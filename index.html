@@ -940,16 +940,65 @@
         </div>
 
         <!-- Thông báo sau khi chuyển khoản -->
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-4 text-xs text-blue-800">
-          ✅ Sau khi chuyển khoản, Simon Center sẽ xác nhận và kích hoạt tài khoản học tập của bạn trong <strong>vòng 24 giờ</strong> qua email và số điện thoại đã đăng ký.
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-4 text-xs text-blue-800 leading-relaxed">
+          💡 Sau khi chuyển khoản thành công trên App Ngân hàng, bạn hãy bấm nút bên dưới để Simon Center lưu thông tin và kích hoạt khóa học nhanh nhất!
         </div>
 
-        <div class="space-y-2">
-          <a id="zaloAfterPay" href="https://zalo.me/0389609938" target="_blank" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wide transition shadow">
-            💬 Báo đã chuyển khoản qua Zalo
+        <div class="space-y-2.5">
+          <!-- NÚT BẤM XÁC NHẬN ĐÃ CHUYỂN KHOẢN -->
+          <button onclick="handlePaidConfirm()" id="btnPaidConfirm" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wide transition shadow-lg flex items-center justify-center space-x-1.5">
+            <span>✅ TÔI ĐÃ CHUYỂN KHOẢN XONG</span>
+          </button>
+          
+          <a id="zaloAfterPay" href="https://zalo.me/0389609938" target="_blank" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wide transition shadow">
+            💬 Nhắn báo qua Zalo 0389.609.938
           </a>
-          <button onclick="goToStep1()" class="block w-full text-gray-400 hover:text-gray-600 text-xs py-1.5 transition">
+          
+          <button onclick="goToStep1()" class="block w-full text-gray-400 hover:text-gray-600 text-xs py-1 transition">
             ← Quay lại thông tin đăng ký
+          </button>
+        </div>
+      </div>
+
+      <!-- ========== BƯỚC 3: ĐÃ XÁC NHẬN THANH TOÁN THÀNH CÔNG ========== -->
+      <div id="step3Content" class="p-6 text-center hidden">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl font-bold">
+          ✓
+        </div>
+        <h3 class="text-lg font-extrabold text-gray-900 mb-1">ĐÃ GHI NHẬN ĐƠN ĐÃ THANH TOÁN!</h3>
+        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+          Cảm ơn bạn <strong id="paidNameText" class="text-brand-crimson">...</strong>! Thông tin của bạn đã được cập nhật thành trạng thái <span class="text-emerald-700 font-bold">"ĐÃ THANH TOÁN"</span> vào hệ thống Simon Center.
+        </p>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-3.5 mb-4 text-xs text-gray-800 text-left space-y-1.5">
+          <div class="flex justify-between">
+            <span class="text-gray-500">Học viên:</span>
+            <span id="paidSummaryName" class="font-bold text-gray-900">...</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500">Số điện thoại:</span>
+            <span id="paidSummaryPhone" class="font-semibold text-gray-900">...</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500">Email nhận bài giảng:</span>
+            <span id="paidSummaryEmail" class="font-semibold text-gray-900">...</span>
+          </div>
+          <div class="flex justify-between items-center border-t border-gray-200 pt-1.5">
+            <span class="text-gray-500">Trạng thái:</span>
+            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[11px]">ĐÃ THANH TOÁN</span>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-gray-500 italic mb-4 leading-relaxed">
+          ✉️ Email xác nhận &amp; quà tặng Ebook nội bộ của Thầy Henrik Simon sẽ được gửi tự động tới hòm thư của bạn trong ít phút!
+        </p>
+
+        <div class="space-y-2">
+          <a id="zaloCommunityBtn" href="https://zalo.me/0389609938" target="_blank" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wide transition shadow">
+            👉 Bấm vào đây để nhắn Zalo nhận hỗ trợ ngay
+          </a>
+          <button onclick="closeModal()" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl text-xs transition">
+            Hoàn tất &amp; Đóng
           </button>
         </div>
       </div>
@@ -1018,14 +1067,14 @@
   <!-- 2 NÚT NỔI STICKY GÓC MÀN HÌNH ĐỂ KHÁCH GỌI HOẶC CHAT ZALO NGAY LẬP TỨC -->
   <div class="fixed bottom-5 right-5 z-50 flex flex-col space-y-3">
     <!-- Nút Chat Zalo -->
-    <a href="https://zalo.me/0389609938" target="_blank" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group" title="Chat Zalo Tư Vấn Nhanh">
+    <a href="https://zalo.me/0389609938" target="_blank" onclick="trackLeadChannel('Nút Zalo trực tiếp')" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group" title="Chat Zalo Tư Vấn Nhanh">
       <span class="font-bold text-xs">Zalo</span>
       <span class="absolute right-16 bg-black text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow">
         Chat Zalo 24/7
       </span>
     </a>
     <!-- Nút Gọi Hotline -->
-    <a href="tel:0389609938" class="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group animate-bounce" title="Gọi Hotline Đăng Ký">
+    <a href="tel:0389609938" onclick="trackLeadChannel('Nút Gọi Hotline')" class="w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group animate-bounce" title="Gọi Hotline Đăng Ký">
       <span class="text-xl">📞</span>
       <span class="absolute right-16 bg-black text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow">
         Gọi 0389.609.938
@@ -1133,7 +1182,18 @@
     // 3. XỬ LÝ FORM ĐĂNG KÝ VÀ THANH TOÁN QR VIETQR
     // =========================================================================
 
-    // ── CẤU HÌNH THANH TOÁN ── Thay bằng thông tin tài khoản thực của bạn ──
+    // =========================================================================
+    // 3. XỬ LÝ ĐA KÊNH NHẬN ĐƠN, LƯU GOOGLE SHEET & THANH TOÁN QR VIETQR
+    // =========================================================================
+
+    // ── CẤU HÌNH GOOGLE SHEETS WEBHOOK (Xem file google-sheets-script.js để lấy URL) ──
+    // Bạn có thể dán trực tiếp link Web App vào đây hoặc cài đặt trong trang admin-confirm.html
+    const DEFAULT_GOOGLE_SHEET_URL = ''; 
+    function getGoogleSheetUrl() {
+      return localStorage.getItem('simon_google_sheet_url') || DEFAULT_GOOGLE_SHEET_URL;
+    }
+
+    // ── CẤU HÌNH THANH TOÁN ── Techcombank Simon Center
     const BANK_CONFIG = {
       bankCode: 'TCB',                  // Techcombank
       accountNumber: '387979795668',    // STK Techcombank Simon Center
@@ -1141,9 +1201,48 @@
       template: 'compact2'              // compact2 = nhỏ gọn, qr-only = chỉ QR
     };
 
-    // Lưu thông tin khách đăng ký để dùng khi sinh QR
+    // Lưu thông tin khách đăng ký hiện tại
     let _currentLead = {};
 
+    // ── HÀM GỬI DỮ LIỆU ĐỒNG BỘ LÊN GOOGLE SHEET ──
+    function sendToGoogleSheet(payload) {
+      const url = getGoogleSheetUrl();
+      if (!url) {
+        console.log('Chưa cài link Google Sheet Web App. Thông tin đã được lưu trong bộ nhớ máy (LocalStorage).', payload);
+        return;
+      }
+      try {
+        fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(() => {
+          console.log('Đã gửi thành công lên Google Sheet:', payload);
+        }).catch(err => {
+          console.log('Lỗi gửi Google Sheet:', err);
+        });
+      } catch (e) {
+        console.log('Lỗi fetch Google Sheet:', e);
+      }
+    }
+
+    // ── TRACKING CÁC KÊNH NHẬN ĐƠN: ZALO & GỌI ĐIỆN ──
+    function trackLeadChannel(channelName) {
+      const pricing = getDynamicPricing();
+      sendToGoogleSheet({
+        action: 'register',
+        name: 'Khách bấm ' + channelName,
+        phone: 'Chưa để lại số',
+        email: '',
+        occupation: 'Quan tâm qua ' + channelName,
+        price: pricing.currentPriceFormatted,
+        channel: channelName,
+        status: 'Chờ tư vấn (' + channelName + ')'
+      });
+    }
+
+    // ── XỬ LÝ KHI KHÁCH GỬI FORM ĐĂNG KÝ ──
     function handleFormSubmit(e) {
       e.preventDefault();
       const form = e.target;
@@ -1153,36 +1252,126 @@
       const occ = document.getElementById('occupation').value.trim();
       const pricing = getDynamicPricing();
 
-      // Lưu thông tin lead
-      _currentLead = { name, phone, email, occupation: occ, price: pricing.currentPriceFormatted, priceRaw: pricing.currentPrice };
+      // Lưu thông tin lead hiện tại
+      _currentLead = { 
+        name, 
+        phone, 
+        email, 
+        occupation: occ, 
+        price: pricing.currentPriceFormatted, 
+        priceRaw: pricing.currentPrice,
+        channel: 'Form Website',
+        status: 'Chờ thanh toán'
+      };
 
       // 1. Lưu bản sao dữ liệu vào máy (LocalStorage)
       const existingLeads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
-      const newLead = { name, phone, email, occupation: occ, registeredPrice: pricing.currentPriceFormatted, time: new Date().toLocaleString() };
+      const newLead = { 
+        name, 
+        phone, 
+        email, 
+        occupation: occ, 
+        registeredPrice: pricing.currentPriceFormatted, 
+        channel: 'Form Website',
+        status: 'Chờ thanh toán',
+        time: new Date().toLocaleString('vi-VN') 
+      };
       existingLeads.push(newLead);
       localStorage.setItem('simon_chiropractic_leads', JSON.stringify(existingLeads));
 
-      // 2. Gửi dữ liệu ngầm lên FormSubmit qua Fetch API (gửi về email)
+      // 2. GỬI TỰ ĐỘNG LÊN GOOGLE SHEET
+      sendToGoogleSheet({
+        action: 'register',
+        name: name,
+        phone: phone,
+        email: email,
+        occupation: occ,
+        price: pricing.currentPriceFormatted,
+        channel: 'Form Website',
+        status: 'Chờ thanh toán'
+      });
+
+      // 3. Gửi đồng thời về Email quản trị qua FormSubmit (dự phòng)
       const formData = new FormData(form);
       fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
         .catch(err => console.log('FormSubmit:', err));
 
-      // 3. Điền thông tin vào Modal Bước 1
+      // 4. Điền thông tin vào Modal Bước 1
       document.getElementById('modalName').innerText = name;
       document.getElementById('modalPhone').innerText = phone;
       document.getElementById('modalEmail').innerText = email;
       document.getElementById('modalPrice').innerText = pricing.currentPriceFormatted;
 
-      // 4. Tạo link Zalo soạn sẵn nội dung
+      // 5. Tạo link Zalo soạn sẵn nội dung
       const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký khóa học Gieo Mầm.\nTên: ${name} | SĐT: ${phone} | Giá: ${pricing.currentPriceFormatted}`);
       document.getElementById('zaloDirectBtn').href = `https://zalo.me/0389609938?text=${zaloMsg}`;
 
-      // 5. Hiển thị Modal – bắt đầu ở Bước 1
+      // 6. Hiển thị Modal – bắt đầu ở Bước 1
       goToStep1();
       document.getElementById('successModal').classList.remove('hidden');
       document.getElementById('successModal').classList.add('flex');
 
       form.reset();
+    }
+
+    // ── XỬ LÝ KHI KHÁCH BẤM: "✅ TÔI ĐÃ CHUYỂN KHOẢN XONG" ──
+    function handlePaidConfirm() {
+      const pricing = getDynamicPricing();
+      const name = _currentLead.name || document.getElementById('modalName').innerText;
+      const phone = _currentLead.phone || document.getElementById('modalPhone').innerText;
+      const email = _currentLead.email || document.getElementById('modalEmail').innerText;
+      const price = _currentLead.price || pricing.currentPriceFormatted;
+
+      const btn = document.getElementById('btnPaidConfirm');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳ Đang ghi nhận...</span>';
+      }
+
+      // 1. Gửi lệnh cập nhật trạng thái "ĐÃ THANH TOÁN" lên Google Sheet
+      // (Google Apps Script sẽ tự động cập nhật dòng của khách và gửi Email kích hoạt)
+      sendToGoogleSheet({
+        action: 'confirm_payment',
+        name: name,
+        phone: phone,
+        email: email,
+        price: price,
+        status: 'ĐÃ THANH TOÁN'
+      });
+
+      // 2. Lưu vào danh sách đã thanh toán trên LocalStorage
+      const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
+      confirmed.push({ 
+        name, 
+        phone, 
+        email, 
+        price: price, 
+        status: 'ĐÃ THANH TOÁN',
+        time: new Date().toLocaleString('vi-VN') 
+      });
+      localStorage.setItem('simon_confirmed_payments', JSON.stringify(confirmed));
+
+      // 3. Cập nhật giao diện sang Bước 3
+      document.getElementById('paidNameText').innerText = name;
+      document.getElementById('paidSummaryName').innerText = name;
+      document.getElementById('paidSummaryPhone').innerText = phone;
+      document.getElementById('paidSummaryEmail').innerText = email;
+
+      const zaloMsgDone = encodeURIComponent(`Chào Simon Center, tôi ${name} (${phone}) đã chuyển khoản thành công ${price} cho khóa học Gieo Mầm. Nhờ Simon Center hỗ trợ kích hoạt giúp tôi!`);
+      const communityBtn = document.getElementById('zaloCommunityBtn');
+      if (communityBtn) {
+        communityBtn.href = `https://zalo.me/0389609938?text=${zaloMsgDone}`;
+      }
+
+      document.getElementById('step2Content').classList.add('hidden');
+      document.getElementById('step3Content').classList.remove('hidden');
+      
+      const step2Tab = document.getElementById('step2Tab');
+      step2Tab.classList.remove('text-brand-crimson', 'border-brand-crimson', 'text-gray-400');
+      step2Tab.classList.add('text-emerald-600', 'border-emerald-600');
+      step2Tab.innerText = '✓ Đã thanh toán';
+
+      showCopyToast('Đã ghi nhận thanh toán thành công!');
     }
 
     // ── CHUYỂN SANG BƯỚC 2: Sinh QR VietQR ──
@@ -1208,23 +1397,38 @@
       const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${pricing.currentPriceFormatted} cho khóa Gieo Mầm. Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
       document.getElementById('zaloAfterPay').href = `https://zalo.me/0389609938?text=${zaloMsg2}`;
 
+      // Reset nút xác nhận nếu bấm lại
+      const btn = document.getElementById('btnPaidConfirm');
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>✅ TÔI ĐÃ CHUYỂN KHOẢN XONG</span>';
+      }
+
       // Chuyển tab UI
       document.getElementById('step1Content').classList.add('hidden');
       document.getElementById('step2Content').classList.remove('hidden');
+      document.getElementById('step3Content').classList.add('hidden');
+      
       document.getElementById('step1Tab').classList.remove('text-brand-crimson', 'border-brand-crimson');
       document.getElementById('step1Tab').classList.add('text-gray-400', 'border-transparent');
-      document.getElementById('step2Tab').classList.remove('text-gray-400', 'border-transparent');
+      
+      document.getElementById('step2Tab').classList.remove('text-gray-400', 'border-transparent', 'text-emerald-600', 'border-emerald-600');
       document.getElementById('step2Tab').classList.add('text-brand-crimson', 'border-brand-crimson');
+      document.getElementById('step2Tab').innerText = '② Thanh toán ngay';
     }
 
     // ── QUAY LẠI BƯỚC 1 ──
     function goToStep1() {
       document.getElementById('step1Content').classList.remove('hidden');
       document.getElementById('step2Content').classList.add('hidden');
+      document.getElementById('step3Content').classList.add('hidden');
+      
       document.getElementById('step1Tab').classList.add('text-brand-crimson', 'border-brand-crimson');
       document.getElementById('step1Tab').classList.remove('text-gray-400', 'border-transparent');
-      document.getElementById('step2Tab').classList.remove('text-brand-crimson', 'border-brand-crimson');
+      
+      document.getElementById('step2Tab').classList.remove('text-brand-crimson', 'border-brand-crimson', 'text-emerald-600', 'border-emerald-600');
       document.getElementById('step2Tab').classList.add('text-gray-400', 'border-transparent');
+      document.getElementById('step2Tab').innerText = '② Thanh toán ngay';
     }
 
     // ── ĐÓNG MODAL ──
