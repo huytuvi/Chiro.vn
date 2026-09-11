@@ -164,16 +164,22 @@
 
     <!-- DANH SÁCH HỌC VIÊN -->
     <div class="card p-6 mb-6">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký</h2>
-        <div class="flex space-x-2">
-          <button onclick="exportCSV()" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3 py-1.5 rounded-lg transition">📥 Xuất Excel</button>
-          <button onclick="loadLeads()" class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-3 py-1.5 rounded-lg transition">🔄 Tải lại</button>
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div>
+          <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký khóa học</h2>
+          <p id="leadSourceStatus" class="text-xs text-gray-500 mt-0.5">Đang kiểm tra nguồn dữ liệu...</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="exportCSV()" id="btnExportCSV" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1">
+            <span>📥 Xuất file Excel (.csv)</span>
+          </button>
+          <button onclick="loadLeads()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-3 py-2 rounded-lg transition border border-gray-300">
+            🔄 Tải lại dữ liệu
+          </button>
         </div>
       </div>
-      <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
-        ⚠️ Danh sách này chỉ hiển thị từ thiết bị này. Để xem <strong>tất cả đăng ký</strong>, kiểm tra hộp thư <strong>simoncentervn@gmail.com</strong>.
-      </p>
+      
+      <div id="leadsTableNotice" class="text-xs rounded-lg px-3.5 py-2.5 mb-4 hidden"></div>
       <div id="leadsTable" class="text-sm text-gray-600">Đang tải...</div>
     </div>
 
@@ -394,37 +400,118 @@ Simon Center – 0389.609.938</div>
       setTimeout(() => el.classList.add('hidden'), 7000);
     }
 
-    function loadLeads() {
-      const leads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
+    // Danh sách học viên lưu trong bộ nhớ tạm để phục vụ xuất Excel
+    let _currentLeadsList = [];
+
+    async function loadLeads() {
+      const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
+      const tableEl = document.getElementById('leadsTable');
+      const statusEl = document.getElementById('leadSourceStatus');
+      const noticeEl = document.getElementById('leadsTableNotice');
+
+      // TRƯỜNG HỢP 1: ĐÃ CẤU HÌNH LINK GOOGLE SHEET -> LẤY TRỰC TIẾP TỪ GOOGLE SHEET
+      if (gsUrl) {
+        statusEl.innerHTML = '<span class="text-emerald-600 font-semibold">🟢 Đang kết nối Google Sheet...</span>';
+        tableEl.innerHTML = '<div class="py-10 text-center text-xs text-gray-500"><span class="inline-block animate-spin mr-2">🔄</span>Đang tải dữ liệu trực tiếp từ Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>...</div>';
+
+        try {
+          const fetchUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=get_leads&t=' + Date.now();
+          const response = await fetch(fetchUrl);
+          const result = await response.json();
+
+          if (result && result.status === 'success') {
+            _currentLeadsList = result.data || [];
+            statusEl.innerHTML = `<span class="text-emerald-700 font-bold">🟢 Dữ liệu trực tiếp từ Google Sheet (${_currentLeadsList.length} học viên)</span>`;
+            
+            noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between';
+            noticeEl.innerHTML = `<span>✅ Đang đồng bộ trực tiếp với file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>. Mọi đăng ký mới hoặc chuyển khoản đều hiển thị ở đây!</span>`;
+            noticeEl.classList.remove('hidden');
+
+            renderLeadsTable(_currentLeadsList, true);
+            return;
+          }
+        } catch (err) {
+          console.log('Lỗi kết nối Google Sheet:', err);
+          statusEl.innerHTML = '<span class="text-amber-600 font-semibold">⚠️ Không thể kết nối Google Sheet, chuyển sang dữ liệu máy</span>';
+        }
+      }
+
+      // TRƯỜNG HỢP 2: CHƯA CÀI LINK HOẶC LỖI KẾT NỐI -> LẤY TỪ LOCALSTORAGE MÁY NÀY
+      const localLeads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
       const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
       const confirmedEmails = confirmed.map(c => c.email);
+
+      _currentLeadsList = localLeads.map(l => ({
+        time: l.time || '',
+        name: l.name || '',
+        phone: l.phone || '',
+        email: l.email || '',
+        price: l.registeredPrice || '5.000.000 VNĐ',
+        occupation: l.occupation || '',
+        channel: l.channel || 'Form Website',
+        status: confirmedEmails.includes(l.email) ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán',
+        emailStatus: confirmedEmails.includes(l.email) ? 'Đã xác nhận' : ''
+      }));
+
+      statusEl.innerHTML = `<span class="text-amber-600 font-semibold">⚠️ Dữ liệu lưu tạm trên máy này (${_currentLeadsList.length} học viên)</span>`;
+      
+      noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-amber-50 border border-amber-200 text-amber-800 leading-relaxed';
+      noticeEl.innerHTML = `⚠️ Bạn chưa dán link Web App Google Sheet ở <strong>Mục 1 phía trên</strong> (hoặc vừa mở trên trình duyệt mới). Hãy dán link Google Sheet để bảng này tự động đồng bộ trực tiếp với file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> nhé!`;
+      noticeEl.classList.remove('hidden');
+
+      renderLeadsTable(_currentLeadsList, false);
+    }
+
+    function renderLeadsTable(leads, isLiveGoogleSheet) {
       const el = document.getElementById('leadsTable');
 
       if (!leads.length) {
-        el.innerHTML = '<p class="text-gray-400 text-xs text-center py-4">Chưa có đăng ký nào. Kiểm tra hộp thư simoncentervn@gmail.com để xem tất cả.</p>';
+        el.innerHTML = '<div class="text-gray-400 text-xs text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-200">Chưa có lượt đăng ký nào trong danh sách. Khi có học viên điền form hoặc bấm Zalo/Hotline, dữ liệu sẽ tự động xuất hiện ở đây!</div>';
         return;
       }
 
       let html = `<div class="overflow-x-auto"><table class="w-full text-xs border-collapse">
-        <thead><tr class="bg-gray-100">
-          <th class="text-left p-2 font-bold">Họ tên</th><th class="text-left p-2 font-bold">SĐT</th>
-          <th class="text-left p-2 font-bold">Email</th><th class="text-left p-2 font-bold">Học phí</th>
-          <th class="text-left p-2 font-bold">Trạng thái</th><th class="text-left p-2 font-bold">Thao tác</th>
+        <thead><tr class="bg-gray-100 text-gray-700">
+          <th class="text-left p-2.5 font-bold">Thời gian</th>
+          <th class="text-left p-2.5 font-bold">Họ và tên</th>
+          <th class="text-left p-2.5 font-bold">SĐT</th>
+          <th class="text-left p-2.5 font-bold">Email</th>
+          <th class="text-left p-2.5 font-bold">Học phí</th>
+          <th class="text-left p-2.5 font-bold">Kênh</th>
+          <th class="text-left p-2.5 font-bold">Trạng thái</th>
+          <th class="text-left p-2.5 font-bold">Thao tác</th>
         </tr></thead><tbody>`;
 
       leads.slice().reverse().forEach(lead => {
-        const paid = confirmedEmails.includes(lead.email);
-        html += `<tr class="border-t border-gray-100 hover:bg-gray-50">
-          <td class="p-2 font-semibold">${lead.name}</td>
-          <td class="p-2">${lead.phone}</td>
-          <td class="p-2 text-blue-700">${lead.email}</td>
-          <td class="p-2 font-bold text-red-800">${lead.registeredPrice}</td>
-          <td class="p-2">${paid ? '<span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-bold">✅ Đã TT</span>' : '<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">⏳ Chờ TT</span>'}</td>
-          <td class="p-2"><button onclick="fillForm('${lead.name.replace(/'/g,"\\'")}','${lead.phone}','${lead.email}','${lead.registeredPrice}')" class="bg-red-900 hover:bg-red-800 text-white px-2 py-1 rounded text-xs font-semibold">Xác nhận</button></td>
+        const isPaid = (lead.status || '').toUpperCase().includes('ĐÃ THANH TOÁN') || (lead.status || '').toUpperCase().includes('ĐÃ TT');
+        const statusBadge = isPaid 
+          ? '<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">✅ ĐÃ THANH TOÁN</span>'
+          : '<span class="bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-full font-medium">⏳ Chờ thanh toán</span>';
+
+        html += `<tr class="border-t border-gray-100 hover:bg-gray-50 transition">
+          <td class="p-2.5 text-gray-500 whitespace-nowrap">${lead.time || 'Mới đây'}</td>
+          <td class="p-2.5 font-bold text-gray-900">${lead.name}</td>
+          <td class="p-2.5 font-mono">${lead.phone}</td>
+          <td class="p-2.5 text-blue-700">${lead.email || '<span class="text-gray-400 italic">Chưa có</span>'}</td>
+          <td class="p-2.5 font-bold text-brand-crimson whitespace-nowrap">${lead.price}</td>
+          <td class="p-2.5"><span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-[11px]">${lead.channel || 'Form Web'}</span></td>
+          <td class="p-2.5 whitespace-nowrap">${statusBadge}</td>
+          <td class="p-2.5 whitespace-nowrap">
+            <button onclick="fillForm('${(lead.name||'').replace(/'/g,"\\'")}','${lead.phone||''}','${lead.email||''}','${lead.price||'5.000.000 VNĐ'}')" 
+                    class="bg-red-900 hover:bg-red-800 text-white px-2.5 py-1 rounded text-xs font-semibold shadow transition">
+              ${isPaid ? 'Gửi lại Email' : 'Xác nhận nhận tiền'}
+            </button>
+          </td>
         </tr>`;
       });
 
-      html += `</tbody></table></div><p class="text-xs text-gray-500 mt-2">Tổng: <strong>${leads.length}</strong> đăng ký | Đã xác nhận: <strong>${confirmed.length}</strong></p>`;
+      const totalPaid = leads.filter(l => (l.status||'').toUpperCase().includes('ĐÃ THANH TOÁN')).length;
+      html += `</tbody></table></div>
+      <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 mt-3 pt-2 border-t border-gray-100">
+        <div>Tổng số: <strong>${leads.length}</strong> học viên | Đã thanh toán: <strong class="text-emerald-700">${totalPaid}</strong> | Chờ thanh toán: <strong class="text-amber-700">${leads.length - totalPaid}</strong></div>
+        <div class="text-[11px] text-gray-400">Nguồn: ${isLiveGoogleSheet ? 'Google Sheets (Live)' : 'Bộ nhớ trình duyệt'}</div>
+      </div>`;
+      
       el.innerHTML = html;
     }
 
@@ -437,15 +524,41 @@ Simon Center – 0389.609.938</div>
     }
 
     function exportCSV() {
-      const leads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
-      if (!leads.length) { alert('Chưa có dữ liệu.'); return; }
-      const csv = [['Họ tên','SĐT','Email','Nghề nghiệp','Học phí','Thời gian'],
-        ...leads.map(l => [l.name,l.phone,l.email,l.occupation||'',l.registeredPrice,l.time])]
-        .map(r => r.map(c => `"${(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+      if (!_currentLeadsList || !_currentLeadsList.length) {
+        alert('Chưa có dữ liệu học viên để xuất file Excel. Vui lòng bấm nút "🔄 Tải lại dữ liệu" hoặc kiểm tra lại kết nối Google Sheet.');
+        return;
+      }
+
+      // Tiêu đề các cột cho file Excel
+      const headers = ['Thời gian', 'Họ và tên', 'Số điện thoại', 'Email', 'Học phí', 'Nghề nghiệp', 'Kênh nhận đơn', 'Trạng thái thanh toán', 'Trạng thái gửi Email'];
+      
+      const rows = _currentLeadsList.map(l => [
+        l.time || '',
+        l.name || '',
+        l.phone ? ("'" + l.phone) : '',
+        l.email || '',
+        l.price || '',
+        l.occupation || '',
+        l.channel || 'Form Website',
+        l.status || 'Chờ thanh toán',
+        l.emailStatus || ''
+      ]);
+
+      const csvContent = [headers, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      // Thêm \uFEFF (UTF-8 BOM) để khi mở bằng Excel tiếng Việt không bao giờ bị lỗi font!
+      const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'}));
-      a.download = `simon-dang-ky-${new Date().toISOString().slice(0,10)}.csv`;
+      a.href = url;
+      const todayStr = new Date().toISOString().slice(0, 10);
+      a.download = `Khach_Hang_Khoa_Hoc_Simon_Center_${todayStr}.csv`;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
   </script>
 </body>

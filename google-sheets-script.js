@@ -142,14 +142,61 @@ function doPost(e) {
 }
 
 /**
- * Xử lý kiểm tra khi mở link Web App bằng trình duyệt (GET request)
+ * Xử lý lấy toàn bộ danh sách đăng ký từ Google Sheet về cho trang Admin (GET request)
+ * Phục vụ hiển thị bảng điều khiển và bấm "Xuất Excel"
  */
 function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({
-    status: "active",
-    service: "Simon Center Google Sheet Webhook API",
-    time: new Date().toISOString()
-  })).setMimeType(ContentService.MimeType.JSON);
+  try {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const rows = sheet.getDataRange().getValues();
+    const leads = [];
+
+    // Bắt đầu từ dòng 1 (bỏ qua dòng tiêu đề ở vị trí 0)
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      // Nếu dòng trống hoàn toàn thì bỏ qua
+      if (!row[0] && !row[1] && !row[2]) continue;
+
+      let timeFormatted = '';
+      if (row[0]) {
+        try {
+          if (row[0] instanceof Date) {
+            timeFormatted = Utilities.formatDate(row[0], "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+          } else {
+            timeFormatted = String(row[0]);
+          }
+        } catch(err) {
+          timeFormatted = String(row[0]);
+        }
+      }
+
+      leads.push({
+        rowIndex: i + 1,
+        time: timeFormatted,
+        name: String(row[1] || '').trim(),
+        phone: String(row[2] || '').replace(/^'/, '').trim(),
+        email: String(row[3] || '').trim(),
+        price: String(row[4] || '5.000.000 VNĐ').trim(),
+        occupation: String(row[5] || '').trim(),
+        channel: String(row[6] || 'Form Website').trim(),
+        status: String(row[7] || 'Chờ thanh toán').trim(),
+        emailStatus: String(row[8] || '').trim()
+      });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      sheetName: sheet.getName(),
+      total: leads.length,
+      data: leads
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 /**
