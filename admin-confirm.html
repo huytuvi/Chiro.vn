@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 Admin – Xác Nhận Thanh Toán | Simon Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- EmailJS: gửi email từ trình duyệt, không cần server -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    body { font-family: 'Be Vietnam Pro', sans-serif; }
+    .card { background: white; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-10 px-4">
+
+  <!-- ĐĂNG NHẬP ADMIN -->
+  <div id="loginScreen" class="max-w-sm mx-auto">
+    <div class="card p-8 text-center">
+      <div class="w-16 h-16 bg-red-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🔐</div>
+      <h1 class="text-xl font-extrabold text-gray-900 mb-1">Simon Center Admin</h1>
+      <p class="text-xs text-gray-500 mb-6">Trang xác nhận thanh toán nội bộ</p>
+      <input type="password" id="adminPassword" placeholder="Nhập mật khẩu admin" 
+             class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm mb-3 focus:ring-2 focus:ring-red-800 outline-none"
+             onkeydown="if(event.key==='Enter') checkLogin()">
+      <button onclick="checkLogin()" class="w-full bg-red-900 hover:bg-red-800 text-white font-bold py-3 rounded-xl text-sm transition">
+        Đăng nhập →
+      </button>
+      <p id="loginError" class="text-red-500 text-xs mt-2 hidden">Mật khẩu không đúng</p>
+      <p class="text-xs text-gray-400 mt-4">Mật khẩu mặc định: <code class="bg-gray-100 px-1.5 py-0.5 rounded">simon2026</code></p>
+    </div>
+  </div>
+
+  <!-- BẢNG ĐIỀU KHIỂN ADMIN -->
+  <div id="adminDashboard" class="max-w-3xl mx-auto hidden">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-extrabold text-gray-900">📊 Bảng điều khiển Admin</h1>
+        <p class="text-sm text-gray-500">Simon Center – Khóa học Gieo Mầm</p>
+      </div>
+      <button onclick="logout()" class="text-xs text-gray-500 hover:text-red-700 border border-gray-300 px-3 py-1.5 rounded-lg transition">
+        Đăng xuất
+      </button>
+    </div>
+
+    <!-- SETUP EMAILJS -->
+    <div id="emailjsSetup" class="card p-6 mb-6 border-2 border-amber-300">
+      <h2 class="font-extrabold text-amber-800 mb-2 text-base">⚙️ Cài đặt EmailJS (chỉ cần làm 1 lần)</h2>
+      <p class="text-xs text-gray-600 mb-4">EmailJS cho phép gửi email xác nhận tự động. Miễn phí 200 email/tháng.</p>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Public Key (emailjs.com → Account → General)</label>
+          <input type="text" id="ejsPublicKey" placeholder="Ví dụ: user_xxxxxxxxxxx" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Service ID (Email Services)</label>
+          <input type="text" id="ejsServiceId" placeholder="Ví dụ: service_xxxxxxx" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Template ID (Email Templates)</label>
+          <input type="text" id="ejsTemplateId" placeholder="Ví dụ: template_xxxxxxx" 
+                 class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono">
+        </div>
+        <button onclick="saveEmailJSConfig()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-lg text-xs transition">
+          💾 Lưu cấu hình EmailJS
+        </button>
+        <p class="text-xs text-blue-700">
+          👉 Chưa có? <a href="https://www.emailjs.com/" target="_blank" class="underline font-semibold">Đăng ký miễn phí tại emailjs.com</a> — xem hướng dẫn chi tiết bên dưới.
+        </p>
+      </div>
+    </div>
+
+    <!-- GỬI XÁC NHẬN -->
+    <div class="card p-6 mb-6">
+      <h2 class="font-extrabold text-gray-900 mb-1 text-lg">✅ Xác nhận đã nhận tiền</h2>
+      <p class="text-xs text-gray-500 mb-5">Điền thông tin học viên đã chuyển khoản → Bấm gửi → Email tự động đến họ</p>
+
+      <div class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Họ và tên học viên *</label>
+            <input type="text" id="cf_name" placeholder="Nguyễn Văn A"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Số điện thoại *</label>
+            <input type="text" id="cf_phone" placeholder="0901234567"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Email học viên * (email sẽ gửi tới đây)</label>
+          <input type="email" id="cf_email" placeholder="hocvien@email.com"
+                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Số tiền đã nhận</label>
+            <input type="text" id="cf_amount" placeholder="5.000.000 VNĐ"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Ngày nhận tiền</label>
+            <input type="text" id="cf_date"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Link truy cập khóa học</label>
+          <input type="text" id="cf_courselink" placeholder="https://..." value="https://simoncenter.vn/khoa-hoc"
+                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Ghi chú thêm</label>
+          <textarea id="cf_note" rows="2" placeholder="Tài khoản đã được kích hoạt..."
+                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none resize-none"></textarea>
+        </div>
+      </div>
+
+      <div id="emailPreview" class="mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-700 hidden">
+        <div class="font-bold text-gray-900 mb-2">📧 Preview email sẽ gửi:</div>
+        <div id="previewContent" class="whitespace-pre-wrap leading-relaxed"></div>
+      </div>
+
+      <div class="flex space-x-3 mt-5">
+        <button onclick="previewEmail()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm transition">
+          👁 Xem trước
+        </button>
+        <button onclick="sendConfirmation()" id="sendBtn" class="flex-1 flex-grow-[2] bg-red-900 hover:bg-red-800 text-white font-extrabold py-3 rounded-xl text-sm transition">
+          📨 Gửi xác nhận cho học viên
+        </button>
+      </div>
+      <div id="sendResult" class="mt-3 text-center text-sm font-semibold hidden"></div>
+    </div>
+
+    <!-- DANH SÁCH HỌC VIÊN -->
+    <div class="card p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký</h2>
+        <div class="flex space-x-2">
+          <button onclick="exportCSV()" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3 py-1.5 rounded-lg transition">📥 Xuất Excel</button>
+          <button onclick="loadLeads()" class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-3 py-1.5 rounded-lg transition">🔄 Tải lại</button>
+        </div>
+      </div>
+      <p class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
+        ⚠️ Danh sách này chỉ hiển thị từ thiết bị này. Để xem <strong>tất cả đăng ký</strong>, kiểm tra hộp thư <strong>simoncentervn@gmail.com</strong>.
+      </p>
+      <div id="leadsTable" class="text-sm text-gray-600">Đang tải...</div>
+    </div>
+
+    <!-- HƯỚNG DẪN CÀI EMAILJS -->
+    <div class="card p-6 mb-6">
+      <h2 class="font-extrabold text-gray-900 text-lg mb-4">📖 Hướng dẫn cài EmailJS (miễn phí)</h2>
+      <ol class="space-y-4 text-sm text-gray-700">
+        <li class="flex space-x-3">
+          <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+          <div>Vào <a href="https://www.emailjs.com/" target="_blank" class="text-blue-600 underline">emailjs.com</a> → Đăng ký bằng email <code class="bg-gray-100 px-1 rounded">simoncentervn@gmail.com</code></div>
+        </li>
+        <li class="flex space-x-3">
+          <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+          <div><strong>Email Services</strong> → Add New Service → Gmail → Kết nối Gmail simoncentervn@gmail.com → Lấy <strong>Service ID</strong></div>
+        </li>
+        <li class="flex space-x-3">
+          <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+          <div>
+            <strong>Email Templates</strong> → Create Template. Thiết lập:<br>
+            <span class="text-gray-500">• To: <code class="bg-gray-100 px-1 rounded">{{to_email}}</code></span><br>
+            <span class="text-gray-500">• Subject: <code class="bg-gray-100 px-1 rounded">✅ Simon Center đã nhận thanh toán – Kích hoạt khóa học!</code></span><br>
+            <div class="bg-gray-100 rounded-lg p-3 mt-2 text-xs font-mono whitespace-pre-wrap">Kính chào {{to_name}},
+
+Simon Center xác nhận ĐÃ NHẬN THANH TOÁN cho Khóa Gieo Mầm.
+
+• Học viên: {{to_name}}
+• Số tiền: {{amount}}  
+• Ngày: {{payment_date}}
+
+🎓 Truy cập khóa học: {{course_link}}
+
+Ghi chú: {{note}}
+
+Chúc bạn học tốt!
+Simon Center – 0389.609.938</div>
+          </div>
+        </li>
+        <li class="flex space-x-3">
+          <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+          <div><strong>Account → General</strong> → Copy <strong>Public Key</strong></div>
+        </li>
+        <li class="flex space-x-3">
+          <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">5</span>
+          <div>Điền 3 thông tin vào ô Cài đặt ở trên → Lưu → Xong!</div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- NÂNG CAO: MAKE.COM -->
+    <div class="card p-6 border-l-4 border-blue-500">
+      <h2 class="font-extrabold text-gray-900 text-lg mb-2">🤖 Tự động 100%: Make.com + Techcombank</h2>
+      <p class="text-xs text-gray-500 mb-4">Khi tiền vào tài khoản → Techcombank gửi SMS/email → Make.com đọc → Tự gửi email cho khách. Miễn phí 1.000 thao tác/tháng.</p>
+      <ol class="space-y-2 text-sm text-gray-700">
+        <li>1. Đăng ký <a href="https://www.make.com/" target="_blank" class="text-blue-600 underline font-semibold">make.com</a> miễn phí</li>
+        <li>2. Kích hoạt Techcombank gửi email thông báo biến động số dư → Gửi về Gmail của bạn</li>
+        <li>3. Tạo Scenario trong Make: <strong>Gmail</strong> (trigger khi có email từ Techcombank) → <strong>Filter</strong> (lọc "GIE0 MAM") → <strong>EmailJS / Gmail Send</strong> (gửi xác nhận cho khách)</li>
+        <li>4. Cần hỗ trợ? Nhờ AI (Gemini/ChatGPT) hướng dẫn từng bước tạo Scenario Make.com</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = 'simon2026';
+
+    function checkLogin() {
+      if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        initDashboard();
+      } else {
+        document.getElementById('loginError').classList.remove('hidden');
+        document.getElementById('adminPassword').value = '';
+      }
+    }
+
+    function logout() {
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('loginScreen').classList.remove('hidden');
+    }
+
+    function initDashboard() {
+      document.getElementById('cf_date').value = new Date().toLocaleDateString('vi-VN');
+      const cfg = JSON.parse(localStorage.getItem('simon_emailjs_config') || '{}');
+      if (cfg.publicKey) {
+        document.getElementById('ejsPublicKey').value = cfg.publicKey;
+        document.getElementById('ejsServiceId').value = cfg.serviceId;
+        document.getElementById('ejsTemplateId').value = cfg.templateId;
+        document.getElementById('emailjsSetup').style.border = '2px solid #16a34a';
+        emailjs.init(cfg.publicKey);
+      }
+      loadLeads();
+    }
+
+    function saveEmailJSConfig() {
+      const cfg = {
+        publicKey: document.getElementById('ejsPublicKey').value.trim(),
+        serviceId: document.getElementById('ejsServiceId').value.trim(),
+        templateId: document.getElementById('ejsTemplateId').value.trim()
+      };
+      if (!cfg.publicKey || !cfg.serviceId || !cfg.templateId) {
+        alert('Vui lòng điền đủ Public Key, Service ID và Template ID');
+        return;
+      }
+      localStorage.setItem('simon_emailjs_config', JSON.stringify(cfg));
+      emailjs.init(cfg.publicKey);
+      document.getElementById('emailjsSetup').style.border = '2px solid #16a34a';
+      alert('✅ Lưu thành công! Bạn đã có thể gửi email xác nhận.');
+    }
+
+    function buildData() {
+      return {
+        name: document.getElementById('cf_name').value.trim(),
+        email: document.getElementById('cf_email').value.trim(),
+        phone: document.getElementById('cf_phone').value.trim(),
+        amount: document.getElementById('cf_amount').value.trim() || 'Theo học phí đăng ký',
+        date: document.getElementById('cf_date').value.trim(),
+        link: document.getElementById('cf_courselink').value.trim(),
+        note: document.getElementById('cf_note').value.trim() || 'Chúc bạn học tốt!'
+      };
+    }
+
+    function previewEmail() {
+      const d = buildData();
+      const body = `Kính chào ${d.name},\n\nSimon Center xác nhận ĐÃ NHẬN thanh toán cho Khóa Gieo Mầm.\n\n• Học viên: ${d.name}\n• Số tiền: ${d.amount}\n• Ngày: ${d.date}\n\n🎓 Truy cập khóa học: ${d.link}\n\nGhi chú: ${d.note}\n\nChúc bạn học tốt!\nSimon Center – 0389.609.938`;
+      document.getElementById('previewContent').innerText = body;
+      document.getElementById('emailPreview').classList.remove('hidden');
+    }
+
+    async function sendConfirmation() {
+      const d = buildData();
+      if (!d.name || !d.email) { alert('Vui lòng điền tên và email học viên.'); return; }
+
+      const cfg = JSON.parse(localStorage.getItem('simon_emailjs_config') || '{}');
+      if (!cfg.publicKey) {
+        const sub = encodeURIComponent('✅ Simon Center đã nhận thanh toán – Kích hoạt khóa học!');
+        const body = encodeURIComponent(`Kính chào ${d.name},\n\nSimon Center xác nhận đã nhận ${d.amount} ngày ${d.date}.\n\nLink khóa học: ${d.link}\n\nGhi chú: ${d.note}\n\nChúc bạn học tốt!\nSimon Center`);
+        window.location.href = `mailto:${d.email}?subject=${sub}&body=${body}`;
+        showResult('⚠️ Chưa cài EmailJS – Đã mở Gmail để bạn gửi thủ công. Cài EmailJS để gửi tự động.', 'amber');
+        return;
+      }
+
+      const btn = document.getElementById('sendBtn');
+      btn.disabled = true; btn.innerText = '⏳ Đang gửi...';
+
+      try {
+        await emailjs.send(cfg.serviceId, cfg.templateId, {
+          to_name: d.name, to_email: d.email, phone: d.phone,
+          amount: d.amount, payment_date: d.date, course_link: d.link, note: d.note
+        });
+        const list = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
+        list.push({ ...d, confirmedAt: new Date().toLocaleString() });
+        localStorage.setItem('simon_confirmed_payments', JSON.stringify(list));
+        showResult(`✅ Đã gửi email xác nhận đến ${d.email} thành công!`, 'green');
+        loadLeads();
+        ['cf_name','cf_phone','cf_email','cf_amount','cf_note'].forEach(id => document.getElementById(id).value = '');
+      } catch(err) {
+        showResult(`❌ Lỗi: ${err.text || err}. Kiểm tra cấu hình EmailJS.`, 'red');
+      } finally {
+        btn.disabled = false; btn.innerText = '📨 Gửi xác nhận cho học viên';
+      }
+    }
+
+    function showResult(msg, color) {
+      const el = document.getElementById('sendResult');
+      el.className = `mt-3 text-center text-sm font-semibold text-${color}-700 bg-${color}-50 border border-${color}-200 rounded-xl p-3`;
+      el.innerText = msg;
+      el.classList.remove('hidden');
+      setTimeout(() => el.classList.add('hidden'), 7000);
+    }
+
+    function loadLeads() {
+      const leads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
+      const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
+      const confirmedEmails = confirmed.map(c => c.email);
+      const el = document.getElementById('leadsTable');
+
+      if (!leads.length) {
+        el.innerHTML = '<p class="text-gray-400 text-xs text-center py-4">Chưa có đăng ký nào. Kiểm tra hộp thư simoncentervn@gmail.com để xem tất cả.</p>';
+        return;
+      }
+
+      let html = `<div class="overflow-x-auto"><table class="w-full text-xs border-collapse">
+        <thead><tr class="bg-gray-100">
+          <th class="text-left p-2 font-bold">Họ tên</th><th class="text-left p-2 font-bold">SĐT</th>
+          <th class="text-left p-2 font-bold">Email</th><th class="text-left p-2 font-bold">Học phí</th>
+          <th class="text-left p-2 font-bold">Trạng thái</th><th class="text-left p-2 font-bold">Thao tác</th>
+        </tr></thead><tbody>`;
+
+      leads.slice().reverse().forEach(lead => {
+        const paid = confirmedEmails.includes(lead.email);
+        html += `<tr class="border-t border-gray-100 hover:bg-gray-50">
+          <td class="p-2 font-semibold">${lead.name}</td>
+          <td class="p-2">${lead.phone}</td>
+          <td class="p-2 text-blue-700">${lead.email}</td>
+          <td class="p-2 font-bold text-red-800">${lead.registeredPrice}</td>
+          <td class="p-2">${paid ? '<span class="bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-bold">✅ Đã TT</span>' : '<span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">⏳ Chờ TT</span>'}</td>
+          <td class="p-2"><button onclick="fillForm('${lead.name.replace(/'/g,"\\'")}','${lead.phone}','${lead.email}','${lead.registeredPrice}')" class="bg-red-900 hover:bg-red-800 text-white px-2 py-1 rounded text-xs font-semibold">Xác nhận</button></td>
+        </tr>`;
+      });
+
+      html += `</tbody></table></div><p class="text-xs text-gray-500 mt-2">Tổng: <strong>${leads.length}</strong> đăng ký | Đã xác nhận: <strong>${confirmed.length}</strong></p>`;
+      el.innerHTML = html;
+    }
+
+    function fillForm(name, phone, email, amount) {
+      document.getElementById('cf_name').value = name;
+      document.getElementById('cf_phone').value = phone;
+      document.getElementById('cf_email').value = email;
+      document.getElementById('cf_amount').value = amount;
+      document.getElementById('cf_name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function exportCSV() {
+      const leads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
+      if (!leads.length) { alert('Chưa có dữ liệu.'); return; }
+      const csv = [['Họ tên','SĐT','Email','Nghề nghiệp','Học phí','Thời gian'],
+        ...leads.map(l => [l.name,l.phone,l.email,l.occupation||'',l.registeredPrice,l.time])]
+        .map(r => r.map(c => `"${(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'}));
+      a.download = `simon-dang-ky-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+  </script>
+</body>
+</html>
