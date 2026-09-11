@@ -122,7 +122,7 @@ function doPost(e) {
 
       // TỰ ĐỘNG GỬI EMAIL KÍCH HOẠT CHO KHÁCH HÀNG NẾU CÓ EMAIL
       if (email && sheet.getRange(updatedRow, 9).getValue() !== "ĐÃ GỬI EMAIL") {
-        sendSuccessEmail(email, customerName, customerPrice);
+        sendSuccessEmail(email, customerName, customerPrice, phone);
         sheet.getRange(updatedRow, 9).setValue("ĐÃ GỬI EMAIL lúc " + timeStr);
       }
 
@@ -218,11 +218,12 @@ function onEdit(e) {
 
       if (statusValue === "ĐÃ THANH TOÁN" && emailStatusCell.getValue() !== "ĐÃ GỬI EMAIL") {
         const name = sheet.getRange(row, 2).getValue();
+        const phone = String(sheet.getRange(row, 3).getValue()).replace(/^'/, '');
         const email = sheet.getRange(row, 4).getValue();
         const price = sheet.getRange(row, 5).getValue();
 
         if (email && email.includes('@')) {
-          sendSuccessEmail(email, name, price);
+          sendSuccessEmail(email, name, price, phone);
           const timeNow = Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm");
           emailStatusCell.setValue("ĐÃ GỬI EMAIL lúc " + timeNow);
         }
@@ -236,7 +237,7 @@ function onEdit(e) {
 /**
  * HÀM GỬI EMAIL TỰ ĐỘNG TỪ GMAIL CHÍNH CHỦ CỦA BẠN
  */
-function sendSuccessEmail(recipientEmail, customerName, amountPaid) {
+function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhone) {
   const subject = "✅ [SIMON CENTER] XÁC NHẬN ĐÃ NHẬN THANH TOÁN & KÍCH HOẠT KHÓA HỌC GIEO MẦM";
   
   const htmlBody = `
@@ -251,13 +252,15 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid) {
       
       <p>Simon Center xin trân trọng thông báo: <strong>Chúng tôi đã nhận được thanh toán học phí</strong> cho Khóa học Gieo Mầm của Anh/Chị qua hình thức chuyển khoản ngân hàng.</p>
       
-      <div style="background-color: #f8fafc; border-left: 4px solid #10b981; padding: 15px; border-radius: 6px; margin: 20px 0;">
-        <div style="font-weight: bold; color: #065f46; margin-bottom: 8px;">📋 CHI TIẾT XÁC NHẬN ĐƠN HÀNG:</div>
-        <div>• <strong>Học viên:</strong> ${customerName}</div>
-        <div>• <strong>Khóa học:</strong> Khóa Học Gieo Mầm – Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</div>
-        <div>• <strong>Giảng viên:</strong> Chuyên gia Bác sĩ Henrik Simon</div>
-        <div>• <strong>Học phí đã thanh toán:</strong> <span style="color: #b91c1c; font-weight: bold;">${amountPaid}</span></div>
-        <div>• <strong>Trạng thái:</strong> <span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;">ĐÃ THANH TOÁN THÀNH CÔNG</span></div>
+      <div style="background-color: #f8fafc; border-left: 4px solid #10b981; padding: 16px; border-radius: 6px; margin: 20px 0;">
+        <div style="font-weight: bold; color: #065f46; margin-bottom: 10px; font-size: 15px;">📋 CHI TIẾT XÁC NHẬN ĐƠN HÀNG:</div>
+        <div style="margin-bottom: 5px;">• <strong>Họ và tên học viên:</strong> ${customerName}</div>
+        <div style="margin-bottom: 5px;">• <strong>Số điện thoại:</strong> ${customerPhone || 'Theo thông tin đăng ký'}</div>
+        <div style="margin-bottom: 5px;">• <strong>Email nhận bài giảng:</strong> ${recipientEmail}</div>
+        <div style="margin-bottom: 5px;">• <strong>Khóa học:</strong> Khóa Học Gieo Mầm – Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</div>
+        <div style="margin-bottom: 5px;">• <strong>Giảng viên trực tiếp:</strong> Chuyên gia Bác sĩ Henrik Simon</div>
+        <div style="margin-bottom: 5px;">• <strong>Số tiền đã thanh toán:</strong> <span style="color: #b91c1c; font-weight: bold; font-size: 16px;">${amountPaid}</span></div>
+        <div>• <strong>Trạng thái giao dịch:</strong> <span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;">ĐÃ THANH TOÁN THÀNH CÔNG</span></div>
       </div>
       
       <h3 style="color: #4A121E; font-size: 15px; margin-top: 25px;">🎁 BỘ QUÀ TẶNG & HƯỚNG DẪN BẮT ĐẦU VÀO HỌC:</h3>

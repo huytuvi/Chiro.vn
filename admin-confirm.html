@@ -62,10 +62,16 @@
           <input type="url" id="googleSheetUrlInput" placeholder="https://script.google.com/macros/s/AKfycbx.../exec" 
                  class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white">
         </div>
-        <button onclick="saveGoogleSheetConfig()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
-          💾 Lưu đường link Google Sheets
-        </button>
-        <p class="text-[11px] text-gray-500">
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <button onclick="saveGoogleSheetConfig()" class="flex-1 min-w-[200px] bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
+            💾 Lưu đường link Google Sheets
+          </button>
+          <button onclick="testGoogleSheetConnection()" id="btnTestGS" class="bg-white hover:bg-gray-50 text-emerald-800 font-bold py-2.5 px-3 rounded-lg text-xs transition border border-emerald-300 shadow-sm flex items-center space-x-1">
+            <span>🧪 Kiểm tra kết nối</span>
+          </button>
+        </div>
+        <div id="testGSResult" class="text-xs mt-2 hidden"></div>
+        <p class="text-[11px] text-gray-500 leading-relaxed">
           💡 Khi cài xong đường link này: Khách vừa điền form ➔ tự nhảy vào Google Sheet. Khách chuyển khoản xong hoặc Admin bấm xác nhận ➔ Tự đổi thành "ĐÃ THANH TOÁN" và tự động gửi email từ Gmail của Simon Center!
         </p>
       </div>
@@ -322,7 +328,31 @@ Simon Center – 0389.609.938</div>
 
     function previewEmail() {
       const d = buildData();
-      const body = `Kính chào ${d.name},\n\nSimon Center xác nhận ĐÃ NHẬN thanh toán cho Khóa Gieo Mầm.\n\n• Học viên: ${d.name}\n• Số tiền: ${d.amount}\n• Ngày: ${d.date}\n\n🎓 Truy cập khóa học: ${d.link}\n\nGhi chú: ${d.note}\n\nChúc bạn học tốt!\nSimon Center – 0389.609.938`;
+      const body = `Kính chào Anh/Chị ${d.name},
+
+Simon Center xin trân trọng thông báo: Chúng tôi ĐÃ NHẬN ĐỦ THANH TOÁN học phí cho Khóa học Gieo Mầm của Anh/Chị qua hình thức chuyển khoản ngân hàng.
+
+📋 CHI TIẾT XÁC NHẬN ĐƠN HÀNG:
+• Họ và tên học viên: ${d.name}
+• Số điện thoại: ${d.phone || 'Theo thông tin đăng ký'}
+• Email nhận bài giảng: ${d.email}
+• Khóa học: Khóa Học Gieo Mầm – Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)
+• Giảng viên trực tiếp: Chuyên gia Bác sĩ Henrik Simon
+• Học phí đã thanh toán: ${d.amount}
+• Ngày thanh toán: ${d.date}
+• Trạng thái giao dịch: ĐÃ THANH TOÁN THÀNH CÔNG
+
+🎁 BỘ QUÀ TẶNG & HƯỚNG DẪN BẮT ĐẦU VÀO HỌC:
+1. Giáo trình Ebook nội bộ: "Các Kỹ Thuật Nắn Chỉnh Cột Sống" của Thầy Henrik Simon
+2. Đường link truy cập khóa học: ${d.link}
+3. Link tham gia nhóm Zalo học viên: https://zalo.me/0389609938
+
+Ghi chú: ${d.note}
+
+Chúc Anh/Chị có những trải nghiệm học tập tuyệt vời và gặt hái được những tinh hoa trị liệu quý giá!
+SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂNG
+📍 56 D5, Phường Thạnh Mỹ Tây, Bình Thạnh, TP.HCM | 📞 Hotline: 0389.609.938`;
+
       document.getElementById('previewContent').innerText = body;
       document.getElementById('emailPreview').classList.remove('hidden');
     }
@@ -336,14 +366,15 @@ Simon Center – 0389.609.938</div>
 
       let sentVia = '';
 
-      // 1. CẬP NHẬT GOOGLE SHEET & GỬI EMAIL TỰ ĐỘNG QUA GMAIL (NẾU ĐÃ CÀI GOOGLE APPS SCRIPT)
+      // 1. CẬP NHẬT GOOGLE SHEET & TỰ ĐỘNG GỬI EMAIL TỪ GMAIL CHÍNH CHỦ (NẾU CÓ WEBHOOK)
       const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
       if (gsUrl) {
         try {
+          // Dùng text/plain để tránh CORS preflight OPTIONS block
           await fetch(gsUrl, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({
               action: 'confirm_payment',
               name: d.name,
@@ -381,14 +412,50 @@ Simon Center – 0389.609.938</div>
       if (sentVia) {
         showResult(`✅ Đã cập nhật ĐÃ THANH TOÁN & gửi email xác nhận (${sentVia}) đến ${d.email}!`, 'green');
       } else {
-        const sub = encodeURIComponent('✅ Simon Center đã nhận thanh toán – Kích hoạt khóa học!');
-        const body = encodeURIComponent(`Kính chào ${d.name},\n\nSimon Center xác nhận đã nhận ${d.amount} ngày ${d.date}.\n\nLink khóa học: ${d.link}\n\nGhi chú: ${d.note}\n\nChúc bạn học tốt!\nSimon Center`);
+        const sub = encodeURIComponent('✅ [SIMON CENTER] Xác nhận đã nhận thanh toán & Kích hoạt khóa học Gieo Mầm');
+        const body = encodeURIComponent(`Kính chào Anh/Chị ${d.name},\n\nSimon Center xác nhận ĐÃ NHẬN ĐỦ thanh toán học phí khóa Gieo Mầm.\n\n• Học viên: ${d.name}\n• SĐT: ${d.phone}\n• Email: ${d.email}\n• Số tiền: ${d.amount}\n• Ngày nhận: ${d.date}\n\n🎓 Link truy cập: ${d.link}\n\nChúc bạn học tốt!\nSimon Center – 0389.609.938`);
         window.location.href = `mailto:${d.email}?subject=${sub}&body=${body}`;
         showResult('⚠️ Đã cập nhật ĐÃ THANH TOÁN. Cửa sổ email đã mở để bạn gửi cho học viên.', 'amber');
       }
 
       loadLeads();
       btn.disabled = false; btn.innerText = '📨 Gửi xác nhận cho học viên';
+    }
+
+    async function testGoogleSheetConnection() {
+      const url = document.getElementById('googleSheetUrlInput').value.trim();
+      const resEl = document.getElementById('testGSResult');
+      if (!url) {
+        alert('Vui lòng dán link Google Apps Script Web App trước khi kiểm tra.');
+        return;
+      }
+      resEl.className = 'text-xs mt-2 p-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg block';
+      resEl.innerHTML = '⏳ Đang gửi dòng kiểm tra thử lên Google Sheet...';
+
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'register',
+            name: 'Nguyễn Văn A (Dòng Kiểm Tra)',
+            phone: '0389609938',
+            email: 'test@simoncenter.vn',
+            price: '5.000.000 VNĐ',
+            occupation: 'Kiểm tra hệ thống',
+            channel: 'Test Admin',
+            status: 'Chờ thanh toán'
+          })
+        });
+
+        resEl.className = 'text-xs mt-2 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg block';
+        resEl.innerHTML = '✅ <strong>Đã gửi lệnh thành công!</strong> Hãy mở file Google Sheet <code>Khach_Hang_Khoa_Hoc_Simon_Center</code> của bạn ra xem có dòng mới <em>"Nguyễn Văn A (Dòng Kiểm Tra)"</em> xuất hiện chưa nhé!';
+        setTimeout(loadLeads, 1500);
+      } catch (err) {
+        resEl.className = 'text-xs mt-2 p-2.5 bg-red-50 border border-red-200 text-red-800 rounded-lg block';
+        resEl.innerHTML = '❌ Lỗi kết nối: ' + err.message + '. Hãy kiểm tra xem bạn đã chọn quyền "Ai có quyền truy cập: Bất kỳ ai (Anyone)" khi Triển khai chưa.';
+      }
     }
 
 
@@ -479,10 +546,18 @@ Simon Center – 0389.609.938</div>
           <th class="text-left p-2.5 font-bold">Học phí</th>
           <th class="text-left p-2.5 font-bold">Kênh</th>
           <th class="text-left p-2.5 font-bold">Trạng thái</th>
-          <th class="text-left p-2.5 font-bold">Thao tác</th>
+          <th class="text-left p-2.5 font-bold">
+            <div class="flex items-center space-x-1">
+              <span>Thao tác</span>
+              <label class="inline-flex items-center space-x-1 cursor-pointer ml-1 text-emerald-800 font-normal text-[10px] bg-emerald-100/70 hover:bg-emerald-200 px-1.5 py-0.5 rounded border border-emerald-300" title="Tích chọn để tự động gửi email cho tất cả các dòng khi bấm Xác nhận">
+                <input type="checkbox" id="globalAutoSendToggle" onchange="toggleAllAutoSend(this)" class="w-3.5 h-3.5 text-emerald-600 rounded cursor-pointer">
+                <span>Tất cả</span>
+              </label>
+            </div>
+          </th>
         </tr></thead><tbody>`;
 
-      leads.slice().reverse().forEach(lead => {
+      leads.slice().reverse().forEach((lead, idx) => {
         const isPaid = (lead.status || '').toUpperCase().includes('ĐÃ THANH TOÁN') || (lead.status || '').toUpperCase().includes('ĐÃ TT');
         const statusBadge = isPaid 
           ? '<span class="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">✅ ĐÃ THANH TOÁN</span>'
@@ -497,10 +572,16 @@ Simon Center – 0389.609.938</div>
           <td class="p-2.5"><span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-[11px]">${lead.channel || 'Form Web'}</span></td>
           <td class="p-2.5 whitespace-nowrap">${statusBadge}</td>
           <td class="p-2.5 whitespace-nowrap">
-            <button onclick="fillForm('${(lead.name||'').replace(/'/g,"\\'")}','${lead.phone||''}','${lead.email||''}','${lead.price||'5.000.000 VNĐ'}')" 
-                    class="bg-red-900 hover:bg-red-800 text-white px-2.5 py-1 rounded text-xs font-semibold shadow transition">
-              ${isPaid ? 'Gửi lại Email' : 'Xác nhận nhận tiền'}
-            </button>
+            <div class="flex items-center space-x-2">
+              <label class="flex items-center space-x-1 text-[11px] text-gray-700 cursor-pointer select-none bg-gray-50 hover:bg-gray-100 px-2 py-1 rounded border border-gray-200" title="Tích vào đây: Bấm nút là tự động gửi email kích hoạt luôn cho khách!">
+                <input type="checkbox" id="autoSend_${idx}" class="lead-auto-send-cb w-3.5 h-3.5 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500 cursor-pointer">
+                <span class="text-[10px] font-medium text-emerald-700">Tự gửi Email</span>
+              </label>
+              <button onclick="handleLeadAction(${idx})" id="btnLeadAction_${idx}" 
+                      class="bg-red-900 hover:bg-red-800 text-white px-2.5 py-1 rounded text-xs font-semibold shadow transition flex items-center space-x-1">
+                <span>${isPaid ? '✉️ Gửi lại' : '✅ Xác nhận'}</span>
+              </button>
+            </div>
           </td>
         </tr>`;
       });
@@ -515,11 +596,77 @@ Simon Center – 0389.609.938</div>
       el.innerHTML = html;
     }
 
+    async function handleLeadAction(index) {
+      const reversedLeads = _currentLeadsList.slice().reverse();
+      const lead = reversedLeads[index];
+      if (!lead) return;
+
+      const autoSendCb = document.getElementById('autoSend_' + index);
+      const isAutoSend = autoSendCb ? autoSendCb.checked : false;
+
+      // 1. LUÔN LUÔN ĐIỀN ĐẦY ĐỦ THÔNG TIN VÀO FORM "XÁC NHẬN ĐÃ NHẬN TIỀN"
+      document.getElementById('cf_name').value = lead.name || '';
+      document.getElementById('cf_phone').value = lead.phone || '';
+      document.getElementById('cf_email').value = lead.email || '';
+      document.getElementById('cf_amount').value = lead.price || '5.000.000 VNĐ';
+      document.getElementById('cf_date').value = new Date().toLocaleDateString('vi-VN');
+      document.getElementById('cf_courselink').value = 'https://simoncenter.vn/khoa-hoc';
+      document.getElementById('cf_note').value = 'Tài khoản học tập và Ebook đã được kích hoạt thành công. Chúc bạn học tốt!';
+
+      // Cập nhật phần xem trước email ngay lập tức
+      previewEmail();
+
+      // 2. NẾU CHECKBOX "TỰ ĐỘNG GỬI EMAIL" ĐƯỢC TÍCH:
+      if (isAutoSend) {
+        if (!lead.email || !lead.email.includes('@')) {
+          alert(`Học viên "${lead.name}" chưa có địa chỉ Email để gửi tự động. Vui lòng kiểm tra lại email trong form phía trên rồi bấm gửi.`);
+          document.getElementById('cf_email').focus();
+          return;
+        }
+
+        const btn = document.getElementById('btnLeadAction_' + index);
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<span>⏳ Đang gửi...</span>';
+        }
+
+        // Tự động kích hoạt hàm gửi xác nhận
+        await sendConfirmation();
+
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<span>✅ Đã gửi!</span>';
+          btn.className = 'bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded text-xs font-semibold shadow transition flex items-center space-x-1';
+        }
+      } else {
+        // NẾU KHÔNG TÍCH CHECKBOX: Cuộn lên form để Admin xem xét trước khi gửi
+        const formCard = document.getElementById('cf_name');
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Hiệu ứng viền nhấp nháy báo hiệu đã điền form thành công
+        const confirmBox = formCard.closest('.card');
+        if (confirmBox) {
+          confirmBox.classList.add('ring-4', 'ring-emerald-400');
+          setTimeout(() => confirmBox.classList.remove('ring-4', 'ring-emerald-400'), 2500);
+        }
+
+        showResult(`📋 Đã điền đầy đủ thông tin của học viên "${lead.name}" (${lead.price}) vào form. Bạn có thể kiểm tra và bấm "📨 Gửi xác nhận cho học viên"!`, 'blue');
+      }
+    }
+
+    function toggleAllAutoSend(masterCb) {
+      document.querySelectorAll('.lead-auto-send-cb').forEach(cb => {
+        cb.checked = masterCb.checked;
+      });
+    }
+
     function fillForm(name, phone, email, amount) {
       document.getElementById('cf_name').value = name;
       document.getElementById('cf_phone').value = phone;
       document.getElementById('cf_email').value = email;
       document.getElementById('cf_amount').value = amount;
+      document.getElementById('cf_date').value = new Date().toLocaleDateString('vi-VN');
+      previewEmail();
       document.getElementById('cf_name').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
