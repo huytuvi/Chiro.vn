@@ -149,13 +149,15 @@
         <div class="grid sm:grid-cols-2 gap-3">
           <div>
             <label class="text-xs font-bold text-gray-700 block mb-1">Supabase Project URL</label>
-            <input type="url" id="supabaseUrlInput" placeholder="https://xyzcompany.supabase.co" 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600">
+            <input type="url" id="supabaseUrlInput" 
+                   value="https://fjzkneljhfibwksnpjkk.supabase.co"
+                   class="w-full px-3 py-2 border border-indigo-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600 text-indigo-950 font-medium">
           </div>
           <div>
             <label class="text-xs font-bold text-gray-700 block mb-1">Supabase Anon Public Key (Khóa công khai)</label>
-            <input type="text" id="supabaseKeyInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." 
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600">
+            <input type="text" id="supabaseKeyInput" 
+                   value="sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR"
+                   class="w-full px-3 py-2 border border-indigo-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600 text-indigo-950 font-medium">
           </div>
         </div>
         <div class="flex flex-wrap items-center gap-2 pt-1">
@@ -686,8 +688,8 @@ Simon Center – 0389.609.938</div>
 
     // ── CẤU HÌNH ĐỒNG BỘ 2 LỚP: GOOGLE SHEETS & SUPABASE DATABASE ──
     const DEFAULT_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg/exec'; 
-    const DEFAULT_SUPABASE_URL = '';
-    const DEFAULT_SUPABASE_ANON_KEY = '';
+    const DEFAULT_SUPABASE_URL = 'https://fjzkneljhfibwksnpjkk.supabase.co';
+    const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR';
 
     function getGoogleSheetUrl() {
       return localStorage.getItem('simon_google_sheet_url') || DEFAULT_GOOGLE_SHEET_URL;
