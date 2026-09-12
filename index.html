@@ -77,20 +77,28 @@
 <body class="font-sans text-brand-charcoal bg-white antialiased selection:bg-brand-crimson selection:text-white">
 
   <!-- 1. STICKY TOP URGENCY TICKER BANNER ( ĐẾM NGƯỢC VỊ TRÍ 1 ) -->
-  <div class="sticky top-0 z-50 bg-brand-wineDark text-white py-3 px-4 text-xs md:text-sm font-semibold border-b border-brand-wine shadow-md">
+  <div class="sticky top-0 z-50 bg-brand-wineDark text-white py-2.5 px-4 text-xs md:text-sm font-semibold border-b border-brand-wine shadow-md">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 leading-normal">
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center space-x-2 flex-wrap">
         <span class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-400 text-black uppercase tracking-wider animate-pulse">
-          ⚡ KHÓA GIEO MẦM
+          ⭐ FOUNDING STUDENTS
         </span>
-        <span>Học phí hôm nay: <strong class="text-amber-300 current-price-display">5.000.000 VNĐ</strong> (Giá gốc 10.000.000đ). Cứ qua 24h đêm nay sẽ <strong>TĂNG THÊM 200.000 VNĐ</strong>!</span>
+        <span>Học phí mở màn: <strong class="text-amber-300 current-k1-display">1.500.000 VNĐ</strong> (Giảm 50% cho đợt đầu). Cứ qua 24h đêm nay sẽ <strong id="ticker-increment-text">TĂNG MỖI NGÀY</strong>!</span>
       </div>
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2.5 flex-wrap">
+        <!-- Badge người đang xem trực tiếp -->
+        <span id="topLiveViewersBadge" class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-950/80 border border-emerald-400/60 text-emerald-300 shadow-sm" title="Số lượng người đang cùng truy cập trang web này">
+          <span class="relative flex h-2 w-2 mr-1.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+          </span>
+          <span class="live-viewers-count font-extrabold text-white">24</span>&nbsp;đang xem
+        </span>
         <span class="bg-black/50 px-3 py-1.5 rounded text-amber-300 font-mono font-bold text-xs sm:text-sm border border-amber-500/30 countdown-display">
           ⏳ Đang tính thời gian...
         </span>
-        <a href="#register-form" class="bg-amber-400 hover:bg-amber-300 text-black px-3.5 py-1.5 rounded font-bold transition text-xs shadow">
-          Giữ Chỗ Ngay &rarr;
+        <a href="#pricing" class="bg-amber-400 hover:bg-amber-300 text-black px-3.5 py-1.5 rounded font-bold transition text-xs shadow">
+          Xem Bảng Giá &rarr;
         </a>
       </div>
     </div>
@@ -106,11 +114,12 @@
 
       <!-- Desktop Nav Links -->
       <nav class="hidden lg:flex items-center space-x-7 text-sm font-semibold text-gray-700">
-        <a href="#about-philosophy" class="hover:text-brand-crimson transition">Sự Khác Biệt</a>
+        <a href="#about-philosophy" class="hover:text-brand-crimson transition">Điểm Mạnh Y Khoa</a>
         <a href="#instructor-cv" class="hover:text-brand-crimson transition">Chuyên Gia Henrik</a>
-        <a href="#curriculum" class="hover:text-brand-crimson transition">Lộ Trình 6 Modules</a>
-        <a href="#what-you-learn" class="hover:text-brand-crimson transition">Giá Trị Nhận Được</a>
-        <a href="#bonuses" class="hover:text-brand-crimson transition">5 Ưu Đãi Độc Quyền</a>
+        <a href="#curriculum" class="hover:text-brand-crimson transition">Lộ Trình 3 Khóa</a>
+        <a href="#global-comparison" class="hover:text-brand-crimson transition">So Sánh Quốc Tế</a>
+        <a href="#pricing" class="hover:text-brand-crimson transition">Bảng Giá</a>
+        <a href="#terminology" class="hover:text-brand-crimson transition">Hệ Thuật Ngữ</a>
       </nav>
 
       <!-- CTA Buttons on Header -->
@@ -119,73 +128,83 @@
           📞 0389.609.938
         </a>
         <a href="#register-form" class="bg-brand-crimson hover:bg-brand-crimsonHover text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded shadow transition duration-200">
-          Đăng Ký Khóa Gieo Mầm
+          Đăng Ký Khóa Học
         </a>
       </div>
     </div>
   </header>
 
-  <!-- HERO SECTION: KHOẢNG CÁCH DÒNG RỘNG RÃI, KHÔNG ĐÈ CHỮ ( VỊ TRÍ ĐẾM NGƯỢC 2 ) -->
+  <!-- HERO SECTION: CƠ HỘI ĐẶC BIỆT DUY NHẤT MỘT LẦN ( VỊ TRÍ ĐẾM NGƯỢC 2 ) -->
   <section class="hero-pattern text-white py-16 lg:py-24 relative">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <div class="inline-block mb-4">
-        <span class="font-serif italic text-amber-300 text-lg md:text-xl tracking-wide">
-          Chương trình đào tạo đột phá – Lần đầu tiên và duy nhất tại Việt Nam
+        <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs sm:text-sm font-extrabold bg-amber-400/20 border border-amber-400 text-amber-300 uppercase tracking-wide">
+          ⭐ CƠ HỘI ĐẶC BIỆT — CHỈ CÓ MỘT LẦN CHO FOUNDING STUDENTS
         </span>
       </div>
       
-      <!-- Tiêu đề chính: Tách thành 2 dòng riêng, khoảng cách đủ cho dấu tiếng Việt -->
+      <!-- Tiêu đề chính -->
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-normal mb-4 text-white">
         <span class="block mb-3 sm:mb-4" style="line-height:1.55">LÀM CHỦ TRƯỜNG PHÁI NẮN CHỈNH</span>
         <span class="block" style="line-height:1.55">CỘT SỐNG CHUYÊN BIỆT</span>
       </h1>
       
-      <!-- Phụ đề tiếng Anh tách biệt trang nhã, không đè dòng -->
+      <!-- Phụ đề tiếng Anh chuẩn DISC Đức -->
       <div class="inline-block px-5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-serif italic text-lg sm:text-2xl mb-6 shadow-sm">
-        Specific Chiropractic
+        Specific Chiropractic — Deutsches Institut für Spezifische Chiropraktik (DISC)
       </div>
       
-      <p class="text-base sm:text-lg text-gray-200 font-normal max-w-3xl mx-auto mb-10 leading-relaxed">
-        Trực tiếp lĩnh hội tinh hoa nắn chỉnh y khoa từ Chuyên gia Đức <strong>Henrik Simon</strong> (20+ năm kinh nghiệm). Bí quyết tìm đúng đốt sống sai lệch then chốt và kỹ thuật ngón tay cái êm ái, an toàn cho cả người già và trẻ nhỏ.
+      <p class="text-base sm:text-lg text-gray-200 font-normal max-w-3xl mx-auto mb-8 leading-relaxed">
+        Chương trình Chiropractic Chuyên biệt theo chuẩn Đức <strong>lần đầu tiên được đóng gói trọn vẹn tại Việt Nam</strong>. Trực tiếp chuyển giao từ Chuyên gia <strong>Henrik Simon</strong> (MSc Chiropractic, Heilpraktiker Đức – 20+ năm kinh nghiệm). Nguyên bản quốc tế, đặc hiệu từng đốt, an toàn tuyệt đối cho người già và trẻ nhỏ.
       </p>
 
-      <!-- GIANT COUNTDOWN BOX HERO ( Vị trí đếm ngược lớn 2 ) -->
-      <div class="max-w-xl mx-auto bg-black/55 backdrop-blur-md rounded-2xl p-6 border border-amber-500/40 shadow-2xl mb-10">
+      <!-- GIANT COUNTDOWN BOX HERO ( Vị trí đếm ngược lớn 2 - Đã khắc phục tràn viền +200K ) -->
+      <div class="max-w-xl mx-auto bg-black/60 backdrop-blur-md rounded-2xl p-5 sm:p-7 border border-amber-500/40 shadow-2xl mb-10">
+        <!-- Badge người đang xem trực tiếp trong Hero -->
+        <div id="heroLiveViewersBadge" class="inline-flex items-center space-x-2 bg-emerald-950/70 border border-emerald-500/50 text-emerald-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-4 shadow-sm">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+          </span>
+          <span>🟢 <strong class="live-viewers-count text-white font-extrabold">24</strong> người đang cùng xem khóa học này</span>
+        </div>
+
         <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-300 mb-4 flex items-center justify-center space-x-2">
-          <span>🔥 THỜI GIAN CÒN LẠI ĐỂ NHẬN HỌC PHÍ <span class="current-price-display text-white underline">5.000.000 VNĐ</span>:</span>
+          <span>🔥 THỜI GIAN CÒN LẠI ĐỂ GIỮ HỌC PHÍ ƯU ĐÃI NGÀY ĐẦU (GIẢM 50%):</span>
         </div>
         
-        <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
-          <div class="bg-brand-wineDark/90 p-3.5 rounded-xl border border-white/10 text-center">
+        <div class="grid grid-cols-4 gap-2 sm:gap-3.5 max-w-lg mx-auto">
+          <div class="bg-brand-wineDark/90 p-3 sm:p-3.5 rounded-xl border border-white/10 text-center min-w-0">
             <div class="text-2xl sm:text-4xl font-extrabold text-white font-mono leading-none" id="hero-hours">00</div>
             <div class="text-[10px] sm:text-xs text-gray-300 font-semibold uppercase mt-2">Giờ</div>
           </div>
-          <div class="bg-brand-wineDark/90 p-3.5 rounded-xl border border-white/10 text-center">
+          <div class="bg-brand-wineDark/90 p-3 sm:p-3.5 rounded-xl border border-white/10 text-center min-w-0">
             <div class="text-2xl sm:text-4xl font-extrabold text-white font-mono leading-none" id="hero-minutes">00</div>
             <div class="text-[10px] sm:text-xs text-gray-300 font-semibold uppercase mt-2">Phút</div>
           </div>
-          <div class="bg-brand-wineDark/90 p-3.5 rounded-xl border border-white/10 text-center">
+          <div class="bg-brand-wineDark/90 p-3 sm:p-3.5 rounded-xl border border-white/10 text-center min-w-0">
             <div class="text-2xl sm:text-4xl font-extrabold text-white font-mono leading-none" id="hero-seconds">00</div>
             <div class="text-[10px] sm:text-xs text-gray-300 font-semibold uppercase mt-2">Giây</div>
           </div>
-          <div class="bg-amber-500/25 p-3.5 rounded-xl border border-amber-400/50 text-center">
-            <div class="text-xl sm:text-3xl font-extrabold text-amber-300 font-mono leading-none">+200K</div>
-            <div class="text-[10px] sm:text-xs text-amber-200 font-bold uppercase mt-2">Tăng Mỗi Ngày</div>
+          <!-- Ô Tăng giá: Tinh chỉnh padding & flexbox để chữ luôn bao trùm 100% trong khung viền -->
+          <div class="bg-amber-500/25 px-1 sm:px-2 py-3 rounded-xl border border-amber-400/60 text-center flex flex-col justify-center items-center min-w-0">
+            <div class="text-base sm:text-2xl lg:text-3xl font-black text-amber-300 font-mono leading-none tracking-tight whitespace-nowrap overflow-hidden text-ellipsis w-full" id="hero-increment-tag">+200K</div>
+            <div class="text-[9px] sm:text-xs text-amber-200 font-bold uppercase mt-2 whitespace-nowrap" id="hero-cycle-tag">TĂNG MỖI NGÀY</div>
           </div>
         </div>
         <p class="text-[12px] text-gray-300 mt-4 italic leading-relaxed">
-          ⚠️ Qua 24h đêm nay, học phí sẽ tự động chuyển thành <strong class="text-amber-300 next-price-display">5.200.000 VNĐ</strong> và tiếp tục tăng mỗi ngày cho đến khi chạm giá gốc <strong>10.000.000 VNĐ</strong>!
+          ⚠️ Càng chần chừ càng đắt! Qua 24h đêm nay, học phí sẽ tự động nhích dần lên và tiếp tục tăng theo chu kỳ cho đến khi chạm giá gốc.
         </p>
       </div>
 
       <!-- Dual Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#register-form" class="w-full sm:w-auto bg-brand-crimson hover:bg-brand-crimsonHover text-white font-bold text-base px-9 py-4 rounded-lg shadow-xl transition transform hover:-translate-y-0.5">
-          👉 Đăng Ký Giữ Suất <span class="current-price-display">5.000.000 VNĐ</span> Ngay
+        <a href="#pricing" class="w-full sm:w-auto bg-brand-crimson hover:bg-brand-crimsonHover text-white font-bold text-base px-9 py-4 rounded-lg shadow-xl transition transform hover:-translate-y-0.5">
+          👉 Xem Bảng Giá Founding Students Ngay
         </a>
         <a href="#about-philosophy" class="w-full sm:w-auto bg-white text-brand-wine hover:bg-gray-100 font-bold text-base px-8 py-4 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">
-          Khám Phá Điểm Khác Biệt
+          Khám Phá Điểm Mạnh Y Khoa
         </a>
       </div>
 
@@ -199,84 +218,133 @@
     </div>
   </section>
 
-  <!-- SỰ KHÁC BIỆT: NẮN CHỈNH CHUYÊN BIỆT (SPECIFIC CHIROPRACTIC) VS CHIROPRACTIC THÔNG THƯỜNG -->
+  <!-- ĐIỂM MẠNH & THÀNH CÔNG LÂM SÀNG CỦA TRƯỜNG PHÁI NẮN CHỈNH CHUYÊN BIỆT (SPECIFIC CHIROPRACTIC) -->
   <section id="about-philosophy" class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-extrabold tracking-widest text-brand-crimson uppercase">Định Vị Trường Phái Chuẩn Mực</span>
+        <span class="text-xs font-extrabold tracking-widest text-brand-crimson uppercase">Định Vị Trường Phái Chuẩn Mực Y Khoa Đức</span>
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-normal mt-3 mb-4 leading-relaxed">
-          Sự Khác Biệt Giữa <span class="text-brand-crimson">Nắn Chỉnh Cột Sống Chuyên Biệt</span> <br class="hidden sm:inline">(Specific Chiropractic) &amp; Chiropractic Thông Thường
+          Sức Mạnh Vượt Trội Của <span class="text-brand-crimson">Nắn Chỉnh Cột Sống Chuyên Biệt</span> <br class="hidden sm:inline">(Specific Chiropractic) Theo Chuẩn DISC Đức
         </h2>
-        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
-          Tại sao Thầy Henrik Simon lại kiên định chỉ dạy trường phái Nắn Chỉnh Cột Sống Chuyên Biệt *(Specific Chiropractic)* mà không dạy các kỹ thuật bẻ khớp đại trà?
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+          Trong hơn 20 năm thực hành lâm sàng tại Đức và quốc tế, Chuyên gia Henrik Simon (MSc Chiropractic, chứng chỉ Heilpraktiker CHLB Đức) đã áp dụng phương pháp Nắn chỉnh Cột sống Chuyên biệt <em>(Specific Chiropractic)</em> điều trị thành công cho hàng chục ngàn bệnh nhân — từ những ca thoát vị đĩa đệm mãn tính, thoái hóa chèn ép rễ thần kinh, vẹo cột sống phức tạp đến chăm sóc an toàn tuyệt đối cho người cao tuổi loãng xương và trẻ nhỏ. Thành công lâm sàng vượt bậc này được xây dựng trên nguyên tắc y học chuẩn mực: tìm đúng sai lệch then chốt <em>(Key Subluxation)</em> và giải phóng áp lực rễ thần kinh bằng lực vi tế, giúp cơ thể tự phục hồi chức năng bền vững mà không cần can thiệp phẫu thuật hay lạm dụng thuốc.
         </p>
       </div>
 
-      <!-- Comparison Cards: Khoảng cách thoáng đãng -->
-      <div class="grid md:grid-cols-2 gap-8 mb-16 max-w-5xl mx-auto">
-        <!-- Chiropractic Thông Thường -->
-        <div class="bg-gray-50 rounded-2xl p-7 sm:p-8 border border-gray-200 shadow-sm flex flex-col justify-between">
+      <!-- 4 TRỤ CỘT Y KHOA LÀM NÊN THÀNH CÔNG LÂM SÀNG CỦA THẦY HENRIK SIMON -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        
+        <div class="bg-brand-sand/50 rounded-2xl p-6 border border-amber-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
           <div>
-            <div class="flex items-center space-x-3 mb-5">
-              <span class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg flex-shrink-0">✕</span>
-              <h3 class="text-xl font-bold text-gray-800 leading-relaxed">Chiropractic Thông Thường / Bẻ Khớp Đại Trà</h3>
+            <div class="w-12 h-12 rounded-xl bg-brand-wine text-white flex items-center justify-center font-bold text-xl mb-4 shadow">
+              🎯
             </div>
-            <ul class="space-y-4 text-sm text-gray-600 leading-relaxed">
-              <li class="flex items-start space-x-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><strong>Nắn chỉnh dàn trải:</strong> Thao tác toàn bộ cột sống từ trên xuống dưới theo thói quen mà không xác định được đốt sống nào là gốc rễ.</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><strong>Dùng lực cơ học mạnh:</strong> Giật vặn biên độ rộng, tạo tiếng kêu rôm rốp để bệnh nhân "thấy đã", nhưng dễ làm giãn bao khớp và tổn thương dây chằng.</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><strong>Không phân loại đối tượng:</strong> Khó áp dụng hoặc nguy cơ cao khi gặp người già (xương yếu, loãng xương) và trẻ em.</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-red-500 font-bold">•</span>
-                <span><strong>Dễ tái phát:</strong> Bệnh nhân nhanh tái đau sau vài ngày vì điểm sai lệch then chốt chưa được chỉnh đúng.</span>
-              </li>
-            </ul>
+            <h3 class="text-base font-bold text-brand-wine mb-2 leading-snug">Tìm Đúng Đốt Sống Then Chốt (Key Subluxation)</h3>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              Phân tích cơ sinh học và sờ nắn <em>(Palpation)</em> chuyên sâu để tìm ra đúng "gốc rễ" sai lệch. Chỉ cần tác động chính xác 1 điểm mấu chốt duy nhất, toàn bộ trục cột sống và hệ cơ quanh trục sẽ tự tái lập trạng thái cân bằng tự nhiên.
+            </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500 italic">
-            Hậu quả: Tiềm ẩn nguy cơ tai biến y khoa, bệnh nhân phụ thuộc nắn chỉnh liên tục.
+          <div class="mt-4 pt-3 border-t border-amber-300 text-[11px] font-bold text-brand-crimson">
+            ✓ Trị liệu trúng đích, không dàn trải
           </div>
         </div>
 
-        <!-- Specific Chiropractic -->
-        <div class="bg-brand-sand rounded-2xl p-7 sm:p-8 border-2 border-brand-crimson shadow-md flex flex-col justify-between relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-brand-crimson text-white text-[11px] font-extrabold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
-            Chuẩn Y Khoa Đức
-          </div>
+        <div class="bg-brand-sand/50 rounded-2xl p-6 border border-amber-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
           <div>
-            <div class="flex items-center space-x-3 mb-5">
-              <span class="w-8 h-8 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-lg flex-shrink-0">✓</span>
-              <h3 class="text-xl font-bold text-brand-wine leading-relaxed">Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</h3>
+            <div class="w-12 h-12 rounded-xl bg-brand-crimson text-white flex items-center justify-center font-bold text-xl mb-4 shadow">
+              ⚡
             </div>
-            <ul class="space-y-4 text-sm text-gray-800 leading-relaxed">
-              <li class="flex items-start space-x-2">
-                <span class="text-green-600 font-bold">✔</span>
-                <span><strong>Tìm đúng Đốt sống sai lệch then chốt (Key Subluxation):</strong> Phân tích chuyên sâu để tìm ra đúng "gốc rễ". Chỉ chỉnh đúng 1 điểm mấu chốt, toàn bộ cột sống sẽ tự phục hồi cân bằng.</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-600 font-bold">✔</span>
-                <span><strong>Lực tối thiểu – Hiệu quả tối đa:</strong> Tốc độ cao nhưng biên độ cực ngắn (HVLA), không bẻ vặn thô bạo, không gây sang chấn mô mềm.</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-600 font-bold">✔</span>
-                <span><strong>Kỹ thuật Henrik với ngón tay cái (Daumen-Technik):</strong> Cực kỳ nhẹ nhàng, vi tế, giúp bạn giải quyết an toàn các ca khó cho cả <strong>người già loãng xương lẫn trẻ em cơ xương non nớt</strong>!</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-green-600 font-bold">✔</span>
-                <span><strong>Hiệu quả lâu bền:</strong> Giải phóng triệt để chèn ép rễ thần kinh, người bệnh hồi phục tự nhiên mà không bị nghiện bẻ khớp.</span>
-              </li>
-            </ul>
+            <h3 class="text-base font-bold text-brand-wine mb-2 leading-snug">Lực Tối Thiểu – Hiệu Quả Tối Đa (HVLA)</h3>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              Kỹ thuật High Velocity – Low Amplitude (tốc độ cao nhưng biên độ cực ngắn). Lực phát ra êm ái, trúng đích theo chuẩn vector giải phẫu, giải phóng tức thì chèn ép thần kinh mà tuyệt đối không làm giãn bao khớp hay sang chấn mô mềm.
+            </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-amber-300 text-xs font-bold text-brand-crimson">
-            ⭐ Lợi ích: Tay nghề đỉnh cao, an toàn 100%, bảo vệ khách hàng và nâng tầm vị thế trị liệu viên.
+          <div class="mt-4 pt-3 border-t border-amber-300 text-[11px] font-bold text-brand-crimson">
+            ✓ An toàn cơ sinh học chuẩn Đức
+          </div>
+        </div>
+
+        <div class="bg-brand-sand/50 rounded-2xl p-6 border border-amber-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xl mb-4 shadow">
+              👍
+            </div>
+            <h3 class="text-base font-bold text-brand-wine mb-2 leading-snug">Kỹ Thuật Ngón Cái Độc Quyền (Simon-Technik)</h3>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              Bí quyết thực chiến của Thầy Henrik: Sử dụng ngón tay cái <em>(Daumen-Technik)</em> tiếp xúc cực kỳ vi tế, lực êm ái tuyệt đối. Đây là "vũ khí lâm sàng" giúp bạn tự tin xử lý ca khó cho cả <strong>người già loãng xương lẫn trẻ em</strong> mà hoàn toàn không có rủi ro.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-amber-300 text-[11px] font-bold text-brand-crimson">
+            ✓ Tiếp xúc vi tế, an toàn cho mọi lứa tuổi
+          </div>
+        </div>
+
+        <div class="bg-brand-sand/50 rounded-2xl p-6 border border-amber-200 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-xl mb-4 shadow">
+              🌿
+            </div>
+            <h3 class="text-base font-bold text-brand-wine mb-2 leading-snug">Phục Hồi Lâm Sàng Bền Vững & Dài Lâu</h3>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              Giải phóng triệt để áp lực đè nén lên rễ thần kinh tủy sống, khôi phục dòng chảy dẫn truyền thần kinh tự nhiên. Người bệnh hồi phục thực sự từ bên trong, không bị phụ thuộc vào việc phải nắn chỉnh liên tục, mang lại uy tín lớn cho phòng khám.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-amber-300 text-[11px] font-bold text-brand-crimson">
+            ✓ Nâng tầm giá trị chuyên môn trọn đời
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 6 LỢI THẾ ĐẶC BIỆT KHI ĐƯỢC HỌC CHƯƠNG TRÌNH NÀY (THEO BLUEPRINT) -->
+      <div class="bg-brand-slate rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm mb-16">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-crimson">Giá Trị Độc Quyền</span>
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">6 Lợi Thế Đặc Biệt Khi Học Chương Trình Này</h3>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-xs sm:text-sm text-gray-700">
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">1</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Nguyên bản quốc tế, không "chế biến lại":</strong>
+              Toàn bộ giáo trình dịch trực tiếp từ hệ thống DISC (Đức), giữ nguyên hệ ký hiệu chuẩn (KP, IH, IR, HWS/BWS/LWS…) mà giới chuyên môn thế giới đang dùng. Bạn học đúng thứ mà Chiropractor ở Đức được đào tạo.
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">2</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Người dạy hiếm có tại Việt Nam:</strong>
+              Giảng viên sở hữu bằng <strong>MSc Chiropractic (Donau-Universität Krems, Áo)</strong> hợp tác Chiropraktik Campus Hamburg, cùng <strong>chứng chỉ Heilpraktiker (Đức)</strong> — làm việc thông thạo Đức–Anh–Việt.
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">3</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Có "phả hệ" chuyên môn chuẩn mực:</strong>
+              Chương trình kế thừa trực tiếp từ Henrik Simon và tưởng niệm <strong>L. Dean Kirchner D.C. (1933–2017)</strong> — chiều sâu học thuật và y đức mà các khóa đào tạo trôi nổi không thể có.
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">4</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Đặc hiệu từng đoạn, từng khớp:</strong>
+              Không bẻ vặn đại trà theo quán tính — dạy cách chẩn đoán sai lệch (subluxation) và phát lực đúng hướng, đúng góc tiếp xúc, đúng biên độ (High Velocity – Low Amplitude).
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">5</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Học một lần, hưởng lợi cả sự nghiệp:</strong>
+              Sau khóa, mỗi ca trị liệu chuyên sâu bạn thực hiện có giá 800.000đ – 1.500.000đ tại phòng khám. Kỹ năng thực chiến vững vàng đồng hành cùng bạn suốt cả sự nghiệp trị liệu.
+            </div>
+          </div>
+          <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+            <span class="w-6 h-6 rounded-full bg-brand-crimson text-white flex items-center justify-center font-bold text-xs flex-shrink-0">6</span>
+            <div>
+              <strong class="text-gray-900 block mb-1">Cộng đồng Simon Chiropractic đồng hành:</strong>
+              Tham gia cộng đồng học thuật chuyên môn cao — ôn tập định kỳ, hội chẩn các ca bệnh khó, cập nhật kỹ thuật nắn chỉnh mới dài lâu cùng Thầy Henrik.
+            </div>
           </div>
         </div>
       </div>
@@ -619,146 +687,446 @@
     </div>
   </section>
 
-  <!-- LỘ TRÌNH 6 MODULES CHI TIẾT -->
-  <section id="curriculum" class="py-20 bg-brand-slate">
+  <!-- PHẦN 2 BLUEPRINT: SO SÁNH CHI PHÍ TƯƠNG ĐƯƠNG TRÊN THẾ GIỚI -->
+  <section id="global-comparison" class="py-16 bg-white border-b border-gray-200">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <span class="text-xs font-bold tracking-widest text-brand-crimson uppercase">Khung Chương Trình Học Toàn Diện</span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-3 mb-4 leading-relaxed">Lộ Trình Đào Tạo 6 Modules Chuyên Sâu</h2>
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-crimson uppercase">Giá Trị Thực Tế Vượt Bậc</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-4 leading-relaxed">
+          💎 Chi Phí Tiếp Cận Kiến Thức Này Trên Thế Giới
+        </h2>
         <p class="text-gray-600 text-sm max-w-2xl mx-auto leading-relaxed">
-          Các bài giảng video chất lượng cao được thiết kế logic từ gốc rễ hình ảnh cận lâm sàng đến nắn chỉnh Cổ, CTJ, Lưng, Chậu và Khung sườn.
+          Để học trọn vẹn khối kiến thức nắn chỉnh chuyên biệt này qua các kênh chính quy quốc tế, bạn phải đầu tư nhiều năm và hàng tỷ đồng. Tại <strong>chiro.vn</strong>, bạn học trực tiếp từ Chuyên gia Đức với chi phí chỉ bằng một phần rất nhỏ.
         </p>
       </div>
 
-      <div class="space-y-4">
-        <!-- Module 1 -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-wine text-white font-bold flex items-center justify-center text-sm flex-shrink-0">01</span>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Biomechanics &amp; Spine Anatomy (Cơ Sinh Học &amp; Giải Phẫu Cột Sống Ứng Dụng)</h3>
-              <p class="text-xs text-gray-500 mt-1 leading-relaxed">Cấu tạo đốt sống, rễ thần kinh và bản chất hiện tượng Subluxation (Sai lệch khớp).</p>
-            </div>
-          </div>
-        </div>
+      <!-- Bảng so sánh quốc tế -->
+      <div class="overflow-x-auto rounded-2xl border border-amber-200 shadow-sm mb-8">
+        <table class="w-full text-xs sm:text-sm text-left border-collapse">
+          <thead>
+            <tr class="bg-brand-wine text-white">
+              <th class="p-4 font-bold">Con đường học kiến thức này ở nước ngoài</th>
+              <th class="p-4 font-bold">Chi phí thật</th>
+              <th class="p-4 font-bold text-amber-300">Quy đổi VNĐ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-4">
+                <strong class="text-gray-900 block">Bằng Chiropractic toàn phần (DC / MSc)</strong>
+                <span class="text-gray-500 text-xs">Con đường chính quy để đủ điều kiện dạy nội dung này</span>
+              </td>
+              <td class="p-4 text-gray-700">120.000 – 200.000 USD (chưa tính sinh hoạt phí, 4–6 năm)</td>
+              <td class="p-4 font-bold text-brand-crimson">≈ 3,1 – 5,2 TỶ đồng</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-4">
+                <strong class="text-gray-900 block">Chuỗi chứng chỉ kỹ thuật (VD: Thompson 3 module, online)</strong>
+                <span class="text-gray-500 text-xs">Chỉ học lý thuyết online, không có thực hành tay</span>
+              </td>
+              <td class="p-4 text-gray-700">900 – 1.100 USD</td>
+              <td class="p-4 font-bold text-gray-800">≈ 23 – 29 triệu đồng</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 bg-amber-50/30">
+              <td class="p-4">
+                <strong class="text-gray-900 block">1 workshop nắn chỉnh tứ chi cuối tuần (Mỹ)</strong>
+                <span class="text-gray-500 text-xs">Chỉ dạy duy nhất MỘT vùng (ví dụ chỉ riêng cổ tay/bàn tay)</span>
+              </td>
+              <td class="p-4 text-gray-700">289 USD / cuối tuần</td>
+              <td class="p-4 font-bold text-emerald-800">≈ 7,5 triệu đồng</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-4">
+                <strong class="text-gray-900 block">Tín chỉ đào tạo liên tục (CE) online</strong>
+              </td>
+              <td class="p-4 text-gray-700">9 – 20 USD / giờ</td>
+              <td class="p-4 font-bold text-gray-700">230.000 – 520.000đ / giờ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Module 2 -->
-        <div class="bg-white rounded-lg border-2 border-brand-crimson/50 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-crimson text-white font-bold flex items-center justify-center text-sm flex-shrink-0">02</span>
-            <div>
-              <span class="inline-block px-2 py-0.5 bg-red-100 text-red-700 text-[10px] font-bold rounded mb-1">Cốt tử cho người nắn xương</span>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Medical Imaging &amp; Palpation (Đọc Phim MRI/X-Ray &amp; Kỹ Thuật Sờ Nắn Cấu Trúc Bằng Tay)</h3>
-              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                Cách nhận diện sai lệch đốt sống, thoái hóa, trượt đĩa đệm. Nhận diện dấu hiệu nguy hiểm chống chỉ định nắn chỉnh và <strong>kỹ thuật dùng tay phát hiện vi sai lệch khớp</strong>.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Module 3 -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-wine text-white font-bold flex items-center justify-center text-sm flex-shrink-0">03</span>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Cervical Spine &amp; CTJ (Cột Sống Cổ &amp; Vùng Chuyển Tiếp Cổ - Ngực)</h3>
-              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                Nắn chỉnh C1-C7 và Vùng chuyển tiếp Cổ – Ngực <em>(Cervicothoracic Junction - CTJ / CTÜ)</em>. Ứng dụng <strong>kỹ thuật ngón tay cái Henrik</strong> êm ái cho người già và trẻ em.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Module 4 -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-wine text-white font-bold flex items-center justify-center text-sm flex-shrink-0">04</span>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Lumbar Spine &amp; Pelvis (Nắn Chỉnh Thắt Lưng &amp; Xương Chậu)</h3>
-              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                Nắn chỉnh L1-L5, đoạn bản lề L5-S1. Cân chỉnh Khớp cùng chậu <em>(Khớp SI)</em>, giải phóng chèn ép dây thần kinh tọa <em>(Sciatica)</em>.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Module 5 -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-wine text-white font-bold flex items-center justify-center text-sm flex-shrink-0">05</span>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Thoracic Spine &amp; Rib Cage (Nắn Chỉnh Cột Sống Ngực &amp; Khung Sườn)</h3>
-              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                Nắn chỉnh T1-T12 nằm sấp và nằm ngửa. Cân chỉnh khớp sườn - đốt sống, khắc phục gù lưng và tức ngực khó thở.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Module 6 -->
-        <div class="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <div class="flex items-center space-x-4">
-            <span class="w-9 h-9 rounded-full bg-brand-wine text-white font-bold flex items-center justify-center text-sm flex-shrink-0">06</span>
-            <div>
-              <h3 class="text-base font-bold text-gray-900 leading-relaxed">Extremities Adjustments (Khớp Ngoại Vi &amp; Quy Trình Lâm Sàng)</h3>
-              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-                Nắn chỉnh khớp vai, khuỷu tay, hội chứng ống cổ tay, khớp háng, khớp gối, cổ chân và quy trình tiếp nhận phác đồ chuẩn y khoa.
-              </p>
-            </div>
-          </div>
+      <!-- Điểm nhấn gây sốc -->
+      <div class="bg-amber-50 rounded-2xl p-6 border-2 border-amber-300 flex flex-col md:flex-row items-center gap-4">
+        <div class="text-3xl">👉</div>
+        <div class="text-xs sm:text-sm text-gray-800 leading-relaxed">
+          <strong class="text-brand-crimson block mb-1 text-sm sm:text-base">So Sánh Thực Tế Gây Sốc:</strong>
+          • <strong>Khóa 2 (Nắn chỉnh Tứ chi TRỌN VẸN)</strong> — chi trên, chi dưới, hàm, sườn, gối, cổ chân, háng — giá gốc chỉ <strong>4 triệu</strong>, tức <strong>RẺ HƠN</strong> một workshop cuối tuần ở Mỹ chỉ dạy riêng bàn tay (~7,5 triệu).<br>
+          • <strong>Combo Trọn Cả 3 Khóa</strong> (giá gốc 12 triệu, ưu đãi Founding chỉ <strong>6 triệu</strong>) chỉ tương đương <strong>~0,3%</strong> chi phí học lấy bằng DC ở nước ngoài — mà bạn học tận tay, bằng tiếng Việt, ngay tại TP.HCM!
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BẢNG GIÁ & ĐỒNG HỒ ĐẾM NGƯỢC KHỔNG LỒ ( VỊ TRÍ ĐẾM NGƯỢC 3 ) -->
-  <section class="py-20 bg-brand-sand border-t border-b border-amber-200 relative">
+  <!-- PHẦN 3 BLUEPRINT: LỘ TRÌNH 3 KHÓA HỌC CHUYÊN SÂU CHUẨN ĐỨC (DISC GERMANY) -->
+  <section id="curriculum" class="py-20 bg-brand-slate">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold tracking-widest text-brand-crimson uppercase">Chương Trình Đào Tạo Chuẩn Quốc Tế DISC</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mt-3 mb-4 leading-relaxed">
+          Lộ Trình 3 Khóa Nắn Chỉnh Chuyên Biệt
+        </h2>
+        <p class="text-gray-600 text-sm max-w-2xl mx-auto leading-relaxed">
+          Mỗi khóa học được thiết kế theo đúng giáo trình Viện Nắn Chỉnh Cột Sống Chuyên Biệt Đức (DISC), từ nền tảng cột sống đến toàn bộ tứ chi và kỹ thuật nâng cao.
+        </p>
+      </div>
+
+      <!-- 3 Khóa học Cards -->
+      <div class="space-y-8">
+        
+        <!-- KHÓA 1: CỘT SỐNG CHUYÊN BIỆT -->
+        <div class="bg-white rounded-2xl border-2 border-brand-wine/30 p-6 sm:p-8 shadow-md relative overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-gray-100">
+            <div>
+              <span class="inline-block px-3 py-1 bg-brand-wine text-white text-[11px] font-extrabold rounded uppercase tracking-wider mb-2">
+                🟦 KHÓA 1 — MODUL A (Wirbelsäulenkurs / Spine)
+              </span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-brand-wine leading-tight">
+                NẮN CHỈNH CỘT SỐNG CHUYÊN BIỆT
+              </h3>
+              <p class="text-xs text-gray-500 italic mt-1">"Nền tảng của mọi Chiropractor: làm chủ cột sống từ đốt đội C1 đến khớp cùng chậu."</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xs text-gray-400 line-through">Giá gốc: <span class="k1-original-display">3.000.000 VNĐ</span></div>
+              <div class="text-xl sm:text-2xl font-black text-brand-crimson current-k1-display">1.500.000 VNĐ</div>
+              <span class="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded">Mở màn giảm 50%</span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gray-700 mb-4 leading-relaxed">
+            <strong>Dành cho:</strong> Người mới bước vào Chiropractic chuyên biệt &amp; người đang trị liệu muốn "chuẩn hóa" lại kỹ thuật cột sống theo y khoa Đức.
+          </p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs text-gray-700 mb-6">
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">1. Hệ ngôn ngữ &amp; Ký hiệu quốc tế:</strong>
+              Đọc và ghi hồ sơ bệnh án như một Chiropractor Đức (KP, IH, IR, HWS/BWS/LWS...).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">2. Cột sống cổ (HWS) &amp; CTÜ (C6–Th1):</strong>
+              Translation (ngăn kéo), Rotation, và <strong>chuyên đề đốt đội Atlas C1</strong> (Kombitechnik, Translation thuần, Rotation thuần).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">3. Xương chẩm &amp; Vẹo cổ cấp (Occiput, Torti Collis):</strong>
+              Quy trình 4 bước xử lý co thắt cấp tính êm ái, an toàn.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">4. Cột sống ngực (BWS):</strong>
+              Rotation, Lateralflexion, Double Lamina, Double Transverse, kỹ thuật đĩa <strong>Pottenger</strong>.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">5. Cột sống thắt lưng (LWS):</strong>
+              Rotation &amp; Lateralflexion nằm nghiêng, tư thế <strong>Knee–Chest</strong> (HVLA chuẩn).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">6. Khung chậu – Khớp cùng chậu – Khớp mu:</strong>
+              Khám chân dài/chân ngắn, sai lệch AS/PI Ilium (quy tắc LLL/UMS), xương cụt, khớp mu 3 pha.
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
+            <span>⏱ <strong>Thời lượng:</strong> 4–5 ngày (~40 giờ) • 30% lý thuyết – 70% thực hành</span>
+            <a href="#register-form" onclick="selectCourse('k1')" class="text-brand-crimson font-bold hover:underline">Đăng ký Khóa 1 &rarr;</a>
+          </div>
+        </div>
+
+        <!-- KHÓA 2: NẮN CHỈNH TỨ CHI & KHỚP NGOẠI VI -->
+        <div class="bg-white rounded-2xl border-2 border-emerald-500/40 p-6 sm:p-8 shadow-md relative overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-gray-100">
+            <div>
+              <span class="inline-block px-3 py-1 bg-emerald-700 text-white text-[11px] font-extrabold rounded uppercase tracking-wider mb-2">
+                🟩 KHÓA 2 — EXTREMITÄTENKURS (Extremities)
+              </span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-emerald-900 leading-tight">
+                NẮN CHỈNH TỨ CHI &amp; KHỚP NGOẠI VI
+              </h3>
+              <p class="text-xs text-gray-500 italic mt-1">"Phần mà hầu hết người trị liệu tại Việt Nam bỏ trống: bàn tay, khuỷu, vai, hàm, gối, cổ chân, khớp háng."</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xs text-gray-400 line-through">Giá gốc: <span class="k2-original-display">4.000.000 VNĐ</span></div>
+              <div class="text-xl sm:text-2xl font-black text-brand-crimson current-k2-display">2.000.000 VNĐ</div>
+              <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">&lt; 1 workshop bàn tay ở Mỹ!</span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gray-700 mb-4 leading-relaxed">
+            <strong>Dành cho:</strong> Học viên đã hoàn tất Khóa 1 (hoặc có nền tảng) muốn xử lý trọn vẹn toàn thân cho bệnh nhân — tạo điểm khác biệt lớn để tăng giá dịch vụ tại phòng khám.
+          </p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs text-gray-700 mb-6">
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">1. Chi trên:</strong>
+              Khớp ngón (DIP, PIP), khớp bàn ngón, xương bàn tay, cổ tay, <strong>Hội chứng ống cổ tay (CTS)</strong>.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">2. Khuỷu tay:</strong>
+              <strong>Tennis Elbow</strong> &amp; <strong>Golfer's Elbow</strong> (cả biến thể trước và sau).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">3. Vai &amp; Đai vai:</strong>
+              Gân nhị đầu dài, cơ Delta, chóp xoay, khớp ức đòn (SCG), khớp cùng đòn (ACG), huy động bả vai, <strong>nắn trật khớp vai ra trước</strong>.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">4. Lồng ngực &amp; Khung sườn:</strong>
+              Sườn 1 nhô cao, khớp sườn trước và sau, giải phóng chèn ép ngực khó thở.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">5. Khớp thái dương hàm &amp; Đầu mặt (TMG):</strong>
+              13 tiêu chuẩn chẩn đoán, nắn hàm, xử lý <strong>kẹt khớp hàm mở</strong>, dẫn lưu <strong>xoang hàm/xoang trán</strong>, huy động xương móng &amp; tai.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">6. Chi dưới:</strong>
+              Ngón chân &amp; <strong>Hallux Valgus</strong>, vòm bàn chân, khớp dưới/trên sên (USG/OSG), chỏm mác, <strong>sụn chêm gối</strong>, xoay lệch xương chày, mấu chuyển &amp; <strong>khớp háng</strong>.
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
+            <span>⏱ <strong>Thời lượng:</strong> 4–5 ngày (~40 giờ) • Khuyến nghị đã học Khóa 1</span>
+            <a href="#register-form" onclick="selectCourse('k2')" class="text-emerald-700 font-bold hover:underline">Đăng ký Khóa 2 &rarr;</a>
+          </div>
+        </div>
+
+        <!-- KHÓA 3: KỸ THUẬT THAY THẾ NÂNG CAO & PHÂN TÍCH X-QUANG -->
+        <div class="bg-white rounded-2xl border-2 border-purple-500/40 p-6 sm:p-8 shadow-md relative overflow-hidden">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-gray-100">
+            <div>
+              <span class="inline-block px-3 py-1 bg-purple-900 text-white text-[11px] font-extrabold rounded uppercase tracking-wider mb-2">
+                🟪 KHÓA 3 — MODUL B (Alternativtechniken / Advanced)
+              </span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-purple-950 leading-tight">
+                KỸ THUẬT THAY THẾ NÂNG CAO &amp; PHÂN TÍCH X-QUANG
+              </h3>
+              <p class="text-xs text-gray-500 italic mt-1">"Cấp độ chuyên gia: nhiều đường vào cho một sai lệch, đọc X-quang khung chậu, xử lý ca khó."</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xs text-gray-400 line-through">Giá gốc: <span class="k3-original-display">5.000.000 VNĐ</span></div>
+              <div class="text-xl sm:text-2xl font-black text-brand-crimson current-k3-display">2.500.000 VNĐ</div>
+              <span class="text-[10px] bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded">Cấp độ Chuyên gia</span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gray-700 mb-4 leading-relaxed">
+            <strong>Dành cho:</strong> Học viên đã hoàn tất Khóa 1 &amp; 2, muốn làm chủ tư duy chẩn đoán hình ảnh và kỹ thuật thay thế đa biến thể.
+          </p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs text-gray-700 mb-6">
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">1. Kỹ thuật thay thế cột sống:</strong>
+              Tư thế ngồi &amp; nằm ngửa cho cổ, ngực, thắt lưng (áp dụng cho người lớn tuổi, đau cấp tính, hạn chế vận động).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">2. Tổ hợp Chẩm – Đội biến thể cao cấp:</strong>
+              Đốt đội C1, xương chẩm &amp; tổ hợp chẩm–đội ở các góc tiếp cận phức tạp.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">3. Xương cùng (Sacrum) &amp; Trục xoay:</strong>
+              Nghiêng bên, xoay, gập trước (Nutation) và gập sau (Kontranutation).
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">4. Khung chậu chuyên sâu:</strong>
+              In-/Ex-Ilium, <strong>Upslip / Downslip</strong> &amp; các giải pháp nắn chỉnh thay thế.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">5. Kỹ thuật nắn khung chậu trẻ em:</strong>
+              Phương pháp tiếp xúc vi tế, định lượng lực phù hợp cấu trúc xương trẻ nhỏ.
+            </div>
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <strong class="text-gray-900 block mb-1">6. Đọc &amp; Vẽ sơ đồ X-quang khung chậu (AP):</strong>
+              Nâng tầm từ "kỹ thuật tay" thành <strong>năng lực chẩn đoán hình ảnh y khoa chuẩn xác</strong>.
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100">
+            <span>⏱ <strong>Thời lượng:</strong> 4 ngày (~32 giờ) • Bắt buộc đã hoàn thành Khóa 1 &amp; 2</span>
+            <a href="#register-form" onclick="selectCourse('k3')" class="text-purple-900 font-bold hover:underline">Đăng ký Khóa 3 &rarr;</a>
+          </div>
+        </div>
+
+        <!-- COMBO TRỌN KHÓA (FULL TRACK) -->
+        <div class="bg-gradient-to-r from-brand-wine to-brand-wineDark text-white rounded-3xl p-7 sm:p-10 shadow-2xl border-4 border-amber-400 relative">
+          <div class="absolute top-4 right-4 bg-amber-400 text-black text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider shadow">
+            🔥 KHUYÊN DÙNG NHẤT — GIẢM 50%
+          </div>
+
+          <div class="max-w-3xl">
+            <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-amber-300 mb-2">
+              ⭐ ĐÓNG GÓI COMBO TOÀN DIỆN
+            </span>
+            <h3 class="text-2xl sm:text-4xl font-extrabold mb-3 leading-tight">
+              COMBO TRỌN KHÓA (FULL TRACK 3 KHÓA) + 1 NĂM CỘNG ĐỒNG
+            </h3>
+            <p class="text-sm sm:text-base text-gray-200 mb-6 leading-relaxed">
+              Lộ trình trọn vẹn đưa bạn từ người mới đến chuyên gia nắn chỉnh chuẩn mực DISC Đức. Khoá mức giá ngày mở màn cho cả lộ trình, không bị tăng giá về sau.
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 mb-6 text-xs text-amber-100">
+              <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/15">
+                <div class="font-bold text-white text-sm mb-1">✓ Học Trọn 3 Khóa</div>
+                <span>Cột sống (Modul A) + Tứ chi toàn phần + Kỹ thuật thay thế &amp; X-quang (Modul B)</span>
+              </div>
+              <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/15">
+                <div class="font-bold text-white text-sm mb-1">✓ Tặng 1 Năm Thành Viên</div>
+                <span>Cộng đồng Simon Chiropractic (trị giá 2.000.000đ/năm) — hội chẩn ca bệnh hàng tháng</span>
+              </div>
+              <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/15">
+                <div class="font-bold text-white text-sm mb-1">✓ Ưu Tiên Giữ Chỗ</div>
+                <span>Đảm bảo suất học Founding Students và ưu đãi các buổi Practicum offline</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-6 pt-2">
+              <div>
+                <div class="text-xs text-gray-300 line-through">Giá gốc: <span class="combo-original-display">12.000.000 VNĐ</span></div>
+                <div class="text-3xl sm:text-5xl font-black text-amber-300 current-combo-display leading-none mt-1">6.000.000 VNĐ</div>
+              </div>
+              <a href="#register-form" onclick="selectCourse('combo')" class="bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm sm:text-base px-8 py-4 rounded-xl shadow-xl transition transform hover:scale-105 uppercase tracking-wide">
+                👉 Chốt Combo Trọn Gói Ngay
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHẦN 6 BLUEPRINT: BẢNG THUẬT NGỮ CHUYÊN MÔN QUỐC TẾ DISC ĐỨC -->
+  <section id="terminology" class="py-16 bg-white border-t border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-crimson uppercase">Bằng Chứng Uy Tín Chuyên Môn</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 mb-3 leading-relaxed">
+          Bạn Sẽ Học Bằng Đúng Ngôn Ngữ Mà Chiropractor Quốc Tế Dùng
+        </h2>
+        <p class="text-gray-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+          Không dùng từ ngữ tự phát. Toàn bộ ký hiệu được chuẩn hóa theo hệ thống của Viện Nắn Chỉnh Cột Sống Chuyên Biệt Đức (DISC).
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 text-xs">
+        <!-- Bảng 1: Tư thế & Định hướng -->
+        <div class="bg-brand-slate rounded-xl p-5 border border-gray-200">
+          <h4 class="font-extrabold text-brand-wine text-sm mb-3 uppercase">1. Ký hiệu Tư thế &amp; Định hướng phát lực</h4>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-gray-300 font-bold text-gray-700">
+                <th class="py-2">Ký hiệu</th>
+                <th class="py-2">Nguyên bản Đức</th>
+                <th class="py-2">Ý nghĩa chuyên môn</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr><td class="py-1.5 font-bold text-brand-crimson">KP / IH / IR</td><td>Kontaktpunkt / Impulshand / Impulsrichtung</td><td>Điểm tiếp xúc / tay phát lực / hướng lực xung</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">RL / BL / SL</td><td>Rücken- / Bauch- / Seitenlage</td><td>Nằm ngửa / sấp / nghiêng</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">Trans / Rot</td><td>Translation / Rotation</td><td>Trượt ngang (ngăn kéo) / xoay</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">Lat.flex / Flex / Ext</td><td>Lateralflexion / Flexion / Extension</td><td>Gập nghiêng bên / gấp / duỗi</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">Ventral / Dorsal</td><td>Ventral / Dorsal</td><td>Phía trước (bụng) / phía sau (lưng)</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">Cranial / Caudal</td><td>Cranial / Caudal</td><td>Hướng đầu / hướng chân</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bảng 2: Vùng cột sống & Khớp -->
+        <div class="bg-brand-slate rounded-xl p-5 border border-gray-200">
+          <h4 class="font-extrabold text-brand-wine text-sm mb-3 uppercase">2. Vùng Cột Sống &amp; Khớp Tứ Chi</h4>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-gray-300 font-bold text-gray-700">
+                <th class="py-2">Ký hiệu</th>
+                <th class="py-2">Nguyên bản Đức</th>
+                <th class="py-2">Ý nghĩa chuyên môn</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr><td class="py-1.5 font-bold text-brand-crimson">HWS / BWS / LWS</td><td>Hals- / Brust- / Lendenwirbelsäule</td><td>Cột sống cổ / ngực / thắt lưng</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">CTÜ</td><td>Cervicothorakaler Übergang</td><td>Chuyển đoạn cổ–ngực (C6, C7, Th1)</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">ISG</td><td>Iliosakralgelenk</td><td>Khớp cùng chậu (Khớp SI)</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">ACG / SCG</td><td>Acromio- / Sternoclaviculargelenk</td><td>Khớp cùng đòn / ức đòn</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">USG / OSG</td><td>Unteres / Oberes Sprunggelenk</td><td>Khớp dưới sên / trên sên (cổ chân)</td></tr>
+              <tr><td class="py-1.5 font-bold text-brand-crimson">TMG / CTS</td><td>Kiefergelenk / Carpal-Tunnel-Syndrom</td><td>Khớp thái dương hàm / hội chứng ống cổ tay</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="text-center text-[11px] text-gray-500 mt-4 italic">
+        Khái niệm kỹ thuật trọng tâm: <strong>HVLA</strong> (High Velocity – Low Amplitude) • <strong>End of ROM</strong> (giới hạn vận động cuối) • <strong>Vorspannung</strong> (căng trước) • <strong>Recoil</strong> (xung giật nảy) • <strong>Subluxation</strong> (sai lệch diện khớp).
+      </div>
+    </div>
+  </section>
+
+  <!-- BẢNG TỔNG HỢP GIÁ & ĐỒNG HỒ ĐẾM NGƯỢC KHỔNG LỒ (THEO DÕI TĂNG GIÁ HẰNG NGÀY/TUẦN) -->
+  <section id="pricing" class="py-20 bg-brand-sand border-t border-b border-amber-200 relative">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
-      <div class="inline-block px-4 py-1.5 bg-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-full mb-5 animate-bounce shadow">
-        ⚡ CƠ HỘI ĐỘC NHẤT VÔ NHỊ – KHÓA GIEO MẦM
+      <div class="inline-block px-4 py-1.5 bg-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-full mb-4 animate-bounce shadow">
+        ⚡ CƠ HỘI FOUNDING STUDENTS — GIẢM 50% MỞ MÀN
       </div>
       
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 tracking-normal leading-relaxed">
-        Đăng Ký Liền Tay – Tiết Kiệm Tối Đa
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 tracking-normal leading-relaxed">
+        Bảng Học Phí Mở Màn Đợt Đầu
       </h2>
       
       <p class="text-gray-700 text-sm sm:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-        Để lan tỏa trường phái nắn chỉnh chuẩn mực đến người làm nghề tại Việt Nam, Thầy Henrik để mức giá khởi điểm vô cùng ưu đãi. <strong>Nhưng hãy chú ý: Cứ mỗi ngày trôi qua, học phí sẽ tiếp tục tăng thêm 200.000 VNĐ cho đến khi chạm giá gốc 10.000.000 VNĐ</strong>!
+        Mỗi chu kỳ trôi qua, học phí sẽ tự động nhích dần lên tới khi chạm giá gốc. Đăng ký sớm ngay hôm nay để nhận mức học phí tốt nhất không bao giờ lặp lại!
       </p>
 
-      <!-- GIANT COUNTDOWN BOX 3 -->
-      <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border-2 border-brand-crimson max-w-lg mx-auto pulse-urgent">
+      <!-- GIANT COUNTDOWN BOX -->
+      <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-2xl border-2 border-brand-crimson max-w-xl mx-auto pulse-urgent mb-8">
         
-        <div class="text-sm font-bold text-gray-400 line-through mb-1">Giá gốc sau này: 10.000.000 VNĐ</div>
+        <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Mức giá mở màn hấp dẫn nhất hôm nay:</div>
         
-        <!-- Giá hôm nay: Tự động cập nhật theo ngày -->
-        <div class="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-crimson my-3 tracking-normal leading-none">
-          <span class="current-price-display">5.000.000 VNĐ</span>
+        <!-- Giá hiển thị: Khóa 1 hoặc Combo -->
+        <div class="text-4xl sm:text-5xl font-black text-brand-crimson my-2 tracking-normal leading-none">
+          Từ <span class="current-k1-display">1.500.000 VNĐ</span>
         </div>
+        <div class="text-xs text-gray-500 mb-4">(Hoặc Combo trọn gói 3 khóa: <strong class="text-brand-crimson current-combo-display">6.000.000 VNĐ</strong>)</div>
         
-        <div class="bg-amber-50 border border-amber-300 rounded-xl p-5 my-6 text-center">
+        <div class="bg-amber-50 border border-amber-300 rounded-xl p-4 sm:p-5 my-4 text-center">
           <div class="text-xs font-extrabold uppercase text-amber-900 tracking-wider mb-2">
-            ⏰ ĐỒNG HỒ ĐẾM NGƯỢC ĐẾN HẠN TĂNG GIÁ HÔM NAY:
+            ⏰ ĐỒNG HỒ ĐẾM NGƯỢC ĐẾN HẠN TĂNG GIÁ TIẾP THEO:
           </div>
-          <div class="text-2xl sm:text-4xl font-mono font-black text-brand-crimson countdown-display my-1">
+          <div class="text-3xl sm:text-4xl font-mono font-black text-brand-crimson countdown-display my-1">
             00h 00m 00s
           </div>
-          <div class="text-xs font-semibold text-amber-800 mt-2 leading-relaxed">
-            Sau thời gian này, học phí sẽ lập tức tăng thành: <strong class="text-red-600 next-price-display">5.200.000 VNĐ</strong>!
+          <div class="text-xs font-semibold text-amber-800 mt-2 leading-relaxed" id="pricing-increase-notice">
+            Sau thời gian này, học phí sẽ tự động tăng thêm <strong class="text-red-600" id="pricing-step-text">200.000 VNĐ</strong>!
           </div>
         </div>
 
         <a href="#register-form" class="block w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-base sm:text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-[1.02] uppercase tracking-wide">
-          Chốt Suất <span class="current-price-display">5.000.000 VNĐ</span> Ngay
+          Chốt Suất Ưu Đãi Ngay
         </a>
-        <div class="text-xs text-gray-500 mt-3 leading-normal">Đừng chần chừ – Chần chừ 1 ngày là mất thêm 200.000đ!</div>
+        <div class="text-[11px] text-gray-500 mt-2.5 leading-normal">🔒 Cam kết giữ giá đúng tại thời điểm bạn hoàn tất điền form.</div>
+      </div>
+
+      <!-- Tóm tắt bảng giá theo Blueprint -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div class="text-xs font-bold text-brand-wine uppercase">Khóa 1 — Cột Sống</div>
+          <div class="text-lg font-black text-brand-crimson current-k1-display mt-1">1.500.000đ</div>
+          <div class="text-[11px] text-gray-400 line-through">Giá gốc: 3.000.000đ</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div class="text-xs font-bold text-emerald-800 uppercase">Khóa 2 — Tứ Chi</div>
+          <div class="text-lg font-black text-brand-crimson current-k2-display mt-1">2.000.000đ</div>
+          <div class="text-[11px] text-gray-400 line-through">Giá gốc: 4.000.000đ</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+          <div class="text-xs font-bold text-purple-900 uppercase">Khóa 3 — Nâng Cao</div>
+          <div class="text-lg font-black text-brand-crimson current-k3-display mt-1">2.500.000đ</div>
+          <div class="text-[11px] text-gray-400 line-through">Giá gốc: 5.000.000đ</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl border-2 border-amber-400 shadow-sm">
+          <div class="text-xs font-bold text-amber-900 uppercase">⭐ Combo Trọn Khóa</div>
+          <div class="text-lg font-black text-brand-crimson current-combo-display mt-1">6.000.000đ</div>
+          <div class="text-[11px] text-gray-400 line-through">Giá gốc: 12.000.000đ</div>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- 5. FORM ĐĂNG KÝ BÁN HÀNG THỰC TẾ & THU DATA ( YÊU CẦU 5 & VỊ TRÍ ĐẾM NGƯỢC 4 ) -->
+  <!-- 5. FORM ĐĂNG KÝ BÁN HÀNG THỰC TẾ & THU DATA ( EMAIL: chiroeduvn@gmail.com ) -->
   <section id="register-form" class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-brand-slate rounded-3xl border border-gray-300 p-8 sm:p-12 shadow-2xl relative">
@@ -766,13 +1134,13 @@
         <!-- Header Form -->
         <div class="text-center mb-8">
           <span class="inline-block text-xs font-bold text-brand-wine uppercase tracking-widest bg-brand-wine/10 px-3 py-1 rounded mb-3">
-            Đợt Tuyển Sinh Duy Nhất Tại Việt Nam
+            Đợt Tuyển Sinh Đầu Tiên — Founding Students
           </span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 uppercase tracking-normal leading-relaxed">
-            ĐĂNG KÝ KHÓA HỌC "GIEO MẦM" ĐẦU TIÊN
+            ĐĂNG KÝ KHÓA HỌC CHIROPRACTIC CHUYÊN BIỆT
           </h2>
           <p class="text-sm text-brand-crimson font-bold mt-2 leading-normal">
-            Trường Phái Nắn Chỉnh Cột Sống Chuyên Biệt <em>(Specific Chiropractic)</em> – Chuyên Gia Henrik Simon
+            Giáo Trình Viện DISC Đức – Giảng Viên Chuyên Gia Henrik Simon
           </p>
           
           <!-- Countdown Mini Badge ( Vị trí 4 ) -->
@@ -782,17 +1150,29 @@
           </div>
         </div>
 
-        <!-- FORM HOẠT ĐỘNG THỰC TẾ: Thu thập data qua FormSubmit gửi về Email + Tự động mở Zalo -->
-        <form id="realRegistrationForm" action="https://formsubmit.co/simoncentervn@gmail.com" method="POST" class="space-y-5" onsubmit="handleFormSubmit(event)">
+        <!-- FORM HOẠT ĐỘNG THỰC TẾ: Thu thập data qua FormSubmit gửi về chiroeduvn@gmail.com -->
+        <form id="realRegistrationForm" action="https://formsubmit.co/chiroeduvn@gmail.com" method="POST" class="space-y-5" onsubmit="handleFormSubmit(event)">
           
           <!-- Cấu hình ẩn cho FormSubmit -->
-          <input type="hidden" name="_subject" value="[KHÓA GIEO MẦM] Học viên mới đăng ký – Simon Center">
+          <input type="hidden" name="_subject" value="[CHIRO.VN] Học viên mới đăng ký khóa học – Simon Center">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <!-- Auto-reply: gửi email xác nhận về địa chỉ email khách đã điền -->
-          <input type="hidden" name="_autoresponse" value="Xin chào! Simon Center đã nhận được thông tin đăng ký của bạn cho Khóa học Gieo Mầm – Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic). Suất học của bạn đã được giữ với mức học phí hôm nay. Để hoàn tất đăng ký, vui lòng chuyển khoản qua ngân hàng Techcombank – STK: 387979795668 – Chủ TK: SIMON CENTER. Sau khi chuyển khoản, vui lòng nhắn Zalo 0389.609.938 để được kích hoạt tài khoản trong vòng 24 giờ. Cảm ơn bạn đã tin tưởng Simon Center!">
-          <input type="hidden" name="_next" value="https://simoncenter.vn">
-          <input type="hidden" name="Hoc_Phi_Tai_Thoi_Diem_Dang_Ky" id="hiddenFormPrice" value="5.000.000 VNĐ">
+          <input type="hidden" name="_autoresponse" value="Xin chào! Simon Center đã nhận được thông tin đăng ký của bạn cho Khóa học Chiropractic Chuyên Biệt (Specific Chiropractic). Suất học của bạn đã được giữ với mức học phí ưu đãi hôm nay. Để hoàn tất đăng ký, vui lòng chuyển khoản qua ngân hàng Techcombank – STK: 387979795668 – Chủ TK: SIMON CENTER. Sau khi chuyển khoản, vui lòng nhắn Zalo 0389.609.938 để được kích hoạt tài khoản trong vòng 24 giờ. Cảm ơn bạn đã tin tưởng Simon Center!">
+          <input type="hidden" name="_next" value="https://chiro.vn">
+          <input type="hidden" name="Hoc_Phi_Tai_Thoi_Diem_Dang_Ky" id="hiddenFormPrice" value="6.000.000 VNĐ">
+          <input type="hidden" name="Ten_Khoa_Hoc" id="hiddenFormCourseName" value="Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên">
+
+          <!-- Chọn khóa học -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-gray-700 mb-1.5">Khóa học bạn muốn đăng ký *</label>
+            <select id="selectedCourse" name="Khoa_Hoc_Lua_Chon" onchange="updateFormCourseSelection()" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-sm bg-white font-medium">
+              <option value="combo" selected>⭐ COMBO TRỌN KHÓA (Full Track 3 Khóa + 1 Năm Cộng Đồng) — [Ưu Đãi 50%]</option>
+              <option value="k1">🟦 Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)</option>
+              <option value="k2">🟩 Khóa 2 — Nắn Chỉnh Tứ Chi &amp; Khớp Ngoại Vi (Extremities)</option>
+              <option value="k3">🟪 Khóa 3 — Kỹ Thuật Thay Thế Nâng Cao &amp; Phân Tích X-Quang (Modul B)</option>
+            </select>
+          </div>
           
           <div>
             <label class="block text-xs font-bold uppercase text-gray-700 mb-1.5">Họ và tên của bạn *</label>
@@ -805,7 +1185,7 @@
               <input type="tel" id="phone" name="So_Dien_Thoai" required placeholder="Ví dụ: 0901234567" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-sm bg-white">
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase text-gray-700 mb-1.5">Email nhận giáo trình &amp; quà tặng *</label>
+              <label class="block text-xs font-bold uppercase text-gray-700 mb-1.5">Email nhận bài giảng &amp; tài liệu *</label>
               <input type="email" id="email" name="Email" required placeholder="email@cuaban.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-sm bg-white">
             </div>
           </div>
@@ -822,13 +1202,13 @@
             </select>
           </div>
 
-          <div class="bg-amber-50 rounded-lg p-3.5 border border-amber-200 text-xs text-amber-900 leading-relaxed">
-            ✓ Đăng ký ngay hôm nay để nhận mức học phí: <strong class="text-brand-crimson current-price-display">5.000.000 VNĐ</strong> cùng trọn bộ <strong>5 Ưu Đãi Độc Quyền</strong> (Ebook nội bộ + Vé Seminar + Voucher 50% Workshop + Chứng chỉ + Tham gia nhóm kín hỗ trợ).
+          <div class="bg-amber-50 rounded-lg p-3.5 border border-amber-200 text-xs text-amber-900 leading-relaxed" id="formPriceSummaryBox">
+            ✓ Đăng ký ngay hôm nay để nhận mức học phí ưu đãi: <strong class="text-brand-crimson text-sm" id="formCurrentPriceText">6.000.000 VNĐ</strong> cùng trọn bộ <strong>5 Ưu Đãi Độc Quyền</strong> (Ebook nội bộ + Vé Seminar + Voucher 50% Workshop + Chứng chỉ + Tham gia nhóm kín hỗ trợ).
           </div>
 
           <div class="pt-2">
             <button type="submit" id="submitBtn" class="w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-base py-4 rounded-xl shadow-xl transition duration-200 uppercase tracking-wide flex items-center justify-center space-x-2">
-              <span>👉 XÁC NHẬN ĐĂNG KÝ – GIỮ GIÁ <span class="current-price-display">5.000.000 VNĐ</span></span>
+              <span>👉 XÁC NHẬN ĐĂNG KÝ – GIỮ GIÁ <span id="btnPriceText">6.000.000 VNĐ</span></span>
             </button>
           </div>
 
@@ -841,6 +1221,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- MODAL 2 BƯỚC: ĐĂNG KÝ → THANH TOÁN QR VIETQR -->
   <div id="successModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
@@ -1014,7 +1395,7 @@
       </h4>
       <div class="space-y-2.5">
         <p>
-          <strong>1. Tính chất chương trình:</strong> Khóa học trực tuyến này là chương trình bồi dưỡng kiến thức, chuyển giao học thuật và chia sẻ kinh nghiệm chuyên môn cá nhân của Chuyên gia Henrik Simon, cung cấp khối lượng kiến thức và phân tích kỹ thuật tương đương với trình độ của một Chiropractor quốc tế. Khóa học mang tính chất nghiên cứu khoa học, tự nâng cao hiểu biết cho bản thân và trau dồi kỹ năng chuyên sâu.
+          <strong>1. Tính chất chương trình:</strong> Khóa học trực tuyến này là chương trình bồi dưỡng kiến thức, chuyển giao học thuật và chia sẻ kinh nghiệm chuyên môn cá nhân của Chuyên gia Henrik Simon, cung cấp khối lượng kiến thức và phân tích kỹ thuật theo chương trình học đào tạo Chiropractic  quốc tế. Khóa học mang tính chất nghiên cứu khoa học, tự nâng cao hiểu biết cho bản thân và trau dồi kỹ năng chuyên sâu.
         </p>
         <p>
           <strong>2. Điều kiện hành nghề theo luật pháp Việt Nam:</strong> Khóa học không thay thế cho các văn bằng, chứng chỉ đào tạo y khoa chính quy do Bộ Giáo dục &amp; Đào tạo hoặc Bộ Y tế Nước CHXHCN Việt Nam quy định. Để hành nghề khám bệnh, chữa bệnh hoặc cung cấp dịch vụ phục hồi chức năng/trị liệu có can thiệp trên cơ thể người bệnh tại Việt Nam, người học bắt buộc phải đáp ứng đầy đủ điều kiện bằng cấp chuyên môn và được Bộ Y tế hoặc Sở Y tế cấp Giấy phép hành nghề / Chứng chỉ hành nghề hợp pháp (ví dụ: Bác sĩ chuyên khoa, Y sĩ Y học cổ truyền, Kỹ thuật viên Vật lý trị liệu &amp; Phục hồi chức năng...).
@@ -1046,7 +1427,7 @@
           <p class="text-gray-300 leading-relaxed">
             📍 56 D5, Phường Thạnh Mỹ Tây, Quận Bình Thạnh, TP. Hồ Chí Minh<br>
             📞 Hotline: 0389.609.938<br>
-            ✉️ Email: henriksimon@simoncenter.vn | simoncentervn@gmail.com<br>
+            ✉️ Email: chiroeduvn@gmail.com<br>
             🌐 Website: simoncenter.vn
           </p>
         </div>
@@ -1085,34 +1466,75 @@
   <!-- SCRIPT ĐẾM NGƯỢC ĐỒNG BỘ 4 VỊ TRÍ, TỰ ĐỘNG TĂNG GIÁ HẰNG NGÀY & FORM THU DATA THỰC TẾ -->
   <script>
     // =========================================================================
-    // 1. THUẬT TOÁN TỰ ĐỘNG TĂNG HỌC PHÍ HẰNG NGÀY (+200.000đ/ngày tới 10TR)
+    // 1. THUẬT TOÁN TỰ ĐỘNG TÍNH HỌC PHÍ THEO CẤU HÌNH ADMIN (ĐỒNG BỘ LOCALSTORAGE)
     // =========================================================================
-    const CAMPAIGN_START_DATE = new Date(2026, 8, 10); // Ngày khởi chạy mốc: 10/09/2026
-    CAMPAIGN_START_DATE.setHours(0, 0, 0, 0);
+    const DEFAULT_PRICING_CONFIG = {
+      k1_current: 1500000,
+      k1_original: 3000000,
+      k2_current: 2000000,
+      k2_original: 4000000,
+      k3_current: 2500000,
+      k3_original: 5000000,
+      combo_current: 6000000,
+      combo_original: 12000000,
+      cycle: 'daily', // 'daily' or 'weekly' or 'none'
+      increment_amount: 200000,
+      start_date: '2026-09-10'
+    };
+
+    function getPricingConfig() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('chiro_pricing_config') || 'null');
+        return saved || DEFAULT_PRICING_CONFIG;
+      } catch (e) {
+        return DEFAULT_PRICING_CONFIG;
+      }
+    }
 
     function getDynamicPricing() {
+      const cfg = getPricingConfig();
+      const startDateParts = (cfg.start_date || '2026-09-10').split('-');
+      const startYear = parseInt(startDateParts[0]) || 2026;
+      const startMonth = (parseInt(startDateParts[1]) || 9) - 1;
+      const startDay = parseInt(startDateParts[2]) || 10;
+      const startDate = new Date(startYear, startMonth, startDay, 0, 0, 0, 0);
+
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      
-      // Số ngày đã trôi qua kể từ ngày mở cổng
-      let diffDays = Math.floor((today - CAMPAIGN_START_DATE) / (1000 * 60 * 60 * 24));
-      if (isNaN(diffDays) || diffDays < 0) {
-        diffDays = 0; // Luôn đảm bảo tối thiểu là ngày 0 nếu đồng hồ thiết bị nhỏ hơn mốc
+
+      let diffUnits = 0;
+      const cycle = cfg.cycle || 'daily';
+      const incAmount = cfg.increment_amount !== undefined ? cfg.increment_amount : 200000;
+
+      if (cycle === 'daily') {
+        const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+        diffUnits = Math.max(0, isNaN(diffDays) ? 0 : diffDays);
+      } else if (cycle === 'weekly') {
+        const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+        diffUnits = Math.max(0, Math.floor(Math.max(0, isNaN(diffDays) ? 0 : diffDays) / 7));
+      } else {
+        diffUnits = 0;
       }
 
-      const basePrice = 5000000;
-      const dailyIncrease = 200000;
-      const maxPrice = 10000000;
+      // Tính giá cho từng khóa học
+      const calcPrice = (base, max) => Math.min(max, base + (diffUnits * incAmount));
+      
+      const k1_price = calcPrice(cfg.k1_current || 1500000, cfg.k1_original || 3000000);
+      const k2_price = calcPrice(cfg.k2_current || 2000000, cfg.k2_original || 4000000);
+      const k3_price = calcPrice(cfg.k3_current || 2500000, cfg.k3_original || 5000000);
+      const combo_price = calcPrice(cfg.combo_current || 6000000, cfg.combo_original || 12000000);
 
-      const currentPrice = Math.min(maxPrice, basePrice + (diffDays * dailyIncrease));
-      const nextPrice = Math.min(maxPrice, currentPrice + (currentPrice < maxPrice ? dailyIncrease : 0));
+      const fmt = (num) => num.toLocaleString('vi-VN') + ' VNĐ';
 
       return {
-        currentPrice,
-        nextPrice,
-        diffDays,
-        currentPriceFormatted: currentPrice.toLocaleString('vi-VN') + ' VNĐ',
-        nextPriceFormatted: nextPrice.toLocaleString('vi-VN') + ' VNĐ'
+        cfg,
+        diffUnits,
+        incAmount,
+        cycle,
+        k1: { current: k1_price, original: cfg.k1_original || 3000000, currentFormatted: fmt(k1_price), originalFormatted: fmt(cfg.k1_original || 3000000) },
+        k2: { current: k2_price, original: cfg.k2_original || 4000000, currentFormatted: fmt(k2_price), originalFormatted: fmt(cfg.k2_original || 4000000) },
+        k3: { current: k3_price, original: cfg.k3_original || 5000000, currentFormatted: fmt(k3_price), originalFormatted: fmt(cfg.k3_original || 5000000) },
+        combo: { current: combo_price, original: cfg.combo_original || 12000000, currentFormatted: fmt(combo_price), originalFormatted: fmt(cfg.combo_original || 12000000) }
       };
     }
 
@@ -1120,24 +1542,97 @@
     function applyDynamicPricing() {
       const pricing = getDynamicPricing();
 
-      // Cập nhật tất cả các vị trí hiển thị giá hiện tại
-      document.querySelectorAll('.current-price-display').forEach(el => {
-        el.innerText = pricing.currentPriceFormatted;
-      });
+      // Cập nhật các thẻ hiển thị giá K1
+      document.querySelectorAll('.current-k1-display').forEach(el => el.innerText = pricing.k1.currentFormatted);
+      document.querySelectorAll('.k1-original-display').forEach(el => el.innerText = pricing.k1.originalFormatted);
 
-      // Cập nhật các vị trí hiển thị giá ngày mai
-      document.querySelectorAll('.next-price-display').forEach(el => {
-        el.innerText = pricing.nextPriceFormatted;
-      });
+      // Cập nhật K2
+      document.querySelectorAll('.current-k2-display').forEach(el => el.innerText = pricing.k2.currentFormatted);
+      document.querySelectorAll('.k2-original-display').forEach(el => el.innerText = pricing.k2.originalFormatted);
 
-      // Cập nhật giá vào form ẩn để gửi email chính xác
-      const hiddenInput = document.getElementById('hiddenFormPrice');
-      if (hiddenInput) {
-        hiddenInput.value = pricing.currentPriceFormatted;
+      // Cập nhật K3
+      document.querySelectorAll('.current-k3-display').forEach(el => el.innerText = pricing.k3.currentFormatted);
+      document.querySelectorAll('.k3-original-display').forEach(el => el.innerText = pricing.k3.originalFormatted);
+
+      // Cập nhật Combo
+      document.querySelectorAll('.current-combo-display').forEach(el => el.innerText = pricing.combo.currentFormatted);
+      document.querySelectorAll('.combo-original-display').forEach(el => el.innerText = pricing.combo.originalFormatted);
+
+      // Cập nhật ô tăng giá Hero (không bao giờ tràn viền)
+      const incTag = document.getElementById('hero-increment-tag');
+      if (incTag) {
+        if (pricing.incAmount >= 1000000) {
+          incTag.innerText = `+${(pricing.incAmount / 1000000).toFixed(1)}TR`;
+        } else if (pricing.incAmount > 0) {
+          incTag.innerText = `+${Math.round(pricing.incAmount / 1000)}K`;
+        } else {
+          incTag.innerText = 'CỐ ĐỊNH';
+        }
+      }
+
+      const cycleTag = document.getElementById('hero-cycle-tag');
+      if (cycleTag) {
+        cycleTag.innerText = pricing.cycle === 'weekly' ? 'TĂNG MỖI TUẦN' : (pricing.cycle === 'daily' ? 'TĂNG MỖI NGÀY' : 'HỌC PHÍ MỞ MÀN');
+      }
+
+      const tickerInc = document.getElementById('ticker-increment-text');
+      if (tickerInc) {
+        tickerInc.innerText = pricing.cycle === 'weekly' ? 'TĂNG MỖI TUẦN' : (pricing.cycle === 'daily' ? 'TĂNG MỖI NGÀY' : 'GIỮ CỐ ĐỊNH');
+      }
+
+      const stepText = document.getElementById('pricing-step-text');
+      if (stepText) {
+        stepText.innerText = pricing.incAmount.toLocaleString('vi-VN') + ' VNĐ';
+      }
+
+      updateFormCourseSelection();
+    }
+
+    function selectCourse(courseKey) {
+      const sel = document.getElementById('selectedCourse');
+      if (sel) {
+        sel.value = courseKey;
+        updateFormCourseSelection();
+      }
+      const formSec = document.getElementById('register-form');
+      if (formSec) {
+        formSec.scrollIntoView({ behavior: 'smooth' });
       }
     }
-    applyDynamicPricing();
 
+    function updateFormCourseSelection() {
+      const sel = document.getElementById('selectedCourse');
+      const courseKey = sel ? sel.value : 'combo';
+      const pricing = getDynamicPricing();
+
+      let currentPriceObj = pricing.combo;
+      let courseName = 'Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên';
+
+      if (courseKey === 'k1') {
+        currentPriceObj = pricing.k1;
+        courseName = 'Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)';
+      } else if (courseKey === 'k2') {
+        currentPriceObj = pricing.k2;
+        courseName = 'Khóa 2 — Nắn Chỉnh Tứ Chi & Khớp Ngoại Vi (Extremities)';
+      } else if (courseKey === 'k3') {
+        currentPriceObj = pricing.k3;
+        courseName = 'Khóa 3 — Kỹ Thuật Thay Thế Nâng Cao & Phân Tích X-Quang (Modul B)';
+      }
+
+      const priceText = document.getElementById('formCurrentPriceText');
+      if (priceText) priceText.innerText = currentPriceObj.currentFormatted;
+
+      const btnText = document.getElementById('btnPriceText');
+      if (btnText) btnText.innerText = currentPriceObj.currentFormatted;
+
+      const hiddenPrice = document.getElementById('hiddenFormPrice');
+      if (hiddenPrice) hiddenPrice.value = currentPriceObj.currentFormatted;
+
+      const hiddenName = document.getElementById('hiddenFormCourseName');
+      if (hiddenName) hiddenName.value = courseName;
+    }
+
+    applyDynamicPricing();
 
     // =========================================================================
     // 2. ĐỒNG HỒ ĐẾM NGƯỢC ĐỒNG BỘ 4 VỊ TRÍ ĐẾN 23:59:59 ĐÊM NAY
@@ -1149,7 +1644,7 @@
       const diff = midnight - now;
 
       if (diff <= 0) {
-        document.querySelectorAll('.countdown-display').forEach(el => el.innerText = "Hôm nay đã tăng giá!");
+        document.querySelectorAll('.countdown-display').forEach(el => el.innerText = "Hôm nay đã sang chu kỳ mới!");
         applyDynamicPricing(); // Tự động nhảy sang giá ngày mới
         return;
       }
@@ -1252,7 +1747,22 @@
       const phone = document.getElementById('phone').value.trim();
       const email = document.getElementById('email').value.trim();
       const occ = document.getElementById('occupation').value.trim();
+      const selCourse = document.getElementById('selectedCourse');
+      const courseKey = selCourse ? selCourse.value : 'combo';
       const pricing = getDynamicPricing();
+
+      let currentPriceObj = pricing.combo;
+      let courseName = 'Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên';
+      if (courseKey === 'k1') {
+        currentPriceObj = pricing.k1;
+        courseName = 'Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)';
+      } else if (courseKey === 'k2') {
+        currentPriceObj = pricing.k2;
+        courseName = 'Khóa 2 — Nắn Chỉnh Tứ Chi & Khớp Ngoại Vi (Extremities)';
+      } else if (courseKey === 'k3') {
+        currentPriceObj = pricing.k3;
+        courseName = 'Khóa 3 — Kỹ Thuật Thay Thế Nâng Cao & Phân Tích X-Quang (Modul B)';
+      }
 
       // Lưu thông tin lead hiện tại
       _currentLead = { 
@@ -1260,8 +1770,10 @@
         phone, 
         email, 
         occupation: occ, 
-        price: pricing.currentPriceFormatted, 
-        priceRaw: pricing.currentPrice,
+        course: courseName,
+        courseKey: courseKey,
+        price: currentPriceObj.currentFormatted, 
+        priceRaw: currentPriceObj.current,
         channel: 'Form Website',
         status: 'Chờ thanh toán'
       };
@@ -1273,7 +1785,8 @@
         phone, 
         email, 
         occupation: occ, 
-        registeredPrice: pricing.currentPriceFormatted, 
+        course: courseName,
+        registeredPrice: currentPriceObj.currentFormatted, 
         channel: 'Form Website',
         status: 'Chờ thanh toán',
         time: new Date().toLocaleString('vi-VN') 
@@ -1288,8 +1801,8 @@
         phone: phone,
         email: email,
         occupation: occ,
-        price: pricing.currentPriceFormatted,
-        channel: 'Form Website',
+        price: currentPriceObj.currentFormatted,
+        channel: 'Form Website (' + courseName + ')',
         status: 'Chờ thanh toán'
       });
 
@@ -1302,10 +1815,10 @@
       document.getElementById('modalName').innerText = name;
       document.getElementById('modalPhone').innerText = phone;
       document.getElementById('modalEmail').innerText = email;
-      document.getElementById('modalPrice').innerText = pricing.currentPriceFormatted;
+      document.getElementById('modalPrice').innerText = currentPriceObj.currentFormatted;
 
       // 5. Tạo link Zalo soạn sẵn nội dung
-      const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký khóa học Gieo Mầm.\nTên: ${name} | SĐT: ${phone} | Giá: ${pricing.currentPriceFormatted}`);
+      const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký ${courseName}.\nTên: ${name} | SĐT: ${phone} | Học phí: ${currentPriceObj.currentFormatted}`);
       document.getElementById('zaloDirectBtn').href = `https://zalo.me/0389609938?text=${zaloMsg}`;
 
       // 6. Hiển thị Modal – bắt đầu ở Bước 1
@@ -1314,6 +1827,7 @@
       document.getElementById('successModal').classList.add('flex');
 
       form.reset();
+      updateFormCourseSelection();
     }
 
     // ── XỬ LÝ KHI KHÁCH BẤM: "✅ TÔI ĐÃ CHUYỂN KHOẢN XONG" ──
@@ -1381,22 +1895,24 @@
       const pricing = getDynamicPricing();
       const name = _currentLead.name || '';
       const phone = _currentLead.phone || '';
-      const priceRaw = _currentLead.priceRaw || pricing.currentPrice;
+      const priceRaw = _currentLead.priceRaw || pricing.combo.current;
+      const courseName = _currentLead.course || 'Khóa học Chiropractic Chuyên Biệt';
+      const courseKey = (_currentLead.courseKey || 'combo').toUpperCase();
 
-      // Nội dung chuyển khoản: tên viết liền không dấu + số điện thoại
+      // Nội dung chuyển khoản: mã khóa học + số điện thoại
       const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/gi,'d').replace(/[^a-zA-Z0-9 ]/g,'').trim().toUpperCase().replace(/\s+/g,' ');
-      const note = `GIE0 MAM ${normalize(phone)}`;
+      const note = `CHIRO ${courseKey} ${normalize(phone)}`.trim();
 
       // Sinh QR từ API VietQR (miễn phí, không cần đăng ký)
       const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.bankCode}-${BANK_CONFIG.accountNumber}-${BANK_CONFIG.template}.png?amount=${priceRaw}&addInfo=${encodeURIComponent(note)}&accountName=${encodeURIComponent(BANK_CONFIG.accountName)}`;
 
       document.getElementById('vietqrImg').src = qrUrl;
       document.getElementById('displayAccNum').innerText = BANK_CONFIG.accountNumber;
-      document.getElementById('paymentAmount').innerText = pricing.currentPriceFormatted;
+      document.getElementById('paymentAmount').innerText = _currentLead.price || (priceRaw.toLocaleString('vi-VN') + ' VNĐ');
       document.getElementById('paymentNote').innerText = note;
 
       // Cập nhật Zalo link bước 2
-      const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${pricing.currentPriceFormatted} cho khóa Gieo Mầm. Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
+      const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${_currentLead.price || ''} cho ${courseName}. Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
       document.getElementById('zaloAfterPay').href = `https://zalo.me/0389609938?text=${zaloMsg2}`;
 
       // Reset nút xác nhận nếu bấm lại
@@ -1460,7 +1976,211 @@
       setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 2000);
     }
 
+    // =========================================================================
+    // 4. HỆ THỐNG ĐO TRAFFIC WEBSITE & BỘ ĐẾM NGƯỜI ĐANG XEM TRỰC TIẾP (LIVE)
+    // =========================================================================
+
+    // ── A. ĐO LƯỢT TRUY CẬP WEBSITE (TRAFFIC TRACKING) ──
+    function trackWebsiteTraffic() {
+      // 1. Ghi nhận vào LocalStorage (cho trang Admin xem nhanh ngay cả khi offline)
+      try {
+        const total = Number(localStorage.getItem('simon_traffic_views_total') || '0') + 1;
+        localStorage.setItem('simon_traffic_views_total', String(total));
+
+        const todayKey = 'simon_pv_' + new Date().toISOString().slice(0, 10);
+        const today = Number(localStorage.getItem(todayKey) || '0') + 1;
+        localStorage.setItem(todayKey, String(today));
+        localStorage.setItem('simon_traffic_views_today', String(today));
+      } catch (e) {
+        console.log('Traffic local error:', e);
+      }
+
+      // 2. Gửi beacon đồng bộ lên Google Sheets Web App (PropertiesService)
+      sendToGoogleSheet({
+        action: 'pageview',
+        path: window.location.pathname || '/',
+        referrer: document.referrer || 'direct',
+        title: document.title || 'Chiro.vn',
+        screen: window.innerWidth + 'x' + window.innerHeight,
+        time: new Date().toISOString()
+      });
+    }
+
+    // ── B. BỘ ĐẾM SỐ NGƯỜI ĐANG XEM TRỰC TIẾP (LIVE ACTIVE VIEWERS) & CHẾ ĐỘ BOOST TỰ ĐỘNG ──
+    function getViewersConfig() {
+      return JSON.parse(localStorage.getItem('chiro_viewers_config') || 'null') || {
+        showBadge: true,
+        boostEnabled: true,
+        autoRandom: true,       // Tự động random trong khoảng 20 - 40 người
+        boostOffset: 28,        // Giá trị dự phòng khi tắt autoRandom
+        boostMin: 20,           // Mức sàn: 20 người
+        boostMax: 40,           // Mức trần: 40 người
+        stepMax: 10,            // Biến thiên mỗi lần không quá 10 đơn vị
+        cycleMinutes: 10        // Chu kỳ 10 phút một lần
+      };
+    }
+
+    // Hàm lấy số lượng cộng thêm (Boost Offset) tự động biến thiên cứ 10 phút một lần
+    function getDynamicBoostOffset(config) {
+      if (config.boostEnabled === false) return 0;
+      if (config.autoRandom === false) return parseInt(config.boostOffset, 10) || 0;
+
+      const CYCLE_MS = (config.cycleMinutes || 10) * 60 * 1000; // 10 phút = 600.000 ms
+      const min = config.boostMin !== undefined ? config.boostMin : 20;
+      const max = config.boostMax !== undefined ? config.boostMax : 40;
+      const stepMax = config.stepMax !== undefined ? config.stepMax : 10;
+
+      const now = Date.now();
+      const BOOST_STATE_KEY = 'chiro_boost_offset_state';
+      let state = JSON.parse(localStorage.getItem(BOOST_STATE_KEY) || 'null');
+
+      // Nếu chưa khởi tạo hoặc đã qua 10 phút kể từ lần thay đổi gần nhất
+      if (!state || typeof state.current !== 'number' || !state.lastCycle || (now - state.lastCycle >= CYCLE_MS)) {
+        let prev = (state && typeof state.current === 'number') ? state.current : (min + Math.floor(Math.random() * (max - min + 1)));
+        
+        // Bước nhảy ngẫu nhiên trong khoảng [-stepMax, +stepMax] (tối đa 10)
+        let step = Math.floor(Math.random() * (stepMax * 2 + 1)) - stepMax;
+        if (step === 0) step = (Math.random() > 0.5 ? 2 : -2);
+
+        let next = prev + step;
+        // Đảm bảo luôn nằm trong khoảng 20 - 40
+        if (next < min) next = min + Math.floor(Math.random() * 4);
+        if (next > max) next = max - Math.floor(Math.random() * 4);
+
+        state = {
+          current: next,
+          lastCycle: now
+        };
+        localStorage.setItem(BOOST_STATE_KEY, JSON.stringify(state));
+      }
+
+      return state.current;
+    }
+
+    function initLiveViewersEngine() {
+      const STORAGE_KEY = 'simon_live_viewers_state';
+      const config = getViewersConfig();
+
+      const topBadge = document.getElementById('topLiveViewersBadge');
+      const heroBadge = document.getElementById('heroLiveViewersBadge');
+      const floatingBadge = document.getElementById('liveViewersFloatingBadge');
+
+      // 1. Nếu Admin tắt hoàn toàn huy hiệu người xem: Ẩn cả 3 vị trí trên trang
+      if (config.showBadge === false) {
+        if (topBadge) topBadge.style.display = 'none';
+        if (heroBadge) heroBadge.style.display = 'none';
+        if (floatingBadge) floatingBadge.style.display = 'none';
+        return; // Dừng chạy bộ đếm
+      } else {
+        if (topBadge) topBadge.style.display = 'inline-flex';
+        if (heroBadge) heroBadge.style.display = 'inline-flex';
+        if (floatingBadge) floatingBadge.style.display = 'flex';
+      }
+
+      // 2. Tính khoảng người xem theo giờ thực tế + Số cộng thêm Boost (tự đổi mỗi 10 phút trong khoảng 20-40)
+      function getHourlyRange() {
+        const hour = new Date().getHours();
+        let baseMin = 18, baseMax = 28;
+        if (hour >= 8 && hour < 12) {
+          baseMin = 20; baseMax = 32; // Buổi sáng
+        } else if (hour >= 12 && hour < 14) {
+          baseMin = 16; baseMax = 25; // Buổi trưa
+        } else if (hour >= 14 && hour < 18) {
+          baseMin = 22; baseMax = 34; // Buổi chiều
+        } else if (hour >= 18 && hour < 23) {
+          baseMin = 26; baseMax = 40; // Giờ vàng tối (nhiều người tìm hiểu nhất)
+        } else {
+          baseMin = 11; baseMax = 19; // Khuya
+        }
+
+        // Lấy số Boost động: ngẫu nhiên 20 - 40, biến thiên <= 10 mỗi 10 phút
+        const dynamicBoost = getDynamicBoostOffset(config);
+
+        return {
+          min: baseMin + dynamicBoost,
+          max: baseMax + dynamicBoost,
+          boost: dynamicBoost
+        };
+      }
+
+      function getInitialCount() {
+        const range = getHourlyRange();
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        const now = Date.now();
+
+        // Nếu vừa cập nhật trong vòng 2 phút và nằm trong khoảng hợp lệ, giữ nguyên để đồng bộ giữa các tab
+        if (saved && saved.count && (now - saved.timestamp < 120000) && saved.count >= range.min - 3 && saved.count <= range.max + 5) {
+          return saved.count;
+        }
+
+        const count = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ count: count, timestamp: now }));
+        return count;
+      }
+
+      let currentViewers = getInitialCount();
+
+      function updateViewersDisplay(count) {
+        document.querySelectorAll('.live-viewers-count').forEach(el => {
+          el.innerText = count;
+        });
+      }
+
+      updateViewersDisplay(currentViewers);
+
+      // Dao động vi mô tự nhiên sau mỗi 10-16 giây (-2, -1, 0, +1, +2)
+      function scheduleNextJitter() {
+        const nextInterval = Math.floor(Math.random() * 6000) + 10000; // 10s - 16s
+        setTimeout(() => {
+          const range = getHourlyRange();
+          const jitter = [-2, -1, 0, 1, 1, 2][Math.floor(Math.random() * 6)];
+          let nextCount = currentViewers + jitter;
+
+          if (nextCount < range.min) nextCount = range.min + Math.floor(Math.random() * 3);
+          if (nextCount > range.max) nextCount = range.max - Math.floor(Math.random() * 3);
+
+          currentViewers = nextCount;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ count: currentViewers, timestamp: Date.now() }));
+          updateViewersDisplay(currentViewers);
+          scheduleNextJitter();
+        }, nextInterval);
+      }
+
+      scheduleNextJitter();
+
+      // Định kỳ kiểm tra chu kỳ 10 phút để cập nhật mốc boost nếu vừa sang chu kỳ mới
+      setInterval(() => {
+        const freshConfig = getViewersConfig();
+        if (freshConfig.boostEnabled && freshConfig.autoRandom) {
+          const newRange = getHourlyRange();
+          if (currentViewers < newRange.min || currentViewers > newRange.max) {
+            currentViewers = Math.floor((newRange.min + newRange.max) / 2);
+            updateViewersDisplay(currentViewers);
+          }
+        }
+      }, 30000);
+    }
+
+    // Khởi động khi tải trang
+    window.addEventListener('DOMContentLoaded', () => {
+      trackWebsiteTraffic();
+      initLiveViewersEngine();
+    });
+
   </script>
+
+  <!-- FLOATING LIVE VIEWERS BADGE (Góc dưới bên trái màn hình) -->
+  <div id="liveViewersFloatingBadge" class="fixed bottom-5 left-5 z-40 bg-gray-950/90 hover:bg-black backdrop-blur-md border border-emerald-500/50 text-white text-xs px-3.5 py-2 rounded-full shadow-2xl flex items-center space-x-2.5 transition transform duration-300">
+    <span class="relative flex h-2.5 w-2.5">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+    </span>
+    <span class="text-gray-200">
+      <strong class="live-viewers-count text-emerald-400 font-extrabold">24</strong> người đang xem trang
+    </span>
+    <span class="text-gray-500 text-[10px] hidden sm:inline">• Khóa học đang rất hot</span>
+    <button onclick="document.getElementById('liveViewersFloatingBadge').classList.add('hidden')" class="text-gray-400 hover:text-white ml-1 text-sm leading-none p-0.5" title="Đóng">&times;</button>
+  </div>
 
 </body>
 </html>

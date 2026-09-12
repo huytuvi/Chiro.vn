@@ -32,8 +32,8 @@ const CONFIG = {
   INSTRUCTOR: "Chuyên gia Bác sĩ Henrik Simon (Simon Center)",
   HOTLINE: "0389.609.938",
   ZALO_LINK: "https://zalo.me/0389609938",
-  COMMUNITY_LINK: "https://zalo.me/g/simoncenter", // Thay bằng link nhóm kín của bạn
-  ADMIN_EMAIL: "simoncentervn@gmail.com"
+  COMMUNITY_LINK: "https://zalo.me/0389609938", // Link Zalo hỗ trợ
+  ADMIN_EMAIL: "chiroeduvn@gmail.com"
 };
 
 /**
@@ -57,6 +57,36 @@ function doPost(e) {
     const action = data.action || 'register';
     const now = new Date();
     const timeStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+
+    // TRƯỜNG HỢP 0: Đo traffic lượt truy cập website (Pageview / Visit)
+    if (action === 'pageview' || action === 'track_visit') {
+      const props = PropertiesService.getScriptProperties();
+      const totalViews = Number(props.getProperty('TOTAL_PAGEVIEWS') || '0') + 1;
+      props.setProperty('TOTAL_PAGEVIEWS', String(totalViews));
+
+      const todayKey = 'PV_' + Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "yyyy_MM_dd");
+      const todayViews = Number(props.getProperty(todayKey) || '0') + 1;
+      props.setProperty(todayKey, String(todayViews));
+
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        action: "pageview",
+        total: totalViews,
+        today: todayViews
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // TRƯỜNG HỢP 0B: Lưu cấu hình số người đang xem (Live Viewers Boost)
+    if (action === 'save_viewers_config') {
+      const props = PropertiesService.getScriptProperties();
+      if (data.config) {
+        props.setProperty('VIEWERS_CONFIG', JSON.stringify(data.config));
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        message: "Đã lưu cấu hình viewers thành công"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
 
     // TRƯỜNG HỢP 1: Khách vừa đăng ký trên Form hoặc bấm các nút
     if (action === 'register') {
@@ -184,10 +214,27 @@ function doGet(e) {
       });
     }
 
+    // Lấy thống kê traffic website & cấu hình viewers
+    const props = PropertiesService.getScriptProperties();
+    const totalViews = Number(props.getProperty('TOTAL_PAGEVIEWS') || '0');
+    const todayKey = 'PV_' + Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "yyyy_MM_dd");
+    const todayViews = Number(props.getProperty(todayKey) || '0');
+    
+    let viewersConfig = null;
+    try {
+      const cfgStr = props.getProperty('VIEWERS_CONFIG');
+      if (cfgStr) viewersConfig = JSON.parse(cfgStr);
+    } catch(e) {}
+
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
       sheetName: sheet.getName(),
       total: leads.length,
+      traffic: {
+        total: totalViews,
+        today: todayViews
+      },
+      viewersConfig: viewersConfig,
       data: leads
     })).setMimeType(ContentService.MimeType.JSON);
 

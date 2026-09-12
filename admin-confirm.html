@@ -47,6 +47,59 @@
       </button>
     </div>
 
+    <!-- 0. TỔNG QUAN CHỈ SỐ DOANH THU & TRAFFIC (REAL-TIME METRICS) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
+      <!-- Card 1: Tổng số người đăng ký -->
+      <div class="card p-4 border-l-4 border-red-900 bg-white shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-gray-500 mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Tổng Đăng Ký</span>
+          <span class="text-base">👥</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-gray-900 font-mono" id="statTotalLeads">0</div>
+        <div class="text-[10px] text-gray-400 mt-1">Học viên đã để lại thông tin</div>
+      </div>
+
+      <!-- Card 2: Đã thanh toán -->
+      <div class="card p-4 border-l-4 border-emerald-600 bg-emerald-50/30 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-emerald-800 mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Đã Thanh Toán</span>
+          <span class="text-base">✅</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-emerald-700 font-mono" id="statPaidLeads">0</div>
+        <div class="text-[10px] text-emerald-600 font-medium mt-1" id="statPaidRate">0% hoàn tất</div>
+      </div>
+
+      <!-- Card 3: Chờ thanh toán -->
+      <div class="card p-4 border-l-4 border-amber-500 bg-amber-50/30 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-amber-800 mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Chờ Thanh Toán</span>
+          <span class="text-base">⏳</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-amber-600 font-mono" id="statPendingLeads">0</div>
+        <div class="text-[10px] text-amber-700 font-medium mt-1">Cần chăm sóc / nhắc CK</div>
+      </div>
+
+      <!-- Card 4: Doanh thu thu được -->
+      <div class="card p-4 border-l-4 border-blue-600 bg-blue-50/20 shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between text-blue-800 mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Doanh Thu Đã Thu</span>
+          <span class="text-base">💵</span>
+        </div>
+        <div class="text-lg sm:text-xl font-black text-blue-800 font-mono truncate" id="statTotalRevenue">0 đ</div>
+        <div class="text-[10px] text-blue-600 font-medium mt-1">Từ các đơn đã hoàn tất</div>
+      </div>
+
+      <!-- Card 5: Traffic Lượt truy cập web -->
+      <div class="card p-4 border-l-4 border-purple-600 bg-purple-50/20 shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
+        <div class="flex items-center justify-between text-purple-800 mb-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider">Traffic Website</span>
+          <span class="text-base">🌐</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-purple-800 font-mono" id="statTrafficViews">--</div>
+        <div class="text-[10px] text-purple-700 font-medium mt-1" id="statTodayViews">Hôm nay: --</div>
+      </div>
+    </div>
+
     <!-- SETUP GOOGLE SHEETS WEBHOOK (KHUYÊN DÙNG NHẤT - 100% MIỄN PHÍ TRỌN ĐỜI) -->
     <div id="googleSheetSetup" class="card p-6 mb-6 border-2 border-emerald-400 bg-emerald-50/30">
       <div class="flex items-center justify-between mb-2">
@@ -77,9 +130,250 @@
       </div>
     </div>
 
+    <!-- 2. CẤU HÌNH HỌC PHÍ & LỘ TRÌNH TĂNG GIÁ (DÀNH CHO ADMIN QUẢN LÝ DOANH THU) -->
+    <div id="pricingConfigCard" class="card p-6 mb-6 border-2 border-amber-400 bg-amber-50/40">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="font-extrabold text-amber-900 text-base">💰 2. Cấu hình Học phí & Lộ trình Tăng giá</h2>
+        <span class="text-[11px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded">Đồng bộ Website & Admin</span>
+      </div>
+      <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+        Quản lý giá bán mở màn, giá gốc thực tế và tùy chọn tự động tăng học phí theo ngày hoặc tuần cho từng khóa học. Thay đổi tại đây sẽ tự động hiển thị trên landing page <strong>chiro.vn</strong>.
+      </p>
+
+      <!-- Grid cấu hình 3 Khóa học & Combo theo Blueprint -->
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <!-- Khóa 1 -->
+        <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-xs text-brand-wine uppercase mb-2 flex items-center justify-between">
+            <span>🟦 Khóa 1: Cột Sống Chuyên Biệt (Spine)</span>
+            <span class="text-[10px] text-gray-500 font-normal">Modul A</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
+              <input type="number" id="cfg_k1_current" value="1500000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
+              <input type="number" id="cfg_k1_original" value="3000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- Khóa 2 -->
+        <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-xs text-emerald-800 uppercase mb-2 flex items-center justify-between">
+            <span>🟩 Khóa 2: Tứ Chi & Khớp Ngoại Vi</span>
+            <span class="text-[10px] text-gray-500 font-normal">Extremities</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
+              <input type="number" id="cfg_k2_current" value="2000000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
+              <input type="number" id="cfg_k2_original" value="4000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- Khóa 3 -->
+        <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
+          <div class="font-bold text-xs text-purple-900 uppercase mb-2 flex items-center justify-between">
+            <span>🟪 Khóa 3: Nâng Cao (Modul B)</span>
+            <span class="text-[10px] text-gray-500 font-normal">Advanced</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
+              <input type="number" id="cfg_k3_current" value="2500000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
+              <input type="number" id="cfg_k3_original" value="5000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo Trọn Khóa -->
+        <div class="bg-white p-4 rounded-xl border-2 border-amber-400 shadow-sm">
+          <div class="font-bold text-xs text-amber-900 uppercase mb-2 flex items-center justify-between">
+            <span>⭐ Combo Trọn Khóa (3 Khóa + Cộng Đồng)</span>
+            <span class="text-[10px] bg-amber-400 text-black font-extrabold px-1.5 py-0.5 rounded">Ưu Đãi 50%</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
+              <input type="number" id="cfg_combo_current" value="6000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
+              <input type="number" id="cfg_combo_original" value="12000000" step="500000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tùy chọn tăng giá tự động theo ngày / theo tuần -->
+      <div class="bg-white p-4 rounded-xl border border-amber-300 mb-4">
+        <div class="font-bold text-xs text-gray-800 uppercase mb-2 flex items-center space-x-1.5">
+          <span>⏳ CƠ CHẾ TỰ ĐỘNG TĂNG GIÁ THEO THỜI GIAN (URGENCY)</span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <div>
+            <label class="text-[11px] font-bold text-gray-700 block mb-1">Chu kỳ tăng giá</label>
+            <select id="cfg_increment_cycle" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-medium bg-white">
+              <option value="daily">Tăng mỗi ngày (Daily)</option>
+              <option value="weekly">Tăng mỗi tuần (Weekly)</option>
+              <option value="none">Cố định (Không tăng tự động)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-gray-700 block mb-1">Số tiền tăng mỗi chu kỳ (VNĐ)</label>
+            <input type="number" id="cfg_increment_amount" value="200000" step="50000" placeholder="Ví dụ: 200000" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-gray-700 block mb-1">Ngày bắt đầu tính mốc</label>
+            <input type="date" id="cfg_start_date" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white">
+          </div>
+        </div>
+        <p class="text-[11px] text-gray-500 mt-2 leading-relaxed italic">
+          💡 Ví dụ: Khi chọn "Tăng mỗi ngày" và nhập <strong>200.000 VNĐ</strong>, hệ thống sẽ tự tính số ngày trôi qua từ Ngày mốc và tự động tăng giá cho đến khi chạm Giá gốc thực tế.
+        </p>
+      </div>
+
+      <!-- Nút thao tác -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="savePricingConfig()" class="flex-1 min-w-[200px] bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
+          💾 Lưu Cấu Hình Học Phí & Lộ Trình
+        </button>
+        <button onclick="resetPricingConfigToDefault()" class="bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-3 rounded-lg text-xs transition border border-gray-300 shadow-sm">
+          🔄 Khôi phục chuẩn Blueprint
+        </button>
+      </div>
+      <div id="pricingConfigResult" class="text-xs mt-2 hidden"></div>
+    </div>
+
+    <!-- 3. CẤU HÌNH SỐ NGƯỜI ĐANG XEM (LIVE VIEWERS BOOST & SOCIAL PROOF) -->
+    <div id="viewersConfigCard" class="card p-6 mb-6 border-2 border-emerald-400 bg-emerald-50/40">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="font-extrabold text-emerald-900 text-base">🟢 3. Cấu hình "Số người đang xem" trên Website (Social Proof)</h2>
+        <span class="text-[11px] bg-emerald-200 text-emerald-900 font-bold px-2 py-0.5 rounded">Tự Động 10 Phút</span>
+      </div>
+      <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+        Bật/tắt thanh đếm người xem trực tiếp trên <strong>chiro.vn</strong> và cài đặt chế độ tự động ngẫu nhiên tăng/giảm trong khoảng 20 – 40 người sau mỗi 10 phút để trang web luôn tấp nập, khách hàng cảm thấy đông đảo và an tâm đăng ký.
+      </p>
+
+      <!-- HỘP THÔNG BÁO TÁCH BIỆT: CHỈ HIỂN THỊ SHOW KHÁCH, KHÔNG ẢNH HƯỞNG THỐNG KÊ THẬT -->
+      <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 mb-4 flex items-start space-x-2">
+        <span class="text-base flex-shrink-0">🔒</span>
+        <div class="leading-relaxed">
+          <strong>Lưu ý về tính chính xác:</strong> Cơ chế cộng thêm này <strong>CHỈ DÙNG ĐỂ HIỂN THỊ CHO KHÁCH HÀNG</strong> trên giao diện trang chủ (Social Proof). Toàn bộ <strong>số liệu Thống kê Traffic (Lượt xem)</strong> và <strong>Danh sách Học viên đăng ký</strong> ở các thẻ KPI phía trên luôn là <strong>100% SỐ LIỆU NGƯỜI XEM THẬT</strong> từ lượt truy cập thực tế.
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl border border-emerald-200 mb-4 shadow-sm space-y-4">
+        <!-- Checkbox 1: Bật / Tắt hoàn toàn tính năng hiển thị người xem -->
+        <div class="flex items-start space-x-3 pb-3 border-b border-gray-100">
+          <input type="checkbox" id="cfg_viewers_show_badge" checked class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500 mt-0.5 cursor-pointer" onchange="previewBoostCalculation()">
+          <div>
+            <label for="cfg_viewers_show_badge" class="text-xs font-bold text-gray-800 cursor-pointer block">
+              Hiển thị huy hiệu "Số người đang xem" trên Website (Top Banner, Hero, Huy hiệu nổi)
+            </label>
+            <p class="text-[11px] text-gray-500 mt-0.5">Bỏ tích nếu bạn muốn ẩn hoàn toàn các con số "đang xem" khỏi trang web.</p>
+          </div>
+        </div>
+
+        <!-- Checkbox 2: Bật / Tắt chế độ kích thích Boost -->
+        <div class="flex items-start space-x-3">
+          <input type="checkbox" id="cfg_viewers_boost_enabled" checked onchange="toggleBoostInput(this.checked)" class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500 mt-0.5 cursor-pointer">
+          <div class="flex-1">
+            <label for="cfg_viewers_boost_enabled" class="text-xs font-bold text-gray-800 cursor-pointer block">
+              Bật chế độ "Số người muốn cộng thêm" (Viewer Boost Offset)
+            </label>
+            <p class="text-[11px] text-gray-500 mt-0.5 mb-3">Cộng thêm một lượng người xem vào số người thực tế để tăng uy tín cho trang web.</p>
+
+            <div id="boostInputContainer" class="space-y-3">
+              <!-- Tùy chọn A: Tự động Random 20 - 40, chu kỳ 10 phút, biến thiên <= 10 (Khuyên dùng) -->
+              <div class="p-3.5 rounded-xl border-2 border-emerald-300 bg-emerald-50/50">
+                <div class="flex items-center space-x-2 mb-2">
+                  <input type="radio" id="boostModeAuto" name="boostMode" value="auto" checked onchange="toggleBoostMode()" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                  <label for="boostModeAuto" class="text-xs font-bold text-emerald-950 cursor-pointer flex items-center space-x-1.5">
+                    <span>🎲 Chế độ tự động biến thiên ngẫu nhiên (Khuyên dùng)</span>
+                    <span class="text-[10px] bg-emerald-600 text-white font-extrabold px-1.5 py-0.5 rounded">Tự Động 10 Phút</span>
+                  </label>
+                </div>
+                <p class="text-[11px] text-gray-600 mb-3 ml-6 leading-relaxed">
+                  Hệ thống tự động random số cộng thêm cứ <strong>10 phút một lần</strong> trong khoảng từ <strong>20 – 40 người</strong>, mỗi lần biến thiên tăng/giảm <strong>không quá 10 người</strong> (giúp chuyển tiếp số rất tự nhiên, người xem không thể phát hiện).
+                </p>
+
+                <!-- Grid thông số -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 ml-6 text-xs">
+                  <div class="bg-white p-2 rounded-lg border border-emerald-200">
+                    <span class="text-[10px] text-gray-500 block">Khoảng tối thiểu</span>
+                    <strong class="text-emerald-800 font-mono text-xs">20 người</strong>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-emerald-200">
+                    <span class="text-[10px] text-gray-500 block">Khoảng tối đa</span>
+                    <strong class="text-emerald-800 font-mono text-xs">40 người</strong>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-emerald-200">
+                    <span class="text-[10px] text-gray-500 block">Chu kỳ đổi số</span>
+                    <strong class="text-emerald-800 font-mono text-xs">10 phút / lần</strong>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-emerald-200">
+                    <span class="text-[10px] text-gray-500 block">Biến thiên tối đa</span>
+                    <strong class="text-emerald-800 font-mono text-xs">≤ 10 người / lần</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tùy chọn B: Nhập thủ công một con số cố định -->
+              <div class="p-3.5 rounded-xl border border-gray-200 bg-gray-50">
+                <div class="flex items-center space-x-2 mb-2">
+                  <input type="radio" id="boostModeManual" name="boostMode" value="manual" onchange="toggleBoostMode()" class="w-4 h-4 text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                  <label for="boostModeManual" class="text-xs font-semibold text-gray-700 cursor-pointer">
+                    ⚙️ Hoặc cài đặt cố định một con số nếu muốn:
+                  </label>
+                </div>
+                <div id="manualBoostBox" class="ml-6 flex flex-wrap items-center gap-2 opacity-50 pointer-events-none">
+                  <input type="number" id="cfg_viewers_boost_offset" value="28" min="0" max="200" step="1" 
+                         class="w-24 px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-emerald-700 outline-none"
+                         oninput="previewBoostCalculation()">
+                  <span class="text-xs text-gray-600">người</span>
+                  <div class="flex space-x-1 ml-2">
+                    <button type="button" onclick="setQuickBoost(20)" class="text-[10px] bg-white border border-gray-300 px-2 py-1 rounded hover:bg-gray-100">+20</button>
+                    <button type="button" onclick="setQuickBoost(30)" class="text-[10px] bg-white border border-gray-300 px-2 py-1 rounded hover:bg-gray-100">+30</button>
+                    <button type="button" onclick="setQuickBoost(40)" class="text-[10px] bg-white border border-gray-300 px-2 py-1 rounded hover:bg-gray-100">+40</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Preview box -->
+              <div class="mt-3 p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 flex items-center space-x-2">
+                <span>👁 <strong>Kết quả khách hàng nhìn thấy trên Website:</strong> Khoảng <strong id="previewViewersDisplay" class="text-emerald-700 font-extrabold text-sm">38 – 58</strong> người đang xem</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nút thao tác -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="saveViewersConfig()" class="flex-1 min-w-[200px] bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
+          💾 Lưu Cấu Hình Số Người Đang Xem
+        </button>
+        <button onclick="resetViewersConfig()" class="bg-white hover:bg-gray-50 text-gray-700 font-semibold py-2.5 px-3 rounded-lg text-xs transition border border-gray-300 shadow-sm">
+          🔄 Chuẩn Blueprint (Tự động 20 – 40 người)
+        </button>
+      </div>
+      <div id="viewersConfigResult" class="text-xs mt-2 hidden"></div>
+    </div>
+
     <!-- SETUP EMAILJS (DỰ PHÒNG) -->
     <div id="emailjsSetup" class="card p-6 mb-6 border border-gray-300">
-      <h2 class="font-bold text-gray-700 mb-1 text-sm">⚙️ 2. Cài đặt EmailJS (Kênh gửi email dự phòng)</h2>
+      <h2 class="font-bold text-gray-700 mb-1 text-sm">⚙️ 4. Cài đặt EmailJS (Kênh gửi email dự phòng)</h2>
       <p class="text-xs text-gray-500 mb-3">Nếu bạn không dùng Google Apps Script để gửi email thì có thể dùng EmailJS.</p>
       <div class="space-y-3">
         <div>
@@ -130,8 +424,16 @@
         </div>
         <div class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-xs font-bold text-gray-700 block mb-1">Số tiền đã nhận</label>
-            <input type="text" id="cf_amount" placeholder="5.000.000 VNĐ"
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-xs font-bold text-gray-700 block">Số tiền đã nhận</label>
+              <div class="flex space-x-1">
+                <button type="button" onclick="setQuickAmount('k1')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K1</button>
+                <button type="button" onclick="setQuickAmount('k2')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K2</button>
+                <button type="button" onclick="setQuickAmount('k3')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K3</button>
+                <button type="button" onclick="setQuickAmount('combo')" class="text-[10px] bg-amber-200 hover:bg-amber-300 font-bold px-1.5 py-0.5 rounded text-amber-900">Combo</button>
+              </div>
+            </div>
+            <input type="text" id="cf_amount" placeholder="Ví dụ: 1.500.000 VNĐ hoặc 6.000.000 VNĐ"
                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
           </div>
           <div>
@@ -172,7 +474,10 @@
     <div class="card p-6 mb-6">
       <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div>
-          <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký khóa học</h2>
+          <div class="flex items-center space-x-2">
+            <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký khóa học</h2>
+            <span id="leadsCountBadge" class="bg-red-900 text-white font-bold text-xs px-2.5 py-0.5 rounded-full shadow-sm">0 học viên</span>
+          </div>
           <p id="leadSourceStatus" class="text-xs text-gray-500 mt-0.5">Đang kiểm tra nguồn dữ liệu...</p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
@@ -182,6 +487,25 @@
           <button onclick="loadLeads()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-3 py-2 rounded-lg transition border border-gray-300">
             🔄 Tải lại dữ liệu
           </button>
+        </div>
+      </div>
+
+      <!-- THANH BỘ LỌC NHANH & TÌM KIẾM HỌC VIÊN -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
+        <div class="flex items-center space-x-1.5 text-xs font-semibold">
+          <button onclick="filterLeads('all')" id="tabFilterAll" class="px-3 py-1.5 rounded-lg bg-red-900 text-white shadow-sm transition">
+            Tất cả (<span id="filterAllCount">0</span>)
+          </button>
+          <button onclick="filterLeads('paid')" id="tabFilterPaid" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
+            ✅ Đã thanh toán (<span id="filterPaidCount">0</span>)
+          </button>
+          <button onclick="filterLeads('pending')" id="tabFilterPending" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
+            ⏳ Chờ thanh toán (<span id="filterPendingCount">0</span>)
+          </button>
+        </div>
+        <div class="w-full sm:w-64">
+          <input type="text" id="leadSearchInput" oninput="searchLeads(this.value)" placeholder="🔍 Tìm tên, SĐT, email, kênh..." 
+                 class="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none">
         </div>
       </div>
       
@@ -195,11 +519,11 @@
       <ol class="space-y-4 text-sm text-gray-700">
         <li class="flex space-x-3">
           <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
-          <div>Vào <a href="https://www.emailjs.com/" target="_blank" class="text-blue-600 underline">emailjs.com</a> → Đăng ký bằng email <code class="bg-gray-100 px-1 rounded">simoncentervn@gmail.com</code></div>
+          <div>Vào <a href="https://www.emailjs.com/" target="_blank" class="text-blue-600 underline">emailjs.com</a> → Đăng ký bằng email <code class="bg-gray-100 px-1 rounded">chiroeduvn@gmail.com</code></div>
         </li>
         <li class="flex space-x-3">
           <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
-          <div><strong>Email Services</strong> → Add New Service → Gmail → Kết nối Gmail simoncentervn@gmail.com → Lấy <strong>Service ID</strong></div>
+          <div><strong>Email Services</strong> → Add New Service → Gmail → Kết nối Gmail chiroeduvn@gmail.com → Lấy <strong>Service ID</strong></div>
         </li>
         <li class="flex space-x-3">
           <span class="flex-shrink-0 w-7 h-7 bg-red-900 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
@@ -285,7 +609,268 @@ Simon Center – 0389.609.938</div>
         document.getElementById('ejsTemplateId').value = cfg.templateId;
         emailjs.init(cfg.publicKey);
       }
+
+      // Khởi tạo cấu hình Học phí
+      loadPricingConfigToAdmin();
+
+      // Khởi tạo cấu hình Số người đang xem (Live Viewers Boost)
+      loadViewersConfigToAdmin();
+
       loadLeads();
+    }
+
+    // ==========================================
+    // CẤU HÌNH HỌC PHÍ & TĂNG GIÁ TỰ ĐỘNG
+    // ==========================================
+    const DEFAULT_PRICING_CONFIG = {
+      k1_current: 1500000,
+      k1_original: 3000000,
+      k2_current: 2000000,
+      k2_original: 4000000,
+      k3_current: 2500000,
+      k3_original: 5000000,
+      combo_current: 6000000,
+      combo_original: 12000000,
+      cycle: 'daily',
+      increment_amount: 200000,
+      start_date: '2026-09-10'
+    };
+
+    function loadPricingConfigToAdmin() {
+      const saved = JSON.parse(localStorage.getItem('chiro_pricing_config') || 'null') || DEFAULT_PRICING_CONFIG;
+      if (document.getElementById('cfg_k1_current')) {
+        document.getElementById('cfg_k1_current').value = saved.k1_current || 1500000;
+        document.getElementById('cfg_k1_original').value = saved.k1_original || 3000000;
+        document.getElementById('cfg_k2_current').value = saved.k2_current || 2000000;
+        document.getElementById('cfg_k2_original').value = saved.k2_original || 4000000;
+        document.getElementById('cfg_k3_current').value = saved.k3_current || 2500000;
+        document.getElementById('cfg_k3_original').value = saved.k3_original || 5000000;
+        document.getElementById('cfg_combo_current').value = saved.combo_current || 6000000;
+        document.getElementById('cfg_combo_original').value = saved.combo_original || 12000000;
+        document.getElementById('cfg_increment_cycle').value = saved.cycle || 'daily';
+        document.getElementById('cfg_increment_amount').value = saved.increment_amount !== undefined ? saved.increment_amount : 200000;
+        document.getElementById('cfg_start_date').value = saved.start_date || '2026-09-10';
+      }
+    }
+
+    function savePricingConfig() {
+      const cfg = {
+        k1_current: parseInt(document.getElementById('cfg_k1_current').value) || 1500000,
+        k1_original: parseInt(document.getElementById('cfg_k1_original').value) || 3000000,
+        k2_current: parseInt(document.getElementById('cfg_k2_current').value) || 2000000,
+        k2_original: parseInt(document.getElementById('cfg_k2_original').value) || 4000000,
+        k3_current: parseInt(document.getElementById('cfg_k3_current').value) || 2500000,
+        k3_original: parseInt(document.getElementById('cfg_k3_original').value) || 5000000,
+        combo_current: parseInt(document.getElementById('cfg_combo_current').value) || 6000000,
+        combo_original: parseInt(document.getElementById('cfg_combo_original').value) || 12000000,
+        cycle: document.getElementById('cfg_increment_cycle').value,
+        increment_amount: parseInt(document.getElementById('cfg_increment_amount').value) || 0,
+        start_date: document.getElementById('cfg_start_date').value || '2026-09-10'
+      };
+      localStorage.setItem('chiro_pricing_config', JSON.stringify(cfg));
+      const res = document.getElementById('pricingConfigResult');
+      res.className = 'text-xs mt-2 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg block font-semibold';
+      res.innerHTML = '✅ Đã lưu cấu hình học phí thành công! Giá trên trang chủ và form đăng ký sẽ tự động áp dụng.';
+      res.classList.remove('hidden');
+      setTimeout(() => res.classList.add('hidden'), 5000);
+    }
+
+    function resetPricingConfigToDefault() {
+      if (confirm('Khôi phục toàn bộ học phí và chu kỳ về cấu hình chuẩn Blueprint (Khoá 1: 1.5tr, Khoá 2: 2tr, Khoá 3: 2.5tr, Combo: 6tr, tăng mỗi ngày 200k)?')) {
+        localStorage.removeItem('chiro_pricing_config');
+        loadPricingConfigToAdmin();
+        const res = document.getElementById('pricingConfigResult');
+        res.className = 'text-xs mt-2 p-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg block font-semibold';
+        res.innerHTML = '🔄 Đã khôi phục cài đặt gốc theo Blueprint!';
+        res.classList.remove('hidden');
+        setTimeout(() => res.classList.add('hidden'), 4000);
+      }
+    }
+
+    // ==========================================
+    // CẤU HÌNH SỐ NGƯỜI ĐANG XEM (LIVE VIEWERS BOOST)
+    // ==========================================
+    const DEFAULT_VIEWERS_CONFIG = {
+      showBadge: true,
+      boostEnabled: true,
+      autoRandom: true,       // Tự động random 20-40, 10 phút/lần, biến thiên <= 10
+      boostOffset: 28,        // Giá trị dự phòng nếu dùng thủ công
+      boostMin: 20,
+      boostMax: 40,
+      stepMax: 10,
+      cycleMinutes: 10
+    };
+
+    function loadViewersConfigToAdmin() {
+      const saved = JSON.parse(localStorage.getItem('chiro_viewers_config') || 'null') || DEFAULT_VIEWERS_CONFIG;
+      if (document.getElementById('cfg_viewers_show_badge')) {
+        document.getElementById('cfg_viewers_show_badge').checked = saved.showBadge !== false;
+      }
+      if (document.getElementById('cfg_viewers_boost_enabled')) {
+        const isBoost = saved.boostEnabled !== false;
+        document.getElementById('cfg_viewers_boost_enabled').checked = isBoost;
+        toggleBoostInput(isBoost);
+      }
+      const isAuto = saved.autoRandom !== false;
+      if (document.getElementById('boostModeAuto')) document.getElementById('boostModeAuto').checked = isAuto;
+      if (document.getElementById('boostModeManual')) document.getElementById('boostModeManual').checked = !isAuto;
+      toggleBoostMode();
+
+      if (document.getElementById('cfg_viewers_boost_offset')) {
+        document.getElementById('cfg_viewers_boost_offset').value = saved.boostOffset !== undefined ? saved.boostOffset : 28;
+      }
+      previewBoostCalculation();
+    }
+
+    function toggleBoostInput(isEnabled) {
+      const container = document.getElementById('boostInputContainer');
+      if (container) {
+        if (isEnabled) {
+          container.classList.remove('opacity-40', 'pointer-events-none');
+        } else {
+          container.classList.add('opacity-40', 'pointer-events-none');
+        }
+      }
+      previewBoostCalculation();
+    }
+
+    function toggleBoostMode() {
+      const isAuto = document.getElementById('boostModeAuto')?.checked !== false;
+      const manualBox = document.getElementById('manualBoostBox');
+      if (manualBox) {
+        if (isAuto) {
+          manualBox.classList.add('opacity-50', 'pointer-events-none');
+        } else {
+          manualBox.classList.remove('opacity-50', 'pointer-events-none');
+        }
+      }
+      previewBoostCalculation();
+    }
+
+    function setQuickBoost(offset) {
+      const inp = document.getElementById('cfg_viewers_boost_offset');
+      if (inp) {
+        inp.value = offset;
+        const rad = document.getElementById('boostModeManual');
+        if (rad) rad.checked = true;
+        toggleBoostMode();
+        previewBoostCalculation();
+      }
+    }
+
+    function previewBoostCalculation() {
+      const isShow = document.getElementById('cfg_viewers_show_badge')?.checked !== false;
+      const isBoost = document.getElementById('cfg_viewers_boost_enabled')?.checked !== false;
+      const isAuto = document.getElementById('boostModeAuto')?.checked !== false;
+      const offset = parseInt(document.getElementById('cfg_viewers_boost_offset')?.value || '28', 10);
+      const previewEl = document.getElementById('previewViewersDisplay');
+
+      if (!previewEl) return;
+
+      if (!isShow) {
+        previewEl.innerHTML = '<span class="text-red-500 font-bold">🚫 Đang TẮT hiển thị (Huy hiệu người xem sẽ ẩn hoàn toàn trên Web)</span>';
+        return;
+      }
+
+      // Giả lập theo khung giờ hiện tại
+      const hour = new Date().getHours();
+      let minBase = 18, maxBase = 28;
+      if (hour >= 18 && hour < 23) { minBase = 26; maxBase = 40; }
+      else if (hour >= 23 || hour < 7) { minBase = 11; maxBase = 19; }
+
+      if (!isBoost) {
+        previewEl.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">${minBase} – ${maxBase}</span> người đang xem <span class="text-gray-500 text-[11px] font-normal">(Tự nhiên 100%, không cộng thêm)</span>`;
+        return;
+      }
+
+      if (isAuto) {
+        const minDisp = minBase + 20;
+        const maxDisp = maxBase + 40;
+        previewEl.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">${minDisp} – ${maxDisp}</span> người đang xem <span class="text-emerald-700 text-[11px] font-normal">(Thực tế ~${minBase}–${maxBase} + Boost tự động [20 – 40 người], biến thiên ≤ 10 mỗi 10 phút)</span>`;
+      } else {
+        const minDisp = minBase + offset;
+        const maxDisp = maxBase + offset;
+        previewEl.innerHTML = `<span class="text-emerald-700 font-extrabold text-sm">${minDisp} – ${maxDisp}</span> người đang xem <span class="text-emerald-700 text-[11px] font-normal">(Thực tế ~${minBase}–${maxBase} + Boost cố định ${offset} người)</span>`;
+      }
+    }
+
+    function saveViewersConfig() {
+      const isAuto = document.getElementById('boostModeAuto').checked;
+      const cfg = {
+        showBadge: document.getElementById('cfg_viewers_show_badge').checked,
+        boostEnabled: document.getElementById('cfg_viewers_boost_enabled').checked,
+        autoRandom: isAuto,
+        boostOffset: parseInt(document.getElementById('cfg_viewers_boost_offset').value) || 28,
+        boostMin: 20,
+        boostMax: 40,
+        stepMax: 10,
+        cycleMinutes: 10
+      };
+      localStorage.setItem('chiro_viewers_config', JSON.stringify(cfg));
+
+      // Đồng bộ sang Google Apps Script nếu có Web App URL
+      const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
+      if (gsUrl) {
+        fetch(gsUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'save_viewers_config',
+            config: cfg
+          })
+        }).catch(e => console.log('Sync viewers config err:', e));
+      }
+
+      const res = document.getElementById('viewersConfigResult');
+      res.className = 'text-xs mt-2 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg block font-semibold';
+      let msg = '';
+      if (!cfg.showBadge) {
+        msg = '✅ Đã lưu cấu hình: Đã TẮT hiển thị huy hiệu người xem trên website!';
+      } else if (!cfg.boostEnabled) {
+        msg = '✅ Đã lưu cấu hình: Đang hiển thị người xem tự nhiên 100% (không cộng thêm)!';
+      } else if (cfg.autoRandom) {
+        msg = '✅ Đã lưu cấu hình: Đã kích hoạt chế độ TỰ ĐỘNG RANDOM [20 – 40 người] (Cứ 10 phút đổi 1 lần, biến thiên ≤ 10 người). Khách hàng sẽ thấy trang web luôn đông đúc!';
+      } else {
+        msg = `✅ Đã lưu cấu hình: Đang cộng thêm cố định +${cfg.boostOffset} người xem!`;
+      }
+      res.innerHTML = msg;
+      res.classList.remove('hidden');
+      setTimeout(() => res.classList.add('hidden'), 6000);
+    }
+
+    function resetViewersConfig() {
+      localStorage.setItem('chiro_viewers_config', JSON.stringify(DEFAULT_VIEWERS_CONFIG));
+      loadViewersConfigToAdmin();
+      const res = document.getElementById('viewersConfigResult');
+      res.className = 'text-xs mt-2 p-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg block font-semibold';
+      res.innerHTML = '🔄 Đã khôi phục cài đặt mặc định: Bật hiển thị & Tự động random 20 – 40 người sau mỗi 10 phút!';
+      res.classList.remove('hidden');
+      setTimeout(() => res.classList.add('hidden'), 4000);
+    }
+
+    function setQuickAmount(type) {
+      const saved = JSON.parse(localStorage.getItem('chiro_pricing_config') || 'null') || DEFAULT_PRICING_CONFIG;
+      let amt = 1500000;
+      let courseName = '';
+      if (type === 'k1') {
+        amt = saved.k1_current || 1500000;
+        courseName = 'Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt';
+      } else if (type === 'k2') {
+        amt = saved.k2_current || 2000000;
+        courseName = 'Khóa 2 — Nắn Chỉnh Tứ Chi & Khớp Ngoại Vi';
+      } else if (type === 'k3') {
+        amt = saved.k3_current || 2500000;
+        courseName = 'Khóa 3 — Nâng Cao (Kỹ Thuật Thay Thế & Phân Tích X-Quang)';
+      } else if (type === 'combo') {
+        amt = saved.combo_current || 6000000;
+        courseName = 'Combo Trọn Khóa (3 Khóa) + 1 Năm Thành Viên';
+      }
+      document.getElementById('cf_amount').value = amt.toLocaleString('vi-VN') + ' VNĐ';
+      if (courseName) {
+        document.getElementById('cf_note').value = 'Đăng ký: ' + courseName + '. Tài khoản đã được kích hoạt.';
+      }
+      previewEmail();
     }
 
     function saveGoogleSheetConfig() {
@@ -441,7 +1026,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
             action: 'register',
             name: 'Nguyễn Văn A (Dòng Kiểm Tra)',
             phone: '0389609938',
-            email: 'test@simoncenter.vn',
+            email: 'chiroeduvn@gmail.com',
             price: '5.000.000 VNĐ',
             occupation: 'Kiểm tra hệ thống',
             channel: 'Test Admin',
@@ -467,8 +1052,113 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       setTimeout(() => el.classList.add('hidden'), 7000);
     }
 
-    // Danh sách học viên lưu trong bộ nhớ tạm để phục vụ xuất Excel
+    // Danh sách học viên lưu trong bộ nhớ tạm để phục vụ tìm kiếm, lọc & xuất Excel
+    let _allLeadsList = [];
     let _currentLeadsList = [];
+    let _activeFilter = 'all';
+    let _searchQuery = '';
+    let _isLiveGoogleSheet = false;
+
+    // Cập nhật 5 thẻ KPI đầu trang
+    function updateDashboardMetrics(leads, trafficData) {
+      const total = leads.length;
+      const paid = leads.filter(l => {
+        const s = (l.status || '').toUpperCase();
+        return s.includes('ĐÃ THANH TOÁN') || s.includes('ĐÃ TT') || s.includes('PAID');
+      }).length;
+      const pending = total - paid;
+      const rate = total > 0 ? Math.round((paid / total) * 100) : 0;
+
+      // Tính tổng doanh thu từ các đơn đã thanh toán
+      const totalRevenue = leads.filter(l => {
+        const s = (l.status || '').toUpperCase();
+        return s.includes('ĐÃ THANH TOÁN') || s.includes('ĐÃ TT') || s.includes('PAID');
+      }).reduce((sum, l) => {
+        const num = parseInt(String(l.price || '').replace(/\D/g, ''), 10) || 0;
+        return sum + num;
+      }, 0);
+
+      // Cập nhật DOM các thẻ KPI
+      if (document.getElementById('statTotalLeads')) document.getElementById('statTotalLeads').innerText = total;
+      if (document.getElementById('statPaidLeads')) document.getElementById('statPaidLeads').innerText = paid;
+      if (document.getElementById('statPaidRate')) document.getElementById('statPaidRate').innerText = `${rate}% hoàn tất (${paid}/${total})`;
+      if (document.getElementById('statPendingLeads')) document.getElementById('statPendingLeads').innerText = pending;
+      if (document.getElementById('statTotalRevenue')) document.getElementById('statTotalRevenue').innerText = totalRevenue.toLocaleString('vi-VN') + ' đ';
+      
+      if (document.getElementById('leadsCountBadge')) document.getElementById('leadsCountBadge').innerText = `${total} học viên`;
+      if (document.getElementById('filterAllCount')) document.getElementById('filterAllCount').innerText = total;
+      if (document.getElementById('filterPaidCount')) document.getElementById('filterPaidCount').innerText = paid;
+      if (document.getElementById('filterPendingCount')) document.getElementById('filterPendingCount').innerText = pending;
+
+      // Cập nhật Traffic
+      const trafficViewsEl = document.getElementById('statTrafficViews');
+      const todayViewsEl = document.getElementById('statTodayViews');
+      if (trafficData && trafficData.total !== undefined) {
+        if (trafficViewsEl) trafficViewsEl.innerText = Number(trafficData.total).toLocaleString('vi-VN');
+        if (todayViewsEl) todayViewsEl.innerText = 'Hôm nay: ' + Number(trafficData.today || 0).toLocaleString('vi-VN');
+      } else {
+        const localTotal = Number(localStorage.getItem('simon_traffic_views_total') || '0');
+        const localToday = Number(localStorage.getItem('simon_traffic_views_today') || '0');
+        if (trafficViewsEl) trafficViewsEl.innerText = localTotal > 0 ? localTotal.toLocaleString('vi-VN') : '--';
+        if (todayViewsEl) todayViewsEl.innerText = localToday > 0 ? ('Hôm nay: ' + localToday.toLocaleString('vi-VN')) : 'Chưa có dữ liệu';
+      }
+    }
+
+    // Bộ lọc theo tab: all | paid | pending
+    function filterLeads(filterType) {
+      _activeFilter = filterType;
+      
+      const tabAll = document.getElementById('tabFilterAll');
+      const tabPaid = document.getElementById('tabFilterPaid');
+      const tabPending = document.getElementById('tabFilterPending');
+
+      const activeClass = 'px-3 py-1.5 rounded-lg bg-red-900 text-white shadow-sm transition';
+      const inactiveClass = 'px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition';
+
+      if (tabAll) tabAll.className = filterType === 'all' ? activeClass : inactiveClass;
+      if (tabPaid) tabPaid.className = filterType === 'paid' ? activeClass : inactiveClass;
+      if (tabPending) tabPending.className = filterType === 'pending' ? activeClass : inactiveClass;
+
+      applyFilterAndSearch();
+    }
+
+    // Tìm kiếm tức thì theo từ khóa
+    function searchLeads(query) {
+      _searchQuery = (query || '').trim().toLowerCase();
+      applyFilterAndSearch();
+    }
+
+    function applyFilterAndSearch() {
+      let filtered = _allLeadsList.slice();
+
+      // 1. Lọc theo trạng thái
+      if (_activeFilter === 'paid') {
+        filtered = filtered.filter(l => {
+          const s = (l.status || '').toUpperCase();
+          return s.includes('ĐÃ THANH TOÁN') || s.includes('ĐÃ TT') || s.includes('PAID');
+        });
+      } else if (_activeFilter === 'pending') {
+        filtered = filtered.filter(l => {
+          const s = (l.status || '').toUpperCase();
+          return !s.includes('ĐÃ THANH TOÁN') && !s.includes('ĐÃ TT') && !s.includes('PAID');
+        });
+      }
+
+      // 2. Tìm kiếm theo tên, sđt, email, kênh, nghề nghiệp
+      if (_searchQuery) {
+        filtered = filtered.filter(l => {
+          const name = (l.name || '').toLowerCase();
+          const phone = (l.phone || '').toLowerCase();
+          const email = (l.email || '').toLowerCase();
+          const channel = (l.channel || '').toLowerCase();
+          const occ = (l.occupation || '').toLowerCase();
+          return name.includes(_searchQuery) || phone.includes(_searchQuery) || email.includes(_searchQuery) || channel.includes(_searchQuery) || occ.includes(_searchQuery);
+        });
+      }
+
+      _currentLeadsList = filtered;
+      renderLeadsTable(_currentLeadsList, _isLiveGoogleSheet);
+    }
 
     async function loadLeads() {
       const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
@@ -487,14 +1177,16 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
           const result = await response.json();
 
           if (result && result.status === 'success') {
-            _currentLeadsList = result.data || [];
-            statusEl.innerHTML = `<span class="text-emerald-700 font-bold">🟢 Dữ liệu trực tiếp từ Google Sheet (${_currentLeadsList.length} học viên)</span>`;
+            _allLeadsList = result.data || [];
+            _isLiveGoogleSheet = true;
+            statusEl.innerHTML = `<span class="text-emerald-700 font-bold">🟢 Dữ liệu trực tiếp từ Google Sheet (${_allLeadsList.length} học viên)</span>`;
             
             noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between';
             noticeEl.innerHTML = `<span>✅ Đang đồng bộ trực tiếp với file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>. Mọi đăng ký mới hoặc chuyển khoản đều hiển thị ở đây!</span>`;
             noticeEl.classList.remove('hidden');
 
-            renderLeadsTable(_currentLeadsList, true);
+            updateDashboardMetrics(_allLeadsList, result.traffic || null);
+            applyFilterAndSearch();
             return;
           }
         } catch (err) {
@@ -508,7 +1200,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
       const confirmedEmails = confirmed.map(c => c.email);
 
-      _currentLeadsList = localLeads.map(l => ({
+      _allLeadsList = localLeads.map(l => ({
         time: l.time || '',
         name: l.name || '',
         phone: l.phone || '',
@@ -519,21 +1211,23 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         status: confirmedEmails.includes(l.email) ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán',
         emailStatus: confirmedEmails.includes(l.email) ? 'Đã xác nhận' : ''
       }));
+      _isLiveGoogleSheet = false;
 
-      statusEl.innerHTML = `<span class="text-amber-600 font-semibold">⚠️ Dữ liệu lưu tạm trên máy này (${_currentLeadsList.length} học viên)</span>`;
+      statusEl.innerHTML = `<span class="text-amber-600 font-semibold">⚠️ Dữ liệu lưu tạm trên máy này (${_allLeadsList.length} học viên)</span>`;
       
       noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-amber-50 border border-amber-200 text-amber-800 leading-relaxed';
       noticeEl.innerHTML = `⚠️ Bạn chưa dán link Web App Google Sheet ở <strong>Mục 1 phía trên</strong> (hoặc vừa mở trên trình duyệt mới). Hãy dán link Google Sheet để bảng này tự động đồng bộ trực tiếp với file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> nhé!`;
       noticeEl.classList.remove('hidden');
 
-      renderLeadsTable(_currentLeadsList, false);
+      updateDashboardMetrics(_allLeadsList, null);
+      applyFilterAndSearch();
     }
 
     function renderLeadsTable(leads, isLiveGoogleSheet) {
       const el = document.getElementById('leadsTable');
 
       if (!leads.length) {
-        el.innerHTML = '<div class="text-gray-400 text-xs text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-200">Chưa có lượt đăng ký nào trong danh sách. Khi có học viên điền form hoặc bấm Zalo/Hotline, dữ liệu sẽ tự động xuất hiện ở đây!</div>';
+        el.innerHTML = '<div class="text-gray-400 text-xs text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-200">Không tìm thấy học viên nào phù hợp với bộ lọc hoặc từ khóa tìm kiếm.</div>';
         return;
       }
 
@@ -589,7 +1283,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       const totalPaid = leads.filter(l => (l.status||'').toUpperCase().includes('ĐÃ THANH TOÁN')).length;
       html += `</tbody></table></div>
       <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 mt-3 pt-2 border-t border-gray-100">
-        <div>Tổng số: <strong>${leads.length}</strong> học viên | Đã thanh toán: <strong class="text-emerald-700">${totalPaid}</strong> | Chờ thanh toán: <strong class="text-amber-700">${leads.length - totalPaid}</strong></div>
+        <div>Hiển thị: <strong>${leads.length}</strong> học viên | Đã thanh toán: <strong class="text-emerald-700">${totalPaid}</strong> | Chờ thanh toán: <strong class="text-amber-700">${leads.length - totalPaid}</strong></div>
         <div class="text-[11px] text-gray-400">Nguồn: ${isLiveGoogleSheet ? 'Google Sheets (Live)' : 'Bộ nhớ trình duyệt'}</div>
       </div>`;
       
