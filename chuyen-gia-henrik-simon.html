@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuyên Gia Bác Sĩ Henrik Simon | Trường Phái Specific Chiropractic Đức | Simon Center</title>
+  <meta name="description" content="Khám phá hồ sơ chuyên gia Bác sĩ Henrik Simon, giảng viên Chiropractic Campus Đức, tác giả sách Lehrbuch Chiropraktik và triết lý Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              wine: '#4A121E',
+              wineDark: '#360B14',
+              crimson: '#8F1D35',
+              crimsonHover: '#76162A',
+              sand: '#FDFBF7',
+              slate: '#F4F5F7',
+              charcoal: '#1A1D20',
+              muted: '#64748B'
+            }
+          },
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" href="https://simoncenter.vn/wp-content/uploads/2026/02/cropped-logo-simon-center-150x50-1-32x32.png" sizes="32x32" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #FDFBF7; color: #1A1D20; }
+    .hero-pattern {
+      background: radial-gradient(circle at 50% 0%, #76162A 0%, #4A121E 50%, #20040A 100%);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+  <!-- TOP TICKER BAR -->
+  <div class="bg-brand-wineDark text-white text-[11px] sm:text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-medium">Chuyên trang hồ sơ chuyên gia Bác sĩ Henrik Simon &amp; Y học Chiropractic Đức</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="tel:0389609938" class="hover:text-amber-300 transition font-bold">📞 0389.609.938</a>
+        <a href="https://m.me/simoncenter.vn" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300 transition hidden sm:inline">💬 Messenger</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="logo.png" alt="Simon Center Logo" class="h-9 w-auto object-contain" onerror="this.src='https://simoncenter.vn/wp-content/uploads/2026/02/logo-simon-center-150x50-1.png'">
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold text-gray-700">
+        <a href="index.html" class="hover:text-brand-crimson transition flex items-center space-x-1">
+          <span>🏠 Trang Chủ</span>
+        </a>
+        <a href="chuyen-gia-henrik-simon.html" class="text-brand-crimson font-bold border-b-2 border-brand-crimson pb-0.5">
+          👨‍⚕️ Bác Sĩ Henrik Simon
+        </a>
+        <a href="lo-trinh-khoa-hoc.html" class="hover:text-brand-crimson transition">
+          📚 Lộ Trình 3 Khóa Học
+        </a>
+        <a href="index.html#pricing" class="hover:text-brand-crimson transition">
+          💰 Học Phí Ưu Đãi
+        </a>
+      </nav>
+
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="index.html#pricing" class="bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-xs px-3.5 sm:px-5 py-2.5 rounded-xl shadow-md transition transform hover:scale-105">
+          👉 Đăng Ký Khóa Học
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="bg-gray-100 py-2.5 px-4 border-b border-gray-200 text-xs text-gray-600">
+    <div class="max-w-7xl mx-auto flex items-center space-x-2">
+      <a href="index.html" class="hover:text-brand-crimson font-medium">Trang chủ</a>
+      <span>/</span>
+      <span class="text-gray-900 font-bold">Chuyên gia Bác sĩ Henrik Simon</span>
+    </div>
+  </div>
+
+  <!-- HERO BANNER TRANG CHUYÊN GIA -->
+  <section class="hero-pattern text-white py-14 lg:py-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-xs font-semibold uppercase tracking-wider text-amber-300 mb-4">
+          <span>🇩🇪 Tiêu chuẩn Y khoa CHLB Đức</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+          Bác Sĩ, Chuyên Gia <br class="hidden sm:inline"><span class="text-amber-300">Henrik Simon</span>
+        </h1>
+        <p class="text-gray-200 text-sm sm:text-base leading-relaxed mb-6">
+          Hơn 20 năm cống hiến cho y học phục hồi thần kinh cột sống tự nhiên tại Châu Âu và Việt Nam. Giảng viên Chiropractic Campus (Đức), tác giả sách y khoa kinh điển và người tiên phong đưa trường phái Nắn Chỉnh Cột Sống Chuyên Biệt <em>(Specific Chiropractic)</em> về Việt Nam.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="index.html#pricing" class="bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-lg transition transform hover:scale-105">
+            Đăng Ký Học Với Thầy Henrik →
+          </a>
+          <a href="index.html" class="bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl backdrop-blur transition border border-white/20">
+            ← Quay Lại Trang Chủ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NỘI DUNG CHI TIẾT CHUYÊN GIA HENRIK SIMON -->
+  <main class="flex-1 py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- SPOTLIGHT BOX -->
+      <div class="bg-brand-slate rounded-3xl p-6 sm:p-10 border border-gray-200 shadow-sm mb-16">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="lg:col-span-5 text-center">
+            <div class="relative inline-block rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <img src="https://simoncenter.vn/wp-content/uploads/2023/11/Bác-sĩ-Henrik-Simon.jpg" alt="Bác sĩ Henrik Simon" class="w-full max-w-sm object-cover">
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-6 text-white text-left">
+                <div class="text-xl font-bold">Bác sĩ Henrik Simon</div>
+                <div class="text-amber-300 text-xs font-semibold uppercase tracking-wider mt-1">Giảng viên Chiropractic Campus (Đức)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="inline-block px-3 py-1 bg-brand-wine/10 text-brand-wine text-xs font-bold rounded uppercase tracking-wider mb-3">
+              HỒ SƠ HỌC THUẬT &amp; KINH NGHIỆM
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-4 leading-snug">
+              Bác Sĩ Henrik Simon — Người Thầy Tận Tâm Chuẩn Đức
+            </h2>
+            <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-6">
+              Với triết lý nắn chỉnh vi tế, an toàn tuyệt đối và tôn trọng cơ sinh học tự nhiên, Thầy Henrik Simon kiên định không áp dụng các thao tác vặn bẻ thô bạo mà tập trung chính xác vào điểm then chốt của tổn thương thần kinh cột sống.
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-brand-wine text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm">Học vị &amp; Giảng dạy Châu Âu:</h4>
+                  <p class="text-xs sm:text-sm text-gray-700 leading-relaxed mt-1">
+                    Giảng viên uy tín tại <strong>Chiropractic Campus (Đức)</strong> – cơ sở đào tạo cao học chuyên ngành Chiropractic thuộc <strong>Đại học Danube Krems (Donau-Universität Krems, Áo)</strong>, sở hữu bằng <strong>MSc Chiropractic</strong> <em>(*Bằng Thạc sĩ MSc Chiropractic có giá trị chuyên môn tương đương bằng Bác sĩ Chuyên khoa DC - Doctor of Chiropractic quốc tế)</em>.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-brand-wine text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm">Tác giả sách y khoa kinh điển:</h4>
+                  <p class="text-xs sm:text-sm text-gray-700 leading-relaxed mt-1">
+                    Tác giả cuốn giáo trình <em>"Lehrbuch Chiropraktik"</em> – cẩm nang lâm sàng gối đầu giường của các nhà trị liệu thần kinh cột sống tại Đức và Châu Âu.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-brand-wine text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm">20+ năm kinh nghiệm thực tiễn:</h4>
+                  <p class="text-xs sm:text-sm text-gray-700 leading-relaxed mt-1">
+                    Trực tiếp thăm khám và phục hồi thành công cho hàng chục ngàn ca bệnh lý cột sống phức tạp tại CHLB Đức, Áo và Simon Center Việt Nam.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div class="w-7 h-7 rounded-full bg-brand-wine text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</div>
+                <div>
+                  <h4 class="font-bold text-gray-900 text-sm">Nhà sáng lập Simon Center TP.HCM:</h4>
+                  <p class="text-xs sm:text-sm text-gray-700 leading-relaxed mt-1">
+                    Tiên phong đưa kỹ thuật ngón tay cái Simon-Technik êm ái về Việt Nam, phối hợp tinh hoa Y học cổ truyền Việt Nam và Chiropractic Châu Âu.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-brand-sand rounded-xl border-l-4 border-brand-crimson text-xs sm:text-sm italic text-gray-800 leading-relaxed">
+              "Sứ mệnh của tôi khi mở khóa đào tạo Gieo Mầm này tại Việt Nam là truyền lại những kỹ thuật chính xác, bài bản và an toàn nhất, giúp cộng đồng Kỹ thuật viên và Bác sĩ Việt Nam tự tin nâng cao tay nghề và vị thế của mình."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 TRỤ CỘT Y KHOA -->
+      <div class="mb-16">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-extrabold tracking-widest text-brand-crimson uppercase">TRIẾT LÝ LÂM SÀNG</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2">
+            4 Trụ Cột Y Khoa Làm Nên Thành Công Lâm Sàng
+          </h3>
+          <p class="text-gray-600 text-xs sm:text-sm mt-2">
+            Tại sao phương pháp của Thầy Henrik Simon lại đạt tỷ lệ phục hồi vượt trội mà không cần dùng lực mạnh?
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-brand-sand/60 rounded-2xl p-6 border border-amber-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-wine text-white flex items-center justify-center font-bold text-xl mb-4 shadow">🎯</div>
+              <h4 class="text-base font-bold text-brand-wine mb-2 leading-snug">Tìm Đúng Đốt Sống Then Chốt (Key Subluxation)</h4>
+              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                Phân tích cơ sinh học và sờ nắn <em>(Palpation)</em> chuyên sâu để tìm ra đúng "gốc rễ" sai lệch. Chỉ cần tác động chính xác 1 điểm mấu chốt duy nhất, toàn bộ trục cột sống sẽ tự cân bằng lại mà không cần nắn tràn lan.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-300/60 text-[11px] font-bold text-brand-crimson">
+              ✓ Trị liệu trúng đích, không dàn trải
+            </div>
+          </div>
+
+          <div class="bg-brand-sand/60 rounded-2xl p-6 border border-amber-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-crimson text-white flex items-center justify-center font-bold text-xl mb-4 shadow">⚡</div>
+              <h4 class="text-base font-bold text-brand-wine mb-2 leading-snug">Lực Tối Thiểu – Hiệu Quả Tối Đa (HVLA)</h4>
+              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                Kỹ thuật High Velocity – Low Amplitude (tốc độ cao nhưng biên độ cực ngắn). Lực phát ra êm ái, trúng đích theo chuẩn vector giải phẫu, giải phóng tức thì chèn ép thần kinh mà tuyệt đối không làm giãn bao khớp hay sang chấn mô mềm.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-300/60 text-[11px] font-bold text-brand-crimson">
+              ✓ An toàn cơ sinh học chuẩn Đức
+            </div>
+          </div>
+
+          <div class="bg-brand-sand/60 rounded-2xl p-6 border border-amber-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-xl mb-4 shadow">👍</div>
+              <h4 class="text-base font-bold text-brand-wine mb-2 leading-snug">Kỹ Thuật Ngón Cái Độc Quyền (Simon-Technik)</h4>
+              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                Bí quyết thực chiến của Thầy Henrik: Sử dụng ngón tay cái <em>(Daumen-Technik)</em> tiếp xúc cực kỳ vi tế, lực êm ái tuyệt đối. Đây là "vũ khí lâm sàng" giúp bạn tự tin xử lý ca khó cho cả <strong>người già loãng xương lẫn trẻ em</strong> mà hoàn toàn không có rủi ro.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-300/60 text-[11px] font-bold text-brand-crimson">
+              ✓ Tiếp xúc vi tế, an toàn cho mọi lứa tuổi
+            </div>
+          </div>
+
+          <div class="bg-brand-sand/60 rounded-2xl p-6 border border-amber-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-bold text-xl mb-4 shadow">🌿</div>
+              <h4 class="text-base font-bold text-brand-wine mb-2 leading-snug">Phục Hồi Lâm Sàng Bền Vững &amp; Dài Lâu</h4>
+              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                Giải phóng triệt để áp lực đè nén lên rễ thần kinh tủy sống, khôi phục dòng chảy dẫn truyền thần kinh tự nhiên. Người bệnh hồi phục thực sự từ bên trong, không bị phụ thuộc vào việc phải nắn chỉnh liên tục, mang lại uy tín lớn cho phòng khám.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-300/60 text-[11px] font-bold text-brand-crimson">
+              ✓ Nâng tầm giá trị chuyên môn trọn đời
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BẢNG SO SÁNH CHI PHÍ QUỐC TẾ -->
+      <div class="mb-16">
+        <div class="text-center mb-10">
+          <span class="text-xs font-bold tracking-widest text-brand-crimson uppercase">ĐỊNH GIÁ QUỐC TẾ</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-2 mb-3">
+            💎 Chi Phí Tiếp Cận Kiến Thức Này Trên Thế Giới
+          </h3>
+          <p class="text-gray-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+            Để học trọn vẹn khối kiến thức nắn chỉnh chuyên biệt này qua các kênh chính quy quốc tế, bạn phải đầu tư nhiều năm và hàng tỷ đồng. Tại <strong>chiro.vn</strong>, bạn học trực tiếp từ Chuyên gia Đức với chi phí chỉ bằng một phần rất nhỏ.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-amber-200 shadow-sm mb-6">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-brand-wine text-white">
+                <th class="p-4 font-bold">Con đường học kiến thức này ở nước ngoài</th>
+                <th class="p-4 font-bold">Chi phí thật</th>
+                <th class="p-4 font-bold text-amber-300">Quy đổi VNĐ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <tr class="hover:bg-amber-50/50">
+                <td class="p-4">
+                  <strong class="text-gray-900 block">Bằng Chiropractic toàn phần (DC / MSc)</strong>
+                  <span class="text-gray-500 text-xs">Con đường chính quy để đủ điều kiện dạy nội dung này <em>(*Bằng MSc Chiropractic có giá trị chuyên môn tương đương bằng DC Chiropractic)</em></span>
+                </td>
+                <td class="p-4 text-gray-700">120.000 – 200.000 USD (chưa tính sinh hoạt phí, 4–6 năm)</td>
+                <td class="p-4 font-bold text-brand-crimson">≈ 3,1 – 5,2 TỶ đồng</td>
+              </tr>
+              <tr class="hover:bg-amber-50/50">
+                <td class="p-4">
+                  <strong class="text-gray-900 block">Chuỗi chứng chỉ kỹ thuật (VD: Thompson 3 module, online)</strong>
+                  <span class="text-gray-500 text-xs">Chỉ học lý thuyết online, không có thực hành tay</span>
+                </td>
+                <td class="p-4 text-gray-700">900 – 1.100 USD</td>
+                <td class="p-4 font-bold text-gray-800">≈ 23 – 29 triệu đồng</td>
+              </tr>
+              <tr class="hover:bg-amber-50/50 bg-amber-50/30">
+                <td class="p-4">
+                  <strong class="text-gray-900 block">1 workshop nắn chỉnh tứ chi cuối tuần (Mỹ)</strong>
+                  <span class="text-gray-500 text-xs">Chỉ dạy duy nhất MỘT vùng (ví dụ chỉ riêng cổ tay/bàn tay)</span>
+                </td>
+                <td class="p-4 text-gray-700">289 USD / cuối tuần</td>
+                <td class="p-4 font-bold text-emerald-800">≈ 7,5 triệu đồng</td>
+              </tr>
+              <tr class="hover:bg-amber-50/50">
+                <td class="p-4">
+                  <strong class="text-gray-900 block">Tín chỉ đào tạo liên tục (CE) online</strong>
+                </td>
+                <td class="p-4 text-gray-700">9 – 20 USD / giờ</td>
+                <td class="p-4 font-bold text-gray-700">230.000 – 520.000đ / giờ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-amber-50 rounded-2xl p-6 border-2 border-amber-300 flex flex-col md:flex-row items-center gap-4">
+          <div class="text-3xl">👉</div>
+          <div class="text-xs sm:text-sm text-gray-800 leading-relaxed">
+            <strong class="text-brand-crimson block mb-1 text-sm sm:text-base">So Sánh Thực Tế Gây Sốc:</strong>
+            • <strong>Khóa 2 (Nắn chỉnh Tứ chi TRỌN VẸN)</strong> — chi trên, chi dưới, hàm, sườn, gối, cổ chân, háng — giá gốc chỉ <strong>4 triệu</strong>, tức <strong>RẺ HƠN</strong> một workshop cuối tuần ở Mỹ chỉ dạy riêng bàn tay (~7,5 triệu).<br>
+            • <strong>Combo Trọn Cả 3 Khóa</strong> (ưu đãi chỉ <strong>6 triệu</strong>) chỉ tương đương <strong>~0,3%</strong> chi phí học lấy bằng DC ở nước ngoài — mà bạn học tận tay, bằng tiếng Việt, trực tiếp từ Bác sĩ Henrik Simon!
+          </div>
+        </div>
+      </div>
+
+      <!-- BANNER ĐIỀU HƯỚNG SANG TRANG LỘ TRÌNH HOẶC ĐĂNG KÝ -->
+      <div class="bg-brand-wine text-white rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-xl">
+        <h3 class="text-2xl sm:text-3xl font-extrabold mb-3">
+          Sẵn Sàng Làm Chủ Tinh Hoa Nắn Chỉnh Cùng Bác Sĩ Henrik Simon?
+        </h3>
+        <p class="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+          Xem chi tiết đề cương 3 khóa học hoặc đăng ký ngay hôm nay để nhận ưu đãi học phí giai đoạn Founding Member.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="lo-trinh-khoa-hoc.html" class="bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg transition transform hover:scale-105">
+            Xem Đề Cương 3 Khóa Học Chi Tiết →
+          </a>
+          <a href="index.html#pricing" class="bg-white hover:bg-gray-100 text-brand-wine font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-lg transition transform hover:scale-105">
+            💳 Đăng Ký Giữ Ưu Đãi (Từ 1.500.000đ)
+          </a>
+          <a href="index.html" class="text-white hover:text-amber-300 text-xs font-semibold underline px-2 py-2">
+            ← Quay lại Trang Chủ
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-wineDark text-white py-12 border-t border-white/10 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="bg-white/95 px-3 py-2 rounded-lg inline-block mb-3 shadow">
+            <img src="logo.png" alt="Simon Center" class="h-8 w-auto object-contain" onerror="this.src='https://simoncenter.vn/wp-content/uploads/2026/02/logo-simon-center-150x50-1.png'">
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Trung tâm Chăm sóc Sức khỏe &amp; Thần kinh Cột sống hàng đầu tại TP.HCM. Ứng dụng tinh hoa trường phái Nắn Chỉnh Cột Sống Chuyên Biệt <em>(Specific Chiropractic)</em> Châu Âu phối hợp Y học cổ truyền.
+          </p>
+        </div>
+        <div>
+          <div class="font-bold text-base text-white mb-2">CHUYÊN TRANG CHI TIẾT</div>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="index.html" class="hover:text-amber-300 transition">🏠 Trang Chủ Đăng Ký</a></li>
+            <li><a href="chuyen-gia-henrik-simon.html" class="text-amber-300 font-bold">👨‍⚕️ Bác Sĩ Henrik Simon</a></li>
+            <li><a href="lo-trinh-khoa-hoc.html" class="hover:text-amber-300 transition">📚 Lộ Trình 3 Khóa Học Chuẩn Đức</a></li>
+            <li><a href="index.html#pricing" class="hover:text-amber-300 transition">💰 Bảng Học Phí Ưu Đãi (Giảm 50%)</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-bold text-base text-white mb-2">ĐỊA CHỈ &amp; LIÊN HỆ</div>
+          <p class="text-gray-300 leading-relaxed">
+            📍 56 D5, Phường Thạnh Mỹ Tây, Quận Bình Thạnh, TP. Hồ Chí Minh<br>
+            📞 Hotline: 0389.609.938<br>
+            💬 Messenger: <a href="https://m.me/simoncenter.vn" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline font-semibold">m.me/simoncenter.vn</a><br>
+            ✉️ Email: chiroeduvn@gmail.com<br>
+            🌐 Website: simoncenter.vn
+          </p>
+        </div>
+        <div>
+          <div class="font-bold text-base text-white mb-2">BẢN QUYỀN ĐÀO TẠO</div>
+          <p class="text-gray-300 leading-relaxed">
+            Bản quyền giáo trình và video thuộc về Bác sĩ Henrik Simon &amp; Simon Center &copy; 2026. Nghiêm cấm mọi hình thức sao chép hoặc phân phối khi chưa được sự đồng ý bằng văn bản.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 text-center text-gray-400">
+        Thiết kế giao diện lấy cảm hứng từ chuẩn mực đào tạo Chiropractic của Sherman College of Chiropractic &copy; 2026.
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY BOTTOM BAR TRÊN MOBILE (QUAY VỀ HOẶC ĐĂNG KÝ NHANH) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-gray-300 p-2.5 flex items-center justify-between shadow-2xl">
+    <a href="index.html" class="flex items-center space-x-1 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition">
+      <span>← Về Trang Chủ</span>
+    </a>
+    <a href="index.html#pricing" class="flex items-center space-x-1 text-xs font-extrabold text-white bg-brand-crimson hover:bg-brand-crimsonHover px-4 py-2 rounded-lg shadow transition">
+      <span>⚡ Đăng Ký Giữ Chỗ (1.5Tr) →</span>
+    </a>
+  </div>
+
+  <!-- BỘ 3 NÚT NỔI STICKY GÓC MÀN HÌNH -->
+  <div class="fixed bottom-14 md:bottom-5 right-4 z-50 flex flex-col space-y-3">
+    <!-- Nút Chat Messenger -->
+    <a href="https://m.me/simoncenter.vn" target="_blank" rel="noopener noreferrer" class="w-13 h-13 sm:w-14 sm:h-14 bg-gradient-to-tr from-[#00C6FF] via-[#0078FF] to-[#A033FF] text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group" title="Nhắn tin Messenger Facebook">
+      <svg class="w-6 h-6 sm:w-7 sm:h-7 fill-white" viewBox="0 0 28 28">
+        <path d="M14 2C7.373 2 2 6.974 2 13.111c0 3.497 1.745 6.616 4.475 8.643v4.24l4.062-2.23c1.112.308 2.288.473 3.463.473 6.627 0 12-4.974 12-11.126C26 6.974 20.627 2 14 2zm1.393 14.922l-3.27-3.488-6.38 3.488 7.018-7.447 3.348 3.488 6.302-3.488-7.018 7.447z"/>
+      </svg>
+      <span class="absolute right-16 bg-black text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow">
+        Chat Messenger
+      </span>
+    </a>
+    <!-- Nút Chat Zalo -->
+    <a href="https://zalo.me/0389609938" target="_blank" class="w-13 h-13 sm:w-14 sm:h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group" title="Chat Zalo Tư Vấn">
+      <span class="font-bold text-xs">Zalo</span>
+      <span class="absolute right-16 bg-black text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow">
+        Chat Zalo 24/7
+      </span>
+    </a>
+    <!-- Nút Gọi Hotline -->
+    <a href="tel:0389609938" class="w-13 h-13 sm:w-14 sm:h-14 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl flex items-center justify-center transition transform hover:scale-110 relative group animate-bounce" title="Gọi Hotline">
+      <span class="text-xl">📞</span>
+      <span class="absolute right-16 bg-black text-white text-xs font-semibold px-2.5 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow">
+        Gọi 0389.609.938
+      </span>
+    </a>
+  </div>
+
+</body>
+</html>
