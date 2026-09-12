@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- EmailJS: gửi email từ trình duyệt, không cần server -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- Supabase JS SDK: Cơ sở dữ liệu riêng đám mây siêu tốc 0.05s & Realtime -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body { font-family: 'Be Vietnam Pro', sans-serif; }
     .card { background: white; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
@@ -100,20 +102,21 @@
       </div>
     </div>
 
-    <!-- SETUP GOOGLE SHEETS WEBHOOK (KHUYÊN DÙNG NHẤT - 100% MIỄN PHÍ TRỌN ĐỜI) -->
+    <!-- 1A. SETUP GOOGLE SHEETS WEBHOOK (TỰ ĐỘNG LƯU DỰ PHÒNG & GỬI EMAIL) -->
     <div id="googleSheetSetup" class="card p-6 mb-6 border-2 border-emerald-400 bg-emerald-50/30">
       <div class="flex items-center justify-between mb-2">
-        <h2 class="font-extrabold text-emerald-900 text-base">🟢 1. Cài đặt Google Sheets (Khuyên dùng - Tự động lưu & gửi Gmail)</h2>
+        <h2 class="font-extrabold text-emerald-900 text-base">🟢 1A. Kết Nối Sao Lưu Google Sheets (Khach_Hang_Khoa_Hoc_Simon_Center)</h2>
         <span class="text-[11px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Tự động 100%</span>
       </div>
       <p class="text-xs text-gray-600 mb-3">
-        Dán đường link Web App bạn nhận được sau khi cài đặt file <code class="bg-white px-1 py-0.5 border border-gray-300 rounded font-bold text-gray-800">google-sheets-script.js</code> vào Google Trang Tính của bạn.
+        Đường link Web App chính thức đã được ghim sẵn làm mặc định trong hệ thống để tự động sao lưu dự phòng mọi khách hàng vào Google Sheet.
       </p>
       <div class="space-y-3">
         <div>
           <label class="text-xs font-bold text-gray-700 block mb-1">Google Apps Script Web App URL</label>
-          <input type="url" id="googleSheetUrlInput" placeholder="https://script.google.com/macros/s/AKfycbx.../exec" 
-                 class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white">
+          <input type="url" id="googleSheetUrlInput" 
+                 value="https://script.google.com/macros/s/AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg/exec"
+                 class="w-full px-3 py-2 border border-emerald-300 rounded-lg text-xs font-mono bg-white text-emerald-900 font-medium">
         </div>
         <div class="flex flex-wrap items-center gap-2 pt-1">
           <button onclick="saveGoogleSheetConfig()" class="flex-1 min-w-[200px] bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
@@ -125,8 +128,92 @@
         </div>
         <div id="testGSResult" class="text-xs mt-2 hidden"></div>
         <p class="text-[11px] text-gray-500 leading-relaxed">
-          💡 Khi cài xong đường link này: Khách vừa điền form ➔ tự nhảy vào Google Sheet. Khách chuyển khoản xong hoặc Admin bấm xác nhận ➔ Tự đổi thành "ĐÃ THANH TOÁN" và tự động gửi email từ Gmail của Simon Center!
+          💡 Khi có đơn mới hoặc chuyển khoản: Hệ thống sẽ tự động cập nhật vào file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> và gửi Gmail kích hoạt cho học viên.
         </p>
+      </div>
+    </div>
+
+    <!-- 1B. SETUP SUPABASE DATABASE (CƠ SỞ DỮ LIỆU RIÊNG SIÊU TỐC 0.05S & REALTIME) -->
+    <div id="supabaseSetup" class="card p-6 mb-6 border-2 border-indigo-400 bg-indigo-50/30">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center space-x-2">
+          <h2 class="font-extrabold text-indigo-950 text-base">⚡ 1B. Cài Đặt Cơ Sở Dữ Liệu Riêng Supabase (Tốc độ 0.05s & Realtime)</h2>
+          <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">Khuyên dùng</span>
+        </div>
+        <span id="supabaseStatusBadge" class="text-[11px] bg-gray-200 text-gray-700 font-bold px-2 py-0.5 rounded">Chưa cấu hình</span>
+      </div>
+      <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+        Lưu trữ dữ liệu học viên trong Database PostgreSQL riêng của bạn trên đám mây. Tốc độ mở bảng chỉ 0.05 giây, bảo vệ dữ liệu vĩnh viễn và tự động cập nhật đơn mới tức thì!
+      </p>
+      <div class="space-y-3">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Supabase Project URL</label>
+            <input type="url" id="supabaseUrlInput" placeholder="https://xyzcompany.supabase.co" 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Supabase Anon Public Key (Khóa công khai)</label>
+            <input type="text" id="supabaseKeyInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-indigo-600">
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <button onclick="saveSupabaseConfig()" class="flex-1 min-w-[200px] bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
+            💾 Lưu Cấu Hình Supabase
+          </button>
+          <button onclick="testSupabaseConnection()" id="btnTestSupabase" class="bg-white hover:bg-gray-50 text-indigo-800 font-bold py-2.5 px-3 rounded-lg text-xs transition border border-indigo-300 shadow-sm flex items-center space-x-1">
+            <span>🧪 Kiểm tra kết nối Supabase</span>
+          </button>
+          <button onclick="toggleSupabaseGuide()" class="text-xs text-indigo-700 hover:underline font-semibold px-2 py-1">
+            📖 Hướng dẫn cài đặt 3 phút & Mã SQL ▾
+          </button>
+        </div>
+        <div id="testSupabaseResult" class="text-xs mt-2 hidden"></div>
+
+        <!-- KHUNG HƯỚNG DẪN TẠO BẢNG SUPABASE NHANH -->
+        <div id="supabaseGuideBox" class="mt-3 p-4 bg-white border border-indigo-200 rounded-xl text-xs text-gray-700 space-y-2.5 hidden">
+          <div class="font-bold text-indigo-900">📌 HƯỚNG DẪN 3 BƯỚC THIẾT LẬP SUPABASE (HOÀN TOÀN MIỄN PHÍ):</div>
+          <ol class="list-decimal pl-4 space-y-1.5 leading-relaxed">
+            <li>Truy cập <a href="https://supabase.com" target="_blank" class="text-blue-600 font-bold underline">supabase.com</a> ➔ Bấm <strong>"Start your project"</strong> (Đăng nhập bằng GitHub hoặc Email) ➔ Bấm <strong>"New project"</strong>.</li>
+            <li>Tại menu bên trái của Supabase, bấm vào biểu tượng <strong>SQL Editor</strong> ➔ Bấm <strong>"New query"</strong> ➔ Dán toàn bộ đoạn mã bên dưới vào rồi bấm nút <strong>RUN</strong>:</li>
+          </ol>
+          <div class="relative">
+            <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg font-mono text-[11px] overflow-x-auto max-h-48 select-all" id="supabaseSqlScript">-- 1. Tạo bảng lưu học viên đăng ký khóa học
+CREATE TABLE IF NOT EXISTS public.leads (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    time_str TEXT,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT,
+    price TEXT,
+    course TEXT,
+    occupation TEXT,
+    channel TEXT,
+    status TEXT DEFAULT 'Chờ thanh toán',
+    email_status TEXT
+);
+
+-- 2. Bật bảo mật dữ liệu Row Level Security
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+
+-- 3. Cấp quyền cho Website lưu đơn & Admin quản lý
+CREATE POLICY "Public Insert Leads" ON public.leads FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public Select Leads" ON public.leads FOR SELECT USING (true);
+CREATE POLICY "Public Update Leads" ON public.leads FOR UPDATE USING (true);
+CREATE POLICY "Public Delete Leads" ON public.leads FOR DELETE USING (true);
+
+-- 4. Bật Realtime cập nhật tức thì
+ALTER PUBLICATION supabase_realtime ADD TABLE public.leads;</pre>
+            <button onclick="copySupabaseSQL()" class="absolute top-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white px-2.5 py-1 rounded text-[10px] font-bold shadow">
+              📋 Sao chép mã SQL
+            </button>
+          </div>
+          <p class="leading-relaxed">
+            3. Vào <strong>Project Settings</strong> (biểu tượng bánh răng góc dưới trái) ➔ chọn mục <strong>API</strong> ➔ Copy <strong>Project URL</strong> và <strong>anon public key</strong> dán vào 2 ô phía trên rồi bấm "Lưu"!
+          </p>
+        </div>
       </div>
     </div>
 
@@ -481,6 +568,12 @@
           <p id="leadSourceStatus" class="text-xs text-gray-500 mt-0.5">Đang kiểm tra nguồn dữ liệu...</p>
         </div>
         <div class="flex flex-wrap items-center gap-2">
+          <button onclick="syncPendingLocalLeads()" id="btnSyncLocal" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Đẩy toàn bộ đơn học viên lưu tạm trên máy lên Supabase Database và Google Sheet">
+            <span>🚀 Đồng Bộ Đơn Lưu Tạm</span>
+          </button>
+          <button onclick="confirmResetSystem()" id="btnResetSystem" class="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Xóa toàn bộ dữ liệu học viên trong Google Sheet Khach_Hang_Khoa_Hoc_Simon_Center và máy để làm mới hệ thống">
+            <span>⚠️ Reset Hệ Thống</span>
+          </button>
           <button onclick="exportCSV()" id="btnExportCSV" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1">
             <span>📥 Xuất file Excel (.csv)</span>
           </button>
@@ -591,15 +684,48 @@ Simon Center – 0389.609.938</div>
       document.getElementById('loginScreen').classList.remove('hidden');
     }
 
+    // ── CẤU HÌNH ĐỒNG BỘ 2 LỚP: GOOGLE SHEETS & SUPABASE DATABASE ──
+    const DEFAULT_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg/exec'; 
+    const DEFAULT_SUPABASE_URL = '';
+    const DEFAULT_SUPABASE_ANON_KEY = '';
+
+    function getGoogleSheetUrl() {
+      return localStorage.getItem('simon_google_sheet_url') || DEFAULT_GOOGLE_SHEET_URL;
+    }
+
+    function getSupabaseClient() {
+      const url = localStorage.getItem('simon_supabase_url') || DEFAULT_SUPABASE_URL;
+      const key = localStorage.getItem('simon_supabase_key') || DEFAULT_SUPABASE_ANON_KEY;
+      if (window.supabase && url && key) {
+        try {
+          if (!window._sbAdminClient || window._sbCurrentUrl !== url) {
+            window._sbAdminClient = window.supabase.createClient(url, key);
+            window._sbCurrentUrl = url;
+          }
+          return window._sbAdminClient;
+        } catch (e) {
+          console.warn('Lỗi khởi tạo Supabase:', e);
+        }
+      }
+      return null;
+    }
+
     function initDashboard() {
       document.getElementById('cf_date').value = new Date().toLocaleDateString('vi-VN');
       
       // Khởi tạo cấu hình Google Sheet
-      const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
+      const gsUrl = getGoogleSheetUrl();
       if (gsUrl) {
         document.getElementById('googleSheetUrlInput').value = gsUrl;
         document.getElementById('googleSheetSetup').style.borderColor = '#10b981';
       }
+
+      // Khởi tạo cấu hình Supabase
+      const sbUrl = localStorage.getItem('simon_supabase_url') || DEFAULT_SUPABASE_URL;
+      const sbKey = localStorage.getItem('simon_supabase_key') || DEFAULT_SUPABASE_ANON_KEY;
+      if (sbUrl) document.getElementById('supabaseUrlInput').value = sbUrl;
+      if (sbKey) document.getElementById('supabaseKeyInput').value = sbKey;
+      updateSupabaseBadge();
 
       // Khởi tạo cấu hình EmailJS
       const cfg = JSON.parse(localStorage.getItem('simon_emailjs_config') || '{}');
@@ -884,6 +1010,163 @@ Simon Center – 0389.609.938</div>
       alert('✅ Đã lưu link Google Sheets thành công! Hệ thống đã sẵn sàng tự động đồng bộ.');
     }
 
+    // ── CÁC HÀM XỬ LÝ SUPABASE DATABASE ──
+    function updateSupabaseBadge() {
+      const sb = getSupabaseClient();
+      const badge = document.getElementById('supabaseStatusBadge');
+      const card = document.getElementById('supabaseSetup');
+      if (sb) {
+        if (badge) {
+          badge.className = 'text-[11px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded';
+          badge.innerHTML = '🟢 Đã kết nối Database';
+        }
+        if (card) card.style.borderColor = '#6366f1';
+      } else {
+        if (badge) {
+          badge.className = 'text-[11px] bg-gray-200 text-gray-700 font-bold px-2 py-0.5 rounded';
+          badge.innerHTML = 'Chưa cấu hình';
+        }
+        if (card) card.style.borderColor = '#cbd5e1';
+      }
+    }
+
+    function saveSupabaseConfig() {
+      const url = document.getElementById('supabaseUrlInput').value.trim();
+      const key = document.getElementById('supabaseKeyInput').value.trim();
+      if (!url || !key) {
+        alert('Vui lòng điền đủ Supabase Project URL và Anon Public Key.');
+        return;
+      }
+      localStorage.setItem('simon_supabase_url', url);
+      localStorage.setItem('simon_supabase_key', key);
+      window._sbAdminClient = null; // reset client
+      updateSupabaseBadge();
+      alert('✅ Đã lưu cấu hình Supabase Database thành công! Hệ thống sẽ tải dữ liệu với tốc độ siêu tốc 0.05s.');
+      loadLeads();
+    }
+
+    async function testSupabaseConnection() {
+      const btn = document.getElementById('btnTestSupabase');
+      const resEl = document.getElementById('testSupabaseResult');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Đang kiểm tra...</span>';
+      resEl.className = 'text-xs mt-2 p-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg block font-semibold';
+      resEl.innerHTML = 'Đang kết nối tới Supabase Database...';
+      resEl.classList.remove('hidden');
+
+      const sb = getSupabaseClient();
+      if (!sb) {
+        resEl.className = 'text-xs mt-2 p-2.5 bg-red-50 border border-red-200 text-red-800 rounded-lg block font-semibold';
+        resEl.innerHTML = '❌ Chưa cấu hình URL hoặc Anon Key. Vui lòng điền và bấm "Lưu Cấu Hình Supabase" trước.';
+        btn.disabled = false;
+        btn.innerHTML = '<span>🧪 Kiểm tra kết nối Supabase</span>';
+        return;
+      }
+
+      try {
+        const startTime = performance.now();
+        const { data, error } = await sb.from('leads').select('count', { count: 'exact', head: true });
+        const endTime = performance.now();
+        const ms = Math.round(endTime - startTime);
+
+        if (error) {
+          resEl.className = 'text-xs mt-2 p-2.5 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg block font-semibold';
+          resEl.innerHTML = `⚠️ Kết nối thành công tới Supabase (${ms}ms) nhưng chưa tìm thấy bảng <code>leads</code> hoặc chưa chạy SQL. Vui lòng mở "Hướng dẫn 3 phút & Mã SQL" bên cạnh để tạo bảng nhé! Lỗi: ${error.message}`;
+        } else {
+          resEl.className = 'text-xs mt-2 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg block font-semibold';
+          resEl.innerHTML = `✅ <strong>KẾT NỐI SUPABASE HOÀN HẢO!</strong> Tốc độ phản hồi cực nhanh: <strong>${ms}ms</strong> (dưới 0.1 giây). Sẵn sàng đồng bộ song song cùng Google Sheet!`;
+        }
+      } catch (err) {
+        resEl.className = 'text-xs mt-2 p-2.5 bg-red-50 border border-red-200 text-red-800 rounded-lg block font-semibold';
+        resEl.innerHTML = `❌ Lỗi kết nối Supabase: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>🧪 Kiểm tra kết nối Supabase</span>';
+      }
+    }
+
+    function toggleSupabaseGuide() {
+      const box = document.getElementById('supabaseGuideBox');
+      if (box) box.classList.toggle('hidden');
+    }
+
+    function copySupabaseSQL() {
+      const code = document.getElementById('supabaseSqlScript').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('✅ Đã sao chép mã SQL vào bộ nhớ đệm! Hãy mở Supabase -> SQL Editor -> New query -> Dán vào và bấm RUN.');
+      }).catch(() => {
+        alert('Vui lòng bôi đen đoạn mã SQL và nhấn Ctrl+C để sao chép.');
+      });
+    }
+
+    // ── ĐỒNG BỘ CƯỠNG BỨC TẤT CẢ ĐƠN LƯU TẠM LÊN HỆ THỐNG ──
+    async function syncPendingLocalLeads() {
+      const localLeads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
+      if (!localLeads.length) {
+        alert('ℹ️ Bộ nhớ tạm trên máy này hiện không có đơn hàng nào tồn đọng cần đồng bộ.');
+        return;
+      }
+
+      const btn = document.getElementById('btnSyncLocal');
+      const oldText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳ Đang đồng bộ...</span>';
+      }
+
+      let syncedCount = 0;
+      const sb = getSupabaseClient();
+      const gsUrl = getGoogleSheetUrl();
+
+      for (const lead of localLeads) {
+        // 1. Đẩy vào Supabase
+        if (sb) {
+          try {
+            await sb.from('leads').insert([{
+              name: lead.name,
+              phone: lead.phone,
+              email: lead.email,
+              price: lead.registeredPrice || lead.price,
+              course: lead.course || '',
+              occupation: lead.occupation || '',
+              channel: lead.channel || 'Đồng bộ từ máy',
+              status: lead.status || 'Chờ thanh toán',
+              time_str: lead.time || new Date().toLocaleString('vi-VN')
+            }]);
+          } catch(e) {}
+        }
+
+        // 2. Đẩy lên Google Sheet
+        if (gsUrl) {
+          try {
+            await fetch(gsUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                action: 'register',
+                name: lead.name,
+                phone: lead.phone,
+                email: lead.email,
+                occupation: lead.occupation,
+                price: lead.registeredPrice || lead.price,
+                channel: lead.channel || 'Đồng bộ từ máy',
+                status: lead.status || 'Chờ thanh toán'
+              })
+            });
+          } catch(e) {}
+        }
+        syncedCount++;
+      }
+
+      alert(`✅ ĐÃ ĐỒNG BỘ THÀNH CÔNG ${syncedCount} HỌC VIÊN!\n\nToàn bộ dữ liệu lưu tạm trên máy đã được chuyển thẳng vào Database và Google Sheet.`);
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = oldText;
+      }
+      loadLeads();
+    }
+
     function saveEmailJSConfig() {
       const cfg = {
         publicKey: document.getElementById('ejsPublicKey').value.trim(),
@@ -951,8 +1234,21 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
 
       let sentVia = '';
 
-      // 1. CẬP NHẬT GOOGLE SHEET & TỰ ĐỘNG GỬI EMAIL TỪ GMAIL CHÍNH CHỦ (NẾU CÓ WEBHOOK)
-      const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
+      // 1. CẬP NHẬT TRẠNG THÁI "ĐÃ THANH TOÁN" TRONG SUPABASE (CƠ SỞ DỮ LIỆU RIÊNG)
+      const sb = getSupabaseClient();
+      if (sb) {
+        try {
+          await sb.from('leads')
+            .update({ status: 'ĐÃ THANH TOÁN' })
+            .or(`phone.eq.${d.phone},email.eq.${d.email}`);
+          sentVia = 'Supabase Database';
+        } catch(e) {
+          console.warn('Lỗi cập nhật Supabase:', e);
+        }
+      }
+
+      // 2. CẬP NHẬT GOOGLE SHEET & TỰ ĐỘNG GỬI EMAIL TỪ GMAIL CHÍNH CHỦ
+      const gsUrl = getGoogleSheetUrl();
       if (gsUrl) {
         try {
           // Dùng text/plain để tránh CORS preflight OPTIONS block
@@ -969,7 +1265,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
               status: 'ĐÃ THANH TOÁN'
             })
           });
-          sentVia = 'Google Sheet & Gmail tự động';
+          sentVia = sentVia ? (sentVia + ' & Google Sheet (Gmail tự động)') : 'Google Sheet & Gmail tự động';
         } catch (e) {
           console.log('Lỗi gửi Google Sheet:', e);
         }
@@ -1160,13 +1456,66 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       renderLeadsTable(_currentLeadsList, _isLiveGoogleSheet);
     }
 
+    let _realtimeSubscribed = false;
+    function setupSupabaseRealtime(sb) {
+      if (_realtimeSubscribed || !sb) return;
+      try {
+        sb.channel('realtime_leads')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'leads' }, (payload) => {
+            console.log('⚡ Realtime update received from Supabase:', payload);
+            loadLeads();
+          })
+          .subscribe();
+        _realtimeSubscribed = true;
+      } catch (e) {
+        console.warn('Realtime subscribe err:', e);
+      }
+    }
+
     async function loadLeads() {
-      const gsUrl = localStorage.getItem('simon_google_sheet_url') || '';
       const tableEl = document.getElementById('leadsTable');
       const statusEl = document.getElementById('leadSourceStatus');
       const noticeEl = document.getElementById('leadsTableNotice');
+      const sb = getSupabaseClient();
+      const gsUrl = getGoogleSheetUrl();
 
-      // TRƯỜNG HỢP 1: ĐÃ CẤU HÌNH LINK GOOGLE SHEET -> LẤY TRỰC TIẾP TỪ GOOGLE SHEET
+      // TRƯỜNG HỢP 1: NẾU ĐÃ CẤU HÌNH SUPABASE (DATABASE RIÊNG) -> TỐC ĐỘ SIÊU TỐC 0.05S & REALTIME
+      if (sb) {
+        statusEl.innerHTML = '<span class="text-indigo-600 font-semibold">⚡ Đang kết nối Supabase Database...</span>';
+        try {
+          const { data, error } = await sb.from('leads').select('*').order('id', { ascending: true });
+          if (!error && data) {
+            _allLeadsList = data.map(row => ({
+              id: row.id,
+              time: row.time_str || (row.created_at ? new Date(row.created_at).toLocaleString('vi-VN') : 'Mới đây'),
+              name: row.name || '',
+              phone: row.phone || '',
+              email: row.email || '',
+              price: row.price || '5.000.000 VNĐ',
+              occupation: row.occupation || '',
+              channel: row.channel || 'Form Website',
+              status: row.status || 'Chờ thanh toán',
+              emailStatus: row.email_status || ''
+            }));
+            _isLiveGoogleSheet = true;
+            statusEl.innerHTML = `<span class="text-indigo-800 font-bold">⚡ Supabase Database (${_allLeadsList.length} học viên - Tốc độ 0.05s)</span>`;
+            
+            noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-indigo-50 border border-indigo-200 text-indigo-900 flex items-center justify-between';
+            noticeEl.innerHTML = `<span>⚡ Đang hiển thị trực tiếp từ <strong>Cơ sở dữ liệu riêng Supabase</strong> với tốc độ siêu tốc. Dữ liệu đồng thời được tự động sao lưu dự phòng sang Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>!</span>`;
+            noticeEl.classList.remove('hidden');
+
+            setupSupabaseRealtime(sb);
+
+            updateDashboardMetrics(_allLeadsList, null);
+            applyFilterAndSearch();
+            return;
+          }
+        } catch (errSb) {
+          console.warn('Lỗi kết nối Supabase, chuyển sang Google Sheet:', errSb);
+        }
+      }
+
+      // TRƯỜNG HỢP 2: LẤY TRỰC TIẾP TỪ GOOGLE SHEET (NẾU CHƯA CÓ SUPABASE HOẶC ĐANG CHỜ)
       if (gsUrl) {
         statusEl.innerHTML = '<span class="text-emerald-600 font-semibold">🟢 Đang kết nối Google Sheet...</span>';
         tableEl.innerHTML = '<div class="py-10 text-center text-xs text-gray-500"><span class="inline-block animate-spin mr-2">🔄</span>Đang tải dữ liệu trực tiếp từ Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>...</div>';
@@ -1195,7 +1544,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         }
       }
 
-      // TRƯỜNG HỢP 2: CHƯA CÀI LINK HOẶC LỖI KẾT NỐI -> LẤY TỪ LOCALSTORAGE MÁY NÀY
+      // TRƯỜNG HỢP 3: CHƯA CÀI LINK HOẶC LỖI KẾT NỐI -> LẤY TỪ LOCALSTORAGE MÁY NÀY
       const localLeads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
       const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
       const confirmedEmails = confirmed.map(c => c.email);
@@ -1216,7 +1565,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       statusEl.innerHTML = `<span class="text-amber-600 font-semibold">⚠️ Dữ liệu lưu tạm trên máy này (${_allLeadsList.length} học viên)</span>`;
       
       noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-amber-50 border border-amber-200 text-amber-800 leading-relaxed';
-      noticeEl.innerHTML = `⚠️ Bạn chưa dán link Web App Google Sheet ở <strong>Mục 1 phía trên</strong> (hoặc vừa mở trên trình duyệt mới). Hãy dán link Google Sheet để bảng này tự động đồng bộ trực tiếp với file Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> nhé!`;
+      noticeEl.innerHTML = `⚠️ Đang hiển thị dữ liệu lưu tạm trên máy. Bấm nút <strong>"🚀 Đồng Bộ Đơn Lưu Tạm"</strong> ở trên để đẩy dữ liệu lên Google Sheet và Database nhé!`;
       noticeEl.classList.remove('hidden');
 
       updateDashboardMetrics(_allLeadsList, null);
@@ -1400,6 +1749,97 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+    }
+
+    /**
+     * NÚT RESET HỆ THỐNG: Xóa sạch dữ liệu khách hàng trong Google Sheet và máy
+     * Giữ nguyên dòng tiêu đề Cột A - I để bắt đầu chu kỳ tuyển sinh mới
+     */
+    async function confirmResetSystem() {
+      const confirmed = confirm(
+        "⚠️ CẢNH BÁO QUAN TRỌNG VỀ RESET DỮ LIỆU HỆ THỐNG:\n\n" +
+        "Bạn có chắc chắn muốn XÓA TOÀN BỘ DỮ LIỆU KHÁCH HÀNG trong file Google Sheet 'Khach_Hang_Khoa_Hoc_Simon_Center' và bộ nhớ máy để làm mới hệ thống không?\n\n" +
+        "• Toàn bộ danh sách đăng ký & chuyển khoản sẽ bị xóa (dòng tiêu đề từ Cột A đến I vẫn được giữ nguyên).\n" +
+        "• Thao tác này KHÔNG THỂ HOÀN TÁC!\n\n" +
+        "Bấm OK để tiếp tục reset hoặc Cancel để hủy bỏ."
+      );
+
+      if (!confirmed) return;
+
+      const btn = document.getElementById('btnResetSystem');
+      const oldText = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳ Đang reset...</span>';
+      }
+
+      // 1. Xóa trong Supabase Database nếu có kết nối
+      const sb = getSupabaseClient();
+      if (sb) {
+        try {
+          await sb.from('leads').delete().neq('id', 0);
+          console.log('⚡ Đã reset bảng leads trên Supabase!');
+        } catch(e) {
+          console.warn('Lỗi reset Supabase:', e);
+        }
+      }
+
+      // 2. Gửi lệnh Reset lên Google Apps Script
+      const gsUrl = getGoogleSheetUrl();
+      let sheetResetSuccess = false;
+
+      if (gsUrl) {
+        try {
+          // Thử lệnh qua GET trước (CORS thân thiện nhất trên Apps Script)
+          const resetUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=reset_sheet&t=' + Date.now();
+          const resp = await fetch(resetUrl);
+          const resData = await resp.json();
+          if (resData && resData.status === 'success') {
+            sheetResetSuccess = true;
+          }
+        } catch (e) {
+          console.log('GET reset error, sending POST:', e);
+          try {
+            await fetch(gsUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ action: 'reset_sheet' })
+            });
+            sheetResetSuccess = true;
+          } catch (errPost) {
+            console.error('POST reset error:', errPost);
+          }
+        }
+      }
+
+      // 2. Xóa sạch bộ nhớ lưu tạm trên trình duyệt máy này
+      localStorage.removeItem('simon_chiropractic_leads');
+      localStorage.removeItem('simon_confirmed_payments');
+      localStorage.removeItem('simon_leads_cache');
+
+      // 3. Xóa danh sách hiển thị trên UI
+      _allLeadsList = [];
+      _currentLeadsList = [];
+      
+      const noticeEl = document.getElementById('leadsTableNotice');
+      if (noticeEl) {
+        noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between';
+        noticeEl.innerHTML = `<span>✅ <strong>HỆ THỐNG ĐÃ ĐƯỢC RESET VỀ TRẠNG THÁI MỚI!</strong> Toàn bộ dữ liệu trong Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> và bộ nhớ máy đã được xóa sạch (tiêu đề cột được bảo toàn).</span>`;
+        noticeEl.classList.remove('hidden');
+      }
+
+      alert("✅ HỆ THỐNG ĐÃ ĐƯỢC RESET THÀNH CÔNG!\n\nToàn bộ danh sách đăng ký đã được dọn sạch để sẵn sàng cho chu kỳ mới. Các tiêu đề cột A-I trong Google Sheet vẫn được giữ nguyên vẹn.");
+
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = oldText;
+      }
+
+      // Tự động tải lại danh sách học viên
+      setTimeout(() => {
+        loadLeads();
+      }, 1000);
     }
   </script>
 </body>

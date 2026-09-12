@@ -33,8 +33,6 @@
     }
   </script>
   <link rel="icon" href="https://simoncenter.vn/wp-content/uploads/2026/02/cropped-logo-simon-center-150x50-1-32x32.png" sizes="32x32" />
-  <!-- SUPABASE JS SDK (CƠ SỞ DỮ LIỆU RIÊNG SIÊU TỐC 0.05S & REALTIME) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="icon" href="https://simoncenter.vn/wp-content/uploads/2026/02/cropped-logo-simon-center-150x50-1-192x192.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="https://simoncenter.vn/wp-content/uploads/2026/02/cropped-logo-simon-center-150x50-1-180x180.png" />
   <style>
@@ -1623,30 +1621,11 @@
     // 3. XỬ LÝ ĐA KÊNH NHẬN ĐƠN, LƯU GOOGLE SHEET & THANH TOÁN QR VIETQR
     // =========================================================================
 
-    // ── CẤU HÌNH ĐỒNG BỘ 2 LỚP: GOOGLE SHEETS & SUPABASE DATABASE ──
-    const DEFAULT_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg/exec'; 
-    const DEFAULT_SUPABASE_URL = '';
-    const DEFAULT_SUPABASE_ANON_KEY = '';
-
+    // ── CẤU HÌNH GOOGLE SHEETS WEBHOOK (Xem file google-sheets-script.js để lấy URL) ──
+    // Bạn có thể dán trực tiếp link Web App vào đây hoặc cài đặt trong trang admin-confirm.html
+    const DEFAULT_GOOGLE_SHEET_URL = ''; 
     function getGoogleSheetUrl() {
       return localStorage.getItem('simon_google_sheet_url') || DEFAULT_GOOGLE_SHEET_URL;
-    }
-
-    function getSupabaseClient() {
-      const url = localStorage.getItem('simon_supabase_url') || DEFAULT_SUPABASE_URL;
-      const key = localStorage.getItem('simon_supabase_key') || DEFAULT_SUPABASE_ANON_KEY;
-      if (window.supabase && url && key) {
-        try {
-          if (!window._sbClientInstance || window._sbCurrentUrl !== url) {
-            window._sbClientInstance = window.supabase.createClient(url, key);
-            window._sbCurrentUrl = url;
-          }
-          return window._sbClientInstance;
-        } catch (e) {
-          console.warn('Lỗi khởi tạo Supabase:', e);
-        }
-      }
-      return null;
     }
 
     // ── CẤU HÌNH THANH TOÁN ── Techcombank Simon Center
@@ -1660,36 +1639,7 @@
     // Lưu thông tin khách đăng ký hiện tại
     let _currentLead = {};
 
-    // ── HÀM LƯU VÀO CƠ SỞ DỮ LIỆU RIÊNG SUPABASE (TỐC ĐỘ 0.05S) ──
-    async function saveToSupabase(payload) {
-      const sb = getSupabaseClient();
-      if (!sb) return null;
-      try {
-        const row = {
-          name: payload.name || '',
-          phone: payload.phone || '',
-          email: payload.email || '',
-          price: payload.price || '',
-          course: payload.course || '',
-          occupation: payload.occupation || '',
-          channel: payload.channel || 'Form Website',
-          status: payload.status || 'Chờ thanh toán',
-          time_str: new Date().toLocaleString('vi-VN')
-        };
-        const { data, error } = await sb.from('leads').insert([row]);
-        if (error) {
-          console.warn('Lỗi lưu Supabase:', error);
-          return null;
-        }
-        console.log('⚡ Đã lưu thành công vào Supabase Database:', row);
-        return data;
-      } catch (err) {
-        console.warn('Supabase Exception:', err);
-        return null;
-      }
-    }
-
-    // ── HÀM GỬI DỮ LIỆU SAO LƯU DỰ PHÒNG LÊN GOOGLE SHEET ──
+    // ── HÀM GỬI DỮ LIỆU ĐỒNG BỘ LÊN GOOGLE SHEET ──
     function sendToGoogleSheet(payload) {
       const url = getGoogleSheetUrl();
       if (!url) {
@@ -1705,7 +1655,7 @@
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         }).then(() => {
-          console.log('🟢 Đã sao lưu thành công lên Google Sheet:', payload);
+          console.log('Đã gửi thành công lên Google Sheet:', payload);
         }).catch(err => {
           console.log('Lỗi gửi Google Sheet:', err);
         });
@@ -1717,7 +1667,7 @@
     // ── TRACKING CÁC KÊNH NHẬN ĐƠN: ZALO & GỌI ĐIỆN ──
     function trackLeadChannel(channelName) {
       const pricing = getDynamicPricing();
-      const payload = {
+      sendToGoogleSheet({
         action: 'register',
         name: 'Khách bấm ' + channelName,
         phone: 'Chưa để lại số',
@@ -1726,9 +1676,7 @@
         price: pricing.currentPriceFormatted,
         channel: channelName,
         status: 'Chờ tư vấn (' + channelName + ')'
-      };
-      saveToSupabase(payload);
-      sendToGoogleSheet(payload);
+      });
     }
 
     // ── XỬ LÝ KHI KHÁCH GỬI FORM ĐĂNG KÝ ──
@@ -1762,7 +1710,7 @@
         phone, 
         email, 
         occupation: occ, 
-        course: courseName, 
+        course: courseName,
         courseKey: courseKey,
         price: currentPriceObj.currentFormatted, 
         priceRaw: currentPriceObj.current,
@@ -1777,7 +1725,7 @@
         phone, 
         email, 
         occupation: occ, 
-        course: courseName, 
+        course: courseName,
         registeredPrice: currentPriceObj.currentFormatted, 
         channel: 'Form Website',
         status: 'Chờ thanh toán',
@@ -1786,19 +1734,7 @@
       existingLeads.push(newLead);
       localStorage.setItem('simon_chiropractic_leads', JSON.stringify(existingLeads));
 
-      // 2. GỬI VÀO CƠ SỞ DỮ LIỆU RIÊNG SUPABASE (SIÊU TỐC 0.05S)
-      saveToSupabase({
-        name: name,
-        phone: phone,
-        email: email,
-        occupation: occ,
-        course: courseName,
-        price: currentPriceObj.currentFormatted,
-        channel: 'Form Website (' + courseName + ')',
-        status: 'Chờ thanh toán'
-      });
-
-      // 3. GỬI TỰ ĐỘNG LÊN GOOGLE SHEET (BẢN SAO LƯU DỰ PHÒNG)
+      // 2. GỬI TỰ ĐỘNG LÊN GOOGLE SHEET
       sendToGoogleSheet({
         action: 'register',
         name: name,
@@ -1810,22 +1746,22 @@
         status: 'Chờ thanh toán'
       });
 
-      // 4. Gửi đồng thời về Email quản trị qua FormSubmit (dự phòng)
+      // 3. Gửi đồng thời về Email quản trị qua FormSubmit (dự phòng)
       const formData = new FormData(form);
       fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
         .catch(err => console.log('FormSubmit:', err));
 
-      // 5. Điền thông tin vào Modal Bước 1
+      // 4. Điền thông tin vào Modal Bước 1
       document.getElementById('modalName').innerText = name;
       document.getElementById('modalPhone').innerText = phone;
       document.getElementById('modalEmail').innerText = email;
       document.getElementById('modalPrice').innerText = currentPriceObj.currentFormatted;
 
-      // 6. Tạo link Zalo soạn sẵn nội dung
+      // 5. Tạo link Zalo soạn sẵn nội dung
       const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký ${courseName}.\nTên: ${name} | SĐT: ${phone} | Học phí: ${currentPriceObj.currentFormatted}`);
       document.getElementById('zaloDirectBtn').href = `https://zalo.me/0389609938?text=${zaloMsg}`;
 
-      // 7. Hiển thị Modal – bắt đầu ở Bước 1
+      // 6. Hiển thị Modal – bắt đầu ở Bước 1
       goToStep1();
       document.getElementById('successModal').classList.remove('hidden');
       document.getElementById('successModal').classList.add('flex');
@@ -1848,21 +1784,7 @@
         btn.innerHTML = '<span>⏳ Đang ghi nhận...</span>';
       }
 
-      // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase (Cơ sở dữ liệu riêng)
-      const sb = getSupabaseClient();
-      if (sb) {
-        try {
-          sb.from('leads')
-            .update({ status: 'ĐÃ THANH TOÁN' })
-            .or(`phone.eq.${phone},email.eq.${email}`)
-            .then(({ error }) => {
-              if (error) console.warn('Supabase update status error:', error);
-              else console.log('⚡ Đã cập nhật trạng thái ĐÃ THANH TOÁN trên Supabase!');
-            });
-        } catch(e) {}
-      }
-
-      // 2. Gửi lệnh cập nhật trạng thái "ĐÃ THANH TOÁN" lên Google Sheet
+      // 1. Gửi lệnh cập nhật trạng thái "ĐÃ THANH TOÁN" lên Google Sheet
       // (Google Apps Script sẽ tự động cập nhật dòng của khách và gửi Email kích hoạt)
       sendToGoogleSheet({
         action: 'confirm_payment',

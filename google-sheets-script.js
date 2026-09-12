@@ -163,6 +163,22 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
+    // TRƯỜNG HỢP 3: Reset hệ thống - Xóa toàn bộ dữ liệu học viên trong Google Sheet (giữ nguyên dòng tiêu đề Cột A đến I)
+    if (action === 'reset_sheet') {
+      const lastRow = sheet.getLastRow();
+      let deletedCount = 0;
+      if (lastRow > 1) {
+        deletedCount = lastRow - 1;
+        sheet.deleteRows(2, deletedCount);
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        action: "reset_sheet",
+        deletedRows: deletedCount,
+        message: "Đã reset toàn bộ dữ liệu bảng tính Khach_Hang_Khoa_Hoc_Simon_Center về trạng thái mới! Tiêu đề dòng 1 được giữ nguyên vẹn."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
@@ -173,11 +189,27 @@ function doPost(e) {
 
 /**
  * Xử lý lấy toàn bộ danh sách đăng ký từ Google Sheet về cho trang Admin (GET request)
- * Phục vụ hiển thị bảng điều khiển và bấm "Xuất Excel"
+ * Hoặc thực hiện các lệnh quản trị như Reset bảng tính
  */
 function doGet(e) {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    // LỆNH RESET DỮ LIỆU BẢNG TÍNH QUA GET (tiện lợi, tương thích trình duyệt tốt nhất)
+    if (e && e.parameter && e.parameter.action === 'reset_sheet') {
+      const lastRow = sheet.getLastRow();
+      let deletedCount = 0;
+      if (lastRow > 1) {
+        deletedCount = lastRow - 1;
+        sheet.deleteRows(2, deletedCount);
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        action: "reset_sheet",
+        deletedRows: deletedCount,
+        message: "Đã reset toàn bộ dữ liệu bảng tính Khach_Hang_Khoa_Hoc_Simon_Center về trạng thái mới! Tiêu đề dòng 1 được giữ nguyên vẹn."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
     const rows = sheet.getDataRange().getValues();
     const leads = [];
 
