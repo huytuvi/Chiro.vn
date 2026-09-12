@@ -1482,11 +1482,20 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       const gsUrl = getGoogleSheetUrl();
 
       // TRƯỜNG HỢP 1: NẾU ĐÃ CẤU HÌNH SUPABASE (DATABASE RIÊNG) -> TỐC ĐỘ SIÊU TỐC 0.05S & REALTIME
-      if (sb) {
+      const sbUrl = localStorage.getItem('simon_supabase_url') || DEFAULT_SUPABASE_URL;
+      const sbKey = localStorage.getItem('simon_supabase_key') || DEFAULT_SUPABASE_ANON_KEY;
+      if (sbUrl && sbKey) {
         statusEl.innerHTML = '<span class="text-indigo-600 font-semibold">⚡ Đang kết nối Supabase Database...</span>';
         try {
-          const { data, error } = await sb.from('leads').select('*').order('id', { ascending: true });
-          if (!error && data) {
+          // Lấy trực tiếp qua REST API (tốc độ siêu tốc và không bị ảnh hưởng bởi adblocker)
+          const resp = await fetch(`${sbUrl}/rest/v1/leads?select=*&order=id.asc`, {
+            headers: {
+              'apikey': sbKey,
+              'Authorization': `Bearer ${sbKey}`
+            }
+          });
+          if (resp.ok) {
+            const data = await resp.json();
             _allLeadsList = data.map(row => ({
               id: row.id,
               time: row.time_str || (row.created_at ? new Date(row.created_at).toLocaleString('vi-VN') : 'Mới đây'),
@@ -1506,7 +1515,8 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
             noticeEl.innerHTML = `<span>⚡ Đang hiển thị trực tiếp từ <strong>Cơ sở dữ liệu riêng Supabase</strong> với tốc độ siêu tốc. Dữ liệu đồng thời được tự động sao lưu dự phòng sang Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>!</span>`;
             noticeEl.classList.remove('hidden');
 
-            setupSupabaseRealtime(sb);
+            const sb = getSupabaseClient();
+            if (sb) setupSupabaseRealtime(sb);
 
             updateDashboardMetrics(_allLeadsList, null);
             applyFilterAndSearch();

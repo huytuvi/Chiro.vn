@@ -1662,30 +1662,45 @@
 
     // ── HÀM LƯU VÀO CƠ SỞ DỮ LIỆU RIÊNG SUPABASE (TỐC ĐỘ 0.05S) ──
     async function saveToSupabase(payload) {
+      const row = {
+        name: payload.name || '',
+        phone: payload.phone || '',
+        email: payload.email || '',
+        price: payload.price || '',
+        course: payload.course || '',
+        occupation: payload.occupation || '',
+        channel: payload.channel || 'Form Website',
+        status: payload.status || 'Chờ thanh toán',
+        time_str: new Date().toLocaleString('vi-VN')
+      };
+
+      // Cách 1: Gửi trực tiếp qua REST API Supabase (Đảm bảo 100% không lo lỗi adblocker chặn thư viện)
+      const url = localStorage.getItem('simon_supabase_url') || DEFAULT_SUPABASE_URL;
+      const key = localStorage.getItem('simon_supabase_key') || DEFAULT_SUPABASE_ANON_KEY;
+      if (url && key) {
+        try {
+          fetch(`${url}/rest/v1/leads`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': key,
+              'Authorization': `Bearer ${key}`,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(row)
+          }).then(res => {
+            if (res.ok) console.log('⚡ Đã lưu thành công vào Supabase Database:', row);
+            else console.warn('Supabase REST status:', res.status);
+          }).catch(err => console.warn('Supabase fetch err:', err));
+        } catch(e) {}
+      }
+
+      // Cách 2: Gửi bổ trợ qua Supabase SDK (nếu có sẵn)
       const sb = getSupabaseClient();
-      if (!sb) return null;
-      try {
-        const row = {
-          name: payload.name || '',
-          phone: payload.phone || '',
-          email: payload.email || '',
-          price: payload.price || '',
-          course: payload.course || '',
-          occupation: payload.occupation || '',
-          channel: payload.channel || 'Form Website',
-          status: payload.status || 'Chờ thanh toán',
-          time_str: new Date().toLocaleString('vi-VN')
-        };
-        const { data, error } = await sb.from('leads').insert([row]);
-        if (error) {
-          console.warn('Lỗi lưu Supabase:', error);
-          return null;
-        }
-        console.log('⚡ Đã lưu thành công vào Supabase Database:', row);
-        return data;
-      } catch (err) {
-        console.warn('Supabase Exception:', err);
-        return null;
+      if (sb) {
+        try {
+          sb.from('leads').insert([row]).catch(e => {});
+        } catch (err) {}
       }
     }
 
