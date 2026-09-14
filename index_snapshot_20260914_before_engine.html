@@ -1448,7 +1448,7 @@
         
         <!-- Form Khảo Sát -->
         <form id="chiroSurveyForm" onsubmit="handleSurveySubmit(event)" class="space-y-5">
-          <div id="surveyQuestionsContainer" class="space-y-5">
+          
           <!-- Câu 1: Họ và tên -->
           <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
             <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">
@@ -1544,7 +1544,6 @@
                 <span class="text-xs text-gray-800 font-medium">Cần tư vấn thêm về lịch khai giảng phù hợp</span>
               </label>
             </div>
-          </div>
           </div>
 
           <!-- Nút Submit -->
@@ -2034,106 +2033,6 @@
         otherInput.classList.remove('hidden');
         otherInput.focus();
       }
-    }
-
-    // =========================================================================
-    // ĐỘNG CƠ KHẢO SÁT THÔNG MINH (CONFIG-DRIVEN SURVEY ENGINE)
-    // Tự động nhận diện câu hỏi từ Markdown / Schema JSON, tự sinh giao diện & số hóa
-    // =========================================================================
-    const DEFAULT_SURVEY_SCHEMA = {
-      title: "Bảng Khảo Sát Nhu Cầu Khóa Học",
-      subtitle: "Dành 60 giây để Thầy Henrik Simon & Simon Center tư vấn lộ trình học phù hợp nhất cho anh/chị.",
-      questions: [
-        { id: "surveyName", key: "name", num: 1, label: "Họ và tên của anh/chị là gì?", help: "(Vui lòng điền họ tên)", type: "text", placeholder: "Ví dụ: Nguyễn Văn A", required: true },
-        { id: "surveyPhone", key: "phone", num: 2, label: "Số điện thoại / Zalo để ban tổ chức liên hệ gửi thông tin chi tiết:", help: "(Vui lòng điền số điện thoại hoặc Zalo)", type: "tel", placeholder: "Ví dụ: 0901234567", required: true },
-        { id: "surveyEmail", key: "email", num: 3, label: "Địa chỉ Email của anh/chị:", help: "(Để ban tổ chức gửi lộ trình & tài liệu Chiropractic miễn phí)", type: "email", placeholder: "Ví dụ: nguyenvana@gmail.com", required: true },
-        {
-          id: "surveyGoal", key: "goal", codePrefix: "MT", num: 4, label: "Mục tiêu chính của anh/chị khi tìm hiểu về Chiropractic là gì?", type: "radio", required: true,
-          options: [
-            { code: 1, text: "Học để tự chăm sóc cơ thể và người thân" },
-            { code: 2, text: "Nâng cao tay nghề/bổ trợ công việc hiện tại (HLV, PT, Spa, Vật lý trị liệu...)" },
-            { code: 3, text: "Học nghề bài bản để mở dịch vụ/phòng trị liệu riêng" },
-            { code: 4, text: "Khác", hasOtherText: true, otherPlaceholder: "Nhập mục tiêu khác của bạn..." }
-          ]
-        },
-        {
-          id: "surveyExp", key: "experience", codePrefix: "KN", num: 5, label: "Anh/chị đã từng có kinh nghiệm hoặc nền tảng về trị liệu/cơ xương khớp chưa?", type: "radio", required: true,
-          options: [
-            { code: 1, text: "Chưa từng, là người mới hoàn toàn" },
-            { code: 2, text: "Đã có kiến thức cơ bản / đang làm ngành liên quan" },
-            { code: 3, text: "Đã thực hành Chiropractic nhưng muốn nâng cao chuyên môn" }
-          ]
-        },
-        {
-          id: "surveyFormat", key: "format", codePrefix: "HT", num: 6, label: "Anh/chị mong muốn tham gia khoá học theo hình thức nào?", type: "radio", required: true,
-          options: [
-            { code: 1, text: "Học trực tiếp thực hành (Offline)" },
-            { code: 2, text: "Học lý thuyết Online kết hợp thực hành sau" },
-            { code: 3, text: "Cần tư vấn thêm về lịch khai giảng phù hợp" }
-          ]
-        }
-      ]
-    };
-
-    // Hàm chuyển đổi Markdown câu hỏi trắc nghiệm thành Cấu hình Khảo sát
-    function parseMarkdownToSurveySchema(mdText) {
-      if (!mdText || typeof mdText !== 'string') return DEFAULT_SURVEY_SCHEMA;
-      const lines = mdText.split('\n').map(l => l.trim()).filter(Boolean);
-      const schema = { title: "Bảng Khảo Sát Tùy Biến", subtitle: "Khảo sát tự động tạo từ Markdown", questions: [] };
-      let currentQ = null;
-      let qIndex = 1;
-
-      lines.forEach(line => {
-        if (line.startsWith('# ')) {
-          schema.title = line.replace(/^#\s+/, '');
-        } else if (/^\d+[\.\)]\s+/.test(line)) {
-          if (currentQ) schema.questions.push(currentQ);
-          const rawLabel = line.replace(/^\d+[\.\)]\s+/, '');
-          const isRequired = rawLabel.includes('*');
-          const cleanLabel = rawLabel.replace(/\*/g, '').trim();
-          let codePrefix = 'Q' + qIndex;
-          const codeMatch = cleanLabel.match(/^\[([A-Z0-9_-]+)\]/);
-          let finalLabel = cleanLabel;
-          if (codeMatch) {
-            codePrefix = codeMatch[1];
-            finalLabel = cleanLabel.replace(/^\[[A-Z0-9_-]+\]\s*/, '');
-          }
-
-          let qType = 'radio';
-          let qKey = 'q_' + qIndex;
-          if (/tên|họ và tên/i.test(finalLabel)) { qType = 'text'; qKey = 'name'; }
-          else if (/điện thoại|sđt|zalo|phone/i.test(finalLabel)) { qType = 'tel'; qKey = 'phone'; }
-          else if (/email|thư điện tử/i.test(finalLabel)) { qType = 'email'; qKey = 'email'; }
-
-          currentQ = {
-            id: 'survey_q_' + qIndex,
-            key: qKey,
-            num: qIndex++,
-            codePrefix: codePrefix,
-            label: finalLabel,
-            type: qType,
-            required: isRequired,
-            options: []
-          };
-        } else if (/^[-*•]\s+/.test(line) && currentQ) {
-          const rawOpt = line.replace(/^[-*•]\s+/, '').trim();
-          let optCode = currentQ.options.length + 1;
-          let optText = rawOpt;
-          const optMatch = rawOpt.match(/^\(?\[?(\d+|[A-Z0-9]+)\]?\)?\s*(.*)/);
-          if (optMatch) {
-            optCode = isNaN(Number(optMatch[1])) ? optMatch[1] : Number(optMatch[1]);
-            optText = optMatch[2].trim();
-          }
-          const hasOther = /khác|other/i.test(optText);
-          currentQ.options.push({
-            code: optCode,
-            text: optText,
-            hasOtherText: hasOther
-          });
-        }
-      });
-      if (currentQ) schema.questions.push(currentQ);
-      return schema.questions.length ? schema : DEFAULT_SURVEY_SCHEMA;
     }
 
     function handleSurveySubmit(e) {

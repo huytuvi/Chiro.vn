@@ -1,11 +1,17 @@
 /**
  * ============================================================================
- * GOOGLE APPS SCRIPT: TỰ ĐỘNG LƯU ĐƠN HÀNG & GỬI EMAIL TỰ ĐỘNG - SIMON CENTER
+ * GOOGLE APPS SCRIPT: TỰ ĐỘNG LƯU ĐƠN HÀNG & BẢNG KHẢO SÁT - SIMON CENTER
  * Khóa học Gieo Mầm: Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)
+ * 
+ * 📌 GHI CHÚ TÀI KHOẢN VÀ FILE GOOGLE SHEET QUẢN LÝ:
+ * - File Google Sheet: "Khách Hàng Đăng Ký Khóa Học - Simon Center"
+ * - Tài khoản Google sở hữu: chiroeduvn@gmail.com
+ * - Web App URL: https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec
  * ============================================================================
  * 
- * HƯỚNG DẪN CÀI ĐẶT TRONG 2 PHÚT:
- * 1. Mở Google Sheet mới (sheet.new), đặt tên "Khách Hàng Đăng Ký Khóa Học - Simon Center"
+ * HƯỚNG DẪN CÀI ĐẶT & KÍCH HOẠT:
+ * 1. Đăng nhập tài khoản: chiroeduvn@gmail.com
+ * 2. Mở file Google Sheet: "Khách Hàng Đăng Ký Khóa Học - Simon Center"
  * 2. Đặt tiêu đề cho các cột ở Dòng 1 (từ A1 đến I1):
  *    A: Thời gian
  *    B: Họ và tên
@@ -98,7 +104,61 @@ function doPost(e) {
       const channel = data.channel || 'Form Website';
       const status = data.status || 'Chờ thanh toán';
 
-      // Thêm dòng mới vào Google Sheet
+      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu" (Số hóa đầy đủ)
+      if (data.channel === 'Bảng Khảo Sát Nhu Cầu' || data.action === 'survey' || data.goal || data.digital_code) {
+        let surveySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Khảo Sát Nhu Cầu");
+        if (!surveySheet) {
+          surveySheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet("Khảo Sát Nhu Cầu");
+          surveySheet.appendRow([
+            "Thời gian",
+            "Họ và tên",
+            "Số điện thoại / Zalo",
+            "Email",
+            "Mã Mục Tiêu",
+            "Mục tiêu chi tiết",
+            "Mã Kinh Nghiệm",
+            "Kinh nghiệm / Nền tảng",
+            "Mã Hình Thức",
+            "Hình thức mong muốn",
+            "Mã Số Hóa Tổng Hợp",
+            "Trạng thái tư vấn"
+          ]);
+          surveySheet.getRange("A1:L1").setFontWeight("bold").setBackground("#D9EAD3").setHorizontalAlignment("center");
+        }
+
+        const goalCode = data.goal_code || '';
+        const goal = data.goal || '';
+        const expCode = data.exp_code || '';
+        const exp = data.experience || data.exp || '';
+        const formatCode = data.format_code || '';
+        const format = data.format || '';
+        const digitalCode = data.digital_code || `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
+
+        surveySheet.appendRow([
+          timeStr,
+          name,
+          "'" + phone,
+          email,
+          goalCode,
+          goal || occupation,
+          expCode,
+          exp,
+          formatCode,
+          format,
+          digitalCode,
+          "Chờ tư vấn lộ trình"
+        ]);
+
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "success",
+          message: "Đã lưu khảo sát số hóa vào tab Khảo Sát Nhu Cầu thành công",
+          name: name,
+          phone: phone,
+          digital_code: digitalCode
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học)
       sheet.appendRow([
         timeStr,        // Cột A: Thời gian
         name,           // Cột B: Họ và tên

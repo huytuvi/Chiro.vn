@@ -36,40 +36,18 @@
   </div>
 
   <!-- BẢNG ĐIỀU KHIỂN ADMIN -->
-  <div id="adminDashboard" class="max-w-6xl mx-auto px-3 sm:px-6 hidden">
+  <div id="adminDashboard" class="max-w-3xl mx-auto hidden">
 
     <!-- Header -->
-    <div class="flex items-center justify-between mb-5">
+    <div class="flex items-center justify-between mb-6">
       <div>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center space-x-2">
-          <span>📊 Bảng Điều Khiển Quản Trị</span>
-          <span class="text-xs bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded-full border border-red-200">Simon Center</span>
-        </h1>
-        <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Hệ thống quản trị học viên, doanh thu &amp; phân tích khảo sát chuyên sâu</p>
+        <h1 class="text-2xl font-extrabold text-gray-900">📊 Bảng điều khiển Admin</h1>
+        <p class="text-sm text-gray-500">Simon Center – Khóa học Gieo Mầm</p>
       </div>
-      <button onclick="logout()" class="text-xs text-gray-600 hover:text-red-700 font-semibold border border-gray-300 px-3.5 py-1.5 rounded-xl hover:bg-red-50 transition">
-        Đăng xuất ➔
+      <button onclick="logout()" class="text-xs text-gray-500 hover:text-red-700 border border-gray-300 px-3 py-1.5 rounded-lg transition">
+        Đăng xuất
       </button>
     </div>
-
-    <!-- NAVIGATION TABS -->
-    <div class="flex items-center space-x-2 border-b border-gray-200 mb-6 overflow-x-auto pb-2">
-      <button onclick="switchAdminTab('leads')" id="btnTabLeads" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-red-900 text-white shadow-sm shrink-0">
-        <span>📋 Quản Lý Đơn &amp; Học Viên</span>
-      </button>
-      <button onclick="switchAdminTab('surveyAnalytics')" id="btnTabSurveyAnalytics" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shrink-0">
-        <span>📊 Thống Kê Khảo Sát Nhu Cầu</span>
-        <span id="surveyBadgeCount" class="bg-indigo-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">0</span>
-      </button>
-      <button onclick="switchAdminTab('settings')" id="btnTabSettings" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shrink-0">
-        <span>⚙️ Cài Đặt Hệ Thống</span>
-      </button>
-    </div>
-
-    <!-- ===================================================================== -->
-    <!-- TAB 1: QUẢN LÝ ĐƠN & HỌC VIÊN                                         -->
-    <!-- ===================================================================== -->
-    <div id="sectionLeads" class="space-y-6">
 
     <!-- 0. TỔNG QUAN CHỈ SỐ DOANH THU & TRAFFIC (REAL-TIME METRICS) -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
@@ -124,249 +102,7 @@
       </div>
     </div>
 
-    <!-- DANH SÁCH HỌC VIÊN -->
-    <div class="card p-6 mb-6">
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <div>
-          <div class="flex items-center space-x-2">
-            <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký khóa học</h2>
-            <span id="leadsCountBadge" class="bg-red-900 text-white font-bold text-xs px-2.5 py-0.5 rounded-full shadow-sm">0 học viên</span>
-          </div>
-          <p id="leadSourceStatus" class="text-xs text-gray-500 mt-0.5">Đang kiểm tra nguồn dữ liệu...</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="syncPendingLocalLeads()" id="btnSyncLocal" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Đẩy toàn bộ đơn học viên lưu tạm trên máy lên Supabase Database và Google Sheet">
-            <span>🚀 Đồng Bộ Đơn Lưu Tạm</span>
-          </button>
-          <button onclick="confirmResetSystem()" id="btnResetSystem" class="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Xóa toàn bộ dữ liệu học viên trong Google Sheet Khach_Hang_Khoa_Hoc_Simon_Center và máy để làm mới hệ thống">
-            <span>⚠️ Reset Hệ Thống</span>
-          </button>
-          <button onclick="exportCSV()" id="btnExportCSV" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1">
-            <span>📥 Xuất file Excel (.csv)</span>
-          </button>
-          <button onclick="loadLeads()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-3 py-2 rounded-lg transition border border-gray-300">
-            🔄 Tải lại dữ liệu
-          </button>
-        </div>
-      </div>
-
-      <!-- THANH BỘ LỌC NHANH & TÌM KIẾM HỌC VIÊN -->
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
-        <div class="flex items-center space-x-1.5 text-xs font-semibold">
-          <button onclick="filterLeads('all')" id="tabFilterAll" class="px-3 py-1.5 rounded-lg bg-red-900 text-white shadow-sm transition">
-            Tất cả (<span id="filterAllCount">0</span>)
-          </button>
-          <button onclick="filterLeads('paid')" id="tabFilterPaid" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
-            ✅ Đã thanh toán (<span id="filterPaidCount">0</span>)
-          </button>
-          <button onclick="filterLeads('pending')" id="tabFilterPending" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
-            ⏳ Chờ thanh toán (<span id="filterPendingCount">0</span>)
-          </button>
-        </div>
-        <div class="w-full sm:w-64">
-          <input type="text" id="leadSearchInput" oninput="searchLeads(this.value)" placeholder="🔍 Tìm tên, SĐT, email, kênh..." 
-                 class="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none">
-        </div>
-      </div>
-      
-      <div id="leadsTableNotice" class="text-xs rounded-lg px-3.5 py-2.5 mb-4 hidden"></div>
-      <div id="leadsTable" class="text-sm text-gray-600">Đang tải...</div>
-    </div>
-
-    <!-- GỬI XÁC NHẬN -->
-    <div class="card p-6 mb-6">
-      <h2 class="font-extrabold text-gray-900 mb-1 text-lg">✅ Xác nhận đã nhận tiền</h2>
-      <p class="text-xs text-gray-500 mb-5">Điền thông tin học viên đã chuyển khoản → Bấm gửi → Email tự động đến họ</p>
-
-      <div class="space-y-4">
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="text-xs font-bold text-gray-700 block mb-1">Họ và tên học viên *</label>
-            <input type="text" id="cf_name" placeholder="Nguyễn Văn A"
-                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-          </div>
-          <div>
-            <label class="text-xs font-bold text-gray-700 block mb-1">Số điện thoại *</label>
-            <input type="text" id="cf_phone" placeholder="0901234567"
-                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-gray-700 block mb-1">Email học viên * (email sẽ gửi tới đây)</label>
-          <input type="email" id="cf_email" placeholder="hocvien@email.com"
-                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-        </div>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <div class="flex items-center justify-between mb-1">
-              <label class="text-xs font-bold text-gray-700 block">Số tiền đã nhận</label>
-              <div class="flex space-x-1">
-                <button type="button" onclick="setQuickAmount('k1')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K1</button>
-                <button type="button" onclick="setQuickAmount('k2')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K2</button>
-                <button type="button" onclick="setQuickAmount('k3')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K3</button>
-                <button type="button" onclick="setQuickAmount('combo')" class="text-[10px] bg-amber-200 hover:bg-amber-300 font-bold px-1.5 py-0.5 rounded text-amber-900">Combo</button>
-              </div>
-            </div>
-            <input type="text" id="cf_amount" placeholder="Ví dụ: 1.500.000 VNĐ hoặc 6.000.000 VNĐ"
-                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-          </div>
-          <div>
-            <label class="text-xs font-bold text-gray-700 block mb-1">Ngày nhận tiền</label>
-            <input type="text" id="cf_date"
-                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-gray-700 block mb-1">Link truy cập khóa học</label>
-          <input type="text" id="cf_courselink" placeholder="https://..." value="https://simoncenter.vn/khoa-hoc"
-                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
-        </div>
-        <div>
-          <label class="text-xs font-bold text-gray-700 block mb-1">Ghi chú thêm</label>
-          <textarea id="cf_note" rows="2" placeholder="Tài khoản đã được kích hoạt..."
-                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none resize-none"></textarea>
-        </div>
-      </div>
-
-      <div id="emailPreview" class="mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-700 hidden">
-        <div class="font-bold text-gray-900 mb-2">📧 Preview email sẽ gửi:</div>
-        <div id="previewContent" class="whitespace-pre-wrap leading-relaxed"></div>
-      </div>
-
-      <div class="flex space-x-3 mt-5">
-        <button onclick="previewEmail()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm transition">
-          👁 Xem trước
-        </button>
-        <button onclick="sendConfirmation()" id="sendBtn" class="flex-1 flex-grow-[2] bg-red-900 hover:bg-red-800 text-white font-extrabold py-3 rounded-xl text-sm transition">
-          📨 Gửi xác nhận cho học viên
-        </button>
-      </div>
-      <div id="sendResult" class="mt-3 text-center text-sm font-semibold hidden"></div>
-    </div>
-
-        </div> <!-- /#sectionLeads -->
-
-
-    <!-- ===================================================================== -->
-    <!-- TAB 2: BẢNG ĐIỀU KHIỂN THỐNG KÊ & PHÂN TÍCH KHẢO SÁT NHU CẦU          -->
-    <!-- ===================================================================== -->
-    <div id="sectionSurveyAnalytics" class="hidden space-y-6">
-      
-      <!-- 1. CÁC THẺ CHỈ SỐ NHANH (SURVEY KPIS) -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-        <div class="card p-4 border-l-4 border-indigo-600 bg-white shadow-xs">
-          <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Tổng Lượt Khảo Sát</div>
-          <div class="text-3xl font-black text-indigo-900 font-mono mt-1" id="kpiSurveyTotal">0</div>
-          <div class="text-[10px] text-gray-400 mt-1">Học viên đã hoàn thành</div>
-        </div>
-
-        <div class="card p-4 border-l-4 border-amber-500 bg-amber-50/30 shadow-xs">
-          <div class="text-[11px] font-bold text-amber-900 uppercase tracking-wider">Đã Thực Hành Chiro</div>
-          <div class="text-3xl font-black text-amber-600 font-mono mt-1" id="kpiSurveyPracticed">0</div>
-          <div class="text-[10px] text-amber-700 font-semibold mt-1" id="kpiSurveyPracticedRate">0% tổng số</div>
-        </div>
-
-        <div class="card p-4 border-l-4 border-emerald-600 bg-emerald-50/30 shadow-xs">
-          <div class="text-[11px] font-bold text-emerald-900 uppercase tracking-wider">Muốn Mở Phòng Khám</div>
-          <div class="text-3xl font-black text-emerald-700 font-mono mt-1" id="kpiSurveyClinic">0</div>
-          <div class="text-[10px] text-emerald-600 font-semibold mt-1" id="kpiSurveyClinicRate">0% có nhu cầu</div>
-        </div>
-
-        <div class="card p-4 border-l-4 border-blue-600 bg-blue-50/30 shadow-xs">
-          <div class="text-[11px] font-bold text-blue-900 uppercase tracking-wider">Ưa Thích Học Offline</div>
-          <div class="text-3xl font-black text-blue-700 font-mono mt-1" id="kpiSurveyOffline">0</div>
-          <div class="text-[10px] text-blue-600 font-semibold mt-1" id="kpiSurveyOfflineRate">0% chọn thực hành</div>
-        </div>
-      </div>
-
-      <!-- 2. MA TRẬN PHÂN TÍCH CHÉO 2 CHIỀU: MỤC TIÊU x KINH NGHIỆM -->
-      <div class="card p-5 bg-white shadow-sm border border-gray-200">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <div>
-            <h3 class="font-extrabold text-gray-900 text-base flex items-center space-x-2">
-              <span>🎯 Ma Trận Phân Tích Chéo: Mục Tiêu × Kinh Nghiệm Học Viên</span>
-              <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">Bấm vào ô để lọc học viên</span>
-            </h3>
-            <p class="text-xs text-gray-500 mt-0.5">
-              Phân loại chân dung học viên: bao nhiêu người đã thực hành Chiropractic nhưng muốn nâng cao tay nghề hoặc mở phòng khám riêng.
-            </p>
-          </div>
-          <button onclick="clearMatrixFilter()" id="btnClearMatrixFilter" class="hidden text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg font-bold border border-gray-300 transition">
-            ✕ Bỏ lọc ma trận
-          </button>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full text-xs border-collapse border border-gray-200">
-            <thead>
-              <tr class="bg-gray-100 text-gray-700 border-b border-gray-300">
-                <th class="p-2.5 text-left font-bold border border-gray-200">Mục Tiêu  Kinh Nghiệm</th>
-                <th class="p-2.5 text-center font-bold text-blue-900 border border-gray-200">KN-1: Người mới hoàn toàn</th>
-                <th class="p-2.5 text-center font-bold text-indigo-900 border border-gray-200">KN-2: Có nền tảng cơ bản</th>
-                <th class="p-2.5 text-center font-bold text-amber-900 bg-amber-50 border border-amber-200">KN-3: ĐÃ THỰC HÀNH CHIRO ⭐</th>
-                <th class="p-2.5 text-center font-bold text-gray-900 bg-gray-200 border border-gray-300">Tổng cộng</th>
-              </tr>
-            </thead>
-            <tbody id="matrixTableBody" class="divide-y divide-gray-200 text-gray-800">
-              <!-- Render động -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 3. BIỂU ĐỒ TRỰC QUAN 3 KHỐI -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Chart 1: Mục tiêu -->
-        <div class="card p-4 bg-white shadow-xs border border-gray-200 flex flex-col justify-between">
-          <h4 class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-3">🎯 Phân Bổ Theo Mục Tiêu</h4>
-          <div id="chartGoalBars" class="space-y-2.5 flex-1"></div>
-        </div>
-
-        <!-- Chart 2: Kinh nghiệm -->
-        <div class="card p-4 bg-white shadow-xs border border-gray-200 flex flex-col justify-between">
-          <h4 class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-3">🩺 Phân Bổ Theo Kinh Nghiệm</h4>
-          <div id="chartExpBars" class="space-y-2.5 flex-1"></div>
-        </div>
-
-        <!-- Chart 3: Hình thức -->
-        <div class="card p-4 bg-white shadow-xs border border-gray-200 flex flex-col justify-between">
-          <h4 class="font-bold text-gray-800 text-xs uppercase tracking-wider mb-3">🏫 Phân Bổ Hình Thức Học</h4>
-          <div id="chartFormatBars" class="space-y-2.5 flex-1"></div>
-        </div>
-      </div>
-
-      <!-- 4. BẢNG DANH SÁCH HỌC VIÊN KHẢO SÁT CHI TIẾT -->
-      <div class="card p-5 bg-white shadow-sm border border-gray-200">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div>
-            <div class="flex items-center space-x-2">
-              <h3 class="font-extrabold text-gray-900 text-base" id="surveyTableTitle">📋 Danh Sách Khảo Sát Chi Tiết</h3>
-              <span id="surveyTableBadge" class="bg-indigo-600 text-white font-bold text-xs px-2.5 py-0.5 rounded-full">0 kết quả</span>
-            </div>
-            <p class="text-xs text-gray-500 mt-0.5" id="surveyTableFilterDesc">Dữ liệu được đồng bộ trực tiếp từ Supabase và Google Sheet</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <button onclick="exportSurveyCSV()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-lg transition shadow flex items-center space-x-1">
-              <span>📥 Xuất Excel Khảo Sát (.csv)</span>
-            </button>
-            <div class="w-48 sm:w-60">
-              <input type="text" id="surveySearchInput" oninput="searchSurveyLeads(this.value)" placeholder="🔍 Tìm tên, SĐT, mã MT..." class="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-600 bg-white">
-            </div>
-          </div>
-        </div>
-        <div id="surveyTableContainer" class="overflow-x-auto text-xs">
-          <!-- Bảng khảo sát chi tiết -->
-        </div>
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================================== -->
-    <!-- TAB 3: CÀI ĐẶT HỆ THỐNG & KẾT NỐI                                     -->
-    <!-- ===================================================================== -->
-    <div id="sectionSettings" class="hidden space-y-6">
-<!-- 1A. SETUP GOOGLE SHEETS WEBHOOK (TỰ ĐỘNG LƯU DỰ PHÒNG & GỬI EMAIL) -->
+    <!-- 1A. SETUP GOOGLE SHEETS WEBHOOK (TỰ ĐỘNG LƯU DỰ PHÒNG & GỬI EMAIL) -->
     <div id="googleSheetSetup" class="card p-6 mb-6 border-2 border-emerald-400 bg-emerald-50/30">
       <div class="flex items-center justify-between mb-2">
         <h2 class="font-extrabold text-emerald-900 text-base">🟢 1A. Kết Nối Sao Lưu Google Sheets (Khach_Hang_Khoa_Hoc_Simon_Center)</h2>
@@ -752,6 +488,126 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.leads;</pre>
       </div>
     </div>
 
+    <!-- GỬI XÁC NHẬN -->
+    <div class="card p-6 mb-6">
+      <h2 class="font-extrabold text-gray-900 mb-1 text-lg">✅ Xác nhận đã nhận tiền</h2>
+      <p class="text-xs text-gray-500 mb-5">Điền thông tin học viên đã chuyển khoản → Bấm gửi → Email tự động đến họ</p>
+
+      <div class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Họ và tên học viên *</label>
+            <input type="text" id="cf_name" placeholder="Nguyễn Văn A"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Số điện thoại *</label>
+            <input type="text" id="cf_phone" placeholder="0901234567"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Email học viên * (email sẽ gửi tới đây)</label>
+          <input type="email" id="cf_email" placeholder="hocvien@email.com"
+                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-xs font-bold text-gray-700 block">Số tiền đã nhận</label>
+              <div class="flex space-x-1">
+                <button type="button" onclick="setQuickAmount('k1')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K1</button>
+                <button type="button" onclick="setQuickAmount('k2')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K2</button>
+                <button type="button" onclick="setQuickAmount('k3')" class="text-[10px] bg-gray-100 hover:bg-gray-200 px-1.5 py-0.5 rounded text-gray-700">K3</button>
+                <button type="button" onclick="setQuickAmount('combo')" class="text-[10px] bg-amber-200 hover:bg-amber-300 font-bold px-1.5 py-0.5 rounded text-amber-900">Combo</button>
+              </div>
+            </div>
+            <input type="text" id="cf_amount" placeholder="Ví dụ: 1.500.000 VNĐ hoặc 6.000.000 VNĐ"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-gray-700 block mb-1">Ngày nhận tiền</label>
+            <input type="text" id="cf_date"
+                   class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Link truy cập khóa học</label>
+          <input type="text" id="cf_courselink" placeholder="https://..." value="https://simoncenter.vn/khoa-hoc"
+                 class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-700 block mb-1">Ghi chú thêm</label>
+          <textarea id="cf_note" rows="2" placeholder="Tài khoản đã được kích hoạt..."
+                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-red-800 outline-none resize-none"></textarea>
+        </div>
+      </div>
+
+      <div id="emailPreview" class="mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-xs text-gray-700 hidden">
+        <div class="font-bold text-gray-900 mb-2">📧 Preview email sẽ gửi:</div>
+        <div id="previewContent" class="whitespace-pre-wrap leading-relaxed"></div>
+      </div>
+
+      <div class="flex space-x-3 mt-5">
+        <button onclick="previewEmail()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-xl text-sm transition">
+          👁 Xem trước
+        </button>
+        <button onclick="sendConfirmation()" id="sendBtn" class="flex-1 flex-grow-[2] bg-red-900 hover:bg-red-800 text-white font-extrabold py-3 rounded-xl text-sm transition">
+          📨 Gửi xác nhận cho học viên
+        </button>
+      </div>
+      <div id="sendResult" class="mt-3 text-center text-sm font-semibold hidden"></div>
+    </div>
+
+    <!-- DANH SÁCH HỌC VIÊN -->
+    <div class="card p-6 mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <h2 class="font-extrabold text-gray-900 text-lg">📋 Danh sách đăng ký khóa học</h2>
+            <span id="leadsCountBadge" class="bg-red-900 text-white font-bold text-xs px-2.5 py-0.5 rounded-full shadow-sm">0 học viên</span>
+          </div>
+          <p id="leadSourceStatus" class="text-xs text-gray-500 mt-0.5">Đang kiểm tra nguồn dữ liệu...</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="syncPendingLocalLeads()" id="btnSyncLocal" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Đẩy toàn bộ đơn học viên lưu tạm trên máy lên Supabase Database và Google Sheet">
+            <span>🚀 Đồng Bộ Đơn Lưu Tạm</span>
+          </button>
+          <button onclick="confirmResetSystem()" id="btnResetSystem" class="text-xs bg-red-600 hover:bg-red-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1" title="Xóa toàn bộ dữ liệu học viên trong Google Sheet Khach_Hang_Khoa_Hoc_Simon_Center và máy để làm mới hệ thống">
+            <span>⚠️ Reset Hệ Thống</span>
+          </button>
+          <button onclick="exportCSV()" id="btnExportCSV" class="text-xs bg-green-600 hover:bg-green-700 text-white font-bold px-3.5 py-2 rounded-lg transition shadow flex items-center space-x-1">
+            <span>📥 Xuất file Excel (.csv)</span>
+          </button>
+          <button onclick="loadLeads()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-3 py-2 rounded-lg transition border border-gray-300">
+            🔄 Tải lại dữ liệu
+          </button>
+        </div>
+      </div>
+
+      <!-- THANH BỘ LỌC NHANH & TÌM KIẾM HỌC VIÊN -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
+        <div class="flex items-center space-x-1.5 text-xs font-semibold">
+          <button onclick="filterLeads('all')" id="tabFilterAll" class="px-3 py-1.5 rounded-lg bg-red-900 text-white shadow-sm transition">
+            Tất cả (<span id="filterAllCount">0</span>)
+          </button>
+          <button onclick="filterLeads('paid')" id="tabFilterPaid" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
+            ✅ Đã thanh toán (<span id="filterPaidCount">0</span>)
+          </button>
+          <button onclick="filterLeads('pending')" id="tabFilterPending" class="px-3 py-1.5 rounded-lg bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
+            ⏳ Chờ thanh toán (<span id="filterPendingCount">0</span>)
+          </button>
+        </div>
+        <div class="w-full sm:w-64">
+          <input type="text" id="leadSearchInput" oninput="searchLeads(this.value)" placeholder="🔍 Tìm tên, SĐT, email, kênh..." 
+                 class="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none">
+        </div>
+      </div>
+      
+      <div id="leadsTableNotice" class="text-xs rounded-lg px-3.5 py-2.5 mb-4 hidden"></div>
+      <div id="leadsTable" class="text-sm text-gray-600">Đang tải...</div>
+    </div>
+
     <!-- HƯỚNG DẪN CÀI EMAILJS -->
     <div class="card p-6 mb-6">
       <h2 class="font-extrabold text-gray-900 text-lg mb-4">📖 Hướng dẫn cài EmailJS (miễn phí)</h2>
@@ -809,10 +665,7 @@ Simon Center – 0389.609.938</div>
       </ol>
     </div>
 
-    </div> <!-- /#sectionSettings -->
-  </div> <!-- /#adminDashboard -->
-
-  
+  </div>
 
   <script>
     const ADMIN_PASSWORD = 'simon2026';
@@ -1554,9 +1407,6 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         if (trafficViewsEl) trafficViewsEl.innerText = localTotal > 0 ? localTotal.toLocaleString('vi-VN') : '--';
         if (todayViewsEl) todayViewsEl.innerText = localToday > 0 ? ('Hôm nay: ' + localToday.toLocaleString('vi-VN')) : 'Chưa có dữ liệu';
       }
-
-      // Cập nhật Bảng Thống Kê Khảo Sát chuyên sâu
-      updateSurveyAnalytics(leads);
     }
 
     // Bộ lọc theo tab: all | paid | pending
@@ -2009,419 +1859,6 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
       setTimeout(() => {
         loadLeads();
       }, 1000);
-    }
-
-    // =========================================================================
-    // HỆ THỐNG ĐIỀU HƯỚNG TABS & BÁO CÁO THỐNG KÊ KHẢO SÁT CHUYÊN SÂU
-    // =========================================================================
-    let _surveyLeads = [];
-    let _currentFilteredSurveyLeads = [];
-    let _activeMatrixFilter = null; // { goalCode, expCode }
-
-    function switchAdminTab(tabName) {
-      const btnLeads = document.getElementById('btnTabLeads');
-      const btnSurvey = document.getElementById('btnTabSurveyAnalytics');
-      const btnSettings = document.getElementById('btnTabSettings');
-
-      const secLeads = document.getElementById('sectionLeads');
-      const secSurvey = document.getElementById('sectionSurveyAnalytics');
-      const secSettings = document.getElementById('sectionSettings');
-
-      // Reset all buttons
-      [btnLeads, btnSurvey, btnSettings].forEach(b => {
-        if (b) {
-          b.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shrink-0';
-        }
-      });
-
-      // Hide all sections
-      if (secLeads) secLeads.classList.add('hidden');
-      if (secSurvey) secSurvey.classList.add('hidden');
-      if (secSettings) secSettings.classList.add('hidden');
-
-      if (tabName === 'leads') {
-        if (btnLeads) btnLeads.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-red-900 text-white shadow-sm shrink-0';
-        if (secLeads) secLeads.classList.remove('hidden');
-      } else if (tabName === 'surveyAnalytics') {
-        if (btnSurvey) btnSurvey.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-red-900 text-white shadow-sm shrink-0';
-        if (secSurvey) secSurvey.classList.remove('hidden');
-        renderSurveyAnalyticsView();
-      } else if (tabName === 'settings') {
-        if (btnSettings) btnSettings.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-red-900 text-white shadow-sm shrink-0';
-        if (secSettings) secSettings.classList.remove('hidden');
-      }
-    }
-
-    function updateSurveyAnalytics(allLeads) {
-      if (!allLeads || !Array.isArray(allLeads)) return;
-
-      _surveyLeads = allLeads.filter(l => {
-        const ch = (l.channel || '').toLowerCase();
-        const cr = (l.course || '').toLowerCase();
-        const occ = (l.occupation || '').toLowerCase();
-        return ch.includes('khảo sát') || cr.includes('khảo sát') || cr.includes('mt:') || occ.includes('mt_') || occ.includes('mục tiêu');
-      }).map(l => {
-        let goalCode = 1;
-        let expCode = 1;
-        let formatCode = 1;
-
-        const text = (l.course || '') + ' ' + (l.occupation || '') + ' ' + (l.channel || '');
-
-        const mtMatch = text.match(/MT[:_](\d+)/i);
-        if (mtMatch) goalCode = Number(mtMatch[1]);
-        else if (/chăm sóc/i.test(text)) goalCode = 1;
-        else if (/nâng cao/i.test(text) || /bổ trợ/i.test(text)) goalCode = 2;
-        else if (/mở dịch vụ/i.test(text) || /phòng trị/i.test(text)) goalCode = 3;
-        else if (/khác/i.test(text)) goalCode = 4;
-
-        const knMatch = text.match(/KN[:_](\d+)/i);
-        if (knMatch) expCode = Number(knMatch[1]);
-        else if (/chưa từng/i.test(text)) expCode = 1;
-        else if (/cơ bản/i.test(text) || /liên quan/i.test(text)) expCode = 2;
-        else if (/đã thực hành/i.test(text)) expCode = 3;
-
-        const htMatch = text.match(/HT[:_](\d+)/i);
-        if (htMatch) formatCode = Number(htMatch[1]);
-        else if (/trực tiếp/i.test(text) || /offline/i.test(text)) formatCode = 1;
-        else if (/online/i.test(text)) formatCode = 2;
-        else if (/tư vấn/i.test(text)) formatCode = 3;
-
-        const goalNames = {
-          1: "Tự chăm sóc cơ thể & người thân",
-          2: "Nâng cao tay nghề/bổ trợ công việc",
-          3: "Học nghề bài bản mở phòng trị liệu riêng",
-          4: "Mục tiêu khác"
-        };
-        const expNames = {
-          1: "Chưa từng, là người mới hoàn toàn",
-          2: "Đã có kiến thức cơ bản / làm ngành liên quan",
-          3: "ĐÃ THỰC HÀNH CHIROPRACTIC ⭐"
-        };
-        const formatNames = {
-          1: "Học trực tiếp thực hành (Offline)",
-          2: "Học lý thuyết Online kết hợp thực hành",
-          3: "Cần tư vấn thêm lịch khai giảng"
-        };
-
-        return {
-          ...l,
-          goalCode,
-          expCode,
-          formatCode,
-          goalText: goalNames[goalCode] || "Khác",
-          expText: expNames[expCode] || "Chưa xác định",
-          formatText: formatNames[formatCode] || "Chưa xác định",
-          digitalCode: `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`
-        };
-      });
-
-      const badge = document.getElementById('surveyBadgeCount');
-      if (badge) badge.innerText = _surveyLeads.length;
-
-      _currentFilteredSurveyLeads = _surveyLeads.slice();
-      renderSurveyAnalyticsView();
-    }
-
-    function renderSurveyAnalyticsView() {
-      const total = _surveyLeads.length;
-
-      // 1. KPIs
-      const practiced = _surveyLeads.filter(l => l.expCode === 3).length;
-      const clinic = _surveyLeads.filter(l => l.goalCode === 3).length;
-      const offline = _surveyLeads.filter(l => l.formatCode === 1).length;
-
-      const practicedRate = total > 0 ? Math.round((practiced / total) * 100) : 0;
-      const clinicRate = total > 0 ? Math.round((clinic / total) * 100) : 0;
-      const offlineRate = total > 0 ? Math.round((offline / total) * 100) : 0;
-
-      if (document.getElementById('kpiSurveyTotal')) document.getElementById('kpiSurveyTotal').innerText = total;
-      if (document.getElementById('kpiSurveyPracticed')) document.getElementById('kpiSurveyPracticed').innerText = practiced;
-      if (document.getElementById('kpiSurveyPracticedRate')) document.getElementById('kpiSurveyPracticedRate').innerText = `${practicedRate}% tổng học viên (${practiced}/${total})`;
-      if (document.getElementById('kpiSurveyClinic')) document.getElementById('kpiSurveyClinic').innerText = clinic;
-      if (document.getElementById('kpiSurveyClinicRate')) document.getElementById('kpiSurveyClinicRate').innerText = `${clinicRate}% có nhu cầu (${clinic}/${total})`;
-      if (document.getElementById('kpiSurveyOffline')) document.getElementById('kpiSurveyOffline').innerText = offline;
-      if (document.getElementById('kpiSurveyOfflineRate')) document.getElementById('kpiSurveyOfflineRate').innerText = `${offlineRate}% chọn Offline (${offline}/${total})`;
-
-      // 2. Render Matrix Table
-      renderMatrixTable(total);
-
-      // 3. Render Visual Bar Charts
-      renderVisualCharts(total);
-
-      // 4. Render Survey Leads Table
-      renderSurveyTable();
-    }
-
-    function renderMatrixTable(total) {
-      const tbody = document.getElementById('matrixTableBody');
-      if (!tbody) return;
-
-      const goalRows = [
-        { code: 1, name: "1. Tự chăm sóc sức khỏe & người thân" },
-        { code: 2, name: "2. Nâng cao tay nghề/bổ trợ công việc" },
-        { code: 3, name: "3. Học nghề bài bản mở phòng trị liệu riêng" },
-        { code: 4, name: "4. Mục tiêu khác" }
-      ];
-
-      let html = '';
-      goalRows.forEach(gr => {
-        const c1 = _surveyLeads.filter(l => l.goalCode === gr.code && l.expCode === 1).length;
-        const c2 = _surveyLeads.filter(l => l.goalCode === gr.code && l.expCode === 2).length;
-        const c3 = _surveyLeads.filter(l => l.goalCode === gr.code && l.expCode === 3).length;
-        const rowTotal = c1 + c2 + c3;
-
-        const isHighlight = (gr.code === 2 || gr.code === 3);
-
-        html += `
-          <tr class="hover:bg-indigo-50/40 transition">
-            <td class="p-2.5 font-bold border border-gray-200 text-gray-900">${gr.name}</td>
-            <td class="p-2.5 text-center border border-gray-200">
-              <button onclick="filterSurveyByMatrix(${gr.code}, 1)" class="px-2.5 py-1 rounded-lg text-xs font-bold ${c1 > 0 ? 'bg-blue-100 text-blue-800 hover:bg-blue-200' : 'text-gray-400'} transition" title="Bấm để lọc nhóm này">
-                ${c1}
-              </button>
-            </td>
-            <td class="p-2.5 text-center border border-gray-200">
-              <button onclick="filterSurveyByMatrix(${gr.code}, 2)" class="px-2.5 py-1 rounded-lg text-xs font-bold ${c2 > 0 ? 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200' : 'text-gray-400'} transition" title="Bấm để lọc nhóm này">
-                ${c2}
-              </button>
-            </td>
-            <td class="p-2.5 text-center border border-amber-200 bg-amber-50/40">
-              <button onclick="filterSurveyByMatrix(${gr.code}, 3)" class="px-2.5 py-1 rounded-lg text-xs font-black ${c3 > 0 ? (isHighlight ? 'bg-amber-500 text-white shadow-xs hover:bg-amber-600' : 'bg-amber-100 text-amber-900 hover:bg-amber-200') : 'text-gray-400'} transition" title="Bấm để lọc nhóm này">
-                ${c3} ${c3 > 0 && isHighlight ? '🔥' : ''}
-              </button>
-            </td>
-            <td class="p-2.5 text-center font-bold border border-gray-300 bg-gray-100/60 font-mono text-gray-900">${rowTotal}</td>
-          </tr>
-        `;
-      });
-
-      // Total Row
-      const totC1 = _surveyLeads.filter(l => l.expCode === 1).length;
-      const totC2 = _surveyLeads.filter(l => l.expCode === 2).length;
-      const totC3 = _surveyLeads.filter(l => l.expCode === 3).length;
-
-      html += `
-        <tr class="bg-gray-100/90 font-bold border-t-2 border-gray-300">
-          <td class="p-2.5 text-gray-900 border border-gray-300">TỔNG CỘNG THEO KINH NGHIỆM</td>
-          <td class="p-2.5 text-center border border-gray-300 font-mono text-blue-900">${totC1}</td>
-          <td class="p-2.5 text-center border border-gray-300 font-mono text-indigo-900">${totC2}</td>
-          <td class="p-2.5 text-center border border-amber-300 bg-amber-100/60 font-mono text-amber-900 font-black">${totC3} ⭐</td>
-          <td class="p-2.5 text-center border border-gray-400 font-mono text-base font-black text-red-900">${total}</td>
-        </tr>
-      `;
-
-      tbody.innerHTML = html;
-    }
-
-    function renderVisualCharts(total) {
-      if (total === 0) {
-        ['chartGoalBars', 'chartExpBars', 'chartFormatBars'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = '<div class="text-xs text-gray-400 italic text-center py-4">Chưa có dữ liệu khảo sát</div>';
-        });
-        return;
-      }
-
-      // 1. Goal Bars
-      const g1 = _surveyLeads.filter(l => l.goalCode === 1).length;
-      const g2 = _surveyLeads.filter(l => l.goalCode === 2).length;
-      const g3 = _surveyLeads.filter(l => l.goalCode === 3).length;
-      const g4 = _surveyLeads.filter(l => l.goalCode === 4).length;
-
-      renderBarSet('chartGoalBars', [
-        { label: "1. Tự chăm sóc gia đình", count: g1, total, color: "bg-blue-600" },
-        { label: "2. Nâng cao tay nghề (PT, Spa...)", count: g2, total, color: "bg-indigo-600" },
-        { label: "3. Mở phòng khám riêng", count: g3, total, color: "bg-emerald-600" },
-        { label: "4. Khác", count: g4, total, color: "bg-gray-400" }
-      ]);
-
-      // 2. Exp Bars
-      const e1 = _surveyLeads.filter(l => l.expCode === 1).length;
-      const e2 = _surveyLeads.filter(l => l.expCode === 2).length;
-      const e3 = _surveyLeads.filter(l => l.expCode === 3).length;
-
-      renderBarSet('chartExpBars', [
-        { label: "1. Người mới hoàn toàn", count: e1, total, color: "bg-cyan-600" },
-        { label: "2. Đã có nền tảng cơ bản", count: e2, total, color: "bg-purple-600" },
-        { label: "3. ĐÃ THỰC HÀNH CHIRO ⭐", count: e3, total, color: "bg-amber-500" }
-      ]);
-
-      // 3. Format Bars
-      const f1 = _surveyLeads.filter(l => l.formatCode === 1).length;
-      const f2 = _surveyLeads.filter(l => l.formatCode === 2).length;
-      const f3 = _surveyLeads.filter(l => l.formatCode === 3).length;
-
-      renderBarSet('chartFormatBars', [
-        { label: "1. Học Offline trực tiếp", count: f1, total, color: "bg-emerald-600" },
-        { label: "2. Online + Thực hành", count: f2, total, color: "bg-blue-500" },
-        { label: "3. Cần tư vấn lịch", count: f3, total, color: "bg-gray-500" }
-      ]);
-    }
-
-    function renderBarSet(containerId, items) {
-      const el = document.getElementById(containerId);
-      if (!el) return;
-      let html = '';
-      items.forEach(it => {
-        const pct = it.total > 0 ? Math.round((it.count / it.total) * 100) : 0;
-        html += `
-          <div>
-            <div class="flex justify-between text-[11px] mb-1 font-medium text-gray-700">
-              <span class="truncate mr-2">${it.label}</span>
-              <span class="font-mono font-bold text-gray-900 shrink-0">${it.count} (${pct}%)</span>
-            </div>
-            <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
-              <div class="${it.color} h-2.5 rounded-full transition-all duration-500" style="width: ${pct}%"></div>
-            </div>
-          </div>
-        `;
-      });
-      el.innerHTML = html;
-    }
-
-    function filterSurveyByMatrix(goalCode, expCode) {
-      _activeMatrixFilter = { goalCode, expCode };
-      const btnClear = document.getElementById('btnClearMatrixFilter');
-      if (btnClear) btnClear.classList.remove('hidden');
-
-      const desc = document.getElementById('surveyTableFilterDesc');
-      if (desc) {
-        desc.innerHTML = `<span class="text-indigo-700 font-bold bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">⚡ Đang lọc: Mục tiêu Mã ${goalCode} × Kinh nghiệm Mã ${expCode}</span>`;
-      }
-
-      _currentFilteredSurveyLeads = _surveyLeads.filter(l => l.goalCode === goalCode && l.expCode === expCode);
-      renderSurveyTable();
-    }
-
-    function clearMatrixFilter() {
-      _activeMatrixFilter = null;
-      const btnClear = document.getElementById('btnClearMatrixFilter');
-      if (btnClear) btnClear.classList.add('hidden');
-
-      const desc = document.getElementById('surveyTableFilterDesc');
-      if (desc) desc.innerText = 'Dữ liệu được đồng bộ trực tiếp từ Supabase và Google Sheet';
-
-      _currentFilteredSurveyLeads = _surveyLeads.slice();
-      renderSurveyTable();
-    }
-
-    function searchSurveyLeads(val) {
-      const q = (val || '').toLowerCase().trim();
-      if (!q) {
-        if (_activeMatrixFilter) {
-          _currentFilteredSurveyLeads = _surveyLeads.filter(l => l.goalCode === _activeMatrixFilter.goalCode && l.expCode === _activeMatrixFilter.expCode);
-        } else {
-          _currentFilteredSurveyLeads = _surveyLeads.slice();
-        }
-      } else {
-        const base = _activeMatrixFilter 
-          ? _surveyLeads.filter(l => l.goalCode === _activeMatrixFilter.goalCode && l.expCode === _activeMatrixFilter.expCode)
-          : _surveyLeads;
-        _currentFilteredSurveyLeads = base.filter(l => {
-          return (l.name || '').toLowerCase().includes(q) ||
-                 (l.phone || '').toLowerCase().includes(q) ||
-                 (l.email || '').toLowerCase().includes(q) ||
-                 (l.digitalCode || '').toLowerCase().includes(q);
-        });
-      }
-      renderSurveyTable();
-    }
-
-    function renderSurveyTable() {
-      const container = document.getElementById('surveyTableContainer');
-      const badge = document.getElementById('surveyTableBadge');
-      if (!container) return;
-
-      if (badge) badge.innerText = `${_currentFilteredSurveyLeads.length} học viên`;
-
-      if (_currentFilteredSurveyLeads.length === 0) {
-        container.innerHTML = '<div class="text-center py-8 text-gray-400 italic">Không có dữ liệu khảo sát nào phù hợp.</div>';
-        return;
-      }
-
-      const rowsHtml = _currentFilteredSurveyLeads.map((l, i) => {
-        const cleanPhone = (l.phone || '').replace(/\D/g, '');
-        const zaloUrl = cleanPhone ? `https://zalo.me/${cleanPhone}` : '#';
-        const telUrl = cleanPhone ? `tel:${cleanPhone}` : '#';
-
-        const expBadge = l.expCode === 3 
-          ? `<span class="bg-amber-100 text-amber-900 font-extrabold px-2 py-0.5 rounded text-[10px] border border-amber-300">KN-3: Đã thực hành ⭐</span>`
-          : (l.expCode === 2 
-            ? `<span class="bg-indigo-100 text-indigo-900 font-semibold px-2 py-0.5 rounded text-[10px]">KN-2: Cơ bản</span>`
-            : `<span class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-[10px]">KN-1: Mới</span>`);
-
-        return `
-          <tr class="hover:bg-gray-50 border-b border-gray-100 transition">
-            <td class="p-2.5 font-mono text-gray-400 text-[10px]">${i + 1}</td>
-            <td class="p-2.5 text-gray-500 whitespace-nowrap text-[11px]">${l.time_str || '--'}</td>
-            <td class="p-2.5 font-bold text-gray-900 whitespace-nowrap">${l.name || 'Chưa có tên'}</td>
-            <td class="p-2.5 font-mono text-brand-wine font-semibold whitespace-nowrap">${l.phone || '--'}</td>
-            <td class="p-2.5 text-gray-600 text-[11px]">${l.email || '--'}</td>
-            <td class="p-2.5 font-mono font-bold text-indigo-700 whitespace-nowrap">${l.digitalCode || '--'}</td>
-            <td class="p-2.5">${expBadge}</td>
-            <td class="p-2.5 text-[11px] text-gray-700 max-w-xs truncate" title="${l.goalText}">${l.goalText}</td>
-            <td class="p-2.5 text-[11px] text-gray-700 whitespace-nowrap">${l.formatText}</td>
-            <td class="p-2.5 whitespace-nowrap">
-              <div class="flex items-center space-x-1">
-                ${cleanPhone ? `<a href="${telUrl}" class="p-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold transition" title="Gọi điện">📞 Gọi</a>` : ''}
-                ${cleanPhone ? `<a href="${zaloUrl}" target="_blank" class="p-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold transition" title="Nhắn Zalo">💬 Zalo</a>` : ''}
-              </div>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      container.innerHTML = `
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-gray-100 text-gray-600 text-[11px] uppercase font-bold border-b border-gray-200">
-              <th class="p-2.5 w-8">#</th>
-              <th class="p-2.5">Thời gian</th>
-              <th class="p-2.5">Họ và tên</th>
-              <th class="p-2.5">Số điện thoại</th>
-              <th class="p-2.5">Email</th>
-              <th class="p-2.5">Mã số hóa</th>
-              <th class="p-2.5">Kinh nghiệm</th>
-              <th class="p-2.5">Mục tiêu</th>
-              <th class="p-2.5">Hình thức</th>
-              <th class="p-2.5">Liên hệ</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rowsHtml}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function exportSurveyCSV() {
-      if (!_surveyLeads || !_surveyLeads.length) {
-        alert('Chưa có dữ liệu khảo sát để xuất file!');
-        return;
-      }
-      const headers = ['Thời gian', 'Họ và tên', 'Số điện thoại', 'Email', 'Mã Mục Tiêu', 'Mục Tiêu', 'Mã Kinh Nghiệm', 'Kinh Nghiệm', 'Mã Hình Thức', 'Hình Thức', 'Mã Số Hóa Tổng Hợp'];
-      const rows = _surveyLeads.map(l => [
-        `"${(l.time_str || '').replace(/"/g, '""')}"`,
-        `"${(l.name || '').replace(/"/g, '""')}"`,
-        `"'${(l.phone || '').replace(/"/g, '""')}"`,
-        `"${(l.email || '').replace(/"/g, '""')}"`,
-        l.goalCode,
-        `"${(l.goalText || '').replace(/"/g, '""')}"`,
-        l.expCode,
-        `"${(l.expText || '').replace(/"/g, '""')}"`,
-        l.formatCode,
-        `"${(l.formatText || '').replace(/"/g, '""')}"`,
-        `"${(l.digitalCode || '').replace(/"/g, '""')}"`
-      ]);
-      const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Khao_Sat_Nhu_Cau_Simon_Center_${new Date().toISOString().slice(0, 10)}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
     }
   </script>
 </body>
