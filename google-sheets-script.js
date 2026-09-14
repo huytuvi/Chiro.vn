@@ -545,42 +545,95 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
     surveySheet.setColumnWidth(13, 30);  // M: Cột đệm cách biệt
   }
 
-  // 2. Thiết lập Bảng Thống Kê & Công thức COUNTIF (Cột N đến U)
-  // Bảng 1: Mục tiêu học viên (N1:O5)
+  // 2. Nếu chưa có dữ liệu học viên nào (chỉ mới có dòng 1 tiêu đề)
+  // Tự động thêm 2 dòng dữ liệu mẫu demo để công thức tính toán và biểu đồ hiển thị màu sắc ngay lập tức!
+  if (surveySheet.getLastRow() <= 1) {
+    surveySheet.appendRow([
+      "14/09/2026 21:00:00",
+      "Nguyễn Văn An (Mẫu Demo)",
+      "'0901234567",
+      "nguyenvanan.demo@gmail.com",
+      2,
+      "Nâng cao tay nghề / Bổ trợ công việc",
+      2,
+      "Đã biết cơ bản / Ngành liên quan",
+      1,
+      "Học trực tiếp (Offline)",
+      "[MT:2|KN:2|HT:1]",
+      "Học viên mẫu (Có thể xóa)"
+    ]);
+
+    surveySheet.appendRow([
+      "14/09/2026 21:15:00",
+      "Trần Thị Mai (Mẫu Demo)",
+      "'0912345678",
+      "tranmai.demo@gmail.com",
+      3,
+      "Học bài bản mở phòng trị / Spa",
+      3,
+      "Đã thực hành Chiropractic",
+      1,
+      "Học trực tiếp (Offline)",
+      "[MT:3|KN:3|HT:1]",
+      "Học viên mẫu (Có thể xóa)"
+    ]);
+    Logger.log("📝 Đã thêm 2 dòng dữ liệu mẫu demo để biểu đồ có số liệu hiển thị ngay lập tức.");
+  }
+
+  // 3. Thiết lập Bảng Thống Kê (Xóa sạch vùng cũ dòng 2-6 để tránh trùng lặp)
+  surveySheet.getRange("N2:U6").clearContent();
+
+  // Bảng 1: Mục tiêu học viên (Cột N - O)
   surveySheet.getRange("N1:O1").setValues([["Mục Tiêu Học Viên", "Số Lượng"]]);
-  surveySheet.getRange("N2:O5").setValues([
-    ["1. Tự chăm sóc bản thân & gia đình", '=COUNTIF(E:E, 1)'],
-    ["2. Nâng cao tay nghề / Bổ trợ nghề", '=COUNTIF(E:E, 2)'],
-    ["3. Học bài bản mở phòng trị / Spa", '=COUNTIF(E:E, 3)'],
-    ["4. Mục tiêu khác / Nghiên cứu", '=COUNTIF(E:E, 4)']
+  surveySheet.getRange("N2:N5").setValues([
+    ["1. Tự chăm sóc bản thân & gia đình"],
+    ["2. Nâng cao tay nghề / Bổ trợ nghề"],
+    ["3. Học bài bản mở phòng trị / Spa"],
+    ["4. Mục tiêu khác / Nghiên cứu"]
   ]);
+  setSafeCountif(surveySheet, "O2", "E", 1);
+  setSafeCountif(surveySheet, "O3", "E", 2);
+  setSafeCountif(surveySheet, "O4", "E", 3);
+  setSafeCountif(surveySheet, "O5", "E", 4);
+
   surveySheet.getRange("N1:O1").setFontWeight("bold").setBackground("#E0E7FF").setFontColor("#1E3A8A").setHorizontalAlignment("center");
   surveySheet.getRange("N2:N5").setBackground("#F8FAFC");
   surveySheet.getRange("O2:O5").setHorizontalAlignment("center").setFontWeight("bold");
+  surveySheet.getRange("N1:O5").setBorder(true, true, true, true, true, true, "#CBD5E1", SpreadsheetApp.BorderStyle.SOLID);
 
-  // Bảng 2: Kinh nghiệm nền tảng (Q1:R4)
+  // Bảng 2: Kinh nghiệm nền tảng (Cột Q - R)
   surveySheet.getRange("Q1:R1").setValues([["Kinh Nghiệm Nền Tảng", "Số Lượng"]]);
-  surveySheet.getRange("Q2:R4").setValues([
-    ["1. Chưa từng học (Mới bắt đầu)", '=COUNTIF(G:G, 1)'],
-    ["2. Đã biết cơ bản / Ngành liên quan", '=COUNTIF(G:G, 2)'],
-    ["3. Đã thực hành Chiropractic", '=COUNTIF(G:G, 3)']
+  surveySheet.getRange("Q2:Q4").setValues([
+    ["1. Chưa từng học (Mới bắt đầu)"],
+    ["2. Đã biết cơ bản / Ngành liên quan"],
+    ["3. Đã thực hành Chiropractic"]
   ]);
+  setSafeCountif(surveySheet, "R2", "G", 1);
+  setSafeCountif(surveySheet, "R3", "G", 2);
+  setSafeCountif(surveySheet, "R4", "G", 3);
+
   surveySheet.getRange("Q1:R1").setFontWeight("bold").setBackground("#D1FAE5").setFontColor("#065F46").setHorizontalAlignment("center");
   surveySheet.getRange("Q2:Q4").setBackground("#F8FAFC");
   surveySheet.getRange("R2:R4").setHorizontalAlignment("center").setFontWeight("bold");
+  surveySheet.getRange("Q1:R4").setBorder(true, true, true, true, true, true, "#CBD5E1", SpreadsheetApp.BorderStyle.SOLID);
 
-  // Bảng 3: Hình thức mong muốn (T1:U4)
+  // Bảng 3: Hình thức mong muốn (Cột T - U)
   surveySheet.getRange("T1:U1").setValues([["Hình Thức Mong Muốn", "Số Lượng"]]);
-  surveySheet.getRange("T2:U4").setValues([
-    ["1. Học trực tiếp (Offline)", '=COUNTIF(I:I, 1)'],
-    ["2. Học Online từ xa", '=COUNTIF(I:I, 2)'],
-    ["3. Cần tư vấn thêm", '=COUNTIF(I:I, 3)']
+  surveySheet.getRange("T2:T4").setValues([
+    ["1. Học trực tiếp (Offline)"],
+    ["2. Học Online từ xa"],
+    ["3. Cần tư vấn thêm"]
   ]);
+  setSafeCountif(surveySheet, "U2", "I", 1);
+  setSafeCountif(surveySheet, "U3", "I", 2);
+  setSafeCountif(surveySheet, "U4", "I", 3);
+
   surveySheet.getRange("T1:U1").setFontWeight("bold").setBackground("#FEF3C7").setFontColor("#92400E").setHorizontalAlignment("center");
   surveySheet.getRange("T2:T4").setBackground("#F8FAFC");
   surveySheet.getRange("U2:U4").setHorizontalAlignment("center").setFontWeight("bold");
+  surveySheet.getRange("T1:U4").setBorder(true, true, true, true, true, true, "#CBD5E1", SpreadsheetApp.BorderStyle.SOLID);
 
-  // 3. Tự động vẽ 3 Biểu Đồ Diagrams Real-time (Native Google Sheets Embedded Charts)
+  // 4. Tự động vẽ 3 Biểu Đồ Diagrams Real-time (Bố trí dọc, KHÔNG bị đè nhau, setNumHeaders chuẩn)
   const existingCharts = surveySheet.getCharts();
   if (existingCharts.length === 0 || forceRefreshCharts) {
     for (let i = 0; i < existingCharts.length; i++) {
@@ -588,53 +641,56 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
     }
 
     try {
-      // Biểu đồ 1: Biểu đồ tròn Mục Tiêu Học Viên (Pie Chart 3D)
+      // Biểu đồ 1: Biểu đồ tròn Mục Tiêu Học Viên (Pie Chart 3D) - Vị trí: Dòng 7, Cột N
       const chartGoal = surveySheet.newChart()
         .setChartType(SpreadsheetApp.ChartType.PIE)
         .addRange(surveySheet.getRange("N1:O5"))
-        .setPosition(7, 14, 5, 5) // Đặt tại Dòng 7, Cột N
+        .setNumHeaders(1) // Khai báo Dòng 1 là Tiêu đề, không phải giá trị số
+        .setPosition(7, 14, 0, 0)
         .setOption('title', '📊 TỶ LỆ MỤC TIÊU CỦA HỌC VIÊN')
         .setOption('is3D', true)
-        .setOption('width', 380)
+        .setOption('width', 450)
         .setOption('height', 270)
         .build();
       surveySheet.insertChart(chartGoal);
-      Logger.log("📊 Đã tạo Biểu đồ 1: Mục tiêu");
+      Logger.log("📊 Đã tạo Biểu đồ 1: Mục tiêu (Dòng 7, Cột N)");
     } catch(chartErr1) {
       Logger.log("⚠️ Lỗi tạo Biểu đồ 1: " + chartErr1);
     }
 
     try {
-      // Biểu đồ 2: Biểu đồ cột Kinh Nghiệm Nền Tảng (Column Chart)
+      // Biểu đồ 2: Biểu đồ cột Kinh Nghiệm Nền Tảng (Column Chart) - Vị trí: Dòng 21, Cột N
       const chartExp = surveySheet.newChart()
         .setChartType(SpreadsheetApp.ChartType.COLUMN)
         .addRange(surveySheet.getRange("Q1:R4"))
-        .setPosition(7, 17, 5, 5) // Đặt tại Dòng 7, Cột Q
+        .setNumHeaders(1) // Khai báo Dòng 1 là Tiêu đề
+        .setPosition(21, 14, 0, 0) // Xếp bên dưới Biểu đồ 1, cách 14 dòng -> Tuyệt đối không đè nhau
         .setOption('title', '📈 PHÂN BỔ KINH NGHIỆM NỀN TẢNG')
         .setOption('colors', ['#059669'])
         .setOption('legend', { position: 'none' })
-        .setOption('width', 380)
+        .setOption('width', 450)
         .setOption('height', 270)
         .build();
       surveySheet.insertChart(chartExp);
-      Logger.log("📈 Đã tạo Biểu đồ 2: Kinh nghiệm");
+      Logger.log("📈 Đã tạo Biểu đồ 2: Kinh nghiệm (Dòng 21, Cột N)");
     } catch(chartErr2) {
       Logger.log("⚠️ Lỗi tạo Biểu đồ 2: " + chartErr2);
     }
 
     try {
-      // Biểu đồ 3: Biểu đồ tròn Hình Thức Học (Pie Chart 3D)
+      // Biểu đồ 3: Biểu đồ tròn Hình Thức Học (Pie Chart 3D) - Vị trí: Dòng 35, Cột N
       const chartFormat = surveySheet.newChart()
         .setChartType(SpreadsheetApp.ChartType.PIE)
         .addRange(surveySheet.getRange("T1:U4"))
-        .setPosition(7, 20, 5, 5) // Đặt tại Dòng 7, Cột T
+        .setNumHeaders(1) // Khai báo Dòng 1 là Tiêu đề
+        .setPosition(35, 14, 0, 0) // Xếp bên dưới Biểu đồ 2 -> Tuyệt đối không đè nhau
         .setOption('title', '🎯 HÌNH THỨC HỌC MONG MUỐN')
         .setOption('is3D', true)
-        .setOption('width', 380)
+        .setOption('width', 450)
         .setOption('height', 270)
         .build();
       surveySheet.insertChart(chartFormat);
-      Logger.log("🎯 Đã tạo Biểu đồ 3: Hình thức");
+      Logger.log("🎯 Đã tạo Biểu đồ 3: Hình thức (Dòng 35, Cột N)");
     } catch(chartErr3) {
       Logger.log("⚠️ Lỗi tạo Biểu đồ 3: " + chartErr3);
     }
@@ -643,4 +699,31 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
   SpreadsheetApp.flush();
   return surveySheet;
 }
+
+/**
+ * Hàm thiết lập công thức COUNTIF an toàn tuyệt đối, tương thích 100% với Google Sheets tiếng Việt
+ * (Tự động áp dụng dấu ';' cho Google Sheets Việt Nam, tự chuyển dấu ',' nếu máy ở ngôn ngữ khác)
+ */
+function setSafeCountif(sheet, cellA1, colLetter, code) {
+  const cell = sheet.getRange(cellA1);
+  try {
+    // 1. Thử thiết lập với dấu chấm phẩy ';' (Chuẩn Google Sheets tiếng Việt của tài khoản chiroeduvn@gmail.com)
+    cell.setFormulaLocal(`=COUNTIF(${colLetter}:${colLetter}; ${code})`);
+    SpreadsheetApp.flush();
+    const val = cell.getValue();
+    
+    // 2. Nếu vẫn bị lỗi #ERROR!, thử lại với hàm setFormula tiêu chuẩn quốc tế
+    if (val === "#ERROR!" || (typeof val === 'string' && val.indexOf("ERROR") !== -1)) {
+      cell.setFormula(`=COUNTIF(${colLetter}:${colLetter}, ${code})`);
+      SpreadsheetApp.flush();
+    }
+  } catch(err) {
+    try {
+      cell.setFormula(`=COUNTIF(${colLetter}:${colLetter}, ${code})`);
+    } catch(err2) {
+      Logger.log("⚠️ Lỗi thiết lập công thức tại " + cellA1 + ": " + err2);
+    }
+  }
+}
+
 
