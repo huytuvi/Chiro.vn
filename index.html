@@ -117,7 +117,7 @@
         </a>
 
         <!-- Desktop Nav Links -->
-        <nav class="hidden lg:flex items-center space-x-4 xl:space-x-5 text-xs xl:text-sm font-semibold text-gray-700">
+        <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-4 text-xs xl:text-sm font-semibold text-gray-700">
           <a href="chuyen-gia-henrik-simon.html" class="hover:text-brand-crimson transition flex items-center space-x-1">
             <span>👨‍⚕️ Bác Sĩ Henrik Simon</span>
           </a>
@@ -127,7 +127,9 @@
           <a href="#target-audience" class="hover:text-brand-crimson transition flex items-center space-x-1">
             <span>🎯 Ai Nên Học?</span>
           </a>
-          <a href="#benefits-outcomes" class="hover:text-brand-crimson transition">Quyền Lợi Độc Quyền</a>
+          <button type="button" onclick="openSurveyModal()" class="hover:text-brand-crimson transition flex items-center space-x-1 focus:outline-none">
+            <span>📋 Khảo Sát Nhu Cầu</span>
+          </button>
           <a href="#pricing" class="hover:text-brand-crimson transition font-bold text-brand-crimson">💰 Học Phí (Giảm 50%)</a>
         </nav>
 
@@ -498,6 +500,14 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <!-- Nút mở popup khảo sát nhanh -->
+      <div class="mt-8 text-center">
+        <button type="button" onclick="openSurveyModal()" class="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-wine to-brand-crimson hover:from-brand-wineDark hover:to-brand-crimsonHover text-white text-xs sm:text-sm font-extrabold px-6 py-3.5 rounded-xl shadow-md hover:shadow-xl transition transform hover:scale-[1.02]">
+          <span>📋 Bạn Chưa Chắc Chắn Khóa Nào Phù Hợp? Bấm Khảo Sát Nhanh (1 Phút)</span>
+          <span>➔</span>
+        </button>
       </div>
 
     </div>
@@ -1411,6 +1421,159 @@
     </div>
   </div>
 
+  <!-- ========================================================
+       POPUP KHẢO SÁT NHANH 5 CÂU HỎI (TỰ ĐỘNG GỬI GOOGLE SHEET)
+       ======================================================== -->
+  <div id="surveyModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto" onclick="handleSurveyBackdropClick(event)">
+    <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border-2 border-brand-wine/20 overflow-hidden relative my-auto max-h-[92vh] flex flex-col" onclick="event.stopPropagation()">
+      
+      <!-- Modal Header Sticky -->
+      <div class="bg-gradient-to-r from-brand-wine to-brand-crimson text-white p-5 sm:p-6 relative flex-shrink-0">
+        <button type="button" onclick="closeSurveyModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center text-lg font-bold transition" title="Đóng">
+          ✕
+        </button>
+        <span class="inline-block text-[11px] font-extrabold uppercase tracking-widest bg-white/20 text-amber-300 px-3 py-0.5 rounded-full mb-2">
+          📋 Khảo Sát Cá Nhân Hóa (1 Phút)
+        </span>
+        <h3 class="text-xl sm:text-2xl font-extrabold leading-tight">
+          Bảng Khảo Sát Nhu Cầu Khóa Học
+        </h3>
+        <p class="text-xs text-gray-200 mt-1">
+          Dành 60 giây để Thầy Henrik Simon &amp; Simon Center tư vấn lộ trình học phù hợp nhất cho anh/chị.
+        </p>
+      </div>
+
+      <!-- Modal Body Scrollable -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-5 flex-1">
+        
+        <!-- Form Khảo Sát -->
+        <form id="chiroSurveyForm" onsubmit="handleSurveySubmit(event)" class="space-y-5">
+          
+          <!-- Câu 1: Họ và tên -->
+          <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">
+              1. Họ và tên của anh/chị là gì? <span class="text-brand-crimson">*</span>
+            </label>
+            <p class="text-[11px] text-gray-500 mb-2 italic">(Vui lòng điền họ tên)</p>
+            <input type="text" id="surveyName" required placeholder="Ví dụ: Nguyễn Văn A" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-xs sm:text-sm bg-white font-medium">
+          </div>
+
+          <!-- Câu 2: Số điện thoại / Zalo -->
+          <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">
+              2. Số điện thoại / Zalo để ban tổ chức liên hệ gửi thông tin chi tiết: <span class="text-brand-crimson">*</span>
+            </label>
+            <p class="text-[11px] text-gray-500 mb-2 italic">(Vui lòng điền số điện thoại hoặc Zalo)</p>
+            <input type="tel" id="surveyPhone" required placeholder="Ví dụ: 0901234567" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-xs sm:text-sm bg-white font-medium">
+          </div>
+
+          <!-- Câu 3: Mục tiêu chính -->
+          <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-2">
+              3. Mục tiêu chính của anh/chị khi tìm hiểu về Chiropractic là gì? <span class="text-brand-crimson">*</span>
+            </label>
+            <div class="space-y-2">
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyGoal" value="Học để tự chăm sóc cơ thể và người thân" required class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học để tự chăm sóc cơ thể và người thân</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyGoal" value="Nâng cao tay nghề/bổ trợ công việc hiện tại (HLV, PT, Spa, Vật lý trị liệu...)" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Nâng cao tay nghề/bổ trợ công việc hiện tại (HLV, PT, Spa, Vật lý trị liệu...)</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyGoal" value="Học nghề bài bản để mở dịch vụ/phòng trị liệu riêng" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học nghề bài bản để mở dịch vụ/phòng trị liệu riêng</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyGoal" value="Khác" id="surveyGoalOtherRadio" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson" onchange="toggleSurveyGoalOther(this)">
+                <div class="flex-1">
+                  <span class="text-xs text-gray-800 font-medium">Khác: (Điền ngắn gọn)</span>
+                  <input type="text" id="surveyGoalOtherText" placeholder="Nhập mục tiêu khác của bạn..." class="w-full mt-1.5 px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:ring-1 focus:ring-brand-crimson hidden" oninput="document.getElementById('surveyGoalOtherRadio').checked = true">
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Câu 4: Kinh nghiệm / Nền tảng -->
+          <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-2">
+              4. Anh/chị đã từng có kinh nghiệm hoặc nền tảng về trị liệu/cơ xương khớp chưa? <span class="text-brand-crimson">*</span>
+            </label>
+            <div class="space-y-2">
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyExp" value="Chưa từng, là người mới hoàn toàn" required class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Chưa từng, là người mới hoàn toàn</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyExp" value="Đã có kiến thức cơ bản / đang làm ngành liên quan" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Đã có kiến thức cơ bản / đang làm ngành liên quan</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyExp" value="Đã thực hành Chiropractic nhưng muốn nâng cao chuyên môn" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Đã thực hành Chiropractic nhưng muốn nâng cao chuyên môn</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Câu 5: Hình thức mong muốn -->
+          <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-2">
+              5. Anh/chị mong muốn tham gia khoá học theo hình thức nào? <span class="text-brand-crimson">*</span>
+            </label>
+            <div class="space-y-2">
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyFormat" value="Học trực tiếp thực hành (Offline)" required class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học trực tiếp thực hành (Offline)</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyFormat" value="Học lý thuyết Online kết hợp thực hành sau" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học lý thuyết Online kết hợp thực hành sau</span>
+              </label>
+              <label class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white border border-gray-200 hover:border-brand-crimson cursor-pointer transition">
+                <input type="radio" name="surveyFormat" value="Cần tư vấn thêm về lịch khai giảng phù hợp" class="mt-0.5 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Cần tư vấn thêm về lịch khai giảng phù hợp</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nút Submit -->
+          <div class="pt-2">
+            <button type="submit" id="surveySubmitBtn" class="w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-xs sm:text-sm py-3.5 rounded-xl shadow-lg transition transform hover:scale-[1.01] uppercase tracking-wide flex items-center justify-center space-x-2">
+              <span>🚀 GỬI BẢNG KHẢO SÁT &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>
+            </button>
+            <p class="text-center text-[10px] text-gray-500 mt-2">
+              🔒 Tự động lưu bảo mật vào Google Sheet của Simon Center.
+            </p>
+          </div>
+        </form>
+
+        <!-- Trạng Thái Thành Công Sau Khi Gửi (Ẩn Mặc Định) -->
+        <div id="surveySuccessBox" class="hidden text-center py-6 px-3">
+          <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow">
+            ✓
+          </div>
+          <h3 class="text-lg sm:text-xl font-extrabold text-gray-900 mb-1.5">
+            Đã Gửi Bảng Khảo Sát Thành Công!
+          </h3>
+          <p class="text-xs text-gray-600 max-w-sm mx-auto mb-5 leading-relaxed">
+            Cảm ơn anh/chị <strong id="successSurveyName" class="text-brand-crimson"></strong>! Ban tổ chức Simon Center đã ghi nhận câu trả lời vào Google Sheet và sẽ liên hệ qua SĐT/Zalo <strong id="successSurveyPhone" class="text-brand-crimson"></strong> trong vòng 24h để tư vấn lộ trình học phù hợp nhất.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+            <a href="#pricing" onclick="closeSurveyModal()" class="w-full sm:w-auto bg-brand-crimson hover:bg-brand-crimsonHover text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow transition">
+              👉 Xem Bảng Học Phí Ưu Đãi
+            </a>
+            <button type="button" onclick="closeSurveyModal()" class="w-full sm:w-auto bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition">
+              Đóng Cửa Sổ
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
   <!-- DISCLAIMER PHÁP LÝ ( BẢO VỆ BỘ Y TẾ & BỘ GD&ĐT ) -->
   <section class="py-12 bg-gray-100 border-t border-gray-200 text-gray-600 text-xs leading-relaxed">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1850,6 +2013,119 @@
       };
       saveToSupabase(payload);
       sendToGoogleSheet(payload);
+    }
+
+    // ── XỬ LÝ FORM KHẢO SÁT NHANH 5 CÂU HỎI ──
+    function toggleSurveyGoalOther(radio) {
+      const otherInput = document.getElementById('surveyGoalOtherText');
+      if (radio.checked) {
+        otherInput.classList.remove('hidden');
+        otherInput.focus();
+      }
+    }
+
+    function handleSurveySubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('surveySubmitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Đang gửi dữ liệu vào Google Sheet...</span>';
+
+      const name = document.getElementById('surveyName').value.trim();
+      const phone = document.getElementById('surveyPhone').value.trim();
+
+      // Câu 3: Mục tiêu
+      const goalRadio = document.querySelector('input[name="surveyGoal"]:checked');
+      let goal = goalRadio ? goalRadio.value : '';
+      if (goal === 'Khác') {
+        const customGoal = document.getElementById('surveyGoalOtherText').value.trim();
+        goal = customGoal ? 'Khác: ' + customGoal : 'Khác';
+      }
+
+      // Câu 4: Kinh nghiệm
+      const expRadio = document.querySelector('input[name="surveyExp"]:checked');
+      const exp = expRadio ? expRadio.value : '';
+
+      // Câu 5: Hình thức
+      const formatRadio = document.querySelector('input[name="surveyFormat"]:checked');
+      const format = formatRadio ? formatRadio.value : '';
+
+      const detail = `[Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
+
+      const payload = {
+        action: 'register',
+        name: name,
+        phone: phone,
+        email: '',
+        price: 'Khảo sát nhu cầu',
+        course: 'Bảng Khảo Sát Chiropractic',
+        occupation: detail,
+        channel: 'Bảng Khảo Sát Nhu Cầu (5 Câu)',
+        status: 'Chờ tư vấn lộ trình'
+      };
+
+      // 1. Gửi đồng bộ lên Google Sheet Web App (Tự động vào Google Sheet)
+      sendToGoogleSheet(payload);
+
+      // 2. Gửi đồng bộ lên Supabase nếu có
+      if (typeof saveToSupabase === 'function') {
+        saveToSupabase(payload);
+      }
+
+      // 3. Gửi thông báo Email dự phòng qua FormSubmit
+      fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: '[CHIRO.VN] Học viên gửi Bảng Khảo Sát Nhu Cầu (5 Câu)',
+          Ho_Va_Ten: name,
+          So_Dien_Thoai_Zalo: phone,
+          Cau_3_Muc_Tieu: goal,
+          Cau_4_Kinh_Nghiem: exp,
+          Cau_5_Hinh_Thuc: format,
+          Kenh: 'Bảng Khảo Sát Website Chiro.vn'
+        })
+      }).catch(err => console.log('FormSubmit survey:', err));
+
+      // 4. Hiển thị thông báo thành công
+      setTimeout(() => {
+        document.getElementById('chiroSurveyForm').classList.add('hidden');
+        document.getElementById('successSurveyName').innerText = name;
+        document.getElementById('successSurveyPhone').innerText = phone;
+        document.getElementById('surveySuccessBox').classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀 GỬI BẢNG KHẢO SÁT &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>';
+      }, 500);
+    }
+
+    function openSurveyModal() {
+      const modal = document.getElementById('surveyModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeSurveyModal() {
+      const modal = document.getElementById('surveyModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleSurveyBackdropClick(e) {
+      if (e.target.id === 'surveyModal') {
+        closeSurveyModal();
+      }
+    }
+
+    function resetSurveyForm() {
+      document.getElementById('chiroSurveyForm').reset();
+      document.getElementById('surveyGoalOtherText').classList.add('hidden');
+      document.getElementById('surveySuccessBox').classList.add('hidden');
+      document.getElementById('chiroSurveyForm').classList.remove('hidden');
     }
 
     // ── XỬ LÝ KHI KHÁCH GỬI FORM ĐĂNG KÝ ──
@@ -2304,6 +2580,13 @@
     window.addEventListener('DOMContentLoaded', () => {
       trackWebsiteTraffic();
       initLiveViewersEngine();
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeSurveyModal();
+          closeModal();
+        }
+      });
     });
 
   </script>
