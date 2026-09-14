@@ -104,33 +104,15 @@ function doPost(e) {
       const channel = data.channel || 'Form Website';
       const status = data.status || 'Chờ thanh toán';
 
-      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu" (Số hóa đầy đủ)
+      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu" (Số hóa + Biểu đồ Diagram Real-time)
       if (data.channel === 'Bảng Khảo Sát Nhu Cầu' || data.action === 'survey' || data.goal || data.digital_code) {
-        let surveySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Khảo Sát Nhu Cầu");
-        if (!surveySheet) {
-          surveySheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet("Khảo Sát Nhu Cầu");
-          surveySheet.appendRow([
-            "Thời gian",
-            "Họ và tên",
-            "Số điện thoại / Zalo",
-            "Email",
-            "Mã Mục Tiêu",
-            "Mục tiêu chi tiết",
-            "Mã Kinh Nghiệm",
-            "Kinh nghiệm / Nền tảng",
-            "Mã Hình Thức",
-            "Hình thức mong muốn",
-            "Mã Số Hóa Tổng Hợp",
-            "Trạng thái tư vấn"
-          ]);
-          surveySheet.getRange("A1:L1").setFontWeight("bold").setBackground("#D9EAD3").setHorizontalAlignment("center");
-        }
+        const surveySheet = ensureSurveySheetWithCharts(SpreadsheetApp.getActiveSpreadsheet(), false);
 
-        const goalCode = data.goal_code || '';
+        const goalCode = Number(data.goal_code) || 1;
         const goal = data.goal || '';
-        const expCode = data.exp_code || '';
+        const expCode = Number(data.exp_code) || 1;
         const exp = data.experience || data.exp || '';
-        const formatCode = data.format_code || '';
+        const formatCode = Number(data.format_code) || 1;
         const format = data.format || '';
         const digitalCode = data.digital_code || `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
 
@@ -253,7 +235,56 @@ function doPost(e) {
  */
 function doGet(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getActiveSheet();
+
+    // HỖ TRỢ TRANG ADMIN ĐỌC TAB "Khảo Sát Nhu Cầu" (?tab=survey)
+    if (e && e.parameter && (e.parameter.tab === 'survey' || e.parameter.sheet === 'survey' || e.parameter.type === 'survey')) {
+      const surveySheet = ss.getSheetByName("Khảo Sát Nhu Cầu");
+      if (!surveySheet) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "success",
+          sheetName: "Khảo Sát Nhu Cầu",
+          total: 0,
+          data: []
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+      const sRows = surveySheet.getDataRange().getValues();
+      const surveyLeads = [];
+      for (let i = 1; i < sRows.length; i++) {
+        const r = sRows[i];
+        if (!r[0] && !r[1] && !r[2]) continue;
+        let timeFormatted = '';
+        if (r[0]) {
+          try {
+            timeFormatted = (r[0] instanceof Date) ? Utilities.formatDate(r[0], "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss") : String(r[0]);
+          } catch(err) {
+            timeFormatted = String(r[0]);
+          }
+        }
+        surveyLeads.push({
+          rowIndex: i + 1,
+          time: timeFormatted,
+          name: String(r[1] || '').trim(),
+          phone: String(r[2] || '').replace(/^'/, '').trim(),
+          email: String(r[3] || '').trim(),
+          goalCode: r[4],
+          goal: String(r[5] || '').trim(),
+          expCode: r[6],
+          exp: String(r[7] || '').trim(),
+          formatCode: r[8],
+          format: String(r[9] || '').trim(),
+          digitalCode: String(r[10] || '').trim(),
+          status: String(r[11] || 'Chờ tư vấn lộ trình').trim()
+        });
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        sheetName: "Khảo Sát Nhu Cầu",
+        total: surveyLeads.length,
+        data: surveyLeads
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
 
     // LỆNH RESET DỮ LIỆU BẢNG TÍNH QUA GET (tiện lợi, tương thích trình duyệt tốt nhất)
     if (e && e.parameter && e.parameter.action === 'reset_sheet') {
@@ -430,3 +461,186 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
     name: "Simon Center Chiropractic"
   });
 }
+
+/**
+ * ============================================================================
+ * KHỞI TẠO TỰ ĐỘNG TAB "Khảo Sát Nhu Cầu", BẢNG COUNTIF VÀ 3 DIAGRAM CHARTS
+ * ============================================================================
+ * 
+ * 💡 CÁCH CHẠY THỦ CÔNG (1 CLICK TẠO NGAY KHÔNG CẦN CHỜ KHÁCH ĐIỀN FORM):
+ * 1. Mở Apps Script của Google Sheet "Khách Hàng Đăng Ký Khóa Học - Simon Center"
+ * 2. Trên thanh menu trên cùng, tại ô chọn tên hàm (Function drop-down), chọn: "setupSurveyDashboard"
+ * 3. Bấm nút "Chạy" (Run) ▶️. 
+ *    -> Ngay lập tức trong Google Sheet sẽ xuất hiện Tab "Khảo Sát Nhu Cầu"
+ *    -> Tự động kẻ bảng dữ liệu chuẩn màu sắc thương hiệu Simon Center
+ *    -> Tự động lập bảng công thức COUNTIF cho Mục tiêu, Kinh nghiệm, Hình thức
+ *    -> Tự động VẼ NGAY 3 BIỂU ĐỒ DIAGRAM (2 Tròn 3D + 1 Cột) tự động cập nhật Real-time!
+ */
+function setupSurveyDashboard() {
+  Logger.log("▶️ Bắt đầu hàm setupSurveyDashboard...");
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {
+    Logger.log("❌ LỖI: Không tìm thấy file Spreadsheet đang hoạt động! Hãy đảm bảo mở Apps Script từ menu Tiện ích mở rộng của Google Sheet.");
+    throw new Error("Không tìm thấy Spreadsheet! Hãy mở Apps Script từ menu 'Tiện ích mở rộng' > 'Apps Script' trong chính file Google Sheet của bạn.");
+  }
+  Logger.log("📄 Đang xử lý trên file Google Sheet: " + ss.getName());
+  const sheet = ensureSurveySheetWithCharts(ss, true);
+  SpreadsheetApp.setActiveSheet(sheet);
+  SpreadsheetApp.flush(); // Ép Google Sheet cập nhật ngay lập tức
+  Logger.log("✅ HOÀN TẤT: Đã tạo và định dạng Tab 'Khảo Sát Nhu Cầu' kèm 3 Biểu đồ Diagrams!");
+  return "OK";
+}
+
+/**
+ * Hàm kiểm tra & đảm bảo Tab "Khảo Sát Nhu Cầu", các bảng công thức và Biểu đồ luôn sẵn sàng
+ */
+function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
+  let surveySheet = ss.getSheetByName("Khảo Sát Nhu Cầu");
+  if (!surveySheet) {
+    surveySheet = ss.insertSheet("Khảo Sát Nhu Cầu");
+    Logger.log("➕ Đã tạo Tab mới: 'Khảo Sát Nhu Cầu'");
+  } else {
+    Logger.log("ℹ️ Tab 'Khảo Sát Nhu Cầu' đã tồn tại sẵn.");
+  }
+
+  // 1. Tiêu đề Dòng 1 cho Cột A đến L (Dữ liệu học viên khảo sát)
+  const header = [
+    "Thời gian",
+    "Họ và tên",
+    "Số điện thoại / Zalo",
+    "Email",
+    "Mã Mục Tiêu",
+    "Mục tiêu chi tiết",
+    "Mã Kinh Nghiệm",
+    "Kinh nghiệm / Nền tảng",
+    "Mã Hình Thức",
+    "Hình thức mong muốn",
+    "Mã Số Hóa Tổng Hợp",
+    "Trạng thái tư vấn"
+  ];
+  
+  if (surveySheet.getRange("A1").getValue() === "") {
+    surveySheet.getRange(1, 1, 1, header.length).setValues([header]);
+    surveySheet.getRange("A1:L1")
+      .setFontWeight("bold")
+      .setBackground("#4A121E")
+      .setFontColor("#FFFFFF")
+      .setHorizontalAlignment("center")
+      .setVerticalAlignment("middle");
+    surveySheet.setRowHeight(1, 36);
+
+    // Căn chỉnh độ rộng các cột dữ liệu
+    surveySheet.setColumnWidth(1, 150); // A: Thời gian
+    surveySheet.setColumnWidth(2, 170); // B: Họ tên
+    surveySheet.setColumnWidth(3, 140); // C: SĐT
+    surveySheet.setColumnWidth(4, 180); // D: Email
+    surveySheet.setColumnWidth(5, 100); // E: Mã MT
+    surveySheet.setColumnWidth(6, 220); // F: Mục tiêu
+    surveySheet.setColumnWidth(7, 110); // G: Mã KN
+    surveySheet.setColumnWidth(8, 220); // H: Kinh nghiệm
+    surveySheet.setColumnWidth(9, 100); // I: Mã HT
+    surveySheet.setColumnWidth(10, 180); // J: Hình thức
+    surveySheet.setColumnWidth(11, 160); // K: Mã số hóa
+    surveySheet.setColumnWidth(12, 140); // L: Trạng thái
+    surveySheet.setColumnWidth(13, 30);  // M: Cột đệm cách biệt
+  }
+
+  // 2. Thiết lập Bảng Thống Kê & Công thức COUNTIF (Cột N đến U)
+  // Bảng 1: Mục tiêu học viên (N1:O5)
+  surveySheet.getRange("N1:O1").setValues([["Mục Tiêu Học Viên", "Số Lượng"]]);
+  surveySheet.getRange("N2:O5").setValues([
+    ["1. Tự chăm sóc bản thân & gia đình", '=COUNTIF(E:E, 1)'],
+    ["2. Nâng cao tay nghề / Bổ trợ nghề", '=COUNTIF(E:E, 2)'],
+    ["3. Học bài bản mở phòng trị / Spa", '=COUNTIF(E:E, 3)'],
+    ["4. Mục tiêu khác / Nghiên cứu", '=COUNTIF(E:E, 4)']
+  ]);
+  surveySheet.getRange("N1:O1").setFontWeight("bold").setBackground("#E0E7FF").setFontColor("#1E3A8A").setHorizontalAlignment("center");
+  surveySheet.getRange("N2:N5").setBackground("#F8FAFC");
+  surveySheet.getRange("O2:O5").setHorizontalAlignment("center").setFontWeight("bold");
+
+  // Bảng 2: Kinh nghiệm nền tảng (Q1:R4)
+  surveySheet.getRange("Q1:R1").setValues([["Kinh Nghiệm Nền Tảng", "Số Lượng"]]);
+  surveySheet.getRange("Q2:R4").setValues([
+    ["1. Chưa từng học (Mới bắt đầu)", '=COUNTIF(G:G, 1)'],
+    ["2. Đã biết cơ bản / Ngành liên quan", '=COUNTIF(G:G, 2)'],
+    ["3. Đã thực hành Chiropractic", '=COUNTIF(G:G, 3)']
+  ]);
+  surveySheet.getRange("Q1:R1").setFontWeight("bold").setBackground("#D1FAE5").setFontColor("#065F46").setHorizontalAlignment("center");
+  surveySheet.getRange("Q2:Q4").setBackground("#F8FAFC");
+  surveySheet.getRange("R2:R4").setHorizontalAlignment("center").setFontWeight("bold");
+
+  // Bảng 3: Hình thức mong muốn (T1:U4)
+  surveySheet.getRange("T1:U1").setValues([["Hình Thức Mong Muốn", "Số Lượng"]]);
+  surveySheet.getRange("T2:U4").setValues([
+    ["1. Học trực tiếp (Offline)", '=COUNTIF(I:I, 1)'],
+    ["2. Học Online từ xa", '=COUNTIF(I:I, 2)'],
+    ["3. Cần tư vấn thêm", '=COUNTIF(I:I, 3)']
+  ]);
+  surveySheet.getRange("T1:U1").setFontWeight("bold").setBackground("#FEF3C7").setFontColor("#92400E").setHorizontalAlignment("center");
+  surveySheet.getRange("T2:T4").setBackground("#F8FAFC");
+  surveySheet.getRange("U2:U4").setHorizontalAlignment("center").setFontWeight("bold");
+
+  // 3. Tự động vẽ 3 Biểu Đồ Diagrams Real-time (Native Google Sheets Embedded Charts)
+  const existingCharts = surveySheet.getCharts();
+  if (existingCharts.length === 0 || forceRefreshCharts) {
+    for (let i = 0; i < existingCharts.length; i++) {
+      try { surveySheet.removeChart(existingCharts[i]); } catch(e) {}
+    }
+
+    try {
+      // Biểu đồ 1: Biểu đồ tròn Mục Tiêu Học Viên (Pie Chart 3D)
+      const chartGoal = surveySheet.newChart()
+        .setChartType(SpreadsheetApp.ChartType.PIE)
+        .addRange(surveySheet.getRange("N1:O5"))
+        .setPosition(7, 14, 5, 5) // Đặt tại Dòng 7, Cột N
+        .setOption('title', '📊 TỶ LỆ MỤC TIÊU CỦA HỌC VIÊN')
+        .setOption('is3D', true)
+        .setOption('width', 380)
+        .setOption('height', 270)
+        .build();
+      surveySheet.insertChart(chartGoal);
+      Logger.log("📊 Đã tạo Biểu đồ 1: Mục tiêu");
+    } catch(chartErr1) {
+      Logger.log("⚠️ Lỗi tạo Biểu đồ 1: " + chartErr1);
+    }
+
+    try {
+      // Biểu đồ 2: Biểu đồ cột Kinh Nghiệm Nền Tảng (Column Chart)
+      const chartExp = surveySheet.newChart()
+        .setChartType(SpreadsheetApp.ChartType.COLUMN)
+        .addRange(surveySheet.getRange("Q1:R4"))
+        .setPosition(7, 17, 5, 5) // Đặt tại Dòng 7, Cột Q
+        .setOption('title', '📈 PHÂN BỔ KINH NGHIỆM NỀN TẢNG')
+        .setOption('colors', ['#059669'])
+        .setOption('legend', { position: 'none' })
+        .setOption('width', 380)
+        .setOption('height', 270)
+        .build();
+      surveySheet.insertChart(chartExp);
+      Logger.log("📈 Đã tạo Biểu đồ 2: Kinh nghiệm");
+    } catch(chartErr2) {
+      Logger.log("⚠️ Lỗi tạo Biểu đồ 2: " + chartErr2);
+    }
+
+    try {
+      // Biểu đồ 3: Biểu đồ tròn Hình Thức Học (Pie Chart 3D)
+      const chartFormat = surveySheet.newChart()
+        .setChartType(SpreadsheetApp.ChartType.PIE)
+        .addRange(surveySheet.getRange("T1:U4"))
+        .setPosition(7, 20, 5, 5) // Đặt tại Dòng 7, Cột T
+        .setOption('title', '🎯 HÌNH THỨC HỌC MONG MUỐN')
+        .setOption('is3D', true)
+        .setOption('width', 380)
+        .setOption('height', 270)
+        .build();
+      surveySheet.insertChart(chartFormat);
+      Logger.log("🎯 Đã tạo Biểu đồ 3: Hình thức");
+    } catch(chartErr3) {
+      Logger.log("⚠️ Lỗi tạo Biểu đồ 3: " + chartErr3);
+    }
+  }
+
+  SpreadsheetApp.flush();
+  return surveySheet;
+}
+
