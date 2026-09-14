@@ -1725,12 +1725,17 @@
     // =========================================================================
 
     // ── CẤU HÌNH ĐỒNG BỘ 2 LỚP: GOOGLE SHEETS & SUPABASE DATABASE ──
-    const DEFAULT_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg/exec'; 
+    const DEFAULT_GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec'; 
     const DEFAULT_SUPABASE_URL = 'https://fjzkneljhfibwksnpjkk.supabase.co';
     const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR';
 
     function getGoogleSheetUrl() {
-      return localStorage.getItem('simon_google_sheet_url') || DEFAULT_GOOGLE_SHEET_URL;
+      const stored = localStorage.getItem('simon_google_sheet_url');
+      if (!stored || stored.includes('AKfycbxyHvEyePcps6XacEQvmnbbqVOfzlUtg9GzUDEdLjI_nCXfd2W5003gG7-JcG1WnPqVPg')) {
+        localStorage.setItem('simon_google_sheet_url', DEFAULT_GOOGLE_SHEET_URL);
+        return DEFAULT_GOOGLE_SHEET_URL;
+      }
+      return stored || DEFAULT_GOOGLE_SHEET_URL;
     }
 
     function getSupabaseClient() {
