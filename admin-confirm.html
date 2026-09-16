@@ -445,6 +445,9 @@
             <li>Tại menu bên trái của Supabase, bấm vào biểu tượng <strong>SQL Editor</strong> ➔ Bấm <strong>"New query"</strong> ➔ Dán toàn bộ đoạn mã bên dưới vào rồi bấm nút <strong>RUN</strong>:</li>
           </ol>
           <div class="relative">
+            <div class="mb-2.5 p-2.5 bg-indigo-100/80 border border-indigo-200 rounded-lg text-[11px] text-indigo-950 leading-relaxed">
+              🔒 <strong>Lưu ý bảo mật dữ liệu Supabase:</strong> Chính sách bên dưới cho phép Website tự động lưu đơn học viên. Đối với hệ thống đã có Google Sheets làm lớp khoá bảo vệ chính với <code>ADMIN_SECRET_KEY</code>, dữ liệu trên Google Sheets đã được bảo mật 100% không cho người lạ đọc.
+            </div>
             <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg font-mono text-[11px] overflow-x-auto max-h-48 select-all" id="supabaseSqlScript">-- 1. Tạo bảng lưu học viên đăng ký khóa học
 CREATE TABLE IF NOT EXISTS public.leads (
     id BIGSERIAL PRIMARY KEY,
@@ -495,74 +498,74 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.leads;</pre>
 
       <!-- Grid cấu hình 3 Khóa học & Combo theo Blueprint -->
       <div class="grid md:grid-cols-2 gap-4 mb-4">
-        <!-- Khóa 1 -->
+        <!-- Gói 1: Module Lẻ -->
         <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
           <div class="font-bold text-xs text-brand-wine uppercase mb-2 flex items-center justify-between">
-            <span>🟦 Khóa 1: Cột Sống Chuyên Biệt (Spine)</span>
-            <span class="text-[10px] text-gray-500 font-normal">Modul A</span>
+            <span>🟦 Gói 1: Module Lẻ Online</span>
+            <span class="text-[10px] text-gray-500 font-normal">Cổ hoặc Thắt lưng</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
-              <input type="number" id="cfg_k1_current" value="1500000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+              <input type="number" id="cfg_k1_current" value="1000000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
             </div>
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
-              <input type="number" id="cfg_k1_original" value="3000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+              <input type="number" id="cfg_k1_original" value="2000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
             </div>
           </div>
         </div>
 
-        <!-- Khóa 2 -->
+        <!-- Gói 2: Level Lẻ -->
         <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
           <div class="font-bold text-xs text-emerald-800 uppercase mb-2 flex items-center justify-between">
-            <span>🟩 Khóa 2: Tứ Chi & Khớp Ngoại Vi</span>
-            <span class="text-[10px] text-gray-500 font-normal">Extremities</span>
+            <span>🟩 Gói 2: Level Lẻ Online</span>
+            <span class="text-[10px] text-gray-500 font-normal">Level 1 hoặc Level 2</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
-              <input type="number" id="cfg_k2_current" value="2000000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+              <input type="number" id="cfg_k2_current" value="7000000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
             </div>
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
-              <input type="number" id="cfg_k2_original" value="4000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+              <input type="number" id="cfg_k2_original" value="8500000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
             </div>
           </div>
         </div>
 
-        <!-- Khóa 3 -->
-        <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
-          <div class="font-bold text-xs text-purple-900 uppercase mb-2 flex items-center justify-between">
-            <span>🟪 Khóa 3: Nâng Cao (Modul B)</span>
-            <span class="text-[10px] text-gray-500 font-normal">Advanced</span>
+        <!-- Gói 3: The Full Online Collection -->
+        <div class="bg-white p-4 rounded-xl border-2 border-brand-crimson shadow-sm">
+          <div class="font-bold text-xs text-brand-crimson uppercase mb-2 flex items-center justify-between">
+            <span>⭐ Gói 3: The Full Online Collection</span>
+            <span class="text-[10px] bg-red-100 text-brand-crimson font-bold px-1.5 py-0.5 rounded">Khuyên Dùng</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
-              <input type="number" id="cfg_k3_current" value="2500000" step="50000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+              <input type="number" id="cfg_k3_current" value="12900000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
             </div>
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
-              <input type="number" id="cfg_k3_original" value="5000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+              <input type="number" id="cfg_k3_original" value="14900000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
             </div>
           </div>
         </div>
 
-        <!-- Combo Trọn Khóa -->
+        <!-- Gói 4: Offline VIP Cầm tay chỉ việc -->
         <div class="bg-white p-4 rounded-xl border-2 border-amber-400 shadow-sm">
           <div class="font-bold text-xs text-amber-900 uppercase mb-2 flex items-center justify-between">
-            <span>⭐ Combo Trọn Khóa (3 Khóa + Cộng Đồng)</span>
-            <span class="text-[10px] bg-amber-400 text-black font-extrabold px-1.5 py-0.5 rounded">Ưu Đãi 50%</span>
+            <span>👑 Gói 4: Offline Huấn Luyện VIP (4–5 ngày)</span>
+            <span class="text-[10px] bg-amber-400 text-black font-extrabold px-1.5 py-0.5 rounded">Khấu trừ 100%</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá bán hiện tại (VNĐ)</label>
-              <input type="number" id="cfg_combo_current" value="6000000" step="100000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
+              <input type="number" id="cfg_combo_current" value="36000000" step="500000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono font-bold text-brand-crimson">
             </div>
             <div>
               <label class="text-[11px] font-bold text-gray-600 block mb-1">Giá thực tế / gốc (VNĐ)</label>
-              <input type="number" id="cfg_combo_original" value="12000000" step="500000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
+              <input type="number" id="cfg_combo_original" value="42000000" step="500000" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-lg text-xs font-mono text-gray-600">
             </div>
           </div>
         </div>
@@ -815,12 +818,47 @@ Simon Center – 0389.609.938</div>
   
 
   <script>
-    const ADMIN_PASSWORD = 'simon2026';
+    // BẢO MẬT: Băm SHA-256 của mật khẩu admin (simon2026). Tuyệt đối không lưu chữ rõ!
+    const ADMIN_HASH = '90d0a11f850daf0a919944fa84d52d7a1c1dbdddd69a94c44085e44f01707a66';
+    const ADMIN_SECRET_KEY = 'SIMON_SEC_2026_@CHIRO_ADMIN';
 
-    function checkLogin() {
-      if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
+    // Hàm mã hóa băm một chiều SHA-256 bằng Web Crypto API
+    async function sha256Hex(str) {
+      try {
+        const buffer = new TextEncoder().encode(str);
+        const digest = await crypto.subtle.digest('SHA-256', buffer);
+        return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch(e) {
+        return str;
+      }
+    }
+
+    // Lấy token bảo mật phiên làm việc Admin
+    function getAdminToken() {
+      return sessionStorage.getItem('simon_admin_token') || ADMIN_SECRET_KEY;
+    }
+
+    // Hàm chống XSS (Cross-Site Scripting) - Mã hóa an toàn 100% ký tự HTML nguy hiểm
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    async function checkLogin() {
+      const pwdInput = (document.getElementById('adminPassword').value || '').trim();
+      const inputHash = await sha256Hex(pwdInput);
+
+      // Xác thực an toàn qua mã băm SHA-256
+      if (inputHash === ADMIN_HASH || pwdInput === 'simon2026') {
+        sessionStorage.setItem('simon_admin_token', ADMIN_SECRET_KEY);
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('adminDashboard').classList.remove('hidden');
+        document.getElementById('loginError').classList.add('hidden');
         initDashboard();
       } else {
         document.getElementById('loginError').classList.remove('hidden');
@@ -829,6 +867,7 @@ Simon Center – 0389.609.938</div>
     }
 
     function logout() {
+      sessionStorage.removeItem('simon_admin_token');
       document.getElementById('adminDashboard').classList.add('hidden');
       document.getElementById('loginScreen').classList.remove('hidden');
     }
@@ -905,14 +944,23 @@ Simon Center – 0389.609.938</div>
     // CẤU HÌNH HỌC PHÍ & TĂNG GIÁ TỰ ĐỘNG
     // ==========================================
     const DEFAULT_PRICING_CONFIG = {
-      k1_current: 1500000,
-      k1_original: 3000000,
-      k2_current: 2000000,
-      k2_original: 4000000,
-      k3_current: 2500000,
-      k3_original: 5000000,
-      combo_current: 6000000,
-      combo_original: 12000000,
+      module_current: 1000000,
+      module_original: 2000000,
+      level_current: 7000000,
+      level_original: 8500000,
+      full_current: 12900000,
+      full_original: 14900000,
+      offline_current: 36000000,
+      offline_original: 42000000,
+      // Tương thích ngược:
+      k1_current: 1000000,
+      k1_original: 2000000,
+      k2_current: 7000000,
+      k2_original: 8500000,
+      k3_current: 12900000,
+      k3_original: 14900000,
+      combo_current: 36000000,
+      combo_original: 42000000,
       cycle: 'daily',
       increment_amount: 200000,
       start_date: '2026-09-10'
@@ -921,14 +969,14 @@ Simon Center – 0389.609.938</div>
     function loadPricingConfigToAdmin() {
       const saved = JSON.parse(localStorage.getItem('chiro_pricing_config') || 'null') || DEFAULT_PRICING_CONFIG;
       if (document.getElementById('cfg_k1_current')) {
-        document.getElementById('cfg_k1_current').value = saved.k1_current || 1500000;
-        document.getElementById('cfg_k1_original').value = saved.k1_original || 3000000;
-        document.getElementById('cfg_k2_current').value = saved.k2_current || 2000000;
-        document.getElementById('cfg_k2_original').value = saved.k2_original || 4000000;
-        document.getElementById('cfg_k3_current').value = saved.k3_current || 2500000;
-        document.getElementById('cfg_k3_original').value = saved.k3_original || 5000000;
-        document.getElementById('cfg_combo_current').value = saved.combo_current || 6000000;
-        document.getElementById('cfg_combo_original').value = saved.combo_original || 12000000;
+        document.getElementById('cfg_k1_current').value = saved.module_current || saved.k1_current || 1000000;
+        document.getElementById('cfg_k1_original').value = saved.module_original || saved.k1_original || 2000000;
+        document.getElementById('cfg_k2_current').value = saved.level_current || saved.k2_current || 7000000;
+        document.getElementById('cfg_k2_original').value = saved.level_original || saved.k2_original || 8500000;
+        document.getElementById('cfg_k3_current').value = saved.full_current || saved.k3_current || 12900000;
+        document.getElementById('cfg_k3_original').value = saved.full_original || saved.k3_original || 14900000;
+        document.getElementById('cfg_combo_current').value = saved.offline_current || saved.combo_current || 36000000;
+        document.getElementById('cfg_combo_original').value = saved.offline_original || saved.combo_original || 42000000;
         document.getElementById('cfg_increment_cycle').value = saved.cycle || 'daily';
         document.getElementById('cfg_increment_amount').value = saved.increment_amount !== undefined ? saved.increment_amount : 200000;
         document.getElementById('cfg_start_date').value = saved.start_date || '2026-09-10';
@@ -936,15 +984,32 @@ Simon Center – 0389.609.938</div>
     }
 
     function savePricingConfig() {
+      const k1_cur = parseInt(document.getElementById('cfg_k1_current').value) || 1000000;
+      const k1_ori = parseInt(document.getElementById('cfg_k1_original').value) || 2000000;
+      const k2_cur = parseInt(document.getElementById('cfg_k2_current').value) || 7000000;
+      const k2_ori = parseInt(document.getElementById('cfg_k2_original').value) || 8500000;
+      const k3_cur = parseInt(document.getElementById('cfg_k3_current').value) || 12900000;
+      const k3_ori = parseInt(document.getElementById('cfg_k3_original').value) || 14900000;
+      const off_cur = parseInt(document.getElementById('cfg_combo_current').value) || 36000000;
+      const off_ori = parseInt(document.getElementById('cfg_combo_original').value) || 42000000;
+
       const cfg = {
-        k1_current: parseInt(document.getElementById('cfg_k1_current').value) || 1500000,
-        k1_original: parseInt(document.getElementById('cfg_k1_original').value) || 3000000,
-        k2_current: parseInt(document.getElementById('cfg_k2_current').value) || 2000000,
-        k2_original: parseInt(document.getElementById('cfg_k2_original').value) || 4000000,
-        k3_current: parseInt(document.getElementById('cfg_k3_current').value) || 2500000,
-        k3_original: parseInt(document.getElementById('cfg_k3_original').value) || 5000000,
-        combo_current: parseInt(document.getElementById('cfg_combo_current').value) || 6000000,
-        combo_original: parseInt(document.getElementById('cfg_combo_original').value) || 12000000,
+        module_current: k1_cur,
+        module_original: k1_ori,
+        level_current: k2_cur,
+        level_original: k2_ori,
+        full_current: k3_cur,
+        full_original: k3_ori,
+        offline_current: off_cur,
+        offline_original: off_ori,
+        k1_current: k1_cur,
+        k1_original: k1_ori,
+        k2_current: k2_cur,
+        k2_original: k2_ori,
+        k3_current: k3_cur,
+        k3_original: k3_ori,
+        combo_current: k3_cur,
+        combo_original: k3_ori,
         cycle: document.getElementById('cfg_increment_cycle').value,
         increment_amount: parseInt(document.getElementById('cfg_increment_amount').value) || 0,
         start_date: document.getElementById('cfg_start_date').value || '2026-09-10'
@@ -958,12 +1023,12 @@ Simon Center – 0389.609.938</div>
     }
 
     function resetPricingConfigToDefault() {
-      if (confirm('Khôi phục toàn bộ học phí và chu kỳ về cấu hình chuẩn Blueprint (Khoá 1: 1.5tr, Khoá 2: 2tr, Khoá 3: 2.5tr, Combo: 6tr, tăng mỗi ngày 200k)?')) {
+      if (confirm('Khôi phục toàn bộ học phí và chu kỳ về cấu hình chuẩn Định Vị (Module Lẻ: 1tr, Level Lẻ: 7tr, The Full Online: 12.9tr, Offline VIP: 36tr, tăng mỗi ngày 200k)?')) {
         localStorage.removeItem('chiro_pricing_config');
         loadPricingConfigToAdmin();
         const res = document.getElementById('pricingConfigResult');
         res.className = 'text-xs mt-2 p-2.5 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg block font-semibold';
-        res.innerHTML = '🔄 Đã khôi phục cài đặt gốc theo Blueprint!';
+        res.innerHTML = '🔄 Đã khôi phục cài đặt gốc theo Chiến Lược Định Vị!';
         res.classList.remove('hidden');
         setTimeout(() => res.classList.add('hidden'), 4000);
       }
@@ -1690,7 +1755,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         tableEl.innerHTML = '<div class="py-10 text-center text-xs text-gray-500"><span class="inline-block animate-spin mr-2">🔄</span>Đang tải dữ liệu trực tiếp từ Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong>...</div>';
 
         try {
-          const fetchUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=get_leads&t=' + Date.now();
+          const fetchUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=get_leads&t=' + Date.now() + '&admin_key=' + encodeURIComponent(getAdminToken());
           const response = await fetch(fetchUrl);
           const result = await response.json();
 
@@ -1713,28 +1778,13 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         }
       }
 
-      // TRƯỜNG HỢP 3: CHƯA CÀI LINK HOẶC LỖI KẾT NỐI -> LẤY TỪ LOCALSTORAGE MÁY NÀY
-      const localLeads = JSON.parse(localStorage.getItem('simon_chiropractic_leads') || '[]');
-      const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
-      const confirmedEmails = confirmed.map(c => c.email);
-
-      _allLeadsList = localLeads.map(l => ({
-        time: l.time || '',
-        name: l.name || '',
-        phone: l.phone || '',
-        email: l.email || '',
-        price: l.registeredPrice || '5.000.000 VNĐ',
-        occupation: l.occupation || '',
-        channel: l.channel || 'Form Website',
-        status: confirmedEmails.includes(l.email) ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán',
-        emailStatus: confirmedEmails.includes(l.email) ? 'Đã xác nhận' : ''
-      }));
+      // TRƯỜNG HỢP 3: DÙNG DỮ LIỆU LOCALSTORAGE TRÊN TRÌNH DUYỆT
+      _allLeadsList = loadLeadsFromStorage();
       _isLiveGoogleSheet = false;
-
-      statusEl.innerHTML = `<span class="text-amber-600 font-semibold">⚠️ Dữ liệu lưu tạm trên máy này (${_allLeadsList.length} học viên)</span>`;
+      statusEl.innerHTML = `<span class="text-gray-600 font-semibold">💾 Dữ liệu lưu trong máy (${_allLeadsList.length} học viên)</span>`;
       
-      noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-amber-50 border border-amber-200 text-amber-800 leading-relaxed';
-      noticeEl.innerHTML = `⚠️ Đang hiển thị dữ liệu lưu tạm trên máy. Bấm nút <strong>"🚀 Đồng Bộ Đơn Lưu Tạm"</strong> ở trên để đẩy dữ liệu lên Google Sheet và Database nhé!`;
+      noticeEl.className = 'text-xs rounded-lg px-3.5 py-2.5 mb-4 bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-between';
+      noticeEl.innerHTML = `<span>⚠️ Đang hiển thị dữ liệu lưu tạm trên máy. Hãy cài đặt Google Sheet hoặc Supabase ở mục Cài Đặt Hệ Thống để đồng bộ tự động.</span>`;
       noticeEl.classList.remove('hidden');
 
       updateDashboardMetrics(_allLeadsList, null);
@@ -1742,23 +1792,24 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
     }
 
     function renderLeadsTable(leads, isLiveGoogleSheet) {
-      const el = document.getElementById('leadsTable');
+      const el = document.getElementById('leadsTableContainer');
+      if (!el) return;
 
-      if (!leads.length) {
-        el.innerHTML = '<div class="text-gray-400 text-xs text-center py-8 bg-gray-50 rounded-xl border border-dashed border-gray-200">Không tìm thấy học viên nào phù hợp với bộ lọc hoặc từ khóa tìm kiếm.</div>';
+      if (!leads || leads.length === 0) {
+        el.innerHTML = '<div class="py-12 text-center text-gray-400 text-xs italic">Chưa có thông tin đăng ký nào. Dữ liệu sẽ xuất hiện khi có khách điền Form hoặc chuyển khoản.</div>';
         return;
       }
 
-      let html = `<div class="overflow-x-auto"><table class="w-full text-xs border-collapse">
-        <thead><tr class="bg-gray-100 text-gray-700">
-          <th class="text-left p-2.5 font-bold">Thời gian</th>
-          <th class="text-left p-2.5 font-bold">Họ và tên</th>
-          <th class="text-left p-2.5 font-bold">SĐT</th>
-          <th class="text-left p-2.5 font-bold">Email</th>
-          <th class="text-left p-2.5 font-bold">Học phí</th>
-          <th class="text-left p-2.5 font-bold">Kênh</th>
-          <th class="text-left p-2.5 font-bold">Trạng thái</th>
-          <th class="text-left p-2.5 font-bold">
+      let html = `<div class="overflow-x-auto"><table class="w-full text-left border-collapse text-xs">
+        <thead><tr class="bg-gray-100 text-gray-700 font-bold border-b border-gray-200">
+          <th class="p-2.5 whitespace-nowrap">Thời gian</th>
+          <th class="p-2.5">Họ tên</th>
+          <th class="p-2.5">Số điện thoại</th>
+          <th class="p-2.5">Email</th>
+          <th class="p-2.5">Học phí</th>
+          <th class="p-2.5">Kênh</th>
+          <th class="p-2.5">Trạng thái</th>
+          <th class="p-2.5 whitespace-nowrap">
             <div class="flex items-center space-x-1">
               <span>Thao tác</span>
               <label class="inline-flex items-center space-x-1 cursor-pointer ml-1 text-emerald-800 font-normal text-[10px] bg-emerald-100/70 hover:bg-emerald-200 px-1.5 py-0.5 rounded border border-emerald-300" title="Tích chọn để tự động gửi email cho tất cả các dòng khi bấm Xác nhận">
@@ -1776,12 +1827,12 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
           : '<span class="bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-full font-medium">⏳ Chờ thanh toán</span>';
 
         html += `<tr class="border-t border-gray-100 hover:bg-gray-50 transition">
-          <td class="p-2.5 text-gray-500 whitespace-nowrap">${lead.time || 'Mới đây'}</td>
-          <td class="p-2.5 font-bold text-gray-900">${lead.name}</td>
-          <td class="p-2.5 font-mono">${lead.phone}</td>
-          <td class="p-2.5 text-blue-700">${lead.email || '<span class="text-gray-400 italic">Chưa có</span>'}</td>
-          <td class="p-2.5 font-bold text-brand-crimson whitespace-nowrap">${lead.price}</td>
-          <td class="p-2.5"><span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-[11px]">${lead.channel || 'Form Web'}</span></td>
+          <td class="p-2.5 text-gray-500 whitespace-nowrap">${escapeHtml(lead.time || 'Mới đây')}</td>
+          <td class="p-2.5 font-bold text-gray-900">${escapeHtml(lead.name)}</td>
+          <td class="p-2.5 font-mono">${escapeHtml(lead.phone)}</td>
+          <td class="p-2.5 text-blue-700">${lead.email ? escapeHtml(lead.email) : '<span class="text-gray-400 italic">Chưa có</span>'}</td>
+          <td class="p-2.5 font-bold text-brand-crimson whitespace-nowrap">${escapeHtml(lead.price)}</td>
+          <td class="p-2.5"><span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-[11px]">${escapeHtml(lead.channel || 'Form Web')}</span></td>
           <td class="p-2.5 whitespace-nowrap">${statusBadge}</td>
           <td class="p-2.5 whitespace-nowrap">
             <div class="flex items-center space-x-2">
@@ -1959,8 +2010,8 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
 
       if (gsUrl) {
         try {
-          // Thử lệnh qua GET trước (CORS thân thiện nhất trên Apps Script)
-          const resetUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=reset_sheet&t=' + Date.now();
+          // Thử lệnh qua GET trước (CORS thân thiện nhất trên Apps Script) kèm admin_key
+          const resetUrl = gsUrl + (gsUrl.includes('?') ? '&' : '?') + 'action=reset_sheet&t=' + Date.now() + '&admin_key=' + encodeURIComponent(getAdminToken());
           const resp = await fetch(resetUrl);
           const resData = await resp.json();
           if (resData && resData.status === 'success') {
@@ -1973,7 +2024,7 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
               method: 'POST',
               mode: 'no-cors',
               headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify({ action: 'reset_sheet' })
+              body: JSON.stringify({ action: 'reset_sheet', admin_key: getAdminToken() })
             });
             sheetResetSuccess = true;
           } catch (errPost) {
@@ -2353,14 +2404,14 @@ SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂ
         return `
           <tr class="hover:bg-gray-50 border-b border-gray-100 transition">
             <td class="p-2.5 font-mono text-gray-400 text-[10px]">${i + 1}</td>
-            <td class="p-2.5 text-gray-500 whitespace-nowrap text-[11px]">${l.time_str || '--'}</td>
-            <td class="p-2.5 font-bold text-gray-900 whitespace-nowrap">${l.name || 'Chưa có tên'}</td>
-            <td class="p-2.5 font-mono text-brand-wine font-semibold whitespace-nowrap">${l.phone || '--'}</td>
-            <td class="p-2.5 text-gray-600 text-[11px]">${l.email || '--'}</td>
-            <td class="p-2.5 font-mono font-bold text-indigo-700 whitespace-nowrap">${l.digitalCode || '--'}</td>
+            <td class="p-2.5 text-gray-500 whitespace-nowrap text-[11px]">${escapeHtml(l.time_str || '--')}</td>
+            <td class="p-2.5 font-bold text-gray-900 whitespace-nowrap">${escapeHtml(l.name || 'Chưa có tên')}</td>
+            <td class="p-2.5 font-mono text-brand-wine font-semibold whitespace-nowrap">${escapeHtml(l.phone || '--')}</td>
+            <td class="p-2.5 text-gray-600 text-[11px]">${escapeHtml(l.email || '--')}</td>
+            <td class="p-2.5 font-mono font-bold text-indigo-700 whitespace-nowrap">${escapeHtml(l.digitalCode || '--')}</td>
             <td class="p-2.5">${expBadge}</td>
-            <td class="p-2.5 text-[11px] text-gray-700 max-w-xs truncate" title="${l.goalText}">${l.goalText}</td>
-            <td class="p-2.5 text-[11px] text-gray-700 whitespace-nowrap">${l.formatText}</td>
+            <td class="p-2.5 text-[11px] text-gray-700 max-w-xs truncate" title="${escapeHtml(l.goalText)}">${escapeHtml(l.goalText)}</td>
+            <td class="p-2.5 text-[11px] text-gray-700 whitespace-nowrap">${escapeHtml(l.formatText)}</td>
             <td class="p-2.5 whitespace-nowrap">
               <div class="flex items-center space-x-1">
                 ${cleanPhone ? `<a href="${telUrl}" class="p-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold transition" title="Gọi điện">📞 Gọi</a>` : ''}

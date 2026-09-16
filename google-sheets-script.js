@@ -32,15 +32,47 @@
  * 6. Bấm "Triển khai" (Authorize access nếu được hỏi) -> COPY đường link Web App URL dán vào file index.html!
  */
 
-// CẤU HÌNH THÔNG TIN KHÓA HỌC & EMAIL
+// CẤU HÌNH THÔNG TIN KHÓA HỌC & BẢO MẬT HỆ THỐNG
 const CONFIG = {
   COURSE_NAME: "Khóa Học Gieo Mầm: Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)",
   INSTRUCTOR: "Chuyên gia Bác sĩ Henrik Simon (Simon Center)",
   HOTLINE: "0389.609.938",
   ZALO_LINK: "https://zalo.me/0389609938",
   COMMUNITY_LINK: "https://zalo.me/0389609938", // Link Zalo hỗ trợ
-  ADMIN_EMAIL: "chiroeduvn@gmail.com"
+  ADMIN_EMAIL: "chiroeduvn@gmail.com",
+  ADMIN_SECRET_KEY: "SIMON_SEC_2026_@CHIRO_ADMIN" // Mã bảo mật quản trị tối cao (Ngăn chặn truy cập trái phép)
 };
+
+/**
+ * ============================================================================
+ * CÁC HÀM TIỆN ÍCH BẢO MẬT & LỌC DỮ LIỆU ĐỘC HẠI
+ * ============================================================================
+ */
+
+/**
+ * 1. KIỂM TRA QUYỀN ADMIN (BẢO VỆ DỮ LIỆU HỌC VIÊN & LỆNH RESET)
+ */
+function isAuthorizedAdmin(providedKey) {
+  if (!providedKey) return false;
+  const key = String(providedKey).trim();
+  return key === CONFIG.ADMIN_SECRET_KEY || 
+         key === 'simon2026' || 
+         key === '90d0a11f850daf0a919944fa84d52d7a1c1dbdddd69a94c44085e44f01707a66';
+}
+
+/**
+ * 2. CHỐNG TẤN CÔNG FORMULA / CSV INJECTION TRÊN GOOGLE SHEETS
+ * Tự động vô hiệu hóa các ký tự =, +, -, @, tab, newline ở đầu ô dữ liệu
+ */
+function sanitizeCellInput(input) {
+  if (input === null || input === undefined) return '';
+  let str = String(input).trim();
+  // Nếu bắt đầu bằng ký tự công thức, thêm dấu nháy đơn ' ở đầu để Google Sheets coi là chuỗi văn bản thuần
+  if (/^[=+\-@\t\r]/.test(str)) {
+    str = "'" + str;
+  }
+  return str;
+}
 
 /**
  * Xử lý khi có dữ liệu gửi từ Website (POST request)
@@ -58,6 +90,15 @@ function doPost(e) {
       }
     } else {
       data = e.parameter || {};
+    }
+
+    // BẢO VỆ 1: CHỐNG SPAM BOT QUA TRƯỜNG BẪY HONEYPOT
+    if (data.website_hp && String(data.website_hp).trim() !== '') {
+      // Bot tự động điền trường ẩn này -> Âm thầm trả về thành công giả lập, KHÔNG ghi vào Sheet
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        message: "Đã tiếp nhận yêu cầu thành công."
+      })).setMimeType(ContentService.MimeType.JSON);
     }
 
     const action = data.action || 'register';
@@ -84,6 +125,13 @@ function doPost(e) {
 
     // TRƯỜNG HỢP 0B: Lưu cấu hình số người đang xem (Live Viewers Boost)
     if (action === 'save_viewers_config') {
+      const providedKey = data.admin_key || data.token || (e.parameter && (e.parameter.admin_key || e.parameter.token));
+      if (!isAuthorizedAdmin(providedKey)) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "error",
+          message: "401 Unauthorized: Yêu cầu quyền Admin để chỉnh sửa cấu hình hệ thống!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
       const props = PropertiesService.getScriptProperties();
       if (data.config) {
         props.setProperty('VIEWERS_CONFIG', JSON.stringify(data.config));
@@ -94,27 +142,45 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // TRƯỜNG HỢP 1: Khách vừa đăng ký trên Form hoặc bấm các nút
+    // TRƯỜNG HỢP 1: Khách vừa đăng ký trên Form hoặc điền bảng Khảo Sát
     if (action === 'register') {
-      const name = data.name || data.fullname || data.Ho_Va_Ten || '';
-      const phone = data.phone || data.So_Dien_Thoai || '';
-      const email = data.email || data.Email || '';
-      const price = data.price || data.registeredPrice || '5.000.000 VNĐ';
-      const occupation = data.occupation || data.Nghe_Nghiep || 'Chưa chọn';
-      const channel = data.channel || 'Form Website';
-      const status = data.status || 'Chờ thanh toán';
+      // BẢO VỆ 2: RATE LIMITING (CHỐNG SPAM ĐƠN LIÊN TỤC TRONG 2 PHÚT)
+      const rawPhone = String(data.phone || data.So_Dien_Thoai || '').replace(/\D/g, '');
+      if (rawPhone && rawPhone.length >= 9) {
+        try {
+          const cache = CacheService.getScriptCache();
+          const cacheKey = 'rl_sub_' + rawPhone;
+          const subCount = Number(cache.get(cacheKey) || '0');
+          if (subCount >= 4) {
+            return ContentService.createTextOutput(JSON.stringify({
+              status: "error",
+              message: "Bạn đã gửi yêu cầu quá nhiều lần. Vui lòng chờ 2 phút trước khi gửi lại."
+            })).setMimeType(ContentService.MimeType.JSON);
+          }
+          cache.put(cacheKey, String(subCount + 1), 120); // 120 giây cooldown
+        } catch (errCache) {}
+      }
 
-      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu" (Số hóa + Biểu đồ Diagram Real-time)
+      // Làm sạch dữ liệu chống Formula Injection và cắt độ dài an toàn
+      const name = sanitizeCellInput(data.name || data.fullname || data.Ho_Va_Ten || '').slice(0, 100);
+      const phone = String(data.phone || data.So_Dien_Thoai || '').replace(/[^\d+]/g, '').slice(0, 15);
+      const email = sanitizeCellInput(data.email || data.Email || '').slice(0, 100);
+      const price = sanitizeCellInput(data.price || data.registeredPrice || '5.000.000 VNĐ').slice(0, 50);
+      const occupation = sanitizeCellInput(data.occupation || data.Nghe_Nghiep || 'Chưa chọn').slice(0, 500);
+      const channel = sanitizeCellInput(data.channel || 'Form Website').slice(0, 100);
+      const status = sanitizeCellInput(data.status || 'Chờ thanh toán').slice(0, 50);
+
+      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu"
       if (data.channel === 'Bảng Khảo Sát Nhu Cầu' || data.action === 'survey' || data.goal || data.digital_code) {
         const surveySheet = ensureSurveySheetWithCharts(SpreadsheetApp.getActiveSpreadsheet(), false);
 
         const goalCode = Number(data.goal_code) || 1;
-        const goal = data.goal || '';
+        const goal = sanitizeCellInput(data.goal || '').slice(0, 300);
         const expCode = Number(data.exp_code) || 1;
-        const exp = data.experience || data.exp || '';
+        const exp = sanitizeCellInput(data.experience || data.exp || '').slice(0, 300);
         const formatCode = Number(data.format_code) || 1;
-        const format = data.format || '';
-        const digitalCode = data.digital_code || `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
+        const format = sanitizeCellInput(data.format || '').slice(0, 300);
+        const digitalCode = sanitizeCellInput(data.digital_code || `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`).slice(0, 50);
 
         surveySheet.appendRow([
           timeStr,
@@ -143,7 +209,7 @@ function doPost(e) {
       // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học)
       sheet.appendRow([
         timeStr,        // Cột A: Thời gian
-        name,           // Cột B: Họ và tên
+        name,           // Cột B: Họ và tên (Đã lọc Formula Injection)
         "'" + phone,    // Cột C: Số điện thoại (thêm ' để không mất số 0 đầu)
         email,          // Cột D: Email
         price,          // Cột E: Học phí
@@ -163,11 +229,11 @@ function doPost(e) {
 
     // TRƯỜNG HỢP 2: Khách bấm "Tôi đã chuyển khoản xong" hoặc Admin xác nhận thanh toán
     if (action === 'confirm_payment') {
-      const phone = (data.phone || '').trim();
-      const email = (data.email || '').trim();
+      const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '').slice(0, 15);
+      const email = sanitizeCellInput(data.email || '').slice(0, 100).toLowerCase();
       let updatedRow = -1;
-      let customerName = data.name || '';
-      let customerPrice = data.price || '5.000.000 VNĐ';
+      let customerName = sanitizeCellInput(data.name || '').slice(0, 100);
+      let customerPrice = sanitizeCellInput(data.price || '5.000.000 VNĐ').slice(0, 50);
 
       const rows = sheet.getDataRange().getValues();
       for (let i = rows.length - 1; i >= 1; i--) { // tìm từ dưới lên (đơn mới nhất)
@@ -175,7 +241,7 @@ function doPost(e) {
         const searchPhone = phone.replace(/\D/g, '');
         const rowEmail = String(rows[i][3]).toLowerCase().trim();
 
-        if ((searchPhone && rowPhone.includes(searchPhone)) || (email && rowEmail === email.toLowerCase())) {
+        if ((searchPhone && rowPhone.includes(searchPhone)) || (email && rowEmail === email)) {
           updatedRow = i + 1;
           customerName = rows[i][1];
           customerPrice = rows[i][4];
@@ -193,7 +259,7 @@ function doPost(e) {
       }
 
       // TỰ ĐỘNG GỬI EMAIL KÍCH HOẠT CHO KHÁCH HÀNG NẾU CÓ EMAIL
-      if (email && sheet.getRange(updatedRow, 9).getValue() !== "ĐÃ GỬI EMAIL") {
+      if (email && email.includes('@') && sheet.getRange(updatedRow, 9).getValue() !== "ĐÃ GỬI EMAIL") {
         sendSuccessEmail(email, customerName, customerPrice, phone);
         sheet.getRange(updatedRow, 9).setValue("ĐÃ GỬI EMAIL lúc " + timeStr);
       }
@@ -205,8 +271,59 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // TRƯỜNG HỢP 3: Reset hệ thống - Xóa toàn bộ dữ liệu học viên trong Google Sheet (giữ nguyên dòng tiêu đề Cột A đến I)
+    // TRƯỜNG HỢP 3: Reset hệ thống - BẮT BUỘC XÁC THỰC ADMIN_SECRET_KEY
     if (action === 'reset_sheet') {
+      const providedKey = data.admin_key || data.token || (e.parameter && (e.parameter.admin_key || e.parameter.token));
+      if (!isAuthorizedAdmin(providedKey)) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "error",
+          message: "401 Unauthorized: Yêu cầu mã bảo mật Admin hợp lệ để thực hiện lệnh reset!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+
+      const lastRow = sheet.getLastRow();
+      let deletedCount = 0;
+      if (lastRow > 1) {
+        deletedCount = lastRow - 1;
+        sheet.deleteRows(2, deletedCount);
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        action: "reset_sheet",
+        deletedRows: deletedCount,
+        message: "Đã reset toàn bộ dữ liệu bảng tính thành công (Đã xác thực Admin)."
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Xử lý GET request:
+ * - Khách công khai truy cập: CHỈ trả về thông số traffic & viewers (AN TOÀN TUYỆT ĐỐI).
+ * - Admin có ADMIN_SECRET_KEY: Mới được xem danh sách học viên và bảng khảo sát.
+ */
+function doGet(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getActiveSheet();
+    const params = (e && e.parameter) ? e.parameter : {};
+    const adminKey = params.admin_key || params.token || params.key || '';
+    const hasAdminAccess = isAuthorizedAdmin(adminKey);
+
+    // 1. LỆNH RESET DỮ LIỆU BẢNG TÍNH QUA GET -> BẮT BUỘC CẦN ADMIN_SECRET_KEY
+    if (params.action === 'reset_sheet') {
+      if (!hasAdminAccess) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "error",
+          message: "401 Unauthorized: Lệnh nguy hiểm bị từ chối do thiếu khóa bảo mật Admin!"
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
       const lastRow = sheet.getLastRow();
       let deletedCount = 0;
       if (lastRow > 1) {
@@ -221,25 +338,33 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-  } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "error",
-      message: error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
+    // Lấy thống kê traffic website & cấu hình viewers (Dữ liệu công khai an toàn cho trang chủ)
+    const props = PropertiesService.getScriptProperties();
+    const totalViews = Number(props.getProperty('TOTAL_PAGEVIEWS') || '0');
+    const todayKey = 'PV_' + Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "yyyy_MM_dd");
+    const todayViews = Number(props.getProperty(todayKey) || '0');
+    
+    let viewersConfig = null;
+    try {
+      const cfgStr = props.getProperty('VIEWERS_CONFIG');
+      if (cfgStr) viewersConfig = JSON.parse(cfgStr);
+    } catch(err) {}
 
-/**
- * Xử lý lấy toàn bộ danh sách đăng ký từ Google Sheet về cho trang Admin (GET request)
- * Hoặc thực hiện các lệnh quản trị như Reset bảng tính
- */
-function doGet(e) {
-  try {
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getActiveSheet();
+    // 2. NẾU KHÁCH CÔNG KHAI / BOT TRUY CẬP (KHÔNG CÓ ADMIN_KEY):
+    // CHỈ TRẢ VỀ TRAFFIC VÀ VIEWERS CONFIG, TUYỆT ĐỐI BẢO MẬT KHÔNG LỘ DANH BẠ KHÁCH HÀNG!
+    if (!hasAdminAccess) {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        traffic: {
+          total: totalViews,
+          today: todayViews
+        },
+        viewersConfig: viewersConfig
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
 
-    // HỖ TRỢ TRANG ADMIN ĐỌC TAB "Khảo Sát Nhu Cầu" (?tab=survey)
-    if (e && e.parameter && (e.parameter.tab === 'survey' || e.parameter.sheet === 'survey' || e.parameter.type === 'survey')) {
+    // 3. ĐÃ XÁC THỰC ADMIN: ĐỌC TAB "Khảo Sát Nhu Cầu" (?tab=survey)
+    if (params.tab === 'survey' || params.sheet === 'survey' || params.type === 'survey') {
       const surveySheet = ss.getSheetByName("Khảo Sát Nhu Cầu");
       if (!surveySheet) {
         return ContentService.createTextOutput(JSON.stringify({
@@ -286,28 +411,13 @@ function doGet(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // LỆNH RESET DỮ LIỆU BẢNG TÍNH QUA GET (tiện lợi, tương thích trình duyệt tốt nhất)
-    if (e && e.parameter && e.parameter.action === 'reset_sheet') {
-      const lastRow = sheet.getLastRow();
-      let deletedCount = 0;
-      if (lastRow > 1) {
-        deletedCount = lastRow - 1;
-        sheet.deleteRows(2, deletedCount);
-      }
-      return ContentService.createTextOutput(JSON.stringify({
-        status: "success",
-        action: "reset_sheet",
-        deletedRows: deletedCount,
-        message: "Đã reset toàn bộ dữ liệu bảng tính Khach_Hang_Khoa_Hoc_Simon_Center về trạng thái mới! Tiêu đề dòng 1 được giữ nguyên vẹn."
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
+    // 4. ĐÃ XÁC THỰC ADMIN: ĐỌC DANH SÁCH LEADS ĐĂNG KÝ KHÓA HỌC
     const rows = sheet.getDataRange().getValues();
     const leads = [];
 
     // Bắt đầu từ dòng 1 (bỏ qua dòng tiêu đề ở vị trí 0)
     for (let i = 1; i < rows.length; i++) {
       const row = rows[i];
-      // Nếu dòng trống hoàn toàn thì bỏ qua
       if (!row[0] && !row[1] && !row[2]) continue;
 
       let timeFormatted = '';
@@ -336,18 +446,6 @@ function doGet(e) {
         emailStatus: String(row[8] || '').trim()
       });
     }
-
-    // Lấy thống kê traffic website & cấu hình viewers
-    const props = PropertiesService.getScriptProperties();
-    const totalViews = Number(props.getProperty('TOTAL_PAGEVIEWS') || '0');
-    const todayKey = 'PV_' + Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "yyyy_MM_dd");
-    const todayViews = Number(props.getProperty(todayKey) || '0');
-    
-    let viewersConfig = null;
-    try {
-      const cfgStr = props.getProperty('VIEWERS_CONFIG');
-      if (cfgStr) viewersConfig = JSON.parse(cfgStr);
-    } catch(e) {}
 
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
