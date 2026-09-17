@@ -1,8 +1,8 @@
-# FAQ: CHUYÊN MÔN Y KHOA & SỰ KHÁC BIỆT CHUẨN ĐỨC (DISC)
+# FAQ: CHUYÊN MÔN Y KHOA & SỰ KHÁC BIỆT CHUYÊN BIỆT (DISC)
 
 ---
 
-### Q1: "Trường phái Specific Chiropractic chuẩn Đức của Thầy Henrik Simon khác gì so với nắn chỉnh thông thường?"
+### Q1: "Trường phái Specific Chiropractic chuyên biệt của Thầy Henrik Simon khác gì so với nắn chỉnh thông thường?"
 **Giải đáp chuyên môn:**  
 Sự khác biệt nằm ở 3 nguyên lý trụ cột:
 1. **Specific (Chuyên biệt) thay vì Non-specific (Đại trà):**  

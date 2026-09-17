@@ -20,7 +20,7 @@
 
 ---
 
-## 3. CHUYỂN HÓA THẦN KỲ NHỜ KIẾN THỨC CHIROPRACTIC CHUẨN ĐỨC
+## 3. CHUYỂN HÓA THẦN KỲ NHỜ KIẾN THỨC SPECIFIC CHIROPRACTIC CHUYÊN BIỆT
 1. **Khả năng "Cứu ca cấp cứu" ngay tại sàn tập:**  
    Khi học viên bị "khóa lưng" co cứng cơ sau hiệp deadlift nặng, Tuấn Anh kiểm tra ngay test chân dài/ngắn, xác định sai lệch xoay xương chậu AS/PI và thực hiện thao tác nắn Side-posture giải phóng khớp cùng chậu êm ái. Chỉ sau 3 phút, học viên đứng dậy cúi ngửa bình thường, hết hẳn cơn đau co thắt.
 2. **Kỹ thuật nắn khớp cổ chân & Đai vai:**  
@@ -32,4 +32,4 @@
 * **Uy tín vượt bậc:** Được toàn bộ học viên và các PT khác trong phòng tập nể phục, mệnh danh là *"Huấn luyện viên có đôi bàn tay y khoa"*.
 * **Đóng gói dịch vụ cao cấp:** Mở dịch vụ *"Chiropractic Assessment & Injury Rehab for Lifters"* với mức giá **1.000.000đ – 1.200.000đ/buổi**, kín lịch huấn luyện suốt cả tuần.
 * **Chia sẻ của Tuấn Anh:**  
-  > *"Học Chiropractic chuẩn Đức từ Thầy Henrik Simon không chỉ giúp tôi bảo vệ an toàn 100% cho học viên của mình mà còn nâng tầm nghề PT lên một đẳng cấp hoàn toàn mới. Đây là khoản đầu tư thông minh và sinh lời nhất cuộc đời tôi."*
+  > *"Học Chiropractic chuẩn y khoa từ Thầy Henrik Simon không chỉ giúp tôi bảo vệ an toàn 100% cho học viên của mình mà còn nâng tầm nghề PT lên một đẳng cấp hoàn toàn mới. Đây là khoản đầu tư thông minh và sinh lời nhất cuộc đời tôi."*

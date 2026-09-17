@@ -21,7 +21,7 @@
 * **Giải đáp y khoa:** Theo thống kê của Hiệp hội Chiropractic Hoa Kỳ (ACA) và các nghiên cứu trên tạp chí *Spine*, Chiropractic là một trong những phương pháp trị liệu cơ xương khớp bảo tồn an toàn nhất hiện nay, với tỷ lệ biến chứng nghiêm trọng cực kỳ thấp (khoảng 1 trên vài triệu ca — thấp hơn nhiều so với tỷ lệ biến chứng xuất huyết dạ dày do uống thuốc giảm đau NSAIDs kéo dài hay rủi ro phẫu thuật).
 * **Quy trình kiểm soát an toàn tại Simon Center:**
   1. Kiểm tra tiền sử bệnh lý và tầm soát dấu hiệu Cảnh báo đỏ (Red Flags): Thiểu năng tuần hoàn não, dị dạng mạch máu, loãng xương nặng.
-  2. Bác sĩ Henrik Simon giảng dạy kỹ thuật nắn cổ chuẩn Đức theo phương pháp **Translation (ngăn kéo tịnh tiến) và góc xoay tối thiểu (Minimal Rotation)**, tuyệt đối không xoay vặn cổ quá mức, triệt tiêu hoàn toàn áp lực đè ép lên động mạch đốt sống (Vertebral Artery).
+  2. Bác sĩ Henrik Simon giảng dạy kỹ thuật nắn cổ chuẩn y khoa theo phương pháp **Translation (ngăn kéo tịnh tiến) và góc xoay tối thiểu (Minimal Rotation)**, tuyệt đối không xoay vặn cổ quá mức, triệt tiêu hoàn toàn áp lực đè ép lên động mạch đốt sống (Vertebral Artery).
 
 ---
 

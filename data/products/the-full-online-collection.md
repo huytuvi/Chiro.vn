@@ -1,12 +1,12 @@
 # SẢN PHẨM CỐT LÕI: THE FULL ONLINE COLLECTION
-*(Khóa Học E-Learning Toàn Diện Nắn Chỉnh Cột Sống Chuẩn Y Khoa Đức — Xem Trọn Đời)*
+*(Khóa Học E-Learning Toàn Diện Nắn Chỉnh Cột Sống Chuẩn Y Khoa — Xem Trọn Đời)*
 
 ---
 
 ## 1. THÔNG TIN SẢN PHẨM & MỨC HỌC PHÍ
 * **Tên sản phẩm:** The Full Online Collection (Trọn Bộ Khóa Học Trực Tuyến).
 * **Mức học phí niêm yết:** **14.900.000 VNĐ**.
-* **Định vị sản phẩm:** Đẳng cấp E-Learning chuẩn Đức: Toàn bộ Video 4K, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online.
+* **Định vị sản phẩm:** Đẳng cấp E-Learning chuẩn quốc tế: Toàn bộ Video 4K, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online.
 * **Thời hạn truy cập:** Sở hữu trọn đời tài khoản trên mọi thiết bị (Laptop, iPad, Smartphone).
 
 ---
@@ -23,7 +23,7 @@
 
 ---
 
-## 3. CƠ CHẾ SƯ PHẠM VƯỢT TRỘI CHUẨN ĐỨC
+## 3. CƠ CHẾ SƯ PHẠM VƯỢT TRỘI CHUẨN Y KHOA
 * **Video 4K Đa Góc Quay (First-person POV):** Quay cận cảnh từ góc nhìn của mắt người đứng nắn, thấy rõ từng mm tiếp xúc xương và hướng vector lực.
 * **Hệ thống Micro-drills rèn lực tại nhà:** Bóc tách thao tác thành các bài tập bộ pháp, thả lỏng cổ tay và rơi trọng lực cơ thể (Body Drop) trên đệm/bóng. Rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
 * **Hệ thống Test sau mỗi bài học:** Bắt buộc vượt qua câu hỏi tình huống lâm sàng và chống chỉ định (đạt chuẩn mới mở khóa bài tiếp theo). Đảm bảo học viên nắm chắc 100% kiến thức, không sợ quên bài.

@@ -25,4 +25,4 @@
 
 ## 4. THÀNH QUẢ VƯỢT BẬC
 * **Thay đổi hoàn toàn quy trình dịch vụ:** Kết hợp 20 phút xoa bóp giải cơ bằng tinh dầu + 10 phút nắn chỉnh chuyên biệt Chiropractic. Khách hàng cảm nhận hiệu quả vượt trội, nhẹ nhõm tức thì.
-* **Tăng giá trị dịch vụ & Thu nhập:** Trung tâm đưa vào menu gói *"Nắn Chỉnh Phục Hồi Cột Sống Chuẩn Đức"* với giá **500.000đ – 700.000đ/liệu trình**. Thu nhập của chị Hồng tăng vọt lên **26.000.000đ/tháng**, sức khỏe bản thân được cải thiện rõ rệt vì không còn phải dùng sức cơ bắp cạn kiệt như trước.
+* **Tăng giá trị dịch vụ & Thu nhập:** Trung tâm đưa vào menu gói *"Nắn Chỉnh Phục Hồi Cột Sống Chuẩn Y Khoa"* với giá **500.000đ – 700.000đ/liệu trình**. Thu nhập của chị Hồng tăng vọt lên **26.000.000đ/tháng**, sức khỏe bản thân được cải thiện rõ rệt vì không còn phải dùng sức cơ bắp cạn kiệt như trước.

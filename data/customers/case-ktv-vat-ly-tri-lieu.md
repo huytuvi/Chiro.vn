@@ -24,7 +24,7 @@
    Nhờ các bài tập rơi trọng lực cơ thể (Body Drop) tại nhà của Thầy Henrik, anh Dũng học được cách phát lực xung chớp nhoáng mà cơ bắp cánh tay hoàn toàn thả lỏng. Không còn tình trạng mỏi tay sau ca điều trị.
 2. **Triệt tiêu 100% nỗi sợ nhờ bài Test Cảnh báo đỏ (Red Flags):**  
    Anh nắm vững các tiêu chuẩn an toàn: Ca nào được nắn, ca nào phải gửi đi chụp MRI hoặc chuyển tuyến ngoại khoa. Sự tự tin lâm sàng tăng vọt.
-3. **Kỹ thuật nắn êm ái chuẩn Đức:**  
+3. **Kỹ thuật nắn êm ái chuẩn y khoa:**  
    Ứng dụng kỹ thuật nắn đốt C1 bằng phương pháp Translation và nắn khớp chậu Knee-Chest. Bệnh nhân cảm thấy đốt sống mở ra êm ru, nhẹ nhõm tức thì mà không hề bị giật mình hay sợ hãi.
 
 ---
@@ -33,4 +33,4 @@
 * **Hiệu quả điều trị:** Tỷ lệ bệnh nhân giảm đau cổ vai gáy và đau thắt lưng sau buổi đầu tiên đạt trên 85%.
 * **Nâng tầm thu nhập & vị thế:** Phòng khám tin tưởng giao cho anh phụ trách mảng nắn chỉnh chuyên sâu. Thu nhập từ lương cứng + hoa hồng ca điều trị tăng từ **12.000.000đ lên 28.500.000đ/tháng**.
 * **Trích lời anh Dũng:**  
-  > *"Trước đây tôi nghĩ nắn chỉnh phải dùng sức vạm vỡ. Học Thầy Henrik Simon tôi mới vỡ lẽ: Nắn chỉnh chuẩn Đức là nghệ thuật của tốc độ và góc tiếp xúc xương. Giờ đây mỗi ngày tôi nắn 10 ca vẫn thấy khỏe re, bệnh nhân quý và giới thiệu người nhà đến nắn liên tục."*
+  > *"Trước đây tôi nghĩ nắn chỉnh phải dùng sức vạm vỡ. Học Thầy Henrik Simon tôi mới vỡ lẽ: Nắn chỉnh chuẩn y khoa là nghệ thuật của tốc độ và góc tiếp xúc xương. Giờ đây mỗi ngày tôi nắn 10 ca vẫn thấy khỏe re, bệnh nhân quý và giới thiệu người nhà đến nắn liên tục."*

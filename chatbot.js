@@ -13,7 +13,7 @@
   // 2. answers: Nội dung câu trả lời tương ứng theo id (text: nội dung trả lời)
   // =============================================================================
   const BOT_DATA = {
-    greeting: `Dạ em chào anh/chị ạ! Cảm ơn anh/chị đã ghé thăm <strong>Simon Center</strong>.<br><br>Dạ không biết anh/chị đang quan tâm đến <strong>Chương trình đào tạo Nắn chỉnh Cột sống chuẩn Y khoa Đức</strong> để nâng cao tay nghề, hay anh/chị đang cần hỗ trợ tư vấn trị liệu cơ xương khớp cho bản thân ạ?<br><br>Anh/chị có thể chọn nhanh các câu hỏi bên dưới hoặc nhắn trực tiếp để em hỗ trợ đúng nhu cầu nhất nhé ạ!`,
+    greeting: `Dạ em chào anh/chị ạ! Cảm ơn anh/chị đã ghé thăm <strong>Simon Center</strong>.<br><br>Dạ không biết anh/chị đang quan tâm đến <strong>Chương trình đào tạo Nắn chỉnh Cột sống chuẩn Y khoa</strong> để nâng cao tay nghề, hay anh/chị đang cần hỗ trợ tư vấn trị liệu cơ xương khớp cho bản thân ạ?<br><br>Anh/chị có thể chọn nhanh các câu hỏi bên dưới hoặc nhắn trực tiếp để em hỗ trợ đúng nhu cầu nhất nhé ạ!`,
     
     quickQuestions: [
       { id: "q1", text: "🎓 Học online liệu có làm được thật không?" },
@@ -22,7 +22,7 @@
       { id: "q4", text: "📊 Khóa học có dạy đọc phim X-quang không?" },
       { id: "q5", text: "📜 Chứng chỉ hoàn thành & Pháp lý hành nghề" },
       { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" },
-      { id: "q7", text: "🔥 Nắn chuẩn Đức khác gì bẻ khớp thông thường?" },
+      { id: "q7", text: "🔥 Nắn Specific chuyên biệt khác gì bẻ khớp thông thường?" },
       { id: "q8", text: "💪 Nữ nhỏ con có nắn được khách nam 90kg không?" },
       { id: "q9", text: "💳 Có chính sách trả góp qua thẻ tín dụng không?" },
       { id: "buy", text: "⚡ Đăng ký khóa học / Nhận ưu đãi ngay" },
@@ -31,7 +31,7 @@
 
     answers: {
       q1: {
-        text: `Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là môn thực hành trực tiếp, nên nếu chỉ xem video lý thuyết thụ động thì chắc chắn không ai dám làm cả.<br><br>Khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo <strong>Quy trình sư phạm 3 bước chuẩn Đức</strong> để giải quyết triệt để rào cản này:<br><br>
+        text: `Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là môn thực hành trực tiếp, nên nếu chỉ xem video lý thuyết thụ động thì chắc chắn không ai dám làm cả.<br><br>Khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo <strong>Quy trình sư phạm 3 bước chuẩn y khoa</strong> để giải quyết triệt để rào cản này:<br><br>
 1. <strong>Video 4K góc nhìn người nắn (POV):</strong> Camera đặt đúng tầm mắt người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
 2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Rèn luyện tốc độ, bộ pháp và lực rơi cơ thể trên đệm mút/bóng phản xạ. Tay anh/chị có phản xạ tự nhiên chuẩn xác trước khi chạm người thật nên <strong>hoàn toàn không bị run tay</strong>.<br>
 3. <strong>Hệ thống Test lâm sàng qua môn bắt buộc:</strong> Nắm chắc chỉ định và dấu hiệu nguy hiểm (Red Flags) mới mở khóa bài tiếp theo.<br><br>
@@ -50,7 +50,7 @@ Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư th�
         text: `Dạ em rất hiểu khi mới tìm hiểu, học phí chắc chắn là điều anh/chị cân nhắc kỹ lưỡng đầu tiên ạ.<br><br>
 Nhưng khi bước vào điều trị thực tế, các anh chị học viên đều nhận ra: Một khóa học ngắn ngày giá rẻ thường chỉ dạy vài ba thao tác bẻ khớp theo cảm tính, không dạy đọc phim X-quang và không dạy Cảnh báo đỏ (Red Flags).<br><br>
 Trong ngành y, <strong>rủi ro lớn nhất không phải là học phí đắt hay rẻ, mà là lỡ tay nắn sai vào một ca chống chỉ định</strong> (rách bao xơ đĩa đệm, loãng xương nặng hay thiểu năng tuần hoàn não) thì hậu quả về sức khỏe người bệnh và uy tín cả đời không gì bù đắp được.<br><br>
-Khóa học Simon Center bảo vệ anh/chị an toàn 100%. Về kinh tế, sau khi học xong anh/chị chỉ cần tiếp nhận <strong>5–6 bệnh nhân</strong> tại phòng khám là đã thu hồi hoàn toàn 14.9 triệu, nhưng tay nghề chuẩn Đức thì theo anh/chị trọn đời nhé ạ!`,
+Khóa học Simon Center bảo vệ anh/chị an toàn 100%. Về kinh tế, sau khi học xong anh/chị chỉ cần tiếp nhận <strong>5–6 bệnh nhân</strong> tại phòng khám là đã thu hồi hoàn toàn 14.9 triệu, nhưng tay nghề chuẩn y khoa thì theo anh/chị trọn đời nhé ạ!`,
         cta: "register"
       },
       q4: {
@@ -76,12 +76,12 @@ Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn h
       q7: {
         text: `Dạ khác biệt nằm ở 2 chữ <strong>"Chuyên Biệt (Specific)"</strong> và <strong>"An Toàn"</strong> anh nhé ạ:<br><br>
 • <strong>Bẻ khớp thông thường / Clip mạng:</strong> Vặn xoắn thô bạo toàn thân để tạo tiếng kêu rôm rốp cho đã tai. Âm thanh đó chỉ là bọt khí bao khớp thoát ra, bẻ thô bạo rất dễ làm dãn dây chằng bao khớp và rách bao xơ đĩa đệm.<br>
-• <strong>Specific Chiropractic chuẩn Đức:</strong> Phân tích tìm đúng <strong>đốt sai lệch nguyên phát (Primary Subluxation)</strong> — chỉ nắn đốt kẹt, tuyệt đối không nắn vào đốt lỏng bù trừ. Kỹ thuật HVLA vận tốc cao biên độ nhỏ êm ái, bệnh nhân chưa kịp sợ thì khớp đã mở ra nhẹ nhõm, không hề gây đau đớn ạ!`,
+• <strong>Specific Chiropractic chuyên biệt:</strong> Phân tích tìm đúng <strong>đốt sai lệch nguyên phát (Primary Subluxation)</strong> — chỉ nắn đốt kẹt, tuyệt đối không nắn vào đốt lỏng bù trừ. Kỹ thuật HVLA vận tốc cao biên độ nhỏ êm ái, bệnh nhân chưa kịp sợ thì khớp đã mở ra nhẹ nhõm, không hề gây đau đớn ạ!`,
         cta: "register"
       },
       q8: {
         text: `Dạ chị hoàn toàn yên tâm nhé ạ! Rất nhiều học viên nữ nhỏ nhắn 45kg tại Simon Center hiện đang nắn chỉnh rất mượt mà cho các khách hàng nam to béo 80–90kg.<br><br>
-Bản chất của Chiropractic chuẩn Đức là <strong>khoa học của tốc độ và trọng lực rơi cơ thể (F = m · a)</strong>, hoàn toàn không dùng sức bắp tay.<br><br>
+Bản chất của Chiropractic chuẩn y khoa là <strong>khoa học của tốc độ và trọng lực rơi cơ thể (F = m · a)</strong>, hoàn toàn không dùng sức bắp tay.<br><br>
 Thầy Henrik sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể (Body Drop) trong một phần mười giây. Chị nắn 10 ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, hai cánh tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!`,
         cta: "register"
       },

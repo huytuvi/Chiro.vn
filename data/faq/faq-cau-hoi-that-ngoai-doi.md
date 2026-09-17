@@ -18,7 +18,7 @@
 ### Câu hỏi 3: "Nắn chỉnh có cần sức khỏe vạm vỡ không? Nữ thể hình nhỏ nhắn có nắn được cho khách nam to béo không?"
 * **Câu trả lời thật thường dùng:**  
   *"Dạ hoàn toàn không cần dùng sức gồng bắp tay đâu chị ơi! Đây là hiểu lầm phổ biến nhất của người chưa học bài bản.  
-  Chiropractic chuẩn Đức là khoa học của **vận tốc và trọng lực ($F = m \cdot a$)**. Thầy Henrik Simon dạy kỹ thuật dùng lực rơi cơ thể (Body Drop) và đòn bẩy tự nhiên của khớp. Một bạn nữ 45kg khi nắm đúng góc khóa khớp và thả rơi trọng lượng cơ thể có thể tạo ra cú nắn êm ái mở khớp cho một nam vận động viên 90kg mà hai cánh tay hoàn toàn thả lỏng, không hề tốn sức chút nào chị nhé."*
+  Chiropractic chuẩn y khoa là khoa học của **vận tốc và trọng lực ($F = m \cdot a$)**. Thầy Henrik Simon dạy kỹ thuật dùng lực rơi cơ thể (Body Drop) và đòn bẩy tự nhiên của khớp. Một bạn nữ 45kg khi nắm đúng góc khóa khớp và thả rơi trọng lượng cơ thể có thể tạo ra cú nắn êm ái mở khớp cho một nam vận động viên 90kg mà hai cánh tay hoàn toàn thả lỏng, không hề tốn sức chút nào chị nhé."*
 
 ### Câu hỏi 4: "Sau khi học online xong, nếu anh muốn gặp trực tiếp Thầy Henrik Simon để kiểm tra xem tay nghề mình đặt đã chuẩn chưa thì có cơ hội không?"
 * **Câu trả lời thật thường dùng:**  

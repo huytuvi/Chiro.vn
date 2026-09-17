@@ -3,7 +3,7 @@
 ---
 
 ## 1. MODULE LẺ ONLINE (1.000.000đ – 2.000.000đ)
-* **Đối tượng:** Dành cho người muốn học thử 1 vùng, giải quyết ca đau cấp tính tại phòng khám hoặc kiểm chứng chất lượng giảng dạy chuẩn Đức của Simon Center.
+* **Đối tượng:** Dành cho người muốn học thử 1 vùng, giải quyết ca đau cấp tính tại phòng khám hoặc kiểm chứng chất lượng giảng dạy chuẩn y khoa của Simon Center.
 * **Các Module lựa chọn:**
   * **Module 1: Cột sống Cổ & Chẩm C1 (1.500.000đ):** Điều trị đau cổ vai gáy cấp, đau nửa đầu, vẹo cổ cấp (Torti Collis).
   * **Module 2: Thắt lưng & Khung chậu ISG (1.500.000đ):** Giải quyết đau thắt lưng, đau thần kinh tọa cơ năng, kẹt khớp cùng chậu.

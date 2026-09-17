@@ -9,7 +9,7 @@
 ---
 
 ## 2. BÓC TÁCH TÂM LÝ GỐC RỄ (ROOT CAUSE & HIDDEN FEAR)
-* Khách hàng chưa thấy được **sự khác biệt sinh tử giữa bẻ khớp đại trà và nắn chỉnh chuẩn y khoa Đức**.
+* Khách hàng chưa thấy được **sự khác biệt sinh tử giữa bẻ khớp đại trà và nắn chỉnh chuẩn y khoa**.
 * Họ đang coi khóa học là một "khoản chi tiêu tiêu sản" thay vì một "tài sản đầu tư sinh lời cao".
 * Nỗi sợ vô thức: Sợ bỏ ra 14.9 triệu mà không thu hồi được vốn, sợ kiến thức không tương xứng với số tiền.
 
@@ -30,8 +30,8 @@
 * *Chương trình DISC của Bác sĩ Henrik Simon đào tạo bạn tư duy chẩn đoán gốc rễ: Đọc phim X-quang, sờ nắn định vị đúng đốt lệch nguyên phát và bảo vệ bạn an toàn 100% trước mọi rủi ro pháp lý và tai biến."*
 
 ### Bước 4: Value Equation & Đòn bẩy hoàn vốn (ROI)
-* *"Xét về bài toán kinh tế phòng khám: Sau khi nắm vững kỹ thuật nắn chỉnh chuẩn Đức, anh/chị định giá một ca trị liệu nắn chỉnh chuyên biệt từ 400.000đ – 600.000đ/lượt.  
-Anh/chị chỉ cần tiếp nhận **đúng 5–6 bệnh nhân** là đã thu hồi hoàn toàn 100% số tiền 14.9 triệu này. Nhưng năng lực chẩn đoán và uy tín y khoa chuẩn Đức sẽ theo anh/chị tạo ra thu nhập suốt cả sự nghiệp 10–20 năm tới.*  
+* *"Xét về bài toán kinh tế phòng khám: Sau khi nắm vững kỹ thuật nắn chỉnh chuẩn y khoa, anh/chị định giá một ca trị liệu nắn chỉnh chuyên biệt từ 400.000đ – 600.000đ/lượt.  
+Anh/chị chỉ cần tiếp nhận **đúng 5–6 bệnh nhân** là đã thu hồi hoàn toàn 100% số tiền 14.9 triệu này. Nhưng năng lực chẩn đoán và uy tín y khoa chuẩn y khoa sẽ theo anh/chị tạo ra thu nhập suốt cả sự nghiệp 10–20 năm tới.*  
 *Chưa kể, toàn bộ 14.9 triệu này sẽ được **khấu trừ 100%** nếu sau này anh/chị tham gia khóa Offline Cầm tay chỉ việc cùng Thầy Henrik."*
 
 ### Bước 5: Calibrated Closing Question

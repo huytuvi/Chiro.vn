@@ -3,7 +3,7 @@
 > **Nguyên tắc cốt lõi:**
 > 1. **Luôn đồng cảm trước (Feel - Felt - Found):** Công nhận suy nghĩ của khách hàng để tạo sự tin cậy, không tranh cãi đối đầu.
 > 2. **Giải thích bằng giá trị an toàn y khoa & Hoàn vốn (ROI):** Thay vì giảm giá, hãy làm rõ cái giá đắt đỏ của rủi ro tai biến y khoa.
-> 3. **Tuyệt đối không nêu tên, không dùng từ 'đối thủ' hay dìm hàng bất kỳ ai:** Luôn giữ phong thái chuyên gia y khoa đĩnh đạc, khoa học chuẩn Đức.
+> 3. **Tuyệt đối không nêu tên, không dùng từ 'đối thủ' hay dìm hàng bất kỳ ai:** Luôn giữ phong thái chuyên gia y khoa đĩnh đạc, khoa học chuẩn y khoa.
 
 ---
 

@@ -12,7 +12,7 @@
 | :---: | :--- | :--- | :--- | :--- |
 | **1** | **Module Lẻ Online** | Video E-Learning 4K | **1.000.000đ – 2.000.000đ** | Cho người muốn học thử 1 vùng, giải quyết ca đau cấp (Cổ vai gáy hoặc Thắt lưng - Chậu). |
 | **2** | **Level Lẻ Online (1 & 2)** | E-Learning chuyên sâu | **8.500.000đ** | Cho người muốn học trọn vẹn 1 Level (Level 1 Cột sống hoặc Level 2 Tứ chi). |
-| **3** | **The Full Online Collection (Trọn bộ Online)** | Trọn bộ Full-Spine E-Learning | **14.900.000đ** | **Đẳng cấp E-Learning chuẩn Đức:** Toàn bộ Video 4K POV, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. |
+| **3** | **The Full Online Collection (Trọn bộ Online)** | Trọn bộ Full-Spine E-Learning | **14.900.000đ** | **Đẳng cấp E-Learning chuẩn quốc tế:** Toàn bộ Video 4K POV, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. |
 | **4** | **Khóa Offline Cầm tay chỉ việc (Hands-on Mentorship)** | 4 ngày thực hành trực tiếp | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày cầm tay nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ trọn đời. |
 | **5** | **Superrefresher / Refresher (Học lại ôn bài)** | 1–2 ngày thực hành lâm sàng | **6.000.000đ** *(Giảm 50% còn 3.000.000đ cho Thành viên Cộng đồng)* | Dành cho học viên cũ muốn chỉnh lại cảm giác tay, sửa lỗi tư thế phát lực sau thời gian hành nghề. |
 | **6** | **Tageshospitation (Đi thực tế lâm sàng)** | 1 ngày tại Simon Center | **2.500.000đ / ngày** *(Giảm 50% còn 1.250.000đ cho Thành viên Cộng đồng)* | Trực tiếp đứng cạnh Henrik Simon xem khám bệnh nhân thật, học quy trình chẩn đoán và phác đồ thực chiến. |

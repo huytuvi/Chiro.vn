@@ -26,7 +26,7 @@
 ---
 
 ## 4. KẾT QUẢ ĐẠT ĐƯỢC
-* **Nâng giá trị dịch vụ:** Phòng khám mở thêm gói *"Trị Liệu Cột Sống Chuyên Biệt Chuẩn Đức"* với mức giá **600.000đ – 800.000đ/buổi** (so với giá châm cứu bấm huyệt cũ là 200.000đ).
+* **Nâng giá trị dịch vụ:** Phòng khám mở thêm gói *"Trị Liệu Cột Sống Chuyên Biệt Chuẩn Y Khoa"* với mức giá **600.000đ – 800.000đ/buổi** (so với giá châm cứu bấm huyệt cũ là 200.000đ).
 * **Bệnh nhân trung thành:** Khách hàng đánh giá phòng khám điều trị khoa học, có phim ảnh rõ ràng, thao tác nhẹ nhàng không gây đau.
 * **Trích lời Bác sĩ Trang:**  
   > *"Là một bác sĩ, điều tôi coi trọng nhất là Y Đức và An Toàn. Simon Center cho tôi một nền tảng khoa học vững chắc để biết chính xác lúc nào nên nắn và lúc nào cấm nắn. Đây là khoản đầu tư sinh lời lớn nhất cho sự nghiệp y khoa của tôi."*

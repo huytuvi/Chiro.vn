@@ -12,7 +12,7 @@
 
 ### Kịch bản 1.1: Khách mới nhắn tin vào Fanpage / Website Chatbot (Chào mở thân thiện)
 > *"Dạ em chào anh/chị ạ! Cảm ơn anh/chị đã ghé thăm Simon Center.*  
-> *Dạ không biết anh/chị đang quan tâm đến **Chương trình đào tạo Nắn chỉnh Cột sống chuẩn Y khoa Đức** để nâng cao tay nghề, hay anh/chị đang cần hỗ trợ tư vấn trị liệu cơ xương khớp cho bản thân ạ?  
+> *Dạ không biết anh/chị đang quan tâm đến **Chương trình đào tạo Nắn chỉnh Cột sống chuẩn Y khoa** để nâng cao tay nghề, hay anh/chị đang cần hỗ trợ tư vấn trị liệu cơ xương khớp cho bản thân ạ?  
 > Anh/chị chia sẻ để em hỗ trợ đúng nhu cầu của mình nhất nhé ạ!"*
 
 ### Kịch bản 1.2: Khách bấm vào nút "Tư vấn Khóa học E-Learning / Bảng giá"
@@ -34,7 +34,7 @@
 * **Câu trả lời chuẩn:**
 > *"Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là thao tác cơ sinh học trực tiếp trên cơ thể người, nên nếu chỉ là các video quay lý thuyết thụ động một chiều thì chắc chắn không ai dám làm cả.*  
 >  
-> *Chính vì vậy, khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo **Quy trình sư phạm 3 bước độc quyền chuẩn Đức** để giải quyết triệt để vấn đề này:*  
+> *Chính vì vậy, khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo **Quy trình sư phạm 3 bước độc quyền chuẩn y khoa** để giải quyết triệt để vấn đề này:*  
 > 1. **Video 4K góc nhìn người nắn (First-person POV):** Máy quay đặt đúng tầm mắt của người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực — điều mà học tại hội trường đông người đứng cách xa 3 mét không thể nào nhìn thấy được.  
 > 2. **Phương pháp Micro-drills rèn lực tại nhà:** Toàn bộ kỹ thuật được chia nhỏ thành các bài tập bộ pháp, thả lỏng cổ tay và tận dụng lực rơi cơ thể trên đệm mút hoặc bóng phản xạ. Anh/chị rèn cho cơ bắp có phản xạ tốc độ tự nhiên trước khi chạm vào người thật, nên lúc làm trên bệnh nhân sẽ hoàn toàn tự tin, không bị run tay.  
 > 3. **Hệ thống Test lâm sàng bắt buộc sau mỗi bài:** Phải hiểu đúng bản chất ca bệnh và các dấu hiệu nguy hiểm (Red Flags) thì hệ thống mới mở bài tiếp theo, đảm bảo học bài nào chắc bài đó.  
@@ -66,7 +66,7 @@
 >  
 > *Trong ngành chăm sóc sức khỏe, **rủi ro lớn nhất không phải là học phí đắt hay rẻ, mà là nếu lỡ tay nắn sai vào một ca chống chỉ định** (như rách bao xơ đĩa đệm, loãng xương nặng hay hẹp động mạch đốt sống) thì hậu quả đối với sức khỏe bệnh nhân và uy tín cả đời của mình không gì bù đắp được.*  
 >  
-> *Simon Center đào tạo anh/chị tư duy chẩn đoán gốc rễ: Đọc phim X-quang, sờ nắn định vị đúng đốt lệch và biết rõ **khi nào tuyệt đối cấm nắn** để bảo vệ an toàn 100%. Xét về kinh tế, sau khi học xong anh/chị chỉ cần làm cho **5–6 ca bệnh nhân** tại phòng khám là đã thu hồi trọn vẹn số tiền đầu tư, nhưng tay nghề chuẩn Đức và sự an tâm thì theo mình suốt cả sự nghiệp nhé ạ!"*
+> *Simon Center đào tạo anh/chị tư duy chẩn đoán gốc rễ: Đọc phim X-quang, sờ nắn định vị đúng đốt lệch và biết rõ **khi nào tuyệt đối cấm nắn** để bảo vệ an toàn 100%. Xét về kinh tế, sau khi học xong anh/chị chỉ cần làm cho **5–6 ca bệnh nhân** tại phòng khám là đã thu hồi trọn vẹn số tiền đầu tư, nhưng tay nghề chuẩn y khoa và sự an tâm thì theo mình suốt cả sự nghiệp nhé ạ!"*
 
 ---
 
@@ -100,7 +100,7 @@
 > *"Dạ anh hoàn toàn không bao giờ phải đơn độc đâu ạ! Đó chính là lý do bên em xây dựng **Cộng đồng học viên cũ (Alumni Club)**.*  
 >  
 > *Anh sẽ được tham gia nhóm kín chuyên môn. Khi gặp ca bệnh nhân khó, anh chỉ cần chụp phim X-quang/MRI và gửi mô tả triệu chứng vào nhóm, Thầy Henrik Simon cùng đội ngũ bác sĩ trợ giảng sẽ trực tiếp xem phim, phân tích đốt lệch và hướng dẫn phác đồ điều trị an toàn cho anh 24/7.*  
-> *Cảm giác lúc nào cũng có một hội đồng chuyên môn chuẩn Đức đứng sau lưng hỗ trợ sẽ giúp anh vô cùng tự tin khi tiếp nhận bệnh nhân ạ."*
+> *Cảm giác lúc nào cũng có một hội đồng chuyên môn chuẩn quốc tế đứng sau lưng hỗ trợ sẽ giúp anh vô cùng tự tin khi tiếp nhận bệnh nhân ạ."*
 
 ---
 
@@ -114,7 +114,7 @@
 
 ---
 
-### CÂU 8: "Nắn chỉnh Chiropractic chuẩn Đức của Thầy Henrik khác gì so với nắn bẻ khớp thông thường hay các clip bẻ kêu rôm rốp trên mạng?"
+### CÂU 8: "Nắn chỉnh Chiropractic chuẩn y khoa của Thầy Henrik khác gì so với nắn bẻ khớp thông thường hay các clip bẻ kêu rôm rốp trên mạng?"
 * **Bối cảnh tâm lý:** Bị nhiễu loạn thông tin bởi các video bẻ khớp giật gân trên TikTok, tò mò về bản chất khoa học.
 * **Câu trả lời chuẩn:**
 > *"Dạ sự khác biệt nằm ở 2 chữ **'Chuyên Biệt (Specific)' và 'An Toàn'** anh nhé ạ:*  
@@ -129,7 +129,7 @@
 * **Câu trả lời chuẩn:**
 > *"Dạ chị hoàn toàn yên tâm nhé ạ! Rất nhiều học viên nữ nhỏ nhắn tại Simon Center hiện đang nắn chỉnh rất mượt mà cho các khách hàng nam to lớn gấp đôi.*  
 >  
-> *Bản chất của Chiropractic chuẩn Đức là **khoa học của tốc độ và trọng lực rơi cơ thể ($F = m \cdot a$)**, hoàn toàn không dùng sức gồng của bắp tay.*  
+> *Bản chất của Chiropractic chuẩn y khoa là **khoa học của tốc độ và trọng lực rơi cơ thể ($F = m \cdot a$)**, hoàn toàn không dùng sức gồng của bắp tay.*  
 > *Thầy Henrik Simon sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể (Body Drop) trong một phần mười giây. Khi làm đúng kỹ thuật, chị nắn 10 ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, cổ tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!"*
 
 ---

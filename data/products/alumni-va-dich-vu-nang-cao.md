@@ -12,7 +12,7 @@
 ## 2. TAGESHOSPITATION (ĐI THỰC TẾ LÂM SÀNG TẠI PHÒNG KHÁM)
 * **Mức phí chuẩn:** **2.500.000 VNĐ / ngày**.
 * **Ưu đãi Thành viên Cộng đồng cũ (Alumni):** **GIẢM 50% CÒN 1.250.000 VNĐ / ngày**.
-* **Mục đích:** Trực tiếp đứng cạnh Henrik Simon xem khám bệnh nhân thật tại Simon Center TP.HCM. Học viên được quan sát trọn vẹn quy trình tiếp đón chuẩn y khoa Đức: Hỏi bệnh, khám test vận động, phân tích phim X-quang/MRI thực tế, lập phác đồ và thực hiện thao tác nắn chỉnh kết hợp PHCN.
+* **Mục đích:** Trực tiếp đứng cạnh Henrik Simon xem khám bệnh nhân thật tại Simon Center TP.HCM. Học viên được quan sát trọn vẹn quy trình tiếp đón chuẩn y khoa: Hỏi bệnh, khám test vận động, phân tích phim X-quang/MRI thực tế, lập phác đồ và thực hiện thao tác nắn chỉnh kết hợp PHCN.
 
 ---
 

@@ -7,7 +7,7 @@
 ## MỤC LỤC CHỦ ĐỀ
 1. [Nhóm 1: Câu Hỏi Thường Gặp Khi Trị Liệu Chiropractic (Theo Chuẩn Quốc Tế)](#nhom-1)
 2. [Nhóm 2: Tính Khả Thi & Hiệu Quả Của Phương Pháp Học E-Learning](#nhom-2)
-3. [Nhóm 3: Chuyên Môn Y Khoa & Sự Khác Biệt Chuẩn Đức (DISC)](#nhom-3)
+3. [Nhóm 3: Chuyên Môn Y Khoa & Sự Khác Biệt Chuẩn Quốc Tế (DISC)](#nhom-3)
 4. [Nhóm 4: Đối Tượng Học Viên, Bằng Cấp & Pháp Lý Hành Nghề](#nhom-4)
 5. [Nhóm 5: Chính Sách Học Phí, Khấu Trừ & Quyền Lợi Cộng Đồng Alumni](#nhom-5)
 
@@ -28,15 +28,15 @@
 <a name="nhom-2"></a>
 ### NHÓM 2: HIỆU QUẢ CỦA PHƯƠNG PHÁP HỌC E-LEARNING
 * **Nắn chỉnh là môn thực hành, học online liệu có làm được không hay lại run tay?**  
-  Khóa học áp dụng **Quy trình sư phạm 3 bước chuẩn Đức**: Video 4K POV cận cảnh từng mm góc tiếp xúc -> Micro-drills rèn phản xạ và lực rơi cơ thể tại nhà -> Test tình huống y khoa sau mỗi bài giảng (đạt mới mở bài tiếp). Người học rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
+  Khóa học áp dụng **Quy trình sư phạm 3 bước chuẩn y khoa**: Video 4K POV cận cảnh từng mm góc tiếp xúc -> Micro-drills rèn phản xạ và lực rơi cơ thể tại nhà -> Test tình huống y khoa sau mỗi bài giảng (đạt mới mở bài tiếp). Người học rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
 * **Nếu xem video chưa hiểu thì hỏi ai?**  
   Học viên được tham gia nhóm chuyên môn kín, có trợ giảng và Thầy Henrik hỗ trợ giải đáp thắc mắc liên tục.
 
 ---
 
 <a name="nhom-3"></a>
-### NHÓM 3: CHUYÊN MÔN Y KHOA & SỰ KHÁC BIỆT CHUẨN ĐỨC
-* **Chiropractic chuẩn Đức khác gì so với nắn bẻ khớp thông thường?**  
+### NHÓM 3: CHUYÊN MÔN Y KHOA & SỰ KHÁC BIỆT CHUYÊN BIỆT
+* **Chiropractic chuẩn y khoa khác gì so với nắn bẻ khớp thông thường?**  
   Khác biệt ở tư duy chẩn đoán gốc rễ: Đo đạc phim X-quang, phân tích Full-Spine để tìm đúng **đốt lệch nguyên phát (Primary Subluxation)**, không nắn mò, không nắn vào đốt lỏng bù trừ, tuân thủ nghiêm ngặt Cảnh báo đỏ (Red Flags).
 
 ---
