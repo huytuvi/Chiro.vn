@@ -50,9 +50,10 @@
 >  
 > *Triết lý giảng dạy của Thầy Henrik Simon là **'Dễ hiểu nhưng phải chuẩn'**:  
 > * Toàn bộ thuật ngữ giải phẫu phức tạp đều được Thầy chuyển hóa thành hình ảnh 3D trực quan và các ví dụ mô phỏng đời thường rất gần gũi.  
-> * Anh sẽ hiểu cặn kẽ vì sao khớp bị kẹt và cách mở khóa khớp bằng nguyên lý đòn bẩy tự nhiên mà không cần phải học vẹt những cuốn sách y khoa dày cộp.  
+> * Anh/chị sẽ hiểu cặn kẽ vì sao khớp bị kẹt và cách mở khóa khớp bằng nguyên lý đòn bẩy tự nhiên mà không cần phải học vẹt những cuốn sách y khoa dày cộp.  
 >  
-> *Kiến thức này sẽ giúp anh nâng tầm dịch vụ chỉnh sửa tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng hay vẹo cột sống cho học viên cực kỳ hiệu quả, tạo sự khác biệt vượt trội so với mặt bằng chung trên thị trường nhé ạ!"*
+> *Kiến thức này sẽ giúp anh/chị nâng tầm gói dịch vụ chỉnh sửa tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng, tăng hiệu quả, giá trị buổi trị liệu mình làm cho khách lên rất nhiều nhé ạ!"*
+
 
 ---
 

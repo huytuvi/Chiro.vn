@@ -7,7 +7,11 @@
   if (window.ChiroChatbotLoaded) return;
   window.ChiroChatbotLoaded = true;
 
-  // Dữ liệu kịch bản chuẩn từ sales_script.md
+// =============================================================================
+  // 📝 BẠN CÓ THỂ CHỈNH SỬA CÂU HỎI SẴN & CÂU TRẢ LỜI NGAY TẠI ĐÂY (BOT_DATA):
+  // 1. quickQuestions: Danh sách các nút câu hỏi hiển thị (text: chữ hiển thị trên nút)
+  // 2. answers: Nội dung câu trả lời tương ứng theo id (text: nội dung trả lời)
+  // =============================================================================
   const BOT_DATA = {
     greeting: `Dạ em chào anh/chị ạ! Cảm ơn anh/chị đã ghé thăm <strong>Simon Center</strong>.<br><br>Dạ không biết anh/chị đang quan tâm đến <strong>Chương trình đào tạo Nắn chỉnh Cột sống chuẩn Y khoa Đức</strong> để nâng cao tay nghề, hay anh/chị đang cần hỗ trợ tư vấn trị liệu cơ xương khớp cho bản thân ạ?<br><br>Anh/chị có thể chọn nhanh các câu hỏi bên dưới hoặc nhắn trực tiếp để em hỗ trợ đúng nhu cầu nhất nhé ạ!`,
     
@@ -39,7 +43,7 @@
 Triết lý đào tạo của Thầy Henrik Simon là <strong>"Dễ hiểu nhưng phải chuẩn"</strong>:<br>
 • Mọi thuật ngữ giải phẫu phức tạp đều được chuyển hóa thành mô hình 3D trực quan và bài tập mô phỏng đời thường.<br>
 • Anh/chị hiểu rõ bản chất vì sao khớp kẹt và cách mở khớp bằng đòn bẩy tự nhiên mà không cần học vẹt sách y khoa.<br><br>
-Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng, tăng giá trị buổi tập lên 500k – 1tr/buổi nhé ạ!`,
+Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng, tăng hiệu quả, giá trị buổi trị liệu mình làm cho khách lên rất nhiều nhé ạ!`,
         cta: "register"
       },
       q3: {
@@ -213,7 +217,7 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
       </div>
 
       <!-- TIN NHẮN CHAT (MESSAGES) -->
-      <div id="chiroChatMessages" class="chat-scroll flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3 bg-[#F8FAFC]">
+      <div id="chiroChatMessages" class="chat-scroll flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3 bg-[#F8FAFC] relative">
         <!-- Nội dung tin nhắn -->
       </div>
 
@@ -318,7 +322,20 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
     `;
 
     messagesContainer.appendChild(msgDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // FIX LỖI CUỘN: Cuộn mượt đến ĐẦU của tin nhắn bot mới
+    // Giúp người đọc nhìn thấy ngay câu mở đầu, không bị trôi tuột xuống cuối!
+    setTimeout(() => {
+      try {
+        const topTarget = msgDiv.offsetTop - 8;
+        messagesContainer.scrollTo({
+          top: Math.max(0, topTarget),
+          behavior: "smooth"
+        });
+      } catch (err) {
+        msgDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 60);
   }
 
   function appendUserMessage(text) {
