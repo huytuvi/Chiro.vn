@@ -16,3 +16,10 @@ Chương này trình bày những chỉ định và chống chỉ định quan t
 ### 📖 Nội Dung Chuyên Môn Chi Tiết:
 
 Chương này trình bày những chỉ định và chống chỉ định quan trọng nhất trong điều trị chỉnh hình học. Trước tiên, các chỉ định được giới thiệu tổng quan, sau đó được phân loại chi tiết theo vùng điều trị. Bên cạnh các chống chỉ định tuyệt đối, còn có các chống chỉ định tương đối. Dù các phương pháp điều trị chỉnh hình học nhẹ nhàng được trình bày trong cuốn sách này, vẫn phải thực hiện với sự cẩn thận tuyệt đối. Người điều trị cần biết rõ giới hạn của mình và trong trường hợp nghi ngờ, hãy chuyển bệnh nhân để được chẩn đoán và điều trị chuyên khoa.
+
+---
+
+### 🇩🇪 Nguyên Văn Tiếng Đức (Originaltext - Henrik Simon):
+**3. Erschöpfungsstadium**
+
+Die erhöhte Widerstandskraft kann durch einen erhöhten Kortisolspiegel über Wochen und Monate vom Körper aufrechterhalten werden. Die Energiereserven entleeren sich aber fortlaufend, bis zum Stadium der körperlichen und psychischen Erschöpfung. Es kommt zum Zusammenbruch der Widerstandskraft.
