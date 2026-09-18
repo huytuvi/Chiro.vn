@@ -1,0 +1,101 @@
+[
+  {
+    "name": "Bùi Thị Lộc",
+    "phone": "0987379257",
+    "zalo": "0987379257",
+    "course_registered": "Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên",
+    "price": "6.600.000 VNĐ",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "08:02:32 13/9/2026"
+  },
+  {
+    "name": "Phạm Thị Hồng Vân",
+    "phone": "0979268968",
+    "zalo": "0979268968",
+    "course_registered": "Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)",
+    "price": "2.100.000 VNĐ",
+    "status": "Chờ thanh toán",
+    "registered_at": "08:05:45 13/9/2026"
+  },
+  {
+    "name": "Bui Huy",
+    "phone": "0868794241",
+    "zalo": "0868794241",
+    "course_registered": "Bảng Khảo Sát Chiropractic",
+    "price": "Khảo sát nhu cầu",
+    "status": "Chờ tư vấn lộ trình",
+    "registered_at": "16:00:47 14/9/2026"
+  },
+  {
+    "name": "Bùi Huy",
+    "phone": "0868794241",
+    "zalo": "0868794241",
+    "course_registered": "Khảo Sát [MT:3|KN:1|HT:2]",
+    "price": "Khảo sát nhu cầu",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "20:06:58 14/9/2026"
+  },
+  {
+    "name": "Huy Bui",
+    "phone": "0868794244",
+    "zalo": "0868794244",
+    "course_registered": "Khảo Sát [MT:2|KN:2|HT:1]",
+    "price": "Khảo sát nhu cầu",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "21:39:50 14/9/2026"
+  },
+  {
+    "name": "Nguyên Lộc",
+    "phone": "09098439287",
+    "zalo": "09098439287",
+    "course_registered": "Khảo Sát [MT:3|KN:2|HT:2]",
+    "price": "Khảo sát nhu cầu",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "21:50:39 14/9/2026"
+  },
+  {
+    "name": "Phạm Thị Hồng Vân",
+    "phone": "098243598",
+    "zalo": "098243598",
+    "course_registered": "Khảo Sát [MT:3|KN:2|HT:2]",
+    "price": "Khảo sát nhu cầu",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "21:51:27 14/9/2026"
+  },
+  {
+    "name": "Nguyễn b",
+    "phone": "09908043",
+    "zalo": "09908043",
+    "course_registered": "Khảo Sát [MT:3|KN:1|HT:1]",
+    "price": "Khảo sát nhu cầu",
+    "status": "Chờ tư vấn lộ trình",
+    "registered_at": "16:39:32 18/9/2026"
+  },
+  {
+    "name": "Bui Huy",
+    "phone": "0974745668",
+    "zalo": "0974745668",
+    "course_registered": "The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Micro-Drills + Chứng Chỉ Online)",
+    "price": "14.500.000 VNĐ",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "18:03:52 18/9/2026"
+  },
+  {
+    "name": "NA",
+    "phone": "0808787878",
+    "zalo": "0808787878",
+    "course_registered": "The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Micro-Drills + Chứng Chỉ Online)",
+    "price": "14.500.000 VNĐ",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "18:05:33 18/9/2026"
+  },
+  {
+    "name": "Huy",
+    "phone": "098978698",
+    "zalo": "098978698",
+    "course_registered": "Khóa Học Test Thanh Toán Tự Động SePay (2.000đ)",
+    "price": "2.000 VNĐ",
+    "status": "ĐÃ THANH TOÁN",
+    "registered_at": "18:14:27 18/9/2026"
+  }
+]

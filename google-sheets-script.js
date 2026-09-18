@@ -227,9 +227,22 @@ function doPost(e) {
         ""              // Cột I: Trạng thái email
       ]);
 
+      const lastRow = sheet.getLastRow();
+
+      // TỰ ĐỘNG GỬI EMAIL PHẢN HỒI TIẾP NHẬN ĐĂNG KÝ CHO HỌC VIÊN
+      if (email && email.includes('@')) {
+        try {
+          const courseName = data.course || data.Ten_Khoa_Hoc || CONFIG.COURSE_NAME;
+          sendRegistrationEmail(email, name, courseName, price, phone);
+          sheet.getRange(lastRow, 9).setValue("ĐÃ GỬI EMAIL ĐĂNG KÝ lúc " + timeStr);
+        } catch (errEmail) {
+          Logger.log("Lỗi gửi email đăng ký: " + errEmail);
+        }
+      }
+
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
-        message: "Đã lưu thông tin đăng ký thành công",
+        message: "Đã lưu thông tin đăng ký và gửi email tiếp nhận thành công",
         name: name,
         phone: phone
       })).setMimeType(ContentService.MimeType.JSON);
@@ -276,6 +289,52 @@ function doPost(e) {
         status: "success",
         message: "Đã cập nhật trạng thái ĐÃ THANH TOÁN và gửi email kích hoạt",
         name: customerName
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // TRƯỜNG HỢP 2B: Cập nhật thông tin khách hàng / đơn hàng từ Admin Panel
+    if (action === 'update_lead' || action === 'update_customer' || action === 'update_order') {
+      const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '');
+      const newName = sanitizeCellInput(data.name || '');
+      const newPrice = sanitizeCellInput(data.price || '');
+      const newStatus = sanitizeCellInput(data.status || '');
+      const newCourse = sanitizeCellInput(data.course || '');
+      let found = false;
+
+      const rows = sheet.getDataRange().getValues();
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rowPhone = String(rows[i][2]).replace(/\D/g, '');
+        if (phone && rowPhone.includes(phone)) {
+          if (newName) sheet.getRange(i + 1, 2).setValue(newName);
+          if (newPrice) sheet.getRange(i + 1, 5).setValue(newPrice);
+          if (newCourse) sheet.getRange(i + 1, 7).setValue(newCourse);
+          if (newStatus) sheet.getRange(i + 1, 8).setValue(newStatus);
+          found = true;
+          break;
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: found ? "success" : "not_found",
+        message: found ? "Đã cập nhật dữ liệu trên Google Sheet thành công" : "Không tìm thấy dòng tương ứng trên Sheet"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // TRƯỜNG HỢP 2C: Xóa khách hàng / đơn hàng từ Admin Panel
+    if (action === 'delete_lead' || action === 'delete_customer' || action === 'delete_order') {
+      const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '');
+      let deleted = false;
+      const rows = sheet.getDataRange().getValues();
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rowPhone = String(rows[i][2]).replace(/\D/g, '');
+        if (phone && rowPhone.includes(phone)) {
+          sheet.deleteRow(i + 1);
+          deleted = true;
+          break;
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: deleted ? "success" : "not_found",
+        message: deleted ? "Đã xóa dòng tương ứng trên Google Sheet" : "Không tìm thấy khách hàng cần xóa"
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
@@ -535,61 +594,303 @@ function onEdit(e) {
 }
 
 /**
- * HÀM GỬI EMAIL TỰ ĐỘNG TỪ GMAIL CHÍNH CHỦ CỦA BẠN
+ * NGUYÊN TẮC SINH MÃ ĐƠN HÀNG:
+ * Cấu trúc chuẩn: SCC-[NgàyTháng]-[4SốCuốiSĐT] (Ví dụ: SCC-1809-8698)
+ * - SCC: Tiền tố thương hiệu Simon Chiropractic Center
+ * - ddMM: Ngày và tháng phát sinh đơn (ví dụ 18/09 là 1809)
+ * - 4 số cuối SĐT: Giúp học viên và Simon Center đối soát tìm ngay trong 1 giây!
  */
-function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhone) {
-  const subject = "✅ [SIMON CENTER] XÁC NHẬN ĐÃ NHẬN THANH TOÁN & KÍCH HOẠT KHÓA HỌC GIEO MẦM";
-  
+function generateOrderId(phone, sepayId) {
+  const now = new Date();
+  const dateStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "ddMM");
+  let suffix = "";
+  if (phone) {
+    const clean = String(phone).replace(/\D/g, "");
+    suffix = clean.length >= 4 ? clean.slice(-4) : clean;
+  } else if (sepayId) {
+    suffix = String(sepayId).slice(-4);
+  } else {
+    suffix = String(Math.floor(1000 + Math.random() * 9000));
+  }
+  return "SCC-" + dateStr + "-" + suffix;
+}
+
+/**
+ * HÀM 1: GỬI EMAIL XÁC NHẬN THANH TOÁN THÀNH CÔNG (ĐỒNG BỘ MẪU EMAILJS CAO CẤP)
+ */
+function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhone, courseName, orderId, paymentDate) {
+  if (!recipientEmail || !recipientEmail.includes('@')) return;
+
+  const validName = (customerName && customerName !== 'Học viên SePay' && customerName !== 'Admin Simon Center') ? customerName : 'Học viên';
+  const validPhone = customerPhone || 'Theo thông tin đăng ký';
+  const validCourse = courseName || 'Khóa Học Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)';
+  const validOrder = orderId || generateOrderId(customerPhone);
+  const validDate = paymentDate || Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm");
+
+  const subject = `Order Confirmed #${validOrder} - Simon Chiropractic Center`;
+
   const htmlBody = `
-  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
-    <div style="background-color: #4A121E; padding: 25px; text-align: center; color: #ffffff;">
-      <h1 style="margin: 0; font-size: 20px; font-weight: bold; letter-spacing: 0.5px;">SIMON CENTER CHIROPRACTIC</h1>
-      <p style="margin: 5px 0 0 0; font-size: 13px; color: #fde68a;">Trường Phái Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</p>
-    </div>
-    
-    <div style="padding: 30px 25px; color: #1f2937; line-height: 1.6; font-size: 14px;">
-      <p style="font-size: 16px; font-weight: bold; color: #8F1D35;">Kính chào Anh/Chị ${customerName},</p>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 20px 10px; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
       
-      <p>Simon Center xin trân trọng thông báo: <strong>Chúng tôi đã nhận được thanh toán học phí</strong> cho Khóa học Gieo Mầm của Anh/Chị qua hình thức chuyển khoản ngân hàng.</p>
-      
-      <div style="background-color: #f8fafc; border-left: 4px solid #10b981; padding: 16px; border-radius: 6px; margin: 20px 0;">
-        <div style="font-weight: bold; color: #065f46; margin-bottom: 10px; font-size: 15px;">📋 CHI TIẾT XÁC NHẬN ĐƠN HÀNG:</div>
-        <div style="margin-bottom: 5px;">• <strong>Họ và tên học viên:</strong> ${customerName}</div>
-        <div style="margin-bottom: 5px;">• <strong>Số điện thoại:</strong> ${customerPhone || 'Theo thông tin đăng ký'}</div>
-        <div style="margin-bottom: 5px;">• <strong>Email nhận bài giảng:</strong> ${recipientEmail}</div>
-        <div style="margin-bottom: 5px;">• <strong>Khóa học:</strong> Khóa Học Gieo Mầm – Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</div>
-        <div style="margin-bottom: 5px;">• <strong>Giảng viên trực tiếp:</strong> Chuyên gia Bác sĩ Henrik Simon</div>
-        <div style="margin-bottom: 5px;">• <strong>Số tiền đã thanh toán:</strong> <span style="color: #b91c1c; font-weight: bold; font-size: 16px;">${amountPaid}</span></div>
-        <div>• <strong>Trạng thái giao dịch:</strong> <span style="background-color: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;">ĐÃ THANH TOÁN THÀNH CÔNG</span></div>
+      <!-- HEADER BANNER THƯƠNG HIỆU -->
+      <div style="background: linear-gradient(135deg, #4A121E 0%, #2A0810 100%); padding: 30px 20px; text-align: center; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">SIMON CHIROPRACTIC CENTER</h1>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #fde68a; font-weight: 500;">Viện Đào Tạo Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</p>
+        <p style="margin: 4px 0 0 0; font-size: 11px; color: #e2e8f0; opacity: 0.85;">Giảng viên trực tiếp: Bác sĩ Henrik Simon</p>
       </div>
-      
-      <h3 style="color: #4A121E; font-size: 15px; margin-top: 25px;">🎁 BỘ QUÀ TẶNG & HƯỚNG DẪN BẮT ĐẦU VÀO HỌC:</h3>
-      <ol style="padding-left: 20px; margin: 10px 0;">
-        <li style="margin-bottom: 8px;"><strong>Giáo trình Ebook nội bộ:</strong> "Các Kỹ Thuật Nắn Chỉnh Cột Sống" của Thầy Henrik Simon sẽ được kích hoạt cùng tài khoản học trực tuyến của Anh/Chị.</li>
-        <li style="margin-bottom: 8px;"><strong>Cộng đồng chuyên môn kín:</strong> Bấm vào link dưới đây để tham gia nhóm Zalo học viên dành riêng cho khóa Gieo Mầm để nhận link bài giảng và lịch Seminar:
-          <div style="margin: 10px 0;">
-            <a href="${CONFIG.ZALO_LINK}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 13px;">👉 Bấm vào đây để vào Nhóm Zalo Học Viên</a>
+
+      <!-- NỘI DUNG CHÍNH -->
+      <div style="padding: 30px 25px; color: #1e293b; line-height: 1.6;">
+        <div style="font-size: 16px; font-weight: bold; color: #8F1D35; margin-bottom: 12px;">
+          Kính chào Anh/Chị ${validName},
+        </div>
+        
+        <p style="margin: 0 0 20px 0; font-size: 14px; color: #334155;">
+          Simon Chiropractic Center xin chân thành cảm ơn Anh/Chị đã đăng ký tham gia khóa học. Chúng tôi xác nhận <strong>đã nhận được khoản thanh toán học phí</strong> của Anh/Chị qua hình thức chuyển khoản ngân hàng.
+        </p>
+
+        <!-- BẢNG CHI TIẾT ĐƠN HÀNG (CHUẨN FORM EMAILJS) -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+          <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px;">
+            &#10004; Thông Tin Đơn Hàng &amp; Học Viên
           </div>
-        </li>
-        <li style="margin-bottom: 8px;"><strong>Hỗ trợ kỹ thuật 24/7:</strong> Nếu cần bất kỳ trợ giúp nào về tài khoản học, Anh/Chị hãy liên hệ trực tiếp Hotline/Zalo: <strong>${CONFIG.HOTLINE}</strong>.</li>
-      </ol>
-      
-      <p style="margin-top: 30px; font-style: italic; color: #4b5563;">Chúc Anh/Chị có những trải nghiệm học tập tuyệt vời và gặt hái được những tinh hoa trị liệu quý giá từ Thầy Henrik Simon!</p>
-      
-      <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 25px; font-size: 12px; color: #6b7280;">
-        <strong>SIMON CENTER – TRUNG TÂM NẮN CHỈNH CỘT SỐNG & PHỤC HỒI CHỨC NĂNG</strong><br>
-        📍 56 D5, Phường Thạnh Mỹ Tây, Quận Bình Thạnh, TP. Hồ Chí Minh<br>
-        📞 Hotline: ${CONFIG.HOTLINE} | ✉️ Email: ${CONFIG.ADMIN_EMAIL}<br>
-        🌐 Website: https://simoncenter.vn
+          
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 140px; vertical-align: top;">Họ và tên:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${validName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Email:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${recipientEmail}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Số điện thoại:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${validPhone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Khóa học:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${validCourse}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Mã đơn hàng:</td>
+              <td style="padding: 6px 0; color: #475569; font-family: monospace; font-weight: bold;">${validOrder}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Ngày thanh toán:</td>
+              <td style="padding: 6px 0; color: #0f172a;">${validDate}</td>
+            </tr>
+            <tr style="border-top: 1px dashed #cbd5e1;">
+              <td style="padding: 10px 0 6px 0; color: #64748b; vertical-align: middle;">Học phí đã thanh toán:</td>
+              <td style="padding: 10px 0 6px 0; color: #8F1D35; font-size: 17px; font-weight: 800;">${amountPaid}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: middle;">Trạng thái:</td>
+              <td style="padding: 6px 0;">
+                <span style="display: inline-block; background-color: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 20px; font-weight: bold; font-size: 11px; border: 1px solid #a7f3d0;">
+                  &#10004; ĐÃ XÁC NHẬN THANH TOÁN
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- HƯỚNG DẪN KÍCH HOẠT VÀO HỌC -->
+        <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px; margin-bottom: 25px;">
+          <div style="font-weight: bold; color: #166534; font-size: 14px; margin-bottom: 8px;">
+            &#9733; HƯỚNG DẪN BẮT ĐẦU VÀO HỌC:
+          </div>
+          <ol style="margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.6;">
+            <li style="margin-bottom: 6px;">
+              <strong>Giáo trình Ebook &amp; Video bài giảng:</strong> Đội ngũ học vụ Simon Chiropractic Center sẽ cấp quyền truy cập tài khoản học trực tuyến theo Email <strong>${recipientEmail}</strong> của Anh/Chị trong vòng 24 giờ.
+            </li>
+            <li style="margin-bottom: 6px;">
+              <strong>Nhóm Zalo học viên chuyên môn:</strong> Bấm vào nút bên dưới để tham gia nhóm Zalo học viên, nhận link phòng học Zoom và lịch Seminar trực tiếp cùng Thầy Henrik Simon:
+            </li>
+          </ol>
+
+          <div style="text-align: center; margin: 18px 0 8px 0;">
+            <a href="${CONFIG.ZALO_LINK}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: bold; display: inline-block; font-size: 14px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);">
+              THAM GIA NHÓM ZALO HỌC VIÊN &rarr;
+            </a>
+          </div>
+        </div>
+
+        <p style="margin: 0 0 25px 0; font-size: 13px; color: #475569; font-style: italic; text-align: center;">
+          Chúc Anh/Chị có những trải nghiệm học tập tuyệt vời và tiếp thu trọn vẹn tinh hoa Chiropractic từ Thầy Henrik Simon!
+        </p>
+
+        <!-- FOOTER TỔ CHỨC -->
+        <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #64748b; line-height: 1.6;">
+          <div style="font-weight: bold; color: #0f172a; font-size: 13px;">ĐƠN VỊ ĐÀO TẠO &amp; TỔ CHỨC: SIMON CHIROPRACTIC CENTER</div>
+          <div>Chuyên khoa Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</div>
+          <div style="margin-top: 4px;">&#9658; Hotline / Zalo: <strong>${CONFIG.HOTLINE}</strong> | Email: <strong>${CONFIG.ADMIN_EMAIL}</strong></div>
+          <div>&#9658; Địa chỉ: 56 D5, Phường Thạnh Mỹ Tây, Quận Bình Thạnh, TP. Hồ Chí Minh</div>
+          <div>&#9658; Website: <a href="https://chiro.vn" style="color: #0284c7; text-decoration: none;">https://chiro.vn</a></div>
+        </div>
+
       </div>
     </div>
-  </div>
+  </body>
+  </html>
   `;
 
   GmailApp.sendEmail(recipientEmail, subject, "", {
     htmlBody: htmlBody,
-    name: "Simon Center Chiropractic"
+    name: "Simon Chiropractic Center"
   });
+}
+
+/**
+ * HÀM 2: GỬI EMAIL TIẾP NHẬN ĐĂNG KÝ (GỬI NGAY KHI KHÁCH VỪA ĐIỀN FORM)
+ */
+function sendRegistrationEmail(recipientEmail, customerName, courseName, price, customerPhone, orderId) {
+  if (!recipientEmail || !recipientEmail.includes('@')) return;
+
+  const validName = customerName || 'Học viên';
+  const validPhone = customerPhone || 'Theo thông tin đăng ký';
+  const validCourse = courseName || 'Khóa Học Chiropractic Chuyên Biệt';
+  const validOrder = orderId || generateOrderId(customerPhone);
+
+  const subject = `Order Pending #${validOrder} - Tiếp Nhận Đăng Ký Simon Chiropractic Center`;
+
+  const htmlBody = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 20px 10px; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+      
+      <div style="background: linear-gradient(135deg, #4A121E 0%, #2A0810 100%); padding: 30px 20px; text-align: center; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">SIMON CHIROPRACTIC CENTER</h1>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #fde68a; font-weight: 500;">Viện Đào Tạo Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</p>
+      </div>
+
+      <div style="padding: 30px 25px; color: #1e293b; line-height: 1.6;">
+        <div style="font-size: 16px; font-weight: bold; color: #8F1D35; margin-bottom: 12px;">
+          Kính chào Anh/Chị ${validName},
+        </div>
+        
+        <p style="margin: 0 0 20px 0; font-size: 14px; color: #334155;">
+          Simon Chiropractic Center xin trân trọng thông báo: <strong>Chúng tôi đã tiếp nhận thông tin đăng ký</strong> của Anh/Chị. Suất học ưu đãi của bạn đã được tạm giữ trên hệ thống.
+        </p>
+
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">
+            &#10004; Thông Tin Đăng Ký Khóa Học
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <tr>
+              <td style="padding: 5px 0; color: #64748b; width: 140px;">Họ và tên:</td>
+              <td style="padding: 5px 0; color: #0f172a; font-weight: bold;">${validName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Số điện thoại:</td>
+              <td style="padding: 5px 0; color: #0f172a; font-weight: 500;">${validPhone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Khóa học:</td>
+              <td style="padding: 5px 0; color: #0f172a; font-weight: bold;">${validCourse}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Học phí:</td>
+              <td style="padding: 5px 0; color: #8F1D35; font-size: 16px; font-weight: bold;">${price}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 18px; border-radius: 12px; margin-bottom: 20px; font-size: 13px;">
+          <div style="font-weight: bold; color: #1e40af; margin-bottom: 10px; font-size: 14px;">
+            &#128179; THÔNG TIN CHUYỂN KHOẢN TỰ ĐỘNG (ACB SEPAY):
+          </div>
+          <div style="margin-bottom: 5px;">• Ngân hàng: <strong>ACB (Ngân hàng TMCP Á Châu)</strong></div>
+          <div style="margin-bottom: 5px;">• Số tài khoản: <strong style="font-size: 16px; color: #1e3a8a;">2412825668</strong></div>
+          <div style="margin-bottom: 5px;">• Chủ tài khoản: <strong>BUI NGOC MINH HUY</strong></div>
+          <div style="margin-bottom: 5px;">• Số tiền: <strong style="color: #b91c1c;">${price}</strong></div>
+          <div>• Nội dung CK: <span style="background: #fef08a; padding: 2px 8px; font-weight: bold; border-radius: 4px; color: #0f172a;">CHIRO ${validPhone}</span></div>
+        </div>
+
+        <p style="font-size: 13px; color: #475569;">
+          Hệ thống thanh toán tự động SePay sẽ xác nhận ngay trong 3 giây khi nhận được tiền và tự động gửi email kích hoạt tài khoản học cho Anh/Chị.
+        </p>
+
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="${CONFIG.ZALO_LINK}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 11px 24px; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 13px;">
+            Nhắn Báo Qua Zalo: ${CONFIG.HOTLINE} &rarr;
+          </a>
+        </div>
+
+        <div style="border-top: 1px solid #e2e8f0; padding-top: 18px; font-size: 12px; color: #64748b; line-height: 1.6;">
+          <div style="font-weight: bold; color: #0f172a;">ĐƠN VỊ ĐÀO TẠO &amp; TỔ CHỨC: SIMON CHIROPRACTIC CENTER</div>
+          <div>Hotline / Zalo: <strong>${CONFIG.HOTLINE}</strong> | Email: <strong>${CONFIG.ADMIN_EMAIL}</strong></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+
+  GmailApp.sendEmail(recipientEmail, subject, "", {
+    htmlBody: htmlBody,
+    name: "Simon Chiropractic Center"
+  });
+}
+
+/**
+ * ============================================================================
+ * HÀM 3: GỬI LẠI EMAIL CHO DÒNG MỚI NHẤT TRONG GOOGLE SHEET (DÒNG SỐ 8 CỦA BẠN)
+ * ============================================================================
+ * Bạn bấm chọn hàm này và bấm "Chạy" -> Hệ thống sẽ tự động đọc dòng số 8:
+ * - Người mua: Huy
+ * - SĐT: 098978698
+ * - Email: buihuy01@gmail.com
+ * - Học phí: 2.000 VNĐ
+ * Và gửi ngay 1 email chuẩn đẹp vào hộp thư buihuy01@gmail.com!
+ */
+function resendEmailForLastRow() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName("Đăng Ký Khóa Học") || ss.getSheets()[0];
+  const rows = sheet.getDataRange().getValues();
+  if (rows.length <= 1) {
+    Logger.log("Chưa có dữ liệu học viên trong Google Sheet.");
+    return "Không có dữ liệu";
+  }
+
+  // Lấy dòng cuối cùng (Dòng 8 trong Sheet của bạn)
+  const lastIdx = rows.length - 1;
+  const row = rows[lastIdx];
+  const customerName = String(row[1] || "Học viên").trim();
+  const customerPhone = String(row[2] || "").replace(/^'/, '').trim();
+  const customerEmail = String(row[3] || CONFIG.ADMIN_EMAIL).trim();
+  const customerPrice = String(row[4] || "2.000 VNĐ").trim();
+
+  let courseName = "Khóa Học Test Thanh Toán Tự Động SePay (2.000đ)";
+  const rawChannel = String(row[6] || "").trim();
+  const matchCourse = rawChannel.match(/\((.*?)\)/);
+  if (matchCourse && matchCourse[1]) {
+    courseName = matchCourse[1].trim();
+  } else if (rawChannel && !rawChannel.includes("Form Website")) {
+    courseName = rawChannel;
+  }
+
+  const orderId = generateOrderId(customerPhone);
+  const paymentDate = String(row[0]) || Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+
+  Logger.log("▶️ Đang gửi email cho học viên: " + customerName + " (" + customerEmail + ")... Mã đơn: " + orderId);
+  sendSuccessEmail(customerEmail, customerName, customerPrice, customerPhone, courseName, orderId, paymentDate);
+  sheet.getRange(lastIdx + 1, 9).setValue("ĐÃ GỬI EMAIL XÁC NHẬN lúc " + Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm"));
+  Logger.log("✅ Đã gửi thành công cho học viên: " + customerName);
+  return "OK - Email sent to " + customerEmail;
 }
 
 /**
@@ -651,6 +952,21 @@ function handleSepayWebhook(data, ss) {
       }
     }
 
+    // Nếu chưa khớp được do app ngân hàng cắt mất SĐT -> Tìm dòng 'Chờ thanh toán' gần nhất
+    if (updatedRow === -1) {
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rStatus = String(rows[i][7] || '').toUpperCase();
+        if (rStatus.includes('CHỜ THANH TOÁN') || rStatus.includes('CHO THANH TOAN') || rStatus === '') {
+          updatedRow = i + 1;
+          customerName = rows[i][1];
+          matchedPhone = String(rows[i][2] || "").replace(/^'/, '');
+          customerEmail = rows[i][3];
+          customerPrice = rows[i][4] || formattedAmount;
+          break;
+        }
+      }
+    }
+
     // 3. NẾU TÌM THẤY ĐƠN HỌC VIÊN CÓ SẴN -> CẬP NHẬT TRẠNG THÁI "ĐÃ THANH TOÁN"
     if (updatedRow !== -1) {
       sheet.getRange(updatedRow, 8).setValue("ĐÃ THANH TOÁN (SePay " + bankGateway + ")");
@@ -658,12 +974,22 @@ function handleSepayWebhook(data, ss) {
         sheet.getRange(updatedRow, 5).setValue(customerPrice);
       }
 
-      // Tự động gửi email xác nhận nếu có email và chưa gửi
+      // Tự động gửi email xác nhận đã thanh toán thành công
       const emailStatusCell = sheet.getRange(updatedRow, 9);
-      if (customerEmail && customerEmail.includes("@") && String(emailStatusCell.getValue()).indexOf("ĐÃ GỬI EMAIL") === -1) {
+      if (customerEmail && customerEmail.includes("@") && String(emailStatusCell.getValue()).indexOf("ĐÃ GỬI EMAIL XÁC NHẬN") === -1) {
         try {
-          sendSuccessEmail(customerEmail, customerName, customerPrice, matchedPhone);
-          emailStatusCell.setValue("ĐÃ GỬI EMAIL lúc " + timeStr);
+          const matchedRowData = rows[updatedRow - 1];
+          let courseName = "Khóa Học Nắn Chỉnh Cột Sống Chuyên Biệt";
+          if (matchedRowData) {
+            const rawChannel = String(matchedRowData[6] || "").trim();
+            const matchCourse = rawChannel.match(/\((.*?)\)/);
+            if (matchCourse && matchCourse[1]) courseName = matchCourse[1].trim();
+            else if (rawChannel && !rawChannel.includes("Form Website")) courseName = rawChannel;
+          }
+          const orderId = generateOrderId(matchedPhone, data.id);
+
+          sendSuccessEmail(customerEmail, customerName, customerPrice, matchedPhone, courseName, orderId, timeStr);
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL XÁC NHẬN lúc " + timeStr);
         } catch (eEmail) {
           Logger.log("Lỗi gửi email SePay: " + eEmail);
         }

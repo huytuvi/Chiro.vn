@@ -1,0 +1,211 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "The Full Online Collection (Trọn bộ Online)",
+      "type": "digital",
+      "price": 14900000.0,
+      "description": "Trọn bộ Full-Spine E-Learning Video 4K POV, Drills rèn lực, cấp chứng chỉ",
+      "registered_count": 2,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 2,
+      "name": "Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)",
+      "type": "digital",
+      "price": 2100000.0,
+      "description": "Chuyên đề nắn chỉnh cột sống chuyên sâu",
+      "registered_count": 1,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 3,
+      "name": "Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên",
+      "type": "digital",
+      "price": 6600000.0,
+      "description": "Combo 3 khóa chuyên sâu + 1 năm hội viên Alumni",
+      "registered_count": 1,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 4,
+      "name": "Khóa Học Test Thanh Toán Tự Động SePay",
+      "type": "digital",
+      "price": 2000.0,
+      "description": "Khóa học test tích hợp cổng ACB SePay",
+      "registered_count": 1,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 5,
+      "name": "Khóa Offline Cầm tay chỉ việc (Hands-on Mentorship)",
+      "type": "service",
+      "price": 40000000.0,
+      "description": "4 ngày thực hành trực tiếp cùng Bác sĩ Henrik Simon",
+      "registered_count": 0,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 6,
+      "name": "Tageshospitation (Đi thực tế lâm sàng)",
+      "type": "service",
+      "price": 2500000.0,
+      "description": "1 ngày thực tế khám bệnh nhân tại Simon Center",
+      "registered_count": 0,
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 7,
+      "name": "Giáo trình Chiropractic Y Khoa & Thước Đo Cột Sống",
+      "type": "physical",
+      "price": 1500000.0,
+      "description": "Bộ giáo trình in màu chuẩn y khoa kèm thước đo Cobb",
+      "registered_count": 0,
+      "created_at": "2026-09-18 13:17:13"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Bùi Thị Lộc",
+      "phone": "0987379257",
+      "zalo": "0987379257",
+      "registered_at": "08:02:32 13/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 2,
+      "name": "Phạm Thị Hồng Vân",
+      "phone": "0979268968",
+      "zalo": "0979268968",
+      "registered_at": "08:05:45 13/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 3,
+      "name": "Bui Huy",
+      "phone": "0868794241",
+      "zalo": "0868794241",
+      "registered_at": "16:00:47 14/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 5,
+      "name": "Huy Bui",
+      "phone": "0868794244",
+      "zalo": "0868794244",
+      "registered_at": "21:39:50 14/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 6,
+      "name": "Nguyên Lộc",
+      "phone": "09098439287",
+      "zalo": "09098439287",
+      "registered_at": "21:50:39 14/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 7,
+      "name": "Phạm Thị Hồng Vân",
+      "phone": "098243598",
+      "zalo": "098243598",
+      "registered_at": "21:51:27 14/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 8,
+      "name": "Nguyễn b",
+      "phone": "09908043",
+      "zalo": "09908043",
+      "registered_at": "16:39:32 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 9,
+      "name": "Bui Huy",
+      "phone": "0974745668",
+      "zalo": "0974745668",
+      "registered_at": "18:03:52 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 10,
+      "name": "NA",
+      "phone": "0808787878",
+      "zalo": "0808787878",
+      "registered_at": "18:05:33 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 11,
+      "name": "Huy",
+      "phone": "098978698",
+      "zalo": "098978698",
+      "registered_at": "18:14:27 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customer_id": 1,
+      "customer_name": "Bùi Thị Lộc",
+      "customer_phone": "0987379257",
+      "product_id": 3,
+      "product_name": "Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên",
+      "amount": 6600000.0,
+      "status": "paid",
+      "order_date": "08:02:32 13/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 2,
+      "customer_id": 2,
+      "customer_name": "Phạm Thị Hồng Vân",
+      "customer_phone": "0979268968",
+      "product_id": 2,
+      "product_name": "Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)",
+      "amount": 2100000.0,
+      "status": "pending",
+      "order_date": "08:05:45 13/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 3,
+      "customer_id": 9,
+      "customer_name": "Bui Huy",
+      "customer_phone": "0974745668",
+      "product_id": 1,
+      "product_name": "The Full Online Collection (Trọn bộ Online)",
+      "amount": 14500000.0,
+      "status": "paid",
+      "order_date": "18:03:52 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 4,
+      "customer_id": 10,
+      "customer_name": "NA",
+      "customer_phone": "0808787878",
+      "product_id": 1,
+      "product_name": "The Full Online Collection (Trọn bộ Online)",
+      "amount": 14500000.0,
+      "status": "paid",
+      "order_date": "18:05:33 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    },
+    {
+      "id": 5,
+      "customer_id": 11,
+      "customer_name": "Huy",
+      "customer_phone": "098978698",
+      "product_id": 4,
+      "product_name": "Khóa Học Test Thanh Toán Tự Động SePay",
+      "amount": 2000.0,
+      "status": "paid",
+      "order_date": "18:14:27 18/9/2026",
+      "created_at": "2026-09-18 13:17:13"
+    }
+  ]
+}
