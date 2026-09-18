@@ -101,6 +101,14 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
+    // ========================================================================
+    // TỰ ĐỘNG XỬ LÝ WEBHOOK TỪ SEPAY (KHI CÓ TIỀN VÀO TÀI KHOẢN NGÂN HÀNG ACB)
+    // SePay POST các trường: gateway, transferType ("in"), transferAmount, content
+    // ========================================================================
+    if (data && (data.gateway || data.transferType === 'in' || (data.accountNumber && data.transferAmount !== undefined))) {
+      return handleSepayWebhook(data, SpreadsheetApp.getActiveSpreadsheet());
+    }
+
     const action = data.action || 'register';
     const now = new Date();
     const timeStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
@@ -315,6 +323,30 @@ function doGet(e) {
     const params = (e && e.parameter) ? e.parameter : {};
     const adminKey = params.admin_key || params.token || params.key || '';
     const hasAdminAccess = isAuthorizedAdmin(adminKey);
+
+    // 0. KIỂM TRA TRẠNG THÁI THANH TOÁN (Cho Modal Website tự động chuyển màn hình xanh khi khách CK xong)
+    if (params.action === 'check_payment' && params.phone) {
+      const searchPhone = String(params.phone).replace(/\D/g, '');
+      let isPaid = false;
+      let matchedName = '';
+      if (searchPhone.length >= 9) {
+        const rows = sheet.getDataRange().getValues();
+        for (let i = rows.length - 1; i >= 1; i--) {
+          const rPhone = String(rows[i][2] || '').replace(/\D/g, '');
+          const rStatus = String(rows[i][7] || '').toUpperCase();
+          if (rPhone.includes(searchPhone) && (rStatus.includes('ĐÃ THANH TOÁN') || rStatus.includes('THANH TOAN'))) {
+            isPaid = true;
+            matchedName = rows[i][1];
+            break;
+          }
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        paid: isPaid,
+        name: matchedName
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
 
     // 1. LỆNH RESET DỮ LIỆU BẢNG TÍNH QUA GET -> BẮT BUỘC CẦN ADMIN_SECRET_KEY
     if (params.action === 'reset_sheet') {
@@ -558,6 +590,157 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
     htmlBody: htmlBody,
     name: "Simon Center Chiropractic"
   });
+}
+
+/**
+ * ============================================================================
+ * XỬ LÝ WEBHOOK TỰ ĐỘNG TỪ SEPAY KHI CÓ TIỀN VÀO TÀI KHOẢN NGÂN HÀNG ACB
+ * ============================================================================
+ */
+function handleSepayWebhook(data, ss) {
+  try {
+    // Chỉ xử lý giao dịch tiền vào (transferType = 'in' hoặc transferAmount > 0)
+    if (data.transferType && data.transferType !== 'in') {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        message: "Bỏ qua giao dịch tiền ra (transferType: out)"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    const sheet = (ss && ss.getSheetByName("Đăng Ký Khóa Học")) || (ss ? ss.getSheets()[0] : SpreadsheetApp.getActiveSpreadsheet().getActiveSheet());
+    const now = new Date();
+    const timeStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+
+    const amount = Number(data.transferAmount || 0);
+    const formattedAmount = amount > 0 ? (amount.toLocaleString('vi-VN') + " VNĐ") : "Chưa rõ";
+    const content = String(data.content || data.description || "").trim();
+    const bankGateway = String(data.gateway || "ACB").toUpperCase();
+    const refCode = String(data.referenceCode || data.id || "");
+
+    // 1. TÌM SỐ ĐIỆN THOẠI TRONG NỘI DUNG CHUYỂN KHOẢN
+    let matchedPhone = "";
+    const phoneMatches = content.match(/(0\d{9,10})/g) || content.match(/(\d{9,11})/g);
+    if (phoneMatches && phoneMatches.length > 0) {
+      matchedPhone = phoneMatches[0];
+      if (matchedPhone.startsWith("84") && matchedPhone.length === 11) {
+        matchedPhone = "0" + matchedPhone.slice(2);
+      }
+    }
+
+    let updatedRow = -1;
+    let customerName = "Học viên SePay";
+    let customerEmail = "";
+    let customerPrice = formattedAmount;
+
+    // 2. TÌM KIẾM ĐƠN TRONG BẢNG TÍNH GOOGLE SHEET
+    const rows = sheet.getDataRange().getValues();
+    // Quét từ dưới lên (đơn mới nhất ưu tiên trước)
+    for (let i = rows.length - 1; i >= 1; i--) {
+      const rPhone = String(rows[i][2] || "").replace(/\D/g, "");
+
+      // Khớp theo số điện thoại
+      const isPhoneMatch = (matchedPhone && rPhone.includes(matchedPhone.replace(/\D/g, ''))) ||
+                           (rPhone.length >= 9 && content.includes(rPhone));
+
+      if (isPhoneMatch) {
+        updatedRow = i + 1;
+        customerName = rows[i][1];
+        customerEmail = rows[i][3];
+        customerPrice = rows[i][4] || formattedAmount;
+        break;
+      }
+    }
+
+    // 3. NẾU TÌM THẤY ĐƠN HỌC VIÊN CÓ SẴN -> CẬP NHẬT TRẠNG THÁI "ĐÃ THANH TOÁN"
+    if (updatedRow !== -1) {
+      sheet.getRange(updatedRow, 8).setValue("ĐÃ THANH TOÁN (SePay " + bankGateway + ")");
+      if (amount > 0) {
+        sheet.getRange(updatedRow, 5).setValue(customerPrice);
+      }
+
+      // Tự động gửi email xác nhận nếu có email và chưa gửi
+      const emailStatusCell = sheet.getRange(updatedRow, 9);
+      if (customerEmail && customerEmail.includes("@") && String(emailStatusCell.getValue()).indexOf("ĐÃ GỬI EMAIL") === -1) {
+        try {
+          sendSuccessEmail(customerEmail, customerName, customerPrice, matchedPhone);
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL lúc " + timeStr);
+        } catch (eEmail) {
+          Logger.log("Lỗi gửi email SePay: " + eEmail);
+        }
+      }
+
+      // ĐỒNG BỘ CẬP NHẬT SUPABASE
+      syncPaymentToSupabase(matchedPhone, customerName, "ĐÃ THANH TOÁN", customerPrice);
+
+    } else {
+      // 4. NẾU CHƯA CÓ ĐƠN TRONG SHEET (Khách CK trực tiếp hoặc chưa có SĐT)
+      // Tự động ghi nhận 1 dòng mới để KHÔNG BAO GIỜ BỊ SÓT GIAO DỊCH!
+      sheet.appendRow([
+        timeStr,
+        "Khách CK (" + (matchedPhone || "Chưa rõ SĐT") + ")",
+        "'" + (matchedPhone || ""),
+        "",
+        formattedAmount,
+        "Nội dung CK: " + content,
+        "SePay Webhook (" + bankGateway + " ref: " + refCode + ")",
+        "ĐÃ THANH TOÁN (SePay " + bankGateway + ")",
+        ""
+      ]);
+
+      if (matchedPhone) {
+        syncPaymentToSupabase(matchedPhone, "Khách CK SePay", "ĐÃ THANH TOÁN", formattedAmount);
+      }
+    }
+
+    // 5. TRẢ VỀ PHẢN HỒI THÀNH CÔNG CHO SEPAY
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      status: "success",
+      message: "SePay webhook processed successfully",
+      matchedPhone: matchedPhone,
+      updatedRow: updatedRow,
+      amount: amount
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    Logger.log("Lỗi xử lý SePay Webhook: " + err);
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      status: "warning",
+      message: "Processed with warning: " + err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * CẬP NHẬT TRẠNG THÁI THANH TOÁN SANG SUPABASE
+ */
+function syncPaymentToSupabase(phone, name, status, price) {
+  if (!phone) return;
+  try {
+    const cleanPhone = String(phone).replace(/\D/g, "");
+    const sbUrl = "https://fjzkneljhfibwksnpjkk.supabase.co";
+    const sbKey = "sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR";
+
+    const patchUrl = sbUrl + "/rest/v1/leads?phone=like.*" + cleanPhone + "*";
+    const options = {
+      method: "patch",
+      contentType: "application/json",
+      headers: {
+        "apikey": sbKey,
+        "Authorization": "Bearer " + sbKey,
+        "Prefer": "return=minimal"
+      },
+      payload: JSON.stringify({
+        status: status,
+        price: price
+      }),
+      muteHttpExceptions: true
+    };
+    UrlFetchApp.fetch(patchUrl, options);
+  } catch (e) {
+    Logger.log("Supabase sync warning: " + e);
+  }
 }
 
 /**

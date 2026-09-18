@@ -1648,24 +1648,24 @@
 
         <!-- QR Code tự động sinh từ VietQR API -->
         <div class="relative inline-block mb-3">
-          <img id="vietqrImg" src="" alt="QR chuyển khoản Simon Center"
+          <img id="vietqrImg" src="" alt="QR chuyển khoản SePay ACB"
             class="w-52 h-52 mx-auto rounded-xl border-4 border-brand-crimson shadow-lg"
-            onerror="this.src='https://img.vietqr.io/image/TCB-PLACEHOLDER-compact2.png'">
+            onerror="this.src='https://img.vietqr.io/image/ACB-2412825668-compact2.png'">
           <div
-            class="absolute -top-2 -right-2 bg-brand-crimson text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
-            TECHCOMBANK</div>
+            class="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+            ACB - SEPAY</div>
         </div>
 
         <!-- Chi tiết chuyển khoản -->
         <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-left text-xs space-y-2.5 mb-4">
           <div class="flex justify-between items-center">
             <span class="text-gray-500">Ngân hàng</span>
-            <span class="font-bold text-gray-900">Techcombank (TCB)</span>
+            <span class="font-bold text-gray-900">ACB (Ngân hàng TMCP Á Châu)</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-gray-500">Số tài khoản</span>
             <div class="flex items-center space-x-1.5">
-              <span id="displayAccNum" class="font-mono font-bold text-gray-900">387979795668</span>
+              <span id="displayAccNum" class="font-mono font-bold text-gray-900">2412825668</span>
               <button onclick="copyAccNum()"
                 class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-0.5 rounded text-[10px] font-semibold transition"
                 title="Copy số tài khoản">
@@ -1675,7 +1675,7 @@
           </div>
           <div class="flex justify-between items-center">
             <span class="text-gray-500">Chủ tài khoản</span>
-            <span class="font-bold text-gray-900">SIMON CENTER</span>
+            <span class="font-bold text-gray-900">BUI NGOC MINH HUY</span>
           </div>
           <div class="flex justify-between items-center border-t border-gray-200 pt-2">
             <span class="text-gray-500">Số tiền</span>
@@ -2377,11 +2377,11 @@
       return null;
     }
 
-    // ── CẤU HÌNH THANH TOÁN ── Techcombank Simon Center
+    // ── CẤU HÌNH THANH TOÁN ── ACB BUI NGOC MINH HUY (Tự động nhận diện SePay)
     const BANK_CONFIG = {
-      bankCode: 'TCB',                  // Techcombank
-      accountNumber: '387979795668',    // STK Techcombank Simon Center
-      accountName: 'SIMON CENTER',      // Tên chủ tài khoản
+      bankCode: 'ACB',                  // Ngân hàng Á Châu (ACB)
+      accountNumber: '2412825668',      // STK ACB đã liên kết SePay
+      accountName: 'BUI NGOC MINH HUY', // Tên chủ tài khoản
       template: 'compact2'              // compact2 = nhỏ gọn, qr-only = chỉ QR
     };
 
@@ -2906,6 +2906,7 @@
       localStorage.setItem('simon_confirmed_payments', JSON.stringify(confirmed));
 
       // 3. Cập nhật giao diện sang Bước 3
+      stopPaymentAutoCheck();
       document.getElementById('paidNameText').innerText = name;
       document.getElementById('paidSummaryName').innerText = name;
       document.getElementById('paidSummaryPhone').innerText = phone;
@@ -2928,6 +2929,36 @@
       showCopyToast('Đã ghi nhận thanh toán thành công!');
     }
 
+    // ── TỰ ĐỘNG KIỂM TRA THANH TOÁN SEPAY (POLLING REALTIME) ──
+    let _paymentCheckTimer = null;
+    function startPaymentAutoCheck(phone) {
+      stopPaymentAutoCheck();
+      if (!phone || phone.length < 9) return;
+      const cleanPhone = phone.replace(/\D/g, '');
+
+      _paymentCheckTimer = setInterval(async () => {
+        try {
+          const sheetUrl = getGoogleSheetUrl();
+          if (sheetUrl) {
+            const res = await fetch(`${sheetUrl}?action=check_payment&phone=${encodeURIComponent(cleanPhone)}`);
+            const resData = await res.json();
+            if (resData && resData.paid) {
+              stopPaymentAutoCheck();
+              handlePaidConfirm();
+              return;
+            }
+          }
+        } catch (errPoll) { }
+      }, 3000);
+    }
+
+    function stopPaymentAutoCheck() {
+      if (_paymentCheckTimer) {
+        clearInterval(_paymentCheckTimer);
+        _paymentCheckTimer = null;
+      }
+    }
+
     // ── CHUYỂN SANG BƯỚC 2: Sinh QR VietQR ──
     function goToPaymentStep() {
       const pricing = getDynamicPricing();
@@ -2941,7 +2972,7 @@
       const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').replace(/[^a-zA-Z0-9 ]/g, '').trim().toUpperCase().replace(/\s+/g, ' ');
       const note = `CHIRO ${courseKey} ${normalize(phone)}`.trim();
 
-      // Sinh QR từ API VietQR (miễn phí, không cần đăng ký)
+      // Sinh QR từ API VietQR (miễn phí, liên kết SePay ACB)
       const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.bankCode}-${BANK_CONFIG.accountNumber}-${BANK_CONFIG.template}.png?amount=${priceRaw}&addInfo=${encodeURIComponent(note)}&accountName=${encodeURIComponent(BANK_CONFIG.accountName)}`;
 
       document.getElementById('vietqrImg').src = qrUrl;
@@ -2960,6 +2991,9 @@
         btn.innerHTML = '<span>✅ TÔI ĐÃ CHUYỂN KHOẢN XONG</span>';
       }
 
+      // Kích hoạt tự động quét thanh toán SePay (Không cần khách bấm nút)
+      startPaymentAutoCheck(phone);
+
       // Chuyển tab UI
       document.getElementById('step1Content').classList.add('hidden');
       document.getElementById('step2Content').classList.remove('hidden');
@@ -2975,6 +3009,7 @@
 
     // ── QUAY LẠI BƯỚC 1 ──
     function goToStep1() {
+      stopPaymentAutoCheck();
       document.getElementById('step1Content').classList.remove('hidden');
       document.getElementById('step2Content').classList.add('hidden');
       document.getElementById('step3Content').classList.add('hidden');
@@ -2989,6 +3024,7 @@
 
     // ── ĐÓNG MODAL ──
     function closeModal() {
+      stopPaymentAutoCheck();
       document.getElementById('successModal').classList.add('hidden');
       document.getElementById('successModal').classList.remove('flex');
       goToStep1();
