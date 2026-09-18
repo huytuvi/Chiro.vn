@@ -2,7 +2,7 @@
 
 > **Định vị cốt lõi:** Chương trình đào tạo Chiropractic chuẩn y khoa duy nhất giúp bạn đọc thấu phim X-quang, sờ nắn định vị chính xác gốc bệnh — và nắm vững nguyên tắc khi nào TUYỆT ĐỐI KHÔNG ĐƯỢC NẮN để trị liệu an toàn trọn đời.
 > **Trường phái:** Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic) từ Viện DISC (Đức) do Thầy Henrik Simon sáng lập.
-> **Nguyên tắc thương hiệu:** *"Dễ hiểu nhưng phải chuẩn"* — Chuẩn mực y khoa Đức, đề cao y đức và an toàn sinh mệnh nghề nghiệp.
+> **Nguyên tắc thương hiệu:** *"Dễ hiểu nhưng phải chuẩn"* — Chuẩn mực y khoa quốc tế, đề cao y đức và an toàn sinh mệnh nghề nghiệp.
 
 ---
 

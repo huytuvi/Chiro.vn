@@ -17,7 +17,7 @@
 
 ---
 
-## 3. BƯỚC NGOẶT KHI TIẾP CẬN CHUẨN MỰC Y KHOA ĐỨC CỦA SIMON CENTER
+## 3. BƯỚC NGOẶT KHI TIẾP CẬN CHUẨN MỰC Y KHOA QUỐC TẾ CỦA SIMON CENTER
 * **Sự đồng điệu về tư duy Y học chứng cứ:** Bác sĩ Khoa ban đầu rất thận trọng với các lớp bẻ khớp ngoài thị trường vì sợ thiếu an toàn. Nhưng khi xem giáo trình DISC của Thầy Henrik Simon, anh hoàn toàn bị thuyết phục bởi sự chuẩn xác về giải phẫu, cơ chế trượt mặt khớp Z-joint, và đặc biệt là hệ thống tầm soát Red Flags cực kỳ nghiêm ngặt.
 * **Làm chủ kỹ thuật nắn chỉnh chính xác từng milimet:** Khóa học trực tiếp 4 ngày uốn nắn lực giúp anh làm chủ hoàn toàn các kỹ thuật nắn chỉnh Cột sống thắt lưng và Khung chậu ISG mà không cần dùng sức gồng.
 
