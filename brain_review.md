@@ -32,14 +32,41 @@ Bộ não đã học và khắc sâu nguyên tắc bất biến trong ngành y:
 - Bộ não đã chuyển hóa 100% định vị sang cụm từ **"Chuẩn Y Khoa" (Evidence-based Medical Standard)** hoặc **"Specific Chiropractic"**. Nước Đức và Viện DISC đóng vai trò chuẩn mực học thuật cá nhân của Thầy Henrik Simon (Instructor Authority), mang lại uy tín bền vững không thể tranh cãi.
 
 ### 4. Tiến Hóa 3 Brand Voice Độc Lập Theo Nguyên Tắc Cách Ly Dữ Liệu (Data Isolation Rule)
-- **Giọng 1 (Tư Vấn & Thấu Cảm):** Đạt điểm xuất sắc **9.0/10** ngay từ Ngày 1. Khách hàng cảm nhận được sự ấm áp, kiên nhẫn, tinh thần người thầy thuốc lắng nghe hoàn cảnh sống trước khi đưa ra lời khuyên.
-- **Giọng 2 (Giảng Học Thuật & Đập Tan Ngộ Nhận):** Nắm vững tư duy First Principles, bóc tách bản chất tiếng kêu khớp "rắc" chỉ là bọt khí hoạt dịch (Cavitation), phân biệt rõ đốt kẹt (Hypomobile - cần nắn) và đốt lỏng bù trừ (Hypermobile - cấm nắn).
-- **Giọng 3 (Sale Y Đức & Bán Hàng Có Tâm):** Nhuần nhuyễn công thức *Feel - Felt - Found*, chuyển hóa phản đối chi phí thành bài toán đầu tư an toàn sinh mệnh và hoàn vốn (ROI) chỉ sau 5–6 bệnh nhân; áp dụng chính sách khấu trừ 100% khóa Online lên Offline.
+- **Giọng 1 (Tư Vấn & Đồng Cảm):** Đạt điểm xuất sắc **9.0/10** ngay từ Ngày 1. Khách hàng cảm nhận được sự ấm áp, kiên nhẫn, tinh thần người thầy thuốc lắng nghe hoàn cảnh sống trước khi đưa ra lời khuyên.
+- **Giọng 2 (Học Thuật & Nguyên Lý Gốc):** Đạt **8.8/10** ở Ngày 2. Chuyển hóa các thuật ngữ giải phẫu phức tạp (Subluxation, Biomechanics) thành những hình tượng trực quan, sinh động.
+- **Giọng 3 (Sale Y Đức & Chốt Deal):** Đạt **8.5/10** ở Ngày 3 và Ngày 10. Tiếp cận bán hàng với tâm thế người thầy thuốc khuyên bệnh nhân đi khám sớm, giải tỏa nỗi do dự học phí một cách trung thực, chính trực.
 
-### 5. Kết Nối Trí Tuệ Với Hạ Tầng Thực Thi Bán Hàng (CRM & Thanh Toán QR)
-- Không chỉ dừng lại ở bài viết, bộ não đã tích hợp cấu trúc dữ liệu thương mại (`products`, `customers`, `orders`) kết nối với cổng thanh toán SePay VietQR tự động và Admin Panel, tạo thành một chu trình khép kín: **Thu hút nội dung -> Tư vấn Chatbot -> Thanh toán tự động -> Quản trị học viên**.
+### 2.2. Điểm mạnh nổi bật (Strengths)
+1. **Kiểm soát ranh giới chuyên môn chặt chẽ:** Não bộ tuân thủ xuất sắc nguyên tắc 4 chữ KHÔNG y khoa (Không chẩn đoán từ xa, Không kê đơn, Không hứa chữa khỏi 100%, Không thúc ép).
+2. **Ngôn từ có hồn và giàu tính y đức:** Không giống các chatbot tạo bài rập khuôn, các bài viết của Simon Center mang phong thái điềm tĩnh, mực thước, dùng đúng xưng hô (*"anh/chị"* - *"em/bên em"*), câu kết luôn có *"nhé ạ"*, tạo thiện cảm lớn.
+3. **Cơ chế In-Context Learning (Học qua văn mẫu):** Việc học trực tiếp từ các đoạn văn mẫu do người sáng lập viết lại (Gold Rewrites) giúp Gemini AI nắm bắt đúng nhịp ngắt câu và khí chất bác sĩ.
 
 ---
+
+## 3. Các Điểm Cần Bổ Sung & Nâng Cấp Ngay (Areas for Improvement)
+
+### 3.1. Những thiếu sót phát hiện qua thực tế:
+1. **Kho Case Study lâm sàng còn mỏng:** Hiện não bộ mới chỉ có một vài case study phổ biến (đau cổ vai gáy dân văn phòng, nỗi sợ run tay của KTV mới). Cần bổ sung thêm 10-15 ca bệnh thực tế có phim X-quang cụ thể để các bài viết ngày càng sâu sắc.
+2. **Bộ lọc từ cấm (Blacklist) cần được kích hoạt cứng:** Cần loại bỏ hoàn toàn các từ giục mua hàng rẻ tiền, câu cửa miệng kiểu mạng xã hội (*"tin siêu vui"*, *"cả nhà ơi"*), cũng như các từ không phù hợp phong cách lâm sàng như *"thấu"* để giữ trọn tính chất y khoa đứng đắn.
+3. **Mở rộng dữ liệu phản hồi từ học viên thực tế:** Cần thêm các câu hỏi thường gặp (FAQs) của các bác sĩ YHCT và HLV PT khi chuyển đổi sang học Chiropractic.
+
+---
+
+## 4. Định Hướng Huấn Luyện 7 Ngày Tiếp Theo (Roadmap)
+
+1. **Chuẩn hóa Bộ Quy Tắc Theo Từng Voice:** Thiết lập bảng quản lý luật rõ ràng cho từng giọng (Giọng 1, Giọng 2, Giọng 3) để người dùng kiểm soát chính xác những gì AI đã học.
+2. **Kích hoạt Bộ Lọc Hậu Kiểm (Runtime Blacklist Sanitizer):** Đảm bảo 100% không một từ cấm nào có thể lọt qua bài viết khi xuất bản.
+3. **Tích hợp sâu hệ thống quản lý học viên/khách hàng (CRM):** Kết nối phản hồi từ đơn hàng thực tế vào kho dữ liệu của não bộ.
+
+---
+
+## 5. Kết Luận
+Sau 7 ngày vận hành thực chiến, **Bộ não AI Simon Center** không còn là một công cụ tạo nội dung thông thường, mà đã thực sự trở thành:
+1. **Một người gác cổng thương hiệu** bảo vệ uy tín y khoa tuyệt đối.
+2. **Một kho tàng tri thức số** kế thừa chuẩn mực Đức.
+3. **Một trợ lý tư vấn 24/7** thông minh, kiên nhẫn, đồng hành cùng học viên mới.
+
+### 5. Kết Nối Trí Tuệ Với Hạ Tầng Thực Thi Bán Hàng (CRM & Thanh Toán QR)
 
 ## II. ĐÁNH GIÁ ĐIỂM MẠNH VƯỢT TRỘI CỦA BỘ NÃO HIỆN TẠI
 
