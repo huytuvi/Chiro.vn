@@ -22,16 +22,19 @@ Anh/chị có thể chọn nhanh các chủ đề bên dưới hoặc gõ trực
     // DANH MỤC CÂU HỎI NHANH THEO 2 TAB
     categories: {
       course: {
-        label: "🎓 Khóa Học (10)",
+        label: "🎓 Khóa Học (12)",
         questions: [
+          { id: "c_beginner_budget", text: "🌱 Chưa biết gì & Ít tiền thì nên học từ đâu?" },
           { id: "q1", text: "🎓 Học online liệu có làm được thật không?" },
           { id: "q2", text: "🩺 PT Gym / Spa / chưa học Y có học được không?" },
           { id: "q3", text: "💰 Sao học phí 14.9tr cao hơn lớp 2-3 ngày?" },
+          { id: "c_schedule_duration", text: "⏱️ Thời gian học bao lâu? Có bị giới hạn không?" },
+          { id: "c_location", text: "📍 Lớp Offline học ở đâu? Có ở TP.HCM / Hà Nội?" },
+          { id: "c_career_outcome", text: "💼 Đầu ra sau khóa học & Cơ hội mở phòng khám" },
           { id: "q4", text: "📊 Khóa học có dạy đọc phim X-quang không?" },
           { id: "q5", text: "📜 Chứng chỉ hoàn thành & Pháp lý hành nghề" },
           { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" },
           { id: "q7", text: "🔥 Nắn Specific chuyên biệt khác gì bẻ khớp thông thường?" },
-          { id: "q8", text: "💪 Nữ nhỏ con có nắn được khách nam 90kg không?" },
           { id: "q9", text: "💳 Có chính sách trả góp qua thẻ tín dụng không?" },
           { id: "buy", text: "⚡ Đăng ký khóa học / Nhận ưu đãi ngay" }
         ]
@@ -130,6 +133,82 @@ Anh/chị bấm nút bên dưới để chuyển ngay đến Form đăng ký gi�
 Để anh/chị có cái nhìn thực tế nhất về bài giảng của Thầy Henrik Simon, em xin phép gửi tặng anh/chị <strong>1 Suất Học Thử Bài Giảng Mẫu 4K POV</strong> hoàn toàn miễn phí nhé ạ.<br><br>
 Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng mẫu qua Zalo/Email, đồng thời hệ thống sẽ <strong>tự động bảo lưu mức học phí ưu đãi 14.9 triệu</strong> cho anh/chị mà không sợ bị tăng giá về sau ạ:`,
         cta: "trial"
+      },
+
+      // --- CÂU HỎI MỚI: NGƯỜI MỚI BẮT ĐẦU & KINH PHÍ HẠN CHẾ ---
+      c_beginner_budget: {
+        text: `Dạ em rất chia sẻ và đồng cảm với nỗi băn khoăn của anh/chị ạ! Hơn 50% học viên thành công tại Simon Center khi mới bắt đầu cũng có chung 2 trăn trở y hệt như anh/chị:<br><br>
+🌱 <strong>1. Chưa biết gì về Y khoa thì bắt đầu từ đâu?</strong><br>
+• Anh/chị <strong>hoàn toàn không cần nền tảng y khoa từ trước</strong>. Giáo trình của Bác sĩ Henrik Simon được xây dựng từ số 0 theo mô hình 3D trực quan và cơ chế đòn bẩy tự nhiên, giúp hiểu bản chất tường minh mà không phải học vẹt giải phẫu phức tạp.<br>
+• <strong>Điểm khởi đầu chuẩn nhất:</strong> Khóa <strong>The Full Online Collection</strong>. Anh/chị sẽ được trang bị nền tảng sờ nắn mốc xương, nhận diện Cảnh báo đỏ (Red Flags) để tuyệt đối an toàn cho người bệnh, và phương pháp rèn phản xạ lực Micro-drills tại nhà giúp tay quen phản xạ trước khi chạm người thật (hoàn toàn không lo run tay).<br><br>
+💡 <strong>2. Ngân sách eo hẹp, không có nhiều tiền thì lộ trình thế nào?</strong><br>
+Simon Center có chính sách hỗ trợ tài chính tối ưu để anh/chị không phải chịu áp lực:<br>
+• <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu 4K POV chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
+• <strong>Bước 2 - Trả góp 0% chỉ ~1.2 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Mỗi tháng chỉ bằng thu nhập từ 1–2 ca nắn chỉnh thực tế.<br>
+• <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ 14.9 triệu tiền khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
+<em>Anh/chị không cần gom tiền học dồn dập mọi khóa cùng lúc. Hãy bắt đầu vững chắc từ nền tảng Online trước nhé ạ!</em>`,
+        cta: "trial"
+      },
+
+      // --- CÂU HỎI MỚI: THỜI GIAN & LỊCH HỌC ---
+      c_schedule_duration: {
+        text: `⏱️ <strong>THỜI GIAN HỌC & LỊCH TRÌNH ĐÀO TẠO:</strong><br><br>
+• <strong>Khóa Online The Full Collection:</strong> Tài khoản học có giá trị <strong>TRỌN ĐỜI 24/7</strong>. Anh/chị chủ động hoàn toàn về thời gian, học trên điện thoại hoặc máy tính bất kỳ lúc nào rảnh rỗi mà không sợ bị trôi bài.<br>
+• <strong>Lộ trình tiếp thu trung bình của học viên:</strong><br>
+  - <em>Tuần 1–3:</em> Nắm vững giải phẫu cơ sinh học, sờ nắn mốc xương và bảng Cảnh báo đỏ Red Flags.<br>
+  - <em>Tuần 4–6:</em> Thuần thục phương pháp Micro-drills rèn lực, bộ pháp và các test lâm sàng.<br>
+  - <em>Tuần 7–10:</em> Thực hành nhuần nhuyễn các kỹ thuật nắn chỉnh cột sống cổ, lưng, khung chậu và khớp ngoại vi.<br><br>
+• <strong>Lớp Offline Cầm tay chỉ việc:</strong> Diễn ra tập trung trong <strong>4 ngày thực hành liên tục (thứ 5 đến Chủ nhật)</strong> định kỳ mỗi quý cùng Bác sĩ Henrik Simon tại trung tâm.`,
+        cta: "register"
+      },
+
+      // --- CÂU HỎI MỚI: ĐỊA ĐIỂM HỌC ---
+      c_location: {
+        text: `📍 <strong>ĐỊA ĐIỂM HỌC & CƠ SỞ ĐÀO TẠO SIMON CENTER:</strong><br><br>
+• <strong>Khóa E-Learning Online:</strong> Học trực tuyến mọi lúc mọi nơi trên nền tảng chuyên biệt chuẩn 4K POV. Học viên ở khắp các tỉnh thành trên cả nước và cả kiều bào ở nước ngoài (Mỹ, Đức, Úc, Nhật...) đều theo học rất thuận tiện.<br><br>
+• <strong>Khóa Thực hành Offline Cầm tay chỉ việc:</strong> Được tổ chức tại các cơ sở đào tạo tiêu chuẩn y khoa của Simon Center tại <strong>TP. Hồ Chí Minh</strong> và <strong>Hà Nội</strong>.<br>
+• Lớp học giới hạn sĩ số để Bác sĩ Henrik Simon và trợ giảng chỉnh từng góc tay, bộ pháp và lực nắn cho từng học viên.`,
+        cta: "register"
+      },
+
+      // --- CÂU HỎI MỚI: ĐẦU RA, MỞ PHÒNG KHÁM, THU NHẬP ---
+      c_career_outcome: {
+        text: `💼 <strong>ĐẦU RA NGHỀ NGHIỆP & CƠ HỘI MỞ PHÒNG KHÁM:</strong><br><br>
+Hơn 500+ học viên đã tốt nghiệp tại Simon Center đang ứng dụng rất thành công theo 3 hướng:<br><br>
+1. <strong>Chủ Spa / Phòng khám Đông y / Phục hồi chức năng:</strong> Bổ sung dịch vụ Chiropractic nắn chỉnh cột sống chuẩn y khoa, nâng tầm giá trị buổi trị liệu từ 200k lên <strong>600k – 1.200k/buổi</strong>.<br>
+2. <strong>HLV PT Gym / Huấn luyện viên Yoga:</strong> Nâng cấp thành Chuyên gia Chỉnh sửa Tư thế & Phục hồi vận động (Posture & Mobility Specialist), gia tăng tỷ lệ khách hàng gắn bó lâu dài.<br>
+3. <strong>Mở Cơ sở Trị liệu Cơ xương khớp:</strong> Được bảo trợ chuyên môn từ Simon Center, được cấp Chứng chỉ Hoàn thành có chữ ký Thầy Henrik Simon và hỗ trợ hội chẩn các ca bệnh khó trọn đời.<br><br>
+📊 <em>Bài toán kinh tế:</em> Với học phí ưu đãi 14.9 triệu, anh/chị chỉ cần phục vụ <strong>5–6 bệnh nhân</strong> thực tế là đã hoàn vốn đầu tư!`,
+        cta: "register"
+      },
+
+      // --- CÂU HỎI MỚI: BỆNH NHÂN TỰ HỎI KHÁM / CHỮA BỆNH ---
+      c_patient_consult: {
+        text: `🩺 <strong>TƯ VẤN THĂM KHÁM & ĐIỀU TRỊ CÙNG BÁC SĨ HENRIK SIMON:</strong><br><br>
+Dạ em rất đồng cảm với tình trạng đau mỏi, khó chịu mà anh/chị hoặc người thân đang gặp phải ạ!<br><br>
+Tại Simon Center, mọi ca bệnh đều được tiếp cận theo <strong>Chuẩn Y học Châu Âu</strong>:<br>
+1. <strong>Tìm đúng gốc rễ nguyên nhân:</strong> Không nắn bẻ mò, bắt buộc kết hợp thăm khám lâm sàng và phân tích phim X-quang/MRI cơ sinh học.<br>
+2. <strong>Điều trị bảo tồn an toàn tuyệt đối:</strong> Giải phóng chèn ép thần kinh và phục hồi đường cong sinh lý nhẹ nhàng, không tiêm, không phẫu thuật.<br><br>
+Anh/chị có thể kết nối trực tiếp qua Zalo <strong>0389.609.938</strong> để gửi hình ảnh kết quả phim chụp (nếu có). Bác sĩ Henrik Simon sẽ xem và phân tích hội chẩn miễn phí giúp mình nhé ạ!`,
+        cta: "register"
+      },
+
+      // --- CÂU HỎI MỚI: BÁC SĨ HENRIK SIMON LÀ AI ---
+      c_simon_bio: {
+        text: `👨‍⚕️ <strong>THÔNG TIN VỀ BÁC SĨ HENRIK SIMON:</strong><br><br>
+• Bác sĩ Henrik Simon là Chuyên gia Trị liệu Thần kinh Cột sống Chiropractic hàng đầu đến từ <strong>Cộng hòa Liên bang Đức</strong>, với hơn <strong>20 năm kinh nghiệm lâm sàng</strong> điều trị tại châu Âu.<br>
+• Ông là cựu giảng viên và chuyên gia nòng cốt kế thừa các nghiên cứu cơ sinh học tại <strong>Viện DISC (Đức)</strong>.<br>
+• Tác giả của công trình đồ sộ <strong>hơn 350 bài giảng y khoa chuyên sâu</strong> về kỹ thuật nắn chỉnh cột sống, chẩn đoán hình ảnh X-quang và phương pháp phát lực ngón cái độc quyền (Simon-Technik).<br>
+• Thầy Henrik Simon trực tiếp giảng dạy và trực tiếp cầm tay chỉ việc cho các học viên tại Việt Nam.`,
+        cta: "register"
+      },
+
+      // --- CÂU HỎI MỚI: DỤNG CỤ, BÀN NẮN, ACTIVATOR ---
+      c_table_equipment: {
+        text: `🛠️ <strong>DỤNG CỤ HỖ TRỢ & BÀN NẮN CHIROPRACTIC:</strong><br><br>
+• <strong>Điểm đặc sắc của phương pháp Henrik Simon:</strong> Khóa học tập trung rèn luyện <strong>đôi bàn tay và cơ chế đòn bẩy cơ thể (Body Drop)</strong> của chính bạn. Bạn có thể nắn chỉnh hiệu quả ngay trên giường khám thông thường mà <strong>hoàn toàn không bắt buộc phải mua bàn nắn đắt tiền tiền trăm triệu</strong>.<br>
+• Khi điều kiện cho phép, Thầy cũng hướng dẫn sử dụng bàn nắn phân đoạn (Drop Table), đệm nêm chậu (Pelvic Blocks) và súng nắn Activator để hỗ trợ các ca bệnh đặc thù (người già loãng xương, trẻ em).`,
+        cta: "register"
       },
 
       // --- NHÓM 2: CHUYÊN KHOA CHIROPRACTIC Y HỌC (TỪ 351 BÀI BRAIN.DB) ---
@@ -439,7 +518,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         <div class="flex items-center gap-1">
           <button type="button" id="tabBtnCourse" onclick="window.switchChiroCategory('course')" 
             class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs">
-            🎓 Khóa Học (10)
+            🎓 Khóa Học (12)
           </button>
           <button type="button" id="tabBtnClinical" onclick="window.switchChiroCategory('clinical')" 
             class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200">
@@ -503,7 +582,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
   };
 
   function initGreeting() {
-    appendBotMessage(BOT_DATA.greeting);
+    appendBotMessage(BOT_DATA.greeting, null, true);
     renderQuickChips();
   }
 
@@ -553,7 +632,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     });
   }
 
-  function appendBotMessage(htmlContent, ctaType = null) {
+  function appendBotMessage(htmlContent, ctaType = null, isInstant = false) {
     chatHistory.push({ sender: "bot", text: htmlContent, cta: ctaType });
     const messagesContainer = document.getElementById("chiroChatMessages");
     if (!messagesContainer) return;
@@ -579,6 +658,9 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
           <button onclick="window.scrollToRegisterForm('trial')" class="bg-amber-600 hover:bg-amber-700 text-white w-full text-xs font-bold py-2 px-3 rounded-xl shadow flex items-center justify-center space-x-1.5 transition">
             <span>🎁 Điền Form Nhận Video Học Thử & Giữ Ưu Đãi</span>
           </button>
+          <a href="https://zalo.me/0389609938" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold py-1.5 px-3 rounded-xl shadow-xs flex items-center justify-center space-x-1 transition">
+            <span>💬 Hội Chẩn Ca Bệnh / Zalo Bác Sĩ: 0389.609.938</span>
+          </a>
           <a href="tel:0389609938" class="block text-center text-[11px] text-gray-500 hover:text-brand-crimson font-medium pt-0.5">
             Hotline Hỗ Trợ 24/7: 0389.609.938
           </a>
@@ -586,30 +668,87 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       `;
     }
 
+    if (isInstant) {
+      msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40 mt-0.5">
+          SC
+        </div>
+        <div class="chiro-bot-bubble p-3 rounded-2xl rounded-tl-xs shadow-xs">
+          <div>${htmlContent}</div>
+          ${ctaHtml}
+        </div>
+      `;
+      messagesContainer.appendChild(msgDiv);
+      setTimeout(() => {
+        try {
+          const topTarget = msgDiv.offsetTop - 8;
+          messagesContainer.scrollTo({ top: Math.max(0, topTarget), behavior: "smooth" });
+        } catch (err) {
+          msgDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 60);
+      return;
+    }
+
+    // --- HIỆU ỨNG GÕ CHỮ TỰ NHIÊN (TYPEWRITER STREAMING) ---
+    const paragraphs = htmlContent.split(/<br\s*[\/]?>\s*<br\s*[\/]?>/i);
+    
     msgDiv.innerHTML = `
       <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40 mt-0.5">
         SC
       </div>
       <div class="chiro-bot-bubble p-3 rounded-2xl rounded-tl-xs shadow-xs">
-        <div>${htmlContent}</div>
-        ${ctaHtml}
+        <div class="chiro-stream-content"></div>
+        <span class="chiro-cursor inline-block w-1.5 h-3.5 bg-brand-crimson ml-0.5 animate-pulse align-middle"></span>
+        <div class="chiro-stream-cta hidden opacity-0 transition-opacity duration-500">
+          ${ctaHtml}
+        </div>
       </div>
     `;
 
     messagesContainer.appendChild(msgDiv);
+    
+    const scrollTarget = msgDiv.offsetTop - 10;
+    messagesContainer.scrollTo({ top: Math.max(0, scrollTarget), behavior: "smooth" });
 
-    // FIX LỖI CUỘN: Cuộn mượt đến đầu của tin nhắn mới
-    setTimeout(() => {
-      try {
-        const topTarget = msgDiv.offsetTop - 8;
+    const contentBox = msgDiv.querySelector(".chiro-stream-content");
+    const cursor = msgDiv.querySelector(".chiro-cursor");
+    const ctaBox = msgDiv.querySelector(".chiro-stream-cta");
+
+    let pIndex = 0;
+    function streamNextParagraph() {
+      if (pIndex < paragraphs.length) {
+        if (pIndex > 0) {
+          contentBox.innerHTML += "<br><br>" + paragraphs[pIndex];
+        } else {
+          contentBox.innerHTML = paragraphs[pIndex];
+        }
+        pIndex++;
+        
         messagesContainer.scrollTo({
-          top: Math.max(0, topTarget),
+          top: messagesContainer.scrollHeight,
           behavior: "smooth"
         });
-      } catch (err) {
-        msgDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        const nextDelay = Math.floor(Math.random() * 100) + 240;
+        setTimeout(streamNextParagraph, nextDelay);
+      } else {
+        if (cursor) cursor.remove();
+        if (ctaHtml && ctaBox) {
+          ctaBox.classList.remove("hidden");
+          requestAnimationFrame(() => {
+            ctaBox.classList.remove("opacity-0");
+            ctaBox.classList.add("opacity-100");
+            messagesContainer.scrollTo({
+              top: messagesContainer.scrollHeight,
+              behavior: "smooth"
+            });
+          });
+        }
       }
-    }, 60);
+    }
+
+    setTimeout(streamNextParagraph, 120);
   }
 
   function appendUserMessage(text) {
@@ -798,7 +937,80 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     // B. NHÓM TUYỂN SINH, KHÓA HỌC & BÁN HÀNG CHUẨN Y ĐỨC
     // ---------------------------------------------------------
 
-    // 13. Khách muốn mua / đăng ký / học phí / chuyển khoản
+    // 13. Người mới bắt đầu / Chưa biết gì / Kinh phí hạn chế / Ít tiền / Bắt đầu từ đâu
+    if (
+      norm.includes("chua biet") || norm.includes("bat dau tu dau") || norm.includes("so 0") || 
+      norm.includes("hoc tu dau") || norm.includes("nguoi moi") || norm.includes("chua co kien thuc") || 
+      norm.includes("mat goc") || norm.includes("chua tung hoc") || norm.includes("kho khong") ||
+      norm.includes("khong co qua nhieu tien") || norm.includes("khong co tien") || norm.includes("it tien") || 
+      norm.includes("kinh phi") || norm.includes("ngan sach") || norm.includes("chua du tien") || 
+      norm.includes("khong du tien") || norm.includes("tiet kiem")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_beginner_budget.text, BOT_DATA.answers.c_beginner_budget.cta);
+      return;
+    }
+
+    // 14. Bệnh nhân tự hỏi tư vấn chữa bệnh cho bản thân hoặc người thân
+    if (
+      (norm.includes("toi bi") || norm.includes("em bi") || norm.includes("minh bi") || 
+       norm.includes("nguoi nha bi") || norm.includes("kham o dau") || norm.includes("chi phi kham") || 
+       norm.includes("chua duoc khong") || norm.includes("co tri duoc khong") || norm.includes("kham chua")) &&
+      !norm.includes("khoa hoc") && !norm.includes("hoc online")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_patient_consult.text, BOT_DATA.answers.c_patient_consult.cta);
+      return;
+    }
+
+    // 15. Thời gian học, lịch học, học bao lâu
+    if (
+      norm.includes("bao lau") || norm.includes("thoi gian") || norm.includes("may thang") || 
+      norm.includes("may buoi") || norm.includes("lich hoc") || norm.includes("gio hoc") || 
+      norm.includes("bao lau thi lam duoc") || norm.includes("co kip khong") || norm.includes("gioi han")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_schedule_duration.text, BOT_DATA.answers.c_schedule_duration.cta);
+      return;
+    }
+
+    // 16. Địa điểm học: ở đâu, TP.HCM, Hà Nội, tỉnh xa
+    if (
+      norm.includes("o dau") || norm.includes("dia diem") || norm.includes("dia chi") || 
+      norm.includes("tphcm") || norm.includes("sai gon") || norm.includes("ha noi") || 
+      norm.includes("da nang") || norm.includes("o tinh") || norm.includes("o xa") || norm.includes("o nuoc ngoai")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_location.text, BOT_DATA.answers.c_location.cta);
+      return;
+    }
+
+    // 17. Đầu ra nghề nghiệp, mở phòng khám, cơ hội việc làm, thu nhập
+    if (
+      norm.includes("dau ra") || norm.includes("phong kham") || norm.includes("mo tiem") || 
+      norm.includes("kiem tien") || norm.includes("thu nhap") || norm.includes("co viec lam") || 
+      norm.includes("co khach") || norm.includes("hanh nghe duoc khong") ||
+      (norm.includes("mo") && (norm.includes("phong") || norm.includes("tiem") || norm.includes("co so")))
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_career_outcome.text, BOT_DATA.answers.c_career_outcome.cta);
+      return;
+    }
+
+    // 18. Thông tin về Bác sĩ Henrik Simon
+    if (
+      (norm.includes("henrik simon") && (norm.includes("la ai") || norm.includes("nuoc nao") || norm.includes("bac si") || norm.includes("thay"))) ||
+      norm.includes("giang vien la ai")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_simon_bio.text, BOT_DATA.answers.c_simon_bio.cta);
+      return;
+    }
+
+    // 19. Dụng cụ hỗ trợ, bàn nắn, drop table, activator
+    if (
+      norm.includes("ban nan") || norm.includes("dung cu") || norm.includes("drop table") || 
+      norm.includes("activator") || norm.includes("thiet bi") || norm.includes("mua ban")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_table_equipment.text, BOT_DATA.answers.c_table_equipment.cta);
+      return;
+    }
+
+    // 20. Khách muốn mua / đăng ký / học phí / chuyển khoản
     if (
       norm.includes("dang ky") || norm.includes("mua") || norm.includes("chot") || 
       norm.includes("chuyen khoan") || norm.includes("stk") || norm.includes("giu cho") || 
@@ -808,7 +1020,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 14. Khách do dự / chưa mua / suy nghĩ thêm / đắt
+    // 21. Khách do dự / chưa mua / suy nghĩ thêm / đắt
     if (
       norm.includes("suy nghi") || norm.includes("chua mua") || norm.includes("ban voi") || 
       norm.includes("de sau") || norm.includes("tu tu") || norm.includes("chua co tien") || 
@@ -818,7 +1030,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 15. Khách hỏi online có làm được không / run tay
+    // 22. Khách hỏi online có làm được không / run tay
     if (
       norm.includes("online") || norm.includes("run tay") || norm.includes("video") || 
       norm.includes("thuc hanh") || norm.includes("qua mang") || norm.includes("micro-drill")
@@ -827,7 +1039,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 16. Khách hỏi PT / Spa / tay ngang / chưa học Y
+    // 23. Khách hỏi PT / Spa / tay ngang / chưa học Y
     if (
       norm.includes("pt") || norm.includes("gym") || norm.includes("spa") || 
       norm.includes("tay ngang") || norm.includes("chua hoc y") || norm.includes("yoga") || 
@@ -837,7 +1049,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 17. Khách so sánh giá / học phí sao đắt / 14.9
+    // 24. Khách so sánh giá / học phí sao đắt / 14.9
     if (
       norm.includes("hoc phi") || norm.includes("gia") || norm.includes("dat") || 
       norm.includes("14.9") || norm.includes("bao nhieu") || norm.includes("2-3 ngay") || 
@@ -847,7 +1059,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 18. Khách hỏi chứng chỉ / pháp lý / bằng cấp
+    // 25. Khách hỏi chứng chỉ / pháp lý / bằng cấp
     if (
       norm.includes("chung chi") || norm.includes("bang") || norm.includes("phap ly") || 
       norm.includes("hanh nghe") || norm.includes("giay phep") || norm.includes("so y te")
@@ -856,16 +1068,16 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 19. Khách hỏi khấu trừ lên Offline
+    // 26. Khách hỏi khấu trừ lên Offline
     if (
-      norm.includes("khau tru") || norm.includes("offline") || norm.includes("henrik simon") || 
-      norm.includes("tru tien") || norm.includes("hoc tiep")
+      norm.includes("khau tru") || norm.includes("offline") || norm.includes("tru tien") || 
+      norm.includes("hoc tiep")
     ) {
       appendBotMessage(BOT_DATA.answers.q6.text, BOT_DATA.answers.q6.cta);
       return;
     }
 
-    // 20. Khác gì bẻ khớp thông thường / tiktok
+    // 27. Khác gì bẻ khớp thông thường / tiktok
     if (
       norm.includes("khac gi") || norm.includes("be khop") || norm.includes("tiktok") || 
       norm.includes("thong thuong") || norm.includes("chuyen biet")
@@ -874,7 +1086,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 21. Nữ nhỏ con / sức yếu / khách nam to béo
+    // 28. Nữ nhỏ con / sức yếu / khách nam to béo
     if (
       norm.includes("nu") || norm.includes("nho con") || norm.includes("suc") || 
       norm.includes("yeu") || norm.includes("to beo") || norm.includes("80kg") || 
@@ -884,7 +1096,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 22. Trả góp
+    // 29. Trả góp
     if (
       norm.includes("tra gop") || norm.includes("the tin dung") || norm.includes("chia nho")
     ) {
@@ -893,12 +1105,65 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     }
 
     // ---------------------------------------------------------
-    // C. MẶC ĐỊNH KHI CÂU HỎI NGOÀI PHẠM VI NHẬN DIỆN
+    // C. BỘ XỬ LÝ LINH HOẠT THÔNG MINH KHI NGOÀI CÁC TỪ KHÓA CỐ ĐỊNH
     // ---------------------------------------------------------
+
+    // Ngữ cảnh 1: Chào hỏi thân mật
+    if (
+      norm === "chao" || norm === "hello" || norm === "hi" || norm === "alo" || 
+      norm.includes("chao ad") || norm.includes("chao em") || norm.includes("chao ban") || 
+      norm.includes("xin chao") || norm === "ad" || norm === "ad oi"
+    ) {
+      appendBotMessage(
+        `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
+Em luôn sẵn sàng hỗ trợ anh/chị 2 nội dung chính:<br>
+• 🎓 <strong>Tư vấn Khóa đào tạo Chiropractic Chuẩn Y khoa</strong> (Lộ trình cho người mới từ số 0, học phí ưu đãi 14.9tr, hỗ trợ trả góp 0%, tặng video học thử 4K POV).<br>
+• 🩺 <strong>Giải đáp Bệnh học & Kỹ thuật Chuyên sâu</strong> (Thoát vị đĩa đệm, đau thần kinh tọa, đọc phim X-quang, Cảnh báo đỏ Red Flags...).<br><br>
+Anh/chị đang quan tâm đến nội dung nào để em hỗ trợ chu đáo nhất cho mình nhé ạ?`,
+        "trial"
+      );
+      return;
+    }
+
+    // Ngữ cảnh 2: Có liên quan đến học tập / khóa học / đào tạo
+    if (
+      norm.includes("hoc") || norm.includes("khoa") || norm.includes("dao tao") || 
+      norm.includes("video") || norm.includes("lop") || norm.includes("huong dan") || 
+      norm.includes("giang day") || norm.includes("ky nang") || norm.includes("bai giang")
+    ) {
+      appendBotMessage(
+        `Dạ em chào anh/chị ạ! Về chương trình đào tạo của Bác sĩ Henrik Simon tại Simon Center:<br><br>
+• Khóa học được thiết kế chuẩn Y khoa Quốc tế kế thừa từ Viện DISC (Đức), hướng dẫn bài bản từ giải phẫu cơ sinh học đến kỹ thuật nắn chỉnh thực chiến POV 4K góc nhìn người nắn.<br>
+• Dù anh/chị xuất phát điểm từ con số 0 hay đã là kỹ thuật viên vật lý trị liệu/HLV Gym, phương pháp Micro-drills của Thầy sẽ giúp anh/chị định hình phản xạ chuẩn xác và tự tin thực hành an toàn.<br><br>
+🎁 Để anh/chị trải nghiệm thực tế phương pháp giảng dạy, em xin gửi tặng anh/chị <strong>1 Bài giảng mẫu 4K POV hoàn toàn miễn phí</strong>. Anh/chị bấm nút bên dưới để nhận ngay nhé ạ!`,
+        "trial"
+      );
+      return;
+    }
+
+    // Ngữ cảnh 3: Có liên quan đến triệu chứng đau / bệnh lý
+    if (
+      norm.includes("dau") || norm.includes("moi") || norm.includes("benh") || 
+      norm.includes("cot song") || norm.includes("khop") || norm.includes("te") || 
+      norm.includes("co") || norm.includes("nhuc") || norm.includes("xuong") || norm.includes("gay")
+    ) {
+      appendBotMessage(
+        `Dạ em rất đồng cảm với triệu chứng khó chịu mà anh/chị đang gặp phải ạ!<br><br>
+Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn đau hay tê bì đều bắt nguồn từ <strong>sai lệch trục cơ sinh học hoặc chèn ép rễ thần kinh cục bộ</strong>.<br><br>
+🩺 Để đảm bảo an toàn tuyệt đối:<br>
+1. Tuyệt đối không tự ý vặn bẻ khớp thô bạo khi chưa xác định rõ nguyên nhân.<br>
+2. Anh/chị có thể chụp và gửi hình ảnh phim X-quang hoặc MRI (nếu có) qua Zalo <strong>0389.609.938</strong> để Bác sĩ Henrik Simon và đội ngũ chuyên môn Simon Center hỗ trợ đọc phim và hội chẩn phân tích miễn phí giúp anh/chị nhé ạ!`,
+        "register"
+      );
+      return;
+    }
+
+    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời tâm huyết, lịch sự & kết nối trực tiếp
     appendBotMessage(
-      `Dạ em cảm ơn câu hỏi rất hay của anh/chị ạ! Bác sĩ Henrik Simon và đội ngũ chuyên môn Simon Center luôn sẵn sàng giải đáp chuyên sâu theo từng trường hợp thực tế của anh/chị.<br><br>
-Anh/chị có thể bấm nút bên dưới để <strong>Điền form tư vấn / nhận tài liệu y khoa mẫu</strong>, hoặc nhắn trực tiếp qua Zalo <strong>0389.609.938</strong> để trao đổi cùng Bác sĩ chuyên môn nhé ạ!`,
-      "register"
+      `Dạ em cảm ơn câu hỏi của anh/chị ạ!<br><br>
+Tại Simon Center, tôn chỉ cao nhất của Bác sĩ Henrik Simon là <strong>Y đức chuẩn mực & Trị liệu an toàn tuyệt đối</strong>.<br><br>
+Mọi thắc mắc cụ thể về ca bệnh lâm sàng, kỹ thuật nắn chỉnh chuyên biệt hay lộ trình học tập phù hợp nhất với điều kiện của mình, anh/chị đều có thể để lại thông tin hoặc nhắn tin trực tiếp qua Zalo <strong>0389.609.938</strong> để được Bác sĩ chuyên môn trực tiếp tư vấn chi tiết nhé ạ!`,
+      "trial"
     );
   }
 
@@ -906,24 +1171,33 @@ Anh/chị có thể bấm nút bên dưới để <strong>Điền form tư vấn
     const messagesContainer = document.getElementById("chiroChatMessages");
     if (!messagesContainer) return;
 
+    // Xóa indicator cũ nếu còn
+    const oldIndicator = document.getElementById("chiroTypingIndicator");
+    if (oldIndicator) oldIndicator.remove();
+
     const typingDiv = document.createElement("div");
     typingDiv.id = "chiroTypingIndicator";
-    typingDiv.className = "flex items-center space-x-2 text-xs text-gray-500 italic";
+    typingDiv.className = "flex items-center space-x-2 text-xs py-1";
     typingDiv.innerHTML = `
-      <div class="w-6 h-6 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[9px] shrink-0">SC</div>
-      <div class="bg-gray-200 px-3 py-1.5 rounded-full flex items-center space-x-1">
-        <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce"></span>
-        <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
-        <span class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+      <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40">SC</div>
+      <div class="bg-amber-50/90 border border-amber-200/80 px-3.5 py-2 rounded-2xl rounded-tl-xs flex items-center space-x-2 shadow-xs">
+        <div class="flex items-center space-x-1">
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0s"></span>
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.18s"></span>
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.36s"></span>
+        </div>
+        <span class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">Simon Center đang soạn câu trả lời...</span>
       </div>
     `;
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
+    // Thời gian suy nghĩ và chuẩn bị tự nhiên (1.2s - 1.6s)
+    const thinkingTime = Math.floor(Math.random() * 400) + 1200;
     setTimeout(() => {
       typingDiv.remove();
-      callback();
-    }, 380);
+      if (typeof callback === "function") callback();
+    }, thinkingTime);
   }
 
   // Cuộn mượt đến Form đăng ký
