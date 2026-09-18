@@ -624,7 +624,7 @@ html_content = f'''<!DOCTYPE html>
     // -------------------------------------------------------------------------
     function initCRMData() {{
       // Load from localStorage or fallback to brain.db snapshot
-      const local = localStorage.getItem('simon_crm_data_v3');
+      const local = localStorage.getItem('simon_crm_data_v4');
       if (local) {{
         try {{
           _crmData = JSON.parse(local);
@@ -647,7 +647,7 @@ html_content = f'''<!DOCTYPE html>
     }}
 
     function persistCRMData() {{
-      localStorage.setItem('simon_crm_data_v3', JSON.stringify(_crmData));
+      localStorage.setItem('simon_crm_data_v4', JSON.stringify(_crmData));
       updateKPICards();
     }}
 
@@ -1578,7 +1578,21 @@ html_content = f'''<!DOCTYPE html>
               const existOrder = _crmData.orders.some(o => o.customer_phone === phone);
               if (!existOrder) {{
                 let cleanPrice = Number(String(r.price).replace(/\\D/g, '')) || 2000;
-                let matchedProd = _crmData.products.find(p => p.price == cleanPrice) || _crmData.products[0];
+                let matchedProd = null;
+                if (r.course) {{
+                  const cLower = r.course.toLowerCase();
+                  if (cLower.includes('level 1')) matchedProd = _crmData.products.find(p => p.id === 2);
+                  else if (cLower.includes('level 2')) matchedProd = _crmData.products.find(p => p.id === 3);
+                  else if (cLower.includes('module')) matchedProd = _crmData.products.find(p => p.id === 4);
+                  else if (cLower.includes('offline')) matchedProd = _crmData.products.find(p => p.id === 5);
+                  else if (cLower.includes('tageshospitation')) matchedProd = _crmData.products.find(p => p.id === 6);
+                  else if (cLower.includes('giáo trình') || cLower.includes('thước đo')) matchedProd = _crmData.products.find(p => p.id === 7);
+                  else if (cLower.includes('test') || cleanPrice === 2000) matchedProd = _crmData.products.find(p => p.id === 8);
+                  else if (cLower.includes('full') || cLower.includes('trọn bộ')) matchedProd = _crmData.products.find(p => p.id === 1);
+                }}
+                if (!matchedProd) {{
+                  matchedProd = _crmData.products.find(p => Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
+                }}
                 const newOrdId = _crmData.orders.length > 0 ? Math.max(..._crmData.orders.map(o => o.id)) + 1 : 1;
                 
                 _crmData.orders.push({{
