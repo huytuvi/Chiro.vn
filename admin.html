@@ -1788,14 +1788,40 @@
 
       const sbUrl = document.getElementById('cfgSupabaseUrl').value || DEFAULT_SUPABASE_URL;
       const sbKey = document.getElementById('cfgSupabaseKey').value || DEFAULT_SUPABASE_ANON_KEY;
+      const gsUrl = document.getElementById('cfgGoogleSheetUrl').value || DEFAULT_GS_URL;
 
       try {
-        const resp = await fetch(`${sbUrl}/rest/v1/leads?select=*&order=created_at.asc`, {
-          headers: {
-            'apikey': sbKey,
-            'Authorization': `Bearer ${sbKey}`
-          }
-        });
+        // Đồng thời lấy dữ liệu thực tế từ cả Supabase và Google Sheet để đối soát chéo 100% realtime
+        const [resp, gsResp] = await Promise.all([
+          fetch(`${sbUrl}/rest/v1/leads?select=*&order=created_at.asc`, {
+            headers: {
+              'apikey': sbKey,
+              'Authorization': `Bearer ${sbKey}`
+            }
+          }),
+          fetch(`${gsUrl}?admin_key=simon2026`).then(r => r.json()).catch(() => null)
+        ]);
+
+        // Tạo bản đồ các đơn hàng đã thanh toán ghi nhận từ Google Sheet (nơi SePay Webhook bắn vào đầu tiên)
+        const gsPaidByCode = {};
+        const gsPaidByPhone = {};
+        if (gsResp && Array.isArray(gsResp.data)) {
+          gsResp.data.forEach(row => {
+            const isPaid = row.status && (row.status.includes('ĐÃ THANH TOÁN') || row.status.toUpperCase().includes('THANH TOAN'));
+            if (isPaid) {
+              const codeMatch = (row.channel && (row.channel.match(/SCC\d{12}/i) || row.channel.match(/SCC\d{8,14}/i) || row.channel.match(/DH\d{6}/i))) ||
+                                (row.emailStatus && (row.emailStatus.match(/SCC\d{12}/i) || row.emailStatus.match(/SCC\d{8,14}/i) || row.emailStatus.match(/DH\d{6}/i)));
+              if (codeMatch) {
+                gsPaidByCode[codeMatch[0].toUpperCase()] = true;
+              } else {
+                const rawP = String(row.phone || '').replace(/\D/g, '');
+                if (rawP.length >= 8) {
+                  gsPaidByPhone[rawP.startsWith('0') ? rawP : '0' + rawP] = true;
+                }
+              }
+            }
+          });
+        }
 
         if (resp.ok) {
           const remoteLeads = await resp.json();
@@ -1842,9 +1868,26 @@
                               (r.channel && (r.channel.match(/SCC\d{12}/i) || r.channel.match(/SCC\d{8,14}/i) || r.channel.match(/DH\d{6}/i)));
               let orderCode = codeMatch ? codeMatch[0].toUpperCase() : (r.email_status && (r.email_status.startsWith('SCC') || r.email_status.startsWith('DH')) ? r.email_status : ('SCC' + String(r.id).padStart(12, '0')));
 
-              const isRemotePaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
-              const newStatus = isRemotePaid ? 'paid' : 'pending';
+              // Đối soát chéo: Đã thanh toán nếu Supabase ghi nhận HOẶC Google Sheet ghi nhận
+              const isSbPaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
+              const isGsPaid = Boolean(gsPaidByCode[orderCode] || (!orderCode.startsWith('SCC') && gsPaidByPhone[phone]));
+              const isPaidFinal = isSbPaid || isGsPaid;
+              const newStatus = isPaidFinal ? 'paid' : 'pending';
               let cleanPrice = Number(String(r.price || '').replace(/\D/g, '')) || 0;
+
+              // TỰ ĐỘNG BÙ ĐỒNG BỘ: Nếu Google Sheet đã thanh toán mà Supabase chưa đổi, tự động gửi PATCH cập nhật Supabase ngay!
+              if (isGsPaid && !isSbPaid && r.id) {
+                fetch(`${sbUrl}/rest/v1/leads?id=eq.${r.id}`, {
+                  method: 'PATCH',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': sbKey,
+                    'Authorization': `Bearer ${sbKey}`,
+                    'Prefer': 'return=minimal'
+                  },
+                  body: JSON.stringify({ status: 'ĐÃ THANH TOÁN' })
+                }).catch(() => {});
+              }
 
               // Phát hiện sự kiện để hiển thị Toast thông báo tức thì
               const prevStatus = prevStatusMap[r.id] || prevStatusMap[orderCode];
@@ -1905,7 +1948,7 @@
           const ind = document.getElementById('syncIndicator');
           if (ind) {
             ind.className = "flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold";
-            document.getElementById('syncIndicatorText').innerText = `Đã đồng bộ (${remoteLeads.length} bản ghi Supabase)`;
+            document.getElementById('syncIndicatorText').innerText = `Đã đồng bộ Realtime (Supabase & Google Sheet: ${remoteLeads.length} đơn)`;
           }
 
           if (showAlert) alert(`Đã đồng bộ thành công ${remoteLeads.length} học viên từ Supabase & Google Sheets!`);
