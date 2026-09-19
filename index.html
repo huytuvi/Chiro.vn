@@ -3371,55 +3371,103 @@
       console.log('📧 Đã gửi email nhắc nhở kèm mã SePay cho:', lead.email, 'Mã:', orderCode);
     }
 
-    // ── TỰ ĐỘNG KIỂM TRA THANH TOÁN SEPAY (POLLING REALTIME) ──
+    // ── TỰ ĐỘNG KIỂM TRA THANH TOÁN SEPAY (REALTIME WEBSOCKET + POLLING TỐC ĐỘ CAO) ──
     let _paymentCheckTimer = null;
+    let _paymentRealtimeSub = null;
+
+    async function checkPaymentStatusDirect(code, cleanPhone) {
+      try {
+        // 1. Kiểm tra qua Supabase realtime status bằng mã đơn hàng (email_status) hoặc SĐT
+        const sb = getSupabaseClient();
+        if (sb) {
+          let query = sb.from('leads').select('status, name, email_status');
+          if (code) {
+            query = query.eq('email_status', code);
+          } else if (cleanPhone) {
+            query = query.ilike('phone', `%${cleanPhone}%`);
+          }
+          const { data, error } = await query.order('created_at', { ascending: false }).limit(1);
+          if (!error && data && data.length > 0) {
+            const row = data[0];
+            const st = (row.status || '').toUpperCase();
+            if (st.includes('ĐÃ THANH TOÁN') || st.includes('PAID') || st.includes('HOÀN TẤT')) {
+              stopPaymentAutoCheck();
+              handlePaymentSuccessFromSepay(row.name || _currentLead.name);
+              return true;
+            }
+          }
+        }
+
+        // 2. Kiểm tra qua Google Sheet Web App (fallback)
+        const sheetUrl = getGoogleSheetUrl();
+        if (sheetUrl) {
+          const res = await fetch(`${sheetUrl}?action=check_payment&order_code=${encodeURIComponent(code)}&phone=${encodeURIComponent(cleanPhone)}`);
+          const resData = await res.json();
+          if (resData && resData.paid) {
+            stopPaymentAutoCheck();
+            handlePaymentSuccessFromSepay(resData.name || _currentLead.name);
+            return true;
+          }
+        }
+      } catch (errPoll) { }
+      return false;
+    }
+
     function startPaymentAutoCheck(orderCode, phone) {
       stopPaymentAutoCheck();
       const cleanPhone = (phone || '').replace(/\D/g, '');
       const code = (orderCode || '').trim();
 
-      _paymentCheckTimer = setInterval(async () => {
-        try {
-          // 1. Kiểm tra qua Supabase realtime status bằng mã đơn hàng (email_status) hoặc SĐT
-          const sb = getSupabaseClient();
-          if (sb) {
-            let query = sb.from('leads').select('status, name, email_status');
-            if (code) {
-              query = query.eq('email_status', code);
-            } else if (cleanPhone) {
-              query = query.ilike('phone', `%${cleanPhone}%`);
-            }
-            const { data, error } = await query.order('created_at', { ascending: false }).limit(1);
-            if (!error && data && data.length > 0) {
-              const row = data[0];
-              const st = (row.status || '').toUpperCase();
-              if (st.includes('ĐÃ THANH TOÁN') || st.includes('PAID') || st.includes('HOÀN TẤT')) {
-                stopPaymentAutoCheck();
-                handlePaymentSuccessFromSepay(row.name || _currentLead.name);
-                return;
-              }
-            }
-          }
+      // Kiểm tra ngay lập tức lần đầu
+      checkPaymentStatusDirect(code, cleanPhone);
 
-          // 2. Kiểm tra qua Google Sheet Web App
-          const sheetUrl = getGoogleSheetUrl();
-          if (sheetUrl) {
-            const res = await fetch(`${sheetUrl}?action=check_payment&order_code=${encodeURIComponent(code)}&phone=${encodeURIComponent(cleanPhone)}`);
-            const resData = await res.json();
-            if (resData && resData.paid) {
-              stopPaymentAutoCheck();
-              handlePaymentSuccessFromSepay(resData.name || _currentLead.name);
-              return;
-            }
-          }
-        } catch (errPoll) { }
-      }, 2500);
+      // Kích hoạt Supabase Realtime Channel: Phản hồi ngay < 0.1s khi SePay webhook cập nhật
+      try {
+        const sb = getSupabaseClient();
+        if (sb && typeof sb.channel === 'function') {
+          const channelId = 'chiro_pay_' + (code || cleanPhone || Date.now());
+          _paymentRealtimeSub = sb.channel(channelId)
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'leads' }, (payload) => {
+              const row = payload.new;
+              if (!row) return;
+              const matchesCode = code && (
+                (row.email_status && row.email_status.toUpperCase() === code.toUpperCase()) ||
+                (row.channel && row.channel.toUpperCase().includes(code.toUpperCase()))
+              );
+              const matchesPhone = cleanPhone && row.phone && row.phone.includes(cleanPhone);
+              if (matchesCode || matchesPhone) {
+                const st = (row.status || '').toUpperCase();
+                if (st.includes('ĐÃ THANH TOÁN') || st.includes('PAID') || st.includes('HOÀN TẤT')) {
+                  stopPaymentAutoCheck();
+                  handlePaymentSuccessFromSepay(row.name || _currentLead.name);
+                }
+              }
+            })
+            .subscribe();
+        }
+      } catch (eSub) {
+        console.warn('Realtime channel notice:', eSub);
+      }
+
+      // Polling tốc độ cao 1.2 giây dự phòng mọi rớt mạng websocket
+      _paymentCheckTimer = setInterval(() => {
+        checkPaymentStatusDirect(code, cleanPhone);
+      }, 1200);
     }
 
     function stopPaymentAutoCheck() {
       if (_paymentCheckTimer) {
         clearInterval(_paymentCheckTimer);
         _paymentCheckTimer = null;
+      }
+      if (_paymentRealtimeSub) {
+        try {
+          const sb = getSupabaseClient();
+          if (sb && typeof sb.removeChannel === 'function') {
+            sb.removeChannel(_paymentRealtimeSub);
+          }
+        } catch (e) {}
+        _paymentRealtimeSub = null;
       }
     }
 
