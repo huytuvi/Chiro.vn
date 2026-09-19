@@ -732,7 +732,9 @@
     });
 
     function initCRMData() {
-      const local = localStorage.getItem('simon_crm_data_v5');
+      // Dọn dẹp cache v5 cũ để tránh lưu vết đơn hàng bị gộp do lỗi phiên bản trước
+      try { localStorage.removeItem('simon_crm_data_v5'); } catch(e) {}
+      const local = localStorage.getItem('simon_crm_data_v6');
       if (local) {
         try {
           _crmData = JSON.parse(local);
@@ -782,7 +784,7 @@
     }
 
     function persistCRMData() {
-      localStorage.setItem('simon_crm_data_v5', JSON.stringify(_crmData));
+      localStorage.setItem('simon_crm_data_v6', JSON.stringify(_crmData));
       updateKPICards();
     }
 
@@ -1797,34 +1799,39 @@
 
         if (resp.ok) {
           const remoteLeads = await resp.json();
-          let newCustCount = 0;
+          
+          // 1. Lưu bản đồ trạng thái cũ để phát hiện đơn vừa chuyển trạng thái (SePay thanh toán)
+          const prevStatusMap = {};
+          (_crmData.orders || []).forEach(o => {
+            if (o.lead_id) prevStatusMap[o.lead_id] = o.status;
+            if (o.order_code) prevStatusMap[o.order_code] = o.status;
+          });
+
+          // 2. Giữ lại các đơn hàng tạo thủ công qua Admin Panel (nếu có)
+          const manualOrders = (_crmData.orders || []).filter(o => o.is_manual);
+          const freshCustomers = [];
+          const freshOrders = [...manualOrders];
 
           remoteLeads.forEach(r => {
             const rawPhone = String(r.phone || '').replace(/\D/g, '');
             if (!rawPhone || rawPhone.length < 8) return;
             const phone = rawPhone.startsWith('0') ? rawPhone : '0' + rawPhone;
 
-            let c = _crmData.customers.find(item => item.phone === phone);
+            let c = freshCustomers.find(item => item.phone === phone);
             if (!c) {
-              const newId = _crmData.customers.length > 0 ? Math.max(..._crmData.customers.map(item => item.id)) + 1 : 1;
               c = {
-                id: newId,
+                id: freshCustomers.length + 1,
                 name: r.name || 'Khách hàng',
                 phone: phone,
                 email: r.email || '',
                 zalo: phone,
                 registered_at: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : 'Mới đây')
               };
-              _crmData.customers.push(c);
-              newCustCount++;
+              freshCustomers.push(c);
             } else {
               // Cập nhật tên và email mới nhất nếu có
-              if (r.name && r.name !== 'Khách hàng') {
-                c.name = r.name;
-              }
-              if (r.email && (!c.email || c.email === 'buihuy01@gmail.com')) {
-                c.email = r.email;
-              }
+              if (r.name && r.name !== 'Khách hàng') c.name = r.name;
+              if (r.email && (!c.email || c.email === 'buihuy01@gmail.com')) c.email = r.email;
             }
 
             // Nhận diện đơn hàng: mọi bản ghi đăng ký từ Form (có giá, khóa học, email_status hoặc channel)
@@ -1837,70 +1844,54 @@
 
               const isRemotePaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
               const newStatus = isRemotePaid ? 'paid' : 'pending';
-
               let cleanPrice = Number(String(r.price || '').replace(/\D/g, '')) || 0;
 
-              // Khớp đơn hàng theo lead_id duy nhất của Supabase hoặc mã đơn hàng orderCode
-              // TUYỆT ĐỐI KHÔNG KHỚP THEO SỐ ĐIỆN THOẠI vì 1 học viên có thể đặt nhiều đơn khác nhau!
-              let existOrder = _crmData.orders.find(o => (o.lead_id && o.lead_id === r.id) || (orderCode && o.order_code === orderCode));
-              if (existOrder) {
-                // Nếu đơn chuyển từ pending -> paid thì hiển thị Toast thông báo tức thì!
-                if (existOrder.status === 'pending' && newStatus === 'paid') {
-                  showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${r.name || existOrder.customer_name} vừa thanh toán thành công!`);
-                }
-                existOrder.lead_id = r.id;
-                existOrder.status = newStatus;
-                existOrder.order_code = orderCode;
-                if (r.name && r.name !== 'Khách hàng') existOrder.customer_name = r.name;
-                if (r.email && (!existOrder.customer_email || existOrder.customer_email === 'buihuy01@gmail.com')) {
-                  existOrder.customer_email = r.email;
-                }
-                if (r.course) existOrder.product_name = r.course;
-                if (cleanPrice > 0) existOrder.amount = cleanPrice;
-                if (r.time_str) existOrder.order_date = r.time_str;
-              } else {
-                // Thông báo có đơn đăng ký mới (chỉ hiện khi đã qua lần đồng bộ ban đầu)
-                if (window._hasCompletedInitialSync) {
-                  showAdminToast(`📝 Đơn đăng ký mới: ${orderCode} - ${r.name || 'Khách hàng'} (${cleanPrice > 0 ? cleanPrice.toLocaleString('vi-VN') + ' đ' : 'Chờ thanh toán'})`);
-                }
-
-                let matchedProd = null;
-                if (r.course) {
-                  const cLower = r.course.toLowerCase();
-                  if (cLower.includes('level 1')) matchedProd = _crmData.products.find(p => p.id === 2);
-                  else if (cLower.includes('level 2')) matchedProd = _crmData.products.find(p => p.id === 3);
-                  else if (cLower.includes('module')) matchedProd = _crmData.products.find(p => p.id === 4);
-                  else if (cLower.includes('offline')) matchedProd = _crmData.products.find(p => p.id === 5);
-                  else if (cLower.includes('tageshospitation')) matchedProd = _crmData.products.find(p => p.id === 6);
-                  else if (cLower.includes('giáo trình') || cLower.includes('thước đo')) matchedProd = _crmData.products.find(p => p.id === 7);
-                  else if (cLower.includes('test') || cleanPrice === 2000) matchedProd = _crmData.products.find(p => p.id === 8);
-                  else if (cLower.includes('full') || cLower.includes('trọn bộ')) matchedProd = _crmData.products.find(p => p.id === 1);
-                }
-                if (!matchedProd) {
-                  matchedProd = _crmData.products.find(p => cleanPrice > 0 && Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
-                }
-                if (cleanPrice === 0 && matchedProd) {
-                  cleanPrice = matchedProd.price;
-                }
-                const newOrdId = _crmData.orders.length > 0 ? Math.max(..._crmData.orders.map(o => o.id)) + 1 : 1;
-                
-                _crmData.orders.push({
-                  id: newOrdId,
-                  lead_id: r.id,
-                  order_code: orderCode,
-                  customer_id: c.id,
-                  customer_name: r.name || c.name,
-                  customer_phone: phone,
-                  customer_email: r.email || c.email || '',
-                  product_id: matchedProd ? matchedProd.id : 1,
-                  product_name: r.course || (matchedProd ? matchedProd.name : 'Khóa học'),
-                  amount: cleanPrice,
-                  status: newStatus,
-                  order_date: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'))
-                });
+              // Phát hiện sự kiện để hiển thị Toast thông báo tức thì
+              const prevStatus = prevStatusMap[r.id] || prevStatusMap[orderCode];
+              if (prevStatus === 'pending' && newStatus === 'paid') {
+                showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${r.name || 'Học viên'} vừa thanh toán thành công!`);
+              } else if (!prevStatus && window._hasCompletedInitialSync) {
+                showAdminToast(`📝 Đơn đăng ký mới: ${orderCode} - ${r.name || 'Khách hàng'} (${cleanPrice > 0 ? cleanPrice.toLocaleString('vi-VN') + ' đ' : 'Chờ thanh toán'})`);
               }
+
+              let matchedProd = null;
+              if (r.course) {
+                const cLower = r.course.toLowerCase();
+                if (cLower.includes('level 1')) matchedProd = _crmData.products.find(p => p.id === 2);
+                else if (cLower.includes('level 2')) matchedProd = _crmData.products.find(p => p.id === 3);
+                else if (cLower.includes('module')) matchedProd = _crmData.products.find(p => p.id === 4);
+                else if (cLower.includes('offline')) matchedProd = _crmData.products.find(p => p.id === 5);
+                else if (cLower.includes('tageshospitation')) matchedProd = _crmData.products.find(p => p.id === 6);
+                else if (cLower.includes('giáo trình') || cLower.includes('thước đo')) matchedProd = _crmData.products.find(p => p.id === 7);
+                else if (cLower.includes('test') || cleanPrice === 2000) matchedProd = _crmData.products.find(p => p.id === 8);
+                else if (cLower.includes('full') || cLower.includes('trọn bộ')) matchedProd = _crmData.products.find(p => p.id === 1);
+              }
+              if (!matchedProd) {
+                matchedProd = _crmData.products.find(p => cleanPrice > 0 && Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
+              }
+              if (cleanPrice === 0 && matchedProd) {
+                cleanPrice = matchedProd.price;
+              }
+
+              freshOrders.push({
+                id: r.id,
+                lead_id: r.id,
+                order_code: orderCode,
+                customer_id: c.id,
+                customer_name: r.name || c.name,
+                customer_phone: phone,
+                customer_email: r.email || c.email || '',
+                product_id: matchedProd ? matchedProd.id : 1,
+                product_name: r.course || (matchedProd ? matchedProd.name : 'Khóa học'),
+                amount: cleanPrice,
+                status: newStatus,
+                order_date: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'))
+              });
             }
           });
+
+          _crmData.customers = freshCustomers;
+          _crmData.orders = freshOrders;
 
           window._hasCompletedInitialSync = true;
 
