@@ -749,6 +749,36 @@
 
       renderAllCRM();
       syncAllWithRemote(false);
+      startAdminRealtimeSync();
+    }
+
+    // ── TỰ ĐỘNG THEO DÕI REALTIME ĐƠN HÀNG SEPAY TỪ SUPABASE (3s/LẦN) ──
+    let _adminRealtimeTimer = null;
+    function startAdminRealtimeSync() {
+      if (_adminRealtimeTimer) clearInterval(_adminRealtimeTimer);
+      _adminRealtimeTimer = setInterval(() => {
+        syncAllWithRemote(false); // Quét nền tự động không hiện popup alert phiền phức
+      }, 3000);
+    }
+
+    function showAdminToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-5 right-5 bg-slate-900 text-white border-2 border-emerald-500 text-xs font-bold px-5 py-3 rounded-2xl shadow-2xl z-[9999] flex items-center space-x-2 animate-bounce';
+      toast.innerHTML = `<span>${msg}</span>`;
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.remove('animate-bounce');
+        toast.style.transition = 'opacity 0.4s ease';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
+      }, 4500);
+    }
+
+    function copyToClipboard(text) {
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        showAdminToast('📋 Đã copy mã: ' + text);
+      }).catch(() => {});
     }
 
     function persistCRMData() {
@@ -1229,12 +1259,16 @@
               ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-pending">&#9203; Chờ thanh toán</span>'
               : '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-cancelled">&#10008; Đã hủy</span>');
 
-        const phoneSuffix = o.customer_phone ? String(o.customer_phone).slice(-4) : '0000';
-        const orderCode = `SCC-${phoneSuffix}-#${o.id}`;
+        const orderCode = o.order_code || ('DH' + String(o.id).padStart(6, '0'));
 
         return `
           <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-3 font-mono font-bold text-slate-700">${orderCode}</td>
+            <td class="py-3 px-3">
+              <div class="flex items-center space-x-1">
+                <span class="font-mono font-black text-slate-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-xs tracking-wider">${orderCode}</span>
+                <button onclick="copyToClipboard('${orderCode}')" class="text-slate-400 hover:text-slate-700 text-xs p-1" title="Copy mã đơn hàng">📋</button>
+              </div>
+            </td>
             <td class="py-3 px-3">
               <div class="font-bold text-slate-900">${o.customer_name || 'Khách vãng lai'}</div>
               <div class="text-[11px] text-slate-500 font-mono">${o.customer_phone || '--'}</div>
@@ -1426,8 +1460,7 @@
 
       const cust = _crmData.customers.find(item => item.id == o.customer_id || (o.customer_phone && item.phone == o.customer_phone));
       const targetEmail = o.customer_email || (cust ? cust.email : '') || '';
-      const cleanPhone = (o.customer_phone || (cust ? cust.phone : '') || '').replace(/\D/g, '');
-      const sepayCode = `CHIRO ${(o.product_name || 'LEVEL').toUpperCase().includes('LEVEL 1') ? 'LEVEL_1' : ((o.product_name || '').toUpperCase().includes('LEVEL 2') ? 'LEVEL_2' : 'FULL')} ${cleanPhone}`.trim();
+      const orderCode = o.order_code || ('DH' + String(o.id).padStart(6, '0'));
 
       document.getElementById('modalSendEmail').classList.remove('hidden');
       document.getElementById('mail_order_id_raw').value = orderId;
@@ -1435,10 +1468,10 @@
       document.getElementById('mail_type_select').value = o.status === 'paid' ? 'confirm_payment' : 'send_pending_reminder';
       document.getElementById('mail_recipient').value = targetEmail;
       document.getElementById('mail_name').value = o.customer_name || (cust ? cust.name : 'Học viên');
-      document.getElementById('mail_order_id').value = `SCC-${cleanPhone ? cleanPhone.slice(-4) : '8698'}-#${o.id}`;
+      document.getElementById('mail_order_id').value = orderCode;
       document.getElementById('mail_amount').value = (Number(o.amount) || 0).toLocaleString('vi-VN') + ' VNĐ';
       document.getElementById('mail_course').value = o.product_name || 'Khóa học Chiropractic Chuyên Biệt';
-      document.getElementById('mail_sepay_code').value = sepayCode;
+      document.getElementById('mail_sepay_code').value = orderCode;
       document.getElementById('mailResult').classList.add('hidden');
     }
 
@@ -1758,8 +1791,25 @@
 
             // Khớp đơn hàng nếu có
             if (r.price && (r.price.includes('VNĐ') || r.price.includes('đ') || Number(r.price) > 0)) {
-              const existOrder = _crmData.orders.some(o => o.customer_phone === phone);
-              if (!existOrder) {
+              // Trích xuất mã đơn hàng chuẩn DHxxxxxx
+              let codeMatch = (r.email_status && r.email_status.match(/DH\d{6}/i)) || (r.channel && r.channel.match(/DH\d{6}/i));
+              let orderCode = codeMatch ? codeMatch[0].toUpperCase() : (r.email_status && r.email_status.startsWith('DH') ? r.email_status : ('DH' + String(r.id).padStart(6, '0')));
+
+              const isRemotePaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
+              const newStatus = isRemotePaid ? 'paid' : 'pending';
+
+              let existOrder = _crmData.orders.find(o => (o.order_code && o.order_code === orderCode) || o.customer_phone === phone);
+              if (existOrder) {
+                // Nếu đơn chuyển từ pending -> paid thì hiển thị Toast thông báo tức thì!
+                if (existOrder.status === 'pending' && newStatus === 'paid') {
+                  showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${existOrder.customer_name} vừa thanh toán thành công!`);
+                }
+                existOrder.status = newStatus;
+                existOrder.order_code = orderCode;
+                if (r.email && (!existOrder.customer_email || existOrder.customer_email === 'buihuy01@gmail.com')) {
+                  existOrder.customer_email = r.email;
+                }
+              } else {
                 let cleanPrice = Number(String(r.price).replace(/\D/g, '')) || 2000;
                 let matchedProd = null;
                 if (r.course) {
@@ -1780,6 +1830,7 @@
                 
                 _crmData.orders.push({
                   id: newOrdId,
+                  order_code: orderCode,
                   customer_id: c.id,
                   customer_name: c.name,
                   customer_phone: phone,
@@ -1787,8 +1838,8 @@
                   product_id: matchedProd ? matchedProd.id : 1,
                   product_name: r.course || (matchedProd ? matchedProd.name : 'Khóa học'),
                   amount: cleanPrice,
-                  status: (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid'))) ? 'paid' : 'pending',
-                  order_date: r.time_str || '19/09/2026'
+                  status: newStatus,
+                  order_date: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : '19/09/2026')
                 });
               }
             }

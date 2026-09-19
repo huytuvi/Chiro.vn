@@ -1863,12 +1863,12 @@
             <span id="paymentAmount" class="font-extrabold text-brand-crimson text-base">...</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-500">Nội dung CK</span>
+            <span class="text-gray-500">Nội dung CK (Mã đơn)</span>
             <div class="flex items-center space-x-1.5">
               <span id="paymentNote"
-                class="font-mono font-semibold text-gray-900 text-right max-w-[160px] break-all">...</span>
+                class="font-mono font-black text-brand-crimson bg-amber-100 px-2.5 py-0.5 rounded border border-amber-300 text-sm tracking-wider">...</span>
               <button onclick="copyNote()"
-                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-0.5 rounded text-[10px] font-semibold transition shrink-0">
+                class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2.5 py-0.5 rounded text-[11px] font-bold transition shrink-0">
                 📋 Copy
               </button>
             </div>
@@ -2675,8 +2675,16 @@
     // Lưu thông tin khách đăng ký hiện tại
     let _currentLead = {};
 
+    // ── HÀM SINH MÃ ĐƠN HÀNG CHUẨN SEPAY (DH + 6 CHỮ SỐ) ──
+    // Ví dụ: DH011991. Dùng làm Mã đơn hàng & Nội dung chuyển khoản 1:1 duy nhất
+    function generateOrderCode() {
+      const rand6 = Math.floor(100000 + Math.random() * 900000);
+      return 'DH' + rand6;
+    }
+
     // ── HÀM LƯU VÀO CƠ SỞ DỮ LIỆU RIÊNG SUPABASE (TỐC ĐỘ 0.05S) ──
     async function saveToSupabase(payload) {
+      const orderCode = payload.email_status || payload.order_code || payload.orderCode || null;
       const row = {
         name: payload.name || '',
         phone: payload.phone || '',
@@ -2686,6 +2694,7 @@
         occupation: payload.occupation || '',
         channel: payload.channel || 'Form Website',
         status: payload.status || 'Chờ thanh toán',
+        email_status: orderCode,
         time_str: new Date().toLocaleString('vi-VN')
       };
 
@@ -3079,10 +3088,9 @@
         setTimeout(() => { if (submitBtn) submitBtn.disabled = false; }, 4000);
       }
 
-      // Tạo mã chuyển khoản chuẩn SePay (Mã SePay)
-      const cleanPhone = phone.replace(/\D/g, '');
-      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').replace(/[^a-zA-Z0-9 ]/g, '').trim().toUpperCase().replace(/\s+/g, ' ');
-      const sepayCode = `CHIRO ${(courseKey === 'test_course' ? 'TEST' : courseKey).toUpperCase()} ${normalize(cleanPhone)}`.trim();
+      // Sinh mã đơn hàng chuẩn SePay: DH + 6 chữ số ngẫu nhiên (Ví dụ: DH011991)
+      // Đây là Mã đơn hàng đồng thời là Nội dung chuyển khoản duy nhất để SePay đối soát 1:1
+      const orderCode = generateOrderCode();
 
       // Lưu thông tin lead hiện tại
       _currentLead = {
@@ -3094,7 +3102,8 @@
         courseKey: courseKey === 'test_course' ? 'TEST' : courseKey,
         price: currentPriceObj.currentFormatted,
         priceRaw: currentPriceObj.current,
-        sepayCode: sepayCode,
+        orderCode: orderCode,
+        sepayCode: orderCode,
         channel: 'Form Website',
         status: 'Chờ thanh toán'
       };
@@ -3108,7 +3117,8 @@
         occupation: occ,
         course: courseName,
         registeredPrice: currentPriceObj.currentFormatted,
-        sepayCode: sepayCode,
+        orderCode: orderCode,
+        sepayCode: orderCode,
         channel: 'Form Website',
         status: 'Chờ thanh toán',
         time: new Date().toLocaleString('vi-VN')
@@ -3124,22 +3134,25 @@
         occupation: occ,
         course: courseName,
         price: currentPriceObj.currentFormatted,
-        channel: 'Form Website (' + courseName + ') - Mã: ' + sepayCode,
+        channel: 'MÃ: ' + orderCode + ' | Form Website (' + courseName + ')',
         status: 'Chờ thanh toán',
+        email_status: orderCode,
+        order_code: orderCode,
         website_hp: hp
       });
 
-      // 3. GỬI TỰ ĐỘNG LÊN GOOGLE SHEET (BẢN SAO LƯU DỰ PHÒNG)
+      // 3. GỬI TỰ ĐỘNG LÊN GOOGLE SHEET (BẢN SAO LƯU DỰ PHÒNG & KÍCH HOẠT EMAIL CHỜ THANH TOÁN)
       sendToGoogleSheet({
         action: 'register',
+        order_code: orderCode,
+        sepay_code: orderCode,
         name: name,
         phone: phone,
         email: email,
         occupation: occ,
         course: courseName,
         price: currentPriceObj.currentFormatted,
-        sepay_code: sepayCode,
-        channel: 'Form Website (' + courseName + ')',
+        channel: 'MÃ: ' + orderCode + ' | Form Website (' + courseName + ')',
         status: 'Chờ thanh toán',
         website_hp: hp
       });
@@ -3156,7 +3169,7 @@
       document.getElementById('modalPrice').innerText = currentPriceObj.currentFormatted;
 
       // 6. Tạo link Zalo soạn sẵn nội dung
-      const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký ${courseName}.\nTên: ${name} | SĐT: ${phone} | Học phí: ${currentPriceObj.currentFormatted}`);
+      const zaloMsg = encodeURIComponent(`Chào Simon Center, tôi vừa đăng ký ${courseName}.\nTên: ${name} | SĐT: ${phone} | Mã đơn: ${orderCode} | Học phí: ${currentPriceObj.currentFormatted}`);
       document.getElementById('zaloDirectBtn').href = `https://zalo.me/0389609938?text=${zaloMsg}`;
 
       // 7. Hiển thị Modal – bắt đầu ở Bước 1
@@ -3175,24 +3188,37 @@
       const phone = _currentLead.phone || document.getElementById('modalPhone').innerText;
       const email = _currentLead.email || document.getElementById('modalEmail').innerText;
       const price = _currentLead.price || pricing.currentPriceFormatted;
+      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || '';
 
-      // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase
+      // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase (qua mã đơn hàng email_status)
       const sb = getSupabaseClient();
       if (sb) {
         try {
-          sb.from('leads')
-            .update({ status: 'ĐÃ THANH TOÁN' })
-            .or(`phone.eq.${phone},email.eq.${email}`)
-            .then(({ error }) => {
-              if (error) console.warn('Supabase update status error:', error);
-              else console.log('⚡ Đã cập nhật trạng thái ĐÃ THANH TOÁN trên Supabase!');
-            });
+          if (orderCode) {
+            sb.from('leads')
+              .update({ status: 'ĐÃ THANH TOÁN' })
+              .eq('email_status', orderCode)
+              .then(({ error }) => {
+                if (error) console.warn('Supabase update by code error:', error);
+                else console.log('⚡ Đã cập nhật ĐÃ THANH TOÁN cho mã:', orderCode);
+              });
+          } else {
+            sb.from('leads')
+              .update({ status: 'ĐÃ THANH TOÁN' })
+              .or(`phone.eq.${phone},email.eq.${email}`)
+              .then(({ error }) => {
+                if (error) console.warn('Supabase update status error:', error);
+                else console.log('⚡ Đã cập nhật trạng thái ĐÃ THANH TOÁN trên Supabase!');
+              });
+          }
         } catch (e) { }
       }
 
       // 2. Gửi lệnh cập nhật trạng thái "ĐÃ THANH TOÁN" lên Google Sheet
       sendToGoogleSheet({
         action: 'confirm_payment',
+        order_code: orderCode,
+        sepay_code: orderCode,
         name: name,
         phone: phone,
         email: email,
@@ -3207,6 +3233,7 @@
         phone,
         email,
         price: price,
+        orderCode: orderCode,
         status: 'ĐÃ THANH TOÁN',
         time: new Date().toLocaleString('vi-VN')
       });
@@ -3219,7 +3246,7 @@
       document.getElementById('paidSummaryPhone').innerText = phone;
       document.getElementById('paidSummaryEmail').innerText = email;
 
-      const zaloMsgDone = encodeURIComponent(`Chào Simon Center, tôi ${name} (${phone}) đã chuyển khoản thành công ${price} cho khóa học Chiropractic. Nhờ Simon Center hỗ trợ kích hoạt giúp tôi!`);
+      const zaloMsgDone = encodeURIComponent(`Chào Simon Center, tôi ${name} (${phone}) đã chuyển khoản thành công ${price} cho khóa học Chiropractic. Mã đơn: ${orderCode}. Nhờ Simon Center hỗ trợ kích hoạt giúp tôi!`);
       const communityBtn = document.getElementById('zaloCommunityBtn');
       if (communityBtn) {
         communityBtn.href = `https://zalo.me/0389609938?text=${zaloMsgDone}`;
@@ -3258,7 +3285,8 @@
       // Điền thông tin vào Modal Thông Báo Chờ Thanh Toán
       const courseText = _currentLead.course || 'Khóa học Nắn Chỉnh Cột Sống Chuyên Biệt';
       const priceText = _currentLead.price || '7.000.000 VNĐ';
-      const sepayCode = _currentLead.sepayCode || ('CHIRO ' + _currentLead.phone.replace(/\D/g, ''));
+      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode();
+      _currentLead.orderCode = orderCode;
 
       const modalCourse = document.getElementById('pendingModalCourse');
       if (modalCourse) modalCourse.innerText = courseText;
@@ -3267,13 +3295,13 @@
       if (modalPrice) modalPrice.innerText = priceText;
 
       const modalCode = document.getElementById('pendingModalSepayCode');
-      if (modalCode) modalCode.innerText = sepayCode;
+      if (modalCode) modalCode.innerText = orderCode;
 
       // Tạo link Zalo soạn sẵn đầy đủ thông tin & mã SePay
       const zaloMsg = encodeURIComponent(
         `Chào Simon Chiropractic Center, tôi là ${_currentLead.name} (SĐT: ${_currentLead.phone}).\n` +
         `Tôi vừa đăng ký: ${courseText}.\n` +
-        `Mã SePay chuyển khoản của tôi: ${sepayCode}\n` +
+        `Mã đơn hàng / Nội dung CK SePay: ${orderCode}\n` +
         `Học phí ưu đãi: ${priceText}.\n` +
         `Tôi sẽ chuyển khoản sau, nhờ Simon Center lưu giữ suất học ưu đãi này giúp tôi!`
       );
@@ -3305,62 +3333,53 @@
     }
 
     function copyPendingSepayCode() {
-      const code = (_currentLead && _currentLead.sepayCode) ? _currentLead.sepayCode : (document.getElementById('pendingModalSepayCode')?.innerText || '');
+      const code = (_currentLead && (_currentLead.orderCode || _currentLead.sepayCode)) ? (_currentLead.orderCode || _currentLead.sepayCode) : (document.getElementById('pendingModalSepayCode')?.innerText || '');
       if (code) {
         navigator.clipboard.writeText(code).then(() => {
-          showCopyToast(`Đã copy mã SePay: ${code}`);
+          showCopyToast(`Đã copy mã đơn hàng / CK: ${code}`);
         }).catch(() => {
           showCopyToast(code);
         });
       }
     }
 
-    // Gửi email thông báo kèm mã SePay đến hòm thư học viên và lưu trạng thái Chờ thanh toán
+    // Gửi email thông báo kèm mã đơn hàng / CK đến hòm thư học viên và lưu trạng thái Chờ thanh toán
     function sendPendingReminderEmail(lead) {
       if (!lead || !lead.email) return;
+      const orderCode = lead.orderCode || lead.sepayCode || generateOrderCode();
       sendToGoogleSheet({
         action: 'send_pending_reminder',
+        order_code: orderCode,
+        sepay_code: orderCode,
         name: lead.name,
         phone: lead.phone,
         email: lead.email,
         course: lead.course,
         price: lead.price,
-        sepay_code: lead.sepayCode,
         status: 'Chờ thanh toán'
       });
-      console.log('📧 Đã gửi email nhắc nhở kèm mã SePay cho:', lead.email);
+      console.log('📧 Đã gửi email nhắc nhở kèm mã SePay cho:', lead.email, 'Mã:', orderCode);
     }
 
     // ── TỰ ĐỘNG KIỂM TRA THANH TOÁN SEPAY (POLLING REALTIME) ──
     let _paymentCheckTimer = null;
-    function startPaymentAutoCheck(phone) {
+    function startPaymentAutoCheck(orderCode, phone) {
       stopPaymentAutoCheck();
-      if (!phone || phone.length < 9) return;
-      const cleanPhone = phone.replace(/\D/g, '');
+      const cleanPhone = (phone || '').replace(/\D/g, '');
+      const code = (orderCode || '').trim();
 
       _paymentCheckTimer = setInterval(async () => {
         try {
-          // 1. Kiểm tra qua Google Sheet
-          const sheetUrl = getGoogleSheetUrl();
-          if (sheetUrl) {
-            const res = await fetch(`${sheetUrl}?action=check_payment&phone=${encodeURIComponent(cleanPhone)}`);
-            const resData = await res.json();
-            if (resData && resData.paid) {
-              stopPaymentAutoCheck();
-              handlePaymentSuccessFromSepay(resData.name || _currentLead.name);
-              return;
-            }
-          }
-
-          // 2. Kiểm tra qua Supabase realtime status
+          // 1. Kiểm tra qua Supabase realtime status bằng mã đơn hàng (email_status) hoặc SĐT
           const sb = getSupabaseClient();
           if (sb) {
-            const { data, error } = await sb
-              .from('leads')
-              .select('status, name')
-              .ilike('phone', `%${cleanPhone}%`)
-              .order('created_at', { ascending: false })
-              .limit(1);
+            let query = sb.from('leads').select('status, name, email_status');
+            if (code) {
+              query = query.eq('email_status', code);
+            } else if (cleanPhone) {
+              query = query.ilike('phone', `%${cleanPhone}%`);
+            }
+            const { data, error } = await query.order('created_at', { ascending: false }).limit(1);
             if (!error && data && data.length > 0) {
               const row = data[0];
               const st = (row.status || '').toUpperCase();
@@ -3371,8 +3390,20 @@
               }
             }
           }
+
+          // 2. Kiểm tra qua Google Sheet Web App
+          const sheetUrl = getGoogleSheetUrl();
+          if (sheetUrl) {
+            const res = await fetch(`${sheetUrl}?action=check_payment&order_code=${encodeURIComponent(code)}&phone=${encodeURIComponent(cleanPhone)}`);
+            const resData = await res.json();
+            if (resData && resData.paid) {
+              stopPaymentAutoCheck();
+              handlePaymentSuccessFromSepay(resData.name || _currentLead.name);
+              return;
+            }
+          }
         } catch (errPoll) { }
-      }, 3000);
+      }, 2500);
     }
 
     function stopPaymentAutoCheck() {
@@ -3389,13 +3420,14 @@
       const phone = _currentLead.phone || '';
       const priceRaw = _currentLead.priceRaw || pricing.combo.current;
       const courseName = _currentLead.course || 'Khóa học Chiropractic Chuyên Biệt';
-      const courseKey = (_currentLead.courseKey || 'combo').toUpperCase();
+      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode();
+      _currentLead.orderCode = orderCode;
+      _currentLead.sepayCode = orderCode;
 
-      // Nội dung chuyển khoản: mã khóa học + số điện thoại
-      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').replace(/[^a-zA-Z0-9 ]/g, '').trim().toUpperCase().replace(/\s+/g, ' ');
-      const note = `CHIRO ${courseKey} ${normalize(phone)}`.trim();
+      // Nội dung chuyển khoản: DUY NHẤT mã đơn hàng DHxxxxxx (Ví dụ: DH011991)
+      const note = orderCode;
 
-      // Sinh QR từ API VietQR (miễn phí, liên kết SePay ACB)
+      // Sinh QR từ API VietQR (liên kết SePay ACB)
       const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.bankCode}-${BANK_CONFIG.accountNumber}-${BANK_CONFIG.template}.png?amount=${priceRaw}&addInfo=${encodeURIComponent(note)}&accountName=${encodeURIComponent(BANK_CONFIG.accountName)}`;
 
       document.getElementById('vietqrImg').src = qrUrl;
@@ -3404,11 +3436,11 @@
       document.getElementById('paymentNote').innerText = note;
 
       // Cập nhật Zalo link bước 2
-      const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${_currentLead.price || ''} cho ${courseName}. Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
+      const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${_currentLead.price || ''} cho ${courseName}. Mã đơn / Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
       document.getElementById('zaloAfterPay').href = `https://zalo.me/0389609938?text=${zaloMsg2}`;
 
-      // Kích hoạt tự động quét thanh toán SePay (Không cần khách bấm nút)
-      startPaymentAutoCheck(phone);
+      // Kích hoạt tự động quét thanh toán SePay theo mã đơn hàng và SĐT
+      startPaymentAutoCheck(note, phone);
 
       // Chuyển tab UI
       document.getElementById('step1Content').classList.add('hidden');

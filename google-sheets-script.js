@@ -214,6 +214,10 @@ function doPost(e) {
         })).setMimeType(ContentService.MimeType.JSON);
       }
 
+      // Lấy mã đơn hàng chuẩn SePay (DH + 6 chữ số)
+      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || ('DH' + Math.floor(100000 + Math.random() * 900000)));
+      const fullChannel = channel.includes('MÃ:') ? channel : ('MÃ: ' + orderCode + ' | ' + channel);
+
       // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học)
       sheet.appendRow([
         timeStr,        // Cột A: Thời gian
@@ -222,20 +226,19 @@ function doPost(e) {
         email,          // Cột D: Email
         price,          // Cột E: Học phí
         occupation,     // Cột F: Nghề nghiệp
-        channel,        // Cột G: Kênh nhận đơn
+        fullChannel,    // Cột G: Kênh nhận đơn kèm Mã đơn hàng DHxxxxxx
         status,         // Cột H: Trạng thái
-        ""              // Cột I: Trạng thái email
+        orderCode       // Cột I: Mã đơn hàng lưu giữ đối soát
       ]);
 
       const lastRow = sheet.getLastRow();
 
-      // TỰ ĐỘNG GỬI EMAIL PHẢN HỒI TIẾP NHẬN ĐĂNG KÝ CHO HỌC VIÊN
+      // TỰ ĐỘNG GỬI EMAIL CHÚC MỪNG ĐĂNG KÝ & MÃ SEPAY CHUYỂN KHOẢN CHO HỌC VIÊN
       if (email && email.includes('@')) {
         try {
           const courseName = data.course || data.Ten_Khoa_Hoc || CONFIG.COURSE_NAME;
-          const sepayCode = data.sepay_code || ('CHIRO ' + phone.replace(/\D/g, ''));
-          sendRegistrationEmail(email, name, courseName, price, phone, sepayCode);
-          sheet.getRange(lastRow, 9).setValue("ĐÃ GỬI EMAIL ĐĂNG KÝ lúc " + timeStr);
+          sendRegistrationEmail(email, name, courseName, price, phone, orderCode, orderCode);
+          sheet.getRange(lastRow, 9).setValue("ĐÃ GỬI EMAIL ĐĂNG KÝ (" + orderCode + ")");
         } catch (errEmail) {
           Logger.log("Lỗi gửi email đăng ký: " + errEmail);
         }
@@ -244,6 +247,7 @@ function doPost(e) {
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
         message: "Đã lưu thông tin đăng ký và gửi email tiếp nhận thành công",
+        order_code: orderCode,
         name: name,
         phone: phone
       })).setMimeType(ContentService.MimeType.JSON);
@@ -256,11 +260,11 @@ function doPost(e) {
       const name = sanitizeCellInput(data.name || 'Học viên').slice(0, 100);
       const courseName = sanitizeCellInput(data.course || CONFIG.COURSE_NAME);
       const price = sanitizeCellInput(data.price || '7.000.000 VNĐ');
-      const sepayCode = sanitizeCellInput(data.sepay_code || ('CHIRO ' + phone));
+      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || ('DH' + Math.floor(100000 + Math.random() * 900000)));
 
       if (email && email.includes('@')) {
         try {
-          sendRegistrationEmail(email, name, courseName, price, phone, sepayCode);
+          sendRegistrationEmail(email, name, courseName, price, phone, orderCode, orderCode);
         } catch (errEmail) {
           Logger.log("Lỗi gửi email nhắc nhở chờ thanh toán: " + errEmail);
         }
@@ -271,50 +275,65 @@ function doPost(e) {
         action: "send_pending_reminder",
         message: "Đã gửi email nhắc nhở kèm mã SePay thành công",
         name: name,
-        sepay_code: sepayCode
+        order_code: orderCode,
+        sepay_code: orderCode
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
     // TRƯỜNG HỢP 2: Khách bấm "Tôi đã chuyển khoản xong" hoặc Admin xác nhận thanh toán
     if (action === 'confirm_payment') {
+      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || '').trim().toUpperCase();
       const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '').slice(0, 15);
       const email = sanitizeCellInput(data.email || '').slice(0, 100).toLowerCase();
       let updatedRow = -1;
       let customerName = sanitizeCellInput(data.name || '').slice(0, 100);
       let customerPrice = sanitizeCellInput(data.price || '5.000.000 VNĐ').slice(0, 50);
+      let courseName = sanitizeCellInput(data.course || CONFIG.COURSE_NAME);
 
       const rows = sheet.getDataRange().getValues();
-      for (let i = rows.length - 1; i >= 1; i--) { // tìm từ dưới lên (đơn mới nhất)
+      // Quét từ dưới lên (đơn mới nhất)
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rowChannel = String(rows[i][6] || '').toUpperCase();
+        const rowEmailStatus = String(rows[i][8] || '').toUpperCase();
         const rowPhone = String(rows[i][2]).replace(/\D/g, '');
         const searchPhone = phone.replace(/\D/g, '');
         const rowEmail = String(rows[i][3]).toLowerCase().trim();
 
-        if ((searchPhone && rowPhone.includes(searchPhone)) || (email && rowEmail === email)) {
+        const matchCode = orderCode && (rowChannel.includes(orderCode) || rowEmailStatus.includes(orderCode));
+        const matchPhone = searchPhone && searchPhone.length >= 9 && rowPhone.includes(searchPhone);
+        const matchEmail = email && rowEmail === email;
+
+        if (matchCode || matchPhone || matchEmail) {
           updatedRow = i + 1;
           customerName = rows[i][1];
-          customerPrice = rows[i][4];
+          customerPrice = rows[i][4] || customerPrice;
           sheet.getRange(updatedRow, 8).setValue("ĐÃ THANH TOÁN"); // Cập nhật cột H
           break;
         }
       }
 
       // Nếu không tìm thấy dòng cũ, thêm dòng mới với trạng thái ĐÃ THANH TOÁN
+      const finalOrderId = orderCode || ('DH' + Math.floor(100000 + Math.random() * 900000));
       if (updatedRow === -1) {
         sheet.appendRow([
-          timeStr, customerName, "'" + phone, email, customerPrice, "Đăng ký trực tiếp", "Xác nhận chuyển khoản", "ĐÃ THANH TOÁN", ""
+          timeStr, customerName, "'" + phone, email, customerPrice, "Đăng ký trực tiếp", "MÃ: " + finalOrderId + " | Xác nhận chuyển khoản", "ĐÃ THANH TOÁN", finalOrderId
         ]);
         updatedRow = sheet.getLastRow();
       }
 
       // TỰ ĐỘNG GỬI EMAIL KÍCH HOẠT CHO KHÁCH HÀNG NẾU CÓ EMAIL
-      if (email && email.includes('@') && sheet.getRange(updatedRow, 9).getValue() !== "ĐÃ GỬI EMAIL") {
-        sendSuccessEmail(email, customerName, customerPrice, phone);
-        sheet.getRange(updatedRow, 9).setValue("ĐÃ GỬI EMAIL lúc " + timeStr);
+      if (email && email.includes('@')) {
+        sendSuccessEmail(email, customerName, customerPrice, phone, courseName, finalOrderId, timeStr);
+        sheet.getRange(updatedRow, 9).setValue("ĐÃ GỬI EMAIL lúc " + timeStr + " (" + finalOrderId + ")");
       }
+
+      // Đồng bộ sang Supabase
+      syncPaymentToSupabase(finalOrderId, phone, "ĐÃ THANH TOÁN", customerPrice);
 
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
         message: "Đã cập nhật trạng thái ĐÃ THANH TOÁN và gửi email kích hoạt",
+        order_code: finalOrderId,
         name: customerName
       })).setMimeType(ContentService.MimeType.JSON);
     }
@@ -414,17 +433,25 @@ function doGet(e) {
     const adminKey = params.admin_key || params.token || params.key || '';
     const hasAdminAccess = isAuthorizedAdmin(adminKey);
 
-    // 0. KIỂM TRA TRẠNG THÁI THANH TOÁN (Cho Modal Website tự động chuyển màn hình xanh khi khách CK xong)
-    if (params.action === 'check_payment' && params.phone) {
-      const searchPhone = String(params.phone).replace(/\D/g, '');
+    // 0. KIỂM TRA TRẠNG THÁI THANH TOÁN (Hỗ trợ cả order_code và phone cho Modal Website)
+    if (params.action === 'check_payment' && (params.order_code || params.phone)) {
+      const searchCode = String(params.order_code || '').trim().toUpperCase();
+      const searchPhone = String(params.phone || '').replace(/\D/g, '');
       let isPaid = false;
       let matchedName = '';
-      if (searchPhone.length >= 9) {
-        const rows = sheet.getDataRange().getValues();
-        for (let i = rows.length - 1; i >= 1; i--) {
-          const rPhone = String(rows[i][2] || '').replace(/\D/g, '');
-          const rStatus = String(rows[i][7] || '').toUpperCase();
-          if (rPhone.includes(searchPhone) && (rStatus.includes('ĐÃ THANH TOÁN') || rStatus.includes('THANH TOAN'))) {
+
+      const rows = sheet.getDataRange().getValues();
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rChannel = String(rows[i][6] || '').toUpperCase();
+        const rEmailStatus = String(rows[i][8] || '').toUpperCase();
+        const rPhone = String(rows[i][2] || '').replace(/\D/g, '');
+        const rStatus = String(rows[i][7] || '').toUpperCase();
+
+        const matchCode = searchCode && (rChannel.includes(searchCode) || rEmailStatus.includes(searchCode));
+        const matchPhone = searchPhone && searchPhone.length >= 9 && rPhone.includes(searchPhone);
+
+        if (matchCode || matchPhone) {
+          if (rStatus.includes('ĐÃ THANH TOÁN') || rStatus.includes('THANH TOAN')) {
             isPaid = true;
             matchedName = rows[i][1];
             break;
@@ -628,25 +655,15 @@ function onEdit(e) {
 }
 
 /**
- * NGUYÊN TẮC SINH MÃ ĐƠN HÀNG:
- * Cấu trúc chuẩn: SCC-[NgàyTháng]-[4SốCuốiSĐT] (Ví dụ: SCC-1809-8698)
- * - SCC: Tiền tố thương hiệu Simon Chiropractic Center
- * - ddMM: Ngày và tháng phát sinh đơn (ví dụ 18/09 là 1809)
- * - 4 số cuối SĐT: Giúp học viên và Simon Center đối soát tìm ngay trong 1 giây!
+ * NGUYÊN TẮC SINH MÃ ĐƠN HÀNG CHUẨN SEPAY:
+ * Cấu trúc chuẩn: DH + 6 chữ số ngẫu nhiên (Ví dụ: DH011991)
+ * - Ngắn gọn, không dấu cách, không dấu tiếng Việt
+ * - Dùng đồng thời làm Mã đơn hàng và Nội dung chuyển khoản ngân hàng
+ * - Đảm bảo đối soát tự động 1:1 chính xác 100%
  */
 function generateOrderId(phone, sepayId) {
-  const now = new Date();
-  const dateStr = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "ddMM");
-  let suffix = "";
-  if (phone) {
-    const clean = String(phone).replace(/\D/g, "");
-    suffix = clean.length >= 4 ? clean.slice(-4) : clean;
-  } else if (sepayId) {
-    suffix = String(sepayId).slice(-4);
-  } else {
-    suffix = String(Math.floor(1000 + Math.random() * 9000));
-  }
-  return "SCC-" + dateStr + "-" + suffix;
+  const rand6 = Math.floor(100000 + Math.random() * 900000);
+  return 'DH' + rand6;
 }
 
 /**
@@ -805,8 +822,8 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
   const validName = customerName || 'Học viên';
   const validPhone = customerPhone || 'Theo thông tin đăng ký';
   const validCourse = courseName || 'Khóa Học Chiropractic Chuyên Biệt';
-  const validOrder = orderId || generateOrderId(customerPhone);
-  const validSepayCode = sepayCode || ('CHIRO ' + String(validPhone).replace(/\D/g, ''));
+  const validOrder = orderId || sepayCode || generateOrderId(customerPhone);
+  const validSepayCode = validOrder; // SePay code PHẢI TRÙNG 100% với Mã đơn hàng để đối soát tự động!
   const cleanPriceNum = String(price).replace(/\D/g, '') || '7000000';
 
   const subject = `[Simon Chiropractic Center] Chúc mừng đăng ký thành công — Hướng dẫn chuyển khoản SePay sở hữu bộ kỹ năng Chiropractic (Đơn #${validOrder})`;
@@ -833,7 +850,7 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
         
         <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #92400e; font-weight: 600; line-height: 1.6;">
           🎉 <strong>Chúc mừng Anh/Chị đã đăng ký thành công!</strong><br>
-          Chuyển khoản vào mã QR SePay dưới đây, bạn sẽ sở hữu ngay bộ dạy kỹ thuật nắn chỉnh Chiropractic chi tiết và khoa học nhất từ trước đến nay tại Việt Nam, bằng tiếng Việt!
+          Chuyển khoản vào mã QR SePay dưới đây (Nội dung CK: <strong>${validSepayCode}</strong>), bạn sẽ sở hữu ngay bộ dạy kỹ thuật nắn chỉnh Chiropractic chi tiết và khoa học nhất từ trước đến nay tại Việt Nam, bằng tiếng Việt!
         </div>
 
         <p style="margin: 0 0 16px 0; font-size: 13px; color: #334155;">
@@ -862,6 +879,10 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
               <td style="padding: 5px 0; color: #0f172a; font-weight: bold;">${validCourse}</td>
             </tr>
             <tr>
+              <td style="padding: 5px 0; color: #64748b;">Mã đơn hàng:</td>
+              <td style="padding: 5px 0; color: #0f172a; font-family: monospace; font-weight: bold;">${validOrder}</td>
+            </tr>
+            <tr>
               <td style="padding: 5px 0; color: #64748b;">Học phí ưu đãi:</td>
               <td style="padding: 5px 0; color: #8F1D35; font-size: 16px; font-weight: bold;">${price}</td>
             </tr>
@@ -880,7 +901,10 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
           <div style="margin-bottom: 6px;">• Số tài khoản: <strong style="font-size: 16px; color: #1e3a8a;">2412825668</strong></div>
           <div style="margin-bottom: 6px;">• Chủ tài khoản: <strong>BUI NGOC MINH HUY</strong></div>
           <div style="margin-bottom: 6px;">• Số tiền: <strong style="color: #b91c1c; font-size: 15px;">${price}</strong></div>
-          <div style="margin-bottom: 14px;">• Nội dung CK (Mã SePay): <span style="background: #fef08a; padding: 3px 10px; font-weight: 800; font-family: monospace; border-radius: 4px; color: #0f172a; border: 1px solid #eab308; font-size: 14px;">${validSepayCode}</span></div>
+          <div style="margin-bottom: 10px;">• Nội dung CK (Mã đơn hàng SePay): <span style="background: #fef08a; padding: 4px 12px; font-weight: 800; font-family: monospace; border-radius: 4px; color: #0f172a; border: 1px solid #eab308; font-size: 15px;">${validSepayCode}</span></div>
+          <div style="margin-bottom: 12px; font-size: 12px; color: #b91c1c; font-weight: 600;">
+            ⚠️ QUÝ KHÁCH LƯU Ý: Vui lòng ghi CHÍNH XÁC nội dung chuyển khoản là <strong>${validSepayCode}</strong> để hệ thống SePay tự động xác thực và kích hoạt khóa học trong 3 giây!
+          </div>
           
           <div style="text-align: center; margin-top: 15px; padding-top: 12px; border-top: 1px dashed #bfdbfe;">
             <img src="https://img.vietqr.io/image/ACB-2412825668-compact2.png?amount=${cleanPriceNum}&addInfo=${encodeURIComponent(validSepayCode)}&accountName=BUI%20NGOC%20MINH%20HUY" alt="VietQR ACB SePay" style="width: 210px; height: 210px; border: 3px solid #8F1D35; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
@@ -999,7 +1023,14 @@ function handleSepayWebhook(data, ss) {
     const bankGateway = String(data.gateway || "ACB").toUpperCase();
     const refCode = String(data.referenceCode || data.id || "");
 
-    // 1. TÌM SỐ ĐIỆN THOẠI TRONG NỘI DUNG CHUYỂN KHOẢN
+    // 1. TRÍCH XUẤT MÃ ĐƠN HÀNG (DH + 6 CHỮ SỐ) TỪ NỘI DUNG CHUYỂN KHOẢN
+    let matchedOrderCode = "";
+    const orderMatches = content.match(/(DH\d{6})/i);
+    if (orderMatches && orderMatches.length > 0) {
+      matchedOrderCode = orderMatches[1].toUpperCase();
+    }
+
+    // Fallback: Tìm số điện thoại nếu khách chuyển không ghi mã đơn
     let matchedPhone = "";
     const phoneMatches = content.match(/(0\d{9,10})/g) || content.match(/(\d{9,11})/g);
     if (phoneMatches && phoneMatches.length > 0) {
@@ -1013,40 +1044,61 @@ function handleSepayWebhook(data, ss) {
     let customerName = "Học viên SePay";
     let customerEmail = "";
     let customerPrice = formattedAmount;
+    let customerPhone = matchedPhone;
+    let courseName = "Khóa Học Nắn Chỉnh Cột Sống Chuyên Biệt";
 
     // 2. TÌM KIẾM ĐƠN TRONG BẢNG TÍNH GOOGLE SHEET
     const rows = sheet.getDataRange().getValues();
-    // Quét từ dưới lên (đơn mới nhất ưu tiên trước)
-    for (let i = rows.length - 1; i >= 1; i--) {
-      const rPhone = String(rows[i][2] || "").replace(/\D/g, "");
 
-      // Khớp theo số điện thoại
-      const isPhoneMatch = (matchedPhone && rPhone.includes(matchedPhone.replace(/\D/g, ''))) ||
-                           (rPhone.length >= 9 && content.includes(rPhone));
-
-      if (isPhoneMatch) {
-        updatedRow = i + 1;
-        customerName = rows[i][1];
-        customerEmail = rows[i][3];
-        customerPrice = rows[i][4] || formattedAmount;
-        break;
-      }
-    }
-
-    // Nếu chưa khớp được do app ngân hàng cắt mất SĐT -> Tìm dòng 'Chờ thanh toán' gần nhất
-    if (updatedRow === -1) {
+    // Ưu tiên 1: Khớp chính xác 100% theo Mã đơn hàng DHxxxxxx
+    if (matchedOrderCode) {
       for (let i = rows.length - 1; i >= 1; i--) {
-        const rStatus = String(rows[i][7] || '').toUpperCase();
-        if (rStatus.includes('CHỜ THANH TOÁN') || rStatus.includes('CHO THANH TOAN') || rStatus === '') {
+        const rowChannel = String(rows[i][6] || '').toUpperCase();
+        const rowEmailStatus = String(rows[i][8] || '').toUpperCase();
+        if (rowChannel.includes(matchedOrderCode) || rowEmailStatus.includes(matchedOrderCode)) {
           updatedRow = i + 1;
           customerName = rows[i][1];
-          matchedPhone = String(rows[i][2] || "").replace(/^'/, '');
+          customerPhone = String(rows[i][2] || "").replace(/^'/, '');
           customerEmail = rows[i][3];
           customerPrice = rows[i][4] || formattedAmount;
           break;
         }
       }
     }
+
+    // Ưu tiên 2 (Fallback): Khớp theo số điện thoại nếu khách không ghi mã đơn
+    if (updatedRow === -1 && matchedPhone) {
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rPhone = String(rows[i][2] || "").replace(/\D/g, "");
+        const isPhoneMatch = (matchedPhone && rPhone.includes(matchedPhone.replace(/\D/g, ''))) ||
+                             (rPhone.length >= 9 && content.includes(rPhone));
+        if (isPhoneMatch) {
+          updatedRow = i + 1;
+          customerName = rows[i][1];
+          customerPhone = String(rows[i][2] || "").replace(/^'/, '');
+          customerEmail = rows[i][3];
+          customerPrice = rows[i][4] || formattedAmount;
+          break;
+        }
+      }
+    }
+
+    // Ưu tiên 3 (Fallback): Dòng 'Chờ thanh toán' gần nhất nếu có
+    if (updatedRow === -1) {
+      for (let i = rows.length - 1; i >= 1; i--) {
+        const rStatus = String(rows[i][7] || '').toUpperCase();
+        if (rStatus.includes('CHỜ THANH TOÁN') || rStatus.includes('CHO THANH TOAN') || rStatus === '') {
+          updatedRow = i + 1;
+          customerName = rows[i][1];
+          customerPhone = String(rows[i][2] || "").replace(/^'/, '');
+          customerEmail = rows[i][3];
+          customerPrice = rows[i][4] || formattedAmount;
+          break;
+        }
+      }
+    }
+
+    const finalOrderId = matchedOrderCode || ('DH' + (customerPhone ? customerPhone.slice(-6) : Math.floor(100000 + Math.random() * 900000)));
 
     // 3. NẾU TÌM THẤY ĐƠN HỌC VIÊN CÓ SẴN -> CẬP NHẬT TRẠNG THÁI "ĐÃ THANH TOÁN"
     if (updatedRow !== -1) {
@@ -1055,48 +1107,45 @@ function handleSepayWebhook(data, ss) {
         sheet.getRange(updatedRow, 5).setValue(customerPrice);
       }
 
-      // Tự động gửi email xác nhận đã thanh toán thành công
+      // Xác định tên khóa học
+      const matchedRowData = rows[updatedRow - 1];
+      if (matchedRowData) {
+        const rawChannel = String(matchedRowData[6] || "").trim();
+        const matchCourse = rawChannel.match(/\((.*?)\)/);
+        if (matchCourse && matchCourse[1]) courseName = matchCourse[1].trim();
+        else if (rawChannel && !rawChannel.includes("Form Website")) courseName = rawChannel;
+      }
+
+      // Tự động gửi email xác nhận đã nhận tiền thành công
       const emailStatusCell = sheet.getRange(updatedRow, 9);
       if (customerEmail && customerEmail.includes("@") && String(emailStatusCell.getValue()).indexOf("ĐÃ GỬI EMAIL XÁC NHẬN") === -1) {
         try {
-          const matchedRowData = rows[updatedRow - 1];
-          let courseName = "Khóa Học Nắn Chỉnh Cột Sống Chuyên Biệt";
-          if (matchedRowData) {
-            const rawChannel = String(matchedRowData[6] || "").trim();
-            const matchCourse = rawChannel.match(/\((.*?)\)/);
-            if (matchCourse && matchCourse[1]) courseName = matchCourse[1].trim();
-            else if (rawChannel && !rawChannel.includes("Form Website")) courseName = rawChannel;
-          }
-          const orderId = generateOrderId(matchedPhone, data.id);
-
-          sendSuccessEmail(customerEmail, customerName, customerPrice, matchedPhone, courseName, orderId, timeStr);
-          emailStatusCell.setValue("ĐÃ GỬI EMAIL XÁC NHẬN lúc " + timeStr);
+          sendSuccessEmail(customerEmail, customerName, customerPrice, customerPhone, courseName, finalOrderId, timeStr);
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL XÁC NHẬN lúc " + timeStr + " (" + finalOrderId + ")");
         } catch (eEmail) {
           Logger.log("Lỗi gửi email SePay: " + eEmail);
         }
       }
 
-      // ĐỒNG BỘ CẬP NHẬT SUPABASE
-      syncPaymentToSupabase(matchedPhone, customerName, "ĐÃ THANH TOÁN", customerPrice);
+      // ĐỒNG BỘ CẬP NHẬT SUPABASE: Khớp chính xác theo mã đơn finalOrderId
+      syncPaymentToSupabase(finalOrderId, customerPhone, "ĐÃ THANH TOÁN", customerPrice);
 
     } else {
       // 4. NẾU CHƯA CÓ ĐƠN TRONG SHEET (Khách CK trực tiếp hoặc chưa có SĐT)
       // Tự động ghi nhận 1 dòng mới để KHÔNG BAO GIỜ BỊ SÓT GIAO DỊCH!
       sheet.appendRow([
         timeStr,
-        "Khách CK (" + (matchedPhone || "Chưa rõ SĐT") + ")",
-        "'" + (matchedPhone || ""),
+        "Khách CK (" + (customerPhone || finalOrderId || "SePay") + ")",
+        "'" + (customerPhone || ""),
         "",
         formattedAmount,
         "Nội dung CK: " + content,
-        "SePay Webhook (" + bankGateway + " ref: " + refCode + ")",
+        "MÃ: " + finalOrderId + " | SePay Webhook (" + bankGateway + " ref: " + refCode + ")",
         "ĐÃ THANH TOÁN (SePay " + bankGateway + ")",
-        ""
+        finalOrderId
       ]);
 
-      if (matchedPhone) {
-        syncPaymentToSupabase(matchedPhone, "Khách CK SePay", "ĐÃ THANH TOÁN", formattedAmount);
-      }
+      syncPaymentToSupabase(finalOrderId, customerPhone, "ĐÃ THANH TOÁN", formattedAmount);
     }
 
     // 5. TRẢ VỀ PHẢN HỒI THÀNH CÔNG CHO SEPAY
@@ -1104,7 +1153,8 @@ function handleSepayWebhook(data, ss) {
       success: true,
       status: "success",
       message: "SePay webhook processed successfully",
-      matchedPhone: matchedPhone,
+      matchedOrderCode: finalOrderId,
+      matchedPhone: customerPhone,
       updatedRow: updatedRow,
       amount: amount
     })).setMimeType(ContentService.MimeType.JSON);
@@ -1121,30 +1171,61 @@ function handleSepayWebhook(data, ss) {
 
 /**
  * CẬP NHẬT TRẠNG THÁI THANH TOÁN SANG SUPABASE
+ * Ưu tiên 1: Khớp chính xác 100% qua trường email_status (lưu Mã đơn hàng DHxxxxxx)
+ * Ưu tiên 2 (Fallback): Khớp theo số điện thoại khách hàng
  */
-function syncPaymentToSupabase(phone, name, status, price) {
-  if (!phone) return;
+function syncPaymentToSupabase(orderCode, phone, status, price) {
   try {
-    const cleanPhone = String(phone).replace(/\D/g, "");
     const sbUrl = "https://fjzkneljhfibwksnpjkk.supabase.co";
     const sbKey = "sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR";
 
-    const patchUrl = sbUrl + "/rest/v1/leads?phone=like.*" + cleanPhone + "*";
-    const options = {
-      method: "patch",
-      contentType: "application/json",
-      headers: {
-        "apikey": sbKey,
-        "Authorization": "Bearer " + sbKey,
-        "Prefer": "return=minimal"
-      },
-      payload: JSON.stringify({
-        status: status,
-        price: price
-      }),
-      muteHttpExceptions: true
+    const payload = {
+      status: status,
+      price: price
     };
-    UrlFetchApp.fetch(patchUrl, options);
+
+    // Cách 1: Ưu tiên PATCH theo mã đơn hàng orderCode (lưu trong cột email_status)
+    if (orderCode) {
+      const patchByCodeUrl = sbUrl + "/rest/v1/leads?email_status=eq." + encodeURIComponent(orderCode);
+      const resCode = UrlFetchApp.fetch(patchByCodeUrl, {
+        method: "patch",
+        contentType: "application/json",
+        headers: {
+          "apikey": sbKey,
+          "Authorization": "Bearer " + sbKey,
+          "Prefer": "return=representation"
+        },
+        payload: JSON.stringify(payload),
+        muteHttpExceptions: true
+      });
+      try {
+        const rows = JSON.parse(resCode.getContentText());
+        if (Array.isArray(rows) && rows.length > 0) {
+          Logger.log("⚡ Supabase synced by orderCode: " + orderCode);
+          return;
+        }
+      } catch(e) {}
+    }
+
+    // Cách 2: Fallback PATCH theo số điện thoại
+    if (phone) {
+      const cleanPhone = String(phone).replace(/\D/g, "");
+      if (cleanPhone.length >= 8) {
+        const patchByPhoneUrl = sbUrl + "/rest/v1/leads?phone=like.*" + cleanPhone + "*";
+        UrlFetchApp.fetch(patchByPhoneUrl, {
+          method: "patch",
+          contentType: "application/json",
+          headers: {
+            "apikey": sbKey,
+            "Authorization": "Bearer " + sbKey,
+            "Prefer": "return=minimal"
+          },
+          payload: JSON.stringify(payload),
+          muteHttpExceptions: true
+        });
+        Logger.log("⚡ Supabase synced by phone: " + cleanPhone);
+      }
+    }
   } catch (e) {
     Logger.log("Supabase sync warning: " + e);
   }
