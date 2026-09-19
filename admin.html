@@ -1079,6 +1079,9 @@
         return;
       }
 
+      // Đưa khách hàng mới nhất lên đầu danh sách
+      list.sort((a, b) => (b.id || 0) - (a.id || 0));
+
       tbody.innerHTML = list.map(c => {
         const userOrders = _crmData.orders.filter(o => o.customer_id == c.id || (c.phone && o.customer_phone == c.phone));
         const paidCount = userOrders.filter(o => o.status === 'paid').length;
@@ -1241,10 +1244,18 @@
           const matchPhone = (o.customer_phone || '').toLowerCase().includes(term);
           const matchEmail = (o.customer_email || '').toLowerCase().includes(term);
           const matchProd = (o.product_name || '').toLowerCase().includes(term);
+          const matchCode = (o.order_code || '').toLowerCase().includes(term);
           const matchId = String(o.id).includes(term);
-          return matchCust || matchPhone || matchEmail || matchProd || matchId;
+          return matchCust || matchPhone || matchEmail || matchProd || matchCode || matchId;
         }
         return true;
+      });
+
+      // Luôn đưa đơn hàng mới nhất lên đầu danh sách để dễ theo dõi
+      list.sort((a, b) => {
+        const idA = a.lead_id || a.id || 0;
+        const idB = b.lead_id || b.id || 0;
+        return idB - idA;
       });
 
       if (list.length === 0) {
@@ -1684,32 +1695,59 @@
             });
           } else if (action === 'update') {
             const searchPhone = data.phone || data.customer_phone;
-            if (searchPhone) {
+            const patchBody = JSON.stringify({
+              name: data.name || data.customer_name,
+              email: data.email || data.customer_email,
+              status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán'
+            });
+            const patchHeaders = {
+              'Content-Type': 'application/json',
+              'apikey': sbKey,
+              'Authorization': `Bearer ${sbKey}`,
+              'Prefer': 'return=minimal'
+            };
+
+            if (data.lead_id) {
+              await fetch(`${sbUrl}/rest/v1/leads?id=eq.${data.lead_id}`, {
+                method: 'PATCH',
+                headers: patchHeaders,
+                body: patchBody
+              });
+            } else if (data.order_code) {
+              await fetch(`${sbUrl}/rest/v1/leads?email_status=eq.${encodeURIComponent(data.order_code)}`, {
+                method: 'PATCH',
+                headers: patchHeaders,
+                body: patchBody
+              });
+            } else if (searchPhone) {
               await fetch(`${sbUrl}/rest/v1/leads?phone=eq.${searchPhone}`, {
                 method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'apikey': sbKey,
-                  'Authorization': `Bearer ${sbKey}`,
-                  'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify({
-                  name: data.name || data.customer_name,
-                  email: data.email || data.customer_email,
-                  status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán'
-                })
+                headers: patchHeaders,
+                body: patchBody
               });
             }
           } else if (action === 'delete') {
             const searchPhone = data.phone || data.customer_phone;
-            if (searchPhone) {
+            const delHeaders = {
+              'apikey': sbKey,
+              'Authorization': `Bearer ${sbKey}`,
+              'Prefer': 'return=minimal'
+            };
+
+            if (data.lead_id) {
+              await fetch(`${sbUrl}/rest/v1/leads?id=eq.${data.lead_id}`, {
+                method: 'DELETE',
+                headers: delHeaders
+              });
+            } else if (data.order_code) {
+              await fetch(`${sbUrl}/rest/v1/leads?email_status=eq.${encodeURIComponent(data.order_code)}`, {
+                method: 'DELETE',
+                headers: delHeaders
+              });
+            } else if (searchPhone) {
               await fetch(`${sbUrl}/rest/v1/leads?phone=eq.${searchPhone}`, {
                 method: 'DELETE',
-                headers: {
-                  'apikey': sbKey,
-                  'Authorization': `Bearer ${sbKey}`,
-                  'Prefer': 'return=minimal'
-                }
+                headers: delHeaders
               });
             }
           }
@@ -1780,17 +1818,18 @@
               _crmData.customers.push(c);
               newCustCount++;
             } else {
-              // Cập nhật email nếu c chưa có hoặc trước đó bị gán nhầm
+              // Cập nhật tên và email mới nhất nếu có
+              if (r.name && r.name !== 'Khách hàng') {
+                c.name = r.name;
+              }
               if (r.email && (!c.email || c.email === 'buihuy01@gmail.com')) {
                 c.email = r.email;
               }
-              if (r.name && c.name === 'Khách hàng') {
-                c.name = r.name;
-              }
             }
 
-            // Khớp đơn hàng nếu có
-            if (r.price && (r.price.includes('VNĐ') || r.price.includes('đ') || Number(r.price) > 0)) {
+            // Nhận diện đơn hàng: mọi bản ghi đăng ký từ Form (có giá, khóa học, email_status hoặc channel)
+            const hasOrderInfo = r.price || r.course || r.email_status || (r.channel && r.channel.includes('Form'));
+            if (hasOrderInfo) {
               // Trích xuất mã đơn hàng chuẩn SCC + 12 số (hoặc DH + 6 số cũ)
               let codeMatch = (r.email_status && (r.email_status.match(/SCC\d{12}/i) || r.email_status.match(/SCC\d{8,14}/i) || r.email_status.match(/DH\d{6}/i))) || 
                               (r.channel && (r.channel.match(/SCC\d{12}/i) || r.channel.match(/SCC\d{8,14}/i) || r.channel.match(/DH\d{6}/i)));
@@ -1799,19 +1838,32 @@
               const isRemotePaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
               const newStatus = isRemotePaid ? 'paid' : 'pending';
 
-              let existOrder = _crmData.orders.find(o => (o.order_code && o.order_code === orderCode) || o.customer_phone === phone);
+              let cleanPrice = Number(String(r.price || '').replace(/\D/g, '')) || 0;
+
+              // Khớp đơn hàng theo lead_id duy nhất của Supabase hoặc mã đơn hàng orderCode
+              // TUYỆT ĐỐI KHÔNG KHỚP THEO SỐ ĐIỆN THOẠI vì 1 học viên có thể đặt nhiều đơn khác nhau!
+              let existOrder = _crmData.orders.find(o => (o.lead_id && o.lead_id === r.id) || (orderCode && o.order_code === orderCode));
               if (existOrder) {
                 // Nếu đơn chuyển từ pending -> paid thì hiển thị Toast thông báo tức thì!
                 if (existOrder.status === 'pending' && newStatus === 'paid') {
-                  showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${existOrder.customer_name} vừa thanh toán thành công!`);
+                  showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${r.name || existOrder.customer_name} vừa thanh toán thành công!`);
                 }
+                existOrder.lead_id = r.id;
                 existOrder.status = newStatus;
                 existOrder.order_code = orderCode;
+                if (r.name && r.name !== 'Khách hàng') existOrder.customer_name = r.name;
                 if (r.email && (!existOrder.customer_email || existOrder.customer_email === 'buihuy01@gmail.com')) {
                   existOrder.customer_email = r.email;
                 }
+                if (r.course) existOrder.product_name = r.course;
+                if (cleanPrice > 0) existOrder.amount = cleanPrice;
+                if (r.time_str) existOrder.order_date = r.time_str;
               } else {
-                let cleanPrice = Number(String(r.price).replace(/\D/g, '')) || 2000;
+                // Thông báo có đơn đăng ký mới (chỉ hiện khi đã qua lần đồng bộ ban đầu)
+                if (window._hasCompletedInitialSync) {
+                  showAdminToast(`📝 Đơn đăng ký mới: ${orderCode} - ${r.name || 'Khách hàng'} (${cleanPrice > 0 ? cleanPrice.toLocaleString('vi-VN') + ' đ' : 'Chờ thanh toán'})`);
+                }
+
                 let matchedProd = null;
                 if (r.course) {
                   const cLower = r.course.toLowerCase();
@@ -1825,26 +1877,32 @@
                   else if (cLower.includes('full') || cLower.includes('trọn bộ')) matchedProd = _crmData.products.find(p => p.id === 1);
                 }
                 if (!matchedProd) {
-                  matchedProd = _crmData.products.find(p => Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
+                  matchedProd = _crmData.products.find(p => cleanPrice > 0 && Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
+                }
+                if (cleanPrice === 0 && matchedProd) {
+                  cleanPrice = matchedProd.price;
                 }
                 const newOrdId = _crmData.orders.length > 0 ? Math.max(..._crmData.orders.map(o => o.id)) + 1 : 1;
                 
                 _crmData.orders.push({
                   id: newOrdId,
+                  lead_id: r.id,
                   order_code: orderCode,
                   customer_id: c.id,
-                  customer_name: c.name,
+                  customer_name: r.name || c.name,
                   customer_phone: phone,
                   customer_email: r.email || c.email || '',
                   product_id: matchedProd ? matchedProd.id : 1,
                   product_name: r.course || (matchedProd ? matchedProd.name : 'Khóa học'),
                   amount: cleanPrice,
                   status: newStatus,
-                  order_date: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : '19/09/2026')
+                  order_date: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : new Date().toLocaleString('vi-VN'))
                 });
               }
             }
           });
+
+          window._hasCompletedInitialSync = true;
 
           _crmData.products.forEach(p => {
             p.registered_count = _crmData.orders.filter(o => o.product_id == p.id).length;
