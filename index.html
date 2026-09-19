@@ -1875,26 +1875,30 @@
           </div>
         </div>
 
-        <!-- Thông báo sau khi chuyển khoản -->
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-4 text-xs text-blue-800 leading-relaxed">
-          💡 Sau khi chuyển khoản thành công trên App Ngân hàng, bạn hãy bấm nút bên dưới để Simon Center lưu thông tin
-          và kích hoạt khóa học nhanh nhất!
+        <!-- HỘP TRẠNG THÁI TỰ ĐỘNG KIỂM TRA SEPAY (TỰ ĐỘNG CHUYỂN BƯỚC 3, KHÔNG CẦN BẤM NÚT) -->
+        <div class="bg-amber-50/90 border border-amber-300 rounded-2xl p-4 mb-4 text-xs text-amber-950 text-center space-y-2 shadow-sm">
+          <div class="flex items-center justify-center space-x-2 text-amber-900 font-extrabold text-sm">
+            <svg class="animate-spin h-4 w-4 text-amber-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>HỆ THỐNG ĐANG TỰ ĐỘNG CHỜ SEPAY XÁC NHẬN</span>
+          </div>
+          <p class="text-[11px] text-gray-600 leading-relaxed">
+            Ngay khi ngân hàng ACB báo có tiền, cổng SePay sẽ <strong>tự động nhận diện trong 3–10 giây</strong> và chuyển thẳng tới màn hình hoàn tất. Bạn không cần tự thao tác xác nhận.
+          </p>
         </div>
 
         <div class="space-y-2.5">
-          <!-- NÚT BẤM XÁC NHẬN ĐÃ CHUYỂN KHOẢN -->
-          <button onclick="handlePaidConfirm()" id="btnPaidConfirm"
-            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wide transition shadow-lg flex items-center justify-center space-x-1.5">
-            <span>✅ TÔI ĐÃ CHUYỂN KHOẢN XONG</span>
-          </button>
-
           <a id="zaloAfterPay" href="https://zalo.me/0389609938" target="_blank"
-            class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wide transition shadow">
-            💬 Nhắn báo qua Zalo 0389.609.938
+            class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wide transition shadow flex items-center justify-center space-x-2">
+            <span>💬 Nhắn Zalo Hỗ Trợ 0389.609.938</span>
           </a>
 
-          <button onclick="goToStep1()" class="block w-full text-gray-400 hover:text-gray-600 text-xs py-1 transition">
-            ← Quay lại thông tin đăng ký
+          <!-- NÚT QUAY LẠI (NẾU KHÁCH CHƯA TRẢ TIỀN MÀ QUAY VỀ) -->
+          <button onclick="handleBackFromPayment()"
+            class="block w-full text-slate-600 hover:text-slate-900 font-semibold text-xs py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 transition">
+            ← Quay lại thông tin đăng ký (Tôi sẽ chuyển khoản sau)
           </button>
         </div>
       </div>
@@ -1947,6 +1951,69 @@
             Hoàn tất &amp; Đóng
           </button>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL THÔNG BÁO LƯU ĐĂNG KÝ & GỬI MÃ SEPAY ĐỂ CHUYỂN KHOẢN SAU
+       ======================================================== -->
+  <div id="modalPendingNotice" class="fixed inset-0 bg-black/70 z-[9999] hidden items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center shadow-2xl border-2 border-brand-wine/20 relative animate-in fade-in zoom-in duration-200">
+      
+      <!-- Icon & Badge -->
+      <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl shadow-sm">
+        ⏳
+      </div>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-900 text-[11px] font-extrabold rounded-full uppercase tracking-wider mb-2 border border-amber-300">
+        ĐÃ LƯU ĐĂNG KÝ — TRẠNG THÁI: CHỜ THANH TOÁN
+      </span>
+
+      <!-- Headline chuẩn theo chỉ đạo của user -->
+      <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug mb-2">
+        Chỉ còn một bước nữa thôi là bạn sẽ sở hữu trong tay bộ kỹ năng đầy đủ về môn Chiropractic đầu tiên tại Việt Nam!
+      </h3>
+      
+      <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+        Simon Chiropractic Center đã ghi nhận thông tin của bạn. Suất học ưu đãi hôm nay của bạn đã được tạm giữ. Chúng tôi đã gửi toàn bộ thông tin tài khoản và <strong>Mã SePay</strong> vào Email để bạn có thể chuyển khoản sau.
+      </p>
+
+      <!-- Khung thông tin Mã SePay -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left text-xs space-y-2 mb-5">
+        <div class="flex justify-between items-center">
+          <span class="text-slate-500">Khóa học:</span>
+          <span id="pendingModalCourse" class="font-bold text-slate-900 text-right max-w-[240px] truncate">...</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-500">Học phí ưu đãi:</span>
+          <span id="pendingModalPrice" class="font-black text-brand-crimson text-sm">...</span>
+        </div>
+        <div class="flex justify-between items-center border-t border-slate-200 pt-2">
+          <span class="text-slate-500 font-semibold">Mã SePay chuyển khoản sau:</span>
+          <div class="flex items-center space-x-1.5">
+            <span id="pendingModalSepayCode" class="font-mono font-black text-slate-900 bg-amber-100 px-2 py-0.5 rounded border border-amber-300 text-xs">...</span>
+            <button onclick="copyPendingSepayCode()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-2 py-0.5 rounded text-[10px] font-bold transition">
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="text-[11px] text-slate-500 pt-1">
+          • STK ACB: <strong class="font-mono text-slate-800">2412825668</strong> — Chủ TK: <strong class="text-slate-800">BUI NGOC MINH HUY</strong>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2">
+        <a id="pendingZaloBtn" href="https://zalo.me/0389609938" target="_blank"
+          class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wide transition shadow-lg flex items-center justify-center space-x-2">
+          <span>💬 Mở Zalo Lưu Mã SePay &amp; Nhận Hỗ Trợ (0389.609.938)</span>
+        </a>
+
+        <button onclick="closePendingModal()"
+          class="block w-full text-slate-400 hover:text-slate-600 text-xs py-2 font-medium transition">
+          ✕ Đóng thông báo &amp; quay lại trang chủ
+        </button>
       </div>
 
     </div>
@@ -2301,6 +2368,10 @@
     const DEFAULT_PRICING_CONFIG = {
       module_current: 1000000,
       module_original: 2000000,
+      level1_current: 7000000,
+      level1_original: 8500000,
+      level2_current: 7000000,
+      level2_original: 8500000,
       level_current: 7000000,
       level_original: 8500000,
       full_current: 12900000,
@@ -2316,14 +2387,14 @@
       k3_original: 14900000,
       combo_current: 12900000,
       combo_original: 14900000,
-      cycle: 'daily', // 'daily' or 'weekly' or 'none'
+      cycle: 'weekly',
       increment_amount: 200000,
-      start_date: '2026-09-10'
+      start_date: '2026-09-19'
     };
 
     function getPricingConfig() {
       try {
-        const saved = JSON.parse(localStorage.getItem('chiro_pricing_config') || 'null');
+        const saved = JSON.parse(localStorage.getItem('chiro_pricing_config_v3') || 'null');
         return saved || DEFAULT_PRICING_CONFIG;
       } catch (e) {
         return DEFAULT_PRICING_CONFIG;
@@ -2946,6 +3017,7 @@
     // ── XỬ LÝ KHI KHÁCH GỬI FORM ĐĂNG KÝ ──
     function handleFormSubmit(e) {
       e.preventDefault();
+      _hasSentPendingReminder = false;
       const form = e.target;
       const name = document.getElementById('fullname').value.trim();
       const phone = document.getElementById('phone').value.trim();
@@ -3007,6 +3079,11 @@
         setTimeout(() => { if (submitBtn) submitBtn.disabled = false; }, 4000);
       }
 
+      // Tạo mã chuyển khoản chuẩn SePay (Mã SePay)
+      const cleanPhone = phone.replace(/\D/g, '');
+      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').replace(/[^a-zA-Z0-9 ]/g, '').trim().toUpperCase().replace(/\s+/g, ' ');
+      const sepayCode = `CHIRO ${(courseKey === 'test_course' ? 'TEST' : courseKey).toUpperCase()} ${normalize(cleanPhone)}`.trim();
+
       // Lưu thông tin lead hiện tại
       _currentLead = {
         name,
@@ -3017,6 +3094,7 @@
         courseKey: courseKey === 'test_course' ? 'TEST' : courseKey,
         price: currentPriceObj.currentFormatted,
         priceRaw: currentPriceObj.current,
+        sepayCode: sepayCode,
         channel: 'Form Website',
         status: 'Chờ thanh toán'
       };
@@ -3030,6 +3108,7 @@
         occupation: occ,
         course: courseName,
         registeredPrice: currentPriceObj.currentFormatted,
+        sepayCode: sepayCode,
         channel: 'Form Website',
         status: 'Chờ thanh toán',
         time: new Date().toLocaleString('vi-VN')
@@ -3045,7 +3124,7 @@
         occupation: occ,
         course: courseName,
         price: currentPriceObj.currentFormatted,
-        channel: 'Form Website (' + courseName + ')',
+        channel: 'Form Website (' + courseName + ') - Mã: ' + sepayCode,
         status: 'Chờ thanh toán',
         website_hp: hp
       });
@@ -3057,7 +3136,9 @@
         phone: phone,
         email: email,
         occupation: occ,
+        course: courseName,
         price: currentPriceObj.currentFormatted,
+        sepay_code: sepayCode,
         channel: 'Form Website (' + courseName + ')',
         status: 'Chờ thanh toán',
         website_hp: hp
@@ -3087,21 +3168,15 @@
       updateFormCourseSelection();
     }
 
-    // ── XỬ LÝ KHI KHÁCH BẤM: "✅ TÔI ĐÃ CHUYỂN KHOẢN XONG" ──
-    function handlePaidConfirm() {
+    // ── XỬ LÝ THANH TOÁN TỰ ĐỘNG THÀNH CÔNG TỪ SEPAY ──
+    function handlePaymentSuccessFromSepay(payerName) {
       const pricing = getDynamicPricing();
-      const name = _currentLead.name || document.getElementById('modalName').innerText;
+      const name = payerName || _currentLead.name || document.getElementById('modalName').innerText;
       const phone = _currentLead.phone || document.getElementById('modalPhone').innerText;
       const email = _currentLead.email || document.getElementById('modalEmail').innerText;
       const price = _currentLead.price || pricing.currentPriceFormatted;
 
-      const btn = document.getElementById('btnPaidConfirm');
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '<span>⏳ Đang ghi nhận...</span>';
-      }
-
-      // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase (Cơ sở dữ liệu riêng)
+      // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase
       const sb = getSupabaseClient();
       if (sb) {
         try {
@@ -3116,7 +3191,6 @@
       }
 
       // 2. Gửi lệnh cập nhật trạng thái "ĐÃ THANH TOÁN" lên Google Sheet
-      // (Google Apps Script sẽ tự động cập nhật dòng của khách và gửi Email kích hoạt)
       sendToGoogleSheet({
         action: 'confirm_payment',
         name: name,
@@ -3126,7 +3200,7 @@
         status: 'ĐÃ THANH TOÁN'
       });
 
-      // 2. Lưu vào danh sách đã thanh toán trên LocalStorage
+      // 3. Lưu vào danh sách đã thanh toán trên LocalStorage
       const confirmed = JSON.parse(localStorage.getItem('simon_confirmed_payments') || '[]');
       confirmed.push({
         name,
@@ -3138,14 +3212,14 @@
       });
       localStorage.setItem('simon_confirmed_payments', JSON.stringify(confirmed));
 
-      // 3. Cập nhật giao diện sang Bước 3
+      // 4. Cập nhật giao diện sang Bước 3
       stopPaymentAutoCheck();
       document.getElementById('paidNameText').innerText = name;
       document.getElementById('paidSummaryName').innerText = name;
       document.getElementById('paidSummaryPhone').innerText = phone;
       document.getElementById('paidSummaryEmail').innerText = email;
 
-      const zaloMsgDone = encodeURIComponent(`Chào Simon Center, tôi ${name} (${phone}) đã chuyển khoản thành công ${price} cho khóa học Gieo Mầm. Nhờ Simon Center hỗ trợ kích hoạt giúp tôi!`);
+      const zaloMsgDone = encodeURIComponent(`Chào Simon Center, tôi ${name} (${phone}) đã chuyển khoản thành công ${price} cho khóa học Chiropractic. Nhờ Simon Center hỗ trợ kích hoạt giúp tôi!`);
       const communityBtn = document.getElementById('zaloCommunityBtn');
       if (communityBtn) {
         communityBtn.href = `https://zalo.me/0389609938?text=${zaloMsgDone}`;
@@ -3155,11 +3229,106 @@
       document.getElementById('step3Content').classList.remove('hidden');
 
       const step2Tab = document.getElementById('step2Tab');
-      step2Tab.classList.remove('text-brand-crimson', 'border-brand-crimson', 'text-gray-400');
-      step2Tab.classList.add('text-emerald-600', 'border-emerald-600');
-      step2Tab.innerText = '✓ Đã thanh toán';
+      if (step2Tab) {
+        step2Tab.classList.remove('text-brand-crimson', 'border-brand-crimson', 'text-gray-400');
+        step2Tab.classList.add('text-emerald-600', 'border-emerald-600');
+        step2Tab.innerText = '✓ Đã thanh toán';
+      }
 
-      showCopyToast('Đã ghi nhận thanh toán thành công!');
+      showCopyToast('🎉 SePay đã xác nhận thanh toán thành công!');
+    }
+
+    // Tương thích ngược nếu còn lời gọi cũ
+    function handlePaidConfirm() {
+      handlePaymentSuccessFromSepay();
+    }
+
+    // ── XỬ LÝ KHI KHÁCH QUAY LẠI HOẶC CHƯA CHUYỂN KHOẢN (TRẠNG THÁI: CHỜ THANH TOÁN) ──
+    let _hasSentPendingReminder = false;
+    function handleBackFromPayment() {
+      stopPaymentAutoCheck();
+
+      // Đóng modal đăng ký chính
+      document.getElementById('successModal').classList.add('hidden');
+      document.getElementById('successModal').classList.remove('flex');
+      goToStep1();
+
+      if (!_currentLead || !_currentLead.phone) return;
+
+      // Điền thông tin vào Modal Thông Báo Chờ Thanh Toán
+      const courseText = _currentLead.course || 'Khóa học Nắn Chỉnh Cột Sống Chuyên Biệt';
+      const priceText = _currentLead.price || '7.000.000 VNĐ';
+      const sepayCode = _currentLead.sepayCode || ('CHIRO ' + _currentLead.phone.replace(/\D/g, ''));
+
+      const modalCourse = document.getElementById('pendingModalCourse');
+      if (modalCourse) modalCourse.innerText = courseText;
+
+      const modalPrice = document.getElementById('pendingModalPrice');
+      if (modalPrice) modalPrice.innerText = priceText;
+
+      const modalCode = document.getElementById('pendingModalSepayCode');
+      if (modalCode) modalCode.innerText = sepayCode;
+
+      // Tạo link Zalo soạn sẵn đầy đủ thông tin & mã SePay
+      const zaloMsg = encodeURIComponent(
+        `Chào Simon Chiropractic Center, tôi là ${_currentLead.name} (SĐT: ${_currentLead.phone}).\n` +
+        `Tôi vừa đăng ký: ${courseText}.\n` +
+        `Mã SePay chuyển khoản của tôi: ${sepayCode}\n` +
+        `Học phí ưu đãi: ${priceText}.\n` +
+        `Tôi sẽ chuyển khoản sau, nhờ Simon Center lưu giữ suất học ưu đãi này giúp tôi!`
+      );
+      const pendingZaloBtn = document.getElementById('pendingZaloBtn');
+      if (pendingZaloBtn) {
+        pendingZaloBtn.href = `https://zalo.me/0389609938?text=${zaloMsg}`;
+      }
+
+      // Mở modal thông báo chờ thanh toán
+      const noticeModal = document.getElementById('modalPendingNotice');
+      if (noticeModal) {
+        noticeModal.classList.remove('hidden');
+        noticeModal.classList.add('flex');
+      }
+
+      // Gửi email thông báo & mã SePay (chỉ gửi 1 lần mỗi phiên đăng ký)
+      if (!_hasSentPendingReminder) {
+        _hasSentPendingReminder = true;
+        sendPendingReminderEmail(_currentLead);
+      }
+    }
+
+    function closePendingModal() {
+      const noticeModal = document.getElementById('modalPendingNotice');
+      if (noticeModal) {
+        noticeModal.classList.add('hidden');
+        noticeModal.classList.remove('flex');
+      }
+    }
+
+    function copyPendingSepayCode() {
+      const code = (_currentLead && _currentLead.sepayCode) ? _currentLead.sepayCode : (document.getElementById('pendingModalSepayCode')?.innerText || '');
+      if (code) {
+        navigator.clipboard.writeText(code).then(() => {
+          showCopyToast(`Đã copy mã SePay: ${code}`);
+        }).catch(() => {
+          showCopyToast(code);
+        });
+      }
+    }
+
+    // Gửi email thông báo kèm mã SePay đến hòm thư học viên và lưu trạng thái Chờ thanh toán
+    function sendPendingReminderEmail(lead) {
+      if (!lead || !lead.email) return;
+      sendToGoogleSheet({
+        action: 'send_pending_reminder',
+        name: lead.name,
+        phone: lead.phone,
+        email: lead.email,
+        course: lead.course,
+        price: lead.price,
+        sepay_code: lead.sepayCode,
+        status: 'Chờ thanh toán'
+      });
+      console.log('📧 Đã gửi email nhắc nhở kèm mã SePay cho:', lead.email);
     }
 
     // ── TỰ ĐỘNG KIỂM TRA THANH TOÁN SEPAY (POLLING REALTIME) ──
@@ -3171,14 +3340,35 @@
 
       _paymentCheckTimer = setInterval(async () => {
         try {
+          // 1. Kiểm tra qua Google Sheet
           const sheetUrl = getGoogleSheetUrl();
           if (sheetUrl) {
             const res = await fetch(`${sheetUrl}?action=check_payment&phone=${encodeURIComponent(cleanPhone)}`);
             const resData = await res.json();
             if (resData && resData.paid) {
               stopPaymentAutoCheck();
-              handlePaidConfirm();
+              handlePaymentSuccessFromSepay(resData.name || _currentLead.name);
               return;
+            }
+          }
+
+          // 2. Kiểm tra qua Supabase realtime status
+          const sb = getSupabaseClient();
+          if (sb) {
+            const { data, error } = await sb
+              .from('leads')
+              .select('status, name')
+              .ilike('phone', `%${cleanPhone}%`)
+              .order('created_at', { ascending: false })
+              .limit(1);
+            if (!error && data && data.length > 0) {
+              const row = data[0];
+              const st = (row.status || '').toUpperCase();
+              if (st.includes('ĐÃ THANH TOÁN') || st.includes('PAID') || st.includes('HOÀN TẤT')) {
+                stopPaymentAutoCheck();
+                handlePaymentSuccessFromSepay(row.name || _currentLead.name);
+                return;
+              }
             }
           }
         } catch (errPoll) { }
@@ -3217,13 +3407,6 @@
       const zaloMsg2 = encodeURIComponent(`Chào Simon Center, tôi ${_currentLead.name || ''} (${_currentLead.phone || ''}) vừa chuyển khoản ${_currentLead.price || ''} cho ${courseName}. Nội dung CK: ${note}. Nhờ Simon Center xác nhận giúp!`);
       document.getElementById('zaloAfterPay').href = `https://zalo.me/0389609938?text=${zaloMsg2}`;
 
-      // Reset nút xác nhận nếu bấm lại
-      const btn = document.getElementById('btnPaidConfirm');
-      if (btn) {
-        btn.disabled = false;
-        btn.innerHTML = '<span>✅ TÔI ĐÃ CHUYỂN KHOẢN XONG</span>';
-      }
-
       // Kích hoạt tự động quét thanh toán SePay (Không cần khách bấm nút)
       startPaymentAutoCheck(phone);
 
@@ -3258,6 +3441,12 @@
     // ── ĐÓNG MODAL ──
     function closeModal() {
       stopPaymentAutoCheck();
+      const step2 = document.getElementById('step2Content');
+      // Nếu khách đang ở bước thanh toán mà tắt modal thì hiển thị thông báo Chờ thanh toán và gửi email nhắc nhở
+      if (step2 && !step2.classList.contains('hidden') && _currentLead && _currentLead.phone) {
+        handleBackFromPayment();
+        return;
+      }
       document.getElementById('successModal').classList.add('hidden');
       document.getElementById('successModal').classList.remove('flex');
       goToStep1();

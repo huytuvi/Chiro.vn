@@ -233,7 +233,8 @@ function doPost(e) {
       if (email && email.includes('@')) {
         try {
           const courseName = data.course || data.Ten_Khoa_Hoc || CONFIG.COURSE_NAME;
-          sendRegistrationEmail(email, name, courseName, price, phone);
+          const sepayCode = data.sepay_code || ('CHIRO ' + phone.replace(/\D/g, ''));
+          sendRegistrationEmail(email, name, courseName, price, phone, sepayCode);
           sheet.getRange(lastRow, 9).setValue("ĐÃ GỬI EMAIL ĐĂNG KÝ lúc " + timeStr);
         } catch (errEmail) {
           Logger.log("Lỗi gửi email đăng ký: " + errEmail);
@@ -245,6 +246,32 @@ function doPost(e) {
         message: "Đã lưu thông tin đăng ký và gửi email tiếp nhận thành công",
         name: name,
         phone: phone
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // TRƯỜNG HỢP 1C: Gửi nhắc nhở Chờ thanh toán khi khách quay lại hoặc chuyển khoản sau
+    if (action === 'send_pending_reminder') {
+      const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '').slice(0, 15);
+      const email = sanitizeCellInput(data.email || '').slice(0, 100).toLowerCase();
+      const name = sanitizeCellInput(data.name || 'Học viên').slice(0, 100);
+      const courseName = sanitizeCellInput(data.course || CONFIG.COURSE_NAME);
+      const price = sanitizeCellInput(data.price || '7.000.000 VNĐ');
+      const sepayCode = sanitizeCellInput(data.sepay_code || ('CHIRO ' + phone));
+
+      if (email && email.includes('@')) {
+        try {
+          sendRegistrationEmail(email, name, courseName, price, phone, sepayCode);
+        } catch (errEmail) {
+          Logger.log("Lỗi gửi email nhắc nhở chờ thanh toán: " + errEmail);
+        }
+      }
+
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        action: "send_pending_reminder",
+        message: "Đã gửi email nhắc nhở kèm mã SePay thành công",
+        name: name,
+        sepay_code: sepayCode
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
@@ -751,15 +778,17 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
 /**
  * HÀM 2: GỬI EMAIL TIẾP NHẬN ĐĂNG KÝ (GỬI NGAY KHI KHÁCH VỪA ĐIỀN FORM)
  */
-function sendRegistrationEmail(recipientEmail, customerName, courseName, price, customerPhone, orderId) {
+function sendRegistrationEmail(recipientEmail, customerName, courseName, price, customerPhone, sepayCode, orderId) {
   if (!recipientEmail || !recipientEmail.includes('@')) return;
 
   const validName = customerName || 'Học viên';
   const validPhone = customerPhone || 'Theo thông tin đăng ký';
   const validCourse = courseName || 'Khóa Học Chiropractic Chuyên Biệt';
   const validOrder = orderId || generateOrderId(customerPhone);
+  const validSepayCode = sepayCode || ('CHIRO ' + String(validPhone).replace(/\D/g, ''));
+  const cleanPriceNum = String(price).replace(/\D/g, '') || '7000000';
 
-  const subject = `Order Pending #${validOrder} - Tiếp Nhận Đăng Ký Simon Chiropractic Center`;
+  const subject = `[Simon Chiropractic Center] Chỉ còn 1 bước nữa để hoàn tất đăng ký khóa học Chiropractic! (Đơn #${validOrder})`;
 
   const htmlBody = `
   <!DOCTYPE html>
@@ -781,9 +810,13 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
           Kính chào Anh/Chị ${validName},
         </div>
         
-        <p style="margin: 0 0 20px 0; font-size: 14px; color: #334155;">
-          Simon Chiropractic Center xin trân trọng thông báo: <strong>Chúng tôi đã tiếp nhận thông tin đăng ký</strong> của Anh/Chị. Suất học ưu đãi của bạn đã được tạm giữ trên hệ thống.
+        <p style="margin: 0 0 16px 0; font-size: 14px; color: #334155;">
+          Simon Chiropractic Center xin trân trọng thông báo: <strong>Chúng tôi đã ghi nhận thông tin đăng ký</strong> của Anh/Chị. Suất học ưu đãi của bạn đã được tạm giữ trên hệ thống.
         </p>
+
+        <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #92400e; font-weight: 600; line-height: 1.5;">
+          🚀 Chỉ còn một bước nữa thôi là bạn sẽ sở hữu trong tay bộ kỹ năng đầy đủ về môn Chiropractic đầu tiên tại Việt Nam!
+        </div>
 
         <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
           <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">
@@ -803,30 +836,39 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
               <td style="padding: 5px 0; color: #0f172a; font-weight: bold;">${validCourse}</td>
             </tr>
             <tr>
-              <td style="padding: 5px 0; color: #64748b;">Học phí:</td>
+              <td style="padding: 5px 0; color: #64748b;">Học phí ưu đãi:</td>
               <td style="padding: 5px 0; color: #8F1D35; font-size: 16px; font-weight: bold;">${price}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Trạng thái:</td>
+              <td style="padding: 5px 0; color: #d97706; font-weight: bold;">⏳ CHỜ THANH TOÁN</td>
             </tr>
           </table>
         </div>
 
         <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 18px; border-radius: 12px; margin-bottom: 20px; font-size: 13px;">
           <div style="font-weight: bold; color: #1e40af; margin-bottom: 10px; font-size: 14px;">
-            &#128179; THÔNG TIN CHUYỂN KHOẢN TỰ ĐỘNG (ACB SEPAY):
+            💳 THÔNG TIN CHUYỂN KHOẢN TỰ ĐỘNG (ACB SEPAY):
           </div>
-          <div style="margin-bottom: 5px;">• Ngân hàng: <strong>ACB (Ngân hàng TMCP Á Châu)</strong></div>
-          <div style="margin-bottom: 5px;">• Số tài khoản: <strong style="font-size: 16px; color: #1e3a8a;">2412825668</strong></div>
-          <div style="margin-bottom: 5px;">• Chủ tài khoản: <strong>BUI NGOC MINH HUY</strong></div>
-          <div style="margin-bottom: 5px;">• Số tiền: <strong style="color: #b91c1c;">${price}</strong></div>
-          <div>• Nội dung CK: <span style="background: #fef08a; padding: 2px 8px; font-weight: bold; border-radius: 4px; color: #0f172a;">CHIRO ${validPhone}</span></div>
+          <div style="margin-bottom: 6px;">• Ngân hàng: <strong>ACB (Ngân hàng TMCP Á Châu)</strong></div>
+          <div style="margin-bottom: 6px;">• Số tài khoản: <strong style="font-size: 16px; color: #1e3a8a;">2412825668</strong></div>
+          <div style="margin-bottom: 6px;">• Chủ tài khoản: <strong>BUI NGOC MINH HUY</strong></div>
+          <div style="margin-bottom: 6px;">• Số tiền: <strong style="color: #b91c1c; font-size: 15px;">${price}</strong></div>
+          <div style="margin-bottom: 14px;">• Nội dung CK (Mã SePay): <span style="background: #fef08a; padding: 3px 10px; font-weight: 800; font-family: monospace; border-radius: 4px; color: #0f172a; border: 1px solid #eab308; font-size: 14px;">${validSepayCode}</span></div>
+          
+          <div style="text-align: center; margin-top: 15px; padding-top: 12px; border-top: 1px dashed #bfdbfe;">
+            <img src="https://img.vietqr.io/image/ACB-2412825668-compact2.png?amount=${cleanPriceNum}&addInfo=${encodeURIComponent(validSepayCode)}&accountName=BUI%20NGOC%20MINH%20HUY" alt="VietQR ACB SePay" style="width: 210px; height: 210px; border: 3px solid #8F1D35; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+            <div style="font-size: 11px; color: #64748b; margin-top: 6px;">Mở app ngân hàng quét mã QR để chuyển khoản tự động chính xác</div>
+          </div>
         </div>
 
-        <p style="font-size: 13px; color: #475569;">
-          Hệ thống thanh toán tự động SePay sẽ xác nhận ngay trong 3 giây khi nhận được tiền và tự động gửi email kích hoạt tài khoản học cho Anh/Chị.
+        <p style="font-size: 13px; color: #475569; line-height: 1.6;">
+          Hệ thống thanh toán tự động SePay sẽ tự động nhận diện trong 3 giây khi nhận được tiền và tự động gửi email kích hoạt tài khoản học ngay lập tức cho Anh/Chị.
         </p>
 
-        <div style="text-align: center; margin: 20px 0;">
-          <a href="${CONFIG.ZALO_LINK}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 11px 24px; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 13px;">
-            Nhắn Báo Qua Zalo: ${CONFIG.HOTLINE} &rarr;
+        <div style="text-align: center; margin: 24px 0;">
+          <a href="${CONFIG.ZALO_LINK}?text=${encodeURIComponent('Chào Simon Chiropractic Center, tôi là ' + validName + ' (SĐT: ' + validPhone + '). Tôi đã đăng ký ' + validCourse + '. Mã SePay của tôi là: ' + validSepayCode + '. Nhờ Simon Center hỗ trợ giữ suất ưu đãi giúp tôi!')}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 12px 26px; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 13px;">
+            💬 Mở Zalo Lưu Mã SePay &amp; Nhận Hỗ Trợ (${CONFIG.HOTLINE}) &rarr;
           </a>
         </div>
 
