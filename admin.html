@@ -1259,7 +1259,7 @@
               ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-pending">&#9203; Chờ thanh toán</span>'
               : '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-cancelled">&#10008; Đã hủy</span>');
 
-        const orderCode = o.order_code || ('DH' + String(o.id).padStart(6, '0'));
+        const orderCode = o.order_code || ('SCC' + String(o.id).padStart(12, '0'));
 
         return `
           <tr class="hover:bg-slate-50 transition">
@@ -1460,7 +1460,7 @@
 
       const cust = _crmData.customers.find(item => item.id == o.customer_id || (o.customer_phone && item.phone == o.customer_phone));
       const targetEmail = o.customer_email || (cust ? cust.email : '') || '';
-      const orderCode = o.order_code || ('DH' + String(o.id).padStart(6, '0'));
+      const orderCode = o.order_code || ('SCC' + String(o.id).padStart(12, '0'));
 
       document.getElementById('modalSendEmail').classList.remove('hidden');
       document.getElementById('mail_order_id_raw').value = orderId;
@@ -1791,9 +1791,10 @@
 
             // Khớp đơn hàng nếu có
             if (r.price && (r.price.includes('VNĐ') || r.price.includes('đ') || Number(r.price) > 0)) {
-              // Trích xuất mã đơn hàng chuẩn DHxxxxxx
-              let codeMatch = (r.email_status && r.email_status.match(/DH\d{6}/i)) || (r.channel && r.channel.match(/DH\d{6}/i));
-              let orderCode = codeMatch ? codeMatch[0].toUpperCase() : (r.email_status && r.email_status.startsWith('DH') ? r.email_status : ('DH' + String(r.id).padStart(6, '0')));
+              // Trích xuất mã đơn hàng chuẩn SCC + 12 số (hoặc DH + 6 số cũ)
+              let codeMatch = (r.email_status && (r.email_status.match(/SCC\d{12}/i) || r.email_status.match(/SCC\d{8,14}/i) || r.email_status.match(/DH\d{6}/i))) || 
+                              (r.channel && (r.channel.match(/SCC\d{12}/i) || r.channel.match(/SCC\d{8,14}/i) || r.channel.match(/DH\d{6}/i)));
+              let orderCode = codeMatch ? codeMatch[0].toUpperCase() : (r.email_status && (r.email_status.startsWith('SCC') || r.email_status.startsWith('DH')) ? r.email_status : ('SCC' + String(r.id).padStart(12, '0')));
 
               const isRemotePaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
               const newStatus = isRemotePaid ? 'paid' : 'pending';

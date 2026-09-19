@@ -2675,11 +2675,21 @@
     // Lưu thông tin khách đăng ký hiện tại
     let _currentLead = {};
 
-    // ── HÀM SINH MÃ ĐƠN HÀNG CHUẨN SEPAY (DH + 6 CHỮ SỐ) ──
-    // Ví dụ: DH011991. Dùng làm Mã đơn hàng & Nội dung chuyển khoản 1:1 duy nhất
-    function generateOrderCode() {
-      const rand6 = Math.floor(100000 + Math.random() * 900000);
-      return 'DH' + rand6;
+    // ── HÀM SINH MÃ THAM CHIẾU / MÃ ĐƠN HÀNG CHUYỂN KHOẢN (SCC + ddMMhhmm + 4 SỐ CUỐI SĐT) ──
+    // Ví dụ: Ngày 19/09 lúc 12:35, SĐT 0989788698 -> SCC190912358698
+    // Dùng làm Mã tham chiếu & Nội dung chuyển khoản SePay đối soát 1:1 duy nhất
+    function generateOrderCode(phone) {
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2, '0');
+      const MM = String(now.getMonth() + 1).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const timePart = `${dd}${MM}${hh}${mm}`; // 8 số ddMMhhmm
+      
+      const cleanPhone = String(phone || '').replace(/\D/g, '');
+      const phonePart = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : String(Math.floor(1000 + Math.random() * 9000)));
+      
+      return `SCC${timePart}${phonePart}`;
     }
 
     // ── HÀM LƯU VÀO CƠ SỞ DỮ LIỆU RIÊNG SUPABASE (TỐC ĐỘ 0.05S) ──
@@ -3088,9 +3098,9 @@
         setTimeout(() => { if (submitBtn) submitBtn.disabled = false; }, 4000);
       }
 
-      // Sinh mã đơn hàng chuẩn SePay: DH + 6 chữ số ngẫu nhiên (Ví dụ: DH011991)
-      // Đây là Mã đơn hàng đồng thời là Nội dung chuyển khoản duy nhất để SePay đối soát 1:1
-      const orderCode = generateOrderCode();
+      // Sinh mã tham chiếu / mã đơn hàng chuẩn SePay: SCC + ddMMhhmm + 4 số cuối SĐT (Ví dụ: SCC190912358698)
+      // Đây là Mã tham chiếu đồng thời là Nội dung chuyển khoản duy nhất để SePay đối soát 1:1
+      const orderCode = generateOrderCode(phone);
 
       // Lưu thông tin lead hiện tại
       _currentLead = {
@@ -3285,7 +3295,7 @@
       // Điền thông tin vào Modal Thông Báo Chờ Thanh Toán
       const courseText = _currentLead.course || 'Khóa học Nắn Chỉnh Cột Sống Chuyên Biệt';
       const priceText = _currentLead.price || '7.000.000 VNĐ';
-      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode();
+      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode(_currentLead.phone);
       _currentLead.orderCode = orderCode;
 
       const modalCourse = document.getElementById('pendingModalCourse');
@@ -3301,7 +3311,7 @@
       const zaloMsg = encodeURIComponent(
         `Chào Simon Chiropractic Center, tôi là ${_currentLead.name} (SĐT: ${_currentLead.phone}).\n` +
         `Tôi vừa đăng ký: ${courseText}.\n` +
-        `Mã đơn hàng / Nội dung CK SePay: ${orderCode}\n` +
+        `Mã tham chiếu CK SePay: ${orderCode}\n` +
         `Học phí ưu đãi: ${priceText}.\n` +
         `Tôi sẽ chuyển khoản sau, nhờ Simon Center lưu giữ suất học ưu đãi này giúp tôi!`
       );
@@ -3336,17 +3346,17 @@
       const code = (_currentLead && (_currentLead.orderCode || _currentLead.sepayCode)) ? (_currentLead.orderCode || _currentLead.sepayCode) : (document.getElementById('pendingModalSepayCode')?.innerText || '');
       if (code) {
         navigator.clipboard.writeText(code).then(() => {
-          showCopyToast(`Đã copy mã đơn hàng / CK: ${code}`);
+          showCopyToast(`Đã copy mã tham chiếu CK: ${code}`);
         }).catch(() => {
           showCopyToast(code);
         });
       }
     }
 
-    // Gửi email thông báo kèm mã đơn hàng / CK đến hòm thư học viên và lưu trạng thái Chờ thanh toán
+    // Gửi email thông báo kèm mã tham chiếu / CK đến hòm thư học viên và lưu trạng thái Chờ thanh toán
     function sendPendingReminderEmail(lead) {
       if (!lead || !lead.email) return;
-      const orderCode = lead.orderCode || lead.sepayCode || generateOrderCode();
+      const orderCode = lead.orderCode || lead.sepayCode || generateOrderCode(lead.phone);
       sendToGoogleSheet({
         action: 'send_pending_reminder',
         order_code: orderCode,
@@ -3420,11 +3430,11 @@
       const phone = _currentLead.phone || '';
       const priceRaw = _currentLead.priceRaw || pricing.combo.current;
       const courseName = _currentLead.course || 'Khóa học Chiropractic Chuyên Biệt';
-      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode();
+      const orderCode = _currentLead.orderCode || _currentLead.sepayCode || generateOrderCode(phone);
       _currentLead.orderCode = orderCode;
       _currentLead.sepayCode = orderCode;
 
-      // Nội dung chuyển khoản: DUY NHẤT mã đơn hàng DHxxxxxx (Ví dụ: DH011991)
+      // Nội dung chuyển khoản: DUY NHẤT mã tham chiếu SCC + ddMMhhmm + 4 số cuối SĐT (Ví dụ: SCC190912358698)
       const note = orderCode;
 
       // Sinh QR từ API VietQR (liên kết SePay ACB)

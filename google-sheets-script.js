@@ -214,8 +214,8 @@ function doPost(e) {
         })).setMimeType(ContentService.MimeType.JSON);
       }
 
-      // Lấy mã đơn hàng chuẩn SePay (DH + 6 chữ số)
-      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || ('DH' + Math.floor(100000 + Math.random() * 900000)));
+      // Lấy mã tham chiếu đơn hàng chuẩn SePay (SCC + ddMMhhmm + 4 số cuối SĐT)
+      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || generateOrderId(phone));
       const fullChannel = channel.includes('MÃ:') ? channel : ('MÃ: ' + orderCode + ' | ' + channel);
 
       // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học)
@@ -226,7 +226,7 @@ function doPost(e) {
         email,          // Cột D: Email
         price,          // Cột E: Học phí
         occupation,     // Cột F: Nghề nghiệp
-        fullChannel,    // Cột G: Kênh nhận đơn kèm Mã đơn hàng DHxxxxxx
+        fullChannel,    // Cột G: Kênh nhận đơn kèm Mã tham chiếu SCC...
         status,         // Cột H: Trạng thái
         orderCode       // Cột I: Mã đơn hàng lưu giữ đối soát
       ]);
@@ -260,7 +260,7 @@ function doPost(e) {
       const name = sanitizeCellInput(data.name || 'Học viên').slice(0, 100);
       const courseName = sanitizeCellInput(data.course || CONFIG.COURSE_NAME);
       const price = sanitizeCellInput(data.price || '7.000.000 VNĐ');
-      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || ('DH' + Math.floor(100000 + Math.random() * 900000)));
+      const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || generateOrderId(phone));
 
       if (email && email.includes('@')) {
         try {
@@ -313,7 +313,7 @@ function doPost(e) {
       }
 
       // Nếu không tìm thấy dòng cũ, thêm dòng mới với trạng thái ĐÃ THANH TOÁN
-      const finalOrderId = orderCode || ('DH' + Math.floor(100000 + Math.random() * 900000));
+      const finalOrderId = orderCode || generateOrderId(phone);
       if (updatedRow === -1) {
         sheet.appendRow([
           timeStr, customerName, "'" + phone, email, customerPrice, "Đăng ký trực tiếp", "MÃ: " + finalOrderId + " | Xác nhận chuyển khoản", "ĐÃ THANH TOÁN", finalOrderId
@@ -655,15 +655,26 @@ function onEdit(e) {
 }
 
 /**
- * NGUYÊN TẮC SINH MÃ ĐƠN HÀNG CHUẨN SEPAY:
- * Cấu trúc chuẩn: DH + 6 chữ số ngẫu nhiên (Ví dụ: DH011991)
- * - Ngắn gọn, không dấu cách, không dấu tiếng Việt
- * - Dùng đồng thời làm Mã đơn hàng và Nội dung chuyển khoản ngân hàng
+ * NGUYÊN TẮC SINH MÃ THAM CHIẾU ĐƠN HÀNG CHUẨN SEPAY:
+ * Cấu trúc chuẩn: SCC + ddMMhhmm (8 số) + 4 số cuối số điện thoại (Ví dụ: SCC190912358698)
+ * - SCC: Tiền tố tham chiếu Simon Chiropractic Center
+ * - ddMMhhmm: Ngày, Tháng, Giờ, Phút phát sinh giao dịch
+ * - 4 số cuối SĐT: Định danh duy nhất của học viên
  * - Đảm bảo đối soát tự động 1:1 chính xác 100%
  */
 function generateOrderId(phone, sepayId) {
-  const rand6 = Math.floor(100000 + Math.random() * 900000);
-  return 'DH' + rand6;
+  const now = new Date();
+  const timePart = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "ddMMHHmm"); // 8 số ddMMhhmm
+  let phonePart = "";
+  if (phone) {
+    const clean = String(phone).replace(/\D/g, "");
+    phonePart = clean.length >= 4 ? clean.slice(-4) : clean.padStart(4, "0");
+  } else if (sepayId) {
+    phonePart = String(sepayId).slice(-4).padStart(4, "0");
+  } else {
+    phonePart = String(Math.floor(1000 + Math.random() * 9000));
+  }
+  return "SCC" + timePart + phonePart;
 }
 
 /**
@@ -1023,9 +1034,9 @@ function handleSepayWebhook(data, ss) {
     const bankGateway = String(data.gateway || "ACB").toUpperCase();
     const refCode = String(data.referenceCode || data.id || "");
 
-    // 1. TRÍCH XUẤT MÃ ĐƠN HÀNG (DH + 6 CHỮ SỐ) TỪ NỘI DUNG CHUYỂN KHOẢN
+    // 1. TRÍCH XUẤT MÃ THAM CHIẾU / ĐƠN HÀNG (SCC + 8 số thời gian + 4 số cuối SĐT, hoặc DH + số) TỪ NỘI DUNG CHUYỂN KHOẢN
     let matchedOrderCode = "";
-    const orderMatches = content.match(/(DH\d{6})/i);
+    const orderMatches = content.match(/(SCC\d{12})/i) || content.match(/(SCC\d{8,14})/i) || content.match(/(DH\d{6})/i);
     if (orderMatches && orderMatches.length > 0) {
       matchedOrderCode = orderMatches[1].toUpperCase();
     }
@@ -1098,7 +1109,7 @@ function handleSepayWebhook(data, ss) {
       }
     }
 
-    const finalOrderId = matchedOrderCode || ('DH' + (customerPhone ? customerPhone.slice(-6) : Math.floor(100000 + Math.random() * 900000)));
+    const finalOrderId = matchedOrderCode || generateOrderId(customerPhone, refCode);
 
     // 3. NẾU TÌM THẤY ĐƠN HỌC VIÊN CÓ SẴN -> CẬP NHẬT TRẠNG THÁI "ĐÃ THANH TOÁN"
     if (updatedRow !== -1) {
@@ -1171,7 +1182,7 @@ function handleSepayWebhook(data, ss) {
 
 /**
  * CẬP NHẬT TRẠNG THÁI THANH TOÁN SANG SUPABASE
- * Ưu tiên 1: Khớp chính xác 100% qua trường email_status (lưu Mã đơn hàng DHxxxxxx)
+ * Ưu tiên 1: Khớp chính xác 100% qua trường email_status (lưu Mã tham chiếu SCCddMMhhmmxxxx hoặc DHxxxxxx)
  * Ưu tiên 2 (Fallback): Khớp theo số điện thoại khách hàng
  */
 function syncPaymentToSupabase(orderCode, phone, status, price) {
