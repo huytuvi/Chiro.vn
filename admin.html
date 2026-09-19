@@ -24,7 +24,7 @@
 </head>
 <body class="bg-slate-100 min-h-screen py-8 px-3 sm:px-6">
 
-  <!-- BẢNG ĐIỀU KHIỂN CHÍNH (ADMIN DASHBOARD) - TRUY CẬP TRỰC TIẾP KHÔNG CẦN MẬT KHẨU -->
+  <!-- BẢNG ĐIỀU KHIỂN CHÍNH (ADMIN DASHBOARD) -->
   <div id="adminDashboard" class="max-w-7xl mx-auto space-y-6">
 
     <!-- Header & Quick Info -->
@@ -36,7 +36,7 @@
         <div>
           <div class="flex items-center space-x-2">
             <h1 class="text-xl sm:text-2xl font-black text-slate-900">SIMON CHIROPRACTIC CENTER</h1>
-            <span class="text-[11px] bg-red-100 text-red-900 font-extrabold px-2.5 py-0.5 rounded-full border border-red-200">CRM ADMIN v3.0</span>
+            <span class="text-[11px] bg-red-100 text-red-900 font-extrabold px-2.5 py-0.5 rounded-full border border-red-200">CRM ADMIN v3.5</span>
           </div>
           <p class="text-xs text-slate-500 mt-0.5">Quản trị toàn diện: Sản Phẩm • Khách Hàng • Đơn Hàng (Đồng bộ 3 chiều: brain.db ↔ Supabase ↔ Google Sheets)</p>
         </div>
@@ -47,6 +47,12 @@
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span id="syncIndicatorText">Đã kết nối Supabase &amp; Sheets</span>
         </div>
+        
+        <!-- NÚT RESET DỮ LIỆU HỆ THỐNG -->
+        <button onclick="openResetModal()" class="text-xs text-rose-700 bg-rose-50 hover:bg-rose-100 font-extrabold border border-rose-200 px-3.5 py-2 rounded-xl transition shadow-sm flex items-center space-x-1.5" title="Xóa toàn bộ khách hàng &amp; đơn hàng trên Supabase, Google Sheet và CRM để bắt đầu mới">
+          <span>🗑️ Reset Hệ Thống</span>
+        </button>
+
         <a href="index.html" class="text-xs text-slate-600 hover:text-[#8F1D35] font-semibold border border-slate-300 px-3.5 py-2 rounded-xl hover:bg-slate-50 transition flex items-center space-x-1">
           <span>🌐 Về Trang Chủ Chiro.vn</span>
         </a>
@@ -147,6 +153,9 @@
 
           <!-- Quick Action Buttons -->
           <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openResetModal()" class="text-xs bg-rose-600 hover:bg-rose-700 text-white font-extrabold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1" title="Xóa toàn bộ khách hàng &amp; đơn hàng trên Supabase, Google Sheet và CRM">
+              <span>🗑️ Reset Hệ Thống</span>
+            </button>
             <button onclick="exportCRMToBrainJson()" class="text-xs bg-slate-800 hover:bg-slate-900 text-white font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1" title="Tải file crm_data_sync.json để nạp vào SQLite brain.db">
               <span>💾 Tải File Sync brain.db</span>
             </button>
@@ -173,6 +182,9 @@
             </div>
             <div class="flex items-center space-x-2">
               <input type="text" id="searchProductInput" oninput="searchProducts(this.value)" placeholder="🔍 Tìm kiếm sản phẩm..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white w-48 sm:w-64">
+              <button onclick="executeResetProducts()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-3 py-2 rounded-xl border border-slate-300 transition shadow-sm flex items-center space-x-1 shrink-0" title="Khôi phục về 8 sản phẩm chuẩn ban đầu">
+                <span>🔄 Khôi Phục SP Chuẩn</span>
+              </button>
               <button onclick="openProductModal()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center space-x-1 shrink-0">
                 <span>➕ Thêm Sản Phẩm Mới</span>
               </button>
@@ -206,11 +218,16 @@
         <div id="subTabContentCustomers" class="space-y-4 hidden">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div class="w-full sm:w-72">
-              <input type="text" id="searchCustomerInput" oninput="searchCustomers(this.value)" placeholder="🔍 Tìm theo tên, số điện thoại, Zalo..." class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white">
+              <input type="text" id="searchCustomerInput" oninput="searchCustomers(this.value)" placeholder="🔍 Tìm theo tên, SĐT, email, Zalo..." class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white">
             </div>
-            <button onclick="openCustomerModal()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center space-x-1 shrink-0">
-              <span>➕ Thêm Khách Hàng Mới</span>
-            </button>
+            <div class="flex items-center space-x-2">
+              <button onclick="executeResetCustomersAndOrders()" class="bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs px-3.5 py-2 rounded-xl border border-rose-200 transition shadow-sm flex items-center space-x-1 shrink-0" title="Xóa toàn bộ khách hàng và đơn hàng cả trên Supabase &amp; Sheets">
+                <span>🗑️ Xóa Sạch Khách (Supabase + Sheet)</span>
+              </button>
+              <button onclick="openCustomerModal()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center space-x-1 shrink-0">
+                <span>➕ Thêm Khách Hàng Mới</span>
+              </button>
+            </div>
           </div>
 
           <!-- Bảng Khách Hàng -->
@@ -220,8 +237,9 @@
                 <tr>
                   <th class="py-3 px-3 w-12 text-center">ID</th>
                   <th class="py-3 px-3">Họ và Tên</th>
-                  <th class="py-3 px-3 w-32">Số Điện Thoại</th>
-                  <th class="py-3 px-3 w-32">Zalo</th>
+                  <th class="py-3 px-3 w-28">Số Điện Thoại</th>
+                  <th class="py-3 px-3">Email Nhận Bài Giảng</th>
+                  <th class="py-3 px-3 w-28">Zalo</th>
                   <th class="py-3 px-3 w-36">Ngày Đăng Ký</th>
                   <th class="py-3 px-3 w-32 text-center">Đơn Đã Mua</th>
                   <th class="py-3 px-3 w-36 text-center">Thao Tác</th>
@@ -246,7 +264,7 @@
               <button onclick="filterOrders('pending')" id="fltOrderPending" class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-bold text-[11px] hover:bg-slate-50">⏳ Chờ thanh toán</button>
             </div>
             <div class="flex items-center space-x-2">
-              <input type="text" id="searchOrderInput" oninput="searchOrders(this.value)" placeholder="🔍 Tìm mã đơn, khách, SĐT, khóa..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white w-48 sm:w-64">
+              <input type="text" id="searchOrderInput" oninput="searchOrders(this.value)" placeholder="🔍 Tìm kiếm đơn hàng..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white w-48 sm:w-64">
               <button onclick="openOrderModal()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center space-x-1 shrink-0">
                 <span>➕ Tạo Đơn Hàng Mới</span>
               </button>
@@ -258,13 +276,13 @@
             <table class="w-full text-left text-xs">
               <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
-                  <th class="py-3 px-3 w-28">Mã Đơn</th>
-                  <th class="py-3 px-3">Khách Hàng (Họ tên &amp; SĐT)</th>
-                  <th class="py-3 px-3">Khóa Học / Sản Phẩm</th>
-                  <th class="py-3 px-3 w-32 text-right">Số Tiền (VNĐ)</th>
+                  <th class="py-3 px-3 w-24">Mã Đơn</th>
+                  <th class="py-3 px-3">Khách Hàng &amp; SĐT</th>
+                  <th class="py-3 px-3">Sản Phẩm / Khóa Học</th>
+                  <th class="py-3 px-3 w-28 text-right">Số Tiền (VNĐ)</th>
                   <th class="py-3 px-3 w-32 text-center">Trạng Thái</th>
                   <th class="py-3 px-3 w-32">Ngày Đặt</th>
-                  <th class="py-3 px-3 w-36 text-center">Thao Tác</th>
+                  <th class="py-3 px-3 w-32 text-center">Thao Tác</th>
                 </tr>
               </thead>
               <tbody id="orderTableBody" class="divide-y divide-slate-100 text-slate-800">
@@ -275,103 +293,87 @@
         </div>
 
       </div>
-
-    </div> <!-- /#sectionCRM -->
+    </div>
 
     <!-- =================================================================== -->
-    <!-- SECTION 2: THỐNG KÊ KHẢO SÁT NHU CẦU                               -->
+    <!-- SECTION 2: KHẢO SÁT NHU CẦU                                         -->
     <!-- =================================================================== -->
     <div id="sectionSurvey" class="space-y-6 hidden">
       <div class="card p-6 border border-slate-200">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-4">
           <div>
-            <h2 class="font-extrabold text-slate-900 text-lg">📊 Thống Kê Nhu Cầu &amp; Chân Dung Học Viên</h2>
-            <p class="text-xs text-slate-500">Phân tích từ bảng khảo sát 5 câu hỏi trên website</p>
+            <h2 class="text-base font-black text-slate-900">📊 Danh Sách Khảo Sát Nhu Cầu Học Viên</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Dữ liệu thu thập từ popup khảo sát 5 câu hỏi trên trang chủ Chiro.vn</p>
           </div>
-          <button onclick="loadSurveyData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-2 rounded-lg border border-slate-300">
-            🔄 Làm mới khảo sát
+          <button onclick="syncSurveyFromRemote()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1">
+            <span>🔄 Tải Lại Khảo Sát</span>
           </button>
         </div>
-
-        <div id="surveyContainer" class="space-y-4">
-          <!-- Bảng khảo sát -->
-          <div id="surveyTable" class="overflow-x-auto text-xs"></div>
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-3 w-12 text-center">#</th>
+                <th class="py-3 px-3">Thời Gian</th>
+                <th class="py-3 px-3">Họ và Tên</th>
+                <th class="py-3 px-3">Số Điện Thoại</th>
+                <th class="py-3 px-3">Mã Số Hóa</th>
+                <th class="py-3 px-3">Mục Tiêu Học</th>
+                <th class="py-3 px-3">Kinh Nghiệm</th>
+                <th class="py-3 px-3">Hình Thức Học</th>
+              </tr>
+            </thead>
+            <tbody id="surveyTableBody" class="divide-y divide-slate-100 text-slate-800">
+              <tr><td colspan="8" class="py-8 text-center text-slate-400 italic">Đang tải dữ liệu khảo sát...</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
     <!-- =================================================================== -->
-    <!-- SECTION 3: CÀI ĐẶT HỆ THỐNG & ĐỒNG BỘ                              -->
+    <!-- SECTION 3: CÀI ĐẶT HỆ THỐNG & API                                   -->
     <!-- =================================================================== -->
     <div id="sectionSettings" class="space-y-6 hidden">
-
-      <!-- Sync Info Card -->
-      <div class="card p-6 border-2 border-slate-300 bg-white space-y-4">
-        <h2 class="font-black text-slate-900 text-base">⚡ CƠ CHẾ ĐỒNG BỘ 3 CHIỀU TỰ ĐỘNG</h2>
-        <div class="grid sm:grid-cols-3 gap-4 text-xs">
-          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-            <div class="font-bold text-slate-900 mb-1">1. SQLite brain.db (Cục bộ)</div>
-            <p class="text-slate-600 mb-2">Lưu trữ trên máy chủ nội bộ. Dữ liệu được nạp vào CRM ban đầu và có thể tải file cập nhật tức thì.</p>
-            <button onclick="exportCRMToBrainJson()" class="w-full bg-slate-800 text-white py-1.5 rounded font-bold text-[11px] hover:bg-slate-900">
-              Xuất File Đồng Bộ SQLite
-            </button>
-          </div>
-
-          <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
-            <div class="font-bold text-indigo-950 mb-1">2. Supabase PostgreSQL (Cloud)</div>
-            <p class="text-indigo-800 mb-2">Đồng bộ realtime qua REST API. Mọi thao tác Thêm/Sửa/Xóa đơn học viên sẽ được bắn ngay lên Supabase.</p>
-            <div class="text-[10px] text-indigo-700 font-mono">fjzkneljhfibwksnpjkk.supabase.co</div>
-          </div>
-
-          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
-            <div class="font-bold text-emerald-950 mb-1">3. Google Sheets (Sao lưu)</div>
-            <p class="text-emerald-800 mb-2">Webhook tự động đồng bộ sang Google Sheet <strong>Khach_Hang_Khoa_Hoc_Simon_Center</strong> và gửi Gmail.</p>
-            <div class="text-[10px] text-emerald-700 font-mono">script.google.com/macros/s/...</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Config Google Sheet -->
-      <div class="card p-6 border border-slate-200 space-y-3">
-        <h3 class="font-extrabold text-emerald-900 text-sm">🟢 Cấu Hình Google Apps Script Web App</h3>
-        <input type="text" id="cfgGoogleSheetUrl" value="https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono">
-        <div class="flex space-x-2">
-          <button onclick="saveSettings()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-lg text-xs">Lưu URL Sheets</button>
-          <button onclick="testSheetConnection()" class="bg-white border border-slate-300 text-slate-700 font-semibold px-4 py-2 rounded-lg text-xs hover:bg-slate-50">Kiểm tra kết nối</button>
-        </div>
-      </div>
-
-      <!-- Config Supabase -->
-      <div class="card p-6 border border-slate-200 space-y-3">
-        <h3 class="font-extrabold text-indigo-900 text-sm">⚡ Cấu Hình Supabase API</h3>
-        <div class="grid sm:grid-cols-2 gap-3">
+      <div class="card p-6 border border-slate-200 space-y-4">
+        <h2 class="text-base font-black text-slate-900 border-b border-slate-200 pb-3">⚙️ Cấu Hình Kết Nối API &amp; Đồng Bộ 3 Chiều</h2>
+        
+        <div class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-xs font-bold text-slate-700 block mb-1">Supabase URL</label>
-            <input type="text" id="cfgSupabaseUrl" value="https://fjzkneljhfibwksnpjkk.supabase.co" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Supabase REST URL</label>
+            <input type="text" id="cfgSupabaseUrl" value="https://fjzkneljhfibwksnpjkk.supabase.co" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
           </div>
           <div>
-            <label class="text-xs font-bold text-slate-700 block mb-1">Supabase Anon Public Key</label>
-            <input type="text" id="cfgSupabaseKey" value="sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Supabase Anon Key</label>
+            <input type="text" id="cfgSupabaseKey" value="sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
           </div>
         </div>
-        <div class="flex space-x-2">
-          <button onclick="saveSettings()" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-4 py-2 rounded-lg text-xs">Lưu Supabase</button>
-          <button onclick="testSupabaseConnection()" class="bg-white border border-slate-300 text-slate-700 font-semibold px-4 py-2 rounded-lg text-xs hover:bg-slate-50">Kiểm tra Supabase</button>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Google Sheet Apps Script Web App URL</label>
+          <input type="text" id="cfgGoogleSheetUrl" value="https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+        </div>
+
+        <div class="pt-2 flex items-center space-x-2">
+          <button onclick="saveApiConfigs()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+            💾 Lưu Cấu Hình
+          </button>
+          <button onclick="openResetModal()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+            🗑️ Mở Bảng Reset Hệ Thống
+          </button>
         </div>
       </div>
-
     </div>
 
-  </div> <!-- /#adminDashboard -->
-
+  </div>
 
   <!-- ===================================================================== -->
-  <!-- MODALS CHO CÁC THAO TÁC CRUD                                          -->
+  <!-- MODALS QUẢN TRỊ                                                       -->
   <!-- ===================================================================== -->
 
   <!-- 1. MODAL SẢN PHẨM -->
   <div id="modalProduct" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
         <h3 class="text-base font-black text-slate-900" id="modalProductTitle">➕ Thêm Sản Phẩm Mới</h3>
         <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
@@ -381,21 +383,21 @@
 
       <div>
         <label class="block text-xs font-bold text-slate-700 mb-1">Tên sản phẩm / Khóa học *</label>
-        <input type="text" id="prod_name" placeholder="Ví dụ: Khóa Học Chiropractic Nâng Cao" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+        <input type="text" id="prod_name" placeholder="Ví dụ: Level 1 Online..." class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Loại sản phẩm *</label>
           <select id="prod_type" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none bg-white">
-            <option value="digital">digital (Khóa học Online / Ebook)</option>
-            <option value="service">service (Khóa học Offline / Dịch vụ)</option>
-            <option value="physical">physical (Giáo trình bản cứng / Vật lý)</option>
+            <option value="digital">digital (Online E-learning)</option>
+            <option value="service">service (Offline Cầm tay chỉ việc)</option>
+            <option value="physical">physical (Vật lý - Sách/Thước)</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Học phí / Đơn giá (VNĐ) *</label>
-          <input type="number" id="prod_price" placeholder="14500000" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Đơn giá (VNĐ) *</label>
+          <input type="number" id="prod_price" placeholder="7000000" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
         </div>
       </div>
 
@@ -418,7 +420,7 @@
     </div>
   </div>
 
-  <!-- 2. MODAL KHÁCH HÀNG -->
+  <!-- 2. MODAL KHÁCH HÀNG (CÓ TRƯỜNG EMAIL CHUẨN) -->
   <div id="modalCustomer" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -436,6 +438,11 @@
       <div>
         <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại * (Khóa chính chống trùng lặp)</label>
         <input type="text" id="cust_phone" placeholder="0901234567" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Email học viên * (Nhận tài liệu &amp; kích hoạt bài giảng)</label>
+        <input type="email" id="cust_email" placeholder="hocvien@domain.com" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
       </div>
 
       <div>
@@ -506,87 +513,125 @@
     </div>
   </div>
 
-  <!-- 4. MODAL GỬI EMAIL XÁC NHẬN CHO HỌC VIÊN -->
+  <!-- 4. MODAL GỬI EMAIL THÔNG BÁO CHO HỌC VIÊN (KHÔNG HARDCODE EMAIL) -->
   <div id="modalSendEmail" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-        <h3 class="text-base font-black text-slate-900">📧 Gửi Email Kích Hoạt Khóa Học</h3>
+        <h3 class="text-base font-black text-slate-900" id="modalEmailTitle">📧 Gửi Email Thông Báo Học Viên</h3>
         <button onclick="closeEmailModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
       </div>
 
-      <div class="space-y-3 text-xs">
+      <input type="hidden" id="mail_order_id_raw">
+      <input type="hidden" id="mail_order_status">
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Loại Email Cần Gửi *</label>
+        <select id="mail_type_select" onchange="onMailTypeChange()" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none bg-white font-bold">
+          <option value="confirm_payment">✅ Báo ĐÃ NHẬN TIỀN THÀNH CÔNG (Kích hoạt khóa học)</option>
+          <option value="send_pending_reminder">⏳ Chúc Mừng Đăng Ký Thành Công &amp; Gửi Mã SePay (Chuyển khoản sau)</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Email học viên người nhận *</label>
+        <input type="email" id="mail_recipient" placeholder="hocvien@gmail.com" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none font-mono">
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Email người nhận:</label>
-          <input type="email" id="mail_recipient" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tên học viên</label>
+          <input type="text" id="mail_name" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
         </div>
         <div>
-          <label class="font-bold text-slate-700 block mb-1">Họ tên:</label>
-          <input type="text" id="mail_name" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="font-bold text-slate-700 block mb-1">Mã đơn:</label>
-            <input type="text" id="mail_order_id" class="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono">
-          </div>
-          <div>
-            <label class="font-bold text-slate-700 block mb-1">Số tiền:</label>
-            <input type="text" id="mail_amount" class="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold text-red-800">
-          </div>
-        </div>
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Khóa học:</label>
-          <input type="text" id="mail_course" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Mã đơn hàng</label>
+          <input type="text" id="mail_order_id" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none font-mono">
         </div>
       </div>
 
-      <div id="mailResult" class="text-xs font-bold text-center hidden"></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Học phí (VNĐ)</label>
+          <input type="text" id="mail_amount" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none font-bold text-red-900">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Khóa học</label>
+          <input type="text" id="mail_course" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Mã SePay chuyển khoản</label>
+        <input type="text" id="mail_sepay_code" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none font-mono font-bold bg-amber-50">
+      </div>
+
+      <div id="mailResult" class="hidden p-3 rounded-xl bg-slate-50 text-xs"></div>
 
       <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
         <button onclick="closeEmailModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Đóng</button>
-        <button onclick="executeSendEmail()" id="btnExecuteSendMail" class="px-5 py-2 text-xs font-bold bg-[#8F1D35] hover:bg-[#701529] text-white rounded-lg shadow">
-          Gửi Email Ngay ➔
+        <button onclick="executeSendEmail()" id="btnExecuteSendMail" class="px-5 py-2 text-xs font-bold bg-[#8F1D35] hover:bg-[#701529] text-white rounded-lg shadow">Gửi Email Ngay ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 5. MODAL RESET DỮ LIỆU HỆ THỐNG (SUPABASE + GOOGLE SHEET + CRM)       -->
+  <!-- ===================================================================== -->
+  <div id="modalResetData" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-5 shadow-2xl border-2 border-rose-200 text-center animate-in fade-in zoom-in duration-200">
+      <div class="w-14 h-14 bg-rose-100 text-rose-700 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-sm">
+        🗑️
+      </div>
+
+      <div>
+        <h3 class="text-lg font-black text-slate-900">Bảng Điều Khiển Reset Dữ Liệu</h3>
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+          Cho phép bạn làm sạch dữ liệu kiểm thử hoặc khôi phục danh sách để đón tiếp học viên thật một cách hoàn toàn tự động trên cả 3 nền tảng.
+        </p>
+      </div>
+
+      <div class="space-y-3 text-left">
+        <!-- Lựa chọn 1: Xóa sạch Khách hàng & Đơn hàng -->
+        <div class="p-4 rounded-2xl border-2 border-rose-200 bg-rose-50/50 hover:bg-rose-50 transition cursor-pointer" onclick="executeResetCustomersAndOrders()">
+          <div class="flex items-center justify-between font-black text-xs text-rose-900 mb-1">
+            <span>🗑️ XÓA SẠCH KHÁCH HÀNG &amp; ĐƠN HÀNG</span>
+            <span class="text-[10px] bg-rose-200 text-rose-900 px-2 py-0.5 rounded-full font-bold">Khuyên Dùng</span>
+          </div>
+          <p class="text-[11px] text-rose-700 leading-relaxed">
+            • Xóa sạch toàn bộ bản ghi học viên trên <strong>Supabase</strong>.<br>
+            • Xóa sạch toàn bộ các dòng học viên trên <strong>Google Sheets</strong> (giữ lại tiêu đề dòng 1).<br>
+            • Xóa sạch danh sách Khách hàng &amp; Đơn hàng trên CRM này.<br>
+            • Đưa số lượng đăng ký của các khóa học về <strong>0</strong>.
+          </p>
+          <button id="btnDoResetCustOrders" class="mt-3 w-full py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow">
+            👉 Bấm Vào Đây Để Xóa Sạch Khách &amp; Đơn Hàng
+          </button>
+        </div>
+
+        <!-- Lựa chọn 2: Khôi phục Sản phẩm chuẩn -->
+        <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 transition cursor-pointer" onclick="executeResetProducts()">
+          <div class="flex items-center justify-between font-bold text-xs text-slate-900 mb-1">
+            <span>🔄 KHÔI PHỤC DANH MỤC SẢN PHẨM CHUẨN</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Khôi phục danh sách về 7 sản phẩm chuẩn của Simon Chiropractic Center (+ 1 sản phẩm Test 2.000đ SePay).
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+        <button onclick="executeFullResetAll()" class="text-rose-600 hover:text-rose-800 text-xs font-bold py-2 underline">
+          ⚠️ Full Clean Reset (Tất Cả)
+        </button>
+        <button onclick="closeResetModal()" class="px-4 py-2 text-xs font-semibold text-slate-500 hover:bg-slate-100 rounded-xl transition">
+          ✕ Đóng Bảng
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 5. MODAL DANH SÁCH HỌC VIÊN THEO SẢN PHẨM -->
-  <div id="modalProductStudents" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-    <div class="bg-white rounded-2xl max-w-3xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[90vh] flex flex-col">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-        <div>
-          <div class="flex items-center space-x-2">
-            <span class="text-xl">👥</span>
-            <h3 class="text-base font-black text-slate-900" id="prodStudentsModalTitle">Danh Sách Học Viên Đăng Ký</h3>
-          </div>
-          <p class="text-xs text-slate-500 mt-0.5" id="prodStudentsModalSubtitle">Khóa học: ...</p>
-        </div>
-        <button onclick="closeProductStudentsModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold p-1">✕</button>
-      </div>
-
-      <div id="prodStudentsListContainer" class="overflow-y-auto flex-1 text-xs space-y-3">
-        <!-- Render bảng học viên thuộc sản phẩm này -->
-      </div>
-
-      <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100">
-        <span class="text-xs text-slate-500 font-semibold" id="prodStudentsTotalCount">Tổng cộng: 0 học viên</span>
-        <div class="flex space-x-2">
-          <button onclick="closeProductStudentsModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Đóng</button>
-          <button onclick="quickAddStudentToCurrentProduct()" class="px-4 py-2 text-xs font-bold bg-[#8F1D35] hover:bg-[#701529] text-white rounded-lg shadow flex items-center space-x-1">
-            <span>➕ Thêm Học Viên Vào Khóa Này</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- ===================================================================== -->
-  <!-- JAVASCRIPT CRM ENGINE & MULTI-LAYER SYNCHRONIZATION                   -->
-  <!-- ===================================================================== -->
+  <!-- SCRIPT LOGIC JAVASCRIPT -->
   <script>
-    // DỮ LIỆU BAN ĐẦU TỪ SQLITE brain.db
+    // Dữ liệu ban đầu
     const DEFAULT_BRAIN_CRM = {
   "products": [
     {
@@ -595,7 +640,7 @@
       "type": "digital",
       "price": 12900000.0,
       "description": "Trọn bộ Full-Spine E-Learning Video 4K POV, Drills rèn lực, cấp chứng chỉ trọn đời",
-      "registered_count": 2,
+      "registered_count": 0,
       "created_at": "2026-09-18 13:17:13"
     },
     {
@@ -604,7 +649,7 @@
       "type": "digital",
       "price": 7000000.0,
       "description": "Nền tảng cơ sinh học, sờ nắn động Motion Palpation & nắn chỉnh cột sống Cổ - Ngực - Thắt lưng - Chậu",
-      "registered_count": 1,
+      "registered_count": 0,
       "created_at": "2026-09-18 13:17:13"
     },
     {
@@ -613,7 +658,7 @@
       "type": "digital",
       "price": 7000000.0,
       "description": "Chuyên sâu nắn chỉnh Chi trên, Chi dưới & Phân tích phim X-Quang cơ sinh học Gonstead/Full-Spine",
-      "registered_count": 1,
+      "registered_count": 0,
       "created_at": "2026-09-18 13:17:13"
     },
     {
@@ -658,157 +703,14 @@
       "type": "digital",
       "price": 2000.0,
       "description": "Khóa học test tích hợp cổng thanh toán tự động ACB SePay quét mã QR 2.000đ",
-      "registered_count": 1,
+      "registered_count": 0,
       "created_at": "2026-09-18 13:17:13"
     }
   ],
-  "customers": [
-    {
-      "id": 1,
-      "name": "Bùi Thị Lộc",
-      "phone": "0987379257",
-      "zalo": "0987379257",
-      "registered_at": "08:02:32 13/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 2,
-      "name": "Phạm Thị Hồng Vân",
-      "phone": "0979268968",
-      "zalo": "0979268968",
-      "registered_at": "08:05:45 13/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 3,
-      "name": "Bui Huy",
-      "phone": "0868794241",
-      "zalo": "0868794241",
-      "registered_at": "16:00:47 14/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 5,
-      "name": "Huy Bui",
-      "phone": "0868794244",
-      "zalo": "0868794244",
-      "registered_at": "21:39:50 14/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 6,
-      "name": "Nguyên Lộc",
-      "phone": "09098439287",
-      "zalo": "09098439287",
-      "registered_at": "21:50:39 14/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 7,
-      "name": "Phạm Thị Hồng Vân",
-      "phone": "098243598",
-      "zalo": "098243598",
-      "registered_at": "21:51:27 14/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 8,
-      "name": "Nguyễn b",
-      "phone": "09908043",
-      "zalo": "09908043",
-      "registered_at": "16:39:32 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 9,
-      "name": "Bui Huy",
-      "phone": "0974745668",
-      "zalo": "0974745668",
-      "registered_at": "18:03:52 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 10,
-      "name": "NA",
-      "phone": "0808787878",
-      "zalo": "0808787878",
-      "registered_at": "18:05:33 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 11,
-      "name": "Huy",
-      "phone": "098978698",
-      "zalo": "098978698",
-      "registered_at": "18:14:27 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    }
-  ],
-  "orders": [
-    {
-      "id": 1,
-      "customer_id": 1,
-      "customer_name": "Bùi Thị Lộc",
-      "customer_phone": "0987379257",
-      "product_id": 3,
-      "product_name": "Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B)",
-      "amount": 7000000.0,
-      "status": "paid",
-      "order_date": "08:02:32 13/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 2,
-      "customer_id": 2,
-      "customer_name": "Phạm Thị Hồng Vân",
-      "customer_phone": "0979268968",
-      "product_id": 2,
-      "product_name": "Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A)",
-      "amount": 7000000.0,
-      "status": "pending",
-      "order_date": "08:05:45 13/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 3,
-      "customer_id": 9,
-      "customer_name": "Bui Huy",
-      "customer_phone": "0974745668",
-      "product_id": 1,
-      "product_name": "The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Micro-Drills + Chứng Chỉ Online)",
-      "amount": 12900000.0,
-      "status": "paid",
-      "order_date": "18:03:52 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 4,
-      "customer_id": 10,
-      "customer_name": "NA",
-      "customer_phone": "0808787878",
-      "product_id": 1,
-      "product_name": "The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Micro-Drills + Chứng Chỉ Online)",
-      "amount": 12900000.0,
-      "status": "paid",
-      "order_date": "18:05:33 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    },
-    {
-      "id": 5,
-      "customer_id": 11,
-      "customer_name": "Huy",
-      "customer_phone": "098978698",
-      "product_id": 8,
-      "product_name": "[TEST SEPAY] Khóa Học Test Thanh Toán Tự Động (2.000 VNĐ)",
-      "amount": 2000.0,
-      "status": "paid",
-      "order_date": "18:14:27 18/9/2026",
-      "created_at": "2026-09-18 13:17:13"
-    }
-  ]
+  "customers": [],
+  "orders": []
 };
 
-    // Global state
     let _crmData = {
       products: [],
       customers: [],
@@ -821,22 +723,16 @@
     let _searchCustomerTerm = '';
     let _searchOrderTerm = '';
 
-    // URL Configs
     const DEFAULT_SUPABASE_URL = "https://fjzkneljhfibwksnpjkk.supabase.co";
     const DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR";
     const DEFAULT_GS_URL = "https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec";
 
-    // TỰ ĐỘNG KHỞI TẠO DASHBOARD TRỰC TIẾP (KHÔNG CẦN MẬT KHẨU)
     window.addEventListener('DOMContentLoaded', () => {
       initCRMData();
     });
 
-    // -------------------------------------------------------------------------
-    // CRM DATA INITIALIZATION & LOCAL PERSISTENCE
-    // -------------------------------------------------------------------------
     function initCRMData() {
-      // Load from localStorage or fallback to brain.db snapshot
-      const local = localStorage.getItem('simon_crm_data_v4');
+      const local = localStorage.getItem('simon_crm_data_v5');
       if (local) {
         try {
           _crmData = JSON.parse(local);
@@ -847,41 +743,17 @@
         _crmData = JSON.parse(JSON.stringify(DEFAULT_BRAIN_CRM));
       }
 
-      // Đảm bảo không bị thiếu mảng
       if (!_crmData.products) _crmData.products = [];
       if (!_crmData.customers) _crmData.customers = [];
       if (!_crmData.orders) _crmData.orders = [];
 
       renderAllCRM();
-      
-      // Auto-fetch new updates from Supabase in background
       syncAllWithRemote(false);
     }
 
     function persistCRMData() {
-      localStorage.setItem('simon_crm_data_v4', JSON.stringify(_crmData));
+      localStorage.setItem('simon_crm_data_v5', JSON.stringify(_crmData));
       updateKPICards();
-    }
-
-    function updateKPICards() {
-      document.getElementById('statCustomers').innerText = _crmData.customers.length;
-      document.getElementById('statProducts').innerText = _crmData.products.length;
-
-      const paidOrders = _crmData.orders.filter(o => o.status === 'paid');
-      const pendingOrders = _crmData.orders.filter(o => o.status === 'pending');
-      document.getElementById('statPaidOrders').innerText = paidOrders.length;
-      document.getElementById('statPendingOrders').innerText = pendingOrders.length;
-
-      const totalOrders = _crmData.orders.length;
-      const rate = totalOrders > 0 ? Math.round((paidOrders.length / totalOrders) * 100) : 0;
-      document.getElementById('statPaidRate').innerText = `${rate}% tỷ lệ hoàn tất`;
-
-      const revenue = paidOrders.reduce((sum, o) => sum + (Number(o.amount) || 0), 0);
-      document.getElementById('statRevenue').innerText = revenue.toLocaleString('vi-VN') + ' đ';
-
-      document.getElementById('badgeProdCount').innerText = _crmData.products.length;
-      document.getElementById('badgeCustCount').innerText = _crmData.customers.length;
-      document.getElementById('badgeOrderCount').innerText = _crmData.orders.length;
     }
 
     function renderAllCRM() {
@@ -891,34 +763,41 @@
       renderOrdersTable();
     }
 
-    // -------------------------------------------------------------------------
-    // TAB SWITCHING
-    // -------------------------------------------------------------------------
+    function updateKPICards() {
+      document.getElementById('statCustomers').innerText = _crmData.customers.length;
+      document.getElementById('badgeCustCount').innerText = _crmData.customers.length;
+
+      document.getElementById('statProducts').innerText = _crmData.products.length;
+      document.getElementById('badgeProdCount').innerText = _crmData.products.length;
+
+      const paidOrders = _crmData.orders.filter(o => o.status === 'paid');
+      const pendingOrders = _crmData.orders.filter(o => o.status === 'pending');
+      const totalRev = paidOrders.reduce((sum, o) => sum + (Number(o.amount) || 0), 0);
+
+      document.getElementById('statPaidOrders').innerText = paidOrders.length;
+      document.getElementById('statPendingOrders').innerText = pendingOrders.length;
+      document.getElementById('statRevenue').innerText = totalRev.toLocaleString('vi-VN') + ' đ';
+      document.getElementById('badgeOrderCount').innerText = _crmData.orders.length;
+
+      const rate = _crmData.orders.length > 0 ? Math.round((paidOrders.length / _crmData.orders.length) * 100) : 0;
+      document.getElementById('statPaidRate').innerText = `${rate}% tỷ lệ hoàn tất`;
+    }
+
     function switchMainTab(tab) {
-      const secCRM = document.getElementById('sectionCRM');
-      const secSurvey = document.getElementById('sectionSurvey');
-      const secSettings = document.getElementById('sectionSettings');
-
-      const btnCRM = document.getElementById('navTabCRM');
-      const btnSurvey = document.getElementById('navTabSurvey');
-      const btnSettings = document.getElementById('navTabSettings');
-
-      [secCRM, secSurvey, secSettings].forEach(s => s.classList.add('hidden'));
-      [btnCRM, btnSurvey, btnSettings].forEach(b => {
-        b.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0";
+      ['crm', 'survey', 'settings'].forEach(t => {
+        const sec = document.getElementById('section' + t.toUpperCase());
+        const btn = document.getElementById('navTab' + (t === 'crm' ? 'CRM' : (t === 'survey' ? 'Survey' : 'Settings')));
+        if (sec && btn) {
+          if (t === tab) {
+            sec.classList.remove('hidden');
+            btn.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-[#8F1D35] text-white shadow-sm shrink-0";
+          } else {
+            sec.classList.add('hidden');
+            btn.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0";
+          }
+        }
       });
-
-      if (tab === 'crm') {
-        secCRM.classList.remove('hidden');
-        btnCRM.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-[#8F1D35] text-white shadow-sm shrink-0";
-      } else if (tab === 'survey') {
-        secSurvey.classList.remove('hidden');
-        btnSurvey.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-indigo-700 text-white shadow-sm shrink-0";
-        loadSurveyData();
-      } else if (tab === 'settings') {
-        secSettings.classList.remove('hidden');
-        btnSettings.className = "px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-slate-800 text-white shadow-sm shrink-0";
-      }
+      if (tab === 'survey') syncSurveyFromRemote();
     }
 
     function switchCRMSubTab(sub) {
@@ -930,7 +809,10 @@
       const cBtn = document.getElementById('subTabBtnCustomers');
       const oBtn = document.getElementById('subTabBtnOrders');
 
-      [pTab, cTab, oTab].forEach(t => t.classList.add('hidden'));
+      pTab.classList.add('hidden');
+      cTab.classList.add('hidden');
+      oTab.classList.add('hidden');
+
       [pBtn, cBtn, oBtn].forEach(b => {
         b.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center space-x-1.5 text-slate-600 hover:text-slate-900";
       });
@@ -938,12 +820,15 @@
       if (sub === 'products') {
         pTab.classList.remove('hidden');
         pBtn.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center space-x-1.5 bg-white text-slate-900 shadow-sm";
+        renderProductsTable();
       } else if (sub === 'customers') {
         cTab.classList.remove('hidden');
         cBtn.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center space-x-1.5 bg-white text-slate-900 shadow-sm";
+        renderCustomersTable();
       } else if (sub === 'orders') {
         oTab.classList.remove('hidden');
         oBtn.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center space-x-1.5 bg-white text-slate-900 shadow-sm";
+        renderOrdersTable();
       }
     }
 
@@ -985,33 +870,37 @@
       });
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 italic">Không tìm thấy sản phẩm nào phù hợp.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 italic">Chưa có sản phẩm nào phù hợp.</td></tr>';
         return;
       }
 
       tbody.innerHTML = list.map(p => {
-        const badgeClass = p.type === 'digital' ? 'badge-digital' : (p.type === 'service' ? 'badge-service' : 'badge-physical');
+        const typeBadge = p.type === 'digital' 
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold badge-digital">Digital</span>'
+          : (p.type === 'service' 
+              ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold badge-service">Dịch Vụ</span>'
+              : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold badge-physical">Vật Lý</span>');
+
         return `
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-3 text-center font-mono text-slate-500 font-bold">${p.id}</td>
-            <td class="py-3 px-3 font-bold text-slate-900">${p.name}</td>
-            <td class="py-3 px-3 text-center">
-              <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${badgeClass} uppercase tracking-wide">
-                ${p.type}
-              </span>
+            <td class="py-3 px-3">
+              <div class="font-bold text-slate-900">${p.name}</div>
+              <div class="text-[11px] text-slate-400 font-mono">Tạo lúc: ${p.created_at || '--'}</div>
             </td>
-            <td class="py-3 px-3 text-right font-mono font-bold text-red-900">
+            <td class="py-3 px-3 text-center">${typeBadge}</td>
+            <td class="py-3 px-3 text-right font-mono font-bold text-[#8F1D35]">
               ${(Number(p.price) || 0).toLocaleString('vi-VN')} đ
             </td>
             <td class="py-3 px-3 text-center">
-              <button onclick="viewProductStudents(${p.id})" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-slate-100 hover:bg-rose-50 hover:text-[#8F1D35] hover:border-rose-300 border border-slate-200 text-slate-800 font-black font-mono text-[11px] transition hover:scale-105 shadow-sm group" title="Bấm để xem danh sách học viên đăng ký nhóm này">
+              <button onclick="showEnrolledStudents(${p.id}, '${encodeURIComponent(p.name)}')" 
+                class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-[11px] font-black cursor-pointer transition shadow-sm ${p.registered_count > 0 ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300' : 'bg-slate-100 text-slate-500 hover:bg-slate-200 border border-slate-200'}"
+                title="Bấm để xem danh sách học viên đăng ký khóa học này">
                 <span>👥 ${p.registered_count || 0} học viên</span>
-                <span class="text-[10px] text-slate-400 group-hover:text-[#8F1D35] transition">🔍</span>
+                <span class="text-[10px]">👁️</span>
               </button>
             </td>
-            <td class="py-3 px-3 text-slate-600 max-w-xs truncate" title="${p.description || ''}">
-              ${p.description || '--'}
-            </td>
+            <td class="py-3 px-3 text-slate-600 max-w-xs truncate" title="${p.description || ''}">${p.description || '--'}</td>
             <td class="py-3 px-3 text-center space-x-1 whitespace-nowrap">
               <button onclick="editProduct(${p.id})" class="text-indigo-600 hover:text-indigo-900 font-bold px-2 py-1 bg-indigo-50 hover:bg-indigo-100 rounded text-[11px] transition">
                 ✏️ Sửa
@@ -1023,6 +912,32 @@
           </tr>
         `;
       }).join('');
+    }
+
+    function showEnrolledStudents(prodId, prodNameEncoded) {
+      const prodName = decodeURIComponent(prodNameEncoded);
+      const ordersForThisProd = _crmData.orders.filter(o => o.product_id == prodId || (o.product_name && o.product_name.toLowerCase().includes(prodName.toLowerCase().slice(0, 15))));
+
+      if (ordersForThisProd.length === 0) {
+        alert(`Khóa học: "${prodName}" hiện chưa có học viên nào đặt mua.`);
+        return;
+      }
+
+      let msg = `📋 DANH SÁCH HỌC VIÊN ĐĂNG KÝ KHÓA:
+"${prodName}"
+(Tổng cộng: ${ordersForThisProd.length} học viên)
+----------------------------------------
+`;
+      ordersForThisProd.forEach((o, idx) => {
+        const cust = _crmData.customers.find(c => c.id == o.customer_id || (o.customer_phone && c.phone == o.customer_phone));
+        const email = o.customer_email || (cust ? cust.email : '') || 'Chưa có email';
+        const isPaid = o.status === 'paid';
+        msg += `${idx + 1}. ${o.customer_name || (cust ? cust.name : 'Khách vãng lai')} | SĐT: ${o.customer_phone || '--'} | Email: ${email}
+   • Số tiền: ${(Number(o.amount)||0).toLocaleString('vi-VN')} đ | Trạng thái: ${isPaid ? '✔ ĐÃ THANH TOÁN' : '⏳ Chờ thanh toán'}
+`;
+      });
+
+      alert(msg);
     }
 
     function openProductModal(prod = null) {
@@ -1064,26 +979,25 @@
       }
 
       if (id) {
-        // Update
         const idx = _crmData.products.findIndex(p => p.id == id);
         if (idx !== -1) {
           _crmData.products[idx] = {
             ..._crmData.products[idx],
-            name, type, price,
-            registered_count: registered,
-            description: desc
+            name, type, price, registered_count: registered, description: desc
           };
+          syncEntityToRemote('products', 'update', _crmData.products[idx]);
         }
       } else {
-        // Create new
         const newId = _crmData.products.length > 0 ? Math.max(..._crmData.products.map(p => p.id)) + 1 : 1;
-        _crmData.products.push({
+        const newProd = {
           id: newId,
           name, type, price,
           registered_count: registered,
           description: desc,
-          created_at: new Date().toISOString()
-        });
+          created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        };
+        _crmData.products.push(newProd);
+        syncEntityToRemote('products', 'insert', newProd);
       }
 
       persistCRMData();
@@ -1101,110 +1015,14 @@
       if (!p) return;
       if (confirm(`Bạn có chắc chắn muốn xóa sản phẩm: "${p.name}"?`)) {
         _crmData.products = _crmData.products.filter(item => item.id != id);
+        syncEntityToRemote('products', 'delete', p);
         persistCRMData();
         renderProductsTable();
       }
     }
 
-    // XEM DANH SÁCH HỌC VIÊN THUỘC MỘT SẢN PHẨM CỤ THỂ
-    let _currentViewingProductId = null;
-
-    function viewProductStudents(prodId) {
-      _currentViewingProductId = prodId;
-      const prod = _crmData.products.find(p => p.id == prodId);
-      if (!prod) return;
-
-      document.getElementById('modalProductStudents').classList.remove('hidden');
-      document.getElementById('prodStudentsModalTitle').innerText = `👥 Danh Sách Học Viên (${prod.registered_count || 0})`;
-      document.getElementById('prodStudentsModalSubtitle').innerHTML = `Khóa học: <strong class="text-slate-900">${prod.name}</strong> • Học phí: <span class="font-bold text-red-900">${(Number(prod.price) || 0).toLocaleString('vi-VN')} đ</span> • Phân loại: <span class="uppercase font-bold">${prod.type}</span>`;
-
-      // Lấy tất cả đơn hàng thuộc sản phẩm này
-      const matchingOrders = _crmData.orders.filter(o => 
-        o.product_id == prodId || 
-        (o.product_name && prod.name && o.product_name.toLowerCase().includes(prod.name.toLowerCase())) ||
-        (prod.name.includes('Test') && o.product_name && o.product_name.includes('Test')) ||
-        (prod.name.includes('Full Online') && o.product_name && o.product_name.includes('Full Online'))
-      );
-
-      const container = document.getElementById('prodStudentsListContainer');
-      document.getElementById('prodStudentsTotalCount').innerText = `Tổng cộng: ${matchingOrders.length} học viên đã ghi danh`;
-
-      if (matchingOrders.length === 0) {
-        container.innerHTML = `
-          <div class="py-12 text-center text-slate-500 space-y-3">
-            <div class="text-4xl">📭</div>
-            <p class="font-semibold text-sm text-slate-700">Chưa có học viên nào đăng ký khóa học này.</p>
-            <p class="text-slate-400 text-xs">Bạn có thể bấm nút bên dưới để tạo đơn và thêm học viên vào khóa học ngay!</p>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = `
-        <table class="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
-          <thead class="bg-slate-100 font-bold text-slate-700 border-b border-slate-200">
-            <tr>
-              <th class="py-2.5 px-3 w-10 text-center">STT</th>
-              <th class="py-2.5 px-3">Học Viên</th>
-              <th class="py-2.5 px-3 w-32">Số Điện Thoại</th>
-              <th class="py-2.5 px-3 w-28 text-center">Liên Hệ Zalo</th>
-              <th class="py-2.5 px-3 w-28 text-right">Số Tiền</th>
-              <th class="py-2.5 px-3 w-32 text-center">Trạng Thái</th>
-              <th class="py-2.5 px-3 w-28">Ngày Mua</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100">
-            ${matchingOrders.map((o, idx) => {
-              const cust = _crmData.customers.find(c => c.id == o.customer_id || (o.customer_phone && c.phone == o.customer_phone));
-              const phone = o.customer_phone || (cust ? cust.phone : '--');
-              const name = o.customer_name || (cust ? cust.name : 'Học viên');
-              const zalo = cust && cust.zalo ? cust.zalo : phone;
-              const isPaid = o.status === 'paid';
-
-              return `
-                <tr class="hover:bg-slate-50 transition">
-                  <td class="py-2.5 px-3 text-center font-bold text-slate-400 font-mono">${idx + 1}</td>
-                  <td class="py-2.5 px-3 font-bold text-slate-900">${name}</td>
-                  <td class="py-2.5 px-3 font-mono font-semibold">
-                    ${phone ? `<a href="tel:${phone}" class="text-blue-600 hover:underline">📞 ${phone}</a>` : '--'}
-                  </td>
-                  <td class="py-2.5 px-3 text-center font-mono">
-                    ${zalo ? `<a href="https://zalo.me/${String(zalo).replace(/\D/g,'')}" target="_blank" class="inline-flex items-center space-x-1 px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold hover:bg-blue-100 transition">💬 Zalo</a>` : '--'}
-                  </td>
-                  <td class="py-2.5 px-3 text-right font-mono font-bold text-red-900">
-                    ${(Number(o.amount) || 0).toLocaleString('vi-VN')} đ
-                  </td>
-                  <td class="py-2.5 px-3 text-center">
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${isPaid ? 'badge-paid' : 'badge-pending'}">
-                      ${isPaid ? '&#10004; ĐÃ THANH TOÁN' : '&#9203; Chờ thanh toán'}
-                    </span>
-                  </td>
-                  <td class="py-2.5 px-3 text-slate-500 text-[11px]">${o.order_date || '--'}</td>
-                </tr>
-              `;
-            }).join('')}
-          </tbody>
-        </table>
-      `;
-    }
-
-    function closeProductStudentsModal() {
-      document.getElementById('modalProductStudents').classList.add('hidden');
-      _currentViewingProductId = null;
-    }
-
-    function quickAddStudentToCurrentProduct() {
-      const prodId = _currentViewingProductId;
-      closeProductStudentsModal();
-      if (prodId) {
-        openOrderModal();
-        document.getElementById('ord_product_id').value = prodId;
-        onOrderProductChange();
-      }
-    }
-
     // -------------------------------------------------------------------------
-    // CRUD: CUSTOMERS (KHÁCH HÀNG)
+    // CRUD: CUSTOMERS (KHÁCH HÀNG - CÓ EMAIL ĐẦY ĐỦ)
     // -------------------------------------------------------------------------
     function searchCustomers(term) {
       _searchCustomerTerm = term.toLowerCase().trim();
@@ -1219,19 +1037,19 @@
         if (_searchCustomerTerm) {
           const matchName = (c.name || '').toLowerCase().includes(_searchCustomerTerm);
           const matchPhone = (c.phone || '').toLowerCase().includes(_searchCustomerTerm);
+          const matchEmail = (c.email || '').toLowerCase().includes(_searchCustomerTerm);
           const matchZalo = (c.zalo || '').toLowerCase().includes(_searchCustomerTerm);
-          return matchName || matchPhone || matchZalo;
+          return matchName || matchPhone || matchEmail || matchZalo;
         }
         return true;
       });
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 italic">Chưa có khách hàng nào. Bấm "Thêm Khách Hàng Mới" để tạo.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400 italic">Chưa có khách hàng nào. Bấm "Thêm Khách Hàng Mới" để tạo hoặc bấm "Đồng Bộ Supabase" để tải về.</td></tr>';
         return;
       }
 
       tbody.innerHTML = list.map(c => {
-        // Đếm đơn hàng của khách này
         const userOrders = _crmData.orders.filter(o => o.customer_id == c.id || (c.phone && o.customer_phone == c.phone));
         const paidCount = userOrders.filter(o => o.status === 'paid').length;
 
@@ -1242,10 +1060,13 @@
             <td class="py-3 px-3 font-mono font-semibold text-slate-800">
               <a href="tel:${c.phone}" class="text-blue-600 hover:underline">${c.phone}</a>
             </td>
+            <td class="py-3 px-3 font-mono text-xs">
+              ${c.email ? `<a href="mailto:${c.email}" class="text-slate-700 hover:text-blue-600 font-semibold hover:underline">✉️ ${c.email}</a>` : '<span class="text-slate-400 italic">--</span>'}
+            </td>
             <td class="py-3 px-3 font-mono text-slate-600">
               ${c.zalo ? `<a href="https://zalo.me/${c.zalo.replace(/\D/g,'')}" target="_blank" class="text-indigo-600 font-bold hover:underline">💬 ${c.zalo}</a>` : '--'}
             </td>
-            <td class="py-3 px-3 text-slate-600">${c.registered_at || '--'}</td>
+            <td class="py-3 px-3 text-slate-600 text-[11px]">${c.registered_at || '--'}</td>
             <td class="py-3 px-3 text-center">
               <span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${paidCount > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
                 ${userOrders.length} đơn (${paidCount} đã TT)
@@ -1274,6 +1095,7 @@
         document.getElementById('cust_id').value = cust.id;
         document.getElementById('cust_name').value = cust.name;
         document.getElementById('cust_phone').value = cust.phone;
+        document.getElementById('cust_email').value = cust.email || '';
         document.getElementById('cust_zalo').value = cust.zalo || cust.phone || '';
         document.getElementById('cust_registered_at').value = cust.registered_at || '';
       } else {
@@ -1281,6 +1103,7 @@
         document.getElementById('cust_id').value = '';
         document.getElementById('cust_name').value = '';
         document.getElementById('cust_phone').value = '';
+        document.getElementById('cust_email').value = '';
         document.getElementById('cust_zalo').value = '';
         document.getElementById('cust_registered_at').value = new Date().toLocaleString('vi-VN');
       }
@@ -1290,48 +1113,45 @@
       document.getElementById('modalCustomer').classList.add('hidden');
     }
 
-    async function saveCustomer() {
+    function saveCustomer() {
       const id = document.getElementById('cust_id').value;
       const name = document.getElementById('cust_name').value.trim();
       const phone = document.getElementById('cust_phone').value.trim();
+      const email = document.getElementById('cust_email').value.trim();
       const zalo = document.getElementById('cust_zalo').value.trim() || phone;
-      const registered_at = document.getElementById('cust_registered_at').value.trim() || new Date().toLocaleString('vi-VN');
+      const regAt = document.getElementById('cust_registered_at').value.trim() || new Date().toLocaleString('vi-VN');
 
       if (!name || !phone) {
-        alert('Vui lòng điền Họ tên và Số điện thoại!');
+        alert('Vui lòng nhập Họ tên và Số điện thoại!');
         return;
       }
 
-      // Kiểm tra trùng SĐT nếu là thêm mới
       if (!id) {
         const exist = _crmData.customers.some(c => c.phone.replace(/\D/g,'') === phone.replace(/\D/g,''));
         if (exist) {
-          alert(`Số điện thoại ${phone} đã tồn tại trong danh sách khách hàng! Không được trùng lặp.`);
+          alert(`Số điện thoại "${phone}" đã tồn tại trong danh sách học viên!`);
           return;
         }
       }
 
       if (id) {
-        // Update
         const idx = _crmData.customers.findIndex(c => c.id == id);
         if (idx !== -1) {
           _crmData.customers[idx] = {
             ..._crmData.customers[idx],
-            name, phone, zalo, registered_at
+            name, phone, email, zalo, registered_at: regAt
           };
-          // Cập nhật lên Supabase & Google Sheets
           syncEntityToRemote('customers', 'update', _crmData.customers[idx]);
         }
       } else {
-        // Create new
         const newId = _crmData.customers.length > 0 ? Math.max(..._crmData.customers.map(c => c.id)) + 1 : 1;
         const newCust = {
           id: newId,
-          name, phone, zalo, registered_at,
-          created_at: new Date().toISOString()
+          name, phone, email, zalo,
+          registered_at: regAt,
+          created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
         };
         _crmData.customers.push(newCust);
-        // Đồng bộ lên Supabase & Google Sheets
         syncEntityToRemote('customers', 'insert', newCust);
       }
 
@@ -1350,7 +1170,6 @@
       if (!c) return;
       if (confirm(`Bạn có chắc chắn muốn xóa khách hàng: "${c.name}" (${c.phone})?`)) {
         _crmData.customers = _crmData.customers.filter(item => item.id != id);
-        // Đồng bộ xóa sang Supabase & Sheets
         syncEntityToRemote('customers', 'delete', c);
         persistCRMData();
         renderCustomersTable();
@@ -1390,15 +1209,16 @@
           const term = _searchOrderTerm;
           const matchCust = (o.customer_name || '').toLowerCase().includes(term);
           const matchPhone = (o.customer_phone || '').toLowerCase().includes(term);
+          const matchEmail = (o.customer_email || '').toLowerCase().includes(term);
           const matchProd = (o.product_name || '').toLowerCase().includes(term);
           const matchId = String(o.id).includes(term);
-          return matchCust || matchPhone || matchProd || matchId;
+          return matchCust || matchPhone || matchEmail || matchProd || matchId;
         }
         return true;
       });
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 italic">Chưa có đơn hàng nào. Bấm "Tạo Đơn Hàng Mới" để thêm.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400 italic">Chưa có đơn hàng nào. Bấm "Tạo Đơn Hàng Mới" để thêm hoặc bấm "Đồng Bộ Supabase" để tải về.</td></tr>';
         return;
       }
 
@@ -1409,7 +1229,6 @@
               ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-pending">&#9203; Chờ thanh toán</span>'
               : '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold badge-cancelled">&#10008; Đã hủy</span>');
 
-        // Sinh mã chuẩn: SCC-ddMM-xxxx
         const phoneSuffix = o.customer_phone ? String(o.customer_phone).slice(-4) : '0000';
         const orderCode = `SCC-${phoneSuffix}-#${o.id}`;
 
@@ -1419,6 +1238,7 @@
             <td class="py-3 px-3">
               <div class="font-bold text-slate-900">${o.customer_name || 'Khách vãng lai'}</div>
               <div class="text-[11px] text-slate-500 font-mono">${o.customer_phone || '--'}</div>
+              ${o.customer_email ? `<div class="text-[10px] text-slate-400 font-mono">✉️ ${o.customer_email}</div>` : ''}
             </td>
             <td class="py-3 px-3 font-medium text-slate-800">${o.product_name || 'Khóa học Chiropractic'}</td>
             <td class="py-3 px-3 text-right font-mono font-extrabold text-red-900">
@@ -1431,11 +1251,10 @@
                 <button onclick="quickMarkPaid(${o.id})" class="text-emerald-700 hover:text-emerald-900 font-bold px-2 py-1 bg-emerald-100 hover:bg-emerald-200 rounded text-[11px] transition" title="Xác nhận đã nhận tiền chuyển khoản">
                   ✅ Thu tiền
                 </button>
-              ` : `
-                <button onclick="openEmailModal(${o.id})" class="text-blue-700 hover:text-blue-900 font-bold px-2 py-1 bg-blue-50 hover:bg-blue-100 rounded text-[11px] transition" title="Gửi email kích hoạt cho học viên">
-                  📧 Email
-                </button>
-              `}
+              ` : ''}
+              <button onclick="openEmailModal(${o.id})" class="text-blue-700 hover:text-blue-900 font-bold px-2 py-1 bg-blue-50 hover:bg-blue-100 rounded text-[11px] transition" title="Gửi email cho học viên (Kích hoạt hoặc Nhắc chuyển khoản)">
+                📧 Email
+              </button>
               <button onclick="editOrder(${o.id})" class="text-indigo-600 hover:text-indigo-900 font-bold px-2 py-1 bg-indigo-50 hover:bg-indigo-100 rounded text-[11px] transition">
                 ✏️
               </button>
@@ -1462,14 +1281,20 @@
     }
 
     function onOrderProductChange() {
-      const sel = document.getElementById('ord_product_id');
-      const opt = sel.options[sel.selectedIndex];
+      const selProd = document.getElementById('ord_product_id');
+      const opt = selProd.options[selProd.selectedIndex];
       if (opt && opt.dataset.price) {
         document.getElementById('ord_amount').value = opt.dataset.price;
       }
     }
 
-    function openOrderModal(ord = null, defaultCustId = null) {
+    function createOrderForCustomer(custId) {
+      switchCRMSubTab('orders');
+      openOrderModal();
+      document.getElementById('ord_customer_id').value = custId;
+    }
+
+    function openOrderModal(ord = null) {
       populateOrderDropdowns();
       document.getElementById('modalOrder').classList.remove('hidden');
 
@@ -1484,10 +1309,10 @@
       } else {
         document.getElementById('modalOrderTitle').innerText = '➕ Tạo Đơn Hàng Mới';
         document.getElementById('ord_id').value = '';
-        if (defaultCustId) {
-          document.getElementById('ord_customer_id').value = defaultCustId;
+        if (_crmData.products.length > 0) {
+          document.getElementById('ord_product_id').value = _crmData.products[0].id;
+          document.getElementById('ord_amount').value = _crmData.products[0].price;
         }
-        onOrderProductChange();
         document.getElementById('ord_status').value = 'paid';
         document.getElementById('ord_date').value = new Date().toLocaleString('vi-VN');
       }
@@ -1497,28 +1322,23 @@
       document.getElementById('modalOrder').classList.add('hidden');
     }
 
-    function createOrderForCustomer(custId) {
-      openOrderModal(null, custId);
-    }
-
-    async function saveOrder() {
+    function saveOrder() {
       const id = document.getElementById('ord_id').value;
-      const custId = document.getElementById('ord_customer_id').value;
-      const prodId = document.getElementById('ord_product_id').value;
+      const custId = Number(document.getElementById('ord_customer_id').value);
+      const prodId = Number(document.getElementById('ord_product_id').value);
       const amount = Number(document.getElementById('ord_amount').value) || 0;
       const status = document.getElementById('ord_status').value;
-      const dateStr = document.getElementById('ord_date').value.trim() || new Date().toLocaleString('vi-VN');
+      const date = document.getElementById('ord_date').value.trim() || new Date().toLocaleString('vi-VN');
 
       const cust = _crmData.customers.find(c => c.id == custId);
       const prod = _crmData.products.find(p => p.id == prodId);
 
       if (!cust || !prod) {
-        alert('Vui lòng chọn đầy đủ Khách hàng và Sản phẩm!');
+        alert('Vui lòng chọn khách hàng và sản phẩm hợp lệ!');
         return;
       }
 
       if (id) {
-        // Update
         const idx = _crmData.orders.findIndex(o => o.id == id);
         if (idx !== -1) {
           _crmData.orders[idx] = {
@@ -1526,40 +1346,42 @@
             customer_id: custId,
             customer_name: cust.name,
             customer_phone: cust.phone,
+            customer_email: cust.email || '',
             product_id: prodId,
             product_name: prod.name,
             amount: amount,
             status: status,
-            order_date: dateStr
+            order_date: date
           };
           syncEntityToRemote('orders', 'update', _crmData.orders[idx]);
         }
       } else {
-        // Create new
         const newId = _crmData.orders.length > 0 ? Math.max(..._crmData.orders.map(o => o.id)) + 1 : 1;
-        const newOrder = {
+        const newOrd = {
           id: newId,
           customer_id: custId,
           customer_name: cust.name,
           customer_phone: cust.phone,
+          customer_email: cust.email || '',
           product_id: prodId,
           product_name: prod.name,
           amount: amount,
           status: status,
-          order_date: dateStr,
-          created_at: new Date().toISOString()
+          order_date: date,
+          created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
         };
-        _crmData.orders.push(newOrder);
-        syncEntityToRemote('orders', 'insert', newOrder);
+        _crmData.orders.push(newOrd);
+        syncEntityToRemote('orders', 'insert', newOrd);
       }
 
-      // Cập nhật lại registered_count cho các sản phẩm
+      // Cập nhật số lượng đã đăng ký của sản phẩm
       _crmData.products.forEach(p => {
         p.registered_count = _crmData.orders.filter(o => o.product_id == p.id).length;
       });
 
       persistCRMData();
-      renderAllCRM();
+      renderOrdersTable();
+      renderProductsTable();
       closeOrderModal();
     }
 
@@ -1571,14 +1393,17 @@
     function deleteOrder(id) {
       const o = _crmData.orders.find(item => item.id == id);
       if (!o) return;
-      if (confirm(`Bạn có chắc muốn xóa đơn hàng #${o.id} (${o.customer_name})?`)) {
+      if (confirm(`Bạn có chắc muốn xóa đơn hàng #${id} (${o.customer_name} - ${o.product_name})?`)) {
         _crmData.orders = _crmData.orders.filter(item => item.id != id);
         syncEntityToRemote('orders', 'delete', o);
+
         _crmData.products.forEach(p => {
-          p.registered_count = _crmData.orders.filter(item => item.product_id == p.id).length;
+          p.registered_count = _crmData.orders.filter(ord => ord.product_id == p.id).length;
         });
+
         persistCRMData();
-        renderAllCRM();
+        renderOrdersTable();
+        renderProductsTable();
       }
     }
 
@@ -1593,18 +1418,38 @@
     }
 
     // -------------------------------------------------------------------------
-    // EMAIL CONFIRMATION MODAL
+    // EMAIL CONFIRMATION & NOTIFICATION MODAL
     // -------------------------------------------------------------------------
     function openEmailModal(orderId) {
       const o = _crmData.orders.find(item => item.id == orderId);
       if (!o) return;
+
+      const cust = _crmData.customers.find(item => item.id == o.customer_id || (o.customer_phone && item.phone == o.customer_phone));
+      const targetEmail = o.customer_email || (cust ? cust.email : '') || '';
+      const cleanPhone = (o.customer_phone || (cust ? cust.phone : '') || '').replace(/\D/g, '');
+      const sepayCode = `CHIRO ${(o.product_name || 'LEVEL').toUpperCase().includes('LEVEL 1') ? 'LEVEL_1' : ((o.product_name || '').toUpperCase().includes('LEVEL 2') ? 'LEVEL_2' : 'FULL')} ${cleanPhone}`.trim();
+
       document.getElementById('modalSendEmail').classList.remove('hidden');
-      document.getElementById('mail_recipient').value = 'buihuy01@gmail.com';
-      document.getElementById('mail_name').value = o.customer_name || 'Học viên';
-      document.getElementById('mail_order_id').value = `SCC-1809-${o.customer_phone ? o.customer_phone.slice(-4) : '8698'}`;
+      document.getElementById('mail_order_id_raw').value = orderId;
+      document.getElementById('mail_order_status').value = o.status;
+      document.getElementById('mail_type_select').value = o.status === 'paid' ? 'confirm_payment' : 'send_pending_reminder';
+      document.getElementById('mail_recipient').value = targetEmail;
+      document.getElementById('mail_name').value = o.customer_name || (cust ? cust.name : 'Học viên');
+      document.getElementById('mail_order_id').value = `SCC-${cleanPhone ? cleanPhone.slice(-4) : '8698'}-#${o.id}`;
       document.getElementById('mail_amount').value = (Number(o.amount) || 0).toLocaleString('vi-VN') + ' VNĐ';
-      document.getElementById('mail_course').value = o.product_name || 'Khóa học Chiropractic';
+      document.getElementById('mail_course').value = o.product_name || 'Khóa học Chiropractic Chuyên Biệt';
+      document.getElementById('mail_sepay_code').value = sepayCode;
       document.getElementById('mailResult').classList.add('hidden');
+    }
+
+    function onMailTypeChange() {
+      const mType = document.getElementById('mail_type_select').value;
+      const title = document.getElementById('modalEmailTitle');
+      if (mType === 'confirm_payment') {
+        title.innerText = '📧 Gửi Email Xác Nhận ĐÃ NHẬN TIỀN THÀNH CÔNG';
+      } else {
+        title.innerText = '📧 Gửi Email Chúc Mừng Đăng Ký & Mã SePay Chuyển Khoản';
+      }
     }
 
     function closeEmailModal() {
@@ -1617,46 +1462,160 @@
       const orderId = document.getElementById('mail_order_id').value.trim();
       const amount = document.getElementById('mail_amount').value.trim();
       const course = document.getElementById('mail_course').value.trim();
+      const sepayCode = document.getElementById('mail_sepay_code').value.trim();
+      const actionType = document.getElementById('mail_type_select').value;
       const resEl = document.getElementById('mailResult');
       const btn = document.getElementById('btnExecuteSendMail');
 
       if (!email || !email.includes('@')) {
-        alert('Vui lòng nhập email hợp lệ!');
+        alert('Vui lòng nhập địa chỉ email hợp lệ của học viên!');
         return;
       }
 
       btn.disabled = true;
       btn.innerText = 'Đang gửi email...';
       resEl.classList.remove('hidden');
-      resEl.className = 'text-xs text-indigo-700 font-bold';
-      resEl.innerText = '⏳ Đang gửi email xác nhận qua Apps Script & EmailJS...';
+      resEl.className = 'text-xs text-indigo-700 font-bold p-3 rounded-xl bg-indigo-50';
+      resEl.innerText = '⏳ Đang gửi email qua Google Apps Script Webhook...';
 
       try {
         const gsUrl = document.getElementById('cfgGoogleSheetUrl').value || DEFAULT_GS_URL;
-        // Gửi qua Apps Script Webhook
         await fetch(gsUrl, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({
-            action: 'confirm_payment',
+            action: actionType,
             email: email,
             name: name,
             price: amount,
             course: course,
+            sepay_code: sepayCode,
             order_id: orderId
           })
         });
 
-        resEl.className = 'text-xs text-emerald-700 font-bold';
-        resEl.innerText = '✅ Đã gửi email xác nhận thành công tới ' + email;
+        resEl.className = 'text-xs text-emerald-700 font-bold p-3 rounded-xl bg-emerald-50';
+        resEl.innerText = '✅ Đã gửi email thành công tới: ' + email;
       } catch(err) {
-        resEl.className = 'text-xs text-rose-600 font-bold';
+        resEl.className = 'text-xs text-rose-600 font-bold p-3 rounded-xl bg-rose-50';
         resEl.innerText = '❌ Lỗi gửi email: ' + err.message;
       } finally {
         btn.disabled = false;
         btn.innerText = 'Gửi Email Ngay ➔';
       }
+    }
+
+    // -------------------------------------------------------------------------
+    // HỆ THỐNG RESET DỮ LIỆU: SUPABASE + GOOGLE SHEETS + CRM LOCAL
+    // -------------------------------------------------------------------------
+    function openResetModal() {
+      document.getElementById('modalResetData').classList.remove('hidden');
+    }
+
+    function closeResetModal() {
+      document.getElementById('modalResetData').classList.add('hidden');
+    }
+
+    async function executeResetCustomersAndOrders() {
+      if (!confirm('⚠️ CẢNH BÁO NGUY HIỂM:\n\nBạn có CHẮC CHẮN muốn XÓA SẠCH toàn bộ danh sách Khách hàng & Đơn hàng?\n\n• Xóa 100% bản ghi trên cơ sở dữ liệu Supabase.\n• Xóa toàn bộ dữ liệu học viên trên Google Sheets (giữ lại tiêu đề dòng 1).\n• Xóa toàn bộ khách hàng và đơn hàng trên CRM này.\n• Đưa số lượng học viên đăng ký của các khóa học về 0.\n\nThao tác này KHÔNG THỂ HOÀN TÁC!')) {
+        return;
+      }
+
+      const btn = document.getElementById('btnDoResetCustOrders');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Đang xóa sạch Supabase & Sheets...';
+      }
+
+      try {
+        const sbUrl = document.getElementById('cfgSupabaseUrl').value || DEFAULT_SUPABASE_URL;
+        const sbKey = document.getElementById('cfgSupabaseKey').value || DEFAULT_SUPABASE_ANON_KEY;
+        const gsUrl = document.getElementById('cfgGoogleSheetUrl').value || DEFAULT_GS_URL;
+
+        // A. XÓA TRÊN SUPABASE LEADS
+        try {
+          await fetch(`${sbUrl}/rest/v1/leads?id=gt.0`, {
+            method: 'DELETE',
+            headers: {
+              'apikey': sbKey,
+              'Authorization': `Bearer ${sbKey}`,
+              'Prefer': 'return=minimal'
+            }
+          });
+          console.log('⚡ Đã xóa sạch dữ liệu trên Supabase');
+        } catch(errSb) {
+          console.warn('Lỗi xóa Supabase:', errSb);
+        }
+
+        // B. XÓA TRÊN GOOGLE SHEETS (Dòng 2 trở đi)
+        try {
+          await fetch(gsUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'reset_sheet',
+              admin_key: 'simon2026'
+            })
+          });
+          console.log('⚡ Đã gửi lệnh reset Google Sheet');
+        } catch(errGs) {
+          console.warn('Lỗi reset Google Sheet:', errGs);
+        }
+
+        // C. RESET TRÊN CRM NỘI BỘ
+        _crmData.customers = [];
+        _crmData.orders = [];
+        _crmData.products.forEach(p => p.registered_count = 0);
+
+        persistCRMData();
+        renderAllCRM();
+
+        closeResetModal();
+        alert('🎉 ĐÃ RESET THÀNH CÔNG!\n\nToàn bộ dữ liệu Khách hàng và Đơn hàng trên Supabase, Google Sheet và CRM đã được xóa sạch hoàn toàn. Hệ thống sẵn sàng tiếp nhận lượt đăng ký mới tinh!');
+      } catch (e) {
+        alert('Lỗi khi thực hiện reset: ' + e.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = '👉 Bấm Vào Đây Để Xóa Sạch Khách & Đơn Hàng';
+        }
+      }
+    }
+
+    function executeResetProducts() {
+      if (!confirm('Khôi phục danh mục về 7 khóa học chuẩn (+ 1 khóa test 2.000đ SePay) của Simon Chiropractic Center?\nCác chỉnh sửa tùy biến sản phẩm trước đó sẽ được khôi phục về ban đầu.')) {
+        return;
+      }
+
+      _crmData.products = [
+        { id: 1, name: "The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Micro-Drills + Chứng Chỉ Online)", type: "digital", price: 12900000, description: "Trọn bộ Full-Spine E-Learning Video 4K POV, Drills rèn lực, cấp chứng chỉ trọn đời", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 2, name: "Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A)", type: "digital", price: 7000000, description: "Nền tảng cơ sinh học, sờ nắn động Motion Palpation & nắn chỉnh cột sống Cổ - Ngực - Thắt lưng - Chậu", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 3, name: "Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B)", type: "digital", price: 7000000, description: "Chuyên sâu nắn chỉnh Chi trên, Chi dưới & Phân tích phim X-Quang cơ sinh học Gonstead/Full-Spine", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 4, name: "Module Lẻ Online — Cổ Vai Gáy hoặc Thắt Lưng - Chậu", type: "digital", price: 1000000, description: "Học 1 vùng chuyên biệt (HWS Cổ vai gáy hoặc LWS Thắt lưng - Chậu) thực chiến cấp tốc", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 5, name: "Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (4–5 ngày cùng Thầy Henrik Simon)", type: "service", price: 36000000, description: "4–5 ngày thực hành lâm sàng trực tiếp cùng Bác sĩ Henrik Simon, khấu trừ 100% học phí Online", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 6, name: "Tageshospitation — Đi Thực Tế Lâm Sàng Tại Simon Center", type: "service", price: 2500000, description: "1 ngày thực tế quan sát khám và điều trị bệnh nhân tại Simon Chiropractic Center", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 7, name: "Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống", type: "physical", price: 1500000, description: "Bộ giáo trình in màu chuẩn y khoa kèm thước đo Cobb và phim mẫu giải phẫu cơ sinh học", registered_count: 0, created_at: "2026-09-18 13:17:13" },
+        { id: 8, name: "[TEST SEPAY] Khóa Học Test Thanh Toán Tự Động (2.000 VNĐ)", type: "digital", price: 2000, description: "Khóa học test tích hợp cổng thanh toán tự động ACB SePay quét mã QR 2.000đ", registered_count: 0, created_at: "2026-09-18 13:17:13" }
+      ];
+
+      _crmData.products.forEach(p => {
+        p.registered_count = _crmData.orders.filter(o => o.product_id == p.id).length;
+      });
+
+      persistCRMData();
+      renderAllCRM();
+      closeResetModal();
+      alert('Đã khôi phục danh mục 7 sản phẩm chuẩn (+ 1 khóa test 2.000đ) thành công!');
+    }
+
+    async function executeFullResetAll() {
+      if (!confirm('⚠️ CẢNH BÁO TỐI CAO:\n\nBạn có chắc chắn muốn RESET TOÀN BỘ hệ thống CRM về trạng thái ban đầu?\n• Xóa sạch Supabase\n• Xóa sạch Google Sheet\n• Xóa sạch Khách hàng & Đơn hàng\n• Khôi phục sản phẩm mặc định')) {
+        return;
+      }
+      await executeResetCustomersAndOrders();
+      executeResetProducts();
     }
 
     // -------------------------------------------------------------------------
@@ -1669,78 +1628,81 @@
 
       console.log(`Syncing [${entityType}] [${action}]:`, data);
 
-      // 1. SUPABASE REST API SYNC
-      try {
-        if (entityType === 'customers' || entityType === 'orders') {
-          const cleanPhone = String(data.phone || data.customer_phone || '').replace(/\D/g, '');
-          
+      if (entityType === 'customers' || entityType === 'orders') {
+        try {
           if (action === 'insert') {
             await fetch(`${sbUrl}/rest/v1/leads`, {
               method: 'POST',
               headers: {
+                'Content-Type': 'application/json',
                 'apikey': sbKey,
                 'Authorization': `Bearer ${sbKey}`,
-                'Content-Type': 'application/json',
                 'Prefer': 'return=minimal'
               },
               body: JSON.stringify({
-                name: data.name || data.customer_name,
-                phone: cleanPhone,
-                price: (data.amount ? data.amount.toLocaleString('vi-VN') + ' VNĐ' : 'Khảo sát nhu cầu'),
+                name: data.name || data.customer_name || 'Học viên',
+                phone: data.phone || data.customer_phone || '',
+                email: data.email || data.customer_email || '',
+                price: data.amount ? ((Number(data.amount) || 0).toLocaleString('vi-VN') + ' VNĐ') : '0 VNĐ',
                 course: data.product_name || 'Khóa học Chiropractic',
                 status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán',
-                channel: 'Admin Panel CRM'
+                channel: 'Admin Panel'
               })
             });
-          } else if (action === 'update' && cleanPhone) {
-            await fetch(`${sbUrl}/rest/v1/leads?phone=like.*${cleanPhone}*`, {
-              method: 'PATCH',
-              headers: {
-                'apikey': sbKey,
-                'Authorization': `Bearer ${sbKey}`,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=minimal'
-              },
-              body: JSON.stringify({
-                name: data.name || data.customer_name,
-                price: (data.amount ? data.amount.toLocaleString('vi-VN') + ' VNĐ' : undefined),
-                status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán'
-              })
-            });
-          } else if (action === 'delete' && cleanPhone) {
-            await fetch(`${sbUrl}/rest/v1/leads?phone=like.*${cleanPhone}*`, {
-              method: 'DELETE',
-              headers: {
-                'apikey': sbKey,
-                'Authorization': `Bearer ${sbKey}`
-              }
-            });
+          } else if (action === 'update') {
+            const searchPhone = data.phone || data.customer_phone;
+            if (searchPhone) {
+              await fetch(`${sbUrl}/rest/v1/leads?phone=eq.${searchPhone}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'apikey': sbKey,
+                  'Authorization': `Bearer ${sbKey}`,
+                  'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                  name: data.name || data.customer_name,
+                  email: data.email || data.customer_email,
+                  status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán'
+                })
+              });
+            }
+          } else if (action === 'delete') {
+            const searchPhone = data.phone || data.customer_phone;
+            if (searchPhone) {
+              await fetch(`${sbUrl}/rest/v1/leads?phone=eq.${searchPhone}`, {
+                method: 'DELETE',
+                headers: {
+                  'apikey': sbKey,
+                  'Authorization': `Bearer ${sbKey}`,
+                  'Prefer': 'return=minimal'
+                }
+              });
+            }
           }
+        } catch(errSb) {
+          console.warn('Supabase sync warning:', errSb);
         }
-      } catch(errSb) {
-        console.warn('Supabase sync warning:', errSb);
-      }
 
-      // 2. GOOGLE SHEETS WEBHOOK SYNC
-      try {
-        if (gsUrl) {
-          const cleanPhone = String(data.phone || data.customer_phone || '').replace(/\D/g, '');
+        try {
           await fetch(gsUrl, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              action: action === 'delete' ? 'delete_lead' : 'update_lead',
-              phone: cleanPhone,
+              action: action === 'insert' ? 'register' : (action === 'update' ? 'update_lead' : 'delete_lead'),
               name: data.name || data.customer_name,
-              price: data.amount ? data.amount.toLocaleString('vi-VN') + ' VNĐ' : '',
+              phone: data.phone || data.customer_phone,
+              email: data.email || data.customer_email,
+              price: data.amount ? ((Number(data.amount) || 0).toLocaleString('vi-VN') + ' VNĐ') : '',
+              course: data.product_name || '',
               status: data.status === 'paid' ? 'ĐÃ THANH TOÁN' : 'Chờ thanh toán',
-              course: data.product_name || ''
+              channel: 'Admin Panel'
             })
           });
+        } catch(errGs) {
+          console.warn('Google Sheet sync warning:', errGs);
         }
-      } catch(errGs) {
-        console.warn('Google Sheet sync warning:', errGs);
       }
     }
 
@@ -1778,11 +1740,20 @@
                 id: newId,
                 name: r.name || 'Khách hàng',
                 phone: phone,
+                email: r.email || '',
                 zalo: phone,
                 registered_at: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : 'Mới đây')
               };
               _crmData.customers.push(c);
               newCustCount++;
+            } else {
+              // Cập nhật email nếu c chưa có hoặc trước đó bị gán nhầm
+              if (r.email && (!c.email || c.email === 'buihuy01@gmail.com')) {
+                c.email = r.email;
+              }
+              if (r.name && c.name === 'Khách hàng') {
+                c.name = r.name;
+              }
             }
 
             // Khớp đơn hàng nếu có
@@ -1812,17 +1783,17 @@
                   customer_id: c.id,
                   customer_name: c.name,
                   customer_phone: phone,
+                  customer_email: r.email || c.email || '',
                   product_id: matchedProd ? matchedProd.id : 1,
                   product_name: r.course || (matchedProd ? matchedProd.name : 'Khóa học'),
                   amount: cleanPrice,
-                  status: (r.status && r.status.includes('ĐÃ THANH TOÁN')) ? 'paid' : 'pending',
-                  order_date: r.time_str || '18/09/2026'
+                  status: (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid'))) ? 'paid' : 'pending',
+                  order_date: r.time_str || '19/09/2026'
                 });
               }
             }
           });
 
-          // Cập nhật lại registered_count
           _crmData.products.forEach(p => {
             p.registered_count = _crmData.orders.filter(o => o.product_id == p.id).length;
           });
@@ -1849,7 +1820,6 @@
       }
     }
 
-    // Xuất file JSON để nạp vào brain.db
     function exportCRMToBrainJson() {
       const jsonStr = JSON.stringify(_crmData, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
@@ -1862,98 +1832,68 @@
       alert('Đã tải xuống file crm_data_sync.json!\nBạn có thể chạy lệnh: python3 sync_crm_to_brain.py crm_data_sync.json để nạp trực tiếp vào SQLite brain.db.');
     }
 
-    // Xuất Excel CSV
     function exportCSVOrders() {
-      let csv = "\uFEFFMã đơn,Khách hàng,Số điện thoại,Khóa học,Số tiền,Trạng thái,Ngày mua\n";
+      if (_crmData.orders.length === 0) {
+        alert('Chưa có đơn hàng nào để xuất file CSV!');
+        return;
+      }
+      let csv = '\uFEFFMã Đơn,Họ và Tên,Số Điện Thoại,Email,Khóa Học,Số Tiền,Trạng Thái,Ngày Đặt\n';
       _crmData.orders.forEach(o => {
-        csv += `"#${o.id}","${o.customer_name || ''}","'${o.customer_phone || ''}","${o.product_name || ''}","${o.amount || 0}","${o.status || ''}","${o.order_date || ''}"\n`;
+        csv += `"${o.id}","${o.customer_name}","${o.customer_phone}","${o.customer_email || ''}","${o.product_name}","${o.amount}","${o.status}","${o.order_date}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Don_Hang_Simon_Center_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `Don_Hang_Chiro_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
       URL.revokeObjectURL(url);
     }
 
-    // -------------------------------------------------------------------------
-    // KHẢO SÁT & CÀI ĐẶT
-    // -------------------------------------------------------------------------
-    async function loadSurveyData() {
-      const container = document.getElementById('surveyTable');
-      container.innerHTML = '<div class="py-8 text-center text-slate-500">Đang nạp dữ liệu khảo sát...</div>';
+    async function syncSurveyFromRemote() {
+      const tbody = document.getElementById('surveyTableBody');
+      tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400 italic">⏳ Đang tải dữ liệu khảo sát từ Supabase...</td></tr>';
       const sbUrl = document.getElementById('cfgSupabaseUrl').value || DEFAULT_SUPABASE_URL;
       const sbKey = document.getElementById('cfgSupabaseKey').value || DEFAULT_SUPABASE_ANON_KEY;
 
       try {
-        const resp = await fetch(`${sbUrl}/rest/v1/leads?channel=like.*Khảo Sát*&order=created_at.desc`, {
+        const resp = await fetch(`${sbUrl}/rest/v1/leads?channel=ilike.*Khảo Sát*&order=created_at.desc`, {
           headers: { 'apikey': sbKey, 'Authorization': `Bearer ${sbKey}` }
         });
         if (resp.ok) {
-          const data = await resp.json();
-          document.getElementById('badgeSurveyCount').innerText = data.length;
-          if (data.length === 0) {
-            container.innerHTML = '<div class="py-8 text-center text-slate-400 italic">Chưa có lượt khảo sát nào.</div>';
+          const list = await resp.json();
+          document.getElementById('badgeSurveyCount').innerText = list.length;
+          if (list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400 italic">Chưa có bản ghi khảo sát nào.</td></tr>';
             return;
           }
-          container.innerHTML = `
-            <table class="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
-              <thead class="bg-slate-100 font-bold text-slate-700">
-                <tr>
-                  <th class="py-2.5 px-3">Thời gian</th>
-                  <th class="py-2.5 px-3">Học viên</th>
-                  <th class="py-2.5 px-3">SĐT</th>
-                  <th class="py-2.5 px-3">Chi tiết khảo sát</th>
-                  <th class="py-2.5 px-3">Trạng thái</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-100">
-                ${data.map(r => `
-                  <tr class="hover:bg-slate-50">
-                    <td class="py-2 px-3 text-slate-500 font-mono">${r.time_str || r.created_at}</td>
-                    <td class="py-2 px-3 font-bold text-slate-900">${r.name || 'Khách khảo sát'}</td>
-                    <td class="py-2 px-3 font-mono">${r.phone || '--'}</td>
-                    <td class="py-2 px-3 max-w-md truncate" title="${r.occupation || ''}">${r.occupation || '--'}</td>
-                    <td class="py-2 px-3 font-bold text-emerald-700">${r.status || 'Đã gửi'}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          `;
+          tbody.innerHTML = list.map((item, idx) => `
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-3 text-center font-mono text-slate-500 font-bold">${idx + 1}</td>
+              <td class="py-3 px-3 text-slate-500">${item.time_str || (item.created_at ? new Date(item.created_at).toLocaleString('vi-VN') : '--')}</td>
+              <td class="py-3 px-3 font-bold text-slate-900">${item.name || 'Khách ẩn danh'}</td>
+              <td class="py-3 px-3 font-mono font-semibold text-slate-800">
+                <a href="tel:${item.phone}" class="text-blue-600 hover:underline">${item.phone || '--'}</a>
+              </td>
+              <td class="py-3 px-3 font-mono font-bold text-indigo-700">${item.course || '--'}</td>
+              <td class="py-3 px-3 text-slate-700 max-w-xs truncate" title="${item.occupation || ''}">${item.occupation || '--'}</td>
+              <td class="py-3 px-3 text-slate-600">Đã ghi nhận</td>
+              <td class="py-3 px-3">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold badge-digital">Khảo sát</span>
+              </td>
+            </tr>
+          `).join('');
         }
-      } catch(err) {
-        container.innerHTML = '<div class="py-6 text-center text-rose-600">Lỗi nạp khảo sát: ' + err.message + '</div>';
+      } catch(e) {
+        tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-rose-500 italic">Lỗi kết nối khảo sát: ' + e.message + '</td></tr>';
       }
     }
 
-    function saveSettings() {
+    function saveApiConfigs() {
+      localStorage.setItem('simon_supabase_url', document.getElementById('cfgSupabaseUrl').value.trim());
+      localStorage.setItem('simon_supabase_key', document.getElementById('cfgSupabaseKey').value.trim());
+      localStorage.setItem('simon_google_sheet_url', document.getElementById('cfgGoogleSheetUrl').value.trim());
       alert('Đã lưu cấu hình API thành công!');
-    }
-
-    async function testSheetConnection() {
-      const url = document.getElementById('cfgGoogleSheetUrl').value;
-      try {
-        const r = await fetch(url + '?action=check_payment&phone=098978698&t=' + Date.now());
-        const data = await r.json();
-        alert('Kết nối Google Apps Script thành công: ' + JSON.stringify(data));
-      } catch(err) {
-        alert('Không thể kết nối Google Sheets: ' + err.message);
-      }
-    }
-
-    async function testSupabaseConnection() {
-      const sbUrl = document.getElementById('cfgSupabaseUrl').value;
-      const sbKey = document.getElementById('cfgSupabaseKey').value;
-      try {
-        const r = await fetch(`${sbUrl}/rest/v1/leads?select=id&limit=1`, {
-          headers: { 'apikey': sbKey, 'Authorization': `Bearer ${sbKey}` }
-        });
-        if (r.ok) alert('Kết nối Supabase thành công! Tốc độ phản hồi cực nhanh.');
-        else alert('Lỗi Supabase: Mã lỗi HTTP ' + r.status);
-      } catch(err) {
-        alert('Không thể kết nối Supabase: ' + err.message);
-      }
     }
   </script>
 </body>

@@ -375,12 +375,16 @@ function doPost(e) {
         })).setMimeType(ContentService.MimeType.JSON);
       }
 
-      const lastRow = sheet.getLastRow();
+      const allSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
       let deletedCount = 0;
-      if (lastRow > 1) {
-        deletedCount = lastRow - 1;
-        sheet.deleteRows(2, deletedCount);
-      }
+      allSheets.forEach(s => {
+        const lr = s.getLastRow();
+        if (lr > 1) {
+          s.deleteRows(2, lr - 1);
+          deletedCount += (lr - 1);
+        }
+      });
+
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
         action: "reset_sheet",
@@ -442,12 +446,15 @@ function doGet(e) {
           message: "401 Unauthorized: Lệnh nguy hiểm bị từ chối do thiếu khóa bảo mật Admin!"
         })).setMimeType(ContentService.MimeType.JSON);
       }
-      const lastRow = sheet.getLastRow();
+      const allSheets = SpreadsheetApp.getActiveSpreadsheet().getSheets();
       let deletedCount = 0;
-      if (lastRow > 1) {
-        deletedCount = lastRow - 1;
-        sheet.deleteRows(2, deletedCount);
-      }
+      allSheets.forEach(s => {
+        const lr = s.getLastRow();
+        if (lr > 1) {
+          s.deleteRows(2, lr - 1);
+          deletedCount += (lr - 1);
+        }
+      });
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
         action: "reset_sheet",
@@ -654,7 +661,7 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
   const validOrder = orderId || generateOrderId(customerPhone);
   const validDate = paymentDate || Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm");
 
-  const subject = `Order Confirmed #${validOrder} - Simon Chiropractic Center`;
+  const subject = `[Simon Chiropractic Center] Xác nhận ĐÃ NHẬN TIỀN THÀNH CÔNG — Kích hoạt khóa học (Đơn #${validOrder})`;
 
   const htmlBody = `
   <!DOCTYPE html>
@@ -679,11 +686,12 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
           Kính chào Anh/Chị ${validName},
         </div>
         
-        <p style="margin: 0 0 20px 0; font-size: 14px; color: #334155;">
-          Simon Chiropractic Center xin chân thành cảm ơn Anh/Chị đã đăng ký tham gia khóa học. Chúng tôi xác nhận <strong>đã nhận được khoản thanh toán học phí</strong> của Anh/Chị qua hình thức chuyển khoản ngân hàng.
-        </p>
+        <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #065f46; font-weight: 600; line-height: 1.6;">
+          ✅ <strong>XÁC NHẬN ĐÃ NHẬN TIỀN THÀNH CÔNG!</strong><br>
+          Simon Chiropractic Center xin trân trọng thông báo: Chúng tôi <strong>đã nhận được tiền thanh toán thành công (${amountPaid})</strong> từ Anh/Chị cho khóa học Chiropractic. Tài khoản và quyền truy cập tài liệu học tập của Anh/Chị đã được kích hoạt thành công!
+        </div>
 
-        <!-- BẢNG CHI TIẾT ĐƠN HÀNG (CHUẨN FORM EMAILJS) -->
+        <!-- BẢNG CHI TIẾT ĐƠN HÀNG -->
         <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
           <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px;">
             &#10004; Thông Tin Đơn Hàng &amp; Học Viên
@@ -695,7 +703,7 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
               <td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${validName}</td>
             </tr>
             <tr>
-              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Email:</td>
+              <td style="padding: 6px 0; color: #64748b; vertical-align: top;">Email nhận bài giảng:</td>
               <td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${recipientEmail}</td>
             </tr>
             <tr>
@@ -715,14 +723,14 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
               <td style="padding: 6px 0; color: #0f172a;">${validDate}</td>
             </tr>
             <tr style="border-top: 1px dashed #cbd5e1;">
-              <td style="padding: 10px 0 6px 0; color: #64748b; vertical-align: middle;">Học phí đã thanh toán:</td>
+              <td style="padding: 10px 0 6px 0; color: #64748b; vertical-align: middle;">Học phí đã nhận:</td>
               <td style="padding: 10px 0 6px 0; color: #8F1D35; font-size: 17px; font-weight: 800;">${amountPaid}</td>
             </tr>
             <tr>
               <td style="padding: 6px 0; color: #64748b; vertical-align: middle;">Trạng thái:</td>
               <td style="padding: 6px 0;">
                 <span style="display: inline-block; background-color: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 20px; font-weight: bold; font-size: 11px; border: 1px solid #a7f3d0;">
-                  &#10004; ĐÃ XÁC NHẬN THANH TOÁN
+                  &#10004; ĐÃ NHẬN TIỀN — ĐÃ KÍCH HOẠT
                 </span>
               </td>
             </tr>
@@ -736,7 +744,7 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
           </div>
           <ol style="margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.6;">
             <li style="margin-bottom: 6px;">
-              <strong>Giáo trình Ebook &amp; Video bài giảng:</strong> Đội ngũ học vụ Simon Chiropractic Center sẽ cấp quyền truy cập tài khoản học trực tuyến theo Email <strong>${recipientEmail}</strong> của Anh/Chị trong vòng 24 giờ.
+              <strong>Giáo trình Ebook &amp; Video bài giảng:</strong> Đội ngũ học vụ Simon Chiropractic Center sẽ gửi tài liệu &amp; tài khoản học trực tuyến theo Email <strong>${recipientEmail}</strong> của Anh/Chị trong vòng 15-30 phút.
             </li>
             <li style="margin-bottom: 6px;">
               <strong>Nhóm Zalo học viên chuyên môn:</strong> Bấm vào nút bên dưới để tham gia nhóm Zalo học viên, nhận link phòng học Zoom và lịch Seminar trực tiếp cùng Thầy Henrik Simon:
@@ -769,14 +777,27 @@ function sendSuccessEmail(recipientEmail, customerName, amountPaid, customerPhon
   </html>
   `;
 
-  GmailApp.sendEmail(recipientEmail, subject, "", {
-    htmlBody: htmlBody,
-    name: "Simon Chiropractic Center"
-  });
+  try {
+    MailApp.sendEmail({
+      to: recipientEmail,
+      subject: subject,
+      htmlBody: htmlBody,
+      name: "Simon Chiropractic Center"
+    });
+  } catch (eMailApp) {
+    try {
+      GmailApp.sendEmail(recipientEmail, subject, "", {
+        htmlBody: htmlBody,
+        name: "Simon Chiropractic Center"
+      });
+    } catch (eGmail) {
+      Logger.log("Lỗi gửi email xác nhận đã nhận tiền: " + eGmail);
+    }
+  }
 }
 
 /**
- * HÀM 2: GỬI EMAIL TIẾP NHẬN ĐĂNG KÝ (GỬI NGAY KHI KHÁCH VỪA ĐIỀN FORM)
+ * HÀM 2: GỬI EMAIL TIẾP NHẬN ĐĂNG KÝ (GỬI NGAY KHI KHÁCH VỪA ĐIỀN FORM HOẶC CHƯA THANH TOÁN)
  */
 function sendRegistrationEmail(recipientEmail, customerName, courseName, price, customerPhone, sepayCode, orderId) {
   if (!recipientEmail || !recipientEmail.includes('@')) return;
@@ -788,7 +809,7 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
   const validSepayCode = sepayCode || ('CHIRO ' + String(validPhone).replace(/\D/g, ''));
   const cleanPriceNum = String(price).replace(/\D/g, '') || '7000000';
 
-  const subject = `[Simon Chiropractic Center] Chỉ còn 1 bước nữa để hoàn tất đăng ký khóa học Chiropractic! (Đơn #${validOrder})`;
+  const subject = `[Simon Chiropractic Center] Chúc mừng đăng ký thành công — Hướng dẫn chuyển khoản SePay sở hữu bộ kỹ năng Chiropractic (Đơn #${validOrder})`;
 
   const htmlBody = `
   <!DOCTYPE html>
@@ -810,13 +831,14 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
           Kính chào Anh/Chị ${validName},
         </div>
         
-        <p style="margin: 0 0 16px 0; font-size: 14px; color: #334155;">
+        <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #92400e; font-weight: 600; line-height: 1.6;">
+          🎉 <strong>Chúc mừng Anh/Chị đã đăng ký thành công!</strong><br>
+          Chuyển khoản vào mã QR SePay dưới đây, bạn sẽ sở hữu ngay bộ dạy kỹ thuật nắn chỉnh Chiropractic chi tiết và khoa học nhất từ trước đến nay tại Việt Nam, bằng tiếng Việt!
+        </div>
+
+        <p style="margin: 0 0 16px 0; font-size: 13px; color: #334155;">
           Simon Chiropractic Center xin trân trọng thông báo: <strong>Chúng tôi đã ghi nhận thông tin đăng ký</strong> của Anh/Chị. Suất học ưu đãi của bạn đã được tạm giữ trên hệ thống.
         </p>
-
-        <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #92400e; font-weight: 600; line-height: 1.5;">
-          🚀 Chỉ còn một bước nữa thôi là bạn sẽ sở hữu trong tay bộ kỹ năng đầy đủ về môn Chiropractic đầu tiên tại Việt Nam!
-        </div>
 
         <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
           <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">
@@ -830,6 +852,10 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
             <tr>
               <td style="padding: 5px 0; color: #64748b;">Số điện thoại:</td>
               <td style="padding: 5px 0; color: #0f172a; font-weight: 500;">${validPhone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0; color: #64748b;">Email nhận tài liệu:</td>
+              <td style="padding: 5px 0; color: #0f172a; font-weight: 500;">${recipientEmail}</td>
             </tr>
             <tr>
               <td style="padding: 5px 0; color: #64748b;">Khóa học:</td>
@@ -882,10 +908,23 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
   </html>
   `;
 
-  GmailApp.sendEmail(recipientEmail, subject, "", {
-    htmlBody: htmlBody,
-    name: "Simon Chiropractic Center"
-  });
+  try {
+    MailApp.sendEmail({
+      to: recipientEmail,
+      subject: subject,
+      htmlBody: htmlBody,
+      name: "Simon Chiropractic Center"
+    });
+  } catch (eMailApp) {
+    try {
+      GmailApp.sendEmail(recipientEmail, subject, "", {
+        htmlBody: htmlBody,
+        name: "Simon Chiropractic Center"
+      });
+    } catch (eGmail) {
+      Logger.log("Lỗi gửi email tiếp nhận đăng ký: " + eGmail);
+    }
+  }
 }
 
 /**
