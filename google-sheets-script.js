@@ -188,7 +188,26 @@ function doPost(e) {
         const exp = sanitizeCellInput(data.experience || data.exp || '').slice(0, 300);
         const formatCode = Number(data.format_code) || 1;
         const format = sanitizeCellInput(data.format || '').slice(0, 300);
-        const digitalCode = sanitizeCellInput(data.digital_code || `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`).slice(0, 50);
+
+        // Bóc tách riêng biệt: Mã hồ sơ ưu tiên (WL...) và Mã tổng hợp ([MT:...])
+        let priorityCode = sanitizeCellInput(data.priority_code || '').slice(0, 50);
+        let summaryCode = sanitizeCellInput(data.summary_code || '').slice(0, 50);
+        if (!priorityCode) {
+          if (data.digital_code && data.digital_code.startsWith('WL')) {
+            priorityCode = data.digital_code.split(' ')[0];
+          } else {
+            priorityCode = generateWaitlistPriorityCode(phone);
+          }
+        }
+        if (!summaryCode) {
+          if (data.digital_code && data.digital_code.includes('[MT:')) {
+            const m = data.digital_code.match(/\[MT:[^\]]+\]/);
+            summaryCode = m ? m[0] : `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
+          } else {
+            summaryCode = `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
+          }
+        }
+        const fullDigitalCode = `${priorityCode} ${summaryCode}`;
 
         surveySheet.appendRow([
           timeStr,
@@ -201,7 +220,8 @@ function doPost(e) {
           exp,
           formatCode,
           format,
-          digitalCode,
+          priorityCode,      // Cột K: Mã Hồ Sơ Ưu Tiên (WL...)
+          summaryCode,       // Cột L: Mã Số Hóa Tổng Hợp ([MT:...])
           "Chờ tư vấn lộ trình"
         ]);
 
@@ -209,7 +229,7 @@ function doPost(e) {
         let emailSent = false;
         if (email && email.indexOf('@') !== -1) {
           try {
-            sendWaitlistWelcomeEmail(email, name, phone, goal || occupation, exp, format, digitalCode);
+            sendWaitlistWelcomeEmail(email, name, phone, goal || occupation, exp, format, priorityCode);
             emailSent = true;
           } catch (eMail) {
             Logger.log("Lỗi tự động gửi email chào mừng danh sách chờ: " + eMail);
@@ -221,7 +241,9 @@ function doPost(e) {
           message: "Đã ghi nhận vào danh sách chờ và gửi email chào mừng thành công",
           name: name,
           phone: phone,
-          digital_code: digitalCode,
+          priority_code: priorityCode,
+          summary_code: summaryCode,
+          digital_code: fullDigitalCode,
           email_sent: emailSent
         })).setMimeType(ContentService.MimeType.JSON);
       }
@@ -230,7 +252,8 @@ function doPost(e) {
       const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || generateOrderId(phone));
       const fullChannel = channel.includes('MÃ:') ? channel : ('MÃ: ' + orderCode + ' | ' + channel);
 
-      // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học)
+      // TRƯỜNG HỢP 1B: Đơn đăng ký khóa học -> Thêm vào Sheet chính (Đăng Ký Khóa Học / Trang tính 1)
+      ensureTrangTinh1Headers(sheet);
       sheet.appendRow([
         timeStr,        // Cột A: Thời gian
         name,           // Cột B: Họ và tên (Đã lọc Formula Injection)
@@ -239,22 +262,19 @@ function doPost(e) {
         price,          // Cột E: Học phí
         occupation,     // Cột F: Nghề nghiệp
         fullChannel,    // Cột G: Kênh nhận đơn kèm Mã tham chiếu SCC...
-        status,         // Cột H: Trạng thái
-        orderCode       // Cột I: Mã đơn hàng lưu giữ đối soát
+        status,         // Cột H: Trạng thái thanh toán
+        orderCode,      // Cột I: Mã số chuyển tiền (Payment Code SePay SCC...)
+        "Chờ gửi email" // Cột J: Nhật ký gửi Email xác nhận
       ]);
 
       const lastRow = sheet.getLastRow();
 
-      // TỰ ĐỘNG GỬI EMAIL CHÚC MỪNG ĐĂNG KÝ & MÃ SEPAY CHUYỂN KHOẢN CHO HỌC VIÊN
-      if (email && email.includes('@')) {
-        try {
-          const courseName = data.course || data.Ten_Khoa_Hoc || CONFIG.COURSE_NAME;
-          sendRegistrationEmail(email, name, courseName, price, phone, orderCode, orderCode);
-          sheet.getRange(lastRow, 9).setValue("ĐÃ GỬI EMAIL ĐĂNG KÝ (" + orderCode + ")");
-        } catch (errEmail) {
-          Logger.log("Lỗi gửi email đăng ký: " + errEmail);
-        }
-      }
+      // ⚠️ EMAIL MÃ SEPAY CHỈ GỬI KHI KHÁCH BẤM "TÔI SẼ CHUYỂN KHOẢN SAU"
+      // (action = 'send_pending_reminder') — KHÔNG gửi ngay khi đăng ký,
+      // tránh trường hợp khách đã chuyển tiền ngay tại QR screen rồi vẫn nhận email nhắc CK!
+      // FormSubmit đã gửi email chúc mừng đăng ký đơn giản (không có mã SCC).
+      // → Ghi nhật ký "Chờ gửi email" để admin biết email chưa được gửi ra.
+      sheet.getRange(lastRow, 10).setValue("Chờ gửi email — sẽ gửi khi KH chọn 'CK sau' (" + orderCode + ")");
 
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
@@ -265,7 +285,7 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // TRƯỜNG HỢP 1C: Gửi nhắc nhở Chờ thanh toán khi khách quay lại hoặc chuyển khoản sau
+    // TRƯỜNG HỢP 1C: Gửi email có mã SePay khi khách bấm "Tôi sẽ chuyển khoản sau"
     if (action === 'send_pending_reminder') {
       const phone = sanitizeCellInput(data.phone || '').replace(/\D/g, '').slice(0, 15);
       const email = sanitizeCellInput(data.email || '').slice(0, 100).toLowerCase();
@@ -274,21 +294,45 @@ function doPost(e) {
       const price = sanitizeCellInput(data.price || '7.000.000 VNĐ');
       const orderCode = sanitizeCellInput(data.order_code || data.sepay_code || generateOrderId(phone));
 
+      let emailSent = false;
       if (email && email.includes('@')) {
         try {
           sendRegistrationEmail(email, name, courseName, price, phone, orderCode, orderCode);
+          emailSent = true;
+          Logger.log("✅ Đã gửi email mã SePay (send_pending_reminder) tới: " + email + " | Mã: " + orderCode);
         } catch (errEmail) {
           Logger.log("Lỗi gửi email nhắc nhở chờ thanh toán: " + errEmail);
+        }
+      }
+
+      // Cập nhật nhật ký cột J trong Sheet khi email đã gửi
+      if (emailSent) {
+        try {
+          const rows = sheet.getDataRange().getValues();
+          for (let i = rows.length - 1; i >= 1; i--) {
+            const rowChannel = String(rows[i][6] || '').toUpperCase();
+            const rowPayCode = String(rows[i][8] || '').toUpperCase();
+            const rowPhone = String(rows[i][2]).replace(/\D/g, '');
+            const matchCode = orderCode && (rowChannel.includes(orderCode.toUpperCase()) || rowPayCode.includes(orderCode.toUpperCase()));
+            const matchPhone = phone && phone.length >= 9 && rowPhone.includes(phone.replace(/\D/g, ''));
+            if (matchCode || matchPhone) {
+              sheet.getRange(i + 1, 10).setValue("ĐÃ GỬI EMAIL MÃ SEPAY (" + orderCode + ") lúc " + timeStr);
+              break;
+            }
+          }
+        } catch (errLog) {
+          Logger.log("Lỗi cập nhật nhật ký email: " + errLog);
         }
       }
 
       return ContentService.createTextOutput(JSON.stringify({
         status: "success",
         action: "send_pending_reminder",
-        message: "Đã gửi email nhắc nhở kèm mã SePay thành công",
+        message: emailSent ? "Đã gửi email mã SePay thành công" : "Không tìm thấy email hợp lệ",
         name: name,
         order_code: orderCode,
-        sepay_code: orderCode
+        sepay_code: orderCode,
+        email_sent: emailSent
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
@@ -551,6 +595,8 @@ function doGet(e) {
             timeFormatted = String(r[0]);
           }
         }
+        const pCode = String(r[10] || '').trim();
+        const sCode = String(r[11] || '').trim();
         surveyLeads.push({
           rowIndex: i + 1,
           time: timeFormatted,
@@ -563,8 +609,10 @@ function doGet(e) {
           exp: String(r[7] || '').trim(),
           formatCode: r[8],
           format: String(r[9] || '').trim(),
-          digitalCode: String(r[10] || '').trim(),
-          status: String(r[11] || 'Chờ tư vấn lộ trình').trim()
+          priorityCode: pCode,
+          summaryCode: sCode,
+          digitalCode: `${pCode} ${sCode}`.trim(),
+          status: String(r[12] || r[11] || 'Chờ tư vấn lộ trình').trim()
         });
       }
       return ContentService.createTextOutput(JSON.stringify({
@@ -575,7 +623,7 @@ function doGet(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // 4. ĐÃ XÁC THỰC ADMIN: ĐỌC DANH SÁCH LEADS ĐĂNG KÝ KHÓA HỌC
+    // 4. ĐÃ XÁC THỰC ADMIN: ĐỌC DANH SÁCH LEADS ĐĂNG KÝ KHÓA HỌC (Trang tính 1)
     const rows = sheet.getDataRange().getValues();
     const leads = [];
 
@@ -607,7 +655,8 @@ function doGet(e) {
         occupation: String(row[5] || '').trim(),
         channel: String(row[6] || 'Form Website').trim(),
         status: String(row[7] || 'Chờ thanh toán').trim(),
-        emailStatus: String(row[8] || '').trim()
+        paymentCode: String(row[8] || '').trim(),
+        emailStatus: String(row[9] || row[8] || '').trim()
       });
     }
 
@@ -1521,6 +1570,52 @@ function setupSurveyDashboard() {
 }
 
 /**
+ * Đảm bảo Sheet 1 (Trang tính 1 / Đăng Ký Khóa Học) có đúng tiêu đề chuẩn kèm cột "Mã số chuyển tiền"
+ */
+function ensureTrangTinh1Headers(sheet) {
+  if (!sheet) return;
+  const headers = [
+    "Thời gian",
+    "Họ và tên",
+    "Số điện thoại",
+    "Email",
+    "Học phí (VNĐ)",
+    "Nghề nghiệp / Chuyên môn",
+    "Kênh nhận đơn",
+    "Trạng thái thanh toán",
+    "Mã số chuyển tiền",
+    "Nhật ký gửi Email xác nhận"
+  ];
+  if (sheet.getRange("A1").getValue() === "") {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight("bold")
+      .setBackground("#4A121E")
+      .setFontColor("#FFFFFF")
+      .setHorizontalAlignment("center")
+      .setVerticalAlignment("middle");
+    sheet.setRowHeight(1, 36);
+  } else {
+    const valI = String(sheet.getRange("I1").getValue() || '');
+    if (!valI.includes("Mã số chuyển tiền")) {
+      sheet.getRange("I1").setValue("Mã số chuyển tiền");
+    }
+    const valJ = String(sheet.getRange("J1").getValue() || '');
+    if (!valJ.includes("Nhật ký")) {
+      sheet.getRange("J1").setValue("Nhật ký gửi Email xác nhận");
+    }
+  }
+}
+
+function generateWaitlistPriorityCode(phone) {
+  const now = new Date();
+  const timeDigits = Utilities.formatDate(now, "Asia/Ho_Chi_Minh", "ddMMHHmm");
+  const cleanPhone = String(phone || '').replace(/\D/g, '');
+  const last4 = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : '0000');
+  return 'WL' + timeDigits + last4;
+}
+
+/**
  * Hàm kiểm tra & đảm bảo Tab "Khảo Sát Nhu Cầu", các bảng công thức và Biểu đồ luôn sẵn sàng
  */
 function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
@@ -1532,7 +1627,7 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
     Logger.log("ℹ️ Tab 'Khảo Sát Nhu Cầu' đã tồn tại sẵn.");
   }
 
-  // 1. Tiêu đề Dòng 1 cho Cột A đến L (Dữ liệu học viên khảo sát)
+  // 1. Tiêu đề Dòng 1 cho Cột A đến M (Dữ liệu học viên khảo sát & danh sách chờ)
   const header = [
     "Thời gian",
     "Họ và tên",
@@ -1544,13 +1639,14 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
     "Kinh nghiệm / Nền tảng",
     "Mã Hình Thức",
     "Hình thức mong muốn",
+    "Mã Hồ Sơ Ưu Tiên",
     "Mã Số Hóa Tổng Hợp",
     "Trạng thái tư vấn"
   ];
   
   if (surveySheet.getRange("A1").getValue() === "") {
     surveySheet.getRange(1, 1, 1, header.length).setValues([header]);
-    surveySheet.getRange("A1:L1")
+    surveySheet.getRange("A1:M1")
       .setFontWeight("bold")
       .setBackground("#4A121E")
       .setFontColor("#FFFFFF")
@@ -1569,9 +1665,21 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
     surveySheet.setColumnWidth(8, 220); // H: Kinh nghiệm
     surveySheet.setColumnWidth(9, 100); // I: Mã HT
     surveySheet.setColumnWidth(10, 180); // J: Hình thức
-    surveySheet.setColumnWidth(11, 160); // K: Mã số hóa
-    surveySheet.setColumnWidth(12, 140); // L: Trạng thái
-    surveySheet.setColumnWidth(13, 30);  // M: Cột đệm cách biệt
+    surveySheet.setColumnWidth(11, 160); // K: Mã Hồ Sơ Ưu Tiên
+    surveySheet.setColumnWidth(12, 160); // L: Mã Số Hóa Tổng Hợp
+    surveySheet.setColumnWidth(13, 140); // M: Trạng thái tư vấn
+    surveySheet.setColumnWidth(14, 30);  // N: Cột đệm cách biệt
+  } else {
+    // Nếu tiêu đề chưa có cột L: Mã Số Hóa Tổng Hợp
+    const valK = String(surveySheet.getRange("K1").getValue() || '');
+    if (!valK.includes("Ưu Tiên")) {
+      surveySheet.getRange("K1").setValue("Mã Hồ Sơ Ưu Tiên");
+    }
+    const valL = String(surveySheet.getRange("L1").getValue() || '');
+    if (!valL.includes("Tổng Hợp")) {
+      surveySheet.getRange("L1").setValue("Mã Số Hóa Tổng Hợp");
+      surveySheet.getRange("M1").setValue("Trạng thái tư vấn");
+    }
   }
 
   // 2. Nếu chưa có dữ liệu học viên nào (chỉ mới có dòng 1 tiêu đề)
@@ -1588,6 +1696,7 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
       "Đã biết cơ bản / Ngành liên quan",
       1,
       "Học trực tiếp (Offline)",
+      "WL140921004567",
       "[MT:2|KN:2|HT:1]",
       "Học viên mẫu (Có thể xóa)"
     ]);
@@ -1598,14 +1707,14 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
       "'0912345678",
       "tranmai.demo@gmail.com",
       3,
-      "Học bài bản mở phòng trị / Spa",
-      3,
-      "Đã thực hành Chiropractic",
+      "Học nghề mở dịch vụ",
       1,
-      "Học trực tiếp (Offline)",
-      "[MT:3|KN:3|HT:1]",
+      "Chưa từng, là người mới",
+      2,
+      "Học online",
+      "WL140921155678",
+      "[MT:3|KN:1|HT:2]",
       "Học viên mẫu (Có thể xóa)"
-    ]);
     Logger.log("📝 Đã thêm 2 dòng dữ liệu mẫu demo để biểu đồ có số liệu hiển thị ngay lập tức.");
   }
 

@@ -3043,11 +3043,13 @@
       const last4Phone = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : '0000');
       const priorityCode = 'WL' + timeDigits + last4Phone;
 
-      const digitalCode = priorityCode;
-      const detail = `[MÃ: ${priorityCode}] [Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
+      // Mã số hóa tổng hợp: [MT:x|KN:y|HT:z]
+      const summaryCode = `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
+      const digitalCode = `${priorityCode} ${summaryCode}`;
+      const detail = `[MÃ ƯU TIÊN: ${priorityCode}] [MÃ TỔNG HỢP: ${summaryCode}] | [Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
 
       const payload = {
-        action: 'register',
+        action: 'waitlist',
         name: name,
         phone: phone,
         email: email,
@@ -3057,12 +3059,15 @@
         exp_code: expCode,
         format: format,
         format_code: formatCode,
+        priority_code: priorityCode,
+        summary_code: summaryCode,
         digital_code: digitalCode,
         price: 'Danh sách chờ ưu tiên',
-        course: `Danh Sách Chờ ${digitalCode}`,
+        course: `Danh Sách Chờ ${priorityCode}`,
         occupation: detail,
         channel: 'Bảng Khảo Sát Nhu Cầu',
         status: 'Chờ tư vấn lộ trình',
+        email_status: priorityCode,
         website_hp: hp
       };
 
@@ -3070,7 +3075,7 @@
       sendToGoogleSheet(payload);
 
       // 2. Kích hoạt gửi Email Chào Mừng trực tiếp qua Resend Proxy (khi chạy localhost)
-      triggerWaitlistWelcomeEmail(email, name, phone, goal, exp, format, digitalCode);
+      triggerWaitlistWelcomeEmail(email, name, phone, goal, exp, format, priorityCode);
 
       // 3. Gửi đồng bộ lên Supabase nếu có
       if (typeof saveToSupabase === 'function') {
@@ -3298,31 +3303,33 @@
         website_hp: hp
       });
 
-      // 4. GỬI TỰ ĐỘNG EMAIL XÁC NHẬN / CẢM ƠN TỚI KHÁCH HÀNG QUA FORMSUBMIT
-      const regAutoResponse = `Chúc mừng và chân thành cảm ơn Anh/Chị ${name} đã quan tâm và đăng ký khóa học Chiropractic tại Simon EDU Center (chiro.vn)!\n\n` +
-        `📋 THÔNG TIN ĐƠN ĐĂNG KÝ CỦA ANH/CHỊ:\n` +
-        `• Khóa học đăng ký: ${courseName}\n` +
-        `• Mã đơn hàng: ${orderCode}\n` +
-        `• Học phí ưu đãi: ${currentPriceObj.currentFormatted}\n` +
+      // 4. GỬI EMAIL XÁC NHẬN ĐƠN GIẢN QUA FORMSUBMIT
+      // ⚠️ QUAN TRỌNG: Email này CHỈ xác nhận đã nhận đăng ký — KHÔNG chứa mã SCC hay hướng dẫn CK.
+      // Hướng dẫn chuyển khoản + mã SePay sẽ gửi riêng qua Resend/MailApp CHỈ KHI khách
+      // bấm "← Tôi sẽ chuyển khoản sau" (hàm sendPendingReminderEmail → action: send_pending_reminder).
+      const regAutoResponse =
+        `🎉 CHÚC MỪNG ANH/CHỊ ${name.toUpperCase()} ĐÃ ĐĂNG KÝ THÀNH CÔNG!\n\n` +
+        `Hệ thống Simon EDU Center đã ghi nhận yêu cầu đăng ký của Anh/Chị.\n\n` +
+        `📋 THÔNG TIN ĐƠN ĐĂNG KÝ:\n` +
         `• Họ và tên: ${name}\n` +
         `• Số điện thoại / Zalo: ${phone}\n` +
-        `• Email nhận bài giảng: ${email}\n\n` +
-        `💳 HƯỚNG DẪN HOÀN TẤT ĐĂNG KÝ (Chuyển khoản SePay tự động kích hoạt):\n` +
-        `• Ngân hàng: ACB (Ngân hàng TMCP Á Châu)\n` +
-        `• Số tài khoản: 2412825668\n` +
-        `• Chủ tài khoản: BUI NGOC MINH HUY\n` +
-        `• Số tiền: ${currentPriceObj.currentFormatted}\n` +
-        `• Nội dung chuyển khoản: ${orderCode}\n\n` +
-        `📢 Simon EDU Center sẽ liên tục cung cấp những thông tin mới nhất các khóa học của Simon EDU Center, cập nhật tài liệu và hỗ trợ chuyên môn cho Anh/Chị sớm nhất.\n\n` +
-        `🔒 CAM KẾT BẢO MẬT: Simon EDU Center cam kết bảo mật tuyệt đối 100% toàn bộ thông tin cá nhân của Anh/Chị, tuyệt đối không chia sẻ cho bên thứ ba.\n\n` +
-        `Cần hỗ trợ khẩn cấp, vui lòng liên hệ Hotline/Zalo: 0389.609.938 | 093 115 8868.\nTrân trọng,\nBan Đào Tạo Simon EDU Center — chiro.vn`;
+        `• Email: ${email}\n` +
+        `• Khóa học: ${courseName}\n` +
+        `• Học phí ưu đãi: ${currentPriceObj.currentFormatted}\n` +
+        `• Mã đơn hàng: ${orderCode}\n\n` +
+        `⏳ BƯỚC TIẾP THEO:\n` +
+        `Vui lòng hoàn tất thanh toán qua màn hình QR Code đang hiển thị trên website.\n` +
+        `Nếu Anh/Chị chưa thể chuyển khoản ngay, Simon Center sẽ gửi thêm email hướng dẫn chuyển khoản chi tiết sau.\n\n` +
+        `📞 Cần hỗ trợ khẩn cấp: Hotline/Zalo 0389.609.938 | 093 115 8868\n` +
+        `🔒 Simon EDU Center cam kết bảo mật 100% thông tin cá nhân.\n\n` +
+        `Trân trọng,\nBan Đào Tạo Simon EDU Center — chiro.vn`;
 
       const formData = new FormData(form);
       formData.set('name', name);
       formData.set('email', email);
       formData.set('_replyto', email);
       formData.set('_autoresponse', regAutoResponse);
-      formData.set('_subject', `[Simon Center] Chúc mừng & Cảm ơn Anh/Chị ${name} đã đăng ký khóa học Chiropractic - Mã đơn: ${orderCode}`);
+      formData.set('_subject', `[Simon Center] ✅ Xác nhận đăng ký — ${name} — Khóa học Chiropractic (Đơn #${orderCode})`);
 
       fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
         method: 'POST',
