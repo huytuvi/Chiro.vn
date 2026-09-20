@@ -6,7 +6,7 @@
 ## 1. LỜI KHEN THẬT TỪ HỌC VIÊN KHÓA HỌC (ZALO & HỘI NHÓM NỘI BỘ)
 
 ### Feedback 1: KTV Nguyễn Đức Trọng (Phòng khám Phục hồi chức năng Hà Nội)
-> *"Thực sự phải khen đội ngũ quay phim khóa học của Simon Center! Trước đây mình có mua một khóa online của nước ngoài hơn 400 đô, họ quay toàn cảnh đứng xa tít tắp, không nhìn thấy ngón tay đặt vào đâu. Khóa này góc máy POV từ mắt nhìn xuống zoom sát vào mấu gai sau và điểm tựa ngón tay cái (Pisiform/Thumb). Nhìn một cái là hiểu ngay góc tiếp xúc. Xem đi xem lại tua chậm sướng thật sự!"*
+> *"Thực sự phải khen đội ngũ quay phim khóa học của Simon Center! Trước đây mình có mua một khóa online của nước ngoài hơn 400 đô, họ quay toàn cảnh đứng xa tít tắp, không nhìn thấy ngón tay đặt vào đâu. Khóa này video với các góc quay khác nhau zoom sát vào mấu gai sau và điểm tựa ngón tay cái (Pisiform/Thumb). Nhìn một cái là hiểu ngay góc tiếp xúc. Xem đi xem lại tua chậm sướng thật sự!"*
 
 ### Feedback 2: Bác sĩ YHCT Lê Anh Tuấn (TP. Đà Nẵng)
 > *"Tôi ấn tượng nhất là hệ thống Test trắc nghiệm lâm sàng sau mỗi bài giảng. Ban đầu thấy hơi khắt khe vì trả lời sai ca chống chỉ định Red Flag là không được mở bài tiếp theo. Nhưng nhờ vậy mà tôi buộc phải suy ngẫm kỹ về giải phẫu. Tuần trước phòng khám gặp một ca thoái hóa cổ kèm chóng mặt nghi ngờ thiểu năng tuần hoàn não, nhớ bài test của Thầy Henrik tôi cho đi chụp MRI mạch não ngay thì phát hiện hẹp động mạch đốt sống, kịp thời tránh được một ca tai biến nếu lỡ tay nắn. Khóa học cứu cả sự nghiệp của tôi!"*

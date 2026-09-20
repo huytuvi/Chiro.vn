@@ -20,7 +20,7 @@
 >  
 > *Chính vì hiểu sâu sắc điều đó, chương trình E-Learning tại Simon Center được thiết kế theo **Quy trình sư phạm 3 bước độc quyền của Viện DISC Đức** để giải quyết tận gốc rào cản này:*  
 >  
-> 1. **Thứ nhất là góc máy POV cận cảnh:** Máy quay 4K đặt đúng vị trí mắt của người nắn, zoom sát vào điểm tiếp xúc xương từng milimet, giúp anh/chị nhìn rõ góc khóa khớp và hướng đẩy lực — điều mà học tại hội trường đông người đứng cách xa 3 mét không thể nào quan sát được.  
+> 1. **Thứ nhất là hệ thống video với các góc quay khác nhau kết hợp cận cảnh:** Máy quay bố trí đa góc, zoom sát vào điểm tiếp xúc xương từng milimet, giúp anh/chị nhìn rõ góc khóa khớp và hướng đẩy lực — điều mà học tại hội trường đông người đứng cách xa 3 mét không thể nào quan sát được.  
 > 2. **Thứ hai là phương pháp rèn phản xạ Micro-drills:** Thầy Henrik bóc tách kỹ thuật thành các bài tập bộ pháp, thả lỏng cổ tay và tận dụng trọng lực cơ thể rơi tự do trên đệm mút hoặc bóng đàn hồi tại nhà. Anh/chị rèn cho đôi tay có phản xạ tốc độ tự nhiên trước khi chạm vào người thật, nên sẽ không bao giờ bị run tay.  
 > 3. **Thứ ba là bài Test tình huống lâm sàng bắt buộc:** Sau mỗi bài học, anh/chị phải làm bài test ca bệnh thực tế. Nắm chắc nguyên tắc ca nào được nắn, ca nào cấm nắn thì hệ thống mới mở bài tiếp theo.  
 >  

@@ -28,7 +28,7 @@
 <a name="nhom-2"></a>
 ### NHÓM 2: HIỆU QUẢ CỦA PHƯƠNG PHÁP HỌC E-LEARNING
 * **Nắn chỉnh là môn thực hành, học online liệu có làm được không hay lại run tay?**  
-  Khóa học áp dụng **Quy trình sư phạm 3 bước chuẩn y khoa**: Video 4K POV cận cảnh từng mm góc tiếp xúc -> Micro-drills rèn phản xạ và lực rơi cơ thể tại nhà -> Test tình huống y khoa sau mỗi bài giảng (đạt mới mở bài tiếp). Người học rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
+  Khóa học áp dụng **Quy trình sư phạm 3 bước chuẩn y khoa**: Video với các góc quay khác nhau kết hợp cận cảnh từng mm góc tiếp xúc -> Micro-drills rèn phản xạ và lực rơi cơ thể tại nhà -> Test tình huống y khoa sau mỗi bài giảng (đạt mới mở bài tiếp). Người học rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
 * **Nếu xem video chưa hiểu thì hỏi ai?**  
   Học viên được tham gia nhóm chuyên môn kín, có trợ giảng và Thầy Henrik hỗ trợ giải đáp thắc mắc liên tục.
 

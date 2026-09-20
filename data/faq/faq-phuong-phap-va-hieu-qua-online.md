@@ -9,8 +9,8 @@ Trước khi chạm tay vào bệnh nhân, một Chiropractor chuyên nghiệp c
 2. **Giai đoạn rèn trí nhớ cơ bắp (Motor Learning):** Luyện tốc độ phát lực trong tích tắc mà không dùng sức gồng cơ bắp tay.
 
 Nếu đi học trực tiếp tại lớp học đông người 2–3 ngày, bạn đứng cách xa bàn nắn 3 mét, người đông che khuất tầm nhìn, bạn chỉ thấy "bác sĩ giật một cái kêu rắc" mà không thể thấy được ngón tay cái tiếp xúc vào mấu khớp nào.  
-Với video E-Learning 4K của Simon Center:
-* Camera đặt ở góc nhìn ngôi thứ nhất (First-person POV), bạn nhìn thấy chính xác góc độ như thể bạn đang tự đứng cạnh bàn nắn.
+Với video E-Learning của Simon Center:
+* Video với các góc quay khác nhau, bạn nhìn thấy chính xác góc độ như thể bạn đang tự đứng cạnh bàn nắn.
 * Được tua chậm, dừng hình từng mili-giây, xem lại hàng trăm lần đến khi in sâu vào tiềm thức.
 
 ---

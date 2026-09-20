@@ -97,7 +97,7 @@ Dù đã đạt được bước tiến lớn sau 7 ngày, để bộ não thự
 - **Cần làm:** Nạp thêm vào bảng `knowledge` các câu chuyện thực tế (Case Studies) từ học viên các khóa trước: Những bạn PT Gym, chủ Spa, bác sĩ YHCT đã nâng tầm thu nhập và tự tin nắn chỉnh như thế nào sau khi tốt nghiệp. Dữ liệu người thật việc thật sẽ tăng sức thuyết phục của Giọng 3 lên gấp bội.
 
 ### 4. Kịch Bản Chăm Sóc Lại Lead Tự Động (Lead Nurturing & Retargeting)
-- **Hiện trạng:** Khách nhận video học thử 4K POV miễn phí nhưng nếu chưa đăng ký ngay thì chưa có kịch bản bám đuổi tự động.
+- **Hiện trạng:** Khách nhận video học thử với các góc quay khác nhau miễn phí nhưng nếu chưa đăng ký ngay thì chưa có kịch bản bám đuổi tự động.
 - **Cần làm:** Thiết lập chuỗi 3 email/tin nhắn nhắc nhớ sau 3 ngày, 5 ngày và 7 ngày (chia sẻ thêm 1 mẹo đọc X-quang hay, mời tham gia buổi hội chẩn trực tuyến) để kéo học viên quay lại đăng ký.
 
 ---

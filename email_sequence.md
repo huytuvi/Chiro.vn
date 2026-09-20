@@ -147,7 +147,7 @@
     <div style="background-color: #FFFFFF; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #E2E8F0; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
       <h3 style="color: #8F1D35; margin: 0 0 12px 0; font-size: 17px; font-weight: 700;">Giá Trị Cốt Lõi Khóa Học Mang Lại Cho Anh/Chị:</h3>
       <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #4A5568;">
-        <li style="margin-bottom: 10px;"><strong>Giáo trình giải phẫu & cơ chế 100% bằng tiếng Việt:</strong> Hơn 150+ video quay góc nhìn cận cảnh First-Person, minh họa rõ nét điểm tiếp xúc (hand contacts), góc phát lực (line of drive) và ranh giới an toàn.</li>
+        <li style="margin-bottom: 10px;"><strong>Giáo trình giải phẫu & cơ chế 100% bằng tiếng Việt:</strong> Hơn 150+ video quay với các góc quay khác nhau & cận cảnh, minh họa rõ nét điểm tiếp xúc (hand contacts), góc phát lực (line of drive) và ranh giới an toàn.</li>
         <li style="margin-bottom: 10px;"><strong>Hệ thống bài tập vi chuyển động (Micro-drills):</strong> Phương pháp luyện cảm giác mô và tốc độ phát lực tại nhà độc quyền của trường phái Đức mà không làm đau bệnh nhân.</li>
         <li style="margin-bottom: 10px;"><strong>Phân tích X-Quang thực chiến:</strong> Nhận diện chính xác chỉ định, chống chỉ định tuyệt đối (Red Flags) trước khi chạm tay vào người bệnh.</li>
         <li><strong>Đặc quyền hỗ trợ chuyên môn 1-1:</strong> Thầy Henrik Simon và đội ngũ bác sĩ trực tiếp chấm bài sửa tư thế qua video cho từng học viên.</li>

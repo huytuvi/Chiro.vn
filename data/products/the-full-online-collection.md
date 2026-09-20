@@ -24,7 +24,7 @@
 ---
 
 ## 3. CƠ CHẾ SƯ PHẠM VƯỢT TRỘI CHUẨN Y KHOA
-* **Video 4K Đa Góc Quay (First-person POV):** Quay cận cảnh từ góc nhìn của mắt người đứng nắn, thấy rõ từng mm tiếp xúc xương và hướng vector lực.
+* **Video với các góc quay khác nhau kết hợp cận cảnh:** Quay chi tiết từ nhiều góc độ, thấy rõ từng mm tiếp xúc xương và hướng vector lực.
 * **Hệ thống Micro-drills rèn lực tại nhà:** Bóc tách thao tác thành các bài tập bộ pháp, thả lỏng cổ tay và rơi trọng lực cơ thể (Body Drop) trên đệm/bóng. Rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
 * **Hệ thống Test sau mỗi bài học:** Bắt buộc vượt qua câu hỏi tình huống lâm sàng và chống chỉ định (đạt chuẩn mới mở khóa bài tiếp theo). Đảm bảo học viên nắm chắc 100% kiến thức, không sợ quên bài.
 * **Cấp Chứng chỉ Hoàn thành Online (Certificate of Completion)** có chữ ký xác nhận của Chuyên gia Henrik Simon.

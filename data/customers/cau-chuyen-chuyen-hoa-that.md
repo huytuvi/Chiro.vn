@@ -14,7 +14,7 @@
 
 ## BƯỚC NGOẶT KHI TÁI ĐẦU TƯ TẠI SIMON CENTER
 * Tháng 3/2026, anh Thắng quyết định đăng ký **The Full Online Collection** của Simon Center:
-  1. **Tự tin nhờ hiểu thấu cơ chế:** Video 4K quay góc POV giúp anh nhìn rõ từng milimet điểm tiếp xúc ngón tay vào mấu gai C1, góc khóa khớp và hướng đẩy lực.
+  1. **Tự tin nhờ hiểu thấu cơ chế:** Video với các góc quay khác nhau giúp anh nhìn rõ từng milimet điểm tiếp xúc ngón tay vào mấu gai C1, góc khóa khớp và hướng đẩy lực.
   2. **Rèn luyện tại nhà không cần mượn người:** Nhờ phương pháp *Micro-drills*, mỗi tối anh dành 20 phút tập thả lỏng cổ tay và tập lực rơi cơ thể trên đệm mút. Trí nhớ cơ bắp được hình thành tự nhiên, lực ra sắc bén và dứt khoát.
   3. **Vượt qua 45 bài test tình huống y khoa:** Anh nắm chắc như lòng bàn tay: Trường hợp nào được nắn, trường hợp nào cấm nắn (Red Flags). Nỗi sợ tai biến biến mất 100%.
 

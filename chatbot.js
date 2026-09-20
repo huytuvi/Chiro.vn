@@ -14,11 +14,14 @@
   // 2. Tự động nhận diện từ khóa chuyên môn sâu từ 351 bài kiến thức brain.db
   // =============================================================================
   const BOT_DATA = {
-    greeting: `Dạ em xin kính chào anh/chị ạ! Rất vui được đón tiếp anh/chị ghé thăm <strong>Simon Chiropractic Center</strong>.<br><br>
-Em là Trợ lý Chuyên môn đồng hành trực tiếp cùng <strong>Bác sĩ Henrik Simon</strong>. Em ở đây để cùng anh/chị trao đổi về 2 chủ đề cốt lõi:<br><br>
-• 🎓 <strong>Lộ trình học Nắn chỉnh Cột sống Chuẩn Y khoa</strong> (Học từ con số 0, giáo trình Online 4K POV góc nhìn người nắn, hoặc lớp thực hành Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon).<br>
-• 🩺 <strong>Hội chẩn & Bệnh học Cột sống Chuyên sâu</strong> (Cách nhận diện Cảnh báo đỏ Red Flags, đọc phim X-quang cơ sinh học, lệch khung chậu chân ngắn chân dài, thoát vị đĩa đệm L4-L5, kẹt khớp cùng chậu ISG, khớp cắn hàm TMG...).<br><br>
-Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <strong>lộ trình học tập để nâng cao tay nghề</strong> hay đang có <strong>một ca bệnh thực tế cần hội chẩn chuyên môn</strong> ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
+    greetings: {
+      course: `Dạ em kính chào anh/chị ạ! Rất vui được hỗ trợ anh/chị tìm hiểu về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
+Anh/chị có thể hỏi em bất kỳ nội dung nào: <em>lộ trình học từ con số 0, học trọn bộ hoặc học từng phần lẻ (cổ vai gáy, thắt lưng - chậu...), học phí ưu đãi, trả góp linh hoạt hay lớp thực hành Offline Cầm tay chỉ việc</em>.<br><br>
+Dạ anh/chị đang muốn tìm hiểu khóa học nắn chỉnh cho vùng cột sống nào hay muốn bắt đầu từ lộ trình toàn diện ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
+      clinical: `Dạ em kính chào anh/chị ạ! Em là Trợ lý Chuyên môn hỗ trợ <strong>Hội Chẩn & Bệnh Học Cột Sống</strong> cùng Bác sĩ Henrik Simon.<br><br>
+Anh/chị có thể trao đổi cùng em về các ca lâm sàng thực tế: <em>phân tích phim X-quang, thoát vị đĩa đệm L4-L5/L5-S1, lệch khung chậu chân ngắn chân dài, kẹt khớp cùng chậu ISG, khớp thái dương hàm hay ranh giới Cảnh báo đỏ (Red Flags)</em>.<br><br>
+Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả chẩn đoán hình ảnh như thế nào ạ? Anh/chị chia sẻ chi tiết để em cùng hội chẩn nhé ạ!`
+    },
 
     // DANH MỤC CÂU HỎI NHANH THEO 2 TAB
     categories: {
@@ -26,17 +29,17 @@ Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <str
         label: "🎓 Khóa Học (12)",
         questions: [
           { id: "c_courses_and_pricing", text: "💰 Các khóa học & Bảng giá chi tiết" },
+          { id: "c_lumbar_part", text: "🦴 Muốn học riêng phần lưng / thắt lưng được không?" },
+          { id: "c_cervical_part", text: "💆 Muốn học riêng phần cổ vai gáy được không?" },
           { id: "c_beginner_budget", text: "🌱 Chưa biết gì & Ít tiền thì nên học từ đâu?" },
           { id: "q1", text: "🎓 Học online liệu có làm được thật không?" },
           { id: "q2", text: "🩺 PT Gym / Spa / chưa học Y có học được không?" },
           { id: "q3", text: "💎 Giá trị cốt lõi & Tiêu chuẩn Y học Simon Center" },
-          { id: "c_schedule_duration", text: "⏱️ Thời gian học bao lâu? Có bị giới hạn không?" },
+          { id: "c_schedule_duration", text: "⏱️ Thời gian học bao lâu? Xem lại được không?" },
           { id: "c_location", text: "📍 Lớp Offline học ở đâu? Có ở TP.HCM / Hà Nội?" },
           { id: "c_career_outcome", text: "💼 Đầu ra sau khóa học & Cơ hội mở phòng khám" },
           { id: "q4", text: "📊 Khóa học có dạy đọc phim X-quang không?" },
-          { id: "q5", text: "📜 Chứng chỉ hoàn thành & Pháp lý hành nghề" },
-          { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" },
-          { id: "q7", text: "🔥 Nắn Specific chuyên biệt khác gì bẻ khớp thông thường?" }
+          { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" }
         ]
       },
       clinical: {
@@ -86,8 +89,8 @@ Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <str
         text: `Dạ để đồng hành cùng học viên đạt kết quả lâm sàng an toàn và chuẩn xác nhất, các khóa học tại Simon Center đều được xây dựng theo những tiêu chuẩn chuyên môn rất khắt khe ạ:<br><br>
 🎯 <strong>1. Chuẩn Y Học Cơ Sinh Học Châu Âu:</strong><br>
 Toàn bộ kiến thức kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon và Viện DISC (Đức), chú trọng hiểu rõ bản chất giải phẫu cơ sinh học thay vì học vẹt thao tác.<br><br>
-🎥 <strong>2. Video 4K Góc Nhìn Người Nắn (First-Person POV):</strong><br>
-Camera đặt chuẩn xác theo đúng tầm mắt người đứng nắn, giúp anh/chị quan sát rõ từng milimet điểm tiếp xúc ngón tay, góc khóa khớp và hướng truyền lực.<br><br>
+🎥 <strong>2. Video Với Các Góc Quay Khác Nhau:</strong><br>
+Hệ thống video chất lượng cao với nhiều góc máy (cận cảnh điểm tiếp xúc ngón tay, góc khóa khớp và hướng truyền lực), giúp anh/chị quan sát trực quan từng động tác kỹ thuật.<br><br>
 🏋️ <strong>3. Phương Pháp Micro-Drills Rèn Phản Xạ Lực Tại Nhà:</strong><br>
 Hệ thống bài tập mô phỏng lực rơi cơ thể (Body Drop) trên đệm mút và bóng phản xạ, giúp bàn tay hình thành cảm giác lực nhuần nhuyễn trước khi thao tác trên người thật — hoàn toàn không lo run tay.<br><br>
 🚨 <strong>4. Ranh Giới Cảnh Báo Đỏ (Red Flags) & An Toàn Tuyệt Đối:</strong><br>
@@ -96,10 +99,88 @@ Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn di
         cta: "trial"
       },
 
+      // --- CÂU HỎI MỚI: HỌC RIÊNG LẺ TỪNG PHẦN (LƯNG / CỔ / TỨ CHI) ---
+      c_lumbar_part: {
+        text: `Dạ hoàn toàn được anh/chị nhé ạ! Simon Center có thiết kế riêng các gói học linh hoạt để đáp ứng đúng nhu cầu thực tế của anh/chị mà không bắt buộc phải mua trọn gói ngay từ đầu:<br><br>
+🦴 <strong>MODULE LẺ ONLINE — CHUYÊN SÂU THẮT LƯNG - CHẬU (LWS):</strong><br>
+• <strong>Nội dung trọng tâm:</strong> Làm chủ giải phẫu chức năng và kỹ thuật nắn chỉnh vùng thắt lưng L1–L5, xương cùng S1, kẹt khớp cùng chậu ISG và chỉnh lệch khung chậu (chân ngắn - chân dài).<br>
+• <strong>Kỹ thuật thực chiến:</strong> Xử lý thoát vị đĩa đệm L4-L5, L5-S1, giải áp đau thần kinh tọa, hội chứng cơ hình lê (Piriformis) và phục hồi đường cong sinh lý thắt lưng an toàn.<br>
+• <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập Micro-drills rèn lực rơi (Body Drop) tại nhà, tài khoản xem trọn đời 24/7.<br>
+• <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
+💡 <strong>Đặc quyền khấu trừ 100% khi nâng cấp:</strong><br>
+Nếu sau này anh/chị thấy hiệu quả và muốn nâng cấp lên khóa toàn diện Full-Spine hoặc Offline, <strong>toàn bộ 1.000.000đ đã đóng sẽ được khấu trừ 100%</strong> vào học phí khóa sau, anh/chị hoàn toàn không bị mất phí hay thiệt thòi gì ạ!<br><br>
+Dạ ở vùng thắt lưng, anh/chị đang muốn tập trung xử lý cho một ca bệnh cụ thể nào (như thoát vị đĩa đệm, đau khớp cùng chậu hay lệch hông) không ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
+        cta: "register"
+      },
+
+      c_cervical_part: {
+        text: `Dạ hoàn toàn được anh/chị nhé ạ! Nếu anh/chị chỉ muốn tập trung giải quyết dứt điểm các ca đau mỏi cổ vai gáy, Simon Center có gói chuyên biệt đúng nhu cầu của mình:<br><br>
+💆 <strong>MODULE LẺ ONLINE — CHUYÊN SÂU CỔ VAI GÁY (HWS):</strong><br>
+• <strong>Nội dung trọng tâm:</strong> Kỹ thuật sờ nắn và giải phóng đốt sống cổ từ C1 đến C7, khớp đội - chẩm C0-C1, đoạn chuyển tiếp cổ ngực C7-T1 và khớp sườn đốt sống.<br>
+• <strong>Ứng dụng lâm sàng:</strong> Trị dứt điểm đau nửa đầu Cervicogenic, đau đầu Migraine, hội chứng tiền đình chóng mặt thiếu máu não, tê bì lan xuống cánh tay và thoái hóa đốt sống cổ.<br>
+• <strong>Nguyên tắc an toàn số 1:</strong> Hướng dẫn kiểm tra nghiệm pháp De-Kleyn loại trừ hẹp động mạch sống nền và các dấu hiệu Cảnh báo đỏ (Red Flags) bảo vệ an toàn 100% cho bệnh nhân.<br>
+• <strong>Hình thức học:</strong> Video với các góc quay khác nhau, xem lại trọn đời 24/7 trên mọi thiết bị.<br>
+• <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
+💡 <em>Toàn bộ 1.000.000đ này cũng được khấu trừ 100% nếu sau này anh/chị nâng cấp lên các khóa lớn hơn nhé ạ.</em><br><br>
+Dạ anh/chị đang muốn học nắn cổ để phục vụ khách hàng tại cơ sở hay nắn chăm sóc cho người thân trong gia đình vậy ạ?`,
+        cta: "register"
+      },
+
+      c_extremity_part: {
+        text: `Dạ được anh/chị nhé ạ! Với nắn chỉnh tứ chi và các khớp ngoại vi, Simon Center có chương trình chuyên sâu bài bản:<br><br>
+🦵 <strong>LEVEL 2 ONLINE — TỨ CHI & PHÂN TÍCH X-QUANG CHUYÊN SÂU (MODUL B):</strong><br>
+• <strong>Khớp chi dưới:</strong> Kẹt sụn chêm gối, lật sơ mi cổ chân mạn tính, khớp nhảy xương sên, viêm cân gan chân (gai gót) và lệch khớp háng.<br>
+• <strong>Khớp chi trên:</strong> Viêm lồi cầu ngoài Tennis Elbow, đau khớp vai đông cứng (Frozen Shoulder), hội chứng ống cổ tay và sai lệch xương bàn - ngón tay.<br>
+• <strong>Tích hợp X-quang:</strong> Đo đạc góc trượt và phân tích phim X-quang cơ sinh học chi tiết từng khớp.<br>
+• <strong>Học phí ưu đãi:</strong> <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ). Truy cập trọn đời và cấp Chứng nhận Level 2 chính thức.<br><br>
+Dạ anh/chị đang quan tâm nhiều nhất đến xử lý khớp gối, cổ chân hay khớp vai khuỷu tay vậy ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
+        cta: "register"
+      },
+
+      c_age_limit: {
+        text: `Dạ anh/chị hoàn toàn yên tâm nhé ạ! Tại Simon Center, rất nhiều học viên ở độ tuổi 45, 50, thậm chí gần 60 tuổi vẫn tiếp thu và thực hành rất xuất sắc ạ.<br><br>
+Ưu điểm vượt trội của phương pháp Thầy Henrik Simon là <strong>hoàn toàn không dùng sức cơ bắp tay</strong>:<br>
+• Nắn chỉnh Chiropractic chuẩn Y khoa vận hành theo cơ chế <strong>đòn bẩy tự nhiên và trọng lực rơi cơ thể (Body Drop)</strong> trong một phần mười giây.<br>
+• Thầy dạy kỹ thuật khóa góc khớp chính xác trước khi phát lực nhẹ, nên dù lớn tuổi hay thể lực bình thường thì khi thực hành vẫn thấy cơ thể rất nhẹ nhõm, không bị mất sức hay mỏi khớp.<br>
+• Giáo trình video với các góc quay khác nhau có thể tua chậm, xem đi xem lại nhiều lần vào bất kỳ thời gian rảnh nào trong ngày.<br><br>
+Dạ hiện tại anh/chị đang quan tâm học để tự chăm sóc sức khỏe gia đình hay nâng cao tay nghề ứng dụng trị liệu vậy ạ?`,
+        cta: "trial"
+      },
+
+      c_relearn_lifetime: {
+        text: `⏱️ <strong>QUYỀN LỢI TRUY CẬP TRỌN ĐỜI & XEM LẠI KHÔNG GIỚI HẠN:</strong><br><br>
+• Ngay sau khi đăng ký, tài khoản học trực tuyến của anh/chị được cấp quyền truy cập <strong>VĨNH VIỄN TRỌN ĐỜI 24/7</strong>.<br>
+• <strong>Xem không giới hạn:</strong> Anh/chị có thể xem lại bao nhiêu lần tùy thích, tua chậm từng giây để soi rõ từng góc tay, bộ pháp và hướng lực.<br>
+• <strong>Học trên mọi thiết bị:</strong> Tương thích hoàn hảo trên điện thoại (iOS, Android), máy tính bảng, iPad và máy tính xách tay.<br>
+• Khi Thầy Henrik Simon cập nhật thêm bài giảng mới hoặc cẩm nang lâm sàng mới, tài khoản của anh/chị được <strong>tự động nâng cấp miễn phí 100%</strong> mà không phải đóng thêm bất kỳ phụ phí nào ạ.<br><br>
+Dạ anh/chị có muốn đăng ký nhận ngay 1 bài giảng mẫu với các góc quay khác nhau để học thử trước không ạ?`,
+        cta: "trial"
+      },
+
+      c_abroad_learn: {
+        text: `🌍 <strong>HỌC VIÊN Ở NƯỚC NGOÀI / KIỀU BÀO HỌC NHƯ THẾ NÀO?</strong><br><br>
+Dạ hiện tại có rất nhiều học viên là kiều bào tại Mỹ, Đức, Úc, Canada, Nhật Bản, Đài Loan... đang theo học các khóa của Simon Center rất thuận lợi ạ:<br><br>
+• <strong>Chủ động 100% thời gian:</strong> Nền tảng E-Learning hoạt động 24/7 với đường truyền tốc độ cao quốc tế, không phụ thuộc vào múi giờ.<br>
+• <strong>Hỗ trợ thanh toán quốc tế đa dạng:</strong> Bên em hỗ trợ thanh toán thuận tiện qua thẻ quốc tế (Visa / Mastercard), chuyển khoản liên ngân hàng quốc tế hoặc PayPal / Wise.<br>
+• <strong>Tương tác chuyên môn xuyên biên giới:</strong> Học viên ở nước ngoài quay video bài tập rèn lực gửi về, Bác sĩ Henrik Simon và trợ giảng nhận xét, sửa góc tay trực tiếp qua video.<br><br>
+Dạ hiện tại anh/chị đang sinh sống và làm việc tại quốc gia nào vậy ạ? Anh/chị nhắn để em hỗ trợ phương thức kết nối thuận tiện nhất nhé ạ!`,
+        cta: "register"
+      },
+
+      c_post_course_support: {
+        text: `🤝 <strong>CHÍNH SÁCH ĐỒNG HÀNH & BẢO TRỢ CHUYÊN MÔN TRỌN ĐỜI:</strong><br><br>
+Simon Center không chỉ dạy xong rồi thôi, mà cam kết đồng hành dài lâu cùng anh/chị trên con đường hành nghề:<br><br>
+• <strong>Hội chẩn ca bệnh thực tế 1-1:</strong> Khi anh/chị gặp ca bệnh khó, phim X-quang/MRI phức tạp tại cơ sở của mình, chỉ cần gửi hình ảnh vào nhóm chuyên môn, Thầy Henrik Simon và đội ngũ y khoa sẽ phân tích và gợi ý hướng xử lý an toàn nhất.<br>
+• <strong>Gia nhập Cộng đồng Cựu học viên (Alumni Club):</strong> Được giao lưu, chia sẻ kinh nghiệm điều trị thực tế cùng các bác sĩ, chuyên gia và đồng nghiệp trên toàn quốc.<br>
+• <strong>Cơ hội tham gia ngày thực tế lâm sàng (Tageshospitation):</strong> Được ưu tiên đăng ký đi lâm sàng thực tế tại Simon Chiropractic Center để quan sát Thầy khám và điều trị trên bệnh nhân thật.<br><br>
+Dạ sự bảo trợ y khoa chuẩn xác là điều quan trọng nhất khi bước vào điều trị. Anh/chị có băn khoăn gì thêm về quy trình hỗ trợ này không ạ?`,
+        cta: "register"
+      },
+
       // --- NHÓM 1: TUYỂN SINH & KHÓA HỌC (TỪ SALES SCRIPT) ---
       q1: {
         text: `Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là môn thực hành trực tiếp, nên nếu chỉ xem video lý thuyết thụ động thì chắc chắn không ai dám làm cả.<br><br>Khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo <strong>Quy trình sư phạm 3 bước chuẩn y khoa</strong> để giải quyết triệt để rào cản này:<br><br>
-1. <strong>Video 4K góc nhìn người nắn (POV):</strong> Camera đặt đúng tầm mắt người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
+1. <strong>Video với các góc quay khác nhau:</strong> Hệ thống góc quay đa chiều kết hợp quay cận cảnh, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
 2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Rèn luyện tốc độ, bộ pháp và lực rơi cơ thể trên đệm mút/bóng phản xạ. Tay anh/chị có phản xạ tự nhiên chuẩn xác trước khi chạm người thật nên <strong>hoàn toàn không bị run tay</strong>.<br>
 3. <strong>Hệ thống Test lâm sàng qua môn bắt buộc:</strong> Nắm chắc chỉ định và dấu hiệu nguy hiểm (Red Flags) mới mở khóa bài tiếp theo.<br><br>
 <em>Đặc biệt: Toàn bộ học phí khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em><br><br>
@@ -119,10 +200,10 @@ Dạ hiện tại cơ sở hoặc phòng tập của anh/chị có thường xuy
         text: `Dạ em rất hiểu học phí là điều anh/chị luôn cân nhắc kỹ lưỡng khi tìm hiểu một chương trình đào tạo chuyên môn sâu ạ.<br><br>
 Tại Simon Center, giá trị cốt lõi của khóa học không nằm ở số lượng chiêu thức bề nổi, mà tập trung vào <strong>sự an toàn tuyệt đối và chuẩn mực y khoa quốc tế</strong>:<br><br>
 • <strong>Nền tảng cơ sinh học chuẩn Đức:</strong> Toàn bộ giáo trình kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon (Viện DISC - Đức), giúp anh/chị hiểu rõ nguyên lý khóa khớp và đòn bẩy tự nhiên, không dùng sức gồng bắp tay.<br>
-• <strong>Hệ thống Video 4K POV & Micro-Drills:</strong> Từng góc quay đặt đúng tầm mắt người nắn, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
+• <strong>Hệ thống Video với các góc quay khác nhau & Micro-Drills:</strong> Từng góc quay trực quan đa chiều, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
 • <strong>Đào tạo chuyên sâu phân tích X-quang & Cảnh báo đỏ (Red Flags):</strong> Giúp người thực hành nhận diện chính xác các chống chỉ định y khoa, bảo vệ an toàn trọn đời cho bệnh nhân và uy tín người thầy thuốc.<br>
 • <strong>Đặc quyền khấu trừ 100%:</strong> Toàn bộ học phí khóa Online được khấu trừ 100% khi anh/chị tham gia lớp Thực hành Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon.<br><br>
-Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu góc nhìn người nắn (POV 4K) để trải nghiệm trực quan cách Thầy Henrik truyền đạt không ạ?`,
+Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu với các góc quay khác nhau để trải nghiệm trực quan cách Thầy Henrik truyền đạt không ạ?`,
         cta: "trial"
       },
       q4: {
@@ -170,13 +251,13 @@ Ngay khi kích hoạt, anh được cấp tài khoản học trọn đời và n
       },
       buy: {
         text: `Dạ tuyệt vời quá ạ! Tài khoản học được kích hoạt tự động ngay sau khi đăng ký anh/chị nhé ạ.<br><br>
-Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video 4K POV trọn đời, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
+Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video với các góc quay khác nhau trọn đời, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
 Anh/chị bấm nút bên dưới để chuyển ngay đến Form đăng ký giữ suất ưu đãi đợt này nhé ạ:`,
         cta: "register_now"
       },
       hesitate: {
         text: `Dạ em hoàn toàn hiểu ạ! Quyết định đầu tư một khóa học chuyên môn sâu thì việc cân nhắc thấu đáo là rất cần thiết.<br><br>
-Để anh/chị có cái nhìn thực tế nhất về bài giảng của Thầy Henrik Simon, em xin phép gửi tặng anh/chị <strong>1 Suất Học Thử Bài Giảng Mẫu 4K POV</strong> hoàn toàn miễn phí nhé ạ.<br><br>
+Để anh/chị có cái nhìn thực tế nhất về bài giảng của Thầy Henrik Simon, em xin phép gửi tặng anh/chị <strong>1 Suất Học Thử Bài Giảng Mẫu với các góc quay khác nhau</strong> hoàn toàn miễn phí nhé ạ.<br><br>
 Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng mẫu qua Zalo/Email, đồng thời hệ thống sẽ <strong>tự động bảo lưu mức học phí ưu đãi 12.9 triệu</strong> cho anh/chị mà không sợ bị tăng giá về sau ạ:`,
         cta: "trial"
       },
@@ -189,7 +270,7 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
 • <strong>Điểm khởi đầu chuẩn nhất:</strong> Khóa <strong>The Full Online Collection</strong>. Anh/chị sẽ được trang bị nền tảng sờ nắn mốc xương, nhận diện Cảnh báo đỏ (Red Flags) để tuyệt đối an toàn cho người bệnh, và phương pháp rèn phản xạ lực Micro-drills tại nhà giúp tay quen phản xạ trước khi chạm người thật (hoàn toàn không lo run tay).<br><br>
 💡 <strong>2. Ngân sách eo hẹp, không có nhiều tiền thì lộ trình thế nào?</strong><br>
 Simon Center có chính sách hỗ trợ tài chính tối ưu để anh/chị không phải chịu áp lực:<br>
-• <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu 4K POV chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
+• <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu với các góc quay khác nhau chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
 • <strong>Bước 2 - Trả góp 0% chỉ ~1.1 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Rất nhẹ nhàng về dòng tiền.<br>
 • <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ học phí khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
 Dạ giữa việc <strong>nhận video học thử 0đ</strong> và <strong>tìm hiểu gói hỗ trợ trả góp</strong>, anh/chị muốn em hướng dẫn bước nào trước ạ?`,
@@ -211,7 +292,7 @@ Dạ giữa việc <strong>nhận video học thử 0đ</strong> và <strong>tì
       // --- CÂU HỎI MỚI: ĐỊA ĐIỂM HỌC ---
       c_location: {
         text: `📍 <strong>ĐỊA ĐIỂM HỌC & CƠ SỞ ĐÀO TẠO SIMON CENTER:</strong><br><br>
-• <strong>Khóa E-Learning Online:</strong> Học trực tuyến mọi lúc mọi nơi trên nền tảng chuyên biệt chuẩn 4K POV. Học viên ở khắp các tỉnh thành trên cả nước và cả kiều bào ở nước ngoài (Mỹ, Đức, Úc, Nhật...) đều theo học rất thuận tiện.<br><br>
+• <strong>Khóa E-Learning Online:</strong> Học trực tuyến mọi lúc mọi nơi trên nền tảng chuyên biệt với các góc quay khác nhau. Học viên ở khắp các tỉnh thành trên cả nước và cả kiều bào ở nước ngoài (Mỹ, Đức, Úc, Nhật...) đều theo học rất thuận tiện.<br><br>
 • <strong>Khóa Thực hành Offline Cầm tay chỉ việc:</strong> Được tổ chức tại các cơ sở đào tạo tiêu chuẩn y khoa của Simon Center tại <strong>TP. Hồ Chí Minh</strong> và <strong>Hà Nội</strong>.<br>
 • Lớp học giới hạn sĩ số để Bác sĩ Henrik Simon và trợ giảng chỉnh từng góc tay, bộ pháp và lực nắn cho từng học viên.`,
         cta: "register"
@@ -649,24 +730,35 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
   };
 
   function initGreeting() {
-    appendBotMessage(BOT_DATA.greeting, null, true);
+    const greetingText = (BOT_DATA.greetings && BOT_DATA.greetings[currentCategory]) || BOT_DATA.greetings?.course || BOT_DATA.greeting;
+    appendBotMessage(greetingText, null, true);
     renderQuickChips();
   }
 
   window.switchChiroCategory = function (cat) {
+    if (currentCategory === cat) return;
     currentCategory = cat;
     const btnCourse = document.getElementById("tabBtnCourse");
     const btnClinical = document.getElementById("tabBtnClinical");
 
     if (cat === "course") {
-      btnCourse.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs";
-      btnClinical.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200";
+      if (btnCourse) btnCourse.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs";
+      if (btnClinical) btnClinical.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200";
     } else {
-      btnClinical.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs";
-      btnCourse.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200";
+      if (btnClinical) btnClinical.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs";
+      if (btnCourse) btnCourse.className = "px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200";
     }
 
     renderQuickChips();
+
+    // Nếu người dùng vừa mở chat chưa hỏi câu nào (chỉ mới có lời chào khởi tạo), cập nhật lời chào đúng theo tab
+    if (chatHistory.length <= 1) {
+      chatHistory = [];
+      const messagesContainer = document.getElementById("chiroChatMessages");
+      if (messagesContainer) messagesContainer.innerHTML = "";
+      const greetingText = (BOT_DATA.greetings && BOT_DATA.greetings[currentCategory]) || BOT_DATA.greetings?.course;
+      appendBotMessage(greetingText, null, true);
+    }
   };
 
   function renderQuickChips() {
@@ -794,10 +886,13 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         requestAnimationFrame(() => {
           ctaBox.classList.remove("opacity-0", "translate-y-2");
           ctaBox.classList.add("opacity-100", "translate-y-0");
-          messagesContainer.scrollTo({
-            top: messagesContainer.scrollHeight,
-            behavior: "smooth"
-          });
+          const dist = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight;
+          if (dist < 120) {
+            messagesContainer.scrollTo({
+              top: messagesContainer.scrollHeight,
+              behavior: "smooth"
+            });
+          }
           if (typeof onComplete === "function") {
             setTimeout(onComplete, 300);
           }
@@ -849,14 +944,60 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     let nodeIdx = 0;
     let charIdx = 0;
 
+    // XỬ LÝ CUỘN THÔNG MINH (CHO PHÉP NGƯỜI DÙNG TỰ DO CUỘN LÊN ĐỌC BẤT CỨ LÚC NÀO)
+    let userScrolledUp = false;
+
+    const onWheel = (e) => {
+      if (e.deltaY < 0) {
+        // Người dùng cuộn chuột/touchpad lên -> Ngay lập tức tạm dừng tự động cuộn xuống
+        userScrolledUp = true;
+      } else if (messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < 35) {
+        // Người dùng cuộn lại sát đáy -> Tiếp tục theo dõi
+        userScrolledUp = false;
+      }
+    };
+
+    const onTouchMove = () => {
+      const dist = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight;
+      if (dist > 50) {
+        userScrolledUp = true;
+      } else {
+        userScrolledUp = false;
+      }
+    };
+
+    const onScroll = () => {
+      const dist = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight;
+      if (dist > 65) {
+        userScrolledUp = true;
+      } else if (dist <= 25) {
+        userScrolledUp = false;
+      }
+    };
+
+    if (messagesContainer) {
+      messagesContainer.addEventListener("wheel", onWheel, { passive: true });
+      messagesContainer.addEventListener("touchmove", onTouchMove, { passive: true });
+      messagesContainer.addEventListener("scroll", onScroll, { passive: true });
+    }
+
+    function cleanupScrollListeners() {
+      if (messagesContainer) {
+        messagesContainer.removeEventListener("wheel", onWheel);
+        messagesContainer.removeEventListener("touchmove", onTouchMove);
+        messagesContainer.removeEventListener("scroll", onScroll);
+      }
+    }
+
     function smoothScrollDown() {
-      if (!messagesContainer) return;
+      if (!messagesContainer || userScrolledUp) return;
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     function typeNextTick() {
       if (nodeIdx >= textNodes.length) {
         if (cursor && cursor.parentNode) cursor.remove();
+        cleanupScrollListeners();
         smoothScrollDown();
         if (typeof onComplete === "function") onComplete();
         return;
@@ -966,6 +1107,86 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
   function matchAndReply(userInput) {
     const raw = userInput.toLowerCase();
     const norm = normalizeText(userInput);
+
+    // =========================================================
+    // 0. NHÓM TRẢ LỜI CỤ THỂ CHI TIẾT TỪNG MODULE / NHU CẦU ĐẶC BIỆT
+    // =========================================================
+
+    // 0a. Học riêng phần lưng / thắt lưng / chậu (Ví dụ: "Tôi chỉ muốn học một phần nắn chỉnh phần lưng thôi thì sao?")
+    const isLearnLumbar = 
+      ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
+       (norm.includes("phan lung") || norm.includes("that lung") || norm.includes("vung lung") || norm.includes("cot song that lung") || norm.includes("hoc lung") || norm.includes("nan lung") || norm.includes("l1") || norm.includes("l5"))) ||
+      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("lung") || norm.includes("that lung")));
+
+    if (isLearnLumbar) {
+      appendBotMessage(BOT_DATA.answers.c_lumbar_part.text, BOT_DATA.answers.c_lumbar_part.cta);
+      return;
+    }
+
+    // 0b. Học riêng phần cổ vai gáy / đốt sống cổ / HWS
+    const isLearnCervical = 
+      ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
+       (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("phan co") || norm.includes("dot song co") || norm.includes("vung co") || norm.includes("hoc co") || norm.includes("nan co") || norm.includes("c1") || norm.includes("c7"))) ||
+      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("co") || norm.includes("gay")));
+
+    if (isLearnCervical) {
+      appendBotMessage(BOT_DATA.answers.c_cervical_part.text, BOT_DATA.answers.c_cervical_part.cta);
+      return;
+    }
+
+    // 0c. Học nắn chỉnh tứ chi / tay chân / khớp ngoại vi (gối, cổ chân, vai, khuỷu)
+    const isLearnExtremity = 
+      (norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
+      (norm.includes("tu chi") || norm.includes("tay chan") || norm.includes("khop goi") || norm.includes("co chan") || norm.includes("khuyu tay") || norm.includes("khop vai") || norm.includes("ngoai vi"));
+
+    if (isLearnExtremity) {
+      appendBotMessage(BOT_DATA.answers.c_extremity_part.text, BOT_DATA.answers.c_extremity_part.cta);
+      return;
+    }
+
+    // 0d. Lớn tuổi / 50 tuổi / 60 tuổi / già có học được không
+    const isAgeQuery = 
+      (norm.includes("tuoi") || norm.includes("50") || norm.includes("60") || norm.includes("lon tuoi") || norm.includes("gia") || norm.includes("trung nien")) &&
+      (norm.includes("hoc") || norm.includes("khoa") || currentCategory === "course");
+
+    if (isAgeQuery) {
+      appendBotMessage(BOT_DATA.answers.c_age_limit.text, BOT_DATA.answers.c_age_limit.cta);
+      return;
+    }
+
+    // 0e. Xem lại / tài khoản trọn đời / có giới hạn thời gian không
+    const isLifetimeQuery = 
+      norm.includes("tron doi") || norm.includes("xem lai") || norm.includes("vinh vien") || 
+      norm.includes("xem duoc bao lau") || norm.includes("gioi han thoi gian") || norm.includes("xem di xem lai") || 
+      norm.includes("tai khoan hoc") || norm.includes("mat tai khoan") || norm.includes("het han");
+
+    if (isLifetimeQuery) {
+      appendBotMessage(BOT_DATA.answers.c_relearn_lifetime.text, BOT_DATA.answers.c_relearn_lifetime.cta);
+      return;
+    }
+
+    // 0f. Ở nước ngoài / kiều bào / thanh toán quốc tế / lệch múi giờ
+    const isAbroadQuery = 
+      norm.includes("nuoc ngoai") || norm.includes("kieu bao") || norm.includes("o my") || 
+      norm.includes("o uc") || norm.includes("o duc") || norm.includes("canada") || 
+      norm.includes("nhat ban") || norm.includes("dai loan") || norm.includes("lech mui gio") || 
+      norm.includes("paypal") || norm.includes("the quoc te");
+
+    if (isAbroadQuery) {
+      appendBotMessage(BOT_DATA.answers.c_abroad_learn.text, BOT_DATA.answers.c_abroad_learn.cta);
+      return;
+    }
+
+    // 0g. Hỗ trợ sau khóa học / đồng hành / hội chẩn ca khó
+    const isSupportQuery = 
+      norm.includes("sau khoa hoc") || norm.includes("sau khi hoc") || norm.includes("dong hanh") || 
+      norm.includes("ho tro ca kho") || norm.includes("hoi chan ca kho") || norm.includes("ho tro sau") || 
+      norm.includes("gap ca kho");
+
+    if (isSupportQuery) {
+      appendBotMessage(BOT_DATA.answers.c_post_course_support.text, BOT_DATA.answers.c_post_course_support.cta);
+      return;
+    }
 
     // ---------------------------------------------------------
     // A. NHÓM CHUYÊN KHOA Y HỌC & BỆNH HỌC (TỪ 351 BÀI BRAIN.DB)
@@ -1297,14 +1518,23 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       norm.includes("chao ad") || norm.includes("chao em") || norm.includes("chao ban") || 
       norm.includes("xin chao") || norm === "ad" || norm === "ad oi"
     ) {
-      appendBotMessage(
-        `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
-Em luôn sẵn sàng hỗ trợ anh/chị 2 nội dung chính:<br>
-• 🎓 <strong>Tư vấn Khóa đào tạo Chiropractic Chuẩn Y khoa</strong> (Lộ trình cho người mới từ số 0, học phí ưu đãi 12.9tr, hỗ trợ trả góp 0%, tặng video học thử 4K POV).<br>
-• 🩺 <strong>Giải đáp Bệnh học & Kỹ thuật Chuyên sâu</strong> (Thoát vị đĩa đệm, đau thần kinh tọa, đọc phim X-quang, Cảnh báo đỏ Red Flags...).<br><br>
-Anh/chị đang quan tâm đến nội dung nào để em hỗ trợ chu đáo nhất cho mình nhé ạ?`,
-        "trial"
-      );
+      if (currentCategory === "course") {
+        appendBotMessage(
+          `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
+Em đang sẵn sàng tư vấn chi tiết về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
+Anh/chị có thể trao đổi bất kỳ thông tin nào: <em>lộ trình cho người mới từ số 0, học từng module lẻ (lưng - chậu 1tr, cổ gáy 1tr), trọn bộ Online toàn diện 12.9tr, lớp thực hành Offline Cầm tay chỉ việc hay phương thức trả góp linh hoạt</em>.<br><br>
+Dạ anh/chị đang muốn bắt đầu từ nội dung nào hay đang quan tâm nắn chỉnh cho vùng cột sống nào vậy ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
+          "trial"
+        );
+      } else {
+        appendBotMessage(
+          `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
+Em là Trợ lý Chuyên môn hỗ trợ <strong>Hội Chẩn & Bệnh Học Cột Sống</strong> cùng Bác sĩ Henrik Simon.<br><br>
+Anh/chị có thể trao đổi cùng em về các ca lâm sàng thực tế: <em>phân tích phim X-quang, thoát vị đĩa đệm, đau thần kinh tọa, kẹt khớp cùng chậu ISG, khớp thái dương hàm hay ranh giới Cảnh báo đỏ (Red Flags)</em>.<br><br>
+Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả chẩn đoán hình ảnh như thế nào ạ? Anh/chị chia sẻ chi tiết để em cùng hội chẩn nhé ạ!`,
+          "register"
+        );
+      }
       return;
     }
 
@@ -1316,9 +1546,9 @@ Anh/chị đang quan tâm đến nội dung nào để em hỗ trợ chu đáo n
     ) {
       appendBotMessage(
         `Dạ em chào anh/chị ạ! Về chương trình đào tạo của Bác sĩ Henrik Simon tại Simon Center:<br><br>
-• Khóa học được thiết kế chuẩn Y khoa Quốc tế kế thừa từ Viện DISC (Đức), hướng dẫn bài bản từ giải phẫu cơ sinh học đến kỹ thuật nắn chỉnh thực chiến POV 4K góc nhìn người nắn.<br>
+• Khóa học được thiết kế chuẩn Y khoa Quốc tế kế thừa từ Viện DISC (Đức), hướng dẫn bài bản từ giải phẫu cơ sinh học đến kỹ thuật nắn chỉnh thực chiến qua <strong>hệ thống video với các góc quay khác nhau</strong> kết hợp quay cận cảnh góc khóa khớp.<br>
 • Dù anh/chị xuất phát điểm từ con số 0 hay đã là kỹ thuật viên vật lý trị liệu/HLV Gym, phương pháp Micro-drills của Thầy sẽ giúp anh/chị định hình phản xạ chuẩn xác và tự tin thực hành an toàn.<br><br>
-🎁 Để anh/chị trải nghiệm thực tế phương pháp giảng dạy, em xin gửi tặng anh/chị <strong>1 Bài giảng mẫu 4K POV hoàn toàn miễn phí</strong>. Anh/chị bấm nút bên dưới để nhận ngay nhé ạ!`,
+🎁 Để anh/chị trải nghiệm thực tế phương pháp giảng dạy, em xin gửi tặng anh/chị <strong>1 Bài giảng mẫu với các góc quay khác nhau hoàn toàn miễn phí</strong>. Anh/chị bấm nút bên dưới để nhận ngay nhé ạ!`,
         "trial"
       );
       return;
@@ -1341,15 +1571,22 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
       return;
     }
 
-    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời tâm huyết, uyển chuyển & đặt câu hỏi gợi mở kết nối
-    appendBotMessage(
-      `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
-Trong Trị liệu Thần kinh Cột sống Chiropractic, mỗi tình trạng đau mỏi hay mỗi thắc mắc chuyên môn đều gắn liền với cơ chế cơ sinh học riêng biệt. Để Thầy Henrik Simon và đội ngũ y khoa Simon Center có thể tư vấn chuẩn xác và hữu ích nhất cho anh/chị:<br><br>
-• Nếu anh/chị đang gặp <strong>một ca bệnh hoặc triệu chứng khó chịu cụ thể</strong>: Cơn đau xuất hiện bao lâu rồi và có kèm theo tê lan xuống tay/chân không ạ?<br>
-• Nếu anh/chị đang quan tâm đến <strong>khóa học nâng cao tay nghề</strong>: Anh/chị đang muốn bắt đầu từ con số 0 hay nâng cao kỹ năng thực hành nắn chỉnh ạ?<br><br>
-Anh/chị cứ chia sẻ thêm chi tiết với em ở ô chat bên dưới, em luôn ở đây lắng nghe và hỗ trợ anh/chị nhé ạ!`,
-      "trial"
-    );
+    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời theo đúng ngữ cảnh tab đã chọn
+    if (currentCategory === "course") {
+      appendBotMessage(
+        `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
+Về chương trình đào tạo Chiropractic của Bác sĩ Henrik Simon, trung tâm luôn có các giải pháp học tập linh hoạt sát nhất với nhu cầu thực tế của từng học viên (từ học lẻ từng phần thắt lưng / cổ gáy 1 triệu đến khóa toàn diện Online hoặc lớp thực hành Offline Cầm tay chỉ việc).<br><br>
+Để em hỗ trợ chu đáo và chính xác nhất, anh/chị có thể chia sẻ thêm: Hiện tại anh/chị đang muốn học để tự chăm sóc gia đình, bổ trợ công việc PT/Spa hay phát triển chuyên sâu mở cơ sở trị liệu vậy ạ?`,
+        "trial"
+      );
+    } else {
+      appendBotMessage(
+        `Dạ em rất hiểu và trân trọng câu hỏi chuyên môn này của anh/chị ạ!<br><br>
+Trong Trị liệu Thần kinh Cột sống Chiropractic, mỗi tình trạng đau hay triệu chứng lâm sàng đều gắn liền với cơ chế cơ sinh học và ranh giới an toàn riêng biệt.<br><br>
+Để Thầy Henrik Simon và đội ngũ y khoa có thể tư vấn chuẩn xác nhất cho ca bệnh này: Cơn đau xuất hiện bao lâu rồi và có kèm theo tê buốt lan xuống tay hay chân không ạ? Nếu anh/chị đã có kết quả chụp X-quang hoặc MRI, anh/chị có thể gửi qua Zalo <strong>0389.609.938</strong> để Bác sĩ hỗ trợ phân tích chi tiết nhé ạ!`,
+        "register"
+      );
+    }
   }
 
   function showTypingIndicator(callback) {

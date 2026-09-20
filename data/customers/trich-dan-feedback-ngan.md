@@ -6,7 +6,7 @@
 
 ### ⭐⭐⭐⭐⭐ Nhóm Kỹ Thuật Viên VLTL & Bác Sĩ
 1. **KTV Hoàng Minh Tuấn (Hà Nội):**  
-   *"Video 4K cận cảnh góc POV quay cực kỳ rõ ràng, thấy được cả hướng phát lực rơi cơ thể của Thầy Henrik mà trước đây tôi đi học hội thảo offline đông người không tài nào nhìn thấy được."*
+   *"Video với các góc quay khác nhau kết hợp cận cảnh quay cực kỳ rõ ràng, thấy được cả hướng phát lực rơi cơ thể của Thầy Henrik mà trước đây tôi đi học hội thảo offline đông người không tài nào nhìn thấy được."*
 2. **Bác sĩ YHCT Lê Thị Phương (Đà Nẵng):**  
    *"Hệ thống bài test chống quên bài sau mỗi bài giảng thực sự xuất sắc. Bắt buộc phải hiểu cặn kẽ giải phẫu và chống chỉ định mới được qua bài. Học xong là tự tin nắn cho bệnh nhân mà không hề sợ tai biến."*
 3. **KTV PHCN Đỗ Quốc Hưng (Bình Dương):**  

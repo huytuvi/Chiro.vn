@@ -72,7 +72,7 @@ def setup_crm(db_path, waitlist_path):
     if cursor.fetchone()[0] == 0:
         sample_products = [
             ("Giáo trình Chiropractic Y Khoa & Thước Đo Cột Sống", "physical", 1500000.0, "Giáo trình bản cứng chuẩn y khoa kèm thước đo góc Cobb chuyên dụng", 50),
-            ("The Full Online Collection (Trọn bộ Online)", "digital", 14900000.0, "Trọn bộ Full-Spine E-Learning Video 4K POV, Drills rèn lực, cấp chứng chỉ", None),
+            ("The Full Online Collection (Trọn bộ Online)", "digital", 14900000.0, "Trọn bộ Full-Spine E-Learning Video với các góc quay khác nhau, Drills rèn lực, cấp chứng chỉ", None),
             ("Khóa Offline Cầm tay chỉ việc (Hands-on Mentorship)", "service", 40000000.0, "4 ngày thực hành trực tiếp cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực", None),
             ("Khóa Học Test Thanh Toán Tự Động SePay", "digital", 2000.0, "Khóa học test tích hợp SePay & QR Code ACB chuyển khoản tự động", None)
         ]

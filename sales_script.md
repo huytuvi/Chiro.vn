@@ -35,7 +35,7 @@
 > *"Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là thao tác cơ sinh học trực tiếp trên cơ thể người, nên nếu chỉ là các video quay lý thuyết thụ động một chiều thì chắc chắn không ai dám làm cả.*  
 >  
 > *Chính vì vậy, khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo **Quy trình sư phạm 3 bước độc quyền chuẩn y khoa** để giải quyết triệt để vấn đề này:*  
-> 1. **Video 4K góc nhìn người nắn (First-person POV):** Máy quay đặt đúng tầm mắt của người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực — điều mà học tại hội trường đông người đứng cách xa 3 mét không thể nào nhìn thấy được.  
+> 1. **Video với các góc quay khác nhau kết hợp quay cận cảnh:** Hệ thống camera bố trí đa góc, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực — điều mà học tại hội trường đông người đứng cách xa 3 mét không thể nào nhìn thấy được.  
 > 2. **Phương pháp Micro-drills rèn lực tại nhà:** Toàn bộ kỹ thuật được chia nhỏ thành các bài tập bộ pháp, thả lỏng cổ tay và tận dụng lực rơi cơ thể trên đệm mút hoặc bóng phản xạ. Anh/chị rèn cho cơ bắp có phản xạ tốc độ tự nhiên trước khi chạm vào người thật, nên lúc làm trên bệnh nhân sẽ hoàn toàn tự tin, không bị run tay.  
 > 3. **Hệ thống Test lâm sàng bắt buộc sau mỗi bài:** Phải hiểu đúng bản chất ca bệnh và các dấu hiệu nguy hiểm (Red Flags) thì hệ thống mới mở bài tiếp theo, đảm bảo học bài nào chắc bài đó.  
 >  
@@ -176,7 +176,7 @@ Khi khách bắt đầu hỏi các câu như: *"Khóa này học trên điện t
 ### Kịch bản 4.1: Tặng tài khoản học thử bài giảng mẫu 4K & Giữ học phí ưu đãi
 > *"Dạ em hoàn toàn hiểu ạ! Đầu tư một khóa học chuyên môn sâu thì việc cân nhắc thấu đáo là rất cần thiết.*  
 >  
-> *Để anh/chị có cái nhìn thực tế nhất về phương pháp giảng dạy của Thầy Henrik Simon, em xin phép gửi tặng anh/chị **1 Suất Học Thử Bài Giảng Mẫu Độ Nét 4K (Góc quay POV)** hoàn toàn miễn phí nhé ạ.*  
+> *Để anh/chị có cái nhìn thực tế nhất về phương pháp giảng dạy của Thầy Henrik Simon, em xin phép gửi tặng anh/chị **1 Suất Học Thử Bài Giảng Mẫu (Video với các góc quay khác nhau)** hoàn toàn miễn phí nhé ạ.*  
 >  
 > *Anh/chị chỉ cần điền nhanh thông tin vào form ngắn này: [ĐƯỜNG LINK FORM TRÊN WEBSITE], hệ thống sẽ gửi tài liệu bài giảng mẫu qua Zalo/Email cho anh/chị xem thử trước.  
 > Đồng thời, việc điền form cũng giúp hệ thống **tự động giữ mức học phí ưu đãi 14.9 triệu** cho anh/chị trong chu kỳ này mà không sợ bị tăng giá về sau. Anh/chị điền ngay để nhận bài giảng nhé ạ!"*

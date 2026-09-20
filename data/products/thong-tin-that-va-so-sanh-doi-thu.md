@@ -7,9 +7,9 @@
 
 | Sản Phẩm | Giá Niêm Yết Thật | Giá Ưu Đãi / Điều Kiện Thật | Quyền Lợi & Tính Năng Thật Đã Được Kiểm Chứng |
 | :--- | :--- | :--- | :--- |
-| **Module Lẻ Online** | 2.000.000đ – 3.000.000đ | **1.000.000đ – 2.000.000đ** | Học thử 1 vùng chuyên biệt (Cổ vai gáy hoặc Thắt lưng chậu hoặc Khớp hàm TMJ). Video 4K quay góc nhìn người nắn. |
+| **Module Lẻ Online** | 2.000.000đ – 3.000.000đ | **1.000.000đ – 2.000.000đ** | Học thử 1 vùng chuyên biệt (Cổ vai gáy hoặc Thắt lưng chậu hoặc Khớp hàm TMJ). Video với các góc quay khác nhau. |
 | **Level Lẻ Online (1 & 2)** | 10.000.000đ | **8.500.000đ** | Học trọn 1 Level: Level 1 (Toàn bộ Cột sống Full-Spine) hoặc Level 2 (Toàn bộ Khớp ngoại vi Tứ chi). |
-| **The Full Online Collection** | 18.000.000đ | **14.900.000đ** *(Giai đoạn Founding)* | Trọn bộ Full-Spine + Tứ chi + X-ray. 4K POV, hệ thống Micro-drills rèn lực tại nhà, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. **Tặng kèm: Cẩm nang đọc phim X-quang**. |
+| **The Full Online Collection** | 18.000.000đ | **14.900.000đ** *(Giai đoạn Founding)* | Trọn bộ Full-Spine + Tứ chi + X-ray. Video với các góc quay khác nhau, hệ thống Micro-drills rèn lực tại nhà, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. **Tặng kèm: Cẩm nang đọc phim X-quang**. |
 | **Khóa Offline Cầm tay chỉ việc** | 45.000.000đ | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; **Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ trọn đời**. |
 | **Superrefresher / Refresher** | 6.000.000đ | **3.000.000đ** *(Giảm 50% cho Alumni)* | 1–2 ngày thực hành uốn nắn lại cảm giác tay cho học viên cũ sau thời gian hành nghề bị trôi lực. |
 | **Tageshospitation (Đi lâm sàng)** | 2.500.000đ/ngày | **1.250.000đ/ngày** *(Giảm 50% cho Alumni)* | Trực tiếp đứng cạnh Henrik Simon xem khám, đọc phim và điều trị bệnh nhân thật tại Simon Center TP.HCM. |

@@ -72,7 +72,7 @@ def sync_real_data_to_crm(db_path, leads_json_path, waitlist_output_path):
 
     # Danh mục sản phẩm chuẩn của Simon Chiropractic Center
     products_list = [
-        ("The Full Online Collection (Trọn bộ Online)", "digital", 14900000.0, "Trọn bộ Full-Spine E-Learning Video 4K POV, Drills rèn lực, cấp chứng chỉ", 0),
+        ("The Full Online Collection (Trọn bộ Online)", "digital", 14900000.0, "Trọn bộ Full-Spine E-Learning Video với các góc quay khác nhau, Drills rèn lực, cấp chứng chỉ", 0),
         ("Khóa 1 — Nắn Chỉnh Cột Sống Chuyên Biệt (Spine / Modul A)", "digital", 2100000.0, "Chuyên đề nắn chỉnh cột sống chuyên sâu", 0),
         ("Combo Trọn Khóa (Full Track 3 Khóa) + 1 Năm Thành Viên", "digital", 6600000.0, "Combo 3 khóa chuyên sâu + 1 năm hội viên Alumni", 0),
         ("Khóa Học Test Thanh Toán Tự Động SePay", "digital", 2000.0, "Khóa học test tích hợp cổng ACB SePay", 0),

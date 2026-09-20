@@ -163,7 +163,7 @@ def get_email_3_content():
     </p>
     <div style="background-color: #FFFFFF; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #E2E8F0;">
       <ul style="margin: 0; padding-left: 20px; font-size: 14.5px; color: #4A5568;">
-        <li style="margin-bottom: 10px;"><strong>150+ video cận cảnh First-Person:</strong> Minh họa rõ nét điểm tiếp xúc và góc phát lực an toàn.</li>
+        <li style="margin-bottom: 10px;"><strong>150+ video cận cảnh với các góc quay khác nhau:</strong> Minh họa rõ nét điểm tiếp xúc và góc phát lực an toàn.</li>
         <li style="margin-bottom: 10px;"><strong>Hệ thống bài tập vi chuyển động (Micro-drills):</strong> Luyện cảm giác mô và tốc độ phát lực độc quyền trường phái Đức.</li>
         <li style="margin-bottom: 10px;"><strong>Phân tích X-Quang thực chiến:</strong> Nhận diện chống chỉ định tuyệt đối (Red Flags).</li>
         <li><strong>Đặc quyền hỗ trợ chuyên môn 1-1:</strong> Thầy Henrik Simon trực tiếp sửa tư thế qua video.</li>
