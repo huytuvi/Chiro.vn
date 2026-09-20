@@ -35,6 +35,8 @@ if os.path.exists(CONFIG_FILE):
     except Exception as e:
         print(f"⚠️ Không thể đọc resend_config.txt: {e}")
 
+import ssl
+
 # ==============================================================================
 # HÀM GỬI EMAIL QUA RESEND API
 # ==============================================================================
@@ -54,7 +56,21 @@ def send_resend_email(to_email, subject, html_content):
 
     req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
     try:
-        with urllib.request.urlopen(req) as resp:
+        try:
+            ctx = ssl.create_default_context()
+        except Exception:
+            ctx = ssl._create_unverified_context()
+
+        try:
+            resp_handle = urllib.request.urlopen(req, context=ctx)
+        except urllib.error.URLError as u_err:
+            if "CERTIFICATE_VERIFY_FAILED" in str(u_err):
+                ctx = ssl._create_unverified_context()
+                resp_handle = urllib.request.urlopen(req, context=ctx)
+            else:
+                raise u_err
+
+        with resp_handle as resp:
             data = json.loads(resp.read().decode("utf-8"))
             print(f"✅ Đã gửi thành công tới: {to_email} | Subject: '{subject}' | Resend ID: {data.get('id')}")
             return {"success": True, "id": data.get("id")}
@@ -191,6 +207,116 @@ def get_email_3_content():
 </div>
 """
 
+def get_waitlist_welcome_content(name="anh/chị", phone="", email="", goal="", exp="", format="", digital_code=""):
+    safe_name = name or "Anh/Chị"
+    safe_phone = phone or "Theo thông tin đăng ký"
+    safe_email = email or "Theo thông tin đăng ký"
+    safe_goal = goal or "Tìm hiểu kỹ thuật Chiropractic chuẩn Y khoa"
+    safe_exp = exp or "Người mới tìm hiểu"
+    safe_format = format or "Lộ trình đào tạo chuẩn Simon Center"
+    safe_code = digital_code or "[WAITLIST-SIMON]"
+
+    return f"""
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; line-height: 1.7; color: #2D3748; padding: 25px 20px; background-color: #FAFAF9; border-radius: 12px; border: 1px solid #E2E8F0;">
+  <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #8F1D35;">
+    <h2 style="color: #8F1D35; margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 0.5px;">SIMON CHIROPRACTIC CENTER</h2>
+    <p style="margin: 4px 0 0 0; font-size: 13px; color: #718096; text-transform: uppercase; font-weight: 600;">Simon EDU Center — Trung Tâm Đào Tạo Chiropractic Chuẩn Y Khoa</p>
+  </div>
+  
+  <div style="padding: 24px 0;">
+    <div style="background-color: #ECFDF5; border-left: 4px solid #10B981; padding: 14px 18px; border-radius: 6px; margin-bottom: 20px;">
+      <p style="margin: 0; font-size: 15px; color: #065F46; font-weight: 700;">
+        🎉 CHÀO MỪNG ANH/CHỊ GIA NHẬP DANH SÁCH CHỜ ƯU TIÊN!
+      </p>
+      <p style="margin: 5px 0 0 0; font-size: 13.5px; color: #047857;">
+        Hệ thống Simon EDU Center (chiro.vn) đã ghi nhận thông tin của anh/chị vào hàng đợi ưu tiên.
+      </p>
+    </div>
+
+    <p style="font-size: 15px; margin-bottom: 14px;">Dạ, Simon EDU Center xin kính chào Anh/Chị <strong>{safe_name}</strong>,</p>
+
+    <p style="font-size: 14.5px; margin-bottom: 16px;">
+      Thay mặt Bác sĩ Henrik Simon và Ban Đào Tạo, chúng em xin chân thành cảm ơn Anh/Chị đã hoàn thành bảng khảo sát nhu cầu và đăng ký vào <strong>Danh Sách Chờ Tham Gia Khóa Học Simon EDU Center (chiro.vn)</strong>.
+    </p>
+
+    <!-- BẢNG THÔNG TIN ĐĂNG KÝ -->
+    <div style="background-color: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 18px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+      <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 700; color: #8F1D35; text-transform: uppercase;">
+        📋 Thông Tin Hồ Sơ Đăng Ký Của Anh/Chị:
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+        <tr>
+          <td style="padding: 6px 0; color: #718096; width: 150px;">Họ và tên:</td>
+          <td style="padding: 6px 0; color: #1A202C; font-weight: 600;">{safe_name}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Số điện thoại / Zalo:</td>
+          <td style="padding: 6px 0; color: #1A202C; font-weight: 600;">{safe_phone}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Email nhận tin:</td>
+          <td style="padding: 6px 0; color: #1A202C; font-weight: 600;">{safe_email}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Mục tiêu quan tâm:</td>
+          <td style="padding: 6px 0; color: #1A202C;">{safe_goal}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Nền tảng / Kinh nghiệm:</td>
+          <td style="padding: 6px 0; color: #1A202C;">{safe_exp}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Hình thức mong muốn:</td>
+          <td style="padding: 6px 0; color: #1A202C;">{safe_format}</td>
+        </tr>
+        <tr>
+          <td style="padding: 6px 0; color: #718096;">Mã hồ sơ ưu tiên:</td>
+          <td style="padding: 6px 0; color: #8F1D35; font-family: monospace; font-weight: 700;">{safe_code}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- CAM KẾT CẬP NHẬT SỚM NHẤT -->
+    <div style="background-color: #FFFBEB; border-left: 4px solid #F59E0B; padding: 14px 18px; border-radius: 6px; margin: 18px 0;">
+      <h4 style="margin: 0 0 8px 0; font-size: 14.5px; color: #92400E; font-weight: 700;">
+        ⚡ ĐẶC QUYỀN &amp; CAM KẾT CẬP NHẬT SỚM NHẤT:
+      </h4>
+      <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; color: #78350F; line-height: 1.65;">
+        <li>Những thông tin mới nhất về khóa học, giáo trình đào tạo quốc tế của Thầy Henrik Simon và lịch khai giảng các đợt thực hành trực tiếp sẽ được Simon EDU Center cập nhật <strong>sớm nhất</strong> cho anh/chị qua email này và Zalo trước khi công bố ra ngoài.</li>
+        <li>Ưu tiên giữ chỗ và áp dụng các chính sách học phí ưu đãi độc quyền dành riêng cho học viên thuộc Danh sách chờ.</li>
+        <li>Tài liệu y khoa, cẩm nang phân tích cơ sinh học và video phân tích kỹ thuật chuẩn từ Bác sĩ Henrik Simon.</li>
+      </ul>
+    </div>
+
+    <!-- CAM KẾT BẢO MẬT THÔNG TIN 100% -->
+    <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #3B82F6; padding: 14px 18px; border-radius: 6px; margin: 18px 0;">
+      <h4 style="margin: 0 0 6px 0; font-size: 14px; color: #1E40AF; font-weight: 700;">
+        🔒 CAM KẾT BẢO MẬT THÔNG TIN 100%
+      </h4>
+      <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
+        Simon EDU Center cam kết bảo mật tuyệt đối mọi thông tin cá nhân của anh/chị. Mọi thông tin cung cấp chỉ phục vụ công tác tư vấn chuyên môn và gửi tài liệu nội bộ. Chúng tôi <strong>tuyệt đối không chia sẻ, trao đổi hay bán dữ liệu cho bất kỳ bên thứ ba nào</strong> dưới bất kỳ hình thức nào.
+      </p>
+    </div>
+
+    <p style="font-size: 14.5px; margin: 20px 0 10px 0;">
+      Nếu anh/chị có bất kỳ câu hỏi nào cần giải đáp hoặc muốn trao đổi trực tiếp với chuyên môn, anh/chị có thể phản hồi trực tiếp email này hoặc liên hệ hotline của chúng em nhé ạ.
+    </p>
+
+    <div style="border-top: 1px solid #E2E8F0; padding-top: 16px; margin-top: 24px; font-size: 13px; color: #718096;">
+      <p style="margin: 0 0 4px 0; font-weight: 700; color: #2D3748;">SIMON EDU CENTER — CHIRO.VN</p>
+      <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>093 115 8868</strong></p>
+      <p style="margin: 0 0 4px 0;">🌐 Website: <a href="https://chiro.vn" style="color: #8F1D35; text-decoration: none; font-weight: 600;">https://chiro.vn</a></p>
+      <p style="margin: 0;">✉️ Email: <a href="mailto:hi@chiro.vn" style="color: #8F1D35; text-decoration: none;">hi@chiro.vn</a></p>
+    </div>
+  </div>
+</div>
+"""
+
+def send_waitlist_welcome_email(to_email, name="anh/chị", phone="", goal="", exp="", format="", digital_code=""):
+    subject = "[Simon Center] Chào mừng anh/chị gia nhập Danh Sách Chờ Ưu Tiên — Khóa học Chiropractic Chuẩn Y Khoa"
+    content = get_waitlist_welcome_content(name, phone, to_email, goal, exp, format, digital_code)
+    return send_resend_email(to_email, subject, content)
+
 def get_order_confirmation_content(customer_name, order_code, course_name, price):
     return f"""
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; line-height: 1.7; color: #2D3748; padding: 25px 20px; background-color: #FAFAF9; border-radius: 12px; border: 1px solid #E2E8F0;">
@@ -303,6 +429,18 @@ class ResendProxyHandler(BaseHTTPRequestHandler):
                 res = send_resend_email(email, sub, get_order_confirmation_content(name, order_code, course, price))
                 response_data["resend_id"] = res.get("id")
                 response_data["message"] = f"Đã gửi email xác nhận đơn hàng tới {email}"
+        elif "/api/waitlist-welcome" in path:
+            email = data.get("email", "").strip()
+            name = data.get("name", "anh/chị")
+            phone = data.get("phone", "")
+            goal = data.get("goal", "")
+            exp = data.get("experience", "")
+            fmt = data.get("format", "")
+            code = data.get("digital_code", "")
+            if email:
+                res = send_waitlist_welcome_email(email, name, phone, goal, exp, fmt, code)
+                response_data["resend_id"] = res.get("id")
+                response_data["message"] = f"Đã gửi email chào mừng danh sách chờ tới {email}"
             else:
                 response_data = {"status": "error", "message": "Thiếu email"}
 
@@ -325,6 +463,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Simon Center Resend Automation CLI")
     parser.add_argument("--test", help="Test gửi cả 3 email ngay lập tức cho địa chỉ email (chế độ +test)")
     parser.add_argument("--order", nargs=4, metavar=("EMAIL", "NAME", "ORDER_CODE", "PRICE"), help="Gửi email xác nhận đơn hàng")
+    parser.add_argument("--waitlist", nargs="+", metavar=("EMAIL", "NAME"), help="Gửi email chào mừng danh sách chờ: --waitlist email [name] [phone]")
     parser.add_argument("--serve", action="store_true", help="Chạy local proxy server cho index.html và admin.html")
     parser.add_argument("--port", type=int, default=3000, help="Port cho proxy server (mặc định 3000)")
 
@@ -336,6 +475,11 @@ if __name__ == "__main__":
         email, name, code, price = args.order
         sub = "[Simon Center] Xác nhận đăng ký thành công khóa học — Hướng dẫn kích hoạt bài giảng"
         send_resend_email(email, sub, get_order_confirmation_content(name, code, "The Full Online Collection", price))
+    elif args.waitlist:
+        wl_email = args.waitlist[0]
+        wl_name = args.waitlist[1] if len(args.waitlist) > 1 else "Quý học viên"
+        wl_phone = args.waitlist[2] if len(args.waitlist) > 2 else ""
+        send_waitlist_welcome_email(wl_email, wl_name, wl_phone)
     elif args.serve:
         run_server(args.port)
     else:

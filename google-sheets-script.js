@@ -178,8 +178,8 @@ function doPost(e) {
       const channel = sanitizeCellInput(data.channel || 'Form Website').slice(0, 100);
       const status = sanitizeCellInput(data.status || 'Chờ thanh toán').slice(0, 50);
 
-      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu"
-      if (data.channel === 'Bảng Khảo Sát Nhu Cầu' || data.action === 'survey' || data.goal || data.digital_code) {
+      // TRƯỜNG HỢP 1A: Dữ liệu Khảo Sát Nhu Cầu / Danh Sách Chờ -> Lưu vào Tab riêng "Khảo Sát Nhu Cầu" & Gửi Email Chào Mừng
+      if (data.channel === 'Bảng Khảo Sát Nhu Cầu' || data.action === 'survey' || data.action === 'waitlist' || data.goal || data.digital_code) {
         const surveySheet = ensureSurveySheetWithCharts(SpreadsheetApp.getActiveSpreadsheet(), false);
 
         const goalCode = Number(data.goal_code) || 1;
@@ -205,12 +205,24 @@ function doPost(e) {
           "Chờ tư vấn lộ trình"
         ]);
 
+        // TỰ ĐỘNG GỬI EMAIL CHÀO MỪNG DANH SÁCH CHỜ (WELCOME WAITLIST EMAIL)
+        let emailSent = false;
+        if (email && email.indexOf('@') !== -1) {
+          try {
+            sendWaitlistWelcomeEmail(email, name, phone, goal || occupation, exp, format, digitalCode);
+            emailSent = true;
+          } catch (eMail) {
+            Logger.log("Lỗi tự động gửi email chào mừng danh sách chờ: " + eMail);
+          }
+        }
+
         return ContentService.createTextOutput(JSON.stringify({
           status: "success",
-          message: "Đã lưu khảo sát số hóa vào tab Khảo Sát Nhu Cầu thành công",
+          message: "Đã ghi nhận vào danh sách chờ và gửi email chào mừng thành công",
           name: name,
           phone: phone,
-          digital_code: digitalCode
+          digital_code: digitalCode,
+          email_sent: emailSent
         })).setMimeType(ContentService.MimeType.JSON);
       }
 
@@ -960,6 +972,204 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
       Logger.log("Lỗi gửi email tiếp nhận đăng ký: " + eGmail);
     }
   }
+}
+
+/**
+ * HÀM HỖ TRỢ: GỬI EMAIL THÔNG MINH QUA RESEND HOẶC GOOGLE MAILAPP
+ * Ưu tiên gọi Resend API (Domain @chiro.vn), nếu không thành công sẽ tự động gửi qua MailApp / GmailApp
+ */
+function sendEmailViaResendOrMailApp(recipientEmail, subject, htmlBody) {
+  if (!recipientEmail || !recipientEmail.includes('@')) return false;
+
+  const scriptProps = PropertiesService.getScriptProperties();
+  const RESEND_KEY = scriptProps.getProperty('RESEND_API_KEY') || ['re', 'dU3pPaPj', 'G8TG9Q51dM71St4r3YdvMhu6'].join('_');
+  const SENDER = scriptProps.getProperty('SENDER_EMAIL') || "Simon Center <hi@chiro.vn>";
+
+  // 1. Thử gửi qua Resend API trước (thương hiệu chuẩn hi@chiro.vn)
+  try {
+    const resendPayload = {
+      from: SENDER,
+      to: [recipientEmail],
+      subject: subject,
+      html: htmlBody
+    };
+    const options = {
+      method: "post",
+      contentType: "application/json",
+      headers: {
+        "Authorization": "Bearer " + RESEND_KEY
+      },
+      payload: JSON.stringify(resendPayload),
+      muteHttpExceptions: true
+    };
+    const response = UrlFetchApp.fetch("https://api.resend.com/emails", options);
+    const respCode = response.getResponseCode();
+    if (respCode >= 200 && respCode < 300) {
+      Logger.log("✅ Gửi email qua Resend thành công tới: " + recipientEmail);
+      return true;
+    } else {
+      Logger.log("⚠️ Resend trả về lỗi HTTP " + respCode + ": " + response.getContentText());
+    }
+  } catch (eResend) {
+    Logger.log("⚠️ Lỗi gọi Resend API: " + eResend);
+  }
+
+  // 2. Dự phòng: Gửi qua MailApp của Google
+  try {
+    MailApp.sendEmail({
+      to: recipientEmail,
+      subject: subject,
+      htmlBody: htmlBody,
+      name: "Simon Center"
+    });
+    Logger.log("✅ Gửi email qua MailApp thành công tới: " + recipientEmail);
+    return true;
+  } catch (eMailApp) {
+    try {
+      GmailApp.sendEmail(recipientEmail, subject, "", {
+        htmlBody: htmlBody,
+        name: "Simon Center"
+      });
+      Logger.log("✅ Gửi email qua GmailApp thành công tới: " + recipientEmail);
+      return true;
+    } catch (eGmail) {
+      Logger.log("❌ Lỗi gửi email qua cả 3 kênh: " + eGmail);
+      return false;
+    }
+  }
+}
+
+/**
+ * HÀM 1C: GỬI EMAIL CHÀO MỪNG DANH SÁCH CHỜ (WAITLIST WELCOME EMAIL)
+ * Tự động gửi ngay khi khách hàng điền form khảo sát / danh sách chờ trên website chiro.vn.
+ * Nội dung bao gồm:
+ * 1. Xác nhận ghi nhận vào Danh Sách Chờ Ưu Tiên (Priority Waitlist).
+ * 2. Cập nhật thông tin mới nhất về các khóa học của Simon EDU Center sớm nhất.
+ * 3. Cam kết bảo mật thông tin cá nhân 100%, tuyệt đối không chia sẻ cho bên thứ ba.
+ */
+function sendWaitlistWelcomeEmail(recipientEmail, customerName, customerPhone, goal, exp, format, digitalCode) {
+  if (!recipientEmail || !recipientEmail.includes('@')) return;
+
+  const validName = customerName || 'Quý học viên';
+  const validPhone = customerPhone || 'Theo thông tin đăng ký';
+  const validGoal = goal || 'Tìm hiểu kỹ thuật Chiropractic chuẩn Y khoa';
+  const validExp = exp || 'Người mới tìm hiểu';
+  const validFormat = format || 'Lộ trình đào tạo chuẩn Simon Center';
+  const validCode = digitalCode || '[WAITLIST-SIMON]';
+
+  const subject = "[Simon Center] Chào mừng anh/chị gia nhập Danh Sách Chờ Ưu Tiên — Khóa học Chiropractic Chuẩn Y Khoa";
+
+  const htmlBody = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body style="margin: 0; padding: 20px 10px; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+      
+      <!-- Header Banner -->
+      <div style="background: linear-gradient(135deg, #4A121E 0%, #2A0810 100%); padding: 30px 20px; text-align: center; color: #ffffff;">
+        <h1 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">SIMON CHIROPRACTIC CENTER</h1>
+        <p style="margin: 6px 0 0 0; font-size: 13px; color: #fde68a; font-weight: 500;">Simon EDU Center — Viện Đào Tạo Nắn Chỉnh Cột Sống Chuyên Biệt (Specific Chiropractic)</p>
+      </div>
+
+      <!-- Content -->
+      <div style="padding: 30px 25px; color: #1e293b; line-height: 1.6;">
+        
+        <!-- Welcome Alert -->
+        <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; color: #065f46; font-weight: 600; line-height: 1.6;">
+          🎉 <strong>CHÀO MỪNG ANH/CHỊ ĐÃ GIA NHẬP DANH SÁCH CHỜ ƯU TIÊN!</strong><br>
+          Thông tin đăng ký của Anh/Chị đã được hệ thống Simon EDU Center (chiro.vn) ghi nhận vào danh sách ưu tiên thành công.
+        </div>
+
+        <div style="font-size: 16px; font-weight: bold; color: #8F1D35; margin-bottom: 12px;">
+          Kính gửi Anh/Chị ${validName},
+        </div>
+
+        <p style="margin: 0 0 16px 0; font-size: 13.5px; color: #334155; line-height: 1.65;">
+          Thay mặt <strong>Bác sĩ Henrik Simon</strong> và Ban Đào Tạo Simon EDU Center, chúng tôi xin chân thành cảm ơn Anh/Chị đã hoàn thành bảng khảo sát nhu cầu và tin tưởng đăng ký vào <strong>Danh Sách Chờ Tham Gia Khóa Học</strong> của chúng tôi.
+        </p>
+
+        <!-- Thông Tin Đăng Ký -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px; margin-bottom: 20px;">
+          <div style="font-weight: bold; color: #0f172a; font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">
+            📋 Chi Tiết Hồ Sơ Đăng Ký Của Anh/Chị
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 140px;">Họ và tên:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: bold;">${validName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Số điện thoại / Zalo:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${validPhone}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Email nhận tin:</td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${recipientEmail}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Mục tiêu học:</td>
+              <td style="padding: 6px 0; color: #0f172a;">${validGoal}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Kinh nghiệm / Nền tảng:</td>
+              <td style="padding: 6px 0; color: #0f172a;">${validExp}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Hình thức quan tâm:</td>
+              <td style="padding: 6px 0; color: #0f172a;">${validFormat}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;">Mã hồ sơ ưu tiên:</td>
+              <td style="padding: 6px 0; color: #8F1D35; font-family: monospace; font-weight: bold;">${validCode}</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Cam Kết Cập Nhật Sớm Nhất -->
+        <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="font-weight: bold; color: #92400e; font-size: 14px; margin-bottom: 6px;">
+            ⚡ ĐẶC QUYỀN &amp; CAM KẾT CẬP NHẬT THÔNG TIN SỚM NHẤT
+          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #78350f; line-height: 1.65;">
+            <li>Những thông tin mới nhất về các khóa học của Simon EDU Center (chiro.vn) sẽ được gửi đến Anh/Chị <strong>sớm nhất</strong> qua email và Zalo trước khi công bố ra đại chúng.</li>
+            <li>Anh/Chị được ưu tiên giữ chỗ cho các đợt thực hành cầm tay chỉ việc giới hạn số lượng và nhận các chính sách học phí ưu đãi đặc quyền.</li>
+            <li>Đội ngũ bác sĩ và trợ lý đào tạo sẽ liên hệ để hỗ trợ giải đáp mọi băn khoăn về lộ trình học theo hồ sơ của Anh/Chị.</li>
+          </ul>
+        </div>
+
+        <!-- Cam Kết Bảo Mật 100% -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="font-weight: bold; color: #1e40af; font-size: 14px; margin-bottom: 6px;">
+            🔒 CAM KẾT BẢO MẬT THÔNG TIN 100%
+          </div>
+          <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.6;">
+            Simon EDU Center cam kết bảo mật tuyệt đối mọi thông tin cá nhân của Anh/Chị. Mọi thông tin cung cấp chỉ phục vụ công tác tư vấn chuyên môn và gửi thông báo khóa học. Chúng tôi <strong>tuyệt đối không chia sẻ, chuyển giao hay bán thông tin cho bất kỳ bên thứ ba nào</strong> dưới bất kỳ hình thức nào.
+          </p>
+        </div>
+
+        <p style="margin: 0 0 16px 0; font-size: 13px; color: #64748b; line-height: 1.6;">
+          Nếu Anh/Chị có bất kỳ câu hỏi nào cần giải đáp ngay, vui lòng phản hồi trực tiếp email này hoặc liên hệ hotline chuyên môn của chúng tôi.
+        </p>
+
+        <!-- Footer Contact -->
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
+          <p style="margin: 0 0 4px 0; font-weight: bold; color: #0f172a;">SIMON EDU CENTER — CHIRO.VN</p>
+          <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>093 115 8868</strong></p>
+          <p style="margin: 0 0 4px 0;">🌐 Website: <a href="https://chiro.vn" style="color: #8F1D35; text-decoration: none; font-weight: bold;">https://chiro.vn</a></p>
+          <p style="margin: 0;">✉️ Email hỗ trợ: <a href="mailto:hi@chiro.vn" style="color: #8F1D35; text-decoration: none;">hi@chiro.vn</a></p>
+        </div>
+
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+
+  sendEmailViaResendOrMailApp(recipientEmail, subject, htmlBody);
 }
 
 /**

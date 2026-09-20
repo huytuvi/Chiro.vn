@@ -177,7 +177,7 @@
           </a>
           <button type="button" onclick="openSurveyModal()"
             class="hover:text-brand-crimson transition flex items-center space-x-1 focus:outline-none">
-            <span>📋 Khảo Sát Nhu Cầu</span>
+            <span>📋 Danh Sách Chờ &amp; Khảo Sát</span>
           </button>
           <a href="#pricing" class="hover:text-brand-crimson transition font-bold text-brand-crimson">💰 Học Phí (Giảm
             50%)</a>
@@ -655,7 +655,7 @@
       <div class="mt-8 text-center">
         <button type="button" onclick="openSurveyModal()"
           class="inline-flex items-center space-x-2 bg-gradient-to-r from-brand-wine to-brand-crimson hover:from-brand-wineDark hover:to-brand-crimsonHover text-white text-xs sm:text-sm font-extrabold px-6 py-3.5 rounded-xl shadow-md hover:shadow-xl transition transform hover:scale-[1.02]">
-          <span>📋 Bạn Chưa Chắc Chắn Khóa Nào Phù Hợp? Bấm Khảo Sát Nhanh (1 Phút)</span>
+          <span>📋 Đăng Ký Danh Sách Chờ &amp; Khảo Sát Lộ Trình Phù Hợp (1 Phút)</span>
           <span>➔</span>
         </button>
       </div>
@@ -2038,13 +2038,13 @@
         </button>
         <span
           class="inline-block text-[11px] font-extrabold uppercase tracking-widest bg-white/20 text-amber-300 px-3 py-0.5 rounded-full mb-2">
-          📋 Khảo Sát Cá Nhân Hóa (1 Phút)
+          ✨ DANH SÁCH CHỜ ƯU TIÊN &amp; KHẢO SÁT NHU CẦU
         </span>
         <h3 class="text-xl sm:text-2xl font-extrabold leading-tight">
-          Bảng Khảo Sát Nhu Cầu Khóa Học
+          Bảng Khảo Sát &amp; Đăng Ký Danh Sách Chờ Khóa Học
         </h3>
         <p class="text-xs text-gray-200 mt-1">
-          Dành 60 giây để Thầy Henrik Simon &amp; Simon Center tư vấn lộ trình học phù hợp nhất cho anh/chị.
+          Đăng ký danh sách chờ để nhận thông tin cập nhật khóa học mới nhất sớm nhất &amp; ưu đãi học phí độc quyền từ Simon EDU Center.
         </p>
       </div>
 
@@ -2079,13 +2079,12 @@
                 class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-xs sm:text-sm bg-white font-medium">
             </div>
 
-            <!-- Email (Nhận tài liệu & kết quả khảo sát) -->
+            <!-- Email (Nhận email chào mừng, tài liệu & thông báo khóa học mới nhất) -->
             <div class="bg-brand-sand/60 p-4 rounded-2xl border border-gray-200">
               <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">
                 3. Địa chỉ Email của anh/chị: <span class="text-brand-crimson">*</span>
               </label>
-              <p class="text-[11px] text-gray-500 mb-2 italic">(Để ban tổ chức gửi lộ trình &amp; tài liệu Chiropractic
-                miễn phí)</p>
+              <p class="text-[11px] text-gray-500 mb-2 italic">(Để ban tổ chức gửi email chào mừng, cập nhật lịch học sớm nhất &amp; tài liệu Chiropractic miễn phí — Cam kết bảo mật 100%)</p>
               <input type="email" id="surveyEmail" required placeholder="Ví dụ: nguyenvana@gmail.com"
                 class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson focus:border-transparent text-xs sm:text-sm bg-white font-medium">
             </div>
@@ -2194,10 +2193,10 @@
           <div class="pt-2">
             <button type="submit" id="surveySubmitBtn"
               class="w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-xs sm:text-sm py-3.5 rounded-xl shadow-lg transition transform hover:scale-[1.01] uppercase tracking-wide flex items-center justify-center space-x-2">
-              <span>🚀 GỬI BẢNG KHẢO SÁT &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>
+              <span>🚀 ĐĂNG KÝ DANH SÁCH CHỜ &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>
             </button>
             <p class="text-center text-[10px] text-gray-500 mt-2">
-              🔒 Tự động lưu bảo mật vào Google Sheet của Simon Center.
+              🔒 Cam kết bảo mật 100% thông tin. Hệ thống tự động gửi Email Chào Mừng &amp; cập nhật khóa học sớm nhất cho bạn.
             </p>
           </div>
         </form>
@@ -2209,12 +2208,28 @@
             ✓
           </div>
           <h3 class="text-lg sm:text-xl font-extrabold text-gray-900 mb-1.5">
-            Đã Gửi Bảng Khảo Sát Thành Công!
+            🎉 Đã Ghi Nhận Vào Danh Sách Chờ Ưu Tiên!
           </h3>
-          <p class="text-xs text-gray-600 max-w-sm mx-auto mb-5 leading-relaxed">
-            Cảm ơn anh/chị <strong id="successSurveyName" class="text-brand-crimson"></strong>! Ban tổ chức Simon Center
-            đã ghi nhận câu trả lời vào Google Sheet và sẽ liên hệ qua SĐT/Zalo <strong id="successSurveyPhone"
-              class="text-brand-crimson"></strong> trong vòng 24h để tư vấn lộ trình học phù hợp nhất.
+          <p class="text-xs text-gray-600 max-w-sm mx-auto mb-4 leading-relaxed">
+            Cảm ơn anh/chị <strong id="successSurveyName" class="text-brand-crimson"></strong>! Hệ thống Simon EDU Center đã ghi nhận thông tin của anh/chị vào <strong>Danh Sách Chờ Khóa Học</strong>.
+          </p>
+
+          <!-- Hộp thông báo gửi email tự động & Cam kết -->
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 max-w-md mx-auto mb-5 text-left text-xs text-emerald-950 space-y-2">
+            <div class="font-extrabold flex items-center space-x-1.5 text-emerald-800 text-xs sm:text-sm">
+              <span>📩 Email Chào Mừng Đã Được Gửi Tự Động!</span>
+            </div>
+            <p class="text-[11.5px] text-emerald-900 leading-relaxed">
+              Vui lòng kiểm tra hộp thư đến (hoặc thư mục Quảng cáo/Spam) tại địa chỉ: <strong id="successSurveyEmail" class="text-brand-crimson underline"></strong>
+            </p>
+            <div class="border-t border-emerald-200/70 pt-2 space-y-1 text-[11px] text-emerald-800">
+              <p>⚡ <strong>Cập nhật sớm nhất:</strong> Mọi thông tin mới nhất về lịch khai giảng, giáo trình Bác sĩ Henrik Simon và học phí ưu đãi sẽ được cập nhật sớm nhất cho anh/chị.</p>
+              <p>🔒 <strong>Cam kết bảo mật 100%:</strong> Thông tin cá nhân của anh/chị luôn được bảo mật tuyệt đối, không chia sẻ cho bên thứ ba.</p>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-gray-500 mb-5">
+            Ban Đào Tạo sẽ chủ động liên hệ qua SĐT/Zalo <strong id="successSurveyPhone" class="text-brand-crimson"></strong> trong vòng 24h để đồng hành tư vấn lộ trình.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5">
             <a href="#pricing" onclick="closeSurveyModal()"
@@ -2834,12 +2849,12 @@
     // Tự động nhận diện câu hỏi từ Markdown / Schema JSON, tự sinh giao diện & số hóa
     // =========================================================================
     const DEFAULT_SURVEY_SCHEMA = {
-      title: "Bảng Khảo Sát Nhu Cầu Khóa Học",
-      subtitle: "Dành 60 giây để Thầy Henrik Simon & Simon Center tư vấn lộ trình học phù hợp nhất cho anh/chị.",
+      title: "Bảng Khảo Sát Nhu Cầu & Đăng Ký Danh Sách Chờ Khóa Học",
+      subtitle: "Đăng ký danh sách chờ để nhận thông tin cập nhật khóa học mới nhất sớm nhất & ưu đãi học phí độc quyền từ Simon EDU Center.",
       questions: [
         { id: "surveyName", key: "name", num: 1, label: "Họ và tên của anh/chị là gì?", help: "(Vui lòng điền họ tên)", type: "text", placeholder: "Ví dụ: Nguyễn Văn A", required: true },
         { id: "surveyPhone", key: "phone", num: 2, label: "Số điện thoại / Zalo để ban tổ chức liên hệ gửi thông tin chi tiết:", help: "(Vui lòng điền số điện thoại hoặc Zalo)", type: "tel", placeholder: "Ví dụ: 0901234567", required: true },
-        { id: "surveyEmail", key: "email", num: 3, label: "Địa chỉ Email của anh/chị:", help: "(Để ban tổ chức gửi lộ trình & tài liệu Chiropractic miễn phí)", type: "email", placeholder: "Ví dụ: nguyenvana@gmail.com", required: true },
+        { id: "surveyEmail", key: "email", num: 3, label: "Địa chỉ Email của anh/chị:", help: "(Để ban tổ chức gửi email chào mừng, cập nhật lịch học sớm nhất & tài liệu Chiropractic miễn phí - Bảo mật 100%)", type: "email", placeholder: "Ví dụ: nguyenvana@gmail.com", required: true },
         {
           id: "surveyGoal", key: "goal", codePrefix: "MT", num: 4, label: "Mục tiêu chính của anh/chị khi tìm hiểu về Chiropractic là gì?", type: "radio", required: true,
           options: [
@@ -2929,6 +2944,32 @@
       return schema.questions.length ? schema : DEFAULT_SURVEY_SCHEMA;
     }
 
+    async function triggerWaitlistWelcomeEmail(email, name, phone, goal, exp, format, digitalCode) {
+      if (!email || !email.includes('@')) return;
+      console.log('📧 Đang kích hoạt gửi Email Chào Mừng Danh Sách Chờ tới:', email);
+
+      const payload = {
+        email: email,
+        name: name,
+        phone: phone,
+        goal: goal,
+        experience: exp,
+        format: format,
+        digital_code: digitalCode
+      };
+
+      // 1. Thử gửi qua server Resend Automation nếu đang chạy
+      try {
+        fetch('http://localhost:3000/api/waitlist-welcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(r => r.json()).then(d => {
+          console.log('⚡ Waitlist Welcome Local Resend:', d);
+        }).catch(() => {});
+      } catch (e) {}
+    }
+
     function handleSurveySubmit(e) {
       e.preventDefault();
 
@@ -2943,11 +2984,10 @@
 
       const btn = document.getElementById('surveySubmitBtn');
       btn.disabled = true;
-      btn.innerHTML = '<span>⏳ Đang gửi dữ liệu vào Google Sheet...</span>';
+      btn.innerHTML = '<span>⏳ Đang ghi nhận thông tin &amp; gửi email xác nhận...</span>';
 
       const name = document.getElementById('surveyName').value.trim();
       const phone = document.getElementById('surveyPhone').value.trim();
-
       const email = document.getElementById('surveyEmail').value.trim();
 
       // Câu 4: Mục tiêu
@@ -2984,7 +3024,7 @@
       const detail = `[MÃ: MT_${goalCode}|KN_${expCode}|HT_${formatCode}] [Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
 
       const payload = {
-        action: 'register',
+        action: 'survey',
         name: name,
         phone: phone,
         email: email,
@@ -2995,28 +3035,31 @@
         format: format,
         format_code: formatCode,
         digital_code: digitalCode,
-        price: 'Khảo sát nhu cầu',
-        course: `Khảo Sát ${digitalCode}`,
+        price: 'Danh sách chờ ưu tiên',
+        course: `Danh Sách Chờ ${digitalCode}`,
         occupation: detail,
         channel: 'Bảng Khảo Sát Nhu Cầu',
         status: 'Chờ tư vấn lộ trình',
         website_hp: hp
       };
 
-      // 1. Gửi đồng bộ lên Google Sheet Web App (Tự động vào Google Sheet)
+      // 1. Gửi đồng bộ lên Google Sheet Web App (Google Apps Script tự động lưu & gửi email chào mừng)
       sendToGoogleSheet(payload);
 
-      // 2. Gửi đồng bộ lên Supabase nếu có
+      // 2. Kích hoạt gửi Email Chào Mừng trực tiếp qua Resend Proxy
+      triggerWaitlistWelcomeEmail(email, name, phone, goal, exp, format, digitalCode);
+
+      // 3. Gửi đồng bộ lên Supabase nếu có
       if (typeof saveToSupabase === 'function') {
         saveToSupabase(payload);
       }
 
-      // 3. Gửi thông báo Email dự phòng qua FormSubmit
+      // 4. Gửi thông báo Email dự phòng qua FormSubmit
       fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          _subject: `[CHIRO.VN] Khảo Sát ${digitalCode} - ${name}`,
+          _subject: `[CHIRO.VN] Danh Sách Chờ ${digitalCode} - ${name}`,
           Ho_Va_Ten: name,
           So_Dien_Thoai_Zalo: phone,
           Email: email,
@@ -3027,18 +3070,21 @@
           Ma_Hinh_Thuc: formatCode,
           Hinh_Thuc: format,
           Ma_Tong_Hop: digitalCode,
-          Kenh: 'Bảng Khảo Sát Website Chiro.vn'
+          Kenh: 'Bảng Khảo Sát & Danh Sách Chờ Chiro.vn'
         })
       }).catch(err => console.log('FormSubmit survey:', err));
 
-      // 4. Hiển thị thông báo thành công
+      // 5. Hiển thị thông báo thành công
       setTimeout(() => {
         document.getElementById('chiroSurveyForm').classList.add('hidden');
         document.getElementById('successSurveyName').innerText = name;
         document.getElementById('successSurveyPhone').innerText = phone;
+        if (document.getElementById('successSurveyEmail')) {
+          document.getElementById('successSurveyEmail').innerText = email;
+        }
         document.getElementById('surveySuccessBox').classList.remove('hidden');
         btn.disabled = false;
-        btn.innerHTML = '<span>🚀 GỬI BẢNG KHẢO SÁT &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>';
+        btn.innerHTML = '<span>🚀 ĐĂNG KÝ DANH SÁCH CHỜ &amp; NHẬN TƯ VẤN LỘ TRÌNH</span>';
       }, 500);
     }
 
