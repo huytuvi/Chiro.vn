@@ -377,10 +377,18 @@ function doPost(e) {
         updatedRow = sheet.getLastRow();
       }
 
-      // TỰ ĐỘNG GỬI EMAIL KÍCH HOẠT CHO KHÁCH HÀNG NẾU CÓ EMAIL
-      if (email && email.includes('@')) {
-        sendSuccessEmail(email, customerName, customerPrice, phone, courseName, finalOrderId, timeStr);
-        sheet.getRange(updatedRow, 9).setValue("ĐÃ GỬI EMAIL lúc " + timeStr + " (" + finalOrderId + ")");
+      // TỰ ĐỘNG GỬI EMAIL KÍCH HOẠT CHO KHÁCH HÀNG NẾU CHƯA GỬI (CHỐNG GỬI TRÙNG MỌI TRƯỜNG HỢP)
+      const emailStatusCell = sheet.getRange(updatedRow, 9);
+      const currentEmailLog = String(emailStatusCell.getValue() || '').toUpperCase();
+      if (email && email.includes('@') && !currentEmailLog.includes('ĐÃ GỬI EMAIL')) {
+        try {
+          sendSuccessEmail(email, customerName, customerPrice, phone, courseName, finalOrderId, timeStr);
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL KÍCH HOẠT (" + finalOrderId + ") lúc " + timeStr);
+        } catch (errEmail) {
+          Logger.log("Lỗi gửi email confirm_payment: " + errEmail);
+        }
+      } else {
+        Logger.log("ℹ️ Email xác nhận thanh toán đã được gửi trước đó cho order: " + finalOrderId);
       }
 
       // Đồng bộ sang Supabase
@@ -694,10 +702,8 @@ function onEdit(e) {
 
     // Nếu sửa tại Cột H (Cột 8 - Trạng thái thanh toán) và dòng > 1
     if (col === 8 && row > 1) {
-      const statusValue = String(range.getValue()).trim().toUpperCase();
-      const emailStatusCell = sheet.getRange(row, 9); // Cột I: Trạng thái email
-
-      if (statusValue === "ĐÃ THANH TOÁN" && emailStatusCell.getValue() !== "ĐÃ GỬI EMAIL") {
+      const currentEmailLog = String(emailStatusCell.getValue() || '').toUpperCase();
+      if (statusValue.includes("ĐÃ THANH TOÁN") && !currentEmailLog.includes("ĐÃ GỬI EMAIL")) {
         const name = sheet.getRange(row, 2).getValue();
         const phone = String(sheet.getRange(row, 3).getValue()).replace(/^'/, '');
         const email = sheet.getRange(row, 4).getValue();
@@ -706,7 +712,7 @@ function onEdit(e) {
         if (email && email.includes('@')) {
           sendSuccessEmail(email, name, price, phone);
           const timeNow = Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm");
-          emailStatusCell.setValue("ĐÃ GỬI EMAIL lúc " + timeNow);
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL KÍCH HOẠT lúc " + timeNow);
         }
       }
     }
@@ -1425,15 +1431,18 @@ function handleSepayWebhook(data, ss) {
         else if (rawChannel && !rawChannel.includes("Form Website")) courseName = rawChannel;
       }
 
-      // Tự động gửi email xác nhận đã nhận tiền thành công
+      // Tự động gửi email xác nhận đã nhận tiền thành công (nếu chưa từng gửi)
       const emailStatusCell = sheet.getRange(updatedRow, 9);
-      if (customerEmail && customerEmail.includes("@") && String(emailStatusCell.getValue()).indexOf("ĐÃ GỬI EMAIL XÁC NHẬN") === -1) {
+      const currentEmailLog = String(emailStatusCell.getValue() || '').toUpperCase();
+      if (customerEmail && customerEmail.includes("@") && !currentEmailLog.includes("ĐÃ GỬI EMAIL")) {
         try {
           sendSuccessEmail(customerEmail, customerName, customerPrice, customerPhone, courseName, finalOrderId, timeStr);
-          emailStatusCell.setValue("ĐÃ GỬI EMAIL XÁC NHẬN lúc " + timeStr + " (" + finalOrderId + ")");
+          emailStatusCell.setValue("ĐÃ GỬI EMAIL KÍCH HOẠT (" + finalOrderId + ") lúc " + timeStr);
         } catch (eEmail) {
           Logger.log("Lỗi gửi email SePay: " + eEmail);
         }
+      } else {
+        Logger.log("ℹ️ Email xác nhận thanh toán đã được gửi trước đó cho order: " + finalOrderId);
       }
 
       // ĐỒNG BỘ CẬP NHẬT SUPABASE: Khớp chính xác theo mã đơn finalOrderId

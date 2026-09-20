@@ -3358,12 +3358,23 @@
 
     // ── XỬ LÝ THANH TOÁN TỰ ĐỘNG THÀNH CÔNG TỪ SEPAY ──
     function handlePaymentSuccessFromSepay(payerName) {
+      stopPaymentAutoCheck();
+
       const pricing = getDynamicPricing();
       const name = payerName || _currentLead.name || document.getElementById('modalName').innerText;
       const phone = _currentLead.phone || document.getElementById('modalPhone').innerText;
       const email = _currentLead.email || document.getElementById('modalEmail').innerText;
       const price = _currentLead.price || pricing.currentPriceFormatted;
       const orderCode = _currentLead.orderCode || _currentLead.sepayCode || '';
+
+      // ĐẢM BẢO CHỈ XỬ LÝ THANH TOÁN THÀNH CÔNG DUY NHẤT 1 LẦN CHO MỖI ĐƠN HÀNG!
+      window._handledPaymentSuccessCodes = window._handledPaymentSuccessCodes || {};
+      const dedupeKey = orderCode || phone;
+      if (dedupeKey && window._handledPaymentSuccessCodes[dedupeKey]) {
+        console.log('⚡ Thanh toán đã được xác nhận thành công trước đó, bỏ qua:', dedupeKey);
+        return;
+      }
+      if (dedupeKey) window._handledPaymentSuccessCodes[dedupeKey] = true;
 
       // 1. Cập nhật trạng thái "ĐÃ THANH TOÁN" trong Supabase (qua mã đơn hàng email_status)
       const sb = getSupabaseClient();
@@ -3541,6 +3552,11 @@
     let _paymentRealtimeSub = null;
 
     async function checkPaymentStatusDirect(code, cleanPhone) {
+      const dedupeKey = code || cleanPhone;
+      if (dedupeKey && window._handledPaymentSuccessCodes && window._handledPaymentSuccessCodes[dedupeKey]) {
+        stopPaymentAutoCheck();
+        return true;
+      }
       try {
         // 1. Kiểm tra qua Supabase realtime status bằng mã đơn hàng (email_status) hoặc SĐT
         const sb = getSupabaseClient();
