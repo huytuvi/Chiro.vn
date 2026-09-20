@@ -150,8 +150,8 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // TRƯỜNG HỢP 1: Khách vừa đăng ký trên Form hoặc điền bảng Khảo Sát
-    if (action === 'register') {
+    // TRƯỜNG HỢP 1: Khách vừa đăng ký trên Form hoặc điền bảng Khảo Sát / Danh Sách Chờ
+    if (action === 'register' || action === 'survey' || action === 'waitlist') {
       // BẢO VỆ 2: RATE LIMITING (CHỐNG SPAM ĐƠN LIÊN TỤC TRONG 2 PHÚT)
       const rawPhone = String(data.phone || data.So_Dien_Thoai || '').replace(/\D/g, '');
       if (rawPhone && rawPhone.length >= 9) {
@@ -939,6 +939,22 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
           Hệ thống thanh toán tự động SePay sẽ tự động nhận diện trong 3 giây khi nhận được tiền và tự động gửi email kích hoạt tài khoản học ngay lập tức cho Anh/Chị.
         </p>
 
+        <!-- Cam kết cập nhật thông tin & bảo mật -->
+        <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="font-weight: bold; color: #92400e; font-size: 14px; margin-bottom: 6px;">
+            ⚡ ĐẶC QUYỀN &amp; CAM KẾT CẬP NHẬT THÔNG TIN MỚI NHẤT
+          </div>
+          <p style="margin: 0 0 8px 0; font-size: 13px; color: #78350f; line-height: 1.6;">
+            Simon EDU Center trân trọng cảm ơn Anh/Chị đã quan tâm đến khóa học Chiropractic. Anh/Chị sẽ luôn được cung cấp những thông tin mới nhất về các khóa học của Simon EDU Center sớm nhất qua email và Zalo.
+          </p>
+          <div style="font-weight: bold; color: #1e40af; font-size: 13px; margin-top: 10px; margin-bottom: 4px;">
+            🔒 CAM KẾT BẢO MẬT 100%
+          </div>
+          <p style="margin: 0; font-size: 12.5px; color: #334155; line-height: 1.6;">
+            Toàn bộ thông tin đăng ký của Anh/Chị được Simon Center cam kết bảo mật 100%, tuyệt đối không chia sẻ cho bên thứ ba.
+          </p>
+        </div>
+
         <div style="text-align: center; margin: 24px 0;">
           <a href="${CONFIG.ZALO_LINK}?text=${encodeURIComponent('Chào Simon Chiropractic Center, tôi là ' + validName + ' (SĐT: ' + validPhone + '). Tôi đã đăng ký ' + validCourse + '. Mã SePay của tôi là: ' + validSepayCode + '. Nhờ Simon Center hỗ trợ giữ suất ưu đãi giúp tôi!')}" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 12px 26px; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 13px;">
             💬 Mở Zalo Lưu Mã SePay &amp; Nhận Hỗ Trợ (${CONFIG.HOTLINE}) &rarr;
@@ -955,23 +971,7 @@ function sendRegistrationEmail(recipientEmail, customerName, courseName, price, 
   </html>
   `;
 
-  try {
-    MailApp.sendEmail({
-      to: recipientEmail,
-      subject: subject,
-      htmlBody: htmlBody,
-      name: "Simon Chiropractic Center"
-    });
-  } catch (eMailApp) {
-    try {
-      GmailApp.sendEmail(recipientEmail, subject, "", {
-        htmlBody: htmlBody,
-        name: "Simon Chiropractic Center"
-      });
-    } catch (eGmail) {
-      Logger.log("Lỗi gửi email tiếp nhận đăng ký: " + eGmail);
-    }
-  }
+  sendEmailViaResendOrMailApp(recipientEmail, subject, htmlBody);
 }
 
 /**
