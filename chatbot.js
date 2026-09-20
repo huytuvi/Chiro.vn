@@ -9,6 +9,45 @@
   window.ChiroChatbotLoaded = true;
 
   // =============================================================================
+  // 🤖 CẤU HÌNH TRÍ TUỆ NHÂN TẠO GOOGLE GEMINI (GEMINI AI ENGINE)
+  // =============================================================================
+  const GEMINI_CONFIG = {
+    apiKey: localStorage.getItem("CHIRO_GEMINI_API_KEY") || "",
+    model: localStorage.getItem("CHIRO_GEMINI_MODEL") || "gemini-2.5-flash",
+    enabled: localStorage.getItem("CHIRO_GEMINI_ENABLED") !== "false"
+  };
+
+  const GEMINI_SYSTEM_PROMPT = `Bạn là Trợ lý Chuyên môn Trí tuệ Nhân tạo của Simon Chiropractic Center (làm việc cùng Bác sĩ Henrik Simon - chuyên gia Trị liệu Thần kinh Cột sống hàng đầu từ Viện DISC Đức).
+
+MỤC TIÊU & TÍNH CÁCH:
+- Chuyên nghiệp, ấm áp, đồng cảm sâu sắc, khiêm nhường chuẩn mực Y đức.
+- Khi khách hàng chia sẻ đam mê hoặc băn khoăn về việc chưa từng học Y bao giờ: Hãy nhiệt liệt hoan nghênh, đồng cảm và khẳng định 100% họ hoàn toàn làm chủ được nhờ phương pháp đòn bẩy tự nhiên không dùng sức tay và Micro-drills rèn lực tại nhà.
+- Tuyệt đối chính xác về chuyên môn Chiropractic. Dùng tiếng Việt tự nhiên, bình dị, dễ hiểu, tránh thuật ngữ sáo rỗng.
+
+DỮ LIỆU SẢN PHẨM & GIÁ CẢ THẬT TẠI SIMON CENTER:
+1. Module Lẻ Online (Cổ vai gáy HWS hoặc Thắt lưng - Chậu LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ). Thực chiến cấp tốc cho người muốn học thử 1 vùng.
+2. Level 1 Online (Nền tảng Cột sống Full-Spine): 7.000.000 VNĐ.
+3. Level 2 Online (Tứ Chi & Phân tích X-quang Chuyên sâu): 7.000.000 VNĐ.
+4. The Full Online Collection: Trọn bộ toàn diện Full-Spine + Tứ chi + X-ray + Micro-drills + Cấp chứng chỉ. Học phí ưu đãi 12.900.000 VNĐ (giá niêm yết 18.000.000 VNĐ).
+5. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc: 36.000.000 VNĐ (4 ngày thực hành trực tiếp cùng Bác sĩ Henrik Simon tại TP.HCM/Hà Nội).
+6. ĐẶC QUYỀN KHẤU TRỪ 100%: Học viên học bất kỳ gói Online nào (kể cả Module lẻ 1 triệu) khi nâng cấp lên khóa lớn hơn hoặc khóa Offline đều được khấu trừ 100% số tiền đã đóng vào học phí khóa sau.
+7. Hình thức học: Hệ thống video với các góc quay khác nhau kết hợp quay cận cảnh góc khóa khớp, xem trọn đời 24/7 trên điện thoại và máy tính.
+8. Phương pháp 3 bước sư phạm: Video đa góc quay -> Micro-drills rèn lực rơi tự do (Body Drop) tại nhà không dùng sức bắp tay, không lo run tay -> Test tình huống lâm sàng loại trừ Red Flags.
+
+BỆNH HỌC & LÂM SÀNG CỐT LÕI:
+- Thoát vị đĩa đệm L4-L5, L5-S1; đau thần kinh tọa; kẹt khớp cùng chậu ISG; lệch khung chậu chân ngắn chân dài.
+- Cột sống cổ C1 Atlas liên quan đau nửa đầu Migraine, rối loạn tiền đình, chóng mặt.
+- Khớp cắn hàm TMJ kêu lục cục, há miệng lệch.
+- Cảnh báo đỏ (Red Flags): Chèn ép chùm đuôi ngựa Cauda Equina, tiêu xương ung thư, rách bao xơ cấp, hẹp động mạch đốt sống... TUYỆT ĐỐI CẤM NẮN.
+
+QUY TẮC PHẢN HỒI (TUYỆT ĐỐI TUÂN THỦ):
+1. TUYỆT ĐỐI KHÔNG tự tiện đề cập "trả góp 0% / thẻ tín dụng" trừ khi khách hàng CHỦ ĐỘNG HỎI về trả góp!
+2. Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "có muốn tư vấn bệnh học không".
+3. Khi khách hỏi về học một phần/vùng riêng: Đưa ra ngay giải pháp Module Lẻ 1.000.000đ và quyền lợi khấu trừ 100%.
+4. Định dạng câu trả lời: Dùng HTML cơ bản (<br>, <strong>, <em>, bullet •) để hiển thị giao diện đẹp mắt.
+5. Cuối mỗi câu trả lời: Luôn có 1 câu hỏi mở nhẹ nhàng, chu đáo để khách dễ dàng trò chuyện tiếp.`;
+
+  // =============================================================================
   // 📝 HỆ THỐNG DỮ LIỆU CHATBOT (BOT_DATA):
   // 1. Gồm 2 nhóm: 'course' (Khóa học & Tuyển sinh) và 'clinical' (Chuyên khoa Y học)
   // 2. Tự động nhận diện từ khóa chuyên môn sâu từ 351 bài kiến thức brain.db
@@ -16,7 +55,7 @@
   const BOT_DATA = {
     greetings: {
       course: `Dạ em kính chào anh/chị ạ! Rất vui được hỗ trợ anh/chị tìm hiểu về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
-Anh/chị có thể hỏi em bất kỳ nội dung nào: <em>lộ trình học từ con số 0, học trọn bộ hoặc học từng phần lẻ (cổ vai gáy, thắt lưng - chậu...), học phí ưu đãi, trả góp linh hoạt hay lớp thực hành Offline Cầm tay chỉ việc</em>.<br><br>
+Anh/chị có thể hỏi em bất kỳ nội dung nào: <em>lộ trình học từ con số 0, học trọn bộ hoặc học từng phần lẻ (cổ vai gáy, thắt lưng - chậu...), học phí ưu đãi, lớp thực hành Offline Cầm tay chỉ việc hay bài giảng mẫu học thử miễn phí</em>.<br><br>
 Dạ anh/chị đang muốn tìm hiểu khóa học nắn chỉnh cho vùng cột sống nào hay muốn bắt đầu từ lộ trình toàn diện ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
       clinical: `Dạ em kính chào anh/chị ạ! Em là Trợ lý Chuyên môn hỗ trợ <strong>Hội Chẩn & Bệnh Học Cột Sống</strong> cùng Bác sĩ Henrik Simon.<br><br>
 Anh/chị có thể trao đổi cùng em về các ca lâm sàng thực tế: <em>phân tích phim X-quang, thoát vị đĩa đệm L4-L5/L5-S1, lệch khung chậu chân ngắn chân dài, kẹt khớp cùng chậu ISG, khớp thái dương hàm hay ranh giới Cảnh báo đỏ (Red Flags)</em>.<br><br>
@@ -29,9 +68,10 @@ Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả ch�
         label: "🎓 Khóa Học (12)",
         questions: [
           { id: "c_courses_and_pricing", text: "💰 Các khóa học & Bảng giá chi tiết" },
+          { id: "c_zero_base_passion", text: "🌱 Chưa biết gì & Rất đam mê có học được không?" },
           { id: "c_lumbar_part", text: "🦴 Muốn học riêng phần lưng / thắt lưng được không?" },
           { id: "c_cervical_part", text: "💆 Muốn học riêng phần cổ vai gáy được không?" },
-          { id: "c_beginner_budget", text: "🌱 Chưa biết gì & Ít tiền thì nên học từ đâu?" },
+          { id: "c_beginner_budget", text: "💡 Kinh phí ban đầu ít thì lộ trình thế nào?" },
           { id: "q1", text: "🎓 Học online liệu có làm được thật không?" },
           { id: "q2", text: "🩺 PT Gym / Spa / chưa học Y có học được không?" },
           { id: "q3", text: "💎 Giá trị cốt lõi & Tiêu chuẩn Y học Simon Center" },
@@ -262,18 +302,27 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
         cta: "trial"
       },
 
-      // --- CÂU HỎI MỚI: NGƯỜI MỚI BẮT ĐẦU & KINH PHÍ HẠN CHẾ ---
+      // --- CÂU HỎI MỚI: CHƯA BIẾT GÌ, CHƯA TỪNG HỌC, RẤT ĐAM MÊ ---
+      c_zero_base_passion: {
+        text: `Dạ em rất hoan nghênh và trân trọng niềm đam mê của anh/chị ạ! Anh/chị <strong>hoàn toàn theo học và làm chủ được bộ môn Chiropractic này</strong> nhé ạ!<br><br>
+Tại Simon Center, hơn 60% học viên thành công cũng xuất phát điểm từ con số 0 tròn trĩnh giống hệt anh/chị — từ những người làm văn phòng, HLV thể hình PT, chủ spa đến những người có niềm đam mê muốn tự chữa lành cho người thân trong gia đình.<br><br>
+💡 <strong>Vì sao người chưa từng học Y vẫn học tốt và tự tin hành nghề?</strong><br>
+1. <strong>Giáo trình trực quan từ Đức:</strong> Thầy Henrik Simon không bắt học viên phải thuộc lòng các thuật ngữ giải phẫu Latin phức tạp, mà giải thích tường minh cơ chế đòn bẩy tự nhiên và chuyển động khớp qua mô hình 3D trực quan, dễ hiểu - dễ nhớ.<br>
+2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Kỹ thuật nắn chỉnh Chiropractic chuẩn Y khoa hoàn toàn không dùng sức bắp tay, mà sử dụng tốc độ và trọng lực rơi cơ thể (Body Drop). Anh/chị được rèn luyện trên đệm mút và bóng phản xạ tại nhà, giúp bàn tay hình thành phản xạ tự nhiên chuẩn xác trước khi chạm người thật — <strong>hoàn toàn không lo run tay</strong>.<br>
+3. <strong>Ranh giới Cảnh báo đỏ (Red Flags) bảo vệ 100%:</strong> Giáo trình trang bị bài bản các test loại trừ bệnh lý nguy hiểm và các vùng chống chỉ định y khoa, giúp anh/chị luôn tự tin và bảo vệ an toàn cao nhất cho người bệnh.<br>
+4. <strong>Lộ trình học linh hoạt theo nhu cầu:</strong> Anh/chị có thể bắt đầu bằng Module lẻ chuyên sâu (Thắt lưng hoặc Cổ gáy) với học phí chỉ <strong>1.000.000 VNĐ</strong> để tự trải nghiệm trước, hoặc học trọn bộ The Full Online Collection.<br><br>
+Dạ hiện tại anh/chị đang muốn học để tự chăm sóc cho người thân trong gia đình hay định hướng phát triển nghề nghiệp trị liệu lâu dài vậy ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
+        cta: "trial"
+      },
+
+      // --- CÂU HỎI MỚI: KINH PHÍ HẠN CHẾ / BẮT ĐẦU TIẾT KIỆM ---
       c_beginner_budget: {
-        text: `Dạ em rất chia sẻ và đồng cảm với nỗi băn khoăn của anh/chị ạ! Hơn 50% học viên thành công tại Simon Center khi mới bắt đầu cũng có chung 2 trăn trở y hệt như anh/chị:<br><br>
-🌱 <strong>1. Chưa biết gì về Y khoa thì bắt đầu từ đâu?</strong><br>
-• Anh/chị <strong>hoàn toàn không cần nền tảng y khoa từ trước</strong>. Giáo trình của Bác sĩ Henrik Simon được xây dựng từ số 0 theo mô hình 3D trực quan và cơ chế đòn bẩy tự nhiên, giúp hiểu bản chất tường minh mà không phải học vẹt giải phẫu phức tạp.<br>
-• <strong>Điểm khởi đầu chuẩn nhất:</strong> Khóa <strong>The Full Online Collection</strong>. Anh/chị sẽ được trang bị nền tảng sờ nắn mốc xương, nhận diện Cảnh báo đỏ (Red Flags) để tuyệt đối an toàn cho người bệnh, và phương pháp rèn phản xạ lực Micro-drills tại nhà giúp tay quen phản xạ trước khi chạm người thật (hoàn toàn không lo run tay).<br><br>
-💡 <strong>2. Ngân sách eo hẹp, không có nhiều tiền thì lộ trình thế nào?</strong><br>
-Simon Center có chính sách hỗ trợ tài chính tối ưu để anh/chị không phải chịu áp lực:<br>
-• <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu với các góc quay khác nhau chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
-• <strong>Bước 2 - Trả góp 0% chỉ ~1.1 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Rất nhẹ nhàng về dòng tiền.<br>
-• <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ học phí khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
-Dạ giữa việc <strong>nhận video học thử 0đ</strong> và <strong>tìm hiểu gói hỗ trợ trả góp</strong>, anh/chị muốn em hướng dẫn bước nào trước ạ?`,
+        text: `Dạ em rất thấu hiểu nỗi băn khoăn về ngân sách khi bắt đầu tìm hiểu một bộ môn chuyên môn mới ạ!<br><br>
+Tại Simon Center, trung tâm luôn có các giải pháp học tập linh hoạt để anh/chị bắt đầu thuận lợi nhất mà không phải chịu bất kỳ áp lực tài chính nào:<br><br>
+• <strong>Lựa chọn 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể đăng ký nhận ngay 1 bài giảng mẫu với các góc quay khác nhau chuẩn quốc tế để trực tiếp trải nghiệm phương pháp giảng dạy của Thầy Henrik Simon trước khi quyết định.<br>
+• <strong>Lựa chọn 2 - Bắt đầu từ Module Lẻ thực chiến (1.000.000đ):</strong> Thay vì phải đầu tư cả khóa học lớn, anh/chị có thể học riêng 1 vùng chuyên biệt (Module Thắt lưng - Chậu 1tr hoặc Cổ vai gáy 1tr). Học xong áp dụng xử lý được ngay ca bệnh thực tế.<br>
+• <strong>Đặc quyền khấu trừ 100%:</strong> Khi nâng cấp lên khóa lớn hơn (The Full Online Collection) hoặc lớp thực hành Offline Cầm tay chỉ việc sau này, <strong>toàn bộ 1.000.000đ đã đóng sẽ được khấu trừ 100%</strong> vào học phí khóa sau, anh/chị hoàn toàn không bị thiệt thòi chi phí.<br><br>
+Dạ anh/chị có muốn đăng ký nhận bài giảng mẫu học thử miễn phí để trải nghiệm trước không ạ?`,
         cta: "trial"
       },
 
@@ -645,7 +694,12 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
             </div>
           </div>
         </div>
-        <div class="flex items-center space-x-1">
+        <div class="flex items-center space-x-1 sm:space-x-1.5">
+          <button type="button" id="chiroAiToggleBtn" onclick="window.openGeminiSettingsModal()" title="Cài đặt Google Gemini AI" 
+            class="px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 transition shadow-2xs">
+            <span id="chiroAiDot" class="w-1.5 h-1.5 rounded-full bg-amber-300"></span>
+            <span id="chiroAiStatusLabel">AI Gemini</span>
+          </button>
           <button onclick="window.clearChiroChat()" title="Làm mới cuộc trò chuyện" class="text-white/70 hover:text-white p-1.5 text-xs rounded-lg hover:bg-white/10 transition">
             🔄
           </button>
@@ -658,6 +712,50 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       <!-- TIN NHẮN CHAT (MESSAGES) -->
       <div id="chiroChatMessages" class="chat-scroll flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-3 bg-[#F8FAFC] relative">
         <!-- Nội dung tin nhắn -->
+      </div>
+
+      <!-- MODAL CẤU HÌNH GOOGLE GEMINI AI -->
+      <div id="chiroGeminiModal" class="hidden absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50">
+        <div class="bg-white rounded-2xl p-4 shadow-2xl border border-amber-200 text-gray-800 text-xs w-full max-w-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <div class="flex items-center gap-1.5 font-bold text-xs sm:text-sm text-brand-wine">
+              <span class="text-base">🤖</span>
+              <span>Cài Đặt Trí Tuệ Nhân Tạo Google Gemini</span>
+            </div>
+            <button type="button" onclick="window.closeGeminiSettingsModal()" class="text-gray-400 hover:text-gray-600 text-base font-bold p-1">✕</button>
+          </div>
+          <p class="text-[11px] text-gray-600 leading-relaxed">
+            Gắn API Key của <strong>Google Gemini</strong> để Chatbot suy nghĩ sâu, thấu hiểu ngữ cảnh và trò chuyện linh hoạt 100% như ChatGPT!
+          </p>
+          <div class="space-y-1">
+            <label class="font-bold text-[11px] text-gray-700 block">Google Gemini API Key:</label>
+            <input type="password" id="geminiApiKeyInput" placeholder="Dán API Key (AIzaSy...)" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-xl text-xs focus:ring-2 focus:ring-brand-crimson font-mono text-gray-900 bg-gray-50" />
+            <div class="flex justify-between items-center pt-0.5">
+              <a href="https://aistudio.google.com/apikey" target="_blank" class="text-brand-crimson hover:underline text-[10px] font-semibold">
+                👉 Lấy API Key miễn phí tại Google AI Studio
+              </a>
+              <button type="button" onclick="window.toggleApiKeyVisibility()" class="text-[10px] text-gray-500 hover:text-gray-700 font-medium">Hiện/Ẩn</button>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <label class="font-bold text-[11px] text-gray-700 block">Mô hình AI:</label>
+            <select id="geminiModelSelect" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-xl text-xs bg-gray-50">
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash (Mới nhất, Siêu nhanh &amp; Thông minh)</option>
+              <option value="gemini-1.5-flash">Gemini 1.5 Flash (Ổn định, Tiết kiệm)</option>
+              <option value="gemini-1.5-pro">Gemini 1.5 Pro (Suy luận y học chuyên sâu)</option>
+            </select>
+          </div>
+          <div id="geminiTestStatus" class="hidden p-2 rounded-xl text-[11px] font-medium"></div>
+          <div class="flex items-center gap-2 pt-1">
+            <button type="button" onclick="window.saveGeminiConfig()" class="flex-1 bg-brand-crimson hover:bg-brand-wine text-white font-bold py-2 px-3 rounded-xl transition shadow text-xs">
+              💾 Lưu &amp; Kích Hoạt
+            </button>
+            <button type="button" onclick="window.testGeminiConnection()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold py-2 px-3 rounded-xl transition text-xs">
+              🧪 Thử Kết Nối
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- THANH CHUYỂN TAB CHỦ ĐỀ GỢI Ý (KHÓA HỌC / CHUYÊN KHOA) -->
@@ -703,6 +801,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     `;
 
     document.body.appendChild(chatModal);
+    updateAiBadgeStatus();
   }
 
   // =============================================================================
@@ -717,6 +816,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     if (isChatOpen) {
       chatWindow.classList.remove("hidden");
       if (chatBtnIcon) chatBtnIcon.innerText = "✕";
+      updateAiBadgeStatus();
       if (chatHistory.length === 0) {
         initGreeting();
       }
@@ -1071,6 +1171,213 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 
+  // =============================================================================
+  // 🧠 ĐỘNG CƠ TƯ VẤN TRÍ TUỆ NHÂN TẠO GEMINI (GEMINI AI API INTEGRATION)
+  // =============================================================================
+  async function callGeminiAPI(userMessage, history) {
+    const apiKey = (GEMINI_CONFIG.apiKey || "").trim();
+    if (!apiKey) throw new Error("Chưa cấu hình API Key");
+
+    const contents = [];
+    const recent = (history || []).slice(-6);
+    recent.forEach(msg => {
+      if (msg.sender === "user") {
+        contents.push({ role: "user", parts: [{ text: msg.text }] });
+      } else if (msg.sender === "bot") {
+        const clean = (msg.text || "").replace(/<[^>]*>?/gm, " ").replace(/\s+/g, " ").trim();
+        if (clean) {
+          contents.push({ role: "model", parts: [{ text: clean.slice(0, 600) }] });
+        }
+      }
+    });
+
+    contents.push({
+      role: "user",
+      parts: [{
+        text: `[Khách đang ở Tab: ${currentCategory === 'course' ? 'Tư Vấn Khóa Học' : 'Hội Chẩn Bệnh Học'}]. Câu hỏi của khách: "${userMessage}"`
+      }]
+    });
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_CONFIG.model}:generateContent?key=${apiKey}`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system_instruction: {
+          parts: [{ text: GEMINI_SYSTEM_PROMPT }]
+        },
+        contents: contents,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 1000
+        }
+      })
+    });
+
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData?.error?.message || `Lỗi HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    const rawAiText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!rawAiText) throw new Error("Phản hồi rỗng từ Gemini API");
+
+    return formatGeminiMarkdownToHtml(rawAiText);
+  }
+
+  function formatGeminiMarkdownToHtml(text) {
+    if (!text) return "";
+    let html = text.trim();
+
+    // Headers
+    html = html.replace(/^### (.*$)/gim, '<strong class="text-brand-crimson block mt-2 mb-1 text-xs">$1</strong>');
+    html = html.replace(/^## (.*$)/gim, '<strong class="text-brand-crimson block mt-2 mb-1 text-xs">$1</strong>');
+    html = html.replace(/^# (.*$)/gim, '<strong class="text-brand-crimson block mt-2 mb-1 text-xs">$1</strong>');
+
+    // Bold & Italic
+    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    // Bullet points
+    html = html.replace(/^\s*[\-\*]\s+(.*$)/gim, '• $1<br>');
+    html = html.replace(/^\s*(\d+)\.\s+(.*$)/gim, '$1. $2<br>');
+
+    // Line breaks & paragraphs
+    html = html.replace(/\n\n+/g, '<br><br>');
+    html = html.replace(/\n/g, '<br>');
+    html = html.replace(/(<br>){3,}/g, '<br><br>');
+
+    return html;
+  }
+
+  // Quản lý Modal & Trạng thái Gemini AI
+  window.openGeminiSettingsModal = function () {
+    const modal = document.getElementById("chiroGeminiModal");
+    const input = document.getElementById("geminiApiKeyInput");
+    const select = document.getElementById("geminiModelSelect");
+    const statusDiv = document.getElementById("geminiTestStatus");
+
+    if (modal) modal.classList.remove("hidden");
+    if (input) input.value = GEMINI_CONFIG.apiKey || "";
+    if (select) select.value = GEMINI_CONFIG.model || "gemini-2.5-flash";
+    if (statusDiv) {
+      statusDiv.className = "hidden p-2 rounded-xl text-[11px] font-medium";
+      statusDiv.innerHTML = "";
+    }
+  };
+
+  window.closeGeminiSettingsModal = function () {
+    const modal = document.getElementById("chiroGeminiModal");
+    if (modal) modal.classList.add("hidden");
+  };
+
+  window.toggleApiKeyVisibility = function () {
+    const input = document.getElementById("geminiApiKeyInput");
+    if (!input) return;
+    input.type = input.type === "password" ? "text" : "password";
+  };
+
+  window.saveGeminiConfig = function () {
+    const input = document.getElementById("geminiApiKeyInput");
+    const select = document.getElementById("geminiModelSelect");
+    const statusDiv = document.getElementById("geminiTestStatus");
+
+    const key = (input ? input.value.trim() : "");
+    const model = (select ? select.value : "gemini-2.5-flash");
+
+    GEMINI_CONFIG.apiKey = key;
+    GEMINI_CONFIG.model = model;
+    GEMINI_CONFIG.enabled = !!key;
+
+    localStorage.setItem("CHIRO_GEMINI_API_KEY", key);
+    localStorage.setItem("CHIRO_GEMINI_MODEL", model);
+    localStorage.setItem("CHIRO_GEMINI_ENABLED", key ? "true" : "false");
+
+    updateAiBadgeStatus();
+
+    if (statusDiv) {
+      statusDiv.className = "p-2 rounded-xl text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 block";
+      statusDiv.innerHTML = key 
+        ? "✅ Đã lưu cấu hình! Trợ lý Gemini AI hiện đang hoạt động trực tiếp."
+        : "ℹ️ Đã xóa API Key. Chatbot sẽ chạy ở chế độ Chuyên môn Nội bộ.";
+    }
+
+    setTimeout(() => {
+      window.closeGeminiSettingsModal();
+    }, 1200);
+  };
+
+  window.testGeminiConnection = async function () {
+    const input = document.getElementById("geminiApiKeyInput");
+    const select = document.getElementById("geminiModelSelect");
+    const statusDiv = document.getElementById("geminiTestStatus");
+
+    const key = (input ? input.value.trim() : "");
+    const model = (select ? select.value : "gemini-2.5-flash");
+
+    if (!key) {
+      if (statusDiv) {
+        statusDiv.className = "p-2 rounded-xl text-[11px] font-medium bg-rose-50 text-rose-700 border border-rose-200 block";
+        statusDiv.innerText = "⚠️ Vui lòng dán API Key vào ô trước khi thử kết nối.";
+      }
+      return;
+    }
+
+    if (statusDiv) {
+      statusDiv.className = "p-2 rounded-xl text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200 block";
+      statusDiv.innerText = "⏳ Đang kết nối thử tới Google AI Server...";
+    }
+
+    try {
+      const testUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+      const res = await fetch(testUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: "Xin chào, phản hồi 1 câu ngắn xác nhận kết nối." }] }]
+        })
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson?.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "OK";
+
+      if (statusDiv) {
+        statusDiv.className = "p-2 rounded-xl text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 block";
+        statusDiv.innerText = `✅ Kết nối thành công tới ${model}! Phản hồi: "${reply.trim()}"`;
+      }
+    } catch (err) {
+      if (statusDiv) {
+        statusDiv.className = "p-2 rounded-xl text-[11px] font-medium bg-rose-50 text-rose-700 border border-rose-200 block";
+        statusDiv.innerText = `❌ Kết nối thất bại: ${err.message}`;
+      }
+    }
+  };
+
+  function updateAiBadgeStatus() {
+    const badge = document.getElementById("chiroAiToggleBtn");
+    const dot = document.getElementById("chiroAiDot");
+    const label = document.getElementById("chiroAiStatusLabel");
+    if (!badge || !dot || !label) return;
+
+    if (GEMINI_CONFIG.apiKey && GEMINI_CONFIG.enabled) {
+      dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse";
+      label.innerText = "✨ Gemini AI (Bật)";
+      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-emerald-300/40 bg-emerald-400/20 hover:bg-emerald-400/30 text-emerald-200 transition shadow-2xs cursor-pointer";
+    } else {
+      dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+      label.innerText = "⚙️ Cài Gemini AI";
+      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 transition shadow-2xs cursor-pointer";
+    }
+  }
+
   window.handleChiroSend = function (e) {
     e.preventDefault();
     const input = document.getElementById("chiroChatInput");
@@ -1081,6 +1388,29 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     appendUserMessage(text);
     input.value = "";
 
+    // 1. NẾU GEMINI AI ĐÃ CẤU HÌNH VÀ KÍCH HOẠT: GỌI GEMINI TRỰC TIẾP
+    if (GEMINI_CONFIG.apiKey && GEMINI_CONFIG.enabled) {
+      showTypingIndicator((removeIndicator) => {
+        callGeminiAPI(text, chatHistory)
+          .then((aiResponseHtml) => {
+            if (typeof removeIndicator === "function") removeIndicator();
+            let cta = "trial";
+            const lowerRes = aiResponseHtml.toLowerCase();
+            if (lowerRes.includes("dang ky") || lowerRes.includes("hoc phi") || lowerRes.includes("12.9") || lowerRes.includes("1.000.000") || lowerRes.includes("bang gia")) {
+              cta = "register";
+            }
+            appendBotMessage(aiResponseHtml, cta);
+          })
+          .catch((err) => {
+            console.warn("[Gemini API Error -> Fallback Local NLP]:", err);
+            if (typeof removeIndicator === "function") removeIndicator();
+            matchAndReply(text);
+          });
+      }, "🧠 Gemini AI đang tra cứu y khoa & suy nghĩ câu trả lời...");
+      return;
+    }
+
+    // 2. CHẾ ĐỘ MẶC ĐỊNH: BỘ MÁY CHUYÊN MÔN NỘI BỘ (LOCAL MEDICAL NLP)
     showTypingIndicator(() => {
       matchAndReply(text);
     });
@@ -1185,6 +1515,20 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
 
     if (isSupportQuery) {
       appendBotMessage(BOT_DATA.answers.c_post_course_support.text, BOT_DATA.answers.c_post_course_support.cta);
+      return;
+    }
+
+    // 0h. Người mới bắt đầu / Chưa biết gì / Chưa từng học qua / Rất đam mê / Có học được không
+    // Ví dụ câu hỏi: "Tôi chưa biết gì về môn này, chưa từng học qua, nhưng rất đam mê. Tôi theo học được không?"
+    const isZeroBasePassion = 
+      (norm.includes("chua biet") || norm.includes("chua tung hoc") || norm.includes("chua hoc qua") || 
+       norm.includes("dam me") || norm.includes("theo hoc duoc khong") || norm.includes("hoc duoc khong") || 
+       norm.includes("lam duoc khong") || norm.includes("nguoi moi") || norm.includes("chua co kien thuc") || 
+       norm.includes("mat goc") || norm.includes("kho khong") || norm.includes("co kho khong")) &&
+      !norm.includes("it tien") && !norm.includes("kinh phi") && !norm.includes("ngan sach") && !norm.includes("gia");
+
+    if (isZeroBasePassion) {
+      appendBotMessage(BOT_DATA.answers.c_zero_base_passion.text, BOT_DATA.answers.c_zero_base_passion.cta);
       return;
     }
 
@@ -1321,11 +1665,8 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     // B. NHÓM TUYỂN SINH, KHÓA HỌC & BÁN HÀNG CHUẨN Y ĐỨC
     // ---------------------------------------------------------
 
-    // 13. Người mới bắt đầu / Chưa biết gì / Kinh phí hạn chế / Ít tiền / Bắt đầu từ đâu
+    // 13. Kinh phí ban đầu hạn chế / Ít tiền / Tiết kiệm ngân sách
     if (
-      norm.includes("chua biet") || norm.includes("bat dau tu dau") || norm.includes("so 0") || 
-      norm.includes("hoc tu dau") || norm.includes("nguoi moi") || norm.includes("chua co kien thuc") || 
-      norm.includes("mat goc") || norm.includes("chua tung hoc") || norm.includes("kho khong") ||
       norm.includes("khong co qua nhieu tien") || norm.includes("khong co tien") || norm.includes("it tien") || 
       norm.includes("kinh phi") || norm.includes("ngan sach") || norm.includes("chua du tien") || 
       norm.includes("khong du tien") || norm.includes("tiet kiem")
@@ -1522,7 +1863,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         appendBotMessage(
           `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
 Em đang sẵn sàng tư vấn chi tiết về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
-Anh/chị có thể trao đổi bất kỳ thông tin nào: <em>lộ trình cho người mới từ số 0, học từng module lẻ (lưng - chậu 1tr, cổ gáy 1tr), trọn bộ Online toàn diện 12.9tr, lớp thực hành Offline Cầm tay chỉ việc hay phương thức trả góp linh hoạt</em>.<br><br>
+Anh/chị có thể trao đổi bất kỳ thông tin nào: <em>lộ trình cho người mới từ số 0, học từng module lẻ (lưng - chậu 1tr, cổ gáy 1tr), trọn bộ Online toàn diện 12.9tr, lớp thực hành Offline Cầm tay chỉ việc hay bài giảng mẫu học thử miễn phí</em>.<br><br>
 Dạ anh/chị đang muốn bắt đầu từ nội dung nào hay đang quan tâm nắn chỉnh cho vùng cột sống nào vậy ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
           "trial"
         );
@@ -1589,7 +1930,7 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, mỗi tình trạng đ
     }
   }
 
-  function showTypingIndicator(callback) {
+  function showTypingIndicator(callback, customInitialText = null) {
     const messagesContainer = document.getElementById("chiroChatMessages");
     if (!messagesContainer) {
       if (typeof callback === "function") callback();
@@ -1611,13 +1952,23 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, mỗi tình trạng đ
           <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.18s"></span>
           <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.36s"></span>
         </div>
-        <span id="chiroThinkingText" class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">💭 Đang phân tích tình trạng & đối chiếu giải phẫu...</span>
+        <span id="chiroThinkingText" class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">${customInitialText || "💭 Đang phân tích tình trạng & đối chiếu giải phẫu..."}</span>
       </div>
     `;
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
     const thinkingLabel = document.getElementById("chiroThinkingText");
+
+    // Nếu là chế độ gọi AI (có customInitialText), gọi callback ngay và truyền hàm gỡ bỏ indicator
+    if (customInitialText) {
+      if (typeof callback === "function") {
+        callback(() => {
+          if (typingDiv && typingDiv.parentNode) typingDiv.remove();
+        });
+      }
+      return;
+    }
 
     // Giai đoạn 1: Đang phân tích cơ chế giải phẫu (700ms)
     setTimeout(() => {
