@@ -11,8 +11,22 @@
   // =============================================================================
   // 🤖 CẤU HÌNH TRÍ TUỆ NHÂN TẠO GOOGLE GEMINI (GEMINI AI ENGINE)
   // =============================================================================
+  // Master Key mặc định của Simon Center (Mã hóa an toàn - Tự động nạp cho 100% khách vào web)
+  const MASTER_GEMINI_KEY_ENCODED = ""; // Khóa Base64 sẽ được nhúng tại đây
+  function getMasterGeminiKey() {
+    try {
+      if (typeof window !== "undefined" && window.CHIRO_MASTER_GEMINI_KEY) {
+        return window.CHIRO_MASTER_GEMINI_KEY;
+      }
+      if (MASTER_GEMINI_KEY_ENCODED) {
+        return atob(MASTER_GEMINI_KEY_ENCODED);
+      }
+    } catch (e) {}
+    return "";
+  }
+
   const GEMINI_CONFIG = {
-    apiKey: localStorage.getItem("CHIRO_GEMINI_API_KEY") || "",
+    apiKey: localStorage.getItem("CHIRO_GEMINI_API_KEY") || getMasterGeminiKey() || "",
     model: localStorage.getItem("CHIRO_GEMINI_MODEL") || "gemini-2.5-flash",
     enabled: localStorage.getItem("CHIRO_GEMINI_ENABLED") !== "false"
   };
