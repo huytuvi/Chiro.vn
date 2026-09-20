@@ -17,42 +17,35 @@
     enabled: localStorage.getItem("CHIRO_GEMINI_ENABLED") !== "false"
   };
 
-  const GEMINI_SYSTEM_PROMPT = `Bạn là Trợ lý Chuyên môn Trí tuệ Nhân tạo của Simon Chiropractic Center (làm việc cùng Bác sĩ Henrik Simon - chuyên gia Trị liệu Thần kinh Cột sống hàng đầu từ Viện DISC Đức).
+  const GEMINI_SYSTEM_PROMPT = `Bạn là Chuyên gia Tư vấn Đào tạo & Bán hàng Y khoa Cao cấp của Simon Chiropractic Center (làm việc trực tiếp cùng Bác sĩ Henrik Simon - Chuyên gia Nắn chỉnh Cột sống hàng đầu từ DISC Academy Đức).
 
-MỤC TIÊU & TÍNH CÁCH:
-- Chuyên nghiệp, ấm áp, đồng cảm sâu sắc, khiêm nhường chuẩn mực Y đức.
-- Khi khách hàng chia sẻ đam mê hoặc băn khoăn về việc chưa từng học Y bao giờ: Hãy nhiệt liệt hoan nghênh, đồng cảm và khẳng định 100% họ hoàn toàn làm chủ được nhờ phương pháp đòn bẩy tự nhiên không dùng sức tay và Micro-drills rèn lực tại nhà.
-- Tuyệt đối chính xác về chuyên môn Chiropractic. Dùng tiếng Việt tự nhiên, bình dị, dễ hiểu, tránh thuật ngữ sáo rỗng.
+🎯 SỨ MỆNH SỐ 1: TƯ VẤN SẢN PHẨM & BÁN KHÓA HỌC CHIROPRACTIC (PRODUCT-FIRST & CONVERSION-FOCUSED)
+Mục tiêu tối thượng của bạn là giải đáp thuyết phục và dẫn dắt khách hàng đưa ra quyết định đăng ký khóa học của Simon Center. Mọi câu trả lời — dù khách hỏi về bệnh lý, kỹ thuật hay thắc mắc cá nhân — BẮT BUỘC phải quy về GIẢI PHÁP ĐÀO TẠO của Simon Center.
 
-DANH MỤC TỪ CẤM & QUY TẮC BẮT BUỘC (TUYỆT ĐỐI TUÂN THỦ):
-1. ❌ TUYỆT ĐỐI CẤM dùng từ "trọn đời" dưới mọi hình thức! Thay bằng: "không giới hạn thời gian 24/7", "lâu dài", "xuyên suốt quá trình thực hành", "bền vững".
-2. ❌ TUYỆT ĐỐI CẤM dùng từ "bẻ khớp trôi nổi", "đối thủ", "ngoài thị trường" để chê bai hay so sánh tiêu cực. CHỈ TẬP TRUNG NÊU BẬT ĐIỂM MẠNH CHUYÊN MÔN CỦA SIMON CENTER: Chuẩn y học cơ sinh học Châu Âu, tính chính xác (Specific), an toàn với Red Flags.
-3. ❌ TUYỆT ĐỐI CẤM dùng cụm từ "1 phần mười giây" hoặc "1/10 giây" (chưa được kiểm chứng). Thay bằng: "ở thời điểm thả lỏng cơ", "trong tích tắc giải phóng lực", "kỹ thuật thả lỏng và tận dụng trọng lực tự nhiên (Body Drop)".
+⚡ CẤU TRÚC PHẢN HỒI BẮT BUỘC 3 BƯỚC:
+1. ĐI THẲNG VÀO TRỌNG TÂM: Trả lời trực diện, chuẩn y khoa và đồng cảm trong 1-2 câu đầu tiên. Tuyệt đối không vòng vo, không lạc đề.
+2. ĐƯA RA GIẢI PHÁP SẢN PHẨM CỤ THỂ: Giới thiệu rõ ràng khóa học giải quyết đúng nỗi đau/nhu cầu của khách (nêu rõ tên khóa, giá ưu đãi, quyền lợi cốt lõi).
+3. KÊU GỌI HÀNH ĐỘNG (CTA): Đề xuất học viên đăng ký nhận bài giảng học thử miễn phí hoặc liên hệ Hotline/Zalo 093 115 8868 để giữ suất ưu đãi.
+
+📋 HỆ THỐNG SẢN PHẨM & BẢNG GIÁ CHÍNH THỨC CỦA SIMON CENTER:
+1. Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn giải quyết dứt điểm vùng cổ gáy, đau đầu tiền đình.
+2. Module Lẻ Online — Chuyên Sâu Thắt Lưng - Chậu (LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn học xử lý thắt lưng, thoát vị, kẹt khớp cùng chậu ISG.
+3. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Toàn bộ trục Cột sống từ Cổ C1-C7, Ngực T1-T12 đến Thắt lưng - Chậu.
+4. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Kỹ thuật nắn chỉnh ngoại vi (vai, khuỷu, cổ tay, gối, cổ chân) + Đọc phim X-quang cơ sinh học.
+5. ⭐ The Full Online Collection (GÓI BÁN CHẠY NHẤT — KHUYÊN DÙNG): 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ — Tiết kiệm 1.100.000đ so với mua lẻ). Trọn bộ 351 bài giảng Cột sống + Tứ chi + X-ray + Micro-drills rèn lực tại nhà + Cấp Chứng nhận Certificate chính thức do Bác sĩ Henrik Simon ký.
+6. 👑 Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon): 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người).
+7. 📖 Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống: 1.500.000 VNĐ.
+8. 🏥 Tageshospitation (Đi Thực Tế Lâm Sàng Tại Simon Center): 2.500.000 VNĐ.
+💡 ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền đã đóng ở bất kỳ khóa Online nào (kể cả Module lẻ 1 triệu) đều được KHẤU TRỪ 100% khi học viên nâng cấp lên khóa lớn hơn hoặc khóa Offline Cầm tay chỉ việc!
+
+🚫 DANH MỤC TỪ CẤM & NGUYÊN TẮC BẮT BUỘC (TUYỆT ĐỐI TUÂN THỦ):
+1. ❌ TUYỆT ĐỐI CẤM dùng từ "trọn đời" dưới mọi hình thức! Thay bằng: "dài hạn 24/7", "không giới hạn thời gian", "xuyên suốt quá trình thực hành", "đồng hành lâu dài", "bền vững".
+2. ❌ TUYỆT ĐỐI CẤM dùng từ "bẻ khớp trôi nổi", "đối thủ", "ngoài thị trường" để chê bai đối thủ. CHỈ NÊU BẬT THẾ MẠNH ĐỘC BẢN: Chuẩn Y học Châu Âu, Specific chính xác từng phân đoạn, an toàn với Red Flags, video đa góc quay.
+3. ❌ TUYỆT ĐỐI CẤM dùng cụm từ "1 phần mười giây" hoặc "1/10 giây". Thay bằng: "ở thời điểm thả lỏng cơ", "trong tích tắc giải phóng lực", "kỹ thuật thả rơi trọng lượng cơ thể (Body Drop)".
 4. ❌ TUYỆT ĐỐI KHÔNG tự tiện đề cập "trả góp", "trả góp 0%", "thẻ tín dụng" trừ khi khách hàng CHỦ ĐỘNG HỎI về trả góp!
 5. ❌ TUYỆT ĐỐI CẤM dùng từ "Video 4K First-Person POV" (thay bằng "Video với các góc quay khác nhau").
 6. ❌ TUYỆT ĐỐI CẤM hứa hẹn sai pháp lý: "học xong ra mở phòng khám ngay". Minh bạch: Chứng nhận hoàn thành của Simon Center do Bác sĩ Henrik Simon ký; việc hành nghề trị liệu có can thiệp tại Việt Nam phải tuân thủ điều kiện văn bằng của Bộ Y tế/Sở Y tế.
-7. ❌ Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "anh/chị muốn chat chế độ nào".
-
-DỮ LIỆU ĐẦY ĐỦ 6 SẢN PHẨM & HỌC PHÍ TẠI SIMON CENTER:
-1. Module Lẻ Online — Cổ Vai Gáy (HWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ).
-2. Module Lẻ Online — Thắt Lưng - Chậu (LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ).
-3. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ).
-4. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ).
-5. The Full Online Collection: Trọn bộ toàn diện Level 1 + Level 2 (351 bài giảng Cột sống + Tứ chi + X-ray + Micro-drills + Chứng chỉ Certificate). Học phí ưu đãi 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ).
-6. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc: 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, 3-4 ngày trực tiếp cùng Thầy Henrik Simon, lớp giới hạn 10-12 người).
-7. ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền đã đóng ở bất kỳ khóa Online nào (kể cả Module lẻ 1 triệu) đều được khấu trừ 100% khi nâng cấp lên khóa lớn hơn hoặc khóa Offline.
-
-BỘ QUY CHUẨN 10 CÂU HỎI & CÁCH TRẢ LỜI:
-- Q1 (Phù hợp với ai): Nêu rõ 3 nhóm (PT/Yoga/Spa; Bác sĩ/YHCT/VLTL; Người chăm sóc gia đình).
-- Q2 (Người mới từ số 0): Khẳng định làm chủ được nhờ mô hình 3D, bài tập Micro-drills rèn lực tại nhà và ranh giới Red Flags.
-- Q3 (Học online có thực hành được không): Thiết kế chuẩn y khoa như "bộ thước đo quy chuẩn" đối chiếu, học từ ca lâm sàng thật 1:1, khấu trừ 100% lên Offline.
-- Q4 (Các khóa học & giá): Nêu đủ 6 khóa học trên.
-- Q5 (Điểm mạnh phương pháp): Nêu 4 thế mạnh bản quyền của Simon Center, không so sánh đối thủ.
-- Q6 (Nữ/thể lực yếu): Không dùng sức cơ bắp tay, dùng đòn bẩy và trọng lực rơi cơ thể Body Drop ở thời điểm thả lỏng cơ.
-- Q7 (Chứng chỉ & pháp lý): Cấp Certificate of Completion chính thức từ Simon Chiropractic Center do Bác sĩ Henrik Simon ký; hành nghề can thiệp tuân thủ văn bằng Bộ Y tế.
-- Q8 (Học riêng từng phần): Hoàn toàn được, có Module lẻ 1.000.000đ, khấu trừ 100%. Mời liên hệ Ban tổ chức qua Hotline/Zalo: 093 115 8868 để được tư vấn tốt hơn.
-- Q9 (Thanh toán & kích hoạt): Quét QR SePay tự động, gửi email xác nhận và trợ lý kết nối Zalo hỗ trợ.
-- Q10 (Hỗ trợ ca khó): Gia nhập nhóm chuyên môn kín cùng Thầy Henrik Simon, hội chẩn ca bệnh qua hình ảnh/X-quang, đồng hành lâu dài xuyên suốt quá trình thực hành.`;
+7. ❌ Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "anh/chị muốn chat chế độ nào".`;
 
   // =============================================================================
   // 📝 HỆ THỐNG DỮ LIỆU CHATBOT (BOT_DATA):
@@ -112,7 +105,7 @@ Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả ch�
     answers: {
       // --- DANH SÁCH KHÓA HỌC & BẢNG GIÁ CHI TIẾT (2 PHẦN TỰ ĐỘNG) ---
       c_courses_and_pricing_part1: {
-        text: `Dạ em xin gửi anh/chị thông tin chi tiết và học phí minh bạch các chương trình đào tạo tại <strong>Simon Chiropractic Center</strong> ạ:<br><br>
+        text: `Dạ em xin gửi anh/chị danh mục <strong>Hệ Thống Sản Phẩm Khóa Học & Bảng Giá Ưu Đãi</strong> chính thức tại <strong>Simon Chiropractic Center</strong> ạ:<br><br>
 1. 💆 <strong>Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS):</strong><br>
 • Kỹ thuật sờ nắn, giải phóng đốt sống cổ C1–C7, đoạn chuyển tiếp C7-T1, xử lý đau mỏi, đau đầu, tê bì tay và test De-Kleyn an toàn.<br>
 • Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7.<br><br>
@@ -1469,101 +1462,90 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const raw = userInput.toLowerCase();
     const norm = normalizeText(userInput);
 
-    // =========================================================
-    // 0. NHÓM TRẢ LỜI CỤ THỂ CHI TIẾT TỪNG MODULE / NHU CẦU ĐẶC BIỆT
-    // =========================================================
+    // =========================================================================
+    // 🎯 ĐỘNG CƠ PHÂN LOẠI Ý ĐỊNH BÁN HÀNG THÔNG MINH (SALES-FIRST INTENT ROUTER)
+    // NGUYÊN TẮC BẮT BUỘC: LẤY BÁN KHÓA HỌC & GIỚI THIỆU SẢN PHẨM LÀM TRUNG TÂM!
+    // =========================================================================
 
-    // 00. Khách hỏi khóa học / sản phẩm có phù hợp với tôi không / dành cho đối tượng nào / ai nên học
+    // BẢO VỆ TUYỆT ĐỐI VỀ TỪ VỰNG: Nhận diện tuổi tác thật sự
+    // TUYỆT ĐỐI KHÔNG dùng từ 'gia' đơn độc (vì trong tiếng Việt không dấu, 'giá' = 'gia')
+    const isTrueAgeQuery = 
+      norm.includes("lon tuoi") || norm.includes("cao tuoi") || norm.includes("nguoi gia") || 
+      norm.includes("ve gia") || norm.includes("gia roi") || norm.includes("trung nien") ||
+      norm.includes("bao nhieu tuoi") || norm.includes("gioi han tuoi") || norm.includes("tuoi tac") ||
+      ((norm.includes("tuoi") || norm.includes("nam nay")) && (norm.includes("40") || norm.includes("45") || norm.includes("50") || norm.includes("55") || norm.includes("60") || norm.includes("70")));
+
+    // -------------------------------------------------------------------------
+    // 1. KHẤU TRỪ HỌC PHÍ KHI LÊN LỚP OFFLINE
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("khau tru") || norm.includes("tru tien") || 
+      (norm.includes("online") && norm.includes("offline") && (norm.includes("nang cap") || norm.includes("tru")))
+    ) {
+      appendBotMessage(BOT_DATA.answers.q6.text, BOT_DATA.answers.q6.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. SO SÁNH GIÁ / HỌC PHÍ SAO ĐẮT / LÝ DO GIÁ TRỊ VƯỢT TRỘI
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("sao dat") || norm.includes("dat the") || norm.includes("mac the") || 
+      norm.includes("dat qua") || norm.includes("mac qua") || norm.includes("gia cao") || 
+      norm.includes("hoc phi cao") || norm.includes("sao lai dat") || norm.includes("so sanh gia")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q3.text, BOT_DATA.answers.q3.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // ⭐ ƯU TIÊN SỐ 1 TUYỆT ĐỐI: BÁO GIÁ & DANH MỤC SẢN PHẨM KHÓA HỌC
+    // Bắt mọi biến thể: "cho toi biết giá và sản phẩm", "bảng giá", "học phí",
+    // "sản phẩm bên bạn", "các khóa học", "chi phí", "bao nhiêu tiền", "bên mình bán gì"
+    // -------------------------------------------------------------------------
+    const isPricingAndProducts = 
+      !isTrueAgeQuery && !norm.includes("phu hop voi toi") && !norm.includes("danh cho ai") && (
+        norm.includes("gia va san pham") || norm.includes("san pham va gia") ||
+        norm.includes("gia san pham") || norm.includes("bang gia san pham") ||
+        norm.includes("san pham") || norm.includes("mat hang") || norm.includes("dich vu ben") ||
+        norm.includes("bang gia") || norm.includes("bao gia") || norm.includes("hoc phi") ||
+        norm.includes("bao nhieu tien") || norm.includes("chi phi khoa") || norm.includes("gia ca") ||
+        norm.includes("cac khoa hoc") || norm.includes("nhung khoa hoc") || norm.includes("danh sach khoa") ||
+        norm.includes("cac goi hoc") || norm.includes("cac lop hoc") || norm.includes("combo") ||
+        norm.includes("khoa hoc gi") || norm.includes("co nhung khoa") || norm.includes("co cac khoa") ||
+        norm.includes("co khoa hoc nao") || norm.includes("ben minh ban gi") || norm.includes("ben ban ban gi") ||
+        norm.includes("cac chuong trinh dao tao") || norm.includes("he thong khoa hoc") ||
+        norm.includes("mua khoa hoc") || norm.includes("dang ky khoa hoc") || norm.includes("dang ky hoc") ||
+        // Khi câu hỏi có từ "giá" và không phải đang chê đắt
+        (norm.includes("gia") && !norm.includes("dat") && !norm.includes("mac") && !norm.includes("cao")) ||
+        // Khi câu hỏi có từ "chi phí"
+        (norm.includes("chi phi") && !norm.includes("kham") && !norm.includes("chua")) ||
+        // Trong ngữ cảnh khóa học, nếu hỏi chi phí / bao nhiêu / bảng giá
+        (currentCategory === "course" && (norm.includes("chi phi") || norm.includes("bao nhieu") || norm.includes("bang gia") || norm.includes("gia")))
+      );
+
+    if (isPricingAndProducts) {
+      sendCourseListAndPricingSequence();
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. KHÓA HỌC / SẢN PHẨM CÓ PHÙ HỢP VỚI TÔI KHÔNG / DÀNH CHO ĐỐI TƯỢNG NÀO / AI NÊN HỌC
+    // -------------------------------------------------------------------------
     const isTargetAudienceQuery = 
       (norm.includes("phu hop") || norm.includes("hop voi toi") || norm.includes("danh cho ai") || 
        norm.includes("ai nen hoc") || norm.includes("doi tuong") || norm.includes("ai co the hoc") ||
        (norm.includes("san pham") && (norm.includes("phu hop") || norm.includes("cho toi")))) &&
-      !norm.includes("tuoi") && !norm.includes("50") && !norm.includes("60") && !norm.includes("gia") &&
-      !norm.includes("nu") && !norm.includes("nho con") && !norm.includes("yeu");
+      !isTrueAgeQuery && !norm.includes("nu") && !norm.includes("nho con") && !norm.includes("yeu");
 
     if (isTargetAudienceQuery) {
       appendBotMessage(BOT_DATA.answers.c_target_audience.text, BOT_DATA.answers.c_target_audience.cta);
       return;
     }
 
-    // 0a. Học riêng phần lưng / thắt lưng / chậu (Ví dụ: "Tôi chỉ muốn học một phần nắn chỉnh phần lưng thôi thì sao?")
-    const isLearnLumbar = 
-      ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
-       (norm.includes("phan lung") || norm.includes("that lung") || norm.includes("vung lung") || norm.includes("cot song that lung") || norm.includes("hoc lung") || norm.includes("nan lung") || norm.includes("l1") || norm.includes("l5"))) ||
-      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("lung") || norm.includes("that lung")));
-
-    if (isLearnLumbar) {
-      appendBotMessage(BOT_DATA.answers.c_lumbar_part.text, BOT_DATA.answers.c_lumbar_part.cta);
-      return;
-    }
-
-    // 0b. Học riêng phần cổ vai gáy / đốt sống cổ / HWS
-    const isLearnCervical = 
-      ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
-       (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("phan co") || norm.includes("dot song co") || norm.includes("vung co") || norm.includes("hoc co") || norm.includes("nan co") || norm.includes("c1") || norm.includes("c7"))) ||
-      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("vung co") || norm.includes("phan co") || norm.includes("gay")));
-
-    if (isLearnCervical) {
-      appendBotMessage(BOT_DATA.answers.c_cervical_part.text, BOT_DATA.answers.c_cervical_part.cta);
-      return;
-    }
-
-    // 0c. Học nắn chỉnh tứ chi / tay chân / khớp ngoại vi (gối, cổ chân, vai, khuỷu)
-    const isLearnExtremity = 
-      (norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
-      (norm.includes("tu chi") || norm.includes("tay chan") || norm.includes("khop goi") || norm.includes("co chan") || norm.includes("khuyu tay") || norm.includes("khop vai") || norm.includes("ngoai vi"));
-
-    if (isLearnExtremity) {
-      appendBotMessage(BOT_DATA.answers.c_extremity_part.text, BOT_DATA.answers.c_extremity_part.cta);
-      return;
-    }
-
-    // 0d. Lớn tuổi / 50 tuổi / 60 tuổi / già có học được không
-    const isAgeQuery = 
-      (norm.includes("tuoi") || norm.includes("50") || norm.includes("60") || norm.includes("lon tuoi") || norm.includes("gia") || norm.includes("trung nien")) &&
-      (norm.includes("hoc") || norm.includes("khoa") || currentCategory === "course");
-
-    if (isAgeQuery) {
-      appendBotMessage(BOT_DATA.answers.c_age_limit.text, BOT_DATA.answers.c_age_limit.cta);
-      return;
-    }
-
-    // 0e. Xem lại / tài khoản dài hạn / có giới hạn thời gian không
-    const isLifetimeQuery = 
-      norm.includes("tron doi") || norm.includes("xem lai") || norm.includes("vinh vien") || 
-      norm.includes("xem duoc bao lau") || norm.includes("gioi han thoi gian") || norm.includes("xem di xem lai") || 
-      norm.includes("tai khoan hoc") || norm.includes("mat tai khoan") || norm.includes("het han");
-
-    if (isLifetimeQuery) {
-      appendBotMessage(BOT_DATA.answers.c_relearn_lifetime.text, BOT_DATA.answers.c_relearn_lifetime.cta);
-      return;
-    }
-
-    // 0f. Ở nước ngoài / kiều bào / thanh toán quốc tế / lệch múi giờ
-    const isAbroadQuery = 
-      norm.includes("nuoc ngoai") || norm.includes("kieu bao") || norm.includes("o my") || 
-      norm.includes("o uc") || norm.includes("o duc") || norm.includes("canada") || 
-      norm.includes("nhat ban") || norm.includes("dai loan") || norm.includes("lech mui gio") || 
-      norm.includes("paypal") || norm.includes("the quoc te");
-
-    if (isAbroadQuery) {
-      appendBotMessage(BOT_DATA.answers.c_abroad_learn.text, BOT_DATA.answers.c_abroad_learn.cta);
-      return;
-    }
-
-    // 0g. Hỗ trợ sau khóa học / đồng hành / hội chẩn ca khó
-    const isSupportQuery = 
-      norm.includes("sau khoa hoc") || norm.includes("sau khi hoc") || norm.includes("dong hanh") || 
-      norm.includes("ho tro ca kho") || norm.includes("hoi chan ca kho") || norm.includes("ho tro sau") || 
-      norm.includes("gap ca kho");
-
-    if (isSupportQuery) {
-      appendBotMessage(BOT_DATA.answers.c_post_course_support.text, BOT_DATA.answers.c_post_course_support.cta);
-      return;
-    }
-
-    // 0h. Người mới bắt đầu / Chưa biết gì / Chưa từng học qua / Rất đam mê / Có học được không
-    // Ví dụ câu hỏi: "Tôi chưa biết gì về môn này, chưa từng học qua, nhưng rất đam mê. Tôi theo học được không?"
+    // -------------------------------------------------------------------------
+    // 4. NGƯỜI MỚI TỪ CON SỐ 0 / CHƯA BIẾT GÌ / RẤT ĐAM MÊ CÓ HỌC ĐƯỢC KHÔNG
+    // -------------------------------------------------------------------------
     const isZeroBasePassion = 
       (norm.includes("chua biet") || norm.includes("chua tung hoc") || norm.includes("chua hoc qua") || 
        norm.includes("dam me") || norm.includes("theo hoc duoc khong") || norm.includes("hoc duoc khong") || 
@@ -1576,10 +1558,186 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // ---------------------------------------------------------
-    // A. NHÓM CHUYÊN KHOA Y HỌC & BỆNH HỌC (TỪ 351 BÀI BRAIN.DB)
-    // ---------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // 5. HỌC RIÊNG LẺ TỪNG MODULE (CỔ VAI GÁY / THẮT LƯNG / TỨ CHI)
+    // -------------------------------------------------------------------------
+    // 5a. Học riêng cổ vai gáy
+    const isLearnCervical = 
+      (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("phan co") || norm.includes("dot song co") || norm.includes("vung co") || norm.includes("c1") || norm.includes("c7")) &&
+      (norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon"));
 
+    if (isLearnCervical) {
+      appendBotMessage(BOT_DATA.answers.c_cervical_part.text, BOT_DATA.answers.c_cervical_part.cta);
+      return;
+    }
+
+    // 5b. Học riêng thắt lưng - chậu
+    const isLearnLumbar = 
+      (norm.includes("phan lung") || norm.includes("that lung") || norm.includes("vung lung") || norm.includes("cot song that lung") || norm.includes("hoc lung") || norm.includes("l1") || norm.includes("l5")) &&
+      (norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon"));
+
+    if (isLearnLumbar) {
+      appendBotMessage(BOT_DATA.answers.c_lumbar_part.text, BOT_DATA.answers.c_lumbar_part.cta);
+      return;
+    }
+
+    // 5c. Học riêng tứ chi / ngoại vi
+    const isLearnExtremity = 
+      (norm.includes("tu chi") || norm.includes("tay chan") || norm.includes("khop goi") || norm.includes("co chan") || norm.includes("khuyu tay") || norm.includes("khop vai") || norm.includes("ngoai vi")) &&
+      (norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || norm.includes("rieng") || norm.includes("le"));
+
+    if (isLearnExtremity) {
+      appendBotMessage(BOT_DATA.answers.c_extremity_part.text, BOT_DATA.answers.c_extremity_part.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 6. LỚN TUỔI / 50 TUỔI / 60 TUỔI CÓ HỌC ĐƯỢC KHÔNG (ĐÃ KHẮC PHỤC TRIỆT ĐỂ)
+    // -------------------------------------------------------------------------
+    if (isTrueAgeQuery) {
+      appendBotMessage(BOT_DATA.answers.c_age_limit.text, BOT_DATA.answers.c_age_limit.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. HỌC ONLINE CÓ NẮN ĐƯỢC THẬT KHÔNG / THƯỚC ĐO QUY CHUẨN
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("online") && (norm.includes("lam duoc") || norm.includes("thuc hanh duoc") || norm.includes("co duoc khong") || norm.includes("hieu qua khong") || norm.includes("that khong") || norm.includes("so nan sai") || norm.includes("run tay"))
+    ) {
+      appendBotMessage(BOT_DATA.answers.q1.text, BOT_DATA.answers.q1.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 8. NỮ NHỎ CON / THỂ LỰC YẾU / SỢ KHÔNG ĐỦ SỨC
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("nu") || norm.includes("nho con") || norm.includes("the luc") || 
+      norm.includes("suc yeu") || norm.includes("tay yeu") || norm.includes("to beo") || 
+      norm.includes("80kg") || norm.includes("90kg") || norm.includes("khong du suc")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q8.text, BOT_DATA.answers.q8.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 9. KHÓA HUẤN LUYỆN OFFLINE CẦM TAY CHỈ VIỆC (36 TRIỆU)
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("lop offline") || norm.includes("khoa offline") || 
+      norm.includes("cam tay chi viec") || norm.includes("hoc truc tiep") || 
+      norm.includes("36 trieu") || norm.includes("36tr") || norm.includes("henrik simon truc tiep")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_location.text, BOT_DATA.answers.c_location.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 10. KINH PHÍ BAN ĐẦU HẠN CHẾ / ÍT TIỀN / LỘ TRÌNH TIẾT KIỆM
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("it tien") || norm.includes("kinh phi") || norm.includes("ngan sach") ||
+      norm.includes("it von") || norm.includes("kho khan kinh te") || norm.includes("chua du tien")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_beginner_budget.text, BOT_DATA.answers.c_beginner_budget.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 11. CHỨNG CHỈ / BẰNG CẤP / PHÁP LÝ HÀNH NGHỀ / MỞ PHÒNG KHÁM
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("chung chi") || norm.includes("bang cap") || norm.includes("phap ly") || 
+      norm.includes("hanh nghe") || norm.includes("giay phep") || norm.includes("so y te") || 
+      norm.includes("mo phong") || norm.includes("mo spa") || norm.includes("dau ra")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q5.text, BOT_DATA.answers.q5.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 12. XEM LẠI / TÀI KHOẢN HỌC DÀI HẠN / HẠN SỬ DỤNG
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("xem lai") || norm.includes("xem duoc bao lau") || 
+      norm.includes("gioi han thoi gian") || norm.includes("xem di xem lai") || 
+      norm.includes("tai khoan hoc") || norm.includes("mat tai khoan") || norm.includes("het han")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_relearn_lifetime.text, BOT_DATA.answers.c_relearn_lifetime.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 13. Ở NƯỚC NGOÀI / KIỀU BÀO / THANH TOÁN QUỐC TẾ
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("nuoc ngoai") || norm.includes("kieu bao") || norm.includes("o my") || 
+      norm.includes("o uc") || norm.includes("o duc") || norm.includes("canada") || 
+      norm.includes("nhat ban") || norm.includes("dai loan") || norm.includes("paypal")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_abroad_learn.text, BOT_DATA.answers.c_abroad_learn.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 14. ĐỒNG HÀNH SAU HỌC / HỖ TRỢ HỘI CHẨN CA BỆNH KHÓ
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("sau khoa hoc") || norm.includes("sau khi hoc") || norm.includes("dong hanh") || 
+      norm.includes("ho tro ca kho") || norm.includes("hoi chan ca kho") || norm.includes("ho tro sau") || 
+      norm.includes("nhom alumni") || norm.includes("nhom kín")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_post_course_support.text, BOT_DATA.answers.c_post_course_support.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 15. HỌC THỬ / BÀI GIẢNG MẪU MIỄN PHÍ
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("hoc thu") || norm.includes("bai giang mau") || 
+      norm.includes("video mau") || norm.includes("xem thu") || norm.includes("trai nghiem thu")
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_trial_lesson ? BOT_DATA.answers.c_trial_lesson.text : BOT_DATA.answers.c_courses_and_pricing_part2.text, "trial");
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 16. PHƯƠNG THỨC THANH TOÁN / CHUYỂN KHOẢN / SEPAY / STK
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("thanh toan") || norm.includes("chuyen khoan") || 
+      norm.includes("sepay") || norm.includes("so tai khoan") || norm.includes("stk") || norm.includes("ma qr")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q9.text, BOT_DATA.answers.q9.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 17. KHÁC GÌ BẺ KHỚP THÔNG THƯỜNG / TIKTOK
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("khac gi") || norm.includes("be khop") || norm.includes("tiktok") || 
+      norm.includes("thong thuong") || norm.includes("chuyen biet")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q7.text, BOT_DATA.answers.q7.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // 18. TRẢ GÓP (CHỈ TRẢ LỜI KHI KHÁCH CHỦ ĐỘNG HỎI)
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("tra gop") || norm.includes("the tin dung") || norm.includes("chia nho")
+    ) {
+      appendBotMessage(BOT_DATA.answers.q9.text, BOT_DATA.answers.q9.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // B. NHÓM CHUYÊN KHOA Y HỌC & BỆNH HỌC (TỪ 351 BÀI BRAIN.DB)
+    // -------------------------------------------------------------------------
     // 1. Cảnh báo đỏ / Chống chỉ định / Nguy hiểm / Cauda Equina
     if (
       norm.includes("red flag") || norm.includes("redflag") || norm.includes("canh bao do") || 
@@ -1779,123 +1937,9 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 20. Khách muốn mua / đăng ký / học phí / chuyển khoản
-    if (
-      norm.includes("dang ky") || norm.includes("mua") || norm.includes("chot") || 
-      norm.includes("chuyen khoan") || norm.includes("stk") || norm.includes("giu cho") || 
-      norm.includes("uu dai")
-    ) {
-      appendBotMessage(BOT_DATA.answers.buy.text, BOT_DATA.answers.buy.cta);
-      return;
-    }
-
-    // 21. Khách do dự / chưa mua / suy nghĩ thêm / đắt
-    if (
-      norm.includes("suy nghi") || norm.includes("chua mua") || norm.includes("ban voi") || 
-      norm.includes("de sau") || norm.includes("tu tu") || norm.includes("chua co tien") || 
-      norm.includes("can nhac")
-    ) {
-      appendBotMessage(BOT_DATA.answers.hesitate.text, BOT_DATA.answers.hesitate.cta);
-      return;
-    }
-
-    // 22. Khách hỏi online có làm được không / run tay
-    if (
-      norm.includes("online") || norm.includes("run tay") || norm.includes("video") || 
-      norm.includes("thuc hanh") || norm.includes("qua mang") || norm.includes("micro-drill")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q1.text, BOT_DATA.answers.q1.cta);
-      return;
-    }
-
-    // 23. Khách hỏi PT / Spa / tay ngang / chưa học Y
-    if (
-      norm.includes("pt") || norm.includes("gym") || norm.includes("spa") || 
-      norm.includes("tay ngang") || norm.includes("chua hoc y") || norm.includes("yoga") || 
-      norm.includes("massage")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q2.text, BOT_DATA.answers.q2.cta);
-      return;
-    }
-
-    // 23b. Khách hỏi danh sách các khóa học / bảng giá / học phí bao nhiêu (2 tin nhắn tự động)
-    const isCourseListAndPricing = 
-      norm.includes("khoa hoc gi") || norm.includes("cac khoa hoc") || norm.includes("nhung khoa hoc") ||
-      norm.includes("co nhung khoa") || norm.includes("co cac khoa") || norm.includes("co khoa hoc nao") ||
-      norm.includes("danh sach khoa") || norm.includes("cac goi hoc") || norm.includes("cac lop hoc") ||
-      norm.includes("bang gia") || norm.includes("gia ca") || norm.includes("gia bao nhieu") ||
-      norm.includes("hoc phi bao nhieu") || norm.includes("bao nhieu tien") ||
-      norm.includes("chi phi khoa hoc") || norm.includes("gia khoa hoc") ||
-      (norm.includes("khoa hoc") && (norm.includes("gia") || norm.includes("hoc phi") || norm.includes("bao nhieu") || norm.includes("chi phi"))) ||
-      (norm.includes("co") && norm.includes("khoa") && (norm.includes("gi") || norm.includes("nao"))) ||
-      (norm.includes("gia") && norm.includes("bao nhieu")) ||
-      (norm.includes("hoc phi") && !norm.includes("dat") && !norm.includes("mac") && !norm.includes("cao")) ||
-      (norm.includes("chi phi") && !norm.includes("kham") && !norm.includes("chua"));
-
-    if (isCourseListAndPricing) {
-      sendCourseListAndPricingSequence();
-      return;
-    }
-
-    // 24. Khách so sánh giá / học phí sao đắt / lý do giá trị
-    if (
-      norm.includes("sao dat") || norm.includes("dat the") || norm.includes("mac the") || 
-      norm.includes("dat qua") || norm.includes("mac qua") || norm.includes("gia cao") || 
-      norm.includes("hoc phi cao") || norm.includes("sao lai dat") || norm.includes("2-3 ngay") || 
-      norm.includes("so sanh gia") || norm.includes("dat hon")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q3.text, BOT_DATA.answers.q3.cta);
-      return;
-    }
-
-    // 25. Khách hỏi chứng chỉ / pháp lý / bằng cấp
-    if (
-      norm.includes("chung chi") || norm.includes("bang") || norm.includes("phap ly") || 
-      norm.includes("hanh nghe") || norm.includes("giay phep") || norm.includes("so y te")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q5.text, BOT_DATA.answers.q5.cta);
-      return;
-    }
-
-    // 26. Khách hỏi khấu trừ lên Offline
-    if (
-      norm.includes("khau tru") || norm.includes("offline") || norm.includes("tru tien") || 
-      norm.includes("hoc tiep")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q6.text, BOT_DATA.answers.q6.cta);
-      return;
-    }
-
-    // 27. Khác gì bẻ khớp thông thường / tiktok
-    if (
-      norm.includes("khac gi") || norm.includes("be khop") || norm.includes("tiktok") || 
-      norm.includes("thong thuong") || norm.includes("chuyen biet")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q7.text, BOT_DATA.answers.q7.cta);
-      return;
-    }
-
-    // 28. Nữ nhỏ con / sức yếu / khách nam to béo
-    if (
-      norm.includes("nu") || norm.includes("nho con") || norm.includes("suc") || 
-      norm.includes("yeu") || norm.includes("to beo") || norm.includes("80kg") || 
-      norm.includes("90kg")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q8.text, BOT_DATA.answers.q8.cta);
-      return;
-    }
-
-    // 29. Trả góp
-    if (
-      norm.includes("tra gop") || norm.includes("the tin dung") || norm.includes("chia nho")
-    ) {
-      appendBotMessage(BOT_DATA.answers.q9.text, BOT_DATA.answers.q9.cta);
-      return;
-    }
-
-    // ---------------------------------------------------------
-    // C. BỘ XỬ LÝ LINH HOẠT THÔNG MINH KHI NGOÀI CÁC TỪ KHÓA CỐ ĐỊNH
-    // ---------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // C. BỘ HỘI THOẠI THÔNG MINH: LẤY BÁN KHÓA HỌC LÀM TRUNG TÂM!
+    // -------------------------------------------------------------------------
 
     // Ngữ cảnh 1: Chào hỏi thân mật
     if (
@@ -1906,8 +1950,10 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       if (currentCategory === "course") {
         appendBotMessage(
           `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
-Em đang sẵn sàng tư vấn chi tiết về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
-Anh/chị có thể trao đổi bất kỳ thông tin nào: <em>lộ trình cho người mới từ số 0, học từng module lẻ (lưng - chậu 1tr, cổ gáy 1tr), trọn bộ Online toàn diện 12.9tr, lớp thực hành Offline Cầm tay chỉ việc hay bài giảng mẫu học thử miễn phí</em>.<br><br>
+Em đang sẵn sàng tư vấn chi tiết về <strong>Hệ Thống Khóa Học Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon:<br><br>
+• 🟨 <strong>Module Lẻ Online (Cổ gáy hoặc Thắt lưng):</strong> 1.000.000 VNĐ (Khấu trừ 100% khi lên khóa lớn).<br>
+• ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Tứ chi + X-ray):</strong> 12.900.000 VNĐ (Tiết kiệm 1.100.000đ, cấp Chứng chỉ).<br>
+• 👑 <strong>Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon):</strong> 36.000.000 VNĐ.<br><br>
 Dạ anh/chị đang muốn bắt đầu từ nội dung nào hay đang quan tâm nắn chỉnh cho vùng cột sống nào vậy ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
           "trial"
         );
@@ -1956,13 +2002,16 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
       return;
     }
 
-    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời theo đúng ngữ cảnh tab đã chọn
+    // Ngữ cảnh 4: CÂU HỎI MỞ KHÁC — TUYỆT ĐỐI KHÔNG TRẢ LỜI BỪA, LUÔN LẤY BÁN KHÓA HỌC LÀM TRUNG TÂM!
     if (currentCategory === "course") {
       appendBotMessage(
         `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
-Về chương trình đào tạo Chiropractic của Bác sĩ Henrik Simon, trung tâm luôn có các giải pháp học tập linh hoạt sát nhất với nhu cầu thực tế của từng học viên (từ học lẻ từng phần thắt lưng / cổ gáy 1 triệu đến khóa toàn diện Online hoặc lớp thực hành Offline Cầm tay chỉ việc).<br><br>
-Để em hỗ trợ chu đáo và chính xác nhất, anh/chị có thể chia sẻ thêm: Hiện tại anh/chị đang muốn học để tự chăm sóc gia đình, bổ trợ công việc PT/Spa hay phát triển chuyên sâu mở cơ sở trị liệu vậy ạ?`,
-        "trial"
+Tại <strong>Simon Chiropractic Center</strong>, toàn bộ các khóa học đều lấy phương pháp thực chiến Y khoa của Bác sĩ Henrik Simon làm trọng tâm với 3 nấc thang đào tạo rõ ràng:<br><br>
+• 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi nâng cấp</em>).<br>
+• ⭐ <strong>Khóa Đào Tạo Toàn Diện (Khuyên Dùng):</strong> The Full Online Collection — <strong>12.900.000 VNĐ</strong> (Trọn bộ 351 bài giảng Cột sống Full-Spine + Tứ chi + Đọc X-quang + Micro-drills rèn lực tại nhà + Cấp Chứng chỉ).<br>
+• 👑 <strong>Khóa Huấn Luyện Đỉnh Cao:</strong> Workshop Offline Cầm Tay Chỉ Việc — <strong>36.000.000 VNĐ</strong> (3-4 ngày trực tiếp cùng Thầy Henrik Simon — <em>Được khấu trừ 100% học phí Online</em>).<br><br>
+Dạ để em tư vấn đúng gói học và mức học phí tiết kiệm nhất cho mình: Hiện tại anh/chị đang muốn học để tự chăm sóc sức khỏe gia đình, bổ trợ công việc PT/Spa hay nâng cao tay nghề mở cơ sở trị liệu vậy ạ?`,
+        "register"
       );
     } else {
       appendBotMessage(
