@@ -3071,41 +3071,24 @@
         website_hp: hp
       };
 
-      // 1. Gửi đồng bộ lên Google Sheet Web App (Google Apps Script tự động lưu & gửi email chào mừng)
+      // 1. Gửi đồng bộ lên Google Sheet Web App (Google Apps Script tự động lưu & GỬI 1 EMAIL CHÀO MỪNG DUY NHẤT)
       sendToGoogleSheet(payload);
 
-      // 2. Kích hoạt gửi Email Chào Mừng trực tiếp qua Resend Proxy (khi chạy localhost)
-      triggerWaitlistWelcomeEmail(email, name, phone, goal, exp, format, priorityCode);
-
-      // 3. Gửi đồng bộ lên Supabase nếu có
+      // 2. Gửi đồng bộ lên Supabase nếu có
       if (typeof saveToSupabase === 'function') {
         saveToSupabase(payload);
       }
 
-      // 4. Gửi thông báo & GỬI EMAIL CHÀO MỪNG / CẢM ƠN TỰ ĐỘNG TỚI KHÁCH QUA FORMSUBMIT
-      const surveyAutoResponse = `Chào mừng và chân thành cảm ơn Anh/Chị ${name} đã quan tâm và hoàn thành phiếu đăng ký / khảo sát Danh Sách Chờ Khóa Học Chiropractic tại Simon EDU Center (chiro.vn)!\n\n` +
-        `📋 THÔNG TIN ĐĂNG KÝ CỦA ANH/CHỊ:\n` +
-        `• Họ và tên: ${name}\n` +
-        `• Số điện thoại / Zalo: ${phone}\n` +
-        `• Email nhận thông tin: ${email}\n` +
-        `• Mã hồ sơ ưu tiên: ${priorityCode}\n` +
-        `  (Ý nghĩa dòng mã: WL là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ)\n` +
-        `• Mục tiêu đào tạo: ${goal}\n` +
-        `• Kinh nghiệm: ${exp}\n` +
-        `• Hình thức mong muốn: ${format}\n\n` +
-        `📢 Simon EDU Center sẽ liên hệ sớm nhất và luôn cập nhật những thông tin mới nhất về các khóa học Chiropractic chuẩn Y khoa của Bác sĩ Henrik Simon đến Anh/Chị qua Email và Zalo.\n\n` +
-        `🔒 CAM KẾT BẢO MẬT: Simon EDU Center cam kết bảo mật tuyệt đối 100% toàn bộ thông tin cá nhân của Anh/Chị, tuyệt đối không chia sẻ hay bán thông tin cho bất kỳ bên thứ ba nào.\n\n` +
-        `Trân trọng,\nBan Đào Tạo Simon EDU Center — Viện Đào Tạo Chiropractic Chuyên Biệt\nWebsite: https://chiro.vn | Email: hi@chiro.vn | Hotline/Zalo: 093 115 8868 / 0389 609 938`;
-
+      // 3. Gửi thông báo về Hòm thư Admin (chiroeduvn@gmail.com) qua FormSubmit
+      // ⚠️ KHÔNG gửi _autoresponse ở đây để tránh trùng lặp email với Google Apps Script!
       fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          _subject: `[Simon Center] Chúc mừng & Cảm ơn Anh/Chị ${name} đã đăng ký Danh Sách Chờ Khóa Học Chiropractic`,
+          _subject: `[Simon Center Admin] 📝 Nhận đăng ký Danh Sách Chờ mới: ${name} (${priorityCode})`,
           name: name,
           email: email,
           _replyto: email,
-          _autoresponse: surveyAutoResponse,
           Ho_Va_Ten: name,
           So_Dien_Thoai_Zalo: phone,
           Email_Khach_Hang: email,
