@@ -2736,6 +2736,46 @@
           sb.from('leads').insert([row]).catch(e => { });
         } catch (err) { }
       }
+
+      // TỰ ĐỘNG KÍCH HOẠT CHUỖI EMAIL RESEND (HỖ TRỢ CHẾ ĐỘ TEST +TEST)
+      if (row.email && row.email.includes('@')) {
+        triggerResendEmailSequence(row.email, row.name);
+      }
+    }
+
+    // ── HỆ THỐNG GỬI EMAIL TỰ ĐỘNG QUA RESEND (SIMON CENTER) ──
+    async function triggerResendEmailSequence(email, name) {
+      if (!email || !email.includes('@')) return;
+      console.log('📧 Kích hoạt chuỗi email Resend cho:', email);
+      
+      // 1. Gửi qua Python Local Automation Server (nếu đang chạy trên port 3000)
+      try {
+        fetch('http://localhost:3000/api/trigger-sequence', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, name: name })
+        }).then(r => r.json()).then(d => {
+          console.log('⚡ Resend Local Service:', d);
+        }).catch(() => { });
+      } catch (e) {}
+
+      // 2. Gửi qua Google Sheet Web App dự phòng
+      const gsUrl = getGoogleSheetUrl();
+      if (gsUrl) {
+        try {
+          fetch(gsUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'resend_sequence',
+              email: email,
+              name: name,
+              is_test: email.includes('+test')
+            })
+          }).catch(() => {});
+        } catch (e) {}
+      }
     }
 
     // ── HÀM GỬI DỮ LIỆU SAO LƯU DỰ PHÒNG LÊN GOOGLE SHEET ──

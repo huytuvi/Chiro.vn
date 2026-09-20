@@ -1419,6 +1419,11 @@
         };
         _crmData.orders.push(newOrd);
         syncEntityToRemote('orders', 'insert', newOrd);
+
+        // TỰ ĐỘNG GỬI EMAIL XÁC NHẬN ĐƠN HÀNG QUA RESEND TỚI HỌC VIÊN
+        if (newOrd.customer_email && newOrd.customer_email.includes('@')) {
+          sendOrderConfirmationViaResend(newOrd);
+        }
       }
 
       // Cập nhật số lượng đã đăng ký của sản phẩm
@@ -1430,6 +1435,45 @@
       renderOrdersTable();
       renderProductsTable();
       closeOrderModal();
+    }
+
+    // ── HÀM GỬI EMAIL XÁC NHẬN ĐƠN HÀNG QUA RESEND (SIMON CENTER) ──
+    async function sendOrderConfirmationViaResend(order) {
+      const email = order.customer_email || order.email;
+      if (!email || !email.includes('@')) return;
+      const name = order.customer_name || order.name || 'Quý học viên';
+      const orderCode = order.sepay_code || order.order_code || ('SCC' + Date.now().toString().slice(-8));
+      const course = order.product_name || order.course || 'The Full Online Collection';
+      const price = typeof order.amount === 'number' ? (order.amount.toLocaleString('vi-VN') + ' VNĐ') : (order.price || '12.900.000 VNĐ');
+
+      console.log('📧 Tự động kích hoạt email xác nhận đơn hàng Resend tới:', email);
+
+      // 1. Gửi qua Python Local Automation Server (port 3000)
+      try {
+        fetch('http://localhost:3000/api/order-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name, order_code: orderCode, course, price })
+        }).then(r => r.json()).then(d => {
+          console.log('⚡ Resend Order Confirmation Sent:', d);
+        }).catch(() => {});
+      } catch (e) {}
+
+      // 2. Gửi qua Google Sheet Web App dự phòng
+      const gsUrl = document.getElementById('cfgGoogleSheetUrl')?.value || DEFAULT_GS_URL;
+      if (gsUrl) {
+        try {
+          fetch(gsUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'order_confirmation',
+              email, name, order_code: orderCode, course, price
+            })
+          }).catch(() => {});
+        } catch (e) {}
+      }
     }
 
     function editOrder(id) {

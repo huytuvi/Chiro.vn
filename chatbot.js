@@ -14,10 +14,11 @@
   // 2. Tự động nhận diện từ khóa chuyên môn sâu từ 351 bài kiến thức brain.db
   // =============================================================================
   const BOT_DATA = {
-    greeting: `Dạ em chào anh/chị ạ! Cảm ơn anh/chị đã ghé thăm <strong>Simon Center</strong>.<br><br>Em là Trợ lý Chuyên môn Simon Center. Em có thể hỗ trợ anh/chị cả 2 mảng:<br>
-• 🎓 <strong>Tư vấn các Khóa đào tạo Nắn chỉnh Cột sống Chuẩn Y khoa</strong> (Học phí, lộ trình E-Learning, lớp Offline cầm tay chỉ việc cùng Bác sĩ Henrik Simon).<br>
-• 🩺 <strong>Giải đáp Kiến thức Chuyên khoa Chiropractic</strong> (Cảnh báo đỏ Red Flags, đọc phim X-quang, lệch chậu chân ngắn chân dài, thoát vị đĩa đệm, khớp cùng chậu ISG, khớp cắn hàm TMG, kỹ thuật ngón cái...).<br><br>
-Anh/chị có thể chọn nhanh các chủ đề bên dưới hoặc gõ trực tiếp câu hỏi để em giải đáp nhé ạ!`,
+    greeting: `Dạ em xin kính chào anh/chị ạ! Rất vui được đón tiếp anh/chị ghé thăm <strong>Simon Chiropractic Center</strong>.<br><br>
+Em là Trợ lý Chuyên môn đồng hành trực tiếp cùng <strong>Bác sĩ Henrik Simon</strong>. Em ở đây để cùng anh/chị trao đổi về 2 chủ đề cốt lõi:<br><br>
+• 🎓 <strong>Lộ trình học Nắn chỉnh Cột sống Chuẩn Y khoa</strong> (Học từ con số 0, giáo trình Online 4K POV góc nhìn người nắn, hoặc lớp thực hành Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon).<br>
+• 🩺 <strong>Hội chẩn & Bệnh học Cột sống Chuyên sâu</strong> (Cách nhận diện Cảnh báo đỏ Red Flags, đọc phim X-quang cơ sinh học, lệch khung chậu chân ngắn chân dài, thoát vị đĩa đệm L4-L5, kẹt khớp cùng chậu ISG, khớp cắn hàm TMG...).<br><br>
+Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <strong>lộ trình học tập để nâng cao tay nghề</strong> hay đang có <strong>một ca bệnh thực tế cần hội chẩn chuyên môn</strong> ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
 
     // DANH MỤC CÂU HỎI NHANH THEO 2 TAB
     categories: {
@@ -66,7 +67,8 @@ Anh/chị có thể chọn nhanh các chủ đề bên dưới hoặc gõ trực
 1. <strong>Video 4K góc nhìn người nắn (POV):</strong> Camera đặt đúng tầm mắt người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
 2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Rèn luyện tốc độ, bộ pháp và lực rơi cơ thể trên đệm mút/bóng phản xạ. Tay anh/chị có phản xạ tự nhiên chuẩn xác trước khi chạm người thật nên <strong>hoàn toàn không bị run tay</strong>.<br>
 3. <strong>Hệ thống Test lâm sàng qua môn bắt buộc:</strong> Nắm chắc chỉ định và dấu hiệu nguy hiểm (Red Flags) mới mở khóa bài tiếp theo.<br><br>
-<em>Đặc biệt: Toàn bộ 14.9 triệu tiền khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em>`,
+<em>Đặc biệt: Toàn bộ 14.9 triệu tiền khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em><br><br>
+Dạ không biết hiện tại anh/chị đang có nền tảng về Đông y, Vật lý trị liệu hay Thể thao PT vậy ạ? Anh/chị chia sẻ thêm để em tư vấn lộ trình học tập sát nhất với mình nhé ạ!`,
         cta: "register"
       },
       q2: {
@@ -74,14 +76,16 @@ Anh/chị có thể chọn nhanh các chủ đề bên dưới hoặc gõ trực
 Triết lý đào tạo của Thầy Henrik Simon là <strong>"Dễ hiểu nhưng phải chuẩn"</strong>:<br>
 • Mọi thuật ngữ giải phẫu phức tạp đều được chuyển hóa thành mô hình 3D trực quan và bài tập mô phỏng đời thường.<br>
 • Anh/chị hiểu rõ bản chất vì sao khớp kẹt và cách mở khớp bằng đòn bẩy tự nhiên mà không cần học vẹt sách y khoa.<br><br>
-Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng, tăng hiệu quả và giá trị buổi trị liệu mình làm cho khách lên rất nhiều nhé ạ!`,
+Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư thế (Posture Alignment), giải phóng khớp cổ chân, khớp háng, tăng hiệu quả và giá trị buổi trị liệu mình làm cho khách lên rất nhiều nhé ạ!<br><br>
+Dạ hiện tại cơ sở hoặc phòng tập của anh/chị có thường xuyên gặp khách hàng than phiền về đau mỏi cổ vai gáy hay võng lưng không ạ? Anh/chị chia sẻ thêm với em nhé!`,
         cta: "register"
       },
       q3: {
         text: `Dạ em rất hiểu khi mới tìm hiểu, học phí chắc chắn là điều anh/chị cân nhắc kỹ lưỡng đầu tiên ạ.<br><br>
 Nhưng khi bước vào điều trị thực tế, các anh chị học viên đều nhận ra: Một khóa học ngắn ngày giá rẻ thường chỉ dạy vài ba thao tác bẻ khớp theo cảm tính, không dạy đọc phim X-quang và không dạy Cảnh báo đỏ (Red Flags).<br><br>
 Trong ngành y, <strong>rủi ro lớn nhất không phải là học phí đắt hay rẻ, mà là lỡ tay nắn sai vào một ca chống chỉ định</strong> (rách bao xơ đĩa đệm, loãng xương nặng hay thiểu năng tuần hoàn não) thì hậu quả về sức khỏe người bệnh và uy tín cả đời không gì bù đắp được.<br><br>
-Khóa học Simon Center bảo vệ anh/chị an toàn 100%. Về kinh tế, sau khi học xong anh/chị chỉ cần tiếp nhận <strong>5–6 bệnh nhân</strong> tại phòng khám là đã thu hồi hoàn toàn 14.9 triệu, nhưng tay nghề chuẩn y khoa thì theo anh/chị trọn đời nhé ạ!`,
+Khóa học Simon Center bảo vệ anh/chị an toàn 100%. Về kinh tế, sau khi học xong anh/chị chỉ cần tiếp nhận <strong>5–6 bệnh nhân</strong> tại phòng khám là đã thu hồi hoàn toàn 14.9 triệu, nhưng tay nghề chuẩn y khoa thì theo anh/chị trọn đời nhé ạ!<br><br>
+Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu góc nhìn người nắn (POV 4K) để cảm nhận cách Thầy Henrik giảng giải trực quan thế nào trước không ạ?`,
         cta: "register"
       },
       q4: {
@@ -90,36 +94,41 @@ Khóa học hướng dẫn anh chi tiết:<br>
 • Cách đọc các mốc giải phẫu trên phim chụp cột sống thẳng và nghiêng.<br>
 • Đo đạc độ nghiêng xương cùng, độ lệch trục xương chậu (AP Pelvis View) chuẩn xác từng milimet.<br>
 • Nhận diện thoái hóa, trượt đốt sống, gai xương và các bệnh lý nguy hiểm cấm nắn.<br><br>
-🎁 <em>Đặc biệt: Khi đăng ký đợt này, anh được tặng kèm trọn bộ <strong>Cẩm nang phân tích phim X-quang cơ sinh học</strong> độc quyền biên soạn bằng tiếng Việt ạ.</em>`,
+🎁 <em>Đặc biệt: Khi đăng ký đợt này, anh được tặng kèm trọn bộ <strong>Cẩm nang phân tích phim X-quang cơ sinh học</strong> độc quyền biên soạn bằng tiếng Việt ạ.</em><br><br>
+Dạ không biết trước đây anh/chị đã từng tiếp xúc với phim X-quang cột sống bao giờ chưa ạ? Cẩm nang này hướng dẫn từ con số 0 rất dễ hiểu nhé ạ!`,
         cta: "register"
       },
       q5: {
         text: `Dạ sau khi hoàn thành các bài giảng và vượt qua bài test cuối khóa, anh/chị sẽ được cấp <strong>Chứng Chỉ Hoàn Thành (Certificate of Completion)</strong> có chữ ký xác nhận trực tiếp của Bác sĩ Henrik Simon, chứng nhận hoàn thành chương trình đào tạo chuẩn y khoa quốc tế kế thừa từ Viện DISC ạ.<br><br>
-<em>Về mặt pháp lý minh bạch:</em> Khóa học cung cấp tri thức khoa học và nâng cao tay nghề thực hành để ứng dụng chăm sóc sức khỏe, phục hồi chức năng vận động. Còn để mở phòng khám chữa bệnh độc lập tại Việt Nam, người hành nghề cần tuân thủ đầy đủ quy định của Bộ Y tế về Giấy phép hành nghề y tế theo luật định nhé ạ.`,
+<em>Về mặt pháp lý minh bạch:</em> Khóa học cung cấp tri thức khoa học và nâng cao tay nghề thực hành để ứng dụng chăm sóc sức khỏe, phục hồi chức năng vận động. Còn để mở phòng khám chữa bệnh độc lập tại Việt Nam, người hành nghề cần tuân thủ đầy đủ quy định của Bộ Y tế về Giấy phép hành nghề y tế theo luật định nhé ạ.<br><br>
+Dạ anh/chị đang có định hướng nâng cao tay nghề để phục vụ bệnh nhân tại cơ sở của mình hay dự định mở phòng trị liệu mới vậy ạ?`,
         cta: "register"
       },
       q6: {
         text: `Dạ <strong>ĐƯỢC KHẤU TRỪ 100%</strong> anh nhé ạ! Đây là chính sách cực kỳ nhân văn và ưu đãi độc quyền của Simon Center.<br><br>
 Toàn bộ số tiền 14.9 triệu anh đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon (40.000.000đ)</strong>.<br><br>
-Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!`,
+Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!<br><br>
+Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị có muốn giữ suất ưu đãi 14.9 triệu đợt này trước không ạ?`,
         cta: "register"
       },
       q7: {
         text: `Dạ khác biệt nằm ở 2 chữ <strong>"Chuyên Biệt (Specific)"</strong> và <strong>"An Toàn"</strong> anh nhé ạ:<br><br>
 • <strong>Bẻ khớp thông thường / Clip mạng:</strong> Vặn xoắn thô bạo toàn thân để tạo tiếng kêu rôm rốp cho đã tai. Âm thanh đó chỉ là bọt khí bao khớp thoát ra, bẻ thô bạo rất dễ làm dãn dây chằng bao khớp và rách bao xơ đĩa đệm.<br>
-• <strong>Specific Chiropractic chuyên biệt:</strong> Phân tích tìm đúng <strong>đốt sai lệch nguyên phát (Primary Subluxation)</strong> — chỉ nắn đốt kẹt, tuyệt đối không nắn vào đốt lỏng bù trừ. Kỹ thuật HVLA vận tốc cao biên độ nhỏ êm ái, bệnh nhân chưa kịp sợ thì khớp đã mở ra nhẹ nhõm, không hề gây đau đớn ạ!`,
+• <strong>Specific Chiropractic chuyên biệt:</strong> Phân tích tìm đúng <strong>đốt sai lệch nguyên phát (Primary Subluxation)</strong> — chỉ nắn đốt kẹt, tuyệt đối không nắn vào đốt lỏng bù trừ. Kỹ thuật HVLA vận tốc cao biên độ nhỏ êm ái, bệnh nhân chưa kịp sợ thì khớp đã mở ra nhẹ nhõm, không hề gây đau đớn ạ!<br><br>
+Dạ không biết anh/chị đã từng chứng kiến hoặc trải nghiệm một ca nắn chỉnh Specific chuyên biệt bao giờ chưa ạ? Cảm giác rất êm ái và nhẹ nhõm đấy ạ!`,
         cta: "register"
       },
       q8: {
         text: `Dạ chị hoàn toàn yên tâm nhé ạ! Rất nhiều học viên nữ nhỏ nhắn 45kg tại Simon Center hiện đang nắn chỉnh rất mượt mà cho các khách hàng nam to béo 80–90kg.<br><br>
 Bản chất của Chiropractic chuẩn y khoa là <strong>khoa học của tốc độ và trọng lực rơi cơ thể (F = m · a)</strong>, hoàn toàn không dùng sức bắp tay.<br><br>
-Thầy Henrik sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể (Body Drop) trong một phần mười giây. Chị nắn 10 ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, hai cánh tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!`,
+Thầy Henrik sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể (Body Drop) trong một phần mười giây. Chị nắn 10 ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, hai cánh tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!<br><br>
+Dạ chị có đang lo lắng về thể lực hay chiều cao của mình khi nắn chỉnh không ạ? Chị cứ chia sẻ thêm với em nhé!`,
         cta: "register"
       },
       q9: {
         text: `Dạ bên em CÓ hỗ trợ phương án <strong>thanh toán trả góp linh hoạt qua thẻ tín dụng</strong> kỳ hạn 3, 6, 9 hoặc 12 tháng anh nhé ạ.<br><br>
 Tính ra mỗi tháng anh chỉ cần thanh toán khoảng hơn 1 triệu đồng — tương đương thu nhập từ 2 ca nắn chỉnh tại phòng khám, rất nhẹ nhàng về dòng tiền.<br><br>
-Ngay khi kích hoạt, anh được cấp tài khoản học trọn đời và nhận trọn bộ cẩm nang X-quang ngay lập tức. Anh nhắn Zalo hoặc để lại thông tin để em hỗ trợ kiểm tra biểu phí ưu đãi nhất cho anh nhé ạ!`,
+Ngay khi kích hoạt, anh được cấp tài khoản học trọn đời và nhận trọn bộ cẩm nang X-quang ngay lập tức. Anh/chị đang dùng thẻ tín dụng của ngân hàng nào ạ? Để em kiểm tra hỗ trợ chuyển đổi kỳ hạn phù hợp nhất cho anh/chị nhé!`,
         cta: "register"
       },
       buy: {
@@ -146,7 +155,7 @@ Simon Center có chính sách hỗ trợ tài chính tối ưu để anh/chị k
 • <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu 4K POV chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
 • <strong>Bước 2 - Trả góp 0% chỉ ~1.2 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Mỗi tháng chỉ bằng thu nhập từ 1–2 ca nắn chỉnh thực tế.<br>
 • <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ 14.9 triệu tiền khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
-<em>Anh/chị không cần gom tiền học dồn dập mọi khóa cùng lúc. Hãy bắt đầu vững chắc từ nền tảng Online trước nhé ạ!</em>`,
+Dạ giữa việc <strong>nhận video học thử 0đ</strong> và <strong>tìm hiểu gói hỗ trợ trả góp</strong>, anh/chị muốn em hướng dẫn bước nào trước ạ?`,
         cta: "trial"
       },
 
@@ -225,7 +234,8 @@ Trong giáo trình của Bác sĩ Henrik Simon, đây là <strong>nguyên tắc 
 • <strong>Loãng xương nặng:</strong> CẤM LỰC NÉN DỌC trục thân đốt sống. Chỉ dùng lực xoay/trượt ngang tiếp xúc gai mỏm.<br>
 • <strong>Xơ vữa động mạch đốt sống (A. vertebralis):</strong> Bắt buộc làm test De-Kleyn trước khi chạm vào vùng cổ.<br>
 • Bệnh nhân đang dùng Corticoid liều cao kéo dài, bệnh ưa chảy máu (Hemophilia).<br><br>
-<em>💡 Nắm vững Red Flags giúp bạn tự tin từ chối đúng lúc, chuyển viện đúng ca và hành nghề an toàn 100% trọn đời!</em>`,
+<em>💡 Nắm vững Red Flags giúp bạn tự tin từ chối đúng lúc, chuyển viện đúng ca và hành nghề an toàn 100% trọn đời!</em><br><br>
+Dạ trong thực tế điều trị, anh/chị đã từng gặp ca bệnh nào khiến mình băn khoăn không biết có nên nắn hay không chưa ạ? Anh/chị có thể chia sẻ triệu chứng để em cùng hội chẩn nhé ạ!`,
         cta: "register"
       },
 
@@ -239,7 +249,8 @@ Rất nhiều người lầm tưởng tiếng kêu là do "hai đầu xương va
 ⚠️ <strong>2. Tiếng kêu KHÔNG ĐỒNG NGHĨA với nắn thành công:</strong><br>
 • Sau khi bọt khí vỡ, cần <strong>15–20 phút (Giai đoạn trơ - Refractory Period)</strong> để khí hòa tan trở lại vào dịch khớp.<br>
 • <strong>Cảnh báo y khoa:</strong> Các clip vặn bẻ thô bạo trên mạng cố tình vặn xoắn nhiều lần để tạo âm thanh giòn tai sẽ làm <em>giãn dây chằng bao khớp, rách bao xơ đĩa đệm và gây mất vững cột sống (Hypermobility)</em>.<br>
-• Specific Chiropractic chỉ cần mở đúng đốt kẹt (Fixation) bằng lực vi tế, không chạy theo tiếng kêu rôm rốp!`,
+• Specific Chiropractic chỉ cần mở đúng đốt kẹt (Fixation) bằng lực vi tế, không chạy theo tiếng kêu rôm rốp!<br><br>
+Dạ anh/chị có hay gặp khách hàng hoặc bệnh nhân cứ đòi phải bẻ thật mạnh để nghe tiếng kêu to không ạ? Anh/chị chia sẻ cảm nhận thực tế nhé!`,
         cta: "register"
       },
 
@@ -255,7 +266,8 @@ Hơn 90% trường hợp "chân ngắn chân dài" ngoài đời là <strong>B�
 • Đẩy ổ cối xuống dưới ➔ <strong>Làm chân bên đó dài ra</strong>.<br>
 • <em>Dấu hiệu:</em> SIPS bên tổn thương cao hơn và phẳng hơn; gai chậu trước trên (SIAS) thấp hơn.<br><br>
 🎯 <strong>Giải pháp trị liệu:</strong><br>
-Trong giáo trình Henrik Simon, bạn sẽ học cách dùng kỹ thuật nằm nghiêng (Side-lying Pelvis drop) hoặc kỹ thuật nằm sấp tiếp xúc ụ ngồi (Tuber ischiadicum) để đưa chậu về trung tính. Chiều dài 2 chân sẽ <strong>cân bằng ngay lập tức sau 1 buổi</strong>!`,
+Trong giáo trình Henrik Simon, bạn sẽ học cách dùng kỹ thuật nằm nghiêng (Side-lying Pelvis drop) hoặc kỹ thuật nằm sấp tiếp xúc ụ ngồi (Tuber ischiadicum) để đưa chậu về trung tính. Chiều dài 2 chân sẽ <strong>cân bằng ngay lập tức sau 1 buổi</strong>!<br><br>
+Dạ anh/chị có đang theo dõi ca bệnh nào bị lệch hông hoặc bước đi nghiêng một bên không ạ? Nếu có hình ảnh tư thế hay phim X-quang, anh/chị cứ nhắn để em cùng Thầy Henrik xem giúp nhé ạ!`,
         cta: "register"
       },
 
@@ -270,7 +282,8 @@ Khớp cùng chậu (ISG) là trung tâm truyền lực giữa thân mình và h
 • <strong>Nghiệm pháp Mennell:</strong> Bệnh nhân nằm sấp, thầy thuốc cố định xương cùng, nâng đùi duỗi tối đa ra sau. Đau nhói tại khớp cùng chậu là dương tính.<br>
 • <strong>Nghiệm pháp Patrick (FABERE):</strong> Gập - Dang - Xoay ngoài háng (chân bắt chéo số 4). Ép gối xuống bàn: Nếu đau phía trước bẹn ➔ Tổn thương khớp háng; nếu đau phía sau mông chậu ➔ Kẹt khớp cùng chậu ISG.<br>
 • <strong>Vorlauf-Test:</strong> Bệnh nhân đứng thẳng, cúi người ra trước; bên ISG bị khóa cứng thì gai SIPS sẽ bị kéo chạy lên trên sớm hơn bên lành.<br><br>
-<em>Thầy Henrik Simon dạy kỹ thuật nắn chỉnh giải phóng ISG bằng lực rơi đòn bẩy chỉ mất 3 giây là giải tỏa cơn đau tức thì!</em>`,
+<em>Thầy Henrik Simon dạy kỹ thuật nắn chỉnh giải phóng ISG bằng lực rơi đòn bẩy chỉ mất 3 giây là giải tỏa cơn đau tức thì!</em><br><br>
+Dạ trên ca bệnh này, người bệnh đau nhiều hơn khi đứng lâu hay khi đổi tư thế ngồi dậy ạ? Anh/chị mô tả thêm để em trao đổi sâu hơn nhé ạ!`,
         cta: "register"
       },
 
@@ -284,7 +297,8 @@ Khớp cùng chậu (ISG) là trung tâm truyền lực giữa thân mình và h
 ⚡ <strong>2. Phân biệt Hội Chứng Cơ Hình Lê (Piriformis Syndrome):</strong><br>
 • Dây thần kinh tọa không bị ép ở cột sống mà bị co thắt, bó nghẽn bởi cơ hình lê nằm sâu trong mông.<br>
 • <em>Khám lâm sàng:</em> Ấn điểm giữa mông (điểm xuất chiếu cơ hình lê) bệnh nhân giật nảy người vì đau buốt lan xuống chân; nghiệm pháp Lasègue chỉ đau khi xoay khớp háng vào trong khép đùi; phim MRI cột sống thắt lưng không thấy khối thoát vị lớn.<br><br>
-💡 <strong>Lưu ý nắn chỉnh:</strong> Tuyệt đối không nắn vặn xoắn thô bạo vào đĩa đệm đang rách cấp. Simon Center dạy kỹ thuật giải áp rễ thần kinh tự nhiên và nắn các đốt lân cận để chuyển tải trọng lực an toàn!`,
+💡 <strong>Lưu ý nắn chỉnh:</strong> Tuyệt đối không nắn vặn xoắn thô bạo vào đĩa đệm đang rách cấp. Simon Center dạy kỹ thuật giải áp rễ thần kinh tự nhiên và nắn các đốt lân cận để chuyển tải trọng lực an toàn!<br><br>
+Dạ cơn đau của bệnh nhân có bị lan dọc xuống bắp chân hay ngón chân khi cúi người không ạ? Anh/chị chia sẻ chi tiết thêm với em nhé ạ!`,
         cta: "register"
       },
 
@@ -443,6 +457,8 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
           background: #FDFBF7;
           border: 1px solid rgba(217, 119, 6, 0.25);
           color: #1A1D20;
+          font-size: 13px;
+          line-height: 1.68;
         }
         .chiro-user-bubble {
           background: #8F1D35;
@@ -475,6 +491,20 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         .chat-scroll::-webkit-scrollbar-thumb {
           background: #CBD5E1;
           border-radius: 4px;
+        }
+        @keyframes chiroCursorBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .chiro-cursor {
+          display: inline-block;
+          width: 2.5px;
+          height: 14px;
+          background-color: #8F1D35;
+          margin-left: 2px;
+          vertical-align: -1.5px;
+          animation: chiroCursorBlink 0.75s infinite;
+          border-radius: 1px;
         }
       </style>
 
@@ -690,17 +720,14 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // --- HIỆU ỨNG GÕ CHỮ TỰ NHIÊN (TYPEWRITER STREAMING) ---
-    const paragraphs = htmlContent.split(/<br\s*[\/]?>\s*<br\s*[\/]?>/i);
-    
+    // --- HIỆU ỨNG GÕ CHỮ TỪNG TỪ CHUẨN CHATGPT (TRUE STREAMING TYPEWRITER) ---
     msgDiv.innerHTML = `
       <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40 mt-0.5">
         SC
       </div>
-      <div class="chiro-bot-bubble p-3 rounded-2xl rounded-tl-xs shadow-xs">
+      <div class="chiro-bot-bubble p-3 rounded-2xl rounded-tl-xs shadow-xs w-full">
         <div class="chiro-stream-content"></div>
-        <span class="chiro-cursor inline-block w-1.5 h-3.5 bg-brand-crimson ml-0.5 animate-pulse align-middle"></span>
-        <div class="chiro-stream-cta hidden opacity-0 transition-opacity duration-500">
+        <div class="chiro-stream-cta hidden opacity-0 transition-all duration-500 transform translate-y-2">
           ${ctaHtml}
         </div>
       </div>
@@ -712,43 +739,116 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     messagesContainer.scrollTo({ top: Math.max(0, scrollTarget), behavior: "smooth" });
 
     const contentBox = msgDiv.querySelector(".chiro-stream-content");
-    const cursor = msgDiv.querySelector(".chiro-cursor");
     const ctaBox = msgDiv.querySelector(".chiro-stream-cta");
 
-    let pIndex = 0;
-    function streamNextParagraph() {
-      if (pIndex < paragraphs.length) {
-        if (pIndex > 0) {
-          contentBox.innerHTML += "<br><br>" + paragraphs[pIndex];
-        } else {
-          contentBox.innerHTML = paragraphs[pIndex];
-        }
-        pIndex++;
-        
-        messagesContainer.scrollTo({
-          top: messagesContainer.scrollHeight,
-          behavior: "smooth"
-        });
-
-        const nextDelay = Math.floor(Math.random() * 100) + 240;
-        setTimeout(streamNextParagraph, nextDelay);
-      } else {
-        if (cursor) cursor.remove();
-        if (ctaHtml && ctaBox) {
-          ctaBox.classList.remove("hidden");
-          requestAnimationFrame(() => {
-            ctaBox.classList.remove("opacity-0");
-            ctaBox.classList.add("opacity-100");
-            messagesContainer.scrollTo({
-              top: messagesContainer.scrollHeight,
-              behavior: "smooth"
-            });
+    streamHtmlTypewriter(contentBox, htmlContent, () => {
+      if (ctaHtml && ctaBox) {
+        ctaBox.classList.remove("hidden");
+        requestAnimationFrame(() => {
+          ctaBox.classList.remove("opacity-0", "translate-y-2");
+          ctaBox.classList.add("opacity-100", "translate-y-0");
+          messagesContainer.scrollTo({
+            top: messagesContainer.scrollHeight,
+            behavior: "smooth"
           });
-        }
+        });
       }
+    });
+  }
+
+  // ── ĐỘNG CƠ GÕ CHỮ TỪNG TỪ CHUẨN CHATGPT (STREAMING TYPEWRITER ENGINE) ──
+  function streamHtmlTypewriter(targetElement, htmlContent, onComplete) {
+    const messagesContainer = document.getElementById("chiroChatMessages");
+    targetElement.innerHTML = htmlContent;
+
+    // Trích xuất toàn bộ Text Nodes trong cấu trúc DOM đã dựng sẵn (bảo tồn nguyên vẹn mọi thẻ HTML)
+    const textNodes = [];
+    const walker = document.createTreeWalker(targetElement, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while ((node = walker.nextNode())) {
+      textNodes.push({
+        node: node,
+        fullText: node.nodeValue
+      });
+      node.nodeValue = ""; // Làm rỗng ban đầu để gõ dần từng từ
     }
 
-    setTimeout(streamNextParagraph, 120);
+    if (textNodes.length === 0) {
+      if (typeof onComplete === "function") onComplete();
+      return;
+    }
+
+    // Tạo con trỏ nhấp nháy chuẩn ChatGPT
+    const cursor = document.createElement("span");
+    cursor.className = "chiro-cursor";
+    targetElement.appendChild(cursor);
+
+    let nodeIdx = 0;
+    let charIdx = 0;
+
+    function smoothScrollDown() {
+      if (!messagesContainer) return;
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function typeNextTick() {
+      if (nodeIdx >= textNodes.length) {
+        if (cursor && cursor.parentNode) cursor.remove();
+        smoothScrollDown();
+        if (typeof onComplete === "function") onComplete();
+        return;
+      }
+
+      const current = textNodes[nodeIdx];
+      const full = current.fullText;
+
+      // Nếu là khoảng trắng đơn thuần (newline, tab...), hiển thị ngay và sang node tiếp theo
+      if (!full.trim()) {
+        current.node.nodeValue = full;
+        nodeIdx++;
+        charIdx = 0;
+        typeNextTick();
+        return;
+      }
+
+      // Tìm ranh giới từ tiếp theo (khoảng trắng tiếp theo)
+      const nextSpace = full.indexOf(" ", charIdx);
+      let nextChunkEnd;
+      if (nextSpace === -1) {
+        nextChunkEnd = full.length;
+      } else {
+        nextChunkEnd = nextSpace + 1;
+      }
+
+      charIdx = nextChunkEnd;
+      current.node.nodeValue = full.slice(0, charIdx);
+
+      // Đặt con trỏ ngay sau vị trí đang gõ
+      if (current.node.parentNode) {
+        current.node.parentNode.insertBefore(cursor, current.node.nextSibling);
+      }
+
+      smoothScrollDown();
+
+      // Tính toán độ trễ gõ phím chân thực như người gõ phím / ChatGPT streaming
+      const lastChar = full.charAt(charIdx - 1) || (charIdx >= 2 ? full.charAt(charIdx - 2) : "");
+      let delay = Math.floor(Math.random() * 14) + 24; // 24ms - 38ms mỗi từ
+
+      if (lastChar === "." || lastChar === "!" || lastChar === "?") {
+        delay = 180; // Dừng nhịp suy nghĩ ngắt câu
+      } else if (lastChar === "," || lastChar === ";" || lastChar === ":" || lastChar === "—") {
+        delay = 95; // Dừng nhẹ ở dấu phẩy
+      }
+
+      if (charIdx >= full.length) {
+        nodeIdx++;
+        charIdx = 0;
+      }
+
+      setTimeout(typeNextTick, delay);
+    }
+
+    setTimeout(typeNextTick, 60);
   }
 
   function appendUserMessage(text) {
@@ -1158,18 +1258,23 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
       return;
     }
 
-    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời tâm huyết, lịch sự & kết nối trực tiếp
+    // Ngữ cảnh 4: Câu hỏi mở khác - Trả lời tâm huyết, uyển chuyển & đặt câu hỏi gợi mở kết nối
     appendBotMessage(
-      `Dạ em cảm ơn câu hỏi của anh/chị ạ!<br><br>
-Tại Simon Center, tôn chỉ cao nhất của Bác sĩ Henrik Simon là <strong>Y đức chuẩn mực & Trị liệu an toàn tuyệt đối</strong>.<br><br>
-Mọi thắc mắc cụ thể về ca bệnh lâm sàng, kỹ thuật nắn chỉnh chuyên biệt hay lộ trình học tập phù hợp nhất với điều kiện của mình, anh/chị đều có thể để lại thông tin hoặc nhắn tin trực tiếp qua Zalo <strong>0389.609.938</strong> để được Bác sĩ chuyên môn trực tiếp tư vấn chi tiết nhé ạ!`,
+      `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
+Trong Trị liệu Thần kinh Cột sống Chiropractic, mỗi tình trạng đau mỏi hay mỗi thắc mắc chuyên môn đều gắn liền với cơ chế cơ sinh học riêng biệt. Để Thầy Henrik Simon và đội ngũ y khoa Simon Center có thể tư vấn chuẩn xác và hữu ích nhất cho anh/chị:<br><br>
+• Nếu anh/chị đang gặp <strong>một ca bệnh hoặc triệu chứng khó chịu cụ thể</strong>: Cơn đau xuất hiện bao lâu rồi và có kèm theo tê lan xuống tay/chân không ạ?<br>
+• Nếu anh/chị đang quan tâm đến <strong>khóa học nâng cao tay nghề</strong>: Anh/chị đang muốn bắt đầu từ con số 0 hay nâng cao kỹ năng thực hành nắn chỉnh ạ?<br><br>
+Anh/chị cứ chia sẻ thêm chi tiết với em ở ô chat bên dưới, em luôn ở đây lắng nghe và hỗ trợ anh/chị nhé ạ!`,
       "trial"
     );
   }
 
   function showTypingIndicator(callback) {
     const messagesContainer = document.getElementById("chiroChatMessages");
-    if (!messagesContainer) return;
+    if (!messagesContainer) {
+      if (typeof callback === "function") callback();
+      return;
+    }
 
     // Xóa indicator cũ nếu còn
     const oldIndicator = document.getElementById("chiroTypingIndicator");
@@ -1177,7 +1282,7 @@ Mọi thắc mắc cụ thể về ca bệnh lâm sàng, kỹ thuật nắn ch�
 
     const typingDiv = document.createElement("div");
     typingDiv.id = "chiroTypingIndicator";
-    typingDiv.className = "flex items-center space-x-2 text-xs py-1";
+    typingDiv.className = "flex items-center space-x-2 text-xs py-1 transition-all duration-300";
     typingDiv.innerHTML = `
       <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40">SC</div>
       <div class="bg-amber-50/90 border border-amber-200/80 px-3.5 py-2 rounded-2xl rounded-tl-xs flex items-center space-x-2 shadow-xs">
@@ -1186,16 +1291,32 @@ Mọi thắc mắc cụ thể về ca bệnh lâm sàng, kỹ thuật nắn ch�
           <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.18s"></span>
           <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.36s"></span>
         </div>
-        <span class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">Simon Center đang soạn câu trả lời...</span>
+        <span id="chiroThinkingText" class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">💭 Đang phân tích tình trạng & đối chiếu giải phẫu...</span>
       </div>
     `;
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // Thời gian suy nghĩ và chuẩn bị tự nhiên (1.2s - 1.6s)
-    const thinkingTime = Math.floor(Math.random() * 400) + 1200;
+    const thinkingLabel = document.getElementById("chiroThinkingText");
+
+    // Giai đoạn 1: Đang phân tích cơ chế giải phẫu (700ms)
     setTimeout(() => {
-      typingDiv.remove();
+      if (thinkingLabel) {
+        thinkingLabel.innerText = "🧠 Đang tra cứu phác đồ cơ sinh học cùng Thầy Henrik Simon...";
+      }
+    }, 700);
+
+    // Giai đoạn 2: Đang soạn câu trả lời (sau 1450ms)
+    setTimeout(() => {
+      if (thinkingLabel) {
+        thinkingLabel.innerText = "✍️ Simon Center đang soạn câu trả lời...";
+      }
+    }, 1450);
+
+    // Thời gian suy nghĩ tự nhiên giống ChatGPT (1.8s - 2.2s)
+    const thinkingTime = Math.floor(Math.random() * 300) + 1850;
+    setTimeout(() => {
+      if (typingDiv && typingDiv.parentNode) typingDiv.remove();
       if (typeof callback === "function") callback();
     }, thinkingTime);
   }
