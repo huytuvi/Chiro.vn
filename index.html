@@ -3286,10 +3286,10 @@
         website_hp: hp
       });
 
-      // 4. GỬI EMAIL XÁC NHẬN ĐƠN GIẢN QUA FORMSUBMIT
-      // ⚠️ QUAN TRỌNG: Email này CHỈ xác nhận đã nhận đăng ký — KHÔNG chứa mã SCC hay hướng dẫn CK.
-      // Hướng dẫn chuyển khoản + mã SePay sẽ gửi riêng qua Resend/MailApp CHỈ KHI khách
-      // bấm "← Tôi sẽ chuyển khoản sau" (hàm sendPendingReminderEmail → action: send_pending_reminder).
+      // 4. GỬI EMAIL XÁC NHẬN KÈM HƯỚNG DẪN CHUYỂN KHOẢN & MÃ VIETQR QUA FORMSUBMIT
+      const cleanPriceNum = String(currentPriceObj.current).replace(/\D/g, '') || '7000000';
+      const qrImageUrl = `https://img.vietqr.io/image/ACB-2412825668-compact2.png?amount=${cleanPriceNum}&addInfo=${encodeURIComponent(orderCode)}&accountName=BUI%20NGOC%20MINH%20HUY`;
+
       const regAutoResponse =
         `🎉 CHÚC MỪNG ANH/CHỊ ${name.toUpperCase()} ĐÃ ĐĂNG KÝ THÀNH CÔNG!\n\n` +
         `Hệ thống Simon EDU Center đã ghi nhận yêu cầu đăng ký của Anh/Chị.\n\n` +
@@ -3297,12 +3297,19 @@
         `• Họ và tên: ${name}\n` +
         `• Số điện thoại / Zalo: ${phone}\n` +
         `• Email: ${email}\n` +
-        `• Khóa học: ${courseName}\n` +
+        `• Khóa học quan tâm: ${courseName}\n` +
         `• Học phí ưu đãi: ${currentPriceObj.currentFormatted}\n` +
-        `• Mã đơn hàng: ${orderCode}\n\n` +
-        `⏳ BƯỚC TIẾP THEO:\n` +
-        `Vui lòng hoàn tất thanh toán qua màn hình QR Code đang hiển thị trên website.\n` +
-        `Nếu Anh/Chị chưa thể chuyển khoản ngay, Simon Center sẽ gửi thêm email hướng dẫn chuyển khoản chi tiết sau.\n\n` +
+        `• Mã đơn hàng (Nội dung CK SePay): ${orderCode}\n\n` +
+        `💳 HƯỚNG DẪN CHUYỂN KHOẢN TỰ ĐỘNG (ACB SEPAY):\n` +
+        `• Ngân hàng: ACB (Ngân hàng TMCP Á Châu)\n` +
+        `• Số tài khoản: 2412825668\n` +
+        `• Chủ tài khoản: BUI NGOC MINH HUY\n` +
+        `• Số tiền: ${currentPriceObj.currentFormatted}\n` +
+        `• Nội dung chuyển khoản (BẮT BUỘC CHÍNH XÁC): ${orderCode}\n\n` +
+        `📷 MÃ VIETQR QUÉT TỰ ĐỘNG CHUYỂN KHOẢN SEPAY:\n` +
+        `Mở app ngân hàng quét mã QR tại liên kết bên dưới để thông tin tự động điền 100%:\n` +
+        `${qrImageUrl}\n\n` +
+        `⚠️ LƯU Ý QUAN TRỌNG: Vui lòng nhập CHÍNH XÁC nội dung chuyển khoản là "${orderCode}" để cổng SePay tự động xác thực và kích hoạt khóa học cho Anh/Chị trong 3-10 giây!\n\n` +
         `📞 Cần hỗ trợ khẩn cấp: Hotline/Zalo 0389.609.938 | 093 115 8868\n` +
         `🔒 Simon EDU Center cam kết bảo mật 100% thông tin cá nhân.\n\n` +
         `Trân trọng,\nBan Đào Tạo Simon EDU Center — chiro.vn`;
@@ -3312,7 +3319,7 @@
       formData.set('email', email);
       formData.set('_replyto', email);
       formData.set('_autoresponse', regAutoResponse);
-      formData.set('_subject', `[Simon Center] ✅ Xác nhận đăng ký — ${name} — Khóa học Chiropractic (Đơn #${orderCode})`);
+      formData.set('_subject', `[Simon Center] ✅ Xác nhận đăng ký & Hướng dẫn CK SePay — ${name} (Đơn #${orderCode})`);
 
       fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
         method: 'POST',
