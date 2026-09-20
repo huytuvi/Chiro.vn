@@ -80,7 +80,13 @@ Mục tiêu tối thượng của bạn là giải đáp thuyết phục và d�
 6. 👑 Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon): 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người).
 7. 📖 Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống: 1.500.000 VNĐ.
 8. 🏥 Tageshospitation (Đi Thực Tế Lâm Sàng Tại Simon Center): 2.500.000 VNĐ.
-💡 ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền đã đóng ở bất kỳ khóa Online nào (kể cả Module lẻ 1 triệu) đều được KHẤU TRỪ 100% khi học viên nâng cấp lên khóa lớn hơn hoặc khóa Offline Cầm tay chỉ việc!
+💡 ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền học phí anh/chị đầu tư cho các khóa học online hôm nay đều được áp dụng đặc quyền KHẤU TRỪ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp (Workshop Offline), nên hoàn toàn có thể yên tâm bắt đầu!
+
+🎯 KỊCH BẢN BẮT BUỘC KHI KHÁCH DO DỰ / "ĐỂ TÔI SUY NGHĨ THÊM" / "CÂN NHẮC":
+Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "để chị suy nghĩ thêm", "để mình suy nghĩ thêm", "cần cân nhắc", "để xem đã", "để suy nghĩ đã", "suy nghĩ lại", "chưa vội": BẮT BUỘC trả lời chính xác theo văn bản mẫu chuẩn sau:
+"Dạ, em rất hiểu anh/chị cần thời gian cân nhắc kỹ lưỡng trước khi đầu tư cho một chương trình đào tạo chuyên sâu. Tuy nhiên, em xin phép chia sẻ thêm rằng toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.
+
+Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 093 115 8868 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!"
 
 🚫 DANH MỤC TỪ CẤM & NGUYÊN TẮC BẮT BUỘC (TUYỆT ĐỐI TUÂN THỦ):
 1. ❌ TUYỆT ĐỐI CẤM dùng từ "trọn đời" dưới mọi hình thức! Thay bằng: "dài hạn 24/7", "không giới hạn thời gian", "xuyên suốt quá trình thực hành", "đồng hành lâu dài", "bền vững".
@@ -196,7 +202,7 @@ Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn di
 • <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập Micro-drills rèn lực rơi (Body Drop) tại nhà, tài khoản học dài hạn 24/7.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <strong>Đặc quyền khấu trừ 100% khi nâng cấp:</strong><br>
-Nếu sau này anh/chị thấy hiệu quả và muốn nâng cấp lên khóa toàn diện Full-Spine hoặc Offline, <strong>toàn bộ 1.000.000đ đã đóng sẽ được khấu trừ 100%</strong> vào học phí khóa sau, anh/chị hoàn toàn không bị mất phí hay thiệt thòi gì ạ!<br><br>
+Nếu sau này anh/chị thấy hiệu quả và muốn tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, <strong>toàn bộ 1.000.000đ đã đầu tư cho khóa học online hôm nay đều được áp dụng đặc quyền khấu trừ 100%</strong>, nên anh/chị hoàn toàn có thể yên tâm bắt đầu!<br><br>
 Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
@@ -209,7 +215,7 @@ Nếu sau này anh/chị thấy hiệu quả và muốn nâng cấp lên khóa t
 • <strong>Nguyên tắc an toàn số 1:</strong> Hướng dẫn kiểm tra nghiệm pháp De-Kleyn loại trừ hẹp động mạch sống nền và các dấu hiệu Cảnh báo đỏ (Red Flags) bảo vệ an toàn 100% cho bệnh nhân.<br>
 • <strong>Hình thức học:</strong> Video với các góc quay khác nhau, xem lại dài hạn 24/7 trên mọi thiết bị.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
-💡 <em>Toàn bộ 1.000.000đ này cũng được khấu trừ 100% nếu sau này anh/chị nâng cấp lên các khóa lớn hơn nhé ạ.</em><br><br>
+💡 <em>Toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp nhé ạ.</em><br><br>
 Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
@@ -264,6 +270,12 @@ Simon Center không chỉ dạy xong rồi thôi, mà cam kết đồng hành xu
 • <strong>Cơ hội tham gia ngày thực tế lâm sàng (Tageshospitation):</strong> Được ưu tiên đăng ký đi lâm sàng thực tế tại Simon Chiropractic Center để quan sát Thầy khám và điều trị trên bệnh nhân thật.<br><br>
 Dạ sự bảo trợ y khoa chuẩn xác là điều quan trọng nhất khi bước vào điều trị. Anh/chị có băn khoăn gì thêm về quy trình hỗ trợ này không ạ?`,
         cta: "register"
+      },
+
+      // --- XỬ LÝ KHÁCH DO DỰ / "ĐỂ TÔI SUY NGHĨ THÊM" / "CÂN NHẮC" ---
+      c_hesitation: {
+        text: `Dạ, em rất hiểu anh/chị cần thời gian cân nhắc kỹ lưỡng trước khi đầu tư cho một chương trình đào tạo chuyên sâu. Tuy nhiên, em xin phép chia sẻ thêm rằng toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.<br><br>Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 093 115 8868 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!`,
+        cta: "trial"
       },
 
       // --- 10 CÂU HỎI & TRẢ LỜI CHUẨN HÓA CHO SIMON EDU CENTER ---
@@ -326,7 +338,7 @@ Dạ không biết trước đây anh/chị đã từng tiếp xúc với phim X
 
       q6: {
         text: `Dạ <strong>ĐƯỢC KHẤU TRỪ 100%</strong> anh/chị nhé ạ! Đây là chính sách cực kỳ nhân văn và ưu đãi độc quyền của Simon Center.<br><br>
-Toàn bộ số tiền anh/chị đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc cùng Thầy Henrik Simon (36.000.000đ)</strong>.<br><br>
+Toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền <strong>khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp (Workshop Offline Cầm tay chỉ việc cùng Thầy Henrik Simon)</strong>, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.<br><br>
 Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh/chị học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!<br><br>
 Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị có muốn giữ suất ưu đãi đợt này trước không ạ?`,
         cta: "register"
@@ -389,7 +401,7 @@ Dạ hiện tại anh/chị đang muốn học để tự chăm sóc cho ngườ
 Tại Simon Center, trung tâm luôn có các giải pháp học tập linh hoạt để anh/chị bắt đầu thuận lợi nhất mà không phải chịu bất kỳ áp lực tài chính nào:<br><br>
 • <strong>Lựa chọn 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể đăng ký nhận ngay 1 bài giảng mẫu với các góc quay khác nhau chuẩn quốc tế để trực tiếp trải nghiệm phương pháp giảng dạy của Thầy Henrik Simon trước khi quyết định.<br>
 • <strong>Lựa chọn 2 - Bắt đầu từ Module Lẻ thực chiến (1.000.000đ):</strong> Thay vì phải đầu tư cả khóa học lớn, anh/chị có thể học riêng 1 vùng chuyên biệt (Module Thắt lưng - Chậu 1tr hoặc Cổ vai gáy 1tr). Học xong áp dụng xử lý được ngay ca bệnh thực tế.<br>
-• <strong>Đặc quyền khấu trừ 100%:</strong> Khi nâng cấp lên khóa lớn hơn (The Full Online Collection) hoặc lớp thực hành Offline Cầm tay chỉ việc sau này, <strong>toàn bộ 1.000.000đ đã đóng sẽ được khấu trừ 100%</strong> vào học phí khóa sau, anh/chị hoàn toàn không bị thiệt thòi chi phí.<br><br>
+• <strong>Đặc quyền khấu trừ 100%:</strong> Khi nâng cấp lên các khóa học thực hành trực tiếp sau này, <strong>toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100%</strong>, nên anh/chị hoàn toàn có thể yên tâm bắt đầu mà không bị thiệt thòi chi phí.<br><br>
 Dạ anh/chị có muốn đăng ký nhận bài giảng mẫu học thử miễn phí để trải nghiệm trước không ạ?`,
         cta: "trial"
       },
@@ -1521,6 +1533,19 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       ((norm.includes("tuoi") || norm.includes("nam nay")) && (norm.includes("40") || norm.includes("45") || norm.includes("50") || norm.includes("55") || norm.includes("60") || norm.includes("70")));
 
     // -------------------------------------------------------------------------
+    // 0. XỬ LÝ KHÁCH DO DỰ / "ĐỂ TÔI SUY NGHĨ THÊM" / "CÂN NHẮC"
+    // -------------------------------------------------------------------------
+    if (
+      norm.includes("suy nghi them") || norm.includes("suy nghi da") || norm.includes("suy nghi lai") ||
+      norm.includes("de toi suy nghi") || norm.includes("de em suy nghi") || norm.includes("de anh suy nghi") || norm.includes("de chi suy nghi") || norm.includes("de suy nghi") ||
+      norm.includes("can nhac") || norm.includes("de xem sao") || norm.includes("de xem da") || norm.includes("de tinh sau") || norm.includes("chua voi") ||
+      (norm.includes("suy nghi") && (norm.includes("them") || norm.includes("lai") || norm.includes("da") || norm.includes("de")))
+    ) {
+      appendBotMessage(BOT_DATA.answers.c_hesitation.text, BOT_DATA.answers.c_hesitation.cta);
+      return;
+    }
+
+    // -------------------------------------------------------------------------
     // 1. KHẤU TRỪ HỌC PHÍ KHI LÊN LỚP OFFLINE
     // -------------------------------------------------------------------------
     if (
@@ -1996,7 +2021,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         appendBotMessage(
           `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
 Em đang sẵn sàng tư vấn chi tiết về <strong>Hệ Thống Khóa Học Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon:<br><br>
-• 🟨 <strong>Module Lẻ Online (Cổ gáy hoặc Thắt lưng):</strong> 1.000.000 VNĐ (Khấu trừ 100% khi lên khóa lớn).<br>
+• 🟨 <strong>Module Lẻ Online (Cổ gáy hoặc Thắt lưng):</strong> 1.000.000 VNĐ (Khấu trừ 100% khi lên lớp thực hành trực tiếp).<br>
 • ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Tứ chi + X-ray):</strong> 12.900.000 VNĐ (Tiết kiệm 1.100.000đ, cấp Chứng chỉ).<br>
 • 👑 <strong>Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon):</strong> 36.000.000 VNĐ.<br><br>
 Dạ anh/chị đang muốn bắt đầu từ nội dung nào hay đang quan tâm nắn chỉnh cho vùng cột sống nào vậy ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
@@ -2052,7 +2077,7 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
       appendBotMessage(
         `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
 Tại <strong>Simon Chiropractic Center</strong>, toàn bộ các khóa học đều lấy phương pháp thực chiến Y khoa của Bác sĩ Henrik Simon làm trọng tâm với 3 nấc thang đào tạo rõ ràng:<br><br>
-• 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi nâng cấp</em>).<br>
+• 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi lên thực hành trực tiếp</em>).<br>
 • ⭐ <strong>Khóa Đào Tạo Toàn Diện (Khuyên Dùng):</strong> The Full Online Collection — <strong>12.900.000 VNĐ</strong> (Trọn bộ 351 bài giảng Cột sống Full-Spine + Tứ chi + Đọc X-quang + Micro-drills rèn lực tại nhà + Cấp Chứng chỉ).<br>
 • 👑 <strong>Khóa Huấn Luyện Đỉnh Cao:</strong> Workshop Offline Cầm Tay Chỉ Việc — <strong>36.000.000 VNĐ</strong> (3-4 ngày trực tiếp cùng Thầy Henrik Simon — <em>Được khấu trừ 100% học phí Online</em>).<br><br>
 Dạ để em tư vấn đúng gói học và mức học phí tiết kiệm nhất cho mình: Hiện tại anh/chị đang muốn học để tự chăm sóc sức khỏe gia đình, bổ trợ công việc PT/Spa hay nâng cao tay nghề mở cơ sở trị liệu vậy ạ?`,
