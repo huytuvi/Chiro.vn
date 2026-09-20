@@ -1715,6 +1715,7 @@ function ensureSurveySheetWithCharts(ss, forceRefreshCharts) {
       "WL140921155678",
       "[MT:3|KN:1|HT:2]",
       "Học viên mẫu (Có thể xóa)"
+    ]);
     Logger.log("📝 Đã thêm 2 dòng dữ liệu mẫu demo để biểu đồ có số liệu hiển thị ngay lập tức.");
   }
 
