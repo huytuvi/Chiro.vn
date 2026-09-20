@@ -10,10 +10,10 @@
 | **Module Lẻ Online** | 2.000.000đ – 3.000.000đ | **1.000.000đ – 2.000.000đ** | Học thử 1 vùng chuyên biệt (Cổ vai gáy hoặc Thắt lưng chậu hoặc Khớp hàm TMJ). Video với các góc quay khác nhau. |
 | **Level Lẻ Online (1 & 2)** | 10.000.000đ | **8.500.000đ** | Học trọn 1 Level: Level 1 (Toàn bộ Cột sống Full-Spine) hoặc Level 2 (Toàn bộ Khớp ngoại vi Tứ chi). |
 | **The Full Online Collection** | 18.000.000đ | **14.900.000đ** *(Giai đoạn Founding)* | Trọn bộ Full-Spine + Tứ chi + X-ray. Video với các góc quay khác nhau, hệ thống Micro-drills rèn lực tại nhà, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. **Tặng kèm: Cẩm nang đọc phim X-quang**. |
-| **Khóa Offline Cầm tay chỉ việc** | 45.000.000đ | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; **Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ trọn đời**. |
+| **Khóa Offline Cầm tay chỉ việc** | 45.000.000đ | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; **Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ đồng hành lâu dài**. |
 | **Superrefresher / Refresher** | 6.000.000đ | **3.000.000đ** *(Giảm 50% cho Alumni)* | 1–2 ngày thực hành uốn nắn lại cảm giác tay cho học viên cũ sau thời gian hành nghề bị trôi lực. |
 | **Tageshospitation (Đi lâm sàng)** | 2.500.000đ/ngày | **1.250.000đ/ngày** *(Giảm 50% cho Alumni)* | Trực tiếp đứng cạnh Henrik Simon xem khám, đọc phim và điều trị bệnh nhân thật tại Simon Center TP.HCM. |
-| **Gói Toàn diện (Mastery Track)** | 80.000.000đ | **68.000.000đ – 75.000.000đ** | Trọn vẹn Level 1 + Level 2 offline thực chiến, chuẩn bị mở phòng khám từ A-Z. Tặng Full Online 14.9tr + Vé Cộng đồng trọn đời. |
+| **Gói Toàn diện (Mastery Track)** | 80.000.000đ | **68.000.000đ – 75.000.000đ** | Trọn vẹn Level 1 + Level 2 offline thực chiến, chuẩn bị mở phòng khám từ A-Z. Tặng Full Online 14.9tr + Vé Cộng đồng đồng hành lâu dài. |
 | **DISC Full Certification** | 100.000.000đ | **85.000.000đ** | Toàn diện Cột Sống + Ngoại Vi: Modul A + Modul B + Kèm cặp ca bệnh thực tế tại phòng khám + Hỗ trợ chuyên môn 5 năm từ Đức. |
 | **Phí Cộng đồng thành viên cũ** | 1.000.000đ/năm | **500.000đ / 1 năm** | Giảm 50% phí Refresher & Hospitation. Nhóm kín hỗ trợ hội chẩn ca bệnh khó, đọc phim X-quang 24/7. |
 
@@ -32,7 +32,7 @@
   * Học dồn dập hàng trăm thao tác khiến não bị quá tải (Information Overload). Khi về nhà sau 1 tuần, **80% học viên quên sạch vị trí đặt tay và vector phát lực**.
   * **Hậu quả lớn nhất:** "Run tay" — đối diện với bệnh nhân thật có phim chụp X-quang, học viên không biết đọc, sợ nắn sai gây gãy xương hay liệt nên không dám làm. Khóa học bị bỏ xó lãng phí.
 * **Ưu thế thật của Simon Center:**
-  * Có nền tảng E-Learning 4K xem lại trọn đời không bao giờ quên.
+  * Có nền tảng E-Learning 4K xem lại dài hạn 24/7 không giới hạn thời gian không bao giờ quên.
   * Phương pháp Micro-drills rèn lực tại nhà trên đệm mút trước khi đụng người thật.
   * Học online nhưng được **khấu trừ 100% học phí** khi học lên khóa Offline 4 ngày cùng Thầy Henrik Simon (sĩ số nhỏ chỉ 12–16 người).
 

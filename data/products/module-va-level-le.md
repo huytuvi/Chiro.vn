@@ -8,7 +8,7 @@
   * **Module 1: Cột sống Cổ & Chẩm C1 (1.500.000đ):** Điều trị đau cổ vai gáy cấp, đau nửa đầu, vẹo cổ cấp (Torti Collis).
   * **Module 2: Thắt lưng & Khung chậu ISG (1.500.000đ):** Giải quyết đau thắt lưng, đau thần kinh tọa cơ năng, kẹt khớp cùng chậu.
   * **Module 3: Khớp Thái Dương Hàm TMJ & Vùng Mặt (1.000.000đ):** 13 tiêu chuẩn chẩn đoán sai lệch hàm, kẹt hàm mở miệng, dẫn lưu xoang.
-* **Thời hạn:** Truy cập trọn đời bài giảng của module đã chọn.
+* **Thời hạn:** Truy cập dài hạn không giới hạn thời gian bài giảng của module đã chọn.
 * **Chính sách nâng cấp:** Có thể bù phần chênh lệch để nâng cấp lên The Full Online Collection trong vòng 30 ngày.
 
 ---

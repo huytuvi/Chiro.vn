@@ -21,6 +21,6 @@
 > *Tuy nhiên, theo khảo sát từ chính các học viên đã từng học các lớp ngắn ngày về tâm sự với bên em: Điểm mấu chốt của nắn chỉnh là **sự thẩm thấu kiến thức giải phẫu và trí nhớ cơ bắp**.  
 > Nếu nhồi nhét hàng trăm động tác trong 2 ngày cuối tuần, khi trở về phòng khám không có công cụ xem lại, **hơn 80% học viên đều quên sạch chi tiết** và rơi vào tình trạng run tay, không dám nắn trên bệnh nhân thật vì sợ tai biến.*  
 >  
-> *Hệ thống E-Learning của Simon Center cho phép anh/chị xem đi xem lại trọn đời mọi lúc mọi nơi. Các bài kiểm tra ngắn không phải để gây khó khăn, mà là công cụ sư phạm giúp anh/chị khóa chặt kiến thức, học bài nào chắc bài đó.*  
+> *Hệ thống E-Learning của Simon Center cho phép anh/chị xem đi xem lại dài hạn 24/7 không giới hạn thời gian mọi lúc mọi nơi. Các bài kiểm tra ngắn không phải để gây khó khăn, mà là công cụ sư phạm giúp anh/chị khóa chặt kiến thức, học bài nào chắc bài đó.*  
 >  
 > *Đặc biệt, sau khi đã học vững online, nếu anh/chị muốn tham gia **Khóa thực hành cầm tay chỉ việc cùng Thầy Henrik Simon**, anh/chị sẽ được khấu trừ 100% tiền khóa online. Lúc đó anh/chị bước vào lớp thực hành với tâm thế đã hiểu rõ bản chất, tay nghề sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online ạ."*

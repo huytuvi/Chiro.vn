@@ -24,6 +24,6 @@
 >  
 > *Tại Simon Center, anh/chị sẽ được giải quyết triệt để 2 vấn đề này:*  
 > * Anh/chị được học bài bản cách đọc phim X-quang, biết rõ đốt nào được nắn và **khi nào tuyệt đối cấm nắn** để triệt tiêu 100% nỗi sợ tai biến.  
-> * Anh/chị sở hữu kho video 4K xem lại trọn đời và được gia nhập **nhóm kín cựu học viên Alumni**, nơi Thầy Henrik Simon và các bác sĩ trợ giảng luôn đồng hành hỗ trợ hội chẩn các ca bệnh khó cho anh/chị 24/7.*  
+> * Anh/chị sở hữu kho video 4K xem lại dài hạn 24/7 không giới hạn thời gian và được gia nhập **nhóm kín cựu học viên Alumni**, nơi Thầy Henrik Simon và các bác sĩ trợ giảng luôn đồng hành hỗ trợ hội chẩn các ca bệnh khó cho anh/chị 24/7.*  
 >  
 > *Bên em cam kết anh/chị sẽ lấy lại trọn vẹn sự tự tin nghề nghiệp ngay từ những bài học đầu tiên ạ!"*

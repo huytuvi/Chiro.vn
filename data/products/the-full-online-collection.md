@@ -1,5 +1,5 @@
 # SẢN PHẨM CỐT LÕI: THE FULL ONLINE COLLECTION
-*(Khóa Học E-Learning Toàn Diện Nắn Chỉnh Cột Sống Chuẩn Y Khoa — Xem Trọn Đời)*
+*(Khóa Học E-Learning Toàn Diện Nắn Chỉnh Cột Sống Chuẩn Y Khoa — Xem Dài Hạn Không Giới Hạn Thời Gian)*
 
 ---
 
@@ -7,7 +7,7 @@
 * **Tên sản phẩm:** The Full Online Collection (Trọn Bộ Khóa Học Trực Tuyến).
 * **Mức học phí niêm yết:** **14.900.000 VNĐ**.
 * **Định vị sản phẩm:** Đẳng cấp E-Learning chuẩn quốc tế: Toàn bộ Video 4K, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online.
-* **Thời hạn truy cập:** Sở hữu trọn đời tài khoản trên mọi thiết bị (Laptop, iPad, Smartphone).
+* **Thời hạn truy cập:** Sở hữu dài hạn tài khoản trên mọi thiết bị (Laptop, iPad, Smartphone).
 
 ---
 

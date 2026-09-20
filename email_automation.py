@@ -188,7 +188,7 @@ def get_email_3_content():
     <div style="background-color: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
       <p style="margin: 0; font-size: 13.5px; color: #7F1D1D;">Đặc quyền dành riêng cho học viên đăng ký sớm:</p>
       <p style="margin: 6px 0; font-size: 22px; font-weight: 800; color: #8F1D35;">12.900.000 VNĐ <span style="font-size: 14px; text-decoration: line-through; color: #9CA3AF;">19.500.000 VNĐ</span></p>
-      <p style="margin: 0; font-size: 12.5px; color: #991B1B;">Sở hữu trọn đời tài liệu, cập nhật liên tục và cấp chứng chỉ hoàn thành.</p>
+      <p style="margin: 0; font-size: 12.5px; color: #991B1B;">Sở hữu tài liệu dài hạn không giới hạn thời gian, cập nhật liên tục và cấp chứng chỉ hoàn thành.</p>
     </div>
     <div style="text-align: center; margin: 30px 0;">
       <a href="https://chiro.vn" style="background-color: #8F1D35; color: #FFFFFF; text-decoration: none; padding: 14px 32px; font-size: 16px; font-weight: bold; border-radius: 8px; display: inline-block;">

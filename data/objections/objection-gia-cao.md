@@ -35,4 +35,4 @@ Anh/chị chỉ cần tiếp nhận **đúng 5–6 bệnh nhân** là đã thu h
 *Chưa kể, toàn bộ 14.9 triệu này sẽ được **khấu trừ 100%** nếu sau này anh/chị tham gia khóa Offline Cầm tay chỉ việc cùng Thầy Henrik."*
 
 ### Bước 5: Calibrated Closing Question
-* *"Anh/chị có thấy bất hợp lý không nếu chúng ta đầu tư một lần để có được sự an toàn và uy tín trọn đời cho phòng khám của mình?"*
+* *"Anh/chị có thấy bất hợp lý không nếu chúng ta đầu tư một lần để có được sự an toàn và uy tín bền vững suốt sự nghiệp cho phòng khám của mình?"*

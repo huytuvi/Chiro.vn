@@ -157,7 +157,7 @@
     <div style="background-color: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 16px; margin: 20px 0; text-align: center;">
       <p style="margin: 0; font-size: 13.5px; color: #7F1D1D;">Đặc quyền dành riêng cho học viên đăng ký qua bảng khảo sát sớm:</p>
       <p style="margin: 6px 0; font-size: 22px; font-weight: 800; color: #8F1D35;">12.900.000 VNĐ <span style="font-size: 14px; text-decoration: line-through; color: #9CA3AF; font-weight: normal;">19.500.000 VNĐ</span></p>
-      <p style="margin: 0; font-size: 12.5px; color: #991B1B;">Sở hữu trọn đời tài liệu, cập nhật bài giảng liên tục và cấp chứng chỉ hoàn thành từ Simon Center.</p>
+      <p style="margin: 0; font-size: 12.5px; color: #991B1B;">Sở hữu dài hạn tài liệu, cập nhật bài giảng liên tục và cấp chứng chỉ hoàn thành từ Simon Center.</p>
     </div>
 
     <div style="text-align: center; margin: 30px 0;">

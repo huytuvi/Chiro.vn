@@ -24,28 +24,35 @@ MỤC TIÊU & TÍNH CÁCH:
 - Khi khách hàng chia sẻ đam mê hoặc băn khoăn về việc chưa từng học Y bao giờ: Hãy nhiệt liệt hoan nghênh, đồng cảm và khẳng định 100% họ hoàn toàn làm chủ được nhờ phương pháp đòn bẩy tự nhiên không dùng sức tay và Micro-drills rèn lực tại nhà.
 - Tuyệt đối chính xác về chuyên môn Chiropractic. Dùng tiếng Việt tự nhiên, bình dị, dễ hiểu, tránh thuật ngữ sáo rỗng.
 
-DỮ LIỆU SẢN PHẨM & GIÁ CẢ THẬT TẠI SIMON CENTER:
-1. Module Lẻ Online (Cổ vai gáy HWS hoặc Thắt lưng - Chậu LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ). Thực chiến cấp tốc cho người muốn học thử 1 vùng.
-2. Level 1 Online (Nền tảng Cột sống Full-Spine): 7.000.000 VNĐ.
-3. Level 2 Online (Tứ Chi & Phân tích X-quang Chuyên sâu): 7.000.000 VNĐ.
-4. The Full Online Collection: Trọn bộ toàn diện Full-Spine + Tứ chi + X-ray + Micro-drills + Cấp chứng chỉ. Học phí ưu đãi 12.900.000 VNĐ (giá niêm yết 18.000.000 VNĐ).
-5. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc: 36.000.000 VNĐ (4 ngày thực hành trực tiếp cùng Bác sĩ Henrik Simon tại TP.HCM/Hà Nội).
-6. ĐẶC QUYỀN KHẤU TRỪ 100%: Học viên học bất kỳ gói Online nào (kể cả Module lẻ 1 triệu) khi nâng cấp lên khóa lớn hơn hoặc khóa Offline đều được khấu trừ 100% số tiền đã đóng vào học phí khóa sau.
-7. Hình thức học: Hệ thống video với các góc quay khác nhau kết hợp quay cận cảnh góc khóa khớp, xem trọn đời 24/7 trên điện thoại và máy tính.
-8. Phương pháp 3 bước sư phạm: Video đa góc quay -> Micro-drills rèn lực rơi tự do (Body Drop) tại nhà không dùng sức bắp tay, không lo run tay -> Test tình huống lâm sàng loại trừ Red Flags.
+DANH MỤC TỪ CẤM & QUY TẮC BẮT BUỘC (TUYỆT ĐỐI TUÂN THỦ):
+1. ❌ TUYỆT ĐỐI CẤM dùng từ "trọn đời" dưới mọi hình thức! Thay bằng: "không giới hạn thời gian 24/7", "lâu dài", "xuyên suốt quá trình thực hành", "bền vững".
+2. ❌ TUYỆT ĐỐI CẤM dùng từ "bẻ khớp trôi nổi", "đối thủ", "ngoài thị trường" để chê bai hay so sánh tiêu cực. CHỈ TẬP TRUNG NÊU BẬT ĐIỂM MẠNH CHUYÊN MÔN CỦA SIMON CENTER: Chuẩn y học cơ sinh học Châu Âu, tính chính xác (Specific), an toàn với Red Flags.
+3. ❌ TUYỆT ĐỐI CẤM dùng cụm từ "1 phần mười giây" hoặc "1/10 giây" (chưa được kiểm chứng). Thay bằng: "ở thời điểm thả lỏng cơ", "trong tích tắc giải phóng lực", "kỹ thuật thả lỏng và tận dụng trọng lực tự nhiên (Body Drop)".
+4. ❌ TUYỆT ĐỐI KHÔNG tự tiện đề cập "trả góp", "trả góp 0%", "thẻ tín dụng" trừ khi khách hàng CHỦ ĐỘNG HỎI về trả góp!
+5. ❌ TUYỆT ĐỐI CẤM dùng từ "Video 4K First-Person POV" (thay bằng "Video với các góc quay khác nhau").
+6. ❌ TUYỆT ĐỐI CẤM hứa hẹn sai pháp lý: "học xong ra mở phòng khám ngay". Minh bạch: Chứng nhận hoàn thành của Simon Center do Bác sĩ Henrik Simon ký; việc hành nghề trị liệu có can thiệp tại Việt Nam phải tuân thủ điều kiện văn bằng của Bộ Y tế/Sở Y tế.
+7. ❌ Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "anh/chị muốn chat chế độ nào".
 
-BỆNH HỌC & LÂM SÀNG CỐT LÕI:
-- Thoát vị đĩa đệm L4-L5, L5-S1; đau thần kinh tọa; kẹt khớp cùng chậu ISG; lệch khung chậu chân ngắn chân dài.
-- Cột sống cổ C1 Atlas liên quan đau nửa đầu Migraine, rối loạn tiền đình, chóng mặt.
-- Khớp cắn hàm TMJ kêu lục cục, há miệng lệch.
-- Cảnh báo đỏ (Red Flags): Chèn ép chùm đuôi ngựa Cauda Equina, tiêu xương ung thư, rách bao xơ cấp, hẹp động mạch đốt sống... TUYỆT ĐỐI CẤM NẮN.
+DỮ LIỆU ĐẦY ĐỦ 6 SẢN PHẨM & HỌC PHÍ TẠI SIMON CENTER:
+1. Module Lẻ Online — Cổ Vai Gáy (HWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ).
+2. Module Lẻ Online — Thắt Lưng - Chậu (LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ).
+3. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ).
+4. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ).
+5. The Full Online Collection: Trọn bộ toàn diện Level 1 + Level 2 (351 bài giảng Cột sống + Tứ chi + X-ray + Micro-drills + Chứng chỉ Certificate). Học phí ưu đãi 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ).
+6. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc: 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, 3-4 ngày trực tiếp cùng Thầy Henrik Simon, lớp giới hạn 10-12 người).
+7. ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền đã đóng ở bất kỳ khóa Online nào (kể cả Module lẻ 1 triệu) đều được khấu trừ 100% khi nâng cấp lên khóa lớn hơn hoặc khóa Offline.
 
-QUY TẮC PHẢN HỒI (TUYỆT ĐỐI TUÂN THỦ):
-1. TUYỆT ĐỐI KHÔNG tự tiện đề cập "trả góp 0% / thẻ tín dụng" trừ khi khách hàng CHỦ ĐỘNG HỎI về trả góp!
-2. Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "có muốn tư vấn bệnh học không".
-3. Khi khách hỏi về học một phần/vùng riêng: Đưa ra ngay giải pháp Module Lẻ 1.000.000đ và quyền lợi khấu trừ 100%.
-4. Định dạng câu trả lời: Dùng HTML cơ bản (<br>, <strong>, <em>, bullet •) để hiển thị giao diện đẹp mắt.
-5. Cuối mỗi câu trả lời: Luôn có 1 câu hỏi mở nhẹ nhàng, chu đáo để khách dễ dàng trò chuyện tiếp.`;
+BỘ QUY CHUẨN 10 CÂU HỎI & CÁCH TRẢ LỜI:
+- Q1 (Phù hợp với ai): Nêu rõ 3 nhóm (PT/Yoga/Spa; Bác sĩ/YHCT/VLTL; Người chăm sóc gia đình).
+- Q2 (Người mới từ số 0): Khẳng định làm chủ được nhờ mô hình 3D, bài tập Micro-drills rèn lực tại nhà và ranh giới Red Flags.
+- Q3 (Học online có thực hành được không): Thiết kế chuẩn y khoa như "bộ thước đo quy chuẩn" đối chiếu, học từ ca lâm sàng thật 1:1, khấu trừ 100% lên Offline.
+- Q4 (Các khóa học & giá): Nêu đủ 6 khóa học trên.
+- Q5 (Điểm mạnh phương pháp): Nêu 4 thế mạnh bản quyền của Simon Center, không so sánh đối thủ.
+- Q6 (Nữ/thể lực yếu): Không dùng sức cơ bắp tay, dùng đòn bẩy và trọng lực rơi cơ thể Body Drop ở thời điểm thả lỏng cơ.
+- Q7 (Chứng chỉ & pháp lý): Cấp Certificate of Completion chính thức từ Simon Chiropractic Center do Bác sĩ Henrik Simon ký; hành nghề can thiệp tuân thủ văn bằng Bộ Y tế.
+- Q8 (Học riêng từng phần): Hoàn toàn được, có Module lẻ 1.000.000đ, khấu trừ 100%. Mời liên hệ Ban tổ chức qua Hotline/Zalo: 093 115 8868 để được tư vấn tốt hơn.
+- Q9 (Thanh toán & kích hoạt): Quét QR SePay tự động, gửi email xác nhận và trợ lý kết nối Zalo hỗ trợ.
+- Q10 (Hỗ trợ ca khó): Gia nhập nhóm chuyên môn kín cùng Thầy Henrik Simon, hội chẩn ca bệnh qua hình ảnh/X-quang, đồng hành lâu dài xuyên suốt quá trình thực hành.`;
 
   // =============================================================================
   // 📝 HỆ THỐNG DỮ LIỆU CHATBOT (BOT_DATA):
@@ -106,22 +113,26 @@ Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả ch�
       // --- DANH SÁCH KHÓA HỌC & BẢNG GIÁ CHI TIẾT (2 PHẦN TỰ ĐỘNG) ---
       c_courses_and_pricing_part1: {
         text: `Dạ em xin gửi anh/chị thông tin chi tiết và học phí minh bạch các chương trình đào tạo tại <strong>Simon Chiropractic Center</strong> ạ:<br><br>
-⭐ <strong>1. The Full Online Collection (Toàn diện nhất):</strong><br>
-• Bao gồm trọn bộ Level 1 (Full-Spine) + Level 2 (Tứ Chi & Phân tích X-quang).<br>
-• Học phí ưu đãi: <strong>12.900.000 VNĐ</strong> (Học phí gốc: 14.900.000 VNĐ). Tài khoản truy cập trọn đời 24/7.<br><br>
-🟩 <strong>2. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A):</strong><br>
-• Nắm vững cơ sinh học và kỹ thuật nắn chỉnh toàn bộ trục cột sống (Cổ C1-C7, Ngực T1-T12, Thắt lưng - Chậu L1-S1).<br>
-• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ).<br><br>
-🟦 <strong>3. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B):</strong><br>
-• Kỹ thuật nắn chỉnh khớp ngoại vi chi trên - chi dưới và đo đạc phân tích phim X-quang chuyên sâu.<br>
-• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ).<br><br>
-🟨 <strong>4. Module Lẻ Online — Vùng Chuyên Biệt Thực Chiến:</strong><br>
-• Lựa chọn học chuyên sâu 1 vùng: Cổ Vai Gáy (HWS) hoặc Thắt Lưng - Chậu (LWS).<br>
-• Học phí ưu đãi: <strong>1.000.000 VNĐ / module</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
-👑 <strong>5. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (4 Ngày cùng Thầy Henrik Simon):</strong><br>
-• Trực tiếp cùng Bác sĩ Henrik Simon chỉnh từng góc tay, bộ pháp và lực nắn trên người thật.<br>
-• Học phí: <strong>36.000.000 VNĐ</strong> (Học phí niêm yết: 42.000.000 VNĐ).<br>
-• <em>Đặc quyền khấu trừ 100%:</em> Toàn bộ số tiền anh/chị đã đóng ở khóa Online sẽ được <strong>khấu trừ toàn bộ 100%</strong> khi đăng ký nâng cấp lên lớp Offline Cầm tay chỉ việc này nhé ạ.`,
+1. 💆 <strong>Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS):</strong><br>
+• Kỹ thuật sờ nắn, giải phóng đốt sống cổ C1–C7, đoạn chuyển tiếp C7-T1, xử lý đau mỏi, đau đầu, tê bì tay và test De-Kleyn an toàn.<br>
+• Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7.<br><br>
+2. 🦴 <strong>Module Lẻ Online — Chuyên Sâu Thắt Lưng - Chậu (LWS):</strong><br>
+• Nắm vững giải phẫu chức năng L1–L5, xương cùng S1, kẹt khớp cùng chậu ISG, chỉnh lệch chân ngắn - chân dài và phục hồi đĩa đệm.<br>
+• Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7.<br><br>
+3. 🟩 <strong>Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A):</strong><br>
+• Cơ sinh học và kỹ thuật nắn chỉnh toàn bộ trục cột sống: Cổ C1-C7, Ngực T1-T12, Thắt lưng L1-L5 và Khung chậu S1-ISG.<br>
+• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Gốc: 8.500.000 VNĐ).<br><br>
+4. 🟦 <strong>Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B):</strong><br>
+• Kỹ thuật nắn chỉnh khớp ngoại vi (chi trên, chi dưới) và phương pháp đọc, đo đạc phim X-quang cơ sinh học.<br>
+• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Gốc: 8.500.000 VNĐ).<br><br>
+5. ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Level 1 + Level 2):</strong><br>
+• Gói hoàn chỉnh nhất gồm toàn bộ 351 bài giảng: Cột sống Full-Spine + Tứ chi + Đo đọc phim X-quang. Cấp Certificate chính thức.<br>
+• Học phí ưu đãi: <strong>12.900.000 VNĐ</strong> (Gốc: 14.900.000 VNĐ — Tiết kiệm ngay 1.100.000đ so với mua lẻ Level 1 và Level 2).<br><br>
+6. 👑 <strong>Workshop Offline Cầm Tay Chỉ Việc (3-4 Ngày Cùng Thầy Henrik Simon):</strong><br>
+• Lớp giới hạn 10-12 học viên, trực tiếp Bác sĩ Henrik Simon chỉnh sửa từng góc đặt tay, thế đứng và cảm giác lực trên người thật.<br>
+• Học phí: <strong>36.000.000 VNĐ</strong> (Niêm yết: 42.000.000 VNĐ).<br><br>
+💡 <em>Đặc quyền khấu trừ 100%:</em> Toàn bộ số tiền anh/chị đã đóng ở các khóa Online sẽ được <strong>khấu trừ 100%</strong> khi đăng ký nâng cấp lên lớp Workshop Offline Cầm tay chỉ việc này ạ!<br><br>
+Dạ anh/chị đang muốn bắt đầu với một Module chuyên biệt hay tìm hiểu khóa toàn diện ạ?`,
         cta: null
       },
 
@@ -145,11 +156,11 @@ Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn di
 🦴 <strong>MODULE LẺ ONLINE — CHUYÊN SÂU THẮT LƯNG - CHẬU (LWS):</strong><br>
 • <strong>Nội dung trọng tâm:</strong> Làm chủ giải phẫu chức năng và kỹ thuật nắn chỉnh vùng thắt lưng L1–L5, xương cùng S1, kẹt khớp cùng chậu ISG và chỉnh lệch khung chậu (chân ngắn - chân dài).<br>
 • <strong>Kỹ thuật thực chiến:</strong> Xử lý thoát vị đĩa đệm L4-L5, L5-S1, giải áp đau thần kinh tọa, hội chứng cơ hình lê (Piriformis) và phục hồi đường cong sinh lý thắt lưng an toàn.<br>
-• <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập Micro-drills rèn lực rơi (Body Drop) tại nhà, tài khoản xem trọn đời 24/7.<br>
+• <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập Micro-drills rèn lực rơi (Body Drop) tại nhà, tài khoản học dài hạn 24/7.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <strong>Đặc quyền khấu trừ 100% khi nâng cấp:</strong><br>
 Nếu sau này anh/chị thấy hiệu quả và muốn nâng cấp lên khóa toàn diện Full-Spine hoặc Offline, <strong>toàn bộ 1.000.000đ đã đóng sẽ được khấu trừ 100%</strong> vào học phí khóa sau, anh/chị hoàn toàn không bị mất phí hay thiệt thòi gì ạ!<br><br>
-Dạ ở vùng thắt lưng, anh/chị đang muốn tập trung xử lý cho một ca bệnh cụ thể nào (như thoát vị đĩa đệm, đau khớp cùng chậu hay lệch hông) không ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
+Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
 
@@ -159,10 +170,10 @@ Dạ ở vùng thắt lưng, anh/chị đang muốn tập trung xử lý cho m�
 • <strong>Nội dung trọng tâm:</strong> Kỹ thuật sờ nắn và giải phóng đốt sống cổ từ C1 đến C7, khớp đội - chẩm C0-C1, đoạn chuyển tiếp cổ ngực C7-T1 và khớp sườn đốt sống.<br>
 • <strong>Ứng dụng lâm sàng:</strong> Trị dứt điểm đau nửa đầu Cervicogenic, đau đầu Migraine, hội chứng tiền đình chóng mặt thiếu máu não, tê bì lan xuống cánh tay và thoái hóa đốt sống cổ.<br>
 • <strong>Nguyên tắc an toàn số 1:</strong> Hướng dẫn kiểm tra nghiệm pháp De-Kleyn loại trừ hẹp động mạch sống nền và các dấu hiệu Cảnh báo đỏ (Red Flags) bảo vệ an toàn 100% cho bệnh nhân.<br>
-• <strong>Hình thức học:</strong> Video với các góc quay khác nhau, xem lại trọn đời 24/7 trên mọi thiết bị.<br>
+• <strong>Hình thức học:</strong> Video với các góc quay khác nhau, xem lại dài hạn 24/7 trên mọi thiết bị.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <em>Toàn bộ 1.000.000đ này cũng được khấu trừ 100% nếu sau này anh/chị nâng cấp lên các khóa lớn hơn nhé ạ.</em><br><br>
-Dạ anh/chị đang muốn học nắn cổ để phục vụ khách hàng tại cơ sở hay nắn chăm sóc cho người thân trong gia đình vậy ạ?`,
+Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
 
@@ -172,7 +183,7 @@ Dạ anh/chị đang muốn học nắn cổ để phục vụ khách hàng tạ
 • <strong>Khớp chi dưới:</strong> Kẹt sụn chêm gối, lật sơ mi cổ chân mạn tính, khớp nhảy xương sên, viêm cân gan chân (gai gót) và lệch khớp háng.<br>
 • <strong>Khớp chi trên:</strong> Viêm lồi cầu ngoài Tennis Elbow, đau khớp vai đông cứng (Frozen Shoulder), hội chứng ống cổ tay và sai lệch xương bàn - ngón tay.<br>
 • <strong>Tích hợp X-quang:</strong> Đo đạc góc trượt và phân tích phim X-quang cơ sinh học chi tiết từng khớp.<br>
-• <strong>Học phí ưu đãi:</strong> <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ). Truy cập trọn đời và cấp Chứng nhận Level 2 chính thức.<br><br>
+• <strong>Học phí ưu đãi:</strong> <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ). Truy cập học tập dài hạn và cấp Chứng nhận Level 2 chính thức.<br><br>
 Dạ anh/chị đang quan tâm nhiều nhất đến xử lý khớp gối, cổ chân hay khớp vai khuỷu tay vậy ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
         cta: "register"
       },
@@ -180,7 +191,7 @@ Dạ anh/chị đang quan tâm nhiều nhất đến xử lý khớp gối, cổ
       c_age_limit: {
         text: `Dạ anh/chị hoàn toàn yên tâm nhé ạ! Tại Simon Center, rất nhiều học viên ở độ tuổi 45, 50, thậm chí gần 60 tuổi vẫn tiếp thu và thực hành rất xuất sắc ạ.<br><br>
 Ưu điểm vượt trội của phương pháp Thầy Henrik Simon là <strong>hoàn toàn không dùng sức cơ bắp tay</strong>:<br>
-• Nắn chỉnh Chiropractic chuẩn Y khoa vận hành theo cơ chế <strong>đòn bẩy tự nhiên và trọng lực rơi cơ thể (Body Drop)</strong> trong một phần mười giây.<br>
+• Nắn chỉnh Chiropractic chuẩn Y khoa vận hành theo cơ chế <strong>đòn bẩy tự nhiên và trọng lực rơi cơ thể (Body Drop)</strong> ở thời điểm người bệnh thả lỏng cơ.<br>
 • Thầy dạy kỹ thuật khóa góc khớp chính xác trước khi phát lực nhẹ, nên dù lớn tuổi hay thể lực bình thường thì khi thực hành vẫn thấy cơ thể rất nhẹ nhõm, không bị mất sức hay mỏi khớp.<br>
 • Giáo trình video với các góc quay khác nhau có thể tua chậm, xem đi xem lại nhiều lần vào bất kỳ thời gian rảnh nào trong ngày.<br><br>
 Dạ hiện tại anh/chị đang quan tâm học để tự chăm sóc sức khỏe gia đình hay nâng cao tay nghề ứng dụng trị liệu vậy ạ?`,
@@ -188,9 +199,9 @@ Dạ hiện tại anh/chị đang quan tâm học để tự chăm sóc sức kh
       },
 
       c_relearn_lifetime: {
-        text: `⏱️ <strong>QUYỀN LỢI TRUY CẬP TRỌN ĐỜI & XEM LẠI KHÔNG GIỚI HẠN:</strong><br><br>
-• Ngay sau khi đăng ký, tài khoản học trực tuyến của anh/chị được cấp quyền truy cập <strong>VĨNH VIỄN TRỌN ĐỜI 24/7</strong>.<br>
-• <strong>Xem không giới hạn:</strong> Anh/chị có thể xem lại bao nhiêu lần tùy thích, tua chậm từng giây để soi rõ từng góc tay, bộ pháp và hướng lực.<br>
+        text: `⏱️ <strong>QUYỀN LỢI TRUY CẬP DÀI HẠN & XEM LẠI KHÔNG GIỚI HẠN THỜI GIAN:</strong><br><br>
+• Ngay sau khi đăng ký, tài khoản học trực tuyến của anh/chị được cấp quyền truy cập <strong>dài hạn 24/7</strong> không giới hạn số lần xem.<br>
+• <strong>Xem chủ động:</strong> Anh/chị có thể xem lại bao nhiêu lần tùy thích, tua chậm từng giây để soi rõ từng góc tay, bộ pháp và hướng lực.<br>
 • <strong>Học trên mọi thiết bị:</strong> Tương thích hoàn hảo trên điện thoại (iOS, Android), máy tính bảng, iPad và máy tính xách tay.<br>
 • Khi Thầy Henrik Simon cập nhật thêm bài giảng mới hoặc cẩm nang lâm sàng mới, tài khoản của anh/chị được <strong>tự động nâng cấp miễn phí 100%</strong> mà không phải đóng thêm bất kỳ phụ phí nào ạ.<br><br>
 Dạ anh/chị có muốn đăng ký nhận ngay 1 bài giảng mẫu với các góc quay khác nhau để học thử trước không ạ?`,
@@ -208,25 +219,35 @@ Dạ hiện tại anh/chị đang sinh sống và làm việc tại quốc gia n
       },
 
       c_post_course_support: {
-        text: `🤝 <strong>CHÍNH SÁCH ĐỒNG HÀNH & BẢO TRỢ CHUYÊN MÔN TRỌN ĐỜI:</strong><br><br>
-Simon Center không chỉ dạy xong rồi thôi, mà cam kết đồng hành dài lâu cùng anh/chị trên con đường hành nghề:<br><br>
-• <strong>Hội chẩn ca bệnh thực tế 1-1:</strong> Khi anh/chị gặp ca bệnh khó, phim X-quang/MRI phức tạp tại cơ sở của mình, chỉ cần gửi hình ảnh vào nhóm chuyên môn, Thầy Henrik Simon và đội ngũ y khoa sẽ phân tích và gợi ý hướng xử lý an toàn nhất.<br>
-• <strong>Gia nhập Cộng đồng Cựu học viên (Alumni Club):</strong> Được giao lưu, chia sẻ kinh nghiệm điều trị thực tế cùng các bác sĩ, chuyên gia và đồng nghiệp trên toàn quốc.<br>
+        text: `🤝 <strong>CHÍNH SÁCH ĐỒNG HÀNH & HỖ TRỢ CHUYÊN MÔN SAU KHÓA HỌC:</strong><br><br>
+Simon Center không chỉ dạy xong rồi thôi, mà cam kết đồng hành xuyên suốt cùng anh/chị trên con đường hành nghề:<br><br>
+• <strong>Gia nhập Cộng đồng Kín Học Viên Simon Center:</strong> Nơi Thầy Henrik Simon và các trợ lý y khoa sinh hoạt, hỗ trợ học viên hàng ngày.<br>
+• <strong>Hội chẩn ca bệnh thực tế 1-1:</strong> Khi anh/chị gặp ca bệnh phức tạp ngoài thực tế, có thể gửi hình ảnh tư thế hoặc phim X-quang của bệnh nhân lên nhóm để được Thầy và đội ngũ bác sĩ hội chẩn, định hướng phác đồ nắn an toàn trước khi thực hiện.<br>
+• <strong>Giải đáp lâm sàng định kỳ:</strong> Trung tâm định kỳ tổ chức các buổi giải đáp lâm sàng (Case-Study) trực tuyến để học viên liên tục cập nhật và nâng cao tay nghề.<br>
 • <strong>Cơ hội tham gia ngày thực tế lâm sàng (Tageshospitation):</strong> Được ưu tiên đăng ký đi lâm sàng thực tế tại Simon Chiropractic Center để quan sát Thầy khám và điều trị trên bệnh nhân thật.<br><br>
 Dạ sự bảo trợ y khoa chuẩn xác là điều quan trọng nhất khi bước vào điều trị. Anh/chị có băn khoăn gì thêm về quy trình hỗ trợ này không ạ?`,
         cta: "register"
       },
 
-      // --- NHÓM 1: TUYỂN SINH & KHÓA HỌC (TỪ SALES SCRIPT) ---
+      // --- 10 CÂU HỎI & TRẢ LỜI CHUẨN HÓA CHO SIMON EDU CENTER ---
+      c_target_audience: {
+        text: `Dạ, khóa học tại Simon Center được thiết kế chuẩn hóa theo từng nấc thang từ cơ bản đến nâng cao, nên sẽ <strong>rất phù hợp nếu anh/chị thuộc 1 trong 3 nhóm sau</strong> ạ:<br><br>
+1. <strong>Huấn luyện viên PT, Yoga, Pilates, KTV Massage / Spa:</strong> Muốn nâng cấp tay nghề, làm chủ kỹ thuật giải phóng áp lực cột sống để hỗ trợ khách hàng phục hồi nhanh chóng, gia tăng uy tín và nâng cao thu nhập.<br>
+2. <strong>Bác sĩ, Y sĩ YHCT, KTV Vật lý trị liệu & Phục hồi chức năng:</strong> Muốn chuẩn hóa kỹ thuật nắn chỉnh theo y học phương Tây hiện đại (Specific Chiropractic), làm chủ kỹ năng đọc phim X-quang cơ sinh học và loại trừ 100% nguy cơ tai biến y khoa.<br>
+3. <strong>Người đam mê trị liệu muốn chăm sóc người thân:</strong> Học bài bản từ số 0 để biết cách giải tỏa đau nhức cổ vai gáy, thắt lưng cho bản thân và gia đình một cách an toàn, khoa học mà không phải bẻ khớp mò mẫm.<br><br>
+👉 Anh/chị hiện đang làm việc trong ngành sức khỏe/thể thao hay muốn học để chăm sóc sức khỏe gia đình ạ? Anh/chị chia sẻ để em tư vấn lộ trình sát nhất nhé ạ!`,
+        cta: "trial"
+      },
+
       q1: {
-        text: `Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là môn thực hành trực tiếp, nên nếu chỉ xem video lý thuyết thụ động thì chắc chắn không ai dám làm cả.<br><br>Khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo <strong>Quy trình sư phạm 3 bước chuẩn y khoa</strong> để giải quyết triệt để rào cản này:<br><br>
-1. <strong>Video với các góc quay khác nhau:</strong> Hệ thống góc quay đa chiều kết hợp quay cận cảnh, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
-2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Rèn luyện tốc độ, bộ pháp và lực rơi cơ thể trên đệm mút/bóng phản xạ. Tay anh/chị có phản xạ tự nhiên chuẩn xác trước khi chạm người thật nên <strong>hoàn toàn không bị run tay</strong>.<br>
-3. <strong>Hệ thống Test lâm sàng qua môn bắt buộc:</strong> Nắm chắc chỉ định và dấu hiệu nguy hiểm (Red Flags) mới mở khóa bài tiếp theo.<br><br>
-<em>Đặc biệt: Toàn bộ học phí khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em><br><br>
-Dạ không biết hiện tại anh/chị đang có nền tảng về Đông y, Vật lý trị liệu hay Thể thao PT vậy ạ? Anh/chị chia sẻ thêm để em tư vấn lộ trình học tập sát nhất với mình nhé ạ!`,
+        text: `Thực tế, khóa học Online của Simon EDU Center được thiết kế chuẩn y khoa như một <strong>"bộ thước đo quy chuẩn"</strong> dành cho cả người mới bắt đầu lẫn người đã có kinh nghiệm:<br><br>
+• <strong>Quy chuẩn đối chiếu chuẩn xác:</strong> Toàn bộ động tác từ vị trí đặt tay, góc tiếp xúc mỏm gai đến hướng phát lực (Line of Drive) đều được ghi hình đa góc độ và phân tích chậm. Nhờ đó, anh/chị luôn có một nguồn chuẩn y khoa tin cậy để nhìn vào, tự soi chiếu và biết chính xác động tác của mình đã đúng kỹ thuật và an toàn hay chưa.<br>
+• <strong>Học từ ca lâm sàng thực tế:</strong> Trong khóa học online, Thầy Henrik Simon sẽ trực tiếp thị phạm và hướng dẫn xử lý trên bệnh nhân thật theo hình thức 1:1, giúp anh/chị hiểu rõ phản ứng cơ thể và cảm giác lực thực tế chứ không chỉ là lý thuyết suông.<br>
+• <strong>Đặc quyền nâng cấp Offline:</strong> Toàn bộ học phí khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký tham gia các Workshop thực hành trực tiếp "cầm tay chỉ việc" cùng chuyên gia.<br><br>
+Nhờ lộ trình này, anh/chị vừa chủ động xây chắc nền tảng đúng chuẩn ngay tại nhà, vừa rèn luyện kỹ năng với sự an tâm tuyệt đối mà không lo thao tác sai hay gây nguy hiểm ạ!`,
         cta: "register"
       },
+
       q2: {
         text: `Dạ anh/chị hoàn toàn yên tâm nhé ạ! Thực tế hơn 40% học viên xuất sắc tại Simon Center là Huấn luyện viên PT Gym, HLV Yoga và các anh chị chủ Spa.<br><br>
 Triết lý đào tạo của Thầy Henrik Simon là <strong>"Dễ hiểu nhưng phải chuẩn"</strong>:<br>
@@ -236,16 +257,18 @@ Kiến thức này giúp anh/chị nâng tầm gói dịch vụ chỉnh tư th�
 Dạ hiện tại cơ sở hoặc phòng tập của anh/chị có thường xuyên gặp khách hàng than phiền về đau mỏi cổ vai gáy hay võng lưng không ạ? Anh/chị chia sẻ thêm với em nhé!`,
         cta: "register"
       },
+
       q3: {
         text: `Dạ em rất hiểu học phí là điều anh/chị luôn cân nhắc kỹ lưỡng khi tìm hiểu một chương trình đào tạo chuyên môn sâu ạ.<br><br>
 Tại Simon Center, giá trị cốt lõi của khóa học không nằm ở số lượng chiêu thức bề nổi, mà tập trung vào <strong>sự an toàn tuyệt đối và chuẩn mực y khoa quốc tế</strong>:<br><br>
 • <strong>Nền tảng cơ sinh học chuẩn Đức:</strong> Toàn bộ giáo trình kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon (Viện DISC - Đức), giúp anh/chị hiểu rõ nguyên lý khóa khớp và đòn bẩy tự nhiên, không dùng sức gồng bắp tay.<br>
 • <strong>Hệ thống Video với các góc quay khác nhau & Micro-Drills:</strong> Từng góc quay trực quan đa chiều, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
-• <strong>Đào tạo chuyên sâu phân tích X-quang & Cảnh báo đỏ (Red Flags):</strong> Giúp người thực hành nhận diện chính xác các chống chỉ định y khoa, bảo vệ an toàn trọn đời cho bệnh nhân và uy tín người thầy thuốc.<br>
-• <strong>Đặc quyền khấu trừ 100%:</strong> Toàn bộ học phí khóa Online được khấu trừ 100% khi anh/chị tham gia lớp Thực hành Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon.<br><br>
+• <strong>Đào tạo chuyên sâu phân tích X-quang & Cảnh báo đỏ (Red Flags):</strong> Giúp người thực hành nhận diện chính xác các chống chỉ định y khoa, bảo vệ an toàn cao nhất cho bệnh nhân và uy tín người thầy thuốc.<br>
+• <strong>Đặc quyền khấu trừ 100%:</strong> Toàn bộ học phí khóa Online được khấu trừ 100% khi anh/chị tham gia lớp Thực hành Offline Cầm tay chỉ việc cùng Thầy Henrik Simon.<br><br>
 Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu với các góc quay khác nhau để trải nghiệm trực quan cách Thầy Henrik truyền đạt không ạ?`,
         cta: "trial"
       },
+
       q4: {
         text: `Dạ có dạy rất kỹ từ con số 0 anh nhé ạ! Đây chính là điểm khác biệt tự hào nhất của Simon Center.<br><br>
 Khóa học hướng dẫn anh chi tiết:<br>
@@ -256,42 +279,50 @@ Khóa học hướng dẫn anh chi tiết:<br>
 Dạ không biết trước đây anh/chị đã từng tiếp xúc với phim X-quang cột sống bao giờ chưa ạ? Cẩm nang này hướng dẫn từ con số 0 rất dễ hiểu nhé ạ!`,
         cta: "register"
       },
+
       q5: {
-        text: `Dạ sau khi hoàn thành các bài giảng và vượt qua bài test cuối khóa, anh/chị sẽ được cấp <strong>Chứng Chỉ Hoàn Thành (Certificate of Completion)</strong> có chữ ký xác nhận trực tiếp của Bác sĩ Henrik Simon, chứng nhận hoàn thành chương trình đào tạo chuẩn y khoa quốc tế kế thừa từ Viện DISC ạ.<br><br>
-<em>Về mặt pháp lý minh bạch:</em> Khóa học cung cấp tri thức khoa học và nâng cao tay nghề thực hành để ứng dụng chăm sóc sức khỏe, phục hồi chức năng vận động. Còn để mở phòng khám chữa bệnh độc lập tại Việt Nam, người hành nghề cần tuân thủ đầy đủ quy định của Bộ Y tế về Giấy phép hành nghề y tế theo luật định nhé ạ.<br><br>
-Dạ anh/chị đang có định hướng nâng cao tay nghề để phục vụ bệnh nhân tại cơ sở của mình hay dự định mở phòng trị liệu mới vậy ạ?`,
+        text: `Khi hoàn thành chương trình, anh/chị sẽ được cấp <strong>Chứng nhận Hoàn thành Khóa học (Certificate of Completion)</strong> chính thức từ <em>Simon Chiropractic Center</em> do Bác sĩ Henrik Simon ký:<br><br>
+• Chứng nhận này khẳng định anh/chị đã được học qua chương trình bồi dưỡng chuyên môn về nắn chỉnh cột sống <em>Specific Chiropractic</em> chuẩn quốc tế và nắm vững quy trình an toàn y khoa.<br>
+• <strong>Về mặt pháp lý hành nghề:</strong> Để mở phòng khám hoặc cung cấp dịch vụ trị liệu y khoa có can thiệp tại Việt Nam, người hành nghề cần đáp ứng các văn bằng, chứng chỉ y tế chính quy do Bộ Y tế / Sở Y tế quy định (như Bác sĩ, Y sĩ YHCT, KTV Vật lý trị liệu). Chứng nhận của Simon Center là bảo chứng uy tín về kỹ thuật thực hành chuẩn xác bổ trợ đắc lực cho công việc của anh/chị ạ.`,
         cta: "register"
       },
+
       q6: {
         text: `Dạ <strong>ĐƯỢC KHẤU TRỪ 100%</strong> anh/chị nhé ạ! Đây là chính sách cực kỳ nhân văn và ưu đãi độc quyền của Simon Center.<br><br>
-Toàn bộ số tiền anh/chị đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon (36.000.000đ)</strong>.<br><br>
+Toàn bộ số tiền anh/chị đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc cùng Thầy Henrik Simon (36.000.000đ)</strong>.<br><br>
 Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh/chị học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!<br><br>
 Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị có muốn giữ suất ưu đãi đợt này trước không ạ?`,
         cta: "register"
       },
+
       q7: {
-        text: `Dạ khác biệt nằm ở 2 chữ <strong>"Chuyên Biệt (Specific)"</strong> và <strong>"An Toàn"</strong> anh nhé ạ:<br><br>
-• <strong>Bẻ khớp thông thường / Clip mạng:</strong> Vặn xoắn thô bạo toàn thân để tạo tiếng kêu rôm rốp cho đã tai. Âm thanh đó chỉ là bọt khí bao khớp thoát ra, bẻ thô bạo rất dễ làm dãn dây chằng bao khớp và rách bao xơ đĩa đệm.<br>
-• <strong>Specific Chiropractic chuyên biệt:</strong> Phân tích tìm đúng <strong>đốt sai lệch nguyên phát (Primary Subluxation)</strong> — chỉ nắn đốt kẹt, tuyệt đối không nắn vào đốt lỏng bù trừ. Kỹ thuật HVLA vận tốc cao biên độ nhỏ êm ái, bệnh nhân chưa kịp sợ thì khớp đã mở ra nhẹ nhõm, không hề gây đau đớn ạ!<br><br>
-Dạ không biết anh/chị đã từng chứng kiến hoặc trải nghiệm một ca nắn chỉnh Specific chuyên biệt bao giờ chưa ạ? Cảm giác rất êm ái và nhẹ nhõm đấy ạ!`,
-        cta: "register"
+        text: `Dạ, phương pháp giảng dạy của Thầy Henrik Simon tại Simon EDU Center sở hữu những ưu thế vượt trội mang tính bản quyền chuẩn y khoa quốc tế:<br><br>
+• <strong>Chuẩn Y Khoa Cơ Sinh Học Châu Âu:</strong> Hệ thống kiến thức kế thừa hơn 20 năm nghiên cứu và điều trị thực tế của Bác sĩ Henrik Simon tại Đức, tập trung vào bản chất cơ sinh học khớp và giải phẫu chức năng.<br>
+• <strong>Tính Chính Xác Cao (Specific Chiropractic):</strong> Phương pháp tập trung xác định đúng điểm đốt sống sai lệch (Subluxation), đưa khớp vào góc khóa an toàn rồi mới tác động lực nhẹ giải tỏa áp lực, tuyệt đối không dùng lực vặn xoắn bừa bãi.<br>
+• <strong>Hệ Thống Sàng Lọc An Toàn Tuyệt Đối (Red Flags):</strong> Học viên được đào tạo bài bản các bài kiểm tra lâm sàng (như test động mạch sống nền De-Kleyn, kiểm tra bao xơ đĩa đệm, loãng xương) để nắm rõ ranh giới an toàn, đảm bảo sự an tâm 100% cho người bệnh.<br>
+• <strong>Hệ Thống Video Đa Góc Quay & Mô Phỏng Lực:</strong> Từng kỹ thuật được quay chi tiết cận cảnh điểm tiếp xúc mỏm gai, kết hợp phương pháp Micro-drills giúp học viên rèn phản xạ và cảm nhận lực nhuần nhuyễn ngay tại nhà.`,
+        cta: "trial"
       },
+
       q8: {
         text: `Dạ chị hoàn toàn yên tâm nhé ạ! Rất nhiều học viên nữ nhỏ nhắn 45kg tại Simon Center hiện đang nắn chỉnh rất mượt mà cho các khách hàng nam to béo 80–90kg.<br><br>
-Bản chất của Chiropractic chuẩn y khoa là <strong>khoa học của tốc độ và trọng lực rơi cơ thể (F = m · a)</strong>, hoàn toàn không dùng sức bắp tay.<br><br>
-Thầy Henrik sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể (Body Drop) trong một phần mười giây. Chị nắn 10 ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, hai cánh tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!<br><br>
+Bản chất của Chiropractic chuẩn y khoa là <strong>khoa học của tốc độ và trọng lực rơi cơ thể (Body Drop)</strong> ở thời điểm người bệnh thả lỏng cơ, hoàn toàn không dùng sức bắp tay.<br><br>
+Thầy Henrik sẽ dạy chị cách khóa góc khớp (Pre-tension) và thả rơi trọng lượng cơ thể nhẹ nhàng. Chị nắn nhiều ca liên tục mỗi ngày vẫn thấy cơ thể nhẹ nhàng, hai cánh tay hoàn toàn thả lỏng và không hề tốn sức đâu ạ!<br><br>
 Dạ chị có đang lo lắng về thể lực hay chiều cao của mình khi nắn chỉnh không ạ? Chị cứ chia sẻ thêm với em nhé!`,
         cta: "register"
       },
+
       q9: {
-        text: `Dạ bên em CÓ hỗ trợ phương án <strong>thanh toán trả góp linh hoạt qua thẻ tín dụng</strong> kỳ hạn 3, 6, 9 hoặc 12 tháng anh nhé ạ.<br><br>
-Tính ra mỗi tháng anh chỉ cần thanh toán khoảng hơn 1 triệu đồng, rất nhẹ nhàng và chủ động về dòng tiền.<br><br>
-Ngay khi kích hoạt, anh được cấp tài khoản học trọn đời và nhận trọn bộ cẩm nang X-quang ngay lập tức. Anh/chị đang dùng thẻ tín dụng của ngân hàng nào ạ? Để em kiểm tra hỗ trợ chuyển đổi kỳ hạn phù hợp nhất cho anh/chị nhé!`,
+        text: `Dạ quy trình đăng ký và kích hoạt tài khoản diễn ra hoàn toàn tự động trong 1 phút ạ:<br><br>
+1. Anh/chị chọn khóa học và quét mã QR chuyển khoản ngân hàng qua cổng SePay tự động (Mã thanh toán hiển thị rõ ràng trên màn hình).<br>
+2. Ngay sau khi chuyển khoản thành công, hệ thống sẽ tự động gửi <strong>Email xác nhận đơn hàng</strong> kèm thông tin tài khoản học viện vào hòm thư của anh/chị.<br>
+3. Trợ lý chuyên môn của Thầy Henrik Simon sẽ chủ động liên hệ qua Zalo/SĐT để gửi tài liệu học tập, hướng dẫn anh/chị vào lớp và thêm vào nhóm hỗ trợ chuyên môn kín ạ.`,
         cta: "register"
       },
+
       buy: {
         text: `Dạ tuyệt vời quá ạ! Tài khoản học được kích hoạt tự động ngay sau khi đăng ký anh/chị nhé ạ.<br><br>
-Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video với các góc quay khác nhau trọn đời, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
+Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video với các góc quay khác nhau xem dài hạn 24/7, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
 Anh/chị bấm nút bên dưới để chuyển ngay đến Form đăng ký giữ suất ưu đãi đợt này nhé ạ:`,
         cta: "register_now"
       },
@@ -329,7 +360,7 @@ Dạ anh/chị có muốn đăng ký nhận bài giảng mẫu học thử miễ
       // --- CÂU HỎI MỚI: THỜI GIAN & LỊCH HỌC ---
       c_schedule_duration: {
         text: `⏱️ <strong>THỜI GIAN HỌC & LỊCH TRÌNH ĐÀO TẠO:</strong><br><br>
-• <strong>Khóa Online The Full Collection:</strong> Tài khoản học có giá trị <strong>TRỌN ĐỜI 24/7</strong>. Anh/chị chủ động hoàn toàn về thời gian, học trên điện thoại hoặc máy tính bất kỳ lúc nào rảnh rỗi mà không sợ bị trôi bài.<br>
+• <strong>Khóa Online The Full Collection:</strong> Tài khoản học có giá trị <strong>xem dài hạn 24/7 không giới hạn thời gian</strong>. Anh/chị chủ động hoàn toàn về thời gian, học trên điện thoại hoặc máy tính bất kỳ lúc nào rảnh rỗi mà không sợ bị trôi bài.<br>
 • <strong>Lộ trình tiếp thu trung bình của học viên:</strong><br>
   - <em>Tuần 1–3:</em> Nắm vững giải phẫu cơ sinh học, sờ nắn mốc xương và bảng Cảnh báo đỏ Red Flags.<br>
   - <em>Tuần 4–6:</em> Thuần thục phương pháp Micro-drills rèn lực, bộ pháp và các test lâm sàng.<br>
@@ -353,7 +384,7 @@ Dạ anh/chị có muốn đăng ký nhận bài giảng mẫu học thử miễ
 Hơn 500+ học viên đã tốt nghiệp tại Simon Center đang ứng dụng rất thành công theo 3 hướng:<br><br>
 1. <strong>Chủ Spa / Phòng khám Đông y / Phục hồi chức năng:</strong> Bổ sung dịch vụ Chiropractic nắn chỉnh cột sống chuẩn y khoa, nâng tầm giá trị buổi trị liệu từ 200k lên <strong>600k – 1.200k/buổi</strong>.<br>
 2. <strong>HLV PT Gym / Huấn luyện viên Yoga:</strong> Nâng cấp thành Chuyên gia Chỉnh sửa Tư thế & Phục hồi vận động (Posture & Mobility Specialist), gia tăng tỷ lệ khách hàng gắn bó lâu dài.<br>
-3. <strong>Mở Cơ sở Trị liệu Cơ xương khớp:</strong> Được bảo trợ chuyên môn từ Simon Center, được cấp Chứng chỉ Hoàn thành có chữ ký Thầy Henrik Simon và hỗ trợ hội chẩn các ca bệnh khó trọn đời.<br><br>
+3. <strong>Mở Cơ sở Trị liệu Cơ xương khớp:</strong> Được bảo trợ chuyên môn từ Simon Center, được cấp Chứng chỉ Hoàn thành có chữ ký Thầy Henrik Simon và hỗ trợ hội chẩn các ca bệnh khó xuyên suốt quá trình thực hành.<br><br>
 🎯 <em>Định hướng bền vững:</em> Khóa học tập trung trang bị năng lực chẩn đoán và kỹ thuật chuẩn xác, giúp anh/chị xây dựng uy tín lâm sàng vững chắc và phục vụ bệnh nhân hiệu quả ngay sau khi hoàn thành!`,
         cta: "register"
       },
@@ -401,7 +432,7 @@ Trong giáo trình của Bác sĩ Henrik Simon, đây là <strong>nguyên tắc 
 • <strong>Loãng xương nặng:</strong> CẤM LỰC NÉN DỌC trục thân đốt sống. Chỉ dùng lực xoay/trượt ngang tiếp xúc gai mỏm.<br>
 • <strong>Xơ vữa động mạch đốt sống (A. vertebralis):</strong> Bắt buộc làm test De-Kleyn trước khi chạm vào vùng cổ.<br>
 • Bệnh nhân đang dùng Corticoid liều cao kéo dài, bệnh ưa chảy máu (Hemophilia).<br><br>
-<em>💡 Nắm vững Red Flags giúp bạn tự tin từ chối đúng lúc, chuyển viện đúng ca và hành nghề an toàn 100% trọn đời!</em><br><br>
+<em>💡 Nắm vững Red Flags giúp bạn tự tin từ chối đúng lúc, chuyển viện đúng ca và hành nghề an toàn 100% và bền vững!</em><br><br>
 Dạ trong thực tế điều trị, anh/chị đã từng gặp ca bệnh nào khiến mình băn khoăn không biết có nên nắn hay không chưa ạ? Anh/chị có thể chia sẻ triệu chứng để em cùng hội chẩn nhé ạ!`,
         cta: "register"
       },
@@ -1442,6 +1473,19 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     // 0. NHÓM TRẢ LỜI CỤ THỂ CHI TIẾT TỪNG MODULE / NHU CẦU ĐẶC BIỆT
     // =========================================================
 
+    // 00. Khách hỏi khóa học / sản phẩm có phù hợp với tôi không / dành cho đối tượng nào / ai nên học
+    const isTargetAudienceQuery = 
+      (norm.includes("phu hop") || norm.includes("hop voi toi") || norm.includes("danh cho ai") || 
+       norm.includes("ai nen hoc") || norm.includes("doi tuong") || norm.includes("ai co the hoc") ||
+       (norm.includes("san pham") && (norm.includes("phu hop") || norm.includes("cho toi")))) &&
+      !norm.includes("tuoi") && !norm.includes("50") && !norm.includes("60") && !norm.includes("gia") &&
+      !norm.includes("nu") && !norm.includes("nho con") && !norm.includes("yeu");
+
+    if (isTargetAudienceQuery) {
+      appendBotMessage(BOT_DATA.answers.c_target_audience.text, BOT_DATA.answers.c_target_audience.cta);
+      return;
+    }
+
     // 0a. Học riêng phần lưng / thắt lưng / chậu (Ví dụ: "Tôi chỉ muốn học một phần nắn chỉnh phần lưng thôi thì sao?")
     const isLearnLumbar = 
       ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
@@ -1457,7 +1501,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const isLearnCervical = 
       ((norm.includes("hoc") || norm.includes("day") || norm.includes("khoa") || norm.includes("lop") || currentCategory === "course") && 
        (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("phan co") || norm.includes("dot song co") || norm.includes("vung co") || norm.includes("hoc co") || norm.includes("nan co") || norm.includes("c1") || norm.includes("c7"))) ||
-      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("co") || norm.includes("gay")));
+      ((norm.includes("mot phan") || norm.includes("rieng") || norm.includes("le") || norm.includes("chi muon")) && (norm.includes("co vai gay") || norm.includes("vai gay") || norm.includes("vung co") || norm.includes("phan co") || norm.includes("gay")));
 
     if (isLearnCervical) {
       appendBotMessage(BOT_DATA.answers.c_cervical_part.text, BOT_DATA.answers.c_cervical_part.cta);
@@ -1484,7 +1528,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 0e. Xem lại / tài khoản trọn đời / có giới hạn thời gian không
+    // 0e. Xem lại / tài khoản dài hạn / có giới hạn thời gian không
     const isLifetimeQuery = 
       norm.includes("tron doi") || norm.includes("xem lai") || norm.includes("vinh vien") || 
       norm.includes("xem duoc bao lau") || norm.includes("gioi han thoi gian") || norm.includes("xem di xem lai") || 

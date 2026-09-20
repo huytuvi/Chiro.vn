@@ -22,7 +22,7 @@
 * **Quyền lợi:**
   * Trọn bộ thực hành Level 1 (Cột sống) + Level 2 (Tứ chi) chuyên sâu cùng Thầy Henrik Simon.
   * Tặng kèm Khóa The Full Online Collection trị giá **14.900.000đ**.
-  * Tặng Vé vào Cộng đồng học viên cũ trọn đời (Alumni Club).
+  * Tặng Vé vào Cộng đồng học viên cũ đồng hành lâu dài (Alumni Club).
   * Tư vấn quy trình vận hành và setup phòng khám chuẩn y khoa Châu Âu.
 
 ---

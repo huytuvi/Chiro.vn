@@ -20,6 +20,6 @@
 ---
 
 ## 3. QUÀ TẶNG & ĐẶC QUYỀN ĐI KÈM
-* **TẶNG MIỄN PHÍ 100% Khóa The Full Online Collection trị giá 14.900.000đ** để ôn tập video 4K trọn đời.
-* **TẶNG VÉ VÀO CỘNG ĐỒNG HỌC VIÊN CŨ TRỌN ĐỜI (ALUMNI CLUB)**: Miễn phí tham gia nhóm kín chuyên môn trọn đời, được Thầy Henrik và hội đồng cố vấn hỗ trợ hội chẩn ca bệnh khó 24/7.
+* **TẶNG MIỄN PHÍ 100% Khóa The Full Online Collection trị giá 14.900.000đ** để ôn tập video 4K dài hạn.
+* **TẶNG VÉ VÀO CỘNG ĐỒNG HỌC VIÊN CŨ DÀI HẠN (ALUMNI CLUB)**: Miễn phí tham gia nhóm kín chuyên môn đồng hành lâu dài, được Thầy Henrik và hội đồng cố vấn hỗ trợ hội chẩn ca bệnh khó 24/7.
 * **Cấp Chứng chỉ Hoàn thành Thực hành Lâm sàng (Hands-on Certificate)** chuẩn Viện DISC CHLB Đức.
