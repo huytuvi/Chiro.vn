@@ -11,8 +11,8 @@
   // =============================================================================
   // 🤖 CẤU HÌNH TRÍ TUỆ NHÂN TẠO GOOGLE GEMINI (GEMINI AI ENGINE)
   // =============================================================================
-  // Master Key mặc định của Simon Center (Mã hóa an toàn - Tự động nạp cho 100% khách vào web)
-  const MASTER_GEMINI_KEY_ENCODED = ""; // Khóa Base64 sẽ được nhúng tại đây
+  // Master Key mặc định của Simon Center (Mã hóa Base64 an toàn - Tự động kích hoạt cho 100% khách vào web)
+  const MASTER_GEMINI_KEY_ENCODED = "QVEuQWI4Uk42THFscXpIZ0pKeldjREZ5bGVRU2I0eGZkODUxS2IxbzlwOGY1VnR6RjVxdXc=";
   function getMasterGeminiKey() {
     try {
       if (typeof window !== "undefined" && window.CHIRO_MASTER_GEMINI_KEY) {
@@ -25,11 +25,41 @@
     return "";
   }
 
+  // Tự động tối ưu mô hình (gemini-3.5-flash-lite siêu tốc & chính xác)
+  let initialModel = localStorage.getItem("CHIRO_GEMINI_MODEL");
+  if (!initialModel || initialModel === "gemini-2.5-flash" || initialModel === "gemini-1.5-flash") {
+    initialModel = "gemini-3.5-flash-lite";
+  }
+
   const GEMINI_CONFIG = {
     apiKey: localStorage.getItem("CHIRO_GEMINI_API_KEY") || getMasterGeminiKey() || "",
-    model: localStorage.getItem("CHIRO_GEMINI_MODEL") || "gemini-2.5-flash",
+    model: initialModel,
     enabled: localStorage.getItem("CHIRO_GEMINI_ENABLED") !== "false"
   };
+
+  // Đồng bộ API Key từ xa qua Supabase app_config (Cách 2)
+  async function syncKeyFromSupabase() {
+    try {
+      const res = await fetch("https://fjzkneljhfibwksnpjkk.supabase.co/rest/v1/app_config?key=eq.gemini_api_key&select=value", {
+        headers: {
+          "apikey": "sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR",
+          "Authorization": "Bearer sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR"
+        }
+      });
+      if (res.ok) {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0 && rows[0].value) {
+          const remoteKey = rows[0].value.trim();
+          if (remoteKey) {
+            GEMINI_CONFIG.apiKey = remoteKey;
+            updateAiBadgeStatus();
+          }
+        }
+      }
+    } catch (e) {
+      // Dùng Master Key fallback mượt mà
+    }
+  }
 
   const GEMINI_SYSTEM_PROMPT = `Bạn là Chuyên gia Tư vấn Đào tạo & Bán hàng Y khoa Cao cấp của Simon Chiropractic Center (làm việc trực tiếp cùng Bác sĩ Henrik Simon - Chuyên gia Nắn chỉnh Cột sống hàng đầu từ DISC Academy Đức).
 
@@ -778,10 +808,10 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
           </div>
           <div class="space-y-1">
             <label class="font-bold text-[11px] text-gray-700 block">Mô hình AI:</label>
-            <select id="geminiModelSelect" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-xl text-xs bg-gray-50">
-              <option value="gemini-2.5-flash">Gemini 2.5 Flash (Mới nhất, Siêu nhanh &amp; Thông minh)</option>
-              <option value="gemini-1.5-flash">Gemini 1.5 Flash (Ổn định, Tiết kiệm)</option>
-              <option value="gemini-1.5-pro">Gemini 1.5 Pro (Suy luận y học chuyên sâu)</option>
+            <select id="geminiModelSelect" class="w-full px-2.5 py-1.5 border border-gray-300 rounded-xl text-xs bg-gray-50 font-medium">
+              <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite (Siêu nhanh, Khuyên dùng)</option>
+              <option value="gemini-3.6-flash">Gemini 3.6 Flash (Thông minh, Suy luận sâu)</option>
+              <option value="gemini-1.5-pro">Gemini 1.5 Pro (Nghiên cứu chuyên sâu)</option>
             </select>
           </div>
           <div id="geminiTestStatus" class="hidden p-2 rounded-xl text-[11px] font-medium"></div>
@@ -840,6 +870,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
 
     document.body.appendChild(chatModal);
     updateAiBadgeStatus();
+    syncKeyFromSupabase();
   }
 
   // =============================================================================
@@ -1300,7 +1331,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
 
     if (modal) modal.classList.remove("hidden");
     if (input) input.value = GEMINI_CONFIG.apiKey || "";
-    if (select) select.value = GEMINI_CONFIG.model || "gemini-2.5-flash";
+    if (select) select.value = GEMINI_CONFIG.model || "gemini-3.5-flash-lite";
     if (statusDiv) {
       statusDiv.className = "hidden p-2 rounded-xl text-[11px] font-medium";
       statusDiv.innerHTML = "";
@@ -1324,7 +1355,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const statusDiv = document.getElementById("geminiTestStatus");
 
     const key = (input ? input.value.trim() : "");
-    const model = (select ? select.value : "gemini-2.5-flash");
+    const model = (select ? select.value : "gemini-3.5-flash-lite");
 
     GEMINI_CONFIG.apiKey = key;
     GEMINI_CONFIG.model = model;
@@ -1354,7 +1385,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const statusDiv = document.getElementById("geminiTestStatus");
 
     const key = (input ? input.value.trim() : "");
-    const model = (select ? select.value : "gemini-2.5-flash");
+    const model = (select ? select.value : "gemini-3.5-flash-lite");
 
     if (!key) {
       if (statusDiv) {
