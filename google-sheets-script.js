@@ -1174,6 +1174,34 @@ function sendWaitlistWelcomeEmail(recipientEmail, customerName, customerPhone, g
 
 /**
  * ============================================================================
+ * HÀM TEST CẤP QUYỀN & GỬI THỬ EMAIL CHÀO MỪNG DANH SÁCH CHỜ (1-CLICK RUN)
+ * ============================================================================
+ * 📌 Hướng dẫn cấp quyền gửi email cho Google Apps Script:
+ * 1. Trong trình duyệt Google Apps Script, ở thanh công cụ trên cùng:
+ * 2. Chọn hàm: "testSendWaitlistEmail"
+ * 3. Bấm nút "▶️ Chạy" (Run).
+ * 4. Google sẽ hiện hộp thoại "Cần có quyền ủy quyền" -> Bấm "Xem lại quyền"
+ * 5. Chọn tài khoản Google (chiroeduvn@gmail.com) -> Bấm "Nâng cao" (Advanced)
+ * 6. Bấm "Đi tới... (không an toàn)" -> Bấm "Cho phép" (Allow).
+ * 👉 Sau bước này, hệ thống sẽ được cấp quyền gửi email vĩnh viễn và tự động 100%!
+ */
+function testSendWaitlistEmail() {
+  const testEmail = "huybnm6@gmail.com";
+  Logger.log("▶️ Đang gửi thử Email Chào Mừng Danh Sách Chờ tới: " + testEmail);
+  sendWaitlistWelcomeEmail(
+    testEmail,
+    "Nguyễn C",
+    "09123456789",
+    "Nâng cao tay nghề/bổ trợ công việc hiện tại (HLV, PT, Spa, Vật lý trị liệu...)",
+    "Đã có kiến thức cơ bản / đang làm ngành liên quan",
+    "Học lý thuyết Online kết hợp thực hành sau",
+    "[MT:2|KN:2|HT:2]"
+  );
+  Logger.log("✅ Đã hoàn tất lệnh gửi thử!");
+}
+
+/**
+ * ============================================================================
  * HÀM 3: GỬI LẠI EMAIL CHO DÒNG MỚI NHẤT TRONG GOOGLE SHEET (DÒNG SỐ 8 CỦA BẠN)
  * ============================================================================
  * Bạn bấm chọn hàm này và bấm "Chạy" -> Hệ thống sẽ tự động đọc dòng số 8:
