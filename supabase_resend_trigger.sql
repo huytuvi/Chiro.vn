@@ -26,6 +26,9 @@ DECLARE
   v_channel TEXT;
   v_course TEXT;
   v_occupation TEXT;
+  v_phone_digits TEXT;
+  v_last4_phone TEXT;
+  v_priority_code TEXT;
   v_email_subject TEXT;
   v_email_html TEXT;
   v_request_body JSONB;
@@ -42,6 +45,17 @@ BEGIN
   IF v_customer_email IS NULL OR v_customer_email = '' OR POSITION('@' IN v_customer_email) = 0 THEN
     RETURN NEW;
   END IF;
+
+  -- ── TÍNH TOÁN MÃ HỒ SƠ ƯU TIÊN (WL + 8 SỐ NGÀY THÁNG GIỜ PHÚT + 4 SỐ CUỐI SĐT) ──
+  v_phone_digits := REGEXP_REPLACE(v_customer_phone, '\D', '', 'g');
+  IF LENGTH(v_phone_digits) >= 4 THEN
+    v_last4_phone := RIGHT(v_phone_digits, 4);
+  ELSE
+    v_last4_phone := LPAD(COALESCE(v_phone_digits, '0'), 4, '0');
+  END IF;
+
+  -- Mã hồ sơ chuẩn: WL + ddMMhhmm + 4 số cuối SĐT (ví dụ: WL200918024231)
+  v_priority_code := 'WL' || to_char(timezone('Asia/Ho_Chi_Minh', now()), 'DDMMHH24MI') || v_last4_phone;
 
   -- ========================================================================
   -- TRƯỜNG HỢP A: KHÁCH ĐIỀN BẢNG KHẢO SÁT & DANH SÁCH CHỜ (WAITLIST)
@@ -71,7 +85,11 @@ BEGIN
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Số điện thoại / Zalo: <strong>' || v_customer_phone || '</strong></div>' ||
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Email nhận tin: <strong>' || v_customer_email || '</strong></div>' ||
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Hồ sơ đăng ký: <strong>' || v_course || '</strong></div>' ||
-            '<div style="font-size: 13px; color: #475569;">• Trạng thái: <span style="color: #059669; font-weight: 600;">Ưu tiên xếp lớp &amp; Chờ tư vấn lộ trình</span></div>' ||
+            '<div style="font-size: 13px; color: #475569; margin-bottom: 6px;">• Trạng thái: <span style="color: #059669; font-weight: 600;">Ưu tiên xếp lớp &amp; Chờ tư vấn lộ trình</span></div>' ||
+            '<div style="font-size: 13px; color: #1e293b; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1;">• Mã hồ sơ ưu tiên: <strong style="color: #8F1D35; font-family: monospace; font-size: 14px;">' || v_priority_code || '</strong></div>' ||
+            '<div style="font-size: 12px; color: #64748b; margin-top: 4px; line-height: 1.5; font-style: italic; padding-left: 10px;">' ||
+              'Ý nghĩa dòng mã: <strong>WL</strong> là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ.' ||
+            '</div>' ||
           '</div>' ||
           '<div style="background-color: #fefce8; border-left: 4px solid #eab308; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">' ||
             '<div style="font-weight: bold; color: #854d0e; font-size: 13.5px; margin-bottom: 6px;">⚡ ĐẶC QUYỀN &amp; CAM KẾT CẬP NHẬT THÔNG TIN SỚM NHẤT:</div>' ||
@@ -121,7 +139,11 @@ BEGIN
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Họ và tên: <strong>' || v_customer_name || '</strong></div>' ||
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Số điện thoại / Zalo: <strong>' || v_customer_phone || '</strong></div>' ||
             '<div style="font-size: 13px; color: #475569; margin-bottom: 4px;">• Khóa học quan tâm: <strong>' || v_course || '</strong></div>' ||
-            '<div style="font-size: 13px; color: #475569;">• Học phí ưu đãi: <strong style="color: #8F1D35;">' || COALESCE(NEW.price, 'Đang cập nhật') || '</strong></div>' ||
+            '<div style="font-size: 13px; color: #475569; margin-bottom: 6px;">• Học phí ưu đãi: <strong style="color: #8F1D35;">' || COALESCE(NEW.price, 'Đang cập nhật') || '</strong></div>' ||
+            '<div style="font-size: 13px; color: #1e293b; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1;">• Mã hồ sơ ưu tiên: <strong style="color: #8F1D35; font-family: monospace; font-size: 14px;">' || v_priority_code || '</strong></div>' ||
+            '<div style="font-size: 12px; color: #64748b; margin-top: 4px; line-height: 1.5; font-style: italic; padding-left: 10px;">' ||
+              'Ý nghĩa dòng mã: <strong>WL</strong> là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ.' ||
+            '</div>' ||
           '</div>' ||
           '<div style="background-color: #fefce8; border-left: 4px solid #eab308; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">' ||
             '<div style="font-weight: bold; color: #854d0e; font-size: 13.5px; margin-bottom: 6px;">📢 THÔNG BÁO VỀ KHÓA HỌC &amp; LỘ TRÌNH:</div>' ||

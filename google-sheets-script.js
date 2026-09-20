@@ -1055,7 +1055,10 @@ function sendWaitlistWelcomeEmail(recipientEmail, customerName, customerPhone, g
   const validGoal = goal || 'Tìm hiểu kỹ thuật Chiropractic chuẩn Y khoa';
   const validExp = exp || 'Người mới tìm hiểu';
   const validFormat = format || 'Lộ trình đào tạo chuẩn Simon Center';
-  const validCode = digitalCode || '[WAITLIST-SIMON]';
+  const cleanPhone = String(customerPhone || '').replace(/\D/g, '');
+  const last4Phone = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : '0000');
+  const timeDigits = Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "ddMMHHmm");
+  const validCode = (digitalCode && digitalCode.startsWith("WL")) ? digitalCode : ("WL" + timeDigits + last4Phone);
 
   const subject = "[Simon Center] Chào mừng anh/chị gia nhập Danh Sách Chờ Ưu Tiên — Khóa học Chiropractic Chuẩn Y Khoa";
 
@@ -1124,7 +1127,14 @@ function sendWaitlistWelcomeEmail(recipientEmail, customerName, customerPhone, g
             </tr>
             <tr>
               <td style="padding: 6px 0; color: #64748b;">Mã hồ sơ ưu tiên:</td>
-              <td style="padding: 6px 0; color: #8F1D35; font-family: monospace; font-weight: bold;">${validCode}</td>
+              <td style="padding: 6px 0; color: #8F1D35; font-family: monospace; font-weight: bold; font-size: 14px;">${validCode}</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding: 4px 0 6px 0;">
+                <div style="font-size: 12px; color: #64748b; font-style: italic; line-height: 1.5; background-color: #f1f5f9; padding: 6px 10px; border-radius: 6px;">
+                  (Ý nghĩa dòng mã: <strong>WL</strong> là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ).
+                </div>
+              </td>
             </tr>
           </table>
         </div>

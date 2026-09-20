@@ -2223,6 +2223,18 @@
             <p class="text-[11.5px] text-emerald-900 leading-relaxed">
               Vui lòng kiểm tra hộp thư đến (hoặc thư mục Quảng cáo/Spam) tại địa chỉ: <strong id="successSurveyEmail" class="text-brand-crimson underline"></strong>
             </p>
+
+            <!-- Mã hồ sơ ưu tiên -->
+            <div class="bg-white/90 border border-emerald-300 rounded-xl p-3 shadow-2xs my-1.5">
+              <div class="flex items-center justify-between text-[11.5px] font-bold text-gray-800">
+                <span>🏷️ Mã hồ sơ ưu tiên:</span>
+                <span id="successSurveyCode" class="font-mono text-brand-crimson font-extrabold text-xs sm:text-sm bg-rose-50 px-2 py-0.5 rounded border border-rose-200 tracking-wider"></span>
+              </div>
+              <p class="text-[10.5px] text-gray-500 mt-1.5 italic leading-relaxed">
+                (Ý nghĩa dòng mã: <strong>WL</strong> là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ).
+              </p>
+            </div>
+
             <div class="border-t border-emerald-200/70 pt-2 space-y-1 text-[11px] text-emerald-800">
               <p>⚡ <strong>Cập nhật sớm nhất:</strong> Mọi thông tin mới nhất về lịch khai giảng, giáo trình Bác sĩ Henrik Simon và học phí ưu đãi sẽ được cập nhật sớm nhất cho anh/chị.</p>
               <p>🔒 <strong>Cam kết bảo mật 100%:</strong> Thông tin cá nhân của anh/chị luôn được bảo mật tuyệt đối, không chia sẻ cho bên thứ ba.</p>
@@ -3023,8 +3035,16 @@
       else if (format.includes('Online')) formatCode = 2;
       else if (format.includes('tư vấn')) formatCode = 3;
 
-      const digitalCode = `[MT:${goalCode}|KN:${expCode}|HT:${formatCode}]`;
-      const detail = `[MÃ: MT_${goalCode}|KN_${expCode}|HT_${formatCode}] [Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
+      // Mã hồ sơ ưu tiên: WL + 8 số ngày tháng giờ phút + 4 số cuối SĐT (ví dụ: WL200918024231)
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const timeDigits = pad(now.getDate()) + pad(now.getMonth() + 1) + pad(now.getHours()) + pad(now.getMinutes());
+      const cleanPhone = String(phone || '').replace(/\D/g, '');
+      const last4Phone = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : '0000');
+      const priorityCode = 'WL' + timeDigits + last4Phone;
+
+      const digitalCode = priorityCode;
+      const detail = `[MÃ: ${priorityCode}] [Mục tiêu]: ${goal} | [Kinh nghiệm]: ${exp} | [Hình thức]: ${format}`;
 
       const payload = {
         action: 'register',
@@ -3063,7 +3083,8 @@
         `• Họ và tên: ${name}\n` +
         `• Số điện thoại / Zalo: ${phone}\n` +
         `• Email nhận thông tin: ${email}\n` +
-        `• Mã hồ sơ ưu tiên: ${digitalCode}\n` +
+        `• Mã hồ sơ ưu tiên: ${priorityCode}\n` +
+        `  (Ý nghĩa dòng mã: WL là Waitinglist, 8 số tiếp theo là ngày tháng giờ phút mà họ đã điền form, 4 số cuối trong mã hồ sơ là 4 số cuối của số điện thoại của họ)\n` +
         `• Mục tiêu đào tạo: ${goal}\n` +
         `• Kinh nghiệm: ${exp}\n` +
         `• Hình thức mong muốn: ${format}\n\n` +
@@ -3083,6 +3104,7 @@
           Ho_Va_Ten: name,
           So_Dien_Thoai_Zalo: phone,
           Email_Khach_Hang: email,
+          Ma_Ho_So_Uu_Tien: priorityCode,
           Ma_Muc_Tieu: goalCode,
           Muc_Tieu: goal,
           Ma_Kinh_Nghiem: expCode,
@@ -3101,6 +3123,9 @@
         document.getElementById('successSurveyPhone').innerText = phone;
         if (document.getElementById('successSurveyEmail')) {
           document.getElementById('successSurveyEmail').innerText = email;
+        }
+        if (document.getElementById('successSurveyCode')) {
+          document.getElementById('successSurveyCode').innerText = priorityCode;
         }
         document.getElementById('surveySuccessBox').classList.remove('hidden');
         btn.disabled = false;
