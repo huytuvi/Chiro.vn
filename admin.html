@@ -62,10 +62,10 @@
     <!-- MAIN NAVIGATION TABS -->
     <div class="flex items-center space-x-2 border-b border-slate-200 overflow-x-auto pb-1">
       <button onclick="switchMainTab('crm')" id="navTabCRM" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-[#8F1D35] text-white shadow-sm shrink-0">
-        <span>📋 Quản Lý CRM (Đơn - Khách - SP)</span>
+        <span>💼 Quản Lý CRM (Khách &amp; Đơn Hàng)</span>
       </button>
       <button onclick="switchMainTab('survey')" id="navTabSurvey" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
-        <span>📊 Khảo Sát Nhu Cầu</span>
+        <span>📋 Danh Sách Chờ &amp; Khảo Sát</span>
         <span id="badgeSurveyCount" class="bg-indigo-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">0</span>
       </button>
       <button onclick="switchMainTab('settings')" id="navTabSettings" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
@@ -296,35 +296,101 @@
     </div>
 
     <!-- =================================================================== -->
-    <!-- SECTION 2: KHẢO SÁT NHU CẦU                                         -->
+    <!-- SECTION 2: DANH SÁCH CHỜ & KHẢO SÁT NHU CẦU                         -->
     <!-- =================================================================== -->
     <div id="sectionSurvey" class="space-y-6 hidden">
-      <div class="card p-6 border border-slate-200">
-        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-4">
-          <div>
-            <h2 class="text-base font-black text-slate-900">📊 Danh Sách Khảo Sát Nhu Cầu Học Viên</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Dữ liệu thu thập từ popup khảo sát 5 câu hỏi trên trang chủ Chiro.vn</p>
+      <!-- 4 KPI Cards dành riêng cho Danh Sách Chờ -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="card p-4 border-l-4 border-indigo-600 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">TỔNG ĐĂNG KÝ CHỜ</span>
+            <span class="text-base">👥</span>
           </div>
-          <button onclick="syncSurveyFromRemote()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1">
-            <span>🔄 Tải Lại Khảo Sát</span>
-          </button>
+          <div class="text-2xl sm:text-3xl font-black text-slate-900 font-mono" id="wlStatTotal">0</div>
+          <p class="text-[11px] text-slate-400 mt-1">Người muốn tham dự khóa học</p>
         </div>
+
+        <div class="card p-4 border-l-4 border-emerald-500 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">HỌC TRỰC TIẾP OFFLINE</span>
+            <span class="text-base">🏫</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-emerald-600 font-mono" id="wlStatOffline">0</div>
+          <p class="text-[11px] text-emerald-700 font-medium mt-1">Lớp cầm tay chỉ việc</p>
+        </div>
+
+        <div class="card p-4 border-l-4 border-sky-500 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">HỌC ONLINE E-LEARNING</span>
+            <span class="text-base">💻</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-sky-600 font-mono" id="wlStatOnline">0</div>
+          <p class="text-[11px] text-sky-700 font-medium mt-1">Chủ động học từ xa 24/7</p>
+        </div>
+
+        <div class="card p-4 border-l-4 border-amber-500 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">CHỜ TƯ VẤN LỘ TRÌNH</span>
+            <span class="text-base">⏳</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-600 font-mono" id="wlStatPending">0</div>
+          <p class="text-[11px] text-amber-700 font-medium mt-1">Cần trợ lý liên hệ Zalo</p>
+        </div>
+      </div>
+
+      <!-- Danh Sách Bảng Chi Tiết -->
+      <div class="card p-6 border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-4 mb-4 gap-3">
+          <div>
+            <div class="flex items-center space-x-2">
+              <h2 class="text-base font-black text-slate-900">📋 Danh Sách Người Chờ Tham Dự &amp; Khảo Sát Nhu Cầu</h2>
+              <span class="bg-amber-100 text-amber-800 text-[11px] font-bold px-2 py-0.5 rounded-full border border-amber-200">Chưa Mua Hàng - Tách Khỏi CRM</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Danh sách thu thập từ form Đăng ký danh sách chờ &amp; khảo sát 5 câu hỏi trên chiro.vn. Không tính vào khách hàng và đơn hàng.</p>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="syncAllWithRemote(true)" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1">
+              <span>🔄 Tải Lại Dữ Liệu</span>
+            </button>
+            <button onclick="exportWaitlistCSV()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl transition shadow-sm flex items-center space-x-1">
+              <span>📥 Xuất Excel (.csv)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bộ Lọc & Tìm Kiếm -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div class="flex items-center space-x-1 text-xs">
+            <span class="text-slate-500 font-semibold mr-1">Hình thức:</span>
+            <button onclick="filterWaitlistFormat('all')" id="fltWlAll" class="px-2.5 py-1 rounded-md bg-slate-800 text-white font-bold text-[11px]">Tất cả</button>
+            <button onclick="filterWaitlistFormat('offline')" id="fltWlOffline" class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-bold text-[11px] hover:bg-slate-50">🏫 Trực tiếp Offline</button>
+            <button onclick="filterWaitlistFormat('online')" id="fltWlOnline" class="px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-bold text-[11px] hover:bg-slate-50">💻 Học Online</button>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input type="text" id="searchWaitlistInput" oninput="searchWaitlist(this.value)" placeholder="🔍 Tìm theo tên, SĐT, email, mã WL..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35] bg-white w-48 sm:w-64">
+          </div>
+        </div>
+
         <div class="overflow-x-auto border border-slate-200 rounded-xl">
           <table class="w-full text-left text-xs">
             <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
               <tr>
                 <th class="py-3 px-3 w-12 text-center">#</th>
-                <th class="py-3 px-3">Thời Gian</th>
+                <th class="py-3 px-3 w-32">Thời Gian</th>
                 <th class="py-3 px-3">Họ và Tên</th>
-                <th class="py-3 px-3">Số Điện Thoại</th>
-                <th class="py-3 px-3">Mã Số Hóa</th>
-                <th class="py-3 px-3">Mục Tiêu Học</th>
+                <th class="py-3 px-3">Số Điện Thoại / Zalo</th>
+                <th class="py-3 px-3">Email Nhận Tin</th>
+                <th class="py-3 px-3">Mã Hồ Sơ Ưu Tiên</th>
+                <th class="py-3 px-3">Mã Tổng Hợp</th>
+                <th class="py-3 px-3">Mục Tiêu Đào Tạo</th>
                 <th class="py-3 px-3">Kinh Nghiệm</th>
-                <th class="py-3 px-3">Hình Thức Học</th>
+                <th class="py-3 px-3">Hình Thức</th>
+                <th class="py-3 px-3 w-28 text-center">Trạng Thái</th>
+                <th class="py-3 px-3 w-24 text-center">Thao Tác</th>
               </tr>
             </thead>
             <tbody id="surveyTableBody" class="divide-y divide-slate-100 text-slate-800">
-              <tr><td colspan="8" class="py-8 text-center text-slate-400 italic">Đang tải dữ liệu khảo sát...</td></tr>
+              <tr><td colspan="12" class="py-8 text-center text-slate-400 italic">Đang tải dữ liệu danh sách chờ...</td></tr>
             </tbody>
           </table>
         </div>
@@ -714,7 +780,8 @@
     let _crmData = {
       products: [],
       customers: [],
-      orders: []
+      orders: [],
+      waitlist: []
     };
 
     let _filterProductType = 'all';
@@ -748,6 +815,7 @@
       if (!_crmData.products) _crmData.products = [];
       if (!_crmData.customers) _crmData.customers = [];
       if (!_crmData.orders) _crmData.orders = [];
+      if (!_crmData.waitlist) _crmData.waitlist = [];
 
       renderAllCRM();
       syncAllWithRemote(false);
@@ -817,8 +885,10 @@
 
     function switchMainTab(tab) {
       ['crm', 'survey', 'settings'].forEach(t => {
-        const sec = document.getElementById('section' + t.toUpperCase());
-        const btn = document.getElementById('navTab' + (t === 'crm' ? 'CRM' : (t === 'survey' ? 'Survey' : 'Settings')));
+        const secId = t === 'crm' ? 'sectionCRM' : (t === 'survey' ? 'sectionSurvey' : 'sectionSettings');
+        const btnId = 'navTab' + (t === 'crm' ? 'CRM' : (t === 'survey' ? 'Survey' : 'Settings'));
+        const sec = document.getElementById(secId);
+        const btn = document.getElementById(btnId);
         if (sec && btn) {
           if (t === tab) {
             sec.classList.remove('hidden');
@@ -829,7 +899,7 @@
           }
         }
       });
-      if (tab === 'survey') syncSurveyFromRemote();
+      if (tab === 'survey') renderWaitlistTable();
     }
 
     function switchCRMSubTab(sub) {
@@ -1881,12 +1951,57 @@
           const manualOrders = (_crmData.orders || []).filter(o => o.is_manual);
           const freshCustomers = [];
           const freshOrders = [...manualOrders];
+          const freshWaitlist = [];
 
           remoteLeads.forEach(r => {
             const rawPhone = String(r.phone || '').replace(/\D/g, '');
             if (!rawPhone || rawPhone.length < 8) return;
             const phone = rawPhone.startsWith('0') ? rawPhone : '0' + rawPhone;
 
+            // ── PHÂN LOẠI: DANH SÁCH CHỜ / KHẢO SÁT → KHÔNG vào CRM ──
+            const isSurveyOrWaitlist = (
+              (r.channel && (r.channel.includes('Khảo Sát') || r.channel.includes('Danh Sách Chờ') || r.channel.includes('Waitlist'))) ||
+              (r.course && (r.course.includes('Danh Sách Chờ') || r.course.startsWith('WL'))) ||
+              (r.price && String(r.price).toLowerCase().includes('danh sách chờ'))
+            );
+
+            if (isSurveyOrWaitlist) {
+              // Trích xuất mã hồ sơ ưu tiên (WL...) từ nhiều trường
+              let priorityCode = r.priority_code || '';
+              if (!priorityCode) {
+                const wlMatch = ((r.course || '') + ' ' + (r.occupation || '') + ' ' + (r.email_status || '')).match(/WL\d{12}/i);
+                priorityCode = wlMatch ? wlMatch[0].toUpperCase() : '';
+              }
+              // Trích xuất mã tổng hợp [MT:x|KN:y|HT:z]
+              let summaryCode = r.summary_code || '';
+              if (!summaryCode) {
+                const mtMatch = ((r.course || '') + ' ' + (r.occupation || '')).match(/\[MT:\d\|KN:\d\|HT:\d\]/i);
+                summaryCode = mtMatch ? mtMatch[0] : '';
+              }
+              // Mục tiêu, Kinh nghiệm, Hình thức (từ occupation)
+              const occ = r.occupation || '';
+              const goalMatch = occ.match(/\[Mục tiêu\][:\s]*([^\|]+)/i);
+              const expMatch = occ.match(/\[Kinh nghiệm\][:\s]*([^\|]+)/i);
+              const fmtMatch = occ.match(/\[Hình thức\][:\s]*([^\|]+)/i);
+
+              freshWaitlist.push({
+                id: r.id,
+                name: r.name || 'Khách ẩn danh',
+                phone: phone,
+                email: r.email || '',
+                time_str: r.time_str || (r.created_at ? new Date(r.created_at).toLocaleString('vi-VN') : '--'),
+                priority_code: priorityCode,
+                summary_code: summaryCode,
+                goal: goalMatch ? goalMatch[1].trim() : (r.goal || ''),
+                experience: expMatch ? expMatch[1].trim() : (r.experience || ''),
+                format: fmtMatch ? fmtMatch[1].trim() : (r.format || ''),
+                status: r.status || 'Chờ tư vấn lộ trình',
+                channel: r.channel || 'Khảo Sát'
+              });
+              return; // DỪNG — không tạo customer/order cho waitlist
+            }
+
+            // ── CRM: CHỈ KHI LÀ ĐƠN HÀNG THỰC SỰ ──
             let c = freshCustomers.find(item => item.phone === phone);
             if (!c) {
               c = {
@@ -1899,41 +2014,30 @@
               };
               freshCustomers.push(c);
             } else {
-              // Cập nhật tên và email mới nhất nếu có
               if (r.name && r.name !== 'Khách hàng') c.name = r.name;
               if (r.email && (!c.email || c.email === 'buihuy01@gmail.com')) c.email = r.email;
             }
 
-            // Nhận diện đơn hàng: mọi bản ghi đăng ký từ Form (có giá, khóa học, email_status hoặc channel)
             const hasOrderInfo = r.price || r.course || r.email_status || (r.channel && r.channel.includes('Form'));
             if (hasOrderInfo) {
-              // Trích xuất mã đơn hàng chuẩn SCC + 12 số (hoặc DH + 6 số cũ)
-              let codeMatch = (r.email_status && (r.email_status.match(/SCC\d{12}/i) || r.email_status.match(/SCC\d{8,14}/i) || r.email_status.match(/DH\d{6}/i))) || 
+              let codeMatch = (r.email_status && (r.email_status.match(/SCC\d{12}/i) || r.email_status.match(/SCC\d{8,14}/i) || r.email_status.match(/DH\d{6}/i))) ||
                               (r.channel && (r.channel.match(/SCC\d{12}/i) || r.channel.match(/SCC\d{8,14}/i) || r.channel.match(/DH\d{6}/i)));
               let orderCode = codeMatch ? codeMatch[0].toUpperCase() : (r.email_status && (r.email_status.startsWith('SCC') || r.email_status.startsWith('DH')) ? r.email_status : ('SCC' + String(r.id).padStart(12, '0')));
 
-              // Đối soát chéo: Đã thanh toán nếu Supabase ghi nhận HOẶC Google Sheet ghi nhận
               const isSbPaid = (r.status && (r.status.includes('ĐÃ THANH TOÁN') || r.status.toLowerCase().includes('paid')));
               const isGsPaid = Boolean(gsPaidByCode[orderCode] || (!orderCode.startsWith('SCC') && gsPaidByPhone[phone]));
               const isPaidFinal = isSbPaid || isGsPaid;
               const newStatus = isPaidFinal ? 'paid' : 'pending';
               let cleanPrice = Number(String(r.price || '').replace(/\D/g, '')) || 0;
 
-              // TỰ ĐỘNG BÙ ĐỒNG BỘ: Nếu Google Sheet đã thanh toán mà Supabase chưa đổi, tự động gửi PATCH cập nhật Supabase ngay!
               if (isGsPaid && !isSbPaid && r.id) {
                 fetch(`${sbUrl}/rest/v1/leads?id=eq.${r.id}`, {
                   method: 'PATCH',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'apikey': sbKey,
-                    'Authorization': `Bearer ${sbKey}`,
-                    'Prefer': 'return=minimal'
-                  },
+                  headers: { 'Content-Type': 'application/json', 'apikey': sbKey, 'Authorization': `Bearer ${sbKey}`, 'Prefer': 'return=minimal' },
                   body: JSON.stringify({ status: 'ĐÃ THANH TOÁN' })
                 }).catch(() => {});
               }
 
-              // Phát hiện sự kiện để hiển thị Toast thông báo tức thì
               const prevStatus = prevStatusMap[r.id] || prevStatusMap[orderCode];
               if (prevStatus === 'pending' && newStatus === 'paid') {
                 showAdminToast(`🎉 SePay đã xác nhận: Đơn ${orderCode} của ${r.name || 'Học viên'} vừa thanh toán thành công!`);
@@ -1953,17 +2057,14 @@
                 else if (cLower.includes('test') || cleanPrice === 2000) matchedProd = _crmData.products.find(p => p.id === 8);
                 else if (cLower.includes('full') || cLower.includes('trọn bộ')) matchedProd = _crmData.products.find(p => p.id === 1);
               }
-              if (!matchedProd) {
-                matchedProd = _crmData.products.find(p => cleanPrice > 0 && Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
-              }
-              if (cleanPrice === 0 && matchedProd) {
-                cleanPrice = matchedProd.price;
-              }
+              if (!matchedProd) matchedProd = _crmData.products.find(p => cleanPrice > 0 && Math.abs(p.price - cleanPrice) < 1000) || _crmData.products[0];
+              if (cleanPrice === 0 && matchedProd) cleanPrice = matchedProd.price;
 
               freshOrders.push({
                 id: r.id,
                 lead_id: r.id,
                 order_code: orderCode,
+                payment_code: r.payment_code || orderCode,
                 customer_id: c.id,
                 customer_name: r.name || c.name,
                 customer_phone: phone,
@@ -1979,6 +2080,19 @@
 
           _crmData.customers = freshCustomers;
           _crmData.orders = freshOrders;
+          _crmData.waitlist = freshWaitlist;
+
+          // Cập nhật badge & KPI waitlist
+          const badgeSurvey = document.getElementById('badgeSurveyCount');
+          if (badgeSurvey) badgeSurvey.innerText = freshWaitlist.length;
+          const wlStatTotal = document.getElementById('wlStatTotal');
+          if (wlStatTotal) wlStatTotal.innerText = freshWaitlist.length;
+          const wlStatOffline = document.getElementById('wlStatOffline');
+          if (wlStatOffline) wlStatOffline.innerText = freshWaitlist.filter(w => (w.format || '').toLowerCase().includes('trực tiếp') || (w.format || '').toLowerCase().includes('offline')).length;
+          const wlStatOnline = document.getElementById('wlStatOnline');
+          if (wlStatOnline) wlStatOnline.innerText = freshWaitlist.filter(w => (w.format || '').toLowerCase().includes('online')).length;
+          const wlStatPending = document.getElementById('wlStatPending');
+          if (wlStatPending) wlStatPending.innerText = freshWaitlist.filter(w => !w.format || (w.format || '').toLowerCase().includes('tư vấn')).length;
 
           window._hasCompletedInitialSync = true;
 
@@ -2020,14 +2134,145 @@
       alert('Đã tải xuống file crm_data_sync.json!\nBạn có thể chạy lệnh: python3 sync_crm_to_brain.py crm_data_sync.json để nạp trực tiếp vào SQLite brain.db.');
     }
 
+    // ── WAITLIST: BIẾN TÌM KIẾM & LỌC ──
+    let _wlFilterFormat = 'all';
+    let _wlSearchTerm = '';
+
+    function renderWaitlistTable() {
+      const tbody = document.getElementById('surveyTableBody');
+      if (!tbody) return;
+
+      const list = (_crmData.waitlist || []).filter(w => {
+        if (_wlFilterFormat === 'offline' && !((w.format || '').toLowerCase().includes('trực tiếp') || (w.format || '').toLowerCase().includes('offline'))) return false;
+        if (_wlFilterFormat === 'online' && !(w.format || '').toLowerCase().includes('online')) return false;
+        if (_wlSearchTerm) {
+          const t = _wlSearchTerm.toLowerCase();
+          return (w.name || '').toLowerCase().includes(t) ||
+                 (w.phone || '').includes(t) ||
+                 (w.email || '').toLowerCase().includes(t) ||
+                 (w.priority_code || '').toLowerCase().includes(t) ||
+                 (w.summary_code || '').toLowerCase().includes(t);
+        }
+        return true;
+      });
+
+      // Cập nhật KPI cards
+      const wl = _crmData.waitlist || [];
+      const wlTotal = document.getElementById('wlStatTotal'); if (wlTotal) wlTotal.innerText = wl.length;
+      const wlOff = document.getElementById('wlStatOffline'); if (wlOff) wlOff.innerText = wl.filter(w => (w.format || '').toLowerCase().includes('trực tiếp') || (w.format || '').toLowerCase().includes('offline')).length;
+      const wlOn = document.getElementById('wlStatOnline'); if (wlOn) wlOn.innerText = wl.filter(w => (w.format || '').toLowerCase().includes('online')).length;
+      const wlPend = document.getElementById('wlStatPending'); if (wlPend) wlPend.innerText = wl.filter(w => !w.format || (w.format || '').toLowerCase().includes('tư vấn')).length;
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="py-8 text-center text-slate-400 italic">${(_crmData.waitlist || []).length === 0 ? 'Chưa có ai đăng ký danh sách chờ. Hãy bấm "🔄 Tải Lại Dữ Liệu".' : 'Không tìm thấy kết quả phù hợp.'}</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map((w, idx) => {
+        const fmtBadge = (() => {
+          const f = (w.format || '').toLowerCase();
+          if (f.includes('offline') || f.includes('trực tiếp')) return '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">🏫 Offline</span>';
+          if (f.includes('online')) return '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 text-sky-800 border border-sky-200">💻 Online</span>';
+          return '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">⏳ Chờ tư vấn</span>';
+        })();
+
+        const statusBadge = w.status === 'Đã tư vấn'
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">✅ Đã tư vấn</span>'
+          : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">⏳ Chờ tư vấn</span>';
+
+        const esc = (s) => String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-3 text-center font-mono text-slate-500 font-bold">${idx + 1}</td>
+            <td class="py-3 px-3 text-slate-500 text-[11px]">${esc(w.time_str)}</td>
+            <td class="py-3 px-3 font-bold text-slate-900">${esc(w.name)}</td>
+            <td class="py-3 px-3 font-mono font-semibold text-slate-800">
+              <a href="tel:${esc(w.phone)}" class="text-blue-600 hover:underline">${esc(w.phone)}</a>
+            </td>
+            <td class="py-3 px-3 text-slate-600 text-[11px]">${esc(w.email)}</td>
+            <td class="py-3 px-3">
+              <div class="flex items-center space-x-1">
+                <span class="font-mono font-black text-indigo-800 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded text-[11px] tracking-wider">${esc(w.priority_code) || '—'}</span>
+                ${w.priority_code ? `<button onclick="copyToClipboard('${esc(w.priority_code)}')" class="text-slate-400 hover:text-slate-700 text-xs p-0.5" title="Copy mã">📋</button>` : ''}
+              </div>
+            </td>
+            <td class="py-3 px-3 font-mono text-slate-700 text-[11px]">${esc(w.summary_code) || '—'}</td>
+            <td class="py-3 px-3 text-slate-700 text-[11px] max-w-[160px] truncate" title="${esc(w.goal)}">${esc(w.goal) || '—'}</td>
+            <td class="py-3 px-3 text-slate-700 text-[11px] max-w-[140px] truncate" title="${esc(w.experience)}">${esc(w.experience) || '—'}</td>
+            <td class="py-3 px-3">${fmtBadge}</td>
+            <td class="py-3 px-3 text-center">${statusBadge}</td>
+            <td class="py-3 px-3 text-center">
+              <button onclick="deleteWaitlistLead(${w.id})" class="text-rose-600 hover:text-rose-900 font-bold px-2 py-1 bg-rose-50 hover:bg-rose-100 rounded text-[11px] transition" title="Xóa bản ghi này">🗑️</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function searchWaitlist(term) {
+      _wlSearchTerm = (term || '').toLowerCase().trim();
+      renderWaitlistTable();
+    }
+
+    function filterWaitlistFormat(f) {
+      _wlFilterFormat = f;
+      ['all', 'offline', 'online'].forEach(k => {
+        const btn = document.getElementById('fltWl' + k.charAt(0).toUpperCase() + k.slice(1));
+        if (btn) {
+          btn.className = k === f
+            ? 'px-2.5 py-1 rounded-md bg-slate-800 text-white font-bold text-[11px]'
+            : 'px-2.5 py-1 rounded-md bg-white border border-slate-200 text-slate-700 font-bold text-[11px] hover:bg-slate-50';
+        }
+      });
+      renderWaitlistTable();
+    }
+
+    function exportWaitlistCSV() {
+      const list = _crmData.waitlist || [];
+      if (list.length === 0) { alert('Chưa có dữ liệu danh sách chờ để xuất!'); return; }
+      let csv = '\uFEFFSTT,Thời Gian,Họ Tên,Số Điện Thoại,Email,Mã Hồ Sơ Ưu Tiên,Mã Tổng Hợp,Mục Tiêu,Kinh Nghiệm,Hình Thức,Trạng Thái\n';
+      list.forEach((w, idx) => {
+        const q = (s) => '"' + String(s || '').replace(/"/g, '""') + '"';
+        csv += `${idx+1},${q(w.time_str)},${q(w.name)},${q(w.phone)},${q(w.email)},${q(w.priority_code)},${q(w.summary_code)},${q(w.goal)},${q(w.experience)},${q(w.format)},${q(w.status)}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `DanhSachCho_Chiro_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    async function deleteWaitlistLead(id) {
+      if (!id) return;
+      if (!confirm('Bạn có chắc chắn muốn xóa bản ghi danh sách chờ này không?')) return;
+      const sbUrl = document.getElementById('cfgSupabaseUrl').value || DEFAULT_SUPABASE_URL;
+      const sbKey = document.getElementById('cfgSupabaseKey').value || DEFAULT_SUPABASE_ANON_KEY;
+      try {
+        await fetch(`${sbUrl}/rest/v1/leads?id=eq.${id}`, {
+          method: 'DELETE',
+          headers: { 'apikey': sbKey, 'Authorization': `Bearer ${sbKey}`, 'Prefer': 'return=minimal' }
+        });
+        _crmData.waitlist = (_crmData.waitlist || []).filter(w => w.id !== id);
+        persistCRMData();
+        renderWaitlistTable();
+        showAdminToast('🗑️ Đã xóa bản ghi danh sách chờ.');
+      } catch(e) {
+        alert('Lỗi xóa: ' + e.message);
+      }
+    }
+
     function exportCSVOrders() {
       if (_crmData.orders.length === 0) {
         alert('Chưa có đơn hàng nào để xuất file CSV!');
         return;
       }
-      let csv = '\uFEFFMã Đơn,Họ và Tên,Số Điện Thoại,Email,Khóa Học,Số Tiền,Trạng Thái,Ngày Đặt\n';
+      let csv = '\uFEFFMã Đơn,Mã Số Chuyển Tiền,Họ và Tên,Số Điện Thoại,Email,Khóa Học,Số Tiền,Trạng Thái,Ngày Đặt\n';
       _crmData.orders.forEach(o => {
-        csv += `"${o.id}","${o.customer_name}","${o.customer_phone}","${o.customer_email || ''}","${o.product_name}","${o.amount}","${o.status}","${o.order_date}"\n`;
+        const q = (s) => '"' + String(s || '').replace(/"/g, '""') + '"';
+        csv += `${q(o.order_code)},${q(o.payment_code || o.order_code)},${q(o.customer_name)},${q(o.customer_phone)},${q(o.customer_email)},${q(o.product_name)},${q(o.amount)},${q(o.status)},${q(o.order_date)}\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
@@ -2036,45 +2281,6 @@
       a.download = `Don_Hang_Chiro_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-    }
-
-    async function syncSurveyFromRemote() {
-      const tbody = document.getElementById('surveyTableBody');
-      tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400 italic">⏳ Đang tải dữ liệu khảo sát từ Supabase...</td></tr>';
-      const sbUrl = document.getElementById('cfgSupabaseUrl').value || DEFAULT_SUPABASE_URL;
-      const sbKey = document.getElementById('cfgSupabaseKey').value || DEFAULT_SUPABASE_ANON_KEY;
-
-      try {
-        const resp = await fetch(`${sbUrl}/rest/v1/leads?channel=ilike.*Khảo Sát*&order=created_at.desc`, {
-          headers: { 'apikey': sbKey, 'Authorization': `Bearer ${sbKey}` }
-        });
-        if (resp.ok) {
-          const list = await resp.json();
-          document.getElementById('badgeSurveyCount').innerText = list.length;
-          if (list.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-slate-400 italic">Chưa có bản ghi khảo sát nào.</td></tr>';
-            return;
-          }
-          tbody.innerHTML = list.map((item, idx) => `
-            <tr class="hover:bg-slate-50 transition">
-              <td class="py-3 px-3 text-center font-mono text-slate-500 font-bold">${idx + 1}</td>
-              <td class="py-3 px-3 text-slate-500">${item.time_str || (item.created_at ? new Date(item.created_at).toLocaleString('vi-VN') : '--')}</td>
-              <td class="py-3 px-3 font-bold text-slate-900">${item.name || 'Khách ẩn danh'}</td>
-              <td class="py-3 px-3 font-mono font-semibold text-slate-800">
-                <a href="tel:${item.phone}" class="text-blue-600 hover:underline">${item.phone || '--'}</a>
-              </td>
-              <td class="py-3 px-3 font-mono font-bold text-indigo-700">${item.course || '--'}</td>
-              <td class="py-3 px-3 text-slate-700 max-w-xs truncate" title="${item.occupation || ''}">${item.occupation || '--'}</td>
-              <td class="py-3 px-3 text-slate-600">Đã ghi nhận</td>
-              <td class="py-3 px-3">
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold badge-digital">Khảo sát</span>
-              </td>
-            </tr>
-          `).join('');
-        }
-      } catch(e) {
-        tbody.innerHTML = '<tr><td colspan="8" class="py-8 text-center text-rose-500 italic">Lỗi kết nối khảo sát: ' + e.message + '</td></tr>';
-      }
     }
 
     function saveApiConfigs() {
@@ -2086,3 +2292,4 @@
   </script>
 </body>
 </html>
+
