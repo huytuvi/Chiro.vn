@@ -25,19 +25,18 @@ Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <str
       course: {
         label: "🎓 Khóa Học (12)",
         questions: [
+          { id: "c_courses_and_pricing", text: "💰 Các khóa học & Bảng giá chi tiết" },
           { id: "c_beginner_budget", text: "🌱 Chưa biết gì & Ít tiền thì nên học từ đâu?" },
           { id: "q1", text: "🎓 Học online liệu có làm được thật không?" },
           { id: "q2", text: "🩺 PT Gym / Spa / chưa học Y có học được không?" },
-          { id: "q3", text: "💰 Sao học phí 14.9tr cao hơn lớp 2-3 ngày?" },
+          { id: "q3", text: "💎 Giá trị cốt lõi & Tiêu chuẩn Y học Simon Center" },
           { id: "c_schedule_duration", text: "⏱️ Thời gian học bao lâu? Có bị giới hạn không?" },
           { id: "c_location", text: "📍 Lớp Offline học ở đâu? Có ở TP.HCM / Hà Nội?" },
           { id: "c_career_outcome", text: "💼 Đầu ra sau khóa học & Cơ hội mở phòng khám" },
           { id: "q4", text: "📊 Khóa học có dạy đọc phim X-quang không?" },
           { id: "q5", text: "📜 Chứng chỉ hoàn thành & Pháp lý hành nghề" },
           { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" },
-          { id: "q7", text: "🔥 Nắn Specific chuyên biệt khác gì bẻ khớp thông thường?" },
-          { id: "q9", text: "💳 Có chính sách trả góp qua thẻ tín dụng không?" },
-          { id: "buy", text: "⚡ Đăng ký khóa học / Nhận ưu đãi ngay" }
+          { id: "q7", text: "🔥 Nắn Specific chuyên biệt khác gì bẻ khớp thông thường?" }
         ]
       },
       clinical: {
@@ -61,13 +60,49 @@ Dạ, không biết hiện tại anh/chị đang quan tâm tìm hiểu về <str
 
     // KHO DỮ LIỆU CÂU TRẢ LỜI CHI TIẾT
     answers: {
+      // --- DANH SÁCH KHÓA HỌC & BẢNG GIÁ CHI TIẾT (2 PHẦN TỰ ĐỘNG) ---
+      c_courses_and_pricing_part1: {
+        text: `Dạ em xin gửi anh/chị thông tin chi tiết và học phí minh bạch các chương trình đào tạo tại <strong>Simon Chiropractic Center</strong> ạ:<br><br>
+⭐ <strong>1. The Full Online Collection (Toàn diện nhất):</strong><br>
+• Bao gồm trọn bộ Level 1 (Full-Spine) + Level 2 (Tứ Chi & Phân tích X-quang).<br>
+• Học phí ưu đãi: <strong>12.900.000 VNĐ</strong> (Học phí gốc: 14.900.000 VNĐ). Tài khoản truy cập trọn đời 24/7.<br><br>
+🟩 <strong>2. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A):</strong><br>
+• Nắm vững cơ sinh học và kỹ thuật nắn chỉnh toàn bộ trục cột sống (Cổ C1-C7, Ngực T1-T12, Thắt lưng - Chậu L1-S1).<br>
+• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ).<br><br>
+🟦 <strong>3. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B):</strong><br>
+• Kỹ thuật nắn chỉnh khớp ngoại vi chi trên - chi dưới và đo đạc phân tích phim X-quang chuyên sâu.<br>
+• Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Học phí gốc: 8.500.000 VNĐ).<br><br>
+🟨 <strong>4. Module Lẻ Online — Vùng Chuyên Biệt Thực Chiến:</strong><br>
+• Lựa chọn học chuyên sâu 1 vùng: Cổ Vai Gáy (HWS) hoặc Thắt Lưng - Chậu (LWS).<br>
+• Học phí ưu đãi: <strong>1.000.000 VNĐ / module</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
+👑 <strong>5. Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (4 Ngày cùng Thầy Henrik Simon):</strong><br>
+• Trực tiếp cùng Bác sĩ Henrik Simon chỉnh từng góc tay, bộ pháp và lực nắn trên người thật.<br>
+• Học phí: <strong>36.000.000 VNĐ</strong> (Học phí niêm yết: 42.000.000 VNĐ).<br>
+• <em>Đặc quyền khấu trừ 100%:</em> Toàn bộ số tiền anh/chị đã đóng ở khóa Online sẽ được <strong>khấu trừ toàn bộ 100%</strong> khi đăng ký nâng cấp lên lớp Offline Cầm tay chỉ việc này nhé ạ.`,
+        cta: null
+      },
+
+      c_courses_and_pricing_part2: {
+        text: `Dạ để đồng hành cùng học viên đạt kết quả lâm sàng an toàn và chuẩn xác nhất, các khóa học tại Simon Center đều được xây dựng theo những tiêu chuẩn chuyên môn rất khắt khe ạ:<br><br>
+🎯 <strong>1. Chuẩn Y Học Cơ Sinh Học Châu Âu:</strong><br>
+Toàn bộ kiến thức kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon và Viện DISC (Đức), chú trọng hiểu rõ bản chất giải phẫu cơ sinh học thay vì học vẹt thao tác.<br><br>
+🎥 <strong>2. Video 4K Góc Nhìn Người Nắn (First-Person POV):</strong><br>
+Camera đặt chuẩn xác theo đúng tầm mắt người đứng nắn, giúp anh/chị quan sát rõ từng milimet điểm tiếp xúc ngón tay, góc khóa khớp và hướng truyền lực.<br><br>
+🏋️ <strong>3. Phương Pháp Micro-Drills Rèn Phản Xạ Lực Tại Nhà:</strong><br>
+Hệ thống bài tập mô phỏng lực rơi cơ thể (Body Drop) trên đệm mút và bóng phản xạ, giúp bàn tay hình thành cảm giác lực nhuần nhuyễn trước khi thao tác trên người thật — hoàn toàn không lo run tay.<br><br>
+🚨 <strong>4. Ranh Giới Cảnh Báo Đỏ (Red Flags) & An Toàn Tuyệt Đối:</strong><br>
+Trang bị bài bản các test loại trừ bệnh lý nguy hiểm và các vùng chống chỉ định y khoa, giúp người thầy thuốc luôn tự tin và bảo vệ an toàn cao nhất cho người bệnh.<br><br>
+Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn diện từ đầu hay đang quan tâm nắn chỉnh cho một vùng tổn thương cụ thể vậy ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
+        cta: "trial"
+      },
+
       // --- NHÓM 1: TUYỂN SINH & KHÓA HỌC (TỪ SALES SCRIPT) ---
       q1: {
         text: `Dạ em rất hiểu nỗi băn khoăn này của anh/chị ạ! Nắn chỉnh là môn thực hành trực tiếp, nên nếu chỉ xem video lý thuyết thụ động thì chắc chắn không ai dám làm cả.<br><br>Khóa học tại Simon Center được Thầy Henrik Simon thiết kế theo <strong>Quy trình sư phạm 3 bước chuẩn y khoa</strong> để giải quyết triệt để rào cản này:<br><br>
 1. <strong>Video 4K góc nhìn người nắn (POV):</strong> Camera đặt đúng tầm mắt người đứng nắn, zoom sát từng milimet điểm tiếp xúc xương, góc khóa khớp và hướng phát lực.<br>
 2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Rèn luyện tốc độ, bộ pháp và lực rơi cơ thể trên đệm mút/bóng phản xạ. Tay anh/chị có phản xạ tự nhiên chuẩn xác trước khi chạm người thật nên <strong>hoàn toàn không bị run tay</strong>.<br>
 3. <strong>Hệ thống Test lâm sàng qua môn bắt buộc:</strong> Nắm chắc chỉ định và dấu hiệu nguy hiểm (Red Flags) mới mở khóa bài tiếp theo.<br><br>
-<em>Đặc biệt: Toàn bộ 14.9 triệu tiền khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em><br><br>
+<em>Đặc biệt: Toàn bộ học phí khóa Online sẽ được <strong>khấu trừ 100%</strong> khi anh/chị đăng ký lên khóa Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon nhé ạ!</em><br><br>
 Dạ không biết hiện tại anh/chị đang có nền tảng về Đông y, Vật lý trị liệu hay Thể thao PT vậy ạ? Anh/chị chia sẻ thêm để em tư vấn lộ trình học tập sát nhất với mình nhé ạ!`,
         cta: "register"
       },
@@ -81,12 +116,14 @@ Dạ hiện tại cơ sở hoặc phòng tập của anh/chị có thường xuy
         cta: "register"
       },
       q3: {
-        text: `Dạ em rất hiểu khi mới tìm hiểu, học phí chắc chắn là điều anh/chị cân nhắc kỹ lưỡng đầu tiên ạ.<br><br>
-Nhưng khi bước vào điều trị thực tế, các anh chị học viên đều nhận ra: Một khóa học ngắn ngày giá rẻ thường chỉ dạy vài ba thao tác bẻ khớp theo cảm tính, không dạy đọc phim X-quang và không dạy Cảnh báo đỏ (Red Flags).<br><br>
-Trong ngành y, <strong>rủi ro lớn nhất không phải là học phí đắt hay rẻ, mà là lỡ tay nắn sai vào một ca chống chỉ định</strong> (rách bao xơ đĩa đệm, loãng xương nặng hay thiểu năng tuần hoàn não) thì hậu quả về sức khỏe người bệnh và uy tín cả đời không gì bù đắp được.<br><br>
-Khóa học Simon Center bảo vệ anh/chị an toàn 100%. Về kinh tế, sau khi học xong anh/chị chỉ cần tiếp nhận <strong>5–6 bệnh nhân</strong> tại phòng khám là đã thu hồi hoàn toàn 14.9 triệu, nhưng tay nghề chuẩn y khoa thì theo anh/chị trọn đời nhé ạ!<br><br>
-Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu góc nhìn người nắn (POV 4K) để cảm nhận cách Thầy Henrik giảng giải trực quan thế nào trước không ạ?`,
-        cta: "register"
+        text: `Dạ em rất hiểu học phí là điều anh/chị luôn cân nhắc kỹ lưỡng khi tìm hiểu một chương trình đào tạo chuyên môn sâu ạ.<br><br>
+Tại Simon Center, giá trị cốt lõi của khóa học không nằm ở số lượng chiêu thức bề nổi, mà tập trung vào <strong>sự an toàn tuyệt đối và chuẩn mực y khoa quốc tế</strong>:<br><br>
+• <strong>Nền tảng cơ sinh học chuẩn Đức:</strong> Toàn bộ giáo trình kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon (Viện DISC - Đức), giúp anh/chị hiểu rõ nguyên lý khóa khớp và đòn bẩy tự nhiên, không dùng sức gồng bắp tay.<br>
+• <strong>Hệ thống Video 4K POV & Micro-Drills:</strong> Từng góc quay đặt đúng tầm mắt người nắn, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
+• <strong>Đào tạo chuyên sâu phân tích X-quang & Cảnh báo đỏ (Red Flags):</strong> Giúp người thực hành nhận diện chính xác các chống chỉ định y khoa, bảo vệ an toàn trọn đời cho bệnh nhân và uy tín người thầy thuốc.<br>
+• <strong>Đặc quyền khấu trừ 100%:</strong> Toàn bộ học phí khóa Online được khấu trừ 100% khi anh/chị tham gia lớp Thực hành Offline 4 ngày Cầm tay chỉ việc cùng Thầy Henrik Simon.<br><br>
+Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu góc nhìn người nắn (POV 4K) để trải nghiệm trực quan cách Thầy Henrik truyền đạt không ạ?`,
+        cta: "trial"
       },
       q4: {
         text: `Dạ có dạy rất kỹ từ con số 0 anh nhé ạ! Đây chính là điểm khác biệt tự hào nhất của Simon Center.<br><br>
@@ -105,10 +142,10 @@ Dạ anh/chị đang có định hướng nâng cao tay nghề để phục vụ
         cta: "register"
       },
       q6: {
-        text: `Dạ <strong>ĐƯỢC KHẤU TRỪ 100%</strong> anh nhé ạ! Đây là chính sách cực kỳ nhân văn và ưu đãi độc quyền của Simon Center.<br><br>
-Toàn bộ số tiền 14.9 triệu anh đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon (40.000.000đ)</strong>.<br><br>
-Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!<br><br>
-Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị có muốn giữ suất ưu đãi 14.9 triệu đợt này trước không ạ?`,
+        text: `Dạ <strong>ĐƯỢC KHẤU TRỪ 100%</strong> anh/chị nhé ạ! Đây là chính sách cực kỳ nhân văn và ưu đãi độc quyền của Simon Center.<br><br>
+Toàn bộ số tiền anh/chị đã thanh toán cho khóa Online sẽ được <strong>khấu trừ 100% vào học phí khóa Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon (36.000.000đ)</strong>.<br><br>
+Khoản đầu tư hôm nay không hề mất đi mà là bước đệm hoàn hảo: Anh/chị học vững lý thuyết và phản xạ trước, khi bước vào lớp thực hành cùng Thầy Henrik sẽ tiến bộ nhanh gấp 3 lần so với người chưa học qua online đấy ạ!<br><br>
+Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị có muốn giữ suất ưu đãi đợt này trước không ạ?`,
         cta: "register"
       },
       q7: {
@@ -127,20 +164,20 @@ Dạ chị có đang lo lắng về thể lực hay chiều cao của mình khi 
       },
       q9: {
         text: `Dạ bên em CÓ hỗ trợ phương án <strong>thanh toán trả góp linh hoạt qua thẻ tín dụng</strong> kỳ hạn 3, 6, 9 hoặc 12 tháng anh nhé ạ.<br><br>
-Tính ra mỗi tháng anh chỉ cần thanh toán khoảng hơn 1 triệu đồng — tương đương thu nhập từ 2 ca nắn chỉnh tại phòng khám, rất nhẹ nhàng về dòng tiền.<br><br>
+Tính ra mỗi tháng anh chỉ cần thanh toán khoảng hơn 1 triệu đồng, rất nhẹ nhàng và chủ động về dòng tiền.<br><br>
 Ngay khi kích hoạt, anh được cấp tài khoản học trọn đời và nhận trọn bộ cẩm nang X-quang ngay lập tức. Anh/chị đang dùng thẻ tín dụng của ngân hàng nào ạ? Để em kiểm tra hỗ trợ chuyển đổi kỳ hạn phù hợp nhất cho anh/chị nhé!`,
         cta: "register"
       },
       buy: {
         text: `Dạ tuyệt vời quá ạ! Tài khoản học được kích hoạt tự động ngay sau khi đăng ký anh/chị nhé ạ.<br><br>
-Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 14.900.000đ</strong> (bao gồm toàn bộ video 4K POV trọn đời, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
+Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video 4K POV trọn đời, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
 Anh/chị bấm nút bên dưới để chuyển ngay đến Form đăng ký giữ suất ưu đãi đợt này nhé ạ:`,
         cta: "register_now"
       },
       hesitate: {
         text: `Dạ em hoàn toàn hiểu ạ! Quyết định đầu tư một khóa học chuyên môn sâu thì việc cân nhắc thấu đáo là rất cần thiết.<br><br>
 Để anh/chị có cái nhìn thực tế nhất về bài giảng của Thầy Henrik Simon, em xin phép gửi tặng anh/chị <strong>1 Suất Học Thử Bài Giảng Mẫu 4K POV</strong> hoàn toàn miễn phí nhé ạ.<br><br>
-Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng mẫu qua Zalo/Email, đồng thời hệ thống sẽ <strong>tự động bảo lưu mức học phí ưu đãi 14.9 triệu</strong> cho anh/chị mà không sợ bị tăng giá về sau ạ:`,
+Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng mẫu qua Zalo/Email, đồng thời hệ thống sẽ <strong>tự động bảo lưu mức học phí ưu đãi 12.9 triệu</strong> cho anh/chị mà không sợ bị tăng giá về sau ạ:`,
         cta: "trial"
       },
 
@@ -153,8 +190,8 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
 💡 <strong>2. Ngân sách eo hẹp, không có nhiều tiền thì lộ trình thế nào?</strong><br>
 Simon Center có chính sách hỗ trợ tài chính tối ưu để anh/chị không phải chịu áp lực:<br>
 • <strong>Bước 1 - Học thử MIỄN PHÍ 0đ:</strong> Anh/chị có thể nhận ngay 1 bài giảng mẫu 4K POV chuẩn quốc tế để trải nghiệm trực tiếp phương pháp giảng dạy của Thầy trước khi quyết định.<br>
-• <strong>Bước 2 - Trả góp 0% chỉ ~1.2 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Mỗi tháng chỉ bằng thu nhập từ 1–2 ca nắn chỉnh thực tế.<br>
-• <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ 14.9 triệu tiền khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
+• <strong>Bước 2 - Trả góp 0% chỉ ~1.1 triệu/tháng:</strong> Chia nhỏ thanh toán linh hoạt qua thẻ tín dụng từ 3–12 tháng. Rất nhẹ nhàng về dòng tiền.<br>
+• <strong>Bước 3 - Bảo lưu & Khấu trừ 100% lên Offline:</strong> Toàn bộ học phí khóa Online được <strong>khấu trừ 100%</strong> vào học phí khi anh/chị tích lũy đủ điều kiện tham gia lớp Offline Cầm tay chỉ việc 4 ngày cùng Thầy Henrik Simon sau này.<br><br>
 Dạ giữa việc <strong>nhận video học thử 0đ</strong> và <strong>tìm hiểu gói hỗ trợ trả góp</strong>, anh/chị muốn em hướng dẫn bước nào trước ạ?`,
         cta: "trial"
       },
@@ -187,7 +224,7 @@ Hơn 500+ học viên đã tốt nghiệp tại Simon Center đang ứng dụng 
 1. <strong>Chủ Spa / Phòng khám Đông y / Phục hồi chức năng:</strong> Bổ sung dịch vụ Chiropractic nắn chỉnh cột sống chuẩn y khoa, nâng tầm giá trị buổi trị liệu từ 200k lên <strong>600k – 1.200k/buổi</strong>.<br>
 2. <strong>HLV PT Gym / Huấn luyện viên Yoga:</strong> Nâng cấp thành Chuyên gia Chỉnh sửa Tư thế & Phục hồi vận động (Posture & Mobility Specialist), gia tăng tỷ lệ khách hàng gắn bó lâu dài.<br>
 3. <strong>Mở Cơ sở Trị liệu Cơ xương khớp:</strong> Được bảo trợ chuyên môn từ Simon Center, được cấp Chứng chỉ Hoàn thành có chữ ký Thầy Henrik Simon và hỗ trợ hội chẩn các ca bệnh khó trọn đời.<br><br>
-📊 <em>Bài toán kinh tế:</em> Với học phí ưu đãi 14.9 triệu, anh/chị chỉ cần phục vụ <strong>5–6 bệnh nhân</strong> thực tế là đã hoàn vốn đầu tư!`,
+🎯 <em>Định hướng bền vững:</em> Khóa học tập trung trang bị năng lực chẩn đoán và kỹ thuật chuẩn xác, giúp anh/chị xây dựng uy tín lâm sàng vững chắc và phục vụ bệnh nhân hiệu quả ngay sau khi hoàn thành!`,
         cta: "register"
       },
 
@@ -653,6 +690,10 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
   function handleQuestionClick(id, questionText) {
     appendUserMessage(questionText);
     showTypingIndicator(() => {
+      if (id === "c_courses_and_pricing") {
+        sendCourseListAndPricingSequence();
+        return;
+      }
       const ans = BOT_DATA.answers[id];
       if (ans) {
         appendBotMessage(ans.text, ans.cta);
@@ -662,10 +703,13 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     });
   }
 
-  function appendBotMessage(htmlContent, ctaType = null, isInstant = false) {
+  function appendBotMessage(htmlContent, ctaType = null, isInstant = false, onComplete = null) {
     chatHistory.push({ sender: "bot", text: htmlContent, cta: ctaType });
     const messagesContainer = document.getElementById("chiroChatMessages");
-    if (!messagesContainer) return;
+    if (!messagesContainer) {
+      if (typeof onComplete === "function") onComplete();
+      return;
+    }
 
     const msgDiv = document.createElement("div");
     msgDiv.className = "flex items-start space-x-2 text-xs leading-relaxed max-w-[94%]";
@@ -675,7 +719,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       ctaHtml = `
         <div class="mt-3 pt-2.5 border-t border-amber-200/60 space-y-1.5">
           <button onclick="window.scrollToRegisterForm('buy')" class="chiro-cta-btn w-full text-white text-xs font-bold py-2 px-3 rounded-xl shadow flex items-center justify-center space-x-1.5">
-            <span>👉 Xem Học Phí / Giữ Suất Ưu Đãi (14.9Tr)</span>
+            <span>👉 Xem Học Phí / Giữ Suất Ưu Đãi (12.9Tr)</span>
           </button>
           <a href="https://zalo.me/0389609938" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold py-1.5 px-3 rounded-xl shadow-xs flex items-center justify-center space-x-1 transition">
             <span>💬 Hội Chẩn Ca Bệnh / Zalo Bác Sĩ: 0389.609.938</span>
@@ -716,6 +760,9 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         } catch (err) {
           msgDiv.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+        if (typeof onComplete === "function") {
+          setTimeout(onComplete, 80);
+        }
       }, 60);
       return;
     }
@@ -751,8 +798,24 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
             top: messagesContainer.scrollHeight,
             behavior: "smooth"
           });
+          if (typeof onComplete === "function") {
+            setTimeout(onComplete, 300);
+          }
         });
+      } else {
+        if (typeof onComplete === "function") {
+          setTimeout(onComplete, 300);
+        }
       }
+    });
+  }
+
+  // Gửi chuỗi 2 tin nhắn tự động cho câu hỏi Danh sách khóa học & Học phí
+  function sendCourseListAndPricingSequence() {
+    appendBotMessage(BOT_DATA.answers.c_courses_and_pricing_part1.text, null, false, () => {
+      showShortTypingIndicator(() => {
+        appendBotMessage(BOT_DATA.answers.c_courses_and_pricing_part2.text, BOT_DATA.answers.c_courses_and_pricing_part2.cta);
+      }, "✍️ Simon Center đang gửi thêm lưu ý chuyên môn...");
     });
   }
 
@@ -1149,11 +1212,31 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       return;
     }
 
-    // 24. Khách so sánh giá / học phí sao đắt / 14.9
+    // 23b. Khách hỏi danh sách các khóa học / bảng giá / học phí bao nhiêu (2 tin nhắn tự động)
+    const isCourseListAndPricing = 
+      norm.includes("khoa hoc gi") || norm.includes("cac khoa hoc") || norm.includes("nhung khoa hoc") ||
+      norm.includes("co nhung khoa") || norm.includes("co cac khoa") || norm.includes("co khoa hoc nao") ||
+      norm.includes("danh sach khoa") || norm.includes("cac goi hoc") || norm.includes("cac lop hoc") ||
+      norm.includes("bang gia") || norm.includes("gia ca") || norm.includes("gia bao nhieu") ||
+      norm.includes("hoc phi bao nhieu") || norm.includes("bao nhieu tien") ||
+      norm.includes("chi phi khoa hoc") || norm.includes("gia khoa hoc") ||
+      (norm.includes("khoa hoc") && (norm.includes("gia") || norm.includes("hoc phi") || norm.includes("bao nhieu") || norm.includes("chi phi"))) ||
+      (norm.includes("co") && norm.includes("khoa") && (norm.includes("gi") || norm.includes("nao"))) ||
+      (norm.includes("gia") && norm.includes("bao nhieu")) ||
+      (norm.includes("hoc phi") && !norm.includes("dat") && !norm.includes("mac") && !norm.includes("cao")) ||
+      (norm.includes("chi phi") && !norm.includes("kham") && !norm.includes("chua"));
+
+    if (isCourseListAndPricing) {
+      sendCourseListAndPricingSequence();
+      return;
+    }
+
+    // 24. Khách so sánh giá / học phí sao đắt / lý do giá trị
     if (
-      norm.includes("hoc phi") || norm.includes("gia") || norm.includes("dat") || 
-      norm.includes("14.9") || norm.includes("bao nhieu") || norm.includes("2-3 ngay") || 
-      norm.includes("so sanh")
+      norm.includes("sao dat") || norm.includes("dat the") || norm.includes("mac the") || 
+      norm.includes("dat qua") || norm.includes("mac qua") || norm.includes("gia cao") || 
+      norm.includes("hoc phi cao") || norm.includes("sao lai dat") || norm.includes("2-3 ngay") || 
+      norm.includes("so sanh gia") || norm.includes("dat hon")
     ) {
       appendBotMessage(BOT_DATA.answers.q3.text, BOT_DATA.answers.q3.cta);
       return;
@@ -1217,7 +1300,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       appendBotMessage(
         `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
 Em luôn sẵn sàng hỗ trợ anh/chị 2 nội dung chính:<br>
-• 🎓 <strong>Tư vấn Khóa đào tạo Chiropractic Chuẩn Y khoa</strong> (Lộ trình cho người mới từ số 0, học phí ưu đãi 14.9tr, hỗ trợ trả góp 0%, tặng video học thử 4K POV).<br>
+• 🎓 <strong>Tư vấn Khóa đào tạo Chiropractic Chuẩn Y khoa</strong> (Lộ trình cho người mới từ số 0, học phí ưu đãi 12.9tr, hỗ trợ trả góp 0%, tặng video học thử 4K POV).<br>
 • 🩺 <strong>Giải đáp Bệnh học & Kỹ thuật Chuyên sâu</strong> (Thoát vị đĩa đệm, đau thần kinh tọa, đọc phim X-quang, Cảnh báo đỏ Red Flags...).<br><br>
 Anh/chị đang quan tâm đến nội dung nào để em hỗ trợ chu đáo nhất cho mình nhé ạ?`,
         "trial"
@@ -1319,6 +1402,40 @@ Anh/chị cứ chia sẻ thêm chi tiết với em ở ô chat bên dưới, em 
       if (typingDiv && typingDiv.parentNode) typingDiv.remove();
       if (typeof callback === "function") callback();
     }, thinkingTime);
+  }
+
+  // Indicator gõ phím ngắn tự nhiên giữa 2 tin nhắn liên tiếp (~1.2s)
+  function showShortTypingIndicator(callback, text = "✍️ Simon Center đang soạn thêm thông tin...") {
+    const messagesContainer = document.getElementById("chiroChatMessages");
+    if (!messagesContainer) {
+      if (typeof callback === "function") callback();
+      return;
+    }
+
+    const oldIndicator = document.getElementById("chiroTypingIndicator");
+    if (oldIndicator) oldIndicator.remove();
+
+    const typingDiv = document.createElement("div");
+    typingDiv.id = "chiroTypingIndicator";
+    typingDiv.className = "flex items-center space-x-2 text-xs py-1 transition-all duration-300";
+    typingDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-brand-wine text-amber-300 font-extrabold flex items-center justify-center text-[10px] shrink-0 shadow border border-amber-300/40">SC</div>
+      <div class="bg-amber-50/90 border border-amber-200/80 px-3.5 py-2 rounded-2xl rounded-tl-xs flex items-center space-x-2 shadow-xs">
+        <div class="flex items-center space-x-1">
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0s"></span>
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.18s"></span>
+          <span class="w-2 h-2 bg-brand-crimson rounded-full animate-bounce" style="animation-delay: 0.36s"></span>
+        </div>
+        <span class="text-[11px] font-semibold text-brand-crimson animate-pulse ml-1">${text}</span>
+      </div>
+    `;
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    setTimeout(() => {
+      if (typingDiv && typingDiv.parentNode) typingDiv.remove();
+      if (typeof callback === "function") callback();
+    }, 1250);
   }
 
   // Cuộn mượt đến Form đăng ký
