@@ -1,24 +1,24 @@
-[HÀNH TRÌNH 12 NGÀY LỘT XÁC: TỪ MÀN HÌNH TRẮNG ĐẾN HỆ THỐNG Y KHOA CHUYÊN NGHIỆP]
+[HÀNH TRÌNH 12 NGÀY LỘT XÁC: TỪ KHÔNG BIẾT CODE ĐẾN HỆ THỐNG Y KHOA TỰ ĐỘNG CHIRO.VN]
 
 Dạ, em xin chào các anh/chị đồng nghiệp và quý học viên,
 
-Nhìn lại 12 ngày trước, nếu ai nói với em rằng mình có thể tự tay xây dựng trọn vẹn một hệ thống đào tạo Chiropractic chuẩn y khoa từ con số 0 — em chắc chắn sẽ nghĩ đó là chuyện không tưởng. 
+Nhìn lại 12 ngày trước, nếu ai nói với em rằng mình có thể tự tay xây dựng trọn vẹn một hệ thống đào tạo Chiropractic chuẩn y khoa từ con số 0 mà không cần đến lập trình viên chuyên nghiệp — em chắc chắn sẽ nghĩ đó là chuyện không tưởng. 
 
-Ngày 1 bắt đầu: Không có gì trong tay ngoài tư duy chuyên môn của Bác sĩ Henrik Simon và một màn hình trống không. Mọi thứ từ cấu hình CRM, thiết kế giao diện, xử lý luồng đăng ký cho đến đối soát thanh toán tự động... đều là những thuật ngữ hoàn toàn lạ lẫm.
+Ngày 1 bắt đầu: Không hề đụng đến code, ý tưởng tràn ngập làm một trang Landing Page rất dài. Mọi thứ từ CRM, chatbot AI, đến cổng thanh toán tự động SePay... đều là những thứ lần đầu tiên em tự làm với sự hỗ trợ của AI.
 
-Và đây là kết quả thực tế sau 12 ngày nỗ lực không ngừng nghỉ (Con số thật, không tô hồng, không làm màu):
-- 📋 1 Danh sách chờ ưu tiên (Waitlist) đã được ghi nhận và phân loại tự động chuẩn xác 100%.
-- 🤖 1 Trợ lý tư vấn AI y khoa 24/7 đã "nạp" trọn bộ kiến thức nắn chỉnh chuẩn Đức, phục vụ giải đáp cho học viên mọi lúc.
-- 💳 1 Cổng thanh toán tự động VietQR SePay xác nhận giao dịch & tự động gửi email kích hoạt trong 3 giây.
-- 📝 7 Bài viết chuyên sâu trong 7 ngày được đo lường, tinh chỉnh điểm số Brand Voice từ 8.0 lên 9.3/10 (loại bỏ hoàn toàn ngôn từ suồng sã MXH để giữ sự điềm đạm, mực thước y khoa).
-- 🛡️ Hệ thống bảo mật 2 lớp (Supabase + Google Sheets) và bộ kiểm tra dữ liệu chống nhập sai SĐT/Email.
+Và đây là kết quả thực tế sau 12 ngày nỗ lực không ngừng nghỉ (Con số thật, không tô hồng):
+- 📋 Hệ thống Form đăng ký & Bảng khảo sát nhu cầu tự động phân loại Waitlist / CRM chuẩn xác.
+- 🤖 1 Trợ lý tư vấn AI y khoa 24/7 trên website được "nạp" bộ kiến thức nắn chỉnh chuẩn Đức từ Simon Center.
+- 💳 Cổng thanh toán tự động VietQR SePay tự động xác thực và gửi email hướng dẫn + QR Code tự động.
+- 📝 Chuỗi 7 bài viết đo lường Brand Voice từ 8.0 đến 9.3/10 (giữ phong cách điềm đạm, mực thước y khoa).
+- 🛡️ Cứng hóa hệ thống: Bảo mật API key trong .env, validate SĐT/Email và sao lưu database an toàn.
 
-Có thể doanh thu thực tế lúc này vẫn là 0 VNĐ, nhưng điều giá trị nhất em nhận được không nằm ở con số tiền tệ — mà là sự tự tin tuyệt đối vào một nền móng vận hành tử tế, chuẩn xác và sẵn sàng đón nhận những học viên đầu tiên.
+Dù thực tế tất cả lượt test và số liệu trước đây đều là do em và bạn bè thử nghiệm (doanh thu thực tế vẫn là 0 VNĐ), nhưng bài học lớn nhất em nhận được là sự kiên trì vượt qua chính mình sau những ngày làm việc dài, và một nền móng vận hành tử tế đã hoàn chỉnh sẵn sàng đón nhận những học viên thật sự đầu tiên.
 
-Nếu anh/chị muốn trải nghiệm hệ thống nắn chỉnh cột sống chuyên biệt (Specific Chiropractic) chuẩn Đức từ Simon Center, kính mời anh/chị ghé thăm website của chúng em tại:
+Nếu anh/chị muốn trải nghiệm hệ thống nắn chỉnh cột sống chuyên biệt (Specific Chiropractic) chuẩn Đức từ Simon Center, kính mời anh/chị ghé thăm website tại:
 👉 Website chính thức: https://chiro.vn
 
-Em xin chân thành cảm ơn sự đồng hành và những lời góp ý quý báu của các anh/chị đồng nghiệp trong suốt 12 ngày qua!
+Em xin chân thành cảm ơn sự đồng hành và những lời góp ý quý báu của các anh/chị trong suốt 12 ngày qua!
 
 ---
 Simon Chiropractic Center • Viện Đào Tạo Nắn Chỉnh Cột Sống Chuyên Biệt
