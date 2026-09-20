@@ -3005,6 +3005,21 @@
       const phone = document.getElementById('surveyPhone').value.trim();
       const email = document.getElementById('surveyEmail').value.trim();
 
+      if (!isValidPhone(phone)) {
+        alert('⚠️ Vui lòng nhập số điện thoại hợp lệ (gồm 9 - 11 chữ số, ví dụ: 0931158868)!');
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀 GỬI ĐĂNG KÝ DANH SÁCH CHỜ ƯU TIÊN</span>';
+        document.getElementById('surveyPhone').focus();
+        return;
+      }
+      if (!isValidEmail(email)) {
+        alert('⚠️ Vui lòng nhập địa chỉ email đúng định dạng (ví dụ: hockhoahoc@gmail.com)!');
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀 GỬI ĐĂNG KÝ DANH SÁCH CHỜ ƯU TIÊN</span>';
+        document.getElementById('surveyEmail').focus();
+        return;
+      }
+
       // Câu 4: Mục tiêu
       const goalRadio = document.querySelector('input[name="surveyGoal"]:checked');
       let goal = goalRadio ? goalRadio.value : '';
@@ -3152,6 +3167,15 @@
       document.getElementById('chiroSurveyForm').classList.remove('hidden');
     }
 
+    // ── HÀM KIỂM TRA ĐỊNH DẠNG EMAIL VÀ SỐ ĐIỆN THOẠI BẢO VỆ DATA ──
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
+    }
+    function isValidPhone(phone) {
+      const clean = String(phone || '').replace(/\D/g, '');
+      return clean.length >= 9 && clean.length <= 11 && (clean.startsWith('0') || clean.startsWith('84'));
+    }
+
     // ── XỬ LÝ KHI KHÁCH GỬI FORM ĐĂNG KÝ ──
     function handleFormSubmit(e) {
       e.preventDefault();
@@ -3161,6 +3185,19 @@
       const phone = document.getElementById('phone').value.trim();
       const email = document.getElementById('email').value.trim();
       const occ = document.getElementById('occupation').value.trim();
+
+      // BẢO VỆ DỮ LIỆU LIÊN HỆ: VALIDATE SĐT & EMAIL CHỐNG NHẬP SAI
+      if (!isValidPhone(phone)) {
+        alert('⚠️ Vui lòng nhập số điện thoại hợp lệ (gồm 9 - 11 chữ số, ví dụ: 0931158868)!');
+        document.getElementById('phone').focus();
+        return;
+      }
+      if (!isValidEmail(email)) {
+        alert('⚠️ Vui lòng nhập địa chỉ email đúng định dạng (ví dụ: hockhoahoc@gmail.com)!');
+        document.getElementById('email').focus();
+        return;
+      }
+
       const selCourse = document.getElementById('selectedCourse');
       const courseKey = selCourse ? selCourse.value : 'full_online';
       const pricing = getDynamicPricing();
