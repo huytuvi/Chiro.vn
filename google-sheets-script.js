@@ -990,6 +990,7 @@ function sendEmailViaResendOrMailApp(recipientEmail, subject, htmlBody) {
     const resendPayload = {
       from: SENDER,
       to: [recipientEmail],
+      reply_to: "chiroeduvn@gmail.com",
       subject: subject,
       html: htmlBody
     };

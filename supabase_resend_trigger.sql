@@ -171,6 +171,7 @@ BEGIN
   v_request_body := jsonb_build_object(
     'from', 'Simon Center <hi@chiro.vn>',
     'to', jsonb_build_array(v_customer_email),
+    'reply_to', 'chiroeduvn@gmail.com',
     'subject', v_email_subject,
     'html', v_email_html
   );
