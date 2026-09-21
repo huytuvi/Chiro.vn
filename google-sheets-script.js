@@ -1038,7 +1038,7 @@ function sendEmailViaResendOrMailApp(recipientEmail, subject, htmlBody) {
 
   const scriptProps = PropertiesService.getScriptProperties();
   const RESEND_KEY = scriptProps.getProperty('RESEND_API_KEY') || ['re', 'dU3pPaPj', 'G8TG9Q51dM71St4r3YdvMhu6'].join('_');
-  const SENDER = scriptProps.getProperty('SENDER_EMAIL') || "Simon Center <hi@chiro.vn>";
+  const SENDER = scriptProps.getProperty('SENDER_EMAIL') || "Simon Center <admin@chiro.vn>";
 
   // 1. Thử gửi qua Resend API trước (thương hiệu chuẩn hi@chiro.vn)
   try {
