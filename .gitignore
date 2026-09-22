@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 resend_config.txt
+admin-auth.json
 
 # ── Database (data lives on the server, not in git) ──
 brain.db

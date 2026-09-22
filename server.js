@@ -15,15 +15,55 @@
 require('dotenv').config();
 
 const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 const express = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY || '';
+
+// The FIXED key shared with Google Apps Script (from .env). Changing the admin
+// LOGIN password below does NOT change this, so the Sheet integration keeps working.
+const APPSCRIPT_KEY = process.env.ADMIN_SECRET_KEY || '';
+
+// The admin LOGIN password is stored (hashed) in this file so it can be changed
+// at runtime from the admin panel. Falls back to APPSCRIPT_KEY on first run.
+const AUTH_FILE = path.join(__dirname, 'admin-auth.json');
+
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DB_PATH = process.env.BRAIN_DB_PATH
   ? path.resolve(__dirname, process.env.BRAIN_DB_PATH)
   : path.join(__dirname, 'brain.db');
+
+// ── Admin login password (hashed, changeable) ──
+function hashPw(pw, salt) {
+  return crypto.scryptSync(String(pw), salt, 32).toString('hex');
+}
+function saveLoginPassword(pw) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const rec = { salt, hash: hashPw(pw, salt), updatedAt: new Date().toISOString() };
+  fs.writeFileSync(AUTH_FILE, JSON.stringify(rec, null, 2), { mode: 0o600 });
+  return rec;
+}
+function getAuthRecord() {
+  try {
+    return JSON.parse(fs.readFileSync(AUTH_FILE, 'utf8'));
+  } catch (e) {
+    // First run: initialize login password = the .env key
+    return saveLoginPassword(APPSCRIPT_KEY);
+  }
+}
+function verifyLoginPassword(pw) {
+  if (!pw) return false;
+  const rec = getAuthRecord();
+  try {
+    const a = Buffer.from(hashPw(pw, rec.salt), 'hex');
+    const b = Buffer.from(rec.hash, 'hex');
+    return a.length === b.length && crypto.timingSafeEqual(a, b);
+  } catch (e) {
+    return false;
+  }
+}
 
 // ── Open the "second brain" (read-only). Site still runs if it's missing. ──
 let db = null;
@@ -43,10 +83,10 @@ function requireDb(res) {
   return true;
 }
 
-// ── Admin auth: header "x-admin-key" or ?key= must match ADMIN_SECRET_KEY ──
+// ── Admin auth: header "x-admin-key" (or ?key=) must match the login password ──
 function requireAdmin(req, res, next) {
   const key = req.get('x-admin-key') || req.query.key || '';
-  if (!ADMIN_SECRET_KEY || key !== ADMIN_SECRET_KEY) {
+  if (!verifyLoginPassword(key)) {
     return res.status(401).json({ error: 'unauthorized' });
   }
   next();
@@ -63,6 +103,25 @@ app.get('/api/health', (req, res) => {
     env: process.env.NODE_ENV || 'development',
     time: new Date().toISOString(),
   });
+});
+
+// Admin login → verify password, hand back the Apps Script integration key
+app.post('/api/admin/login', (req, res) => {
+  const { password } = req.body || {};
+  if (!verifyLoginPassword(password)) {
+    return res.status(401).json({ error: 'Sai mật khẩu quản trị' });
+  }
+  res.json({ ok: true, appscriptKey: APPSCRIPT_KEY });
+});
+
+// Change the admin login password (must be authenticated with the current one)
+app.post('/api/admin/change-password', requireAdmin, (req, res) => {
+  const np = String((req.body && req.body.newPassword) || '');
+  if (np.length < 6) {
+    return res.status(400).json({ error: 'Mật khẩu mới phải có tối thiểu 6 ký tự' });
+  }
+  saveLoginPassword(np);
+  res.json({ ok: true });
 });
 
 // Public: product catalogue

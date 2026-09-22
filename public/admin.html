@@ -48,6 +48,11 @@
           <span id="syncIndicatorText">Đã kết nối Supabase &amp; Sheets</span>
         </div>
         
+        <!-- NÚT ĐỔI MẬT KHẨU QUẢN TRỊ -->
+        <button onclick="changeAdminPassword()" class="text-xs text-amber-800 bg-amber-50 hover:bg-amber-100 font-extrabold border border-amber-200 px-3.5 py-2 rounded-xl transition shadow-sm flex items-center space-x-1.5" title="Đổi mật khẩu đăng nhập trang quản trị">
+          <span>🔑 Đổi Mật Khẩu</span>
+        </button>
+
         <!-- NÚT RESET DỮ LIỆU HỆ THỐNG -->
         <button onclick="openResetModal()" class="text-xs text-rose-700 bg-rose-50 hover:bg-rose-100 font-extrabold border border-rose-200 px-3.5 py-2 rounded-xl transition shadow-sm flex items-center space-x-1.5" title="Xóa toàn bộ khách hàng &amp; đơn hàng trên Supabase, Google Sheet và CRM để bắt đầu mới">
           <span>🗑️ Reset Hệ Thống</span>
@@ -798,12 +803,52 @@
     function getAdminKey() { try { return sessionStorage.getItem('simon_admin_key') || ''; } catch (e) { return ''; } }
     function clearAdminKey() { try { sessionStorage.removeItem('simon_admin_key'); } catch (e) {} }
 
+    // Khoá tích hợp Google Apps Script (server trả về sau khi đăng nhập đúng)
+    function getGsKey() { try { return sessionStorage.getItem('simon_gs_key') || ''; } catch (e) { return ''; } }
+
     async function validateAdminKey(key) {
       if (!key) return false;
       try {
-        const r = await fetch('/api/admin/stats', { headers: { 'x-admin-key': key } });
-        return r.ok;
+        const r = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: key })
+        });
+        if (!r.ok) return false;
+        const data = await r.json().catch(() => ({}));
+        try {
+          sessionStorage.setItem('simon_admin_key', key);
+          if (data.appscriptKey) sessionStorage.setItem('simon_gs_key', data.appscriptKey);
+        } catch (e) {}
+        return true;
       } catch (e) { return false; }
+    }
+
+    // ── Đổi mật khẩu quản trị ──
+    async function changeAdminPassword() {
+      const cur = getAdminKey();
+      const np = prompt('Nhập MẬT KHẨU MỚI (tối thiểu 6 ký tự):');
+      if (np === null) return;
+      if (np.trim().length < 6) { alert('❌ Mật khẩu mới phải có tối thiểu 6 ký tự.'); return; }
+      const np2 = prompt('Nhập LẠI mật khẩu mới để xác nhận:');
+      if (np2 === null) return;
+      if (np.trim() !== np2.trim()) { alert('❌ Hai lần nhập không khớp.'); return; }
+      try {
+        const r = await fetch('/api/admin/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': cur },
+          body: JSON.stringify({ newPassword: np.trim() })
+        });
+        const data = await r.json().catch(() => ({}));
+        if (r.ok && data.ok) {
+          try { sessionStorage.setItem('simon_admin_key', np.trim()); } catch (e) {}
+          alert('✅ Đổi mật khẩu thành công! Lần đăng nhập sau hãy dùng mật khẩu mới.');
+        } else {
+          alert('❌ Lỗi: ' + (data.error || 'không đổi được mật khẩu'));
+        }
+      } catch (e) {
+        alert('❌ Không kết nối được máy chủ: ' + e.message);
+      }
     }
 
     function showAdminLogin() {
@@ -1776,7 +1821,7 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({
               action: 'reset_sheet',
-              admin_key: getAdminKey()
+              admin_key: getGsKey()
             })
           });
           console.log('⚡ Đã gửi lệnh reset Google Sheet');
@@ -1973,7 +2018,7 @@
               'Authorization': `Bearer ${sbKey}`
             }
           }),
-          fetch(`${gsUrl}?admin_key=${encodeURIComponent(getAdminKey())}`).then(r => r.json()).catch(() => null)
+          fetch(`${gsUrl}?admin_key=${encodeURIComponent(getGsKey())}`).then(r => r.json()).catch(() => null)
         ]);
 
         // Tạo bản đồ các đơn hàng đã thanh toán ghi nhận từ Google Sheet (nơi SePay Webhook bắn vào đầu tiên)
