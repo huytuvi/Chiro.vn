@@ -794,7 +794,67 @@
     const DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_Ifjqnisqu2OcfaMVfjIGvw_F2DkEQsR";
     const DEFAULT_GS_URL = "https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec";
 
-    window.addEventListener('DOMContentLoaded', () => {
+    // ── ĐĂNG NHẬP QUẢN TRỊ (khoá nhập lúc chạy, KHÔNG nhúng cứng trong mã nguồn) ──
+    function getAdminKey() { try { return sessionStorage.getItem('simon_admin_key') || ''; } catch (e) { return ''; } }
+    function clearAdminKey() { try { sessionStorage.removeItem('simon_admin_key'); } catch (e) {} }
+
+    async function validateAdminKey(key) {
+      if (!key) return false;
+      try {
+        const r = await fetch('/api/admin/stats', { headers: { 'x-admin-key': key } });
+        return r.ok;
+      } catch (e) { return false; }
+    }
+
+    function showAdminLogin() {
+      return new Promise((resolve) => {
+        const ov = document.createElement('div');
+        ov.id = 'adminLoginOverlay';
+        ov.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;padding:16px;font-family:system-ui,-apple-system,sans-serif;';
+        ov.innerHTML =
+          '<div style="background:#fff;max-width:380px;width:100%;border-radius:16px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4);">' +
+            '<div style="font-size:22px;font-weight:800;color:#0f172a;margin-bottom:6px;">🔐 Đăng nhập Quản trị</div>' +
+            '<div style="font-size:13px;color:#64748b;margin-bottom:18px;">Nhập khoá quản trị để truy cập bảng CRM Simon Center.</div>' +
+            '<input id="adminKeyInput" type="password" placeholder="Khoá quản trị (ADMIN_SECRET_KEY)" autocomplete="current-password" style="width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:14px;box-sizing:border-box;margin-bottom:10px;" />' +
+            '<label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#64748b;margin-bottom:14px;cursor:pointer;"><input type="checkbox" id="adminKeyShow"/> Hiện khoá</label>' +
+            '<div id="adminKeyErr" style="display:none;color:#dc2626;font-size:13px;margin-bottom:12px;"></div>' +
+            '<button id="adminKeyBtn" style="width:100%;padding:12px;background:#8F1D35;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;">Đăng nhập →</button>' +
+          '</div>';
+        document.body.appendChild(ov);
+        const input = ov.querySelector('#adminKeyInput');
+        const btn = ov.querySelector('#adminKeyBtn');
+        const err = ov.querySelector('#adminKeyErr');
+        const show = ov.querySelector('#adminKeyShow');
+        show.addEventListener('change', () => { input.type = show.checked ? 'text' : 'password'; });
+        setTimeout(() => input.focus(), 50);
+        async function submit() {
+          const key = input.value.trim();
+          if (!key) return;
+          btn.disabled = true; btn.textContent = 'Đang kiểm tra...';
+          if (await validateAdminKey(key)) {
+            try { sessionStorage.setItem('simon_admin_key', key); } catch (e) {}
+            ov.remove();
+            resolve(true);
+          } else {
+            err.style.display = 'block'; err.textContent = 'Khoá không đúng. Vui lòng thử lại.';
+            btn.disabled = false; btn.textContent = 'Đăng nhập →';
+            input.select();
+          }
+        }
+        btn.addEventListener('click', submit);
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+      });
+    }
+
+    async function ensureAdminLogin() {
+      const key = getAdminKey();
+      if (key && await validateAdminKey(key)) return;
+      clearAdminKey();
+      await showAdminLogin();
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await ensureAdminLogin();
       initCRMData();
     });
 
@@ -1716,7 +1776,7 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({
               action: 'reset_sheet',
-              admin_key: 'simon2026'
+              admin_key: getAdminKey()
             })
           });
           console.log('⚡ Đã gửi lệnh reset Google Sheet');
@@ -1913,7 +1973,7 @@
               'Authorization': `Bearer ${sbKey}`
             }
           }),
-          fetch(`${gsUrl}?admin_key=simon2026`).then(r => r.json()).catch(() => null)
+          fetch(`${gsUrl}?admin_key=${encodeURIComponent(getAdminKey())}`).then(r => r.json()).catch(() => null)
         ]);
 
         // Tạo bản đồ các đơn hàng đã thanh toán ghi nhận từ Google Sheet (nơi SePay Webhook bắn vào đầu tiên)

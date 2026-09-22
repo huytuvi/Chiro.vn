@@ -55,9 +55,7 @@ const CONFIG = {
 function isAuthorizedAdmin(providedKey) {
   if (!providedKey) return false;
   const key = String(providedKey).trim();
-  return key === CONFIG.ADMIN_SECRET_KEY || 
-         key === 'simon2026' || 
-         key === '90d0a11f850daf0a919944fa84d52d7a1c1dbdddd69a94c44085e44f01707a66';
+  return key === CONFIG.ADMIN_SECRET_KEY;
 }
 
 /**
