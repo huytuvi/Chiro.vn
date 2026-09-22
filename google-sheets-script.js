@@ -40,7 +40,7 @@ const CONFIG = {
   ZALO_LINK: "https://zalo.me/0389609938",
   COMMUNITY_LINK: "https://zalo.me/0389609938", // Link Zalo hỗ trợ
   ADMIN_EMAIL: "chiroeduvn@gmail.com",
-  ADMIN_SECRET_KEY: "SIMON_SEC_2026_@CHIRO_ADMIN" // Mã bảo mật quản trị tối cao (Ngăn chặn truy cập trái phép)
+  ADMIN_SECRET_KEY: "SIMON_ADMIN_3ba2932973f11f8f35290ca9990c246c27e3dc22" // Mã bảo mật quản trị tối cao (Ngăn chặn truy cập trái phép)
 };
 
 /**
