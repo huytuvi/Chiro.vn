@@ -1,0 +1,11 @@
+{
+  "name": "chiro-mcp-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server exposing website/brain.db tools to the goClaw AI agent",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
