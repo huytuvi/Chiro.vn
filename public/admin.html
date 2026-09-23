@@ -445,6 +445,26 @@
                 <option value="pending">Chỉ form/đơn chưa thanh toán</option>
               </select>
             </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Tốc độ báo cáo</label>
+              <select id="cfgNotifyFrequency" onchange="toggleScheduleTimes()" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+                <option value="immediate">1️⃣ Báo liền ngay khi có đơn/form</option>
+                <option value="30min">2️⃣ Gộp — báo mỗi 30 phút 1 lần</option>
+                <option value="60min">3️⃣ Gộp — báo mỗi 1 tiếng 1 lần</option>
+                <option value="schedule">4️⃣ Báo 2 lần/ngày — sáng &amp; tối</option>
+              </select>
+            </div>
+            <div id="scheduleTimesRow" class="sm:col-span-2 grid grid-cols-2 gap-3" style="display:none">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">🌅 Giờ báo buổi sáng</label>
+                <input type="time" id="cfgNotifyMorning" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">🌙 Giờ báo buổi tối</label>
+                <input type="time" id="cfgNotifyEvening" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+              </div>
+              <p class="col-span-2 text-[11px] text-slate-500">Giờ Việt Nam (GMT+7). Agent gom các đơn/form trong ngày và chỉ nhắn vào 2 mốc giờ này.</p>
+            </div>
           </div>
           <div class="pt-3">
             <button onclick="saveNotifyConfig()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">💾 Lưu Cấu Hình Thông Báo</button>
@@ -926,6 +946,11 @@
     }
 
     // ── Cấu hình thông báo tự động (agent) ──
+    function toggleScheduleTimes() {
+      const f = document.getElementById('cfgNotifyFrequency');
+      const row = document.getElementById('scheduleTimesRow');
+      if (row) row.style.display = (f && f.value === 'schedule') ? '' : 'none';
+    }
     async function loadNotifyConfig() {
       try {
         const r = await fetch('/api/admin/notify-config', { headers: { 'x-admin-key': getAdminKey() } });
@@ -933,18 +958,25 @@
         const c = await r.json();
         const e = document.getElementById('cfgNotifyEnabled'); if (e) e.value = String(c.enabled);
         const s = document.getElementById('cfgNotifySignal'); if (s) s.value = c.signal || 'all';
+        const f = document.getElementById('cfgNotifyFrequency'); if (f) f.value = c.frequency || 'immediate';
+        const m = document.getElementById('cfgNotifyMorning'); if (m) m.value = c.morning_time || '08:00';
+        const v = document.getElementById('cfgNotifyEvening'); if (v) v.value = c.evening_time || '20:00';
+        toggleScheduleTimes();
       } catch (e) { /* ignore */ }
     }
     async function saveNotifyConfig() {
       const enabled = document.getElementById('cfgNotifyEnabled').value === 'true';
       const signal = document.getElementById('cfgNotifySignal').value;
+      const frequency = document.getElementById('cfgNotifyFrequency').value;
+      const morning_time = document.getElementById('cfgNotifyMorning').value || '08:00';
+      const evening_time = document.getElementById('cfgNotifyEvening').value || '20:00';
       const st = document.getElementById('notifyCfgStatus');
       if (st) st.textContent = 'Đang lưu...';
       try {
         const r = await fetch('/api/admin/notify-config', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-admin-key': getAdminKey() },
-          body: JSON.stringify({ enabled, signal }),
+          body: JSON.stringify({ enabled, signal, frequency, morning_time, evening_time }),
         });
         const d = await r.json().catch(() => ({}));
         if (r.ok && d.ok) { if (st) st.textContent = '✅ Đã lưu cấu hình.'; }

@@ -98,26 +98,50 @@ function doAddNote(title, content) {
   }
 }
 
-// Returns NEW leads/orders since the last check (for the agent's proactive heartbeat).
-// Behaviour is driven by notify_config.json (editable in the admin panel):
-//   enabled: true/false · signal: 'all' | 'paid' | 'pending'
-// Uses mcp_state.json to remember the last check → never alerts the same lead twice.
+// Did any scheduled VN time (morning/evening "HH:MM") fall within (sinceMs, nowMs]?
+function crossedScheduledTime(sinceMs, nowMs, morning, evening) {
+  const VN = 7 * 3600000; // UTC+7
+  const nowVN = new Date(nowMs + VN);
+  for (let dayOffset = -1; dayOffset <= 0; dayOffset++) {
+    const d = new Date(nowVN);
+    d.setUTCDate(d.getUTCDate() + dayOffset);
+    for (const t of [morning, evening]) {
+      const [h, mn] = String(t).split(':').map(Number);
+      if (!Number.isFinite(h) || !Number.isFinite(mn)) continue;
+      const schedVNwall = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), h, mn, 0);
+      const schedMs = schedVNwall - VN; // VN wall-clock -> real UTC ms
+      if (schedMs > sinceMs && schedMs <= nowMs) return true;
+    }
+  }
+  return false;
+}
+
+// Returns NEW leads/orders to report NOW (for the agent's proactive heartbeat).
+// Driven by notify_config.json (editable in the admin panel):
+//   enabled · signal (all|paid|pending) · frequency (immediate|30min|60min|schedule) · morning_time · evening_time
+// Uses mcp_state.json (leads_last_notified) → never alerts the same lead twice, and
+// respects the chosen reporting cadence (batch / scheduled).
 async function doNewLeads() {
-  const cfg = { enabled: true, signal: 'all', window_minutes: 1440, ...readJson(NOTIFY_CONFIG_FILE, {}) };
+  const cfg = {
+    enabled: true, signal: 'all', frequency: 'immediate',
+    morning_time: '08:00', evening_time: '20:00',
+    ...readJson(NOTIFY_CONFIG_FILE, {}),
+  };
   if (cfg.enabled === false) return { enabled: false, count: 0, new_leads: [] };
 
   const SB = process.env.SUPABASE_URL;
   const K = process.env.SUPABASE_ANON_KEY;
   if (!SB || !K) throw new Error('Thiếu SUPABASE_URL / SUPABASE_ANON_KEY trong .env');
 
-  // First run: initialize the marker to "now" and don't flood with historical leads.
+  const nowMs = Date.now();
   const state = readJson(STATE_FILE, null);
-  if (!state || !state.leads_last_check) {
-    writeJson(STATE_FILE, { ...(state || {}), leads_last_check: new Date().toISOString() });
-    return { enabled: true, initialized: true, signal: cfg.signal, count: 0, new_leads: [] };
+  // First run: set the marker to "now" so we don't flood with historical leads.
+  if (!state || !state.leads_last_notified) {
+    writeJson(STATE_FILE, { ...(state || {}), leads_last_notified: new Date(nowMs).toISOString() });
+    return { enabled: true, initialized: true, count: 0, new_leads: [] };
   }
 
-  const since = state.leads_last_check;
+  const since = state.leads_last_notified;
   const url = `${SB}/rest/v1/leads?select=*&created_at=gt.${encodeURIComponent(since)}&order=created_at.asc`;
   const res = await fetch(url, { headers: { apikey: K, Authorization: `Bearer ${K}` } });
   if (!res.ok) throw new Error(`Supabase HTTP ${res.status}`);
@@ -127,12 +151,26 @@ async function doNewLeads() {
   if (cfg.signal === 'paid') rows = rows.filter((r) => isPaid(r.status));
   else if (cfg.signal === 'pending') rows = rows.filter((r) => !isPaid(r.status));
 
-  // Advance the marker only when we found rows (never skip a lead that arrives later).
-  if (rows.length) writeJson(STATE_FILE, { ...state, leads_last_check: rows[rows.length - 1].created_at });
+  if (rows.length === 0) return { enabled: true, count: 0, new_leads: [], frequency: cfg.frequency };
 
+  // Decide whether to REPORT now based on the reporting cadence.
+  const sinceMs = new Date(since).getTime();
+  let report = false;
+  if (cfg.frequency === 'immediate') report = true;
+  else if (cfg.frequency === '30min') report = nowMs - sinceMs >= 30 * 60000;
+  else if (cfg.frequency === '60min') report = nowMs - sinceMs >= 60 * 60000;
+  else if (cfg.frequency === 'schedule') report = crossedScheduledTime(sinceMs, nowMs, cfg.morning_time, cfg.evening_time);
+
+  if (!report) {
+    // Holding: leads accumulate, marker NOT advanced → they'll be reported next window.
+    return { enabled: true, count: 0, holding: rows.length, new_leads: [], frequency: cfg.frequency };
+  }
+
+  writeJson(STATE_FILE, { ...state, leads_last_notified: rows[rows.length - 1].created_at });
   return {
     enabled: true,
     signal: cfg.signal,
+    frequency: cfg.frequency,
     count: rows.length,
     new_leads: rows.map((r) => ({ name: r.name, phone: r.phone, price: r.price, course: r.course, status: r.status, created_at: r.created_at })),
   };

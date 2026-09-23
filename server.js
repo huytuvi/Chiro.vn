@@ -32,7 +32,14 @@ const AUTH_FILE = path.join(__dirname, 'admin-auth.json');
 
 // Agent notification settings — editable from the admin panel (no coder needed).
 const NOTIFY_CONFIG_FILE = path.join(__dirname, 'notify_config.json');
-const NOTIFY_DEFAULT = { enabled: true, signal: 'all', window_minutes: 1440 };
+const NOTIFY_DEFAULT = {
+  enabled: true,
+  signal: 'all',            // all | paid | pending
+  frequency: 'immediate',   // immediate | 30min | 60min | schedule
+  morning_time: '08:00',    // dùng khi frequency = schedule
+  evening_time: '20:00',
+  window_minutes: 1440,
+};
 function readNotifyConfig() {
   try { return { ...NOTIFY_DEFAULT, ...JSON.parse(fs.readFileSync(NOTIFY_CONFIG_FILE, 'utf8')) }; }
   catch (e) { return { ...NOTIFY_DEFAULT }; }
@@ -139,9 +146,13 @@ app.get('/api/admin/notify-config', requireAdmin, (req, res) => {
 app.post('/api/admin/notify-config', requireAdmin, (req, res) => {
   const cur = readNotifyConfig();
   const b = req.body || {};
+  const timeRe = /^([01]?\d|2[0-3]):[0-5]\d$/;
   const cfg = {
     enabled: typeof b.enabled === 'boolean' ? b.enabled : cur.enabled,
     signal: ['all', 'paid', 'pending'].includes(b.signal) ? b.signal : cur.signal,
+    frequency: ['immediate', '30min', '60min', 'schedule'].includes(b.frequency) ? b.frequency : cur.frequency,
+    morning_time: timeRe.test(b.morning_time) ? b.morning_time : cur.morning_time,
+    evening_time: timeRe.test(b.evening_time) ? b.evening_time : cur.evening_time,
     window_minutes: Number.isFinite(b.window_minutes) ? b.window_minutes : cur.window_minutes,
     updated_at: new Date().toISOString(),
   };
