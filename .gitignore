@@ -41,3 +41,7 @@ CREDENTIALS.local.md
 # ── Agent runtime state ──
 notify_config.json
 mcp_state.json
+
+# ── Generated vault markdown (từ brain.db) ──
+vault-ready/
+context-files/
