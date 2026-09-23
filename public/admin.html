@@ -73,6 +73,9 @@
         <span>📋 Danh Sách Chờ &amp; Khảo Sát</span>
         <span id="badgeSurveyCount" class="bg-indigo-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">0</span>
       </button>
+      <button onclick="switchMainTab('roles')" id="navTabRoles" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
+        <span>👥 Phân Quyền (Agent)</span>
+      </button>
       <button onclick="switchMainTab('settings')" id="navTabSettings" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
         <span>⚙️ Cài Đặt Hệ Thống &amp; API</span>
       </button>
@@ -398,6 +401,91 @@
               <tr><td colspan="12" class="py-8 text-center text-slate-400 italic">Đang tải dữ liệu danh sách chờ...</td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- SECTION: PHÂN QUYỀN NGƯỜI DÙNG (AGENT / TELEGRAM)                   -->
+    <!-- =================================================================== -->
+    <div id="sectionRoles" class="space-y-6 hidden">
+      <div class="card p-6 border border-slate-200 space-y-4">
+        <h2 class="text-base font-black text-slate-900 border-b border-slate-200 pb-3">👥 Phân Quyền Người Dùng (Agent AI)</h2>
+        <p class="text-[12px] text-slate-500 -mt-1">Gán vai trò cho từng người theo ID nền tảng. Agent AI sẽ tra bảng này để biết ai là <b>Chủ</b>, ai là <b>Quản trị</b>, ai là <b>Nhân viên</b> — và phục vụ / cấp quyền khác nhau. Không cần lập trình viên.</p>
+
+        <!-- Chú thích vai trò -->
+        <div class="grid sm:grid-cols-3 gap-3">
+          <div class="rounded-xl border border-amber-200 bg-amber-50 p-3">
+            <div class="text-xs font-extrabold text-amber-800 mb-1">👑 Chủ (owner)</div>
+            <div class="text-[11px] text-amber-700 leading-relaxed">Toàn quyền. Nhận báo cáo lead/doanh thu, ra lệnh quản trị (đổi web, lấy số liệu, lưu note).</div>
+          </div>
+          <div class="rounded-xl border border-sky-200 bg-sky-50 p-3">
+            <div class="text-xs font-extrabold text-sky-800 mb-1">🛠️ Quản trị (admin)</div>
+            <div class="text-[11px] text-sky-700 leading-relaxed">Xem lead &amp; doanh thu, hỗ trợ vận hành. KHÔNG tự đổi giá / website khi chưa được chủ duyệt.</div>
+          </div>
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+            <div class="text-xs font-extrabold text-emerald-800 mb-1">🙋 Nhân viên (staff)</div>
+            <div class="text-[11px] text-emerald-700 leading-relaxed">Chỉ xem lead được giao. KHÔNG xem doanh thu tổng, KHÔNG thao tác quản trị.</div>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-400">Người KHÔNG có trong danh sách = <b>khách lạ</b>: agent ở chế độ lễ tân, tuyệt đối không lộ số liệu/thông tin nội bộ.</p>
+
+        <!-- Thêm người mới -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <div class="text-xs font-extrabold text-slate-700 mb-2">➕ Thêm người vào danh sách phân quyền</div>
+          <div class="grid sm:grid-cols-5 gap-2 items-end">
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 mb-1">Nền tảng</label>
+              <select id="roleAddPlatform" class="w-full px-2 py-2 text-xs border border-slate-300 rounded-lg outline-none">
+                <option value="telegram">Telegram</option>
+                <option value="messenger" disabled>Messenger (sắp có)</option>
+                <option value="zalo" disabled>Zalo (sắp có)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 mb-1">Tên hiển thị</label>
+              <input id="roleAddName" type="text" placeholder="VD: Anh Huy" class="w-full px-2 py-2 text-xs border border-slate-300 rounded-lg outline-none">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 mb-1">ID nền tảng (sender_id)</label>
+              <input id="roleAddSenderId" type="text" placeholder="VD: 5239167089" class="w-full px-2 py-2 text-xs border border-slate-300 rounded-lg outline-none font-mono">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-slate-500 mb-1">Vai trò</label>
+              <select id="roleAddRole" class="w-full px-2 py-2 text-xs border border-slate-300 rounded-lg outline-none">
+                <option value="owner">👑 Chủ</option>
+                <option value="admin">🛠️ Quản trị</option>
+                <option value="staff">🙋 Nhân viên</option>
+              </select>
+            </div>
+            <div>
+              <button onclick="addRoleMember()" class="w-full bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-3 py-2 rounded-lg transition">➕ Thêm</button>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-2">💡 Chưa biết ID Telegram? Bảo người đó nhắn cho bot một câu, rồi xem trong goClaw → Contacts để lấy <span class="font-mono">sender_id</span>.</p>
+        </div>
+
+        <!-- Bảng danh sách -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="text-slate-500 border-b border-slate-200">
+                <th class="py-2 pr-3 font-bold">Nền tảng</th>
+                <th class="py-2 pr-3 font-bold">Tên</th>
+                <th class="py-2 pr-3 font-bold">ID (sender_id)</th>
+                <th class="py-2 pr-3 font-bold">Vai trò</th>
+                <th class="py-2 pr-3 font-bold text-right">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="rolesTableBody">
+              <tr><td colspan="5" class="py-4 text-center text-slate-400">Đang tải…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pt-2 flex items-center space-x-2 border-t border-slate-100">
+          <button onclick="saveRolesConfig()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">💾 Lưu Phân Quyền</button>
+          <span id="rolesCfgStatus" class="text-[11px] text-slate-500 ml-2"></span>
         </div>
       </div>
     </div>
@@ -984,6 +1072,83 @@
       } catch (e) { if (st) st.textContent = '❌ ' + e.message; }
     }
 
+    // ── Phân quyền người dùng (agent) ──
+    let rolesMembers = [];
+    const ROLE_LABELS = { owner: '👑 Chủ', admin: '🛠️ Quản trị', staff: '🙋 Nhân viên' };
+    const PLATFORM_LABELS = { telegram: 'Telegram', messenger: 'Messenger', zalo: 'Zalo' };
+    function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+    async function loadRolesConfig() {
+      try {
+        const r = await fetch('/api/admin/roles-config', { headers: { 'x-admin-key': getAdminKey() } });
+        if (!r.ok) return;
+        const c = await r.json();
+        rolesMembers = Array.isArray(c.members) ? c.members : [];
+      } catch (e) { rolesMembers = []; }
+      renderRolesTable();
+    }
+    function renderRolesTable() {
+      const tb = document.getElementById('rolesTableBody');
+      if (!tb) return;
+      if (!rolesMembers.length) {
+        tb.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-slate-400">Chưa có ai. Thêm người ở khung phía trên.</td></tr>';
+        return;
+      }
+      tb.innerHTML = rolesMembers.map((m, i) => `
+        <tr class="border-b border-slate-100">
+          <td class="py-2 pr-3">${escapeHtml(PLATFORM_LABELS[m.platform] || m.platform)}</td>
+          <td class="py-2 pr-3 font-medium text-slate-800">${escapeHtml(m.name)}</td>
+          <td class="py-2 pr-3 font-mono text-slate-500">${escapeHtml(m.sender_id)}</td>
+          <td class="py-2 pr-3">
+            <select onchange="changeRoleMember(${i}, this.value)" class="px-2 py-1 text-xs border border-slate-300 rounded-lg outline-none">
+              <option value="owner" ${m.role === 'owner' ? 'selected' : ''}>👑 Chủ</option>
+              <option value="admin" ${m.role === 'admin' ? 'selected' : ''}>🛠️ Quản trị</option>
+              <option value="staff" ${m.role === 'staff' ? 'selected' : ''}>🙋 Nhân viên</option>
+            </select>
+          </td>
+          <td class="py-2 pr-3 text-right">
+            <button onclick="removeRoleMember(${i})" class="text-red-600 hover:text-red-800 font-bold text-xs">🗑️ Xóa</button>
+          </td>
+        </tr>`).join('');
+    }
+    function addRoleMember() {
+      const platform = document.getElementById('roleAddPlatform').value;
+      const name = document.getElementById('roleAddName').value.trim();
+      const sender_id = document.getElementById('roleAddSenderId').value.trim();
+      const role = document.getElementById('roleAddRole').value;
+      const st = document.getElementById('rolesCfgStatus');
+      if (!name || !sender_id) { if (st) st.textContent = '❌ Cần nhập Tên và ID.'; return; }
+      if (rolesMembers.some(m => m.platform === platform && m.sender_id === sender_id)) {
+        if (st) st.textContent = '❌ ID này đã có trong danh sách.'; return;
+      }
+      rolesMembers.push({ platform, name, sender_id, role });
+      document.getElementById('roleAddName').value = '';
+      document.getElementById('roleAddSenderId').value = '';
+      if (st) st.textContent = '➕ Đã thêm — nhớ bấm "Lưu Phân Quyền".';
+      renderRolesTable();
+    }
+    function changeRoleMember(i, role) { if (rolesMembers[i]) rolesMembers[i].role = role; }
+    function removeRoleMember(i) {
+      rolesMembers.splice(i, 1);
+      renderRolesTable();
+      const st = document.getElementById('rolesCfgStatus');
+      if (st) st.textContent = '🗑️ Đã xóa — nhớ bấm "Lưu Phân Quyền".';
+    }
+    async function saveRolesConfig() {
+      const st = document.getElementById('rolesCfgStatus');
+      if (st) st.textContent = 'Đang lưu...';
+      try {
+        const r = await fetch('/api/admin/roles-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': getAdminKey() },
+          body: JSON.stringify({ members: rolesMembers }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (r.ok && d.ok) { if (st) st.textContent = '✅ Đã lưu phân quyền.'; }
+        else { if (st) st.textContent = '❌ ' + (d.error || 'không lưu được'); }
+      } catch (e) { if (st) st.textContent = '❌ ' + e.message; }
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
       await ensureAdminLogin();
       initCRMData();
@@ -1076,11 +1241,15 @@
     }
 
     function switchMainTab(tab) {
-      ['crm', 'survey', 'settings'].forEach(t => {
-        const secId = t === 'crm' ? 'sectionCRM' : (t === 'survey' ? 'sectionSurvey' : 'sectionSettings');
-        const btnId = 'navTab' + (t === 'crm' ? 'CRM' : (t === 'survey' ? 'Survey' : 'Settings'));
-        const sec = document.getElementById(secId);
-        const btn = document.getElementById(btnId);
+      const map = {
+        crm:      { sec: 'sectionCRM',      btn: 'navTabCRM' },
+        survey:   { sec: 'sectionSurvey',   btn: 'navTabSurvey' },
+        roles:    { sec: 'sectionRoles',    btn: 'navTabRoles' },
+        settings: { sec: 'sectionSettings', btn: 'navTabSettings' },
+      };
+      Object.keys(map).forEach(t => {
+        const sec = document.getElementById(map[t].sec);
+        const btn = document.getElementById(map[t].btn);
         if (sec && btn) {
           if (t === tab) {
             sec.classList.remove('hidden');
@@ -1092,6 +1261,7 @@
         }
       });
       if (tab === 'survey') renderWaitlistTable();
+      if (tab === 'roles') loadRolesConfig();
     }
 
     function switchCRMSubTab(sub) {

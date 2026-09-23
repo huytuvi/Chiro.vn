@@ -45,6 +45,16 @@ function readNotifyConfig() {
   catch (e) { return { ...NOTIFY_DEFAULT }; }
 }
 
+// User role/permission mapping — editable from the admin panel (no coder needed).
+// The AI agent reads this (via the MCP check_user_role tool) to tell owner / admin / staff / stranger apart.
+const ROLES_CONFIG_FILE = path.join(__dirname, 'roles_config.json');
+const VALID_ROLES = ['owner', 'admin', 'staff'];
+const VALID_PLATFORMS = ['telegram', 'messenger', 'zalo'];
+function readRolesConfig() {
+  try { const c = JSON.parse(fs.readFileSync(ROLES_CONFIG_FILE, 'utf8')); return { members: Array.isArray(c.members) ? c.members : [] }; }
+  catch (e) { return { members: [] }; }
+}
+
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DB_PATH = process.env.BRAIN_DB_PATH
   ? path.resolve(__dirname, process.env.BRAIN_DB_PATH)
@@ -159,6 +169,31 @@ app.post('/api/admin/notify-config', requireAdmin, (req, res) => {
   try {
     fs.writeFileSync(NOTIFY_CONFIG_FILE, JSON.stringify(cfg, null, 2));
     res.json({ ok: true, config: cfg });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// User role/permission mapping — read/update from the admin panel (no coder needed)
+app.get('/api/admin/roles-config', requireAdmin, (req, res) => {
+  res.json(readRolesConfig());
+});
+app.post('/api/admin/roles-config', requireAdmin, (req, res) => {
+  const b = req.body || {};
+  if (!Array.isArray(b.members)) return res.status(400).json({ error: 'members phải là mảng' });
+  const members = [];
+  for (const m of b.members) {
+    if (!m || typeof m !== 'object') continue;
+    const platform = VALID_PLATFORMS.includes(m.platform) ? m.platform : 'telegram';
+    const role = VALID_ROLES.includes(m.role) ? m.role : 'staff';
+    const name = String(m.name || '').slice(0, 120).trim();
+    const sender_id = String(m.sender_id || '').slice(0, 120).trim();
+    if (!name || !sender_id) continue;
+    members.push({ platform, name, sender_id, role });
+  }
+  try {
+    fs.writeFileSync(ROLES_CONFIG_FILE, JSON.stringify({ members, updated_at: new Date().toISOString() }, null, 2));
+    res.json({ ok: true, count: members.length });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

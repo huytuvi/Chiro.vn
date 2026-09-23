@@ -27,6 +27,7 @@ const DB_PATH = process.env.BRAIN_DB_PATH
 const INDEX_HTML = process.env.INDEX_HTML_PATH || path.join(ROOT, 'public', 'index.html');
 const STATE_FILE = path.join(ROOT, 'mcp_state.json');           // remembers last check (no duplicate alerts)
 const NOTIFY_CONFIG_FILE = path.join(ROOT, 'notify_config.json'); // editable from admin panel
+const ROLES_CONFIG_FILE = path.join(ROOT, 'roles_config.json');   // owner/admin/staff mapping, editable from admin panel
 
 function readJson(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return fallback; }
@@ -176,6 +177,24 @@ async function doNewLeads() {
   };
 }
 
+// Look up a person's role from roles_config.json (managed in the admin panel).
+// Returns owner | admin | staff | stranger + the permissions the agent should honour.
+const ROLE_PERMS = {
+  owner:    { label: 'Chủ',       can: ['admin_ops', 'view_revenue', 'view_leads', 'edit_web', 'manage_users', 'receive_reports'] },
+  admin:    { label: 'Quản trị',  can: ['view_revenue', 'view_leads', 'assist_ops'] },
+  staff:    { label: 'Nhân viên', can: ['view_assigned_leads'] },
+  stranger: { label: 'Khách lạ',  can: ['customer_service'] },
+};
+function doCheckUserRole(platform, senderId) {
+  const cfg = readJson(ROLES_CONFIG_FILE, { members: [] });
+  const members = Array.isArray(cfg.members) ? cfg.members : [];
+  const p = String(platform || 'telegram').toLowerCase();
+  const sid = String(senderId || '').trim();
+  const hit = members.find((m) => String(m.sender_id) === sid && (m.platform || 'telegram') === p);
+  const role = hit ? hit.role : 'stranger';
+  return { role, name: hit ? hit.name : null, permissions: (ROLE_PERMS[role] || ROLE_PERMS.stranger).can, label: (ROLE_PERMS[role] || ROLE_PERMS.stranger).label };
+}
+
 // ── Build a fresh MCP server (stateless: one per request) ──
 function buildServer() {
   const server = new McpServer({ name: 'my-business', version: '1.0.0' });
@@ -238,6 +257,20 @@ function buildServer() {
     return { content: [{ type: 'text', text: `🔔 Có ${r.count} lead/đơn mới:\n${lines}` }] };
   });
 
+  server.registerTool('check_user_role', {
+    title: 'Kiểm tra vai trò người dùng',
+    description: 'Tra vai trò của người đang chat theo ID nền tảng (từ bảng phân quyền trong admin panel). Trả về owner (Chủ) / admin (Quản trị) / staff (Nhân viên) / stranger (Khách lạ) kèm quyền hạn. Gọi tool này TRƯỚC khi tiết lộ số liệu nội bộ hoặc thực hiện lệnh quản trị, để phục vụ đúng vai trò.',
+    inputSchema: {
+      sender_id: z.string().min(1).describe('ID của người đang chat trên nền tảng (VD: Telegram sender_id).'),
+      platform: z.enum(['telegram', 'messenger', 'zalo']).optional().describe("Nền tảng (mặc định 'telegram')."),
+    },
+  }, async ({ sender_id, platform }) => {
+    log('check_user_role:', platform || 'telegram', sender_id);
+    const r = doCheckUserRole(platform, sender_id);
+    const who = r.name ? `${r.name} (${r.label})` : r.label;
+    return { content: [{ type: 'text', text: `👤 Vai trò: ${r.role} — ${who}\nQuyền: ${r.permissions.join(', ')}` }] };
+  });
+
   return server;
 }
 
@@ -246,7 +279,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', service: 'mcp', tools: ['update_hero', 'crm_stats', 'add_note'], time: new Date().toISOString() });
+  res.json({ status: 'ok', service: 'mcp', tools: ['update_hero', 'crm_stats', 'add_note', 'get_new_leads_since_last_check', 'check_user_role'], time: new Date().toISOString() });
 });
 
 app.post('/mcp', async (req, res) => {
