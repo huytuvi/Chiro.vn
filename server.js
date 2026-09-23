@@ -30,6 +30,14 @@ const APPSCRIPT_KEY = process.env.ADMIN_SECRET_KEY || '';
 // at runtime from the admin panel. Falls back to APPSCRIPT_KEY on first run.
 const AUTH_FILE = path.join(__dirname, 'admin-auth.json');
 
+// Agent notification settings — editable from the admin panel (no coder needed).
+const NOTIFY_CONFIG_FILE = path.join(__dirname, 'notify_config.json');
+const NOTIFY_DEFAULT = { enabled: true, signal: 'all', window_minutes: 1440 };
+function readNotifyConfig() {
+  try { return { ...NOTIFY_DEFAULT, ...JSON.parse(fs.readFileSync(NOTIFY_CONFIG_FILE, 'utf8')) }; }
+  catch (e) { return { ...NOTIFY_DEFAULT }; }
+}
+
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DB_PATH = process.env.BRAIN_DB_PATH
   ? path.resolve(__dirname, process.env.BRAIN_DB_PATH)
@@ -122,6 +130,27 @@ app.post('/api/admin/change-password', requireAdmin, (req, res) => {
   }
   saveLoginPassword(np);
   res.json({ ok: true });
+});
+
+// Agent notification config — read/update from the admin panel (no coder needed)
+app.get('/api/admin/notify-config', requireAdmin, (req, res) => {
+  res.json(readNotifyConfig());
+});
+app.post('/api/admin/notify-config', requireAdmin, (req, res) => {
+  const cur = readNotifyConfig();
+  const b = req.body || {};
+  const cfg = {
+    enabled: typeof b.enabled === 'boolean' ? b.enabled : cur.enabled,
+    signal: ['all', 'paid', 'pending'].includes(b.signal) ? b.signal : cur.signal,
+    window_minutes: Number.isFinite(b.window_minutes) ? b.window_minutes : cur.window_minutes,
+    updated_at: new Date().toISOString(),
+  };
+  try {
+    fs.writeFileSync(NOTIFY_CONFIG_FILE, JSON.stringify(cfg, null, 2));
+    res.json({ ok: true, config: cfg });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // Public: product catalogue

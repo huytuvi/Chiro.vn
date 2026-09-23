@@ -25,6 +25,15 @@ const DB_PATH = process.env.BRAIN_DB_PATH
   ? path.resolve(ROOT, process.env.BRAIN_DB_PATH)
   : path.join(ROOT, 'brain.db');
 const INDEX_HTML = process.env.INDEX_HTML_PATH || path.join(ROOT, 'public', 'index.html');
+const STATE_FILE = path.join(ROOT, 'mcp_state.json');           // remembers last check (no duplicate alerts)
+const NOTIFY_CONFIG_FILE = path.join(ROOT, 'notify_config.json'); // editable from admin panel
+
+function readJson(file, fallback) {
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return fallback; }
+}
+function writeJson(file, obj) {
+  try { fs.writeFileSync(file, JSON.stringify(obj, null, 2)); } catch (e) { /* ignore */ }
+}
 
 function log(...args) {
   console.log(new Date().toISOString(), '[mcp]', ...args);
@@ -89,6 +98,46 @@ function doAddNote(title, content) {
   }
 }
 
+// Returns NEW leads/orders since the last check (for the agent's proactive heartbeat).
+// Behaviour is driven by notify_config.json (editable in the admin panel):
+//   enabled: true/false · signal: 'all' | 'paid' | 'pending'
+// Uses mcp_state.json to remember the last check → never alerts the same lead twice.
+async function doNewLeads() {
+  const cfg = { enabled: true, signal: 'all', window_minutes: 1440, ...readJson(NOTIFY_CONFIG_FILE, {}) };
+  if (cfg.enabled === false) return { enabled: false, count: 0, new_leads: [] };
+
+  const SB = process.env.SUPABASE_URL;
+  const K = process.env.SUPABASE_ANON_KEY;
+  if (!SB || !K) throw new Error('Thiếu SUPABASE_URL / SUPABASE_ANON_KEY trong .env');
+
+  // First run: initialize the marker to "now" and don't flood with historical leads.
+  const state = readJson(STATE_FILE, null);
+  if (!state || !state.leads_last_check) {
+    writeJson(STATE_FILE, { ...(state || {}), leads_last_check: new Date().toISOString() });
+    return { enabled: true, initialized: true, signal: cfg.signal, count: 0, new_leads: [] };
+  }
+
+  const since = state.leads_last_check;
+  const url = `${SB}/rest/v1/leads?select=*&created_at=gt.${encodeURIComponent(since)}&order=created_at.asc`;
+  const res = await fetch(url, { headers: { apikey: K, Authorization: `Bearer ${K}` } });
+  if (!res.ok) throw new Error(`Supabase HTTP ${res.status}`);
+  let rows = await res.json();
+
+  const isPaid = (s) => !!s && s.toUpperCase().includes('ĐÃ THANH TOÁN');
+  if (cfg.signal === 'paid') rows = rows.filter((r) => isPaid(r.status));
+  else if (cfg.signal === 'pending') rows = rows.filter((r) => !isPaid(r.status));
+
+  // Advance the marker only when we found rows (never skip a lead that arrives later).
+  if (rows.length) writeJson(STATE_FILE, { ...state, leads_last_check: rows[rows.length - 1].created_at });
+
+  return {
+    enabled: true,
+    signal: cfg.signal,
+    count: rows.length,
+    new_leads: rows.map((r) => ({ name: r.name, phone: r.phone, price: r.price, course: r.course, status: r.status, created_at: r.created_at })),
+  };
+}
+
 // ── Build a fresh MCP server (stateless: one per request) ──
 function buildServer() {
   const server = new McpServer({ name: 'my-business', version: '1.0.0' });
@@ -127,6 +176,28 @@ function buildServer() {
     log('add_note:', title);
     const r = doAddNote(title, content);
     return { content: [{ type: 'text', text: `📝 Đã lưu ghi chú #${r.id}: "${r.title}"` }] };
+  });
+
+  server.registerTool('get_new_leads_since_last_check', {
+    title: 'Kiểm tra lead/đơn mới (cho heartbeat)',
+    description: 'Trả về các lead/đơn MỚI từ lần kiểm tra trước (dùng cho heartbeat để chủ động nhắn chủ). Tự nhớ mốc thời gian nên không báo trùng. Loại tín hiệu (tất cả / chỉ đã thanh toán / chỉ chờ) do cấu hình trong admin panel quyết định.',
+    inputSchema: {},
+  }, async () => {
+    log('get_new_leads_since_last_check');
+    const r = await doNewLeads();
+    if (r.enabled === false) {
+      return { content: [{ type: 'text', text: '(Thông báo tự động đang TẮT trong cấu hình admin — không kiểm tra.)' }] };
+    }
+    if (r.initialized) {
+      return { content: [{ type: 'text', text: '(Đã khởi tạo theo dõi. Từ giờ sẽ báo lead/đơn mới.)' }] };
+    }
+    if (r.count === 0) {
+      return { content: [{ type: 'text', text: '(Không có lead/đơn mới.)' }] };
+    }
+    const lines = r.new_leads
+      .map((l) => `• ${l.name || '?'} — ${l.phone || ''} — ${l.course || ''} — ${l.price || ''} — ${l.status || ''}`)
+      .join('\n');
+    return { content: [{ type: 'text', text: `🔔 Có ${r.count} lead/đơn mới:\n${lines}` }] };
   });
 
   return server;

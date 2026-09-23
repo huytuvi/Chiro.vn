@@ -37,3 +37,7 @@ index_backup_before_refine_*.html
 
 # ── Handoff credentials (NHẠY CẢM — chỉ local) ──
 CREDENTIALS.local.md
+
+# ── Agent runtime state ──
+notify_config.json
+mcp_state.json

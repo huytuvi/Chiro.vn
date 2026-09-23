@@ -425,6 +425,33 @@
           <input type="text" id="cfgGoogleSheetUrl" value="https://script.google.com/macros/s/AKfycbx_pTqoPFNEU4nV4u-f1i1607aWLRfefN1o_bj7--bAaVRIrYiM4GkQoe8bzjqeMS61kA/exec" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
         </div>
 
+        <!-- CẤU HÌNH THÔNG BÁO TỰ ĐỘNG (Agent Telegram / Heartbeat) -->
+        <div class="border-t border-slate-200 pt-4 mt-2">
+          <div class="text-sm font-extrabold text-slate-800 mb-1">🔔 Cấu Hình Thông Báo Tự Động (Agent Telegram)</div>
+          <p class="text-[11px] text-slate-500 mb-3">Agent sẽ tự nhắn Telegram khi có tín hiệu mới. Chỉnh tại đây bất cứ lúc nào — không cần lập trình viên.</p>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Bật thông báo tự động</label>
+              <select id="cfgNotifyEnabled" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+                <option value="true">✅ Bật — agent tự nhắn khi có tín hiệu</option>
+                <option value="false">⛔ Tắt — không nhắn tự động</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Loại tín hiệu agent theo dõi</label>
+              <select id="cfgNotifySignal" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#8F1D35] outline-none">
+                <option value="all">Tất cả lead/đơn mới (form + đơn)</option>
+                <option value="paid">Chỉ đơn ĐÃ THANH TOÁN</option>
+                <option value="pending">Chỉ form/đơn chưa thanh toán</option>
+              </select>
+            </div>
+          </div>
+          <div class="pt-3">
+            <button onclick="saveNotifyConfig()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">💾 Lưu Cấu Hình Thông Báo</button>
+            <span id="notifyCfgStatus" class="text-[11px] text-slate-500 ml-2"></span>
+          </div>
+        </div>
+
         <div class="pt-2 flex items-center space-x-2">
           <button onclick="saveApiConfigs()" class="bg-[#8F1D35] hover:bg-[#701529] text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
             💾 Lưu Cấu Hình
@@ -898,9 +925,37 @@
       await showAdminLogin();
     }
 
+    // ── Cấu hình thông báo tự động (agent) ──
+    async function loadNotifyConfig() {
+      try {
+        const r = await fetch('/api/admin/notify-config', { headers: { 'x-admin-key': getAdminKey() } });
+        if (!r.ok) return;
+        const c = await r.json();
+        const e = document.getElementById('cfgNotifyEnabled'); if (e) e.value = String(c.enabled);
+        const s = document.getElementById('cfgNotifySignal'); if (s) s.value = c.signal || 'all';
+      } catch (e) { /* ignore */ }
+    }
+    async function saveNotifyConfig() {
+      const enabled = document.getElementById('cfgNotifyEnabled').value === 'true';
+      const signal = document.getElementById('cfgNotifySignal').value;
+      const st = document.getElementById('notifyCfgStatus');
+      if (st) st.textContent = 'Đang lưu...';
+      try {
+        const r = await fetch('/api/admin/notify-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': getAdminKey() },
+          body: JSON.stringify({ enabled, signal }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (r.ok && d.ok) { if (st) st.textContent = '✅ Đã lưu cấu hình.'; }
+        else { if (st) st.textContent = '❌ ' + (d.error || 'không lưu được'); }
+      } catch (e) { if (st) st.textContent = '❌ ' + e.message; }
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
       await ensureAdminLogin();
       initCRMData();
+      loadNotifyConfig();
     });
 
     function initCRMData() {
