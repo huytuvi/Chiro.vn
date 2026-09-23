@@ -34,3 +34,6 @@ __pycache__/
 *_snapshot*.html
 *_monolithic*.html
 index_backup_before_refine_*.html
+
+# ── Handoff credentials (NHẠY CẢM — chỉ local) ──
+CREDENTIALS.local.md
