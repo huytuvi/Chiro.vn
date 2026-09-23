@@ -11,6 +11,9 @@ brain_backup.db
 *.sqlite
 *.sqlite3
 
+# ── Supabase backups (contain customer PII — never commit) ──
+supabase_backup/
+
 # ── Node ──
 node_modules/
 npm-debug.log*
