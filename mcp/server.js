@@ -6,6 +6,7 @@
  * Tools: update_hero, crm_stats, add_note
  */
 
+import 'dotenv/config';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -47,24 +48,35 @@ function doUpdateHero(newTitle) {
   return { success: true, old_title: oldTitle, new_title: newTitle };
 }
 
-function doCrmStats(period) {
-  const db = openDb();
-  try {
-    const cWhere = period === 'today'
-      ? "WHERE date(registered_at, '+7 hours') = date('now', '+7 hours')" : '';
-    const oWhere = period === 'today'
-      ? "WHERE date(order_date, '+7 hours') = date('now', '+7 hours')" : '';
-    const paidWhere = oWhere
-      ? oWhere + " AND status IN ('paid','completed')"
-      : "WHERE status IN ('paid','completed')";
-    const customers = db.prepare(`SELECT COUNT(*) n FROM customers ${cWhere}`).get().n;
-    const orders = db.prepare(`SELECT COUNT(*) n FROM orders ${oWhere}`).get().n;
-    const paid_orders = db.prepare(`SELECT COUNT(*) n FROM orders ${paidWhere}`).get().n;
-    const revenue = db.prepare(`SELECT COALESCE(SUM(amount),0) s FROM orders ${paidWhere}`).get().s;
-    return { period: period || 'all', customers, orders, paid_orders, revenue };
-  } finally {
-    db.close();
+// crm_stats reads the LIVE data from Supabase `leads` (same source as the admin panel),
+// so it always matches reality — brain.db is only a periodically-synced mirror.
+async function doCrmStats(period) {
+  const SB = process.env.SUPABASE_URL;
+  const K = process.env.SUPABASE_ANON_KEY;
+  if (!SB || !K) throw new Error('Thiếu SUPABASE_URL / SUPABASE_ANON_KEY trong .env');
+
+  const res = await fetch(`${SB}/rest/v1/leads?select=name,phone,price,status,created_at`, {
+    headers: { apikey: K, Authorization: `Bearer ${K}` },
+  });
+  if (!res.ok) throw new Error(`Supabase HTTP ${res.status}`);
+  let rows = await res.json();
+
+  if (period === 'today') {
+    const todayVN = new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10);
+    rows = rows.filter((r) => {
+      if (!r.created_at) return false;
+      const dVN = new Date(new Date(r.created_at).getTime() + 7 * 3600 * 1000).toISOString().slice(0, 10);
+      return dVN === todayVN;
+    });
   }
+
+  const isPaid = (s) => !!s && s.toUpperCase().includes('ĐÃ THANH TOÁN'.toUpperCase());
+  const toNum = (p) => Number(String(p || '').replace(/[^\d]/g, '')) || 0;
+  const paid = rows.filter((r) => isPaid(r.status));
+  const revenue = paid.reduce((sum, r) => sum + toNum(r.price), 0);
+  const customers = new Set(rows.map((r) => r.phone).filter(Boolean)).size;
+
+  return { period: period || 'all', customers, orders: rows.length, paid_orders: paid.length, revenue };
 }
 
 function doAddNote(title, content) {
@@ -98,7 +110,7 @@ function buildServer() {
   }, async ({ period }) => {
     const p = period || 'all';
     log('crm_stats:', p);
-    const r = doCrmStats(p);
+    const r = await doCrmStats(p);
     const label = p === 'today' ? 'Hôm nay' : 'Tổng cộng';
     const text = `📊 ${label}:\n- Khách hàng: ${r.customers}\n- Đơn hàng: ${r.orders}\n- Đã thanh toán: ${r.paid_orders}\n- Doanh thu: ${Number(r.revenue).toLocaleString('vi-VN')} đ`;
     return { content: [{ type: 'text', text }] };
