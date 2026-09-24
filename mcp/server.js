@@ -117,11 +117,28 @@ function crossedScheduledTime(sinceMs, nowMs, morning, evening) {
   return false;
 }
 
-// Returns NEW leads/orders to report NOW (for the agent's proactive heartbeat).
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8837255291:AAHs647bVFftOG-bCvDWv2LB5bIx193cvXc';
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '7383945015';
+
+async function sendTelegramDirect(text) {
+  try {
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: 'Markdown' }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('Telegram direct send error:', err);
+    return false;
+  }
+}
+
+// Returns NEW leads or STATUS UPDATES (e.g. Paid) to report NOW (for the agent's proactive heartbeat).
 // Driven by notify_config.json (editable in the admin panel):
 //   enabled · signal (all|paid|pending) · frequency (immediate|30min|60min|schedule) · morning_time · evening_time
-// Uses mcp_state.json (leads_last_notified) → never alerts the same lead twice, and
-// respects the chosen reporting cadence (batch / scheduled).
+// Uses mcp_state.json (notified_map & leads_last_notified) → never misses new leads OR status changes.
 async function doNewLeads() {
   const cfg = {
     enabled: true, signal: 'all', frequency: 'immediate',
@@ -135,27 +152,44 @@ async function doNewLeads() {
   if (!SB || !K) throw new Error('Thiếu SUPABASE_URL / SUPABASE_ANON_KEY trong .env');
 
   const nowMs = Date.now();
-  const state = readJson(STATE_FILE, null);
-  // First run: set the marker to "now" so we don't flood with historical leads.
-  if (!state || !state.leads_last_notified) {
-    writeJson(STATE_FILE, { ...(state || {}), leads_last_notified: new Date(nowMs).toISOString() });
-    return { enabled: true, initialized: true, count: 0, new_leads: [] };
-  }
+  const state = readJson(STATE_FILE, {}) || {};
+  const notifiedMap = state.notified_map || {};
 
-  const since = state.leads_last_notified;
-  const url = `${SB}/rest/v1/leads?select=*&created_at=gt.${encodeURIComponent(since)}&order=created_at.asc`;
+  // Query top 50 recent leads ordered by id desc
+  const url = `${SB}/rest/v1/leads?select=*&order=id.desc&limit=50`;
   const res = await fetch(url, { headers: { apikey: K, Authorization: `Bearer ${K}` } });
   if (!res.ok) throw new Error(`Supabase HTTP ${res.status}`);
   let rows = await res.json();
 
   const isPaid = (s) => !!s && s.toUpperCase().includes('ĐÃ THANH TOÁN');
-  if (cfg.signal === 'paid') rows = rows.filter((r) => isPaid(r.status));
-  else if (cfg.signal === 'pending') rows = rows.filter((r) => !isPaid(r.status));
 
-  if (rows.length === 0) return { enabled: true, count: 0, new_leads: [], frequency: cfg.frequency };
+  const isFirstRun = Object.keys(notifiedMap).length === 0 && !state.leads_last_notified;
+  if (isFirstRun) {
+    const initialMap = {};
+    for (const r of rows) {
+      initialMap[r.id] = r.status || '';
+    }
+    writeJson(STATE_FILE, { ...state, notified_map: initialMap, leads_last_notified: new Date(nowMs).toISOString() });
+    return { enabled: true, initialized: true, count: 0, new_leads: [] };
+  }
 
-  // Decide whether to REPORT now based on the reporting cadence.
-  const sinceMs = new Date(since).getTime();
+  let changedRows = [];
+  for (const r of rows) {
+    const prevStatus = notifiedMap[r.id];
+    const currStatus = r.status || '';
+    if (prevStatus === undefined) {
+      changedRows.push({ ...r, _change: 'new' });
+    } else if (prevStatus !== currStatus) {
+      changedRows.push({ ...r, _change: 'updated', _prev_status: prevStatus });
+    }
+  }
+
+  if (cfg.signal === 'paid') changedRows = changedRows.filter((r) => isPaid(r.status));
+  else if (cfg.signal === 'pending') changedRows = changedRows.filter((r) => !isPaid(r.status));
+
+  if (changedRows.length === 0) return { enabled: true, count: 0, new_leads: [], frequency: cfg.frequency };
+
+  const sinceMs = state.leads_last_notified ? new Date(state.leads_last_notified).getTime() : nowMs - 60000;
   let report = false;
   if (cfg.frequency === 'immediate') report = true;
   else if (cfg.frequency === '30min') report = nowMs - sinceMs >= 30 * 60000;
@@ -163,17 +197,50 @@ async function doNewLeads() {
   else if (cfg.frequency === 'schedule') report = crossedScheduledTime(sinceMs, nowMs, cfg.morning_time, cfg.evening_time);
 
   if (!report) {
-    // Holding: leads accumulate, marker NOT advanced → they'll be reported next window.
-    return { enabled: true, count: 0, holding: rows.length, new_leads: [], frequency: cfg.frequency };
+    return { enabled: true, count: 0, holding: changedRows.length, new_leads: [], frequency: cfg.frequency };
   }
 
-  writeJson(STATE_FILE, { ...state, leads_last_notified: rows[rows.length - 1].created_at });
+  // Send direct Telegram notification for each changed lead (0 LLM tokens, 100% reliable)
+  for (const r of changedRows) {
+    let title = r._change === 'updated' ? '💳 CẬP NHẬT THANH TOÁN / TRẠNG THÁI' : '📝 ĐƠN ĐĂNG KÝ / LEAD MỚI';
+    if (isPaid(r.status)) title = '🎉 KHÁCH THANH TOÁN THÀNH CÔNG!';
+
+    const text = `${title}\n\n` +
+      `👤 *Họ tên:* ${r.name || 'Khách hàng'}\n` +
+      `📞 *SĐT:* \`${r.phone || 'Chưa có'}\`\n` +
+      `📚 *Khóa/Sản phẩm:* ${r.course || 'Mặc định'}\n` +
+      `💰 *Giá:* ${r.price || '0 đ'}\n` +
+      `📌 *Trạng thái:* *${r.status || 'Chờ tư vấn'}*\n` +
+      (r._change === 'updated' ? `🔄 *Trạng thái cũ:* ${r._prev_status}\n` : '') +
+      `🕒 *Thời gian:* ${r.time_str || new Date().toLocaleString('vi-VN')}`;
+
+    await sendTelegramDirect(text);
+  }
+
+  const updatedMap = { ...notifiedMap };
+  for (const r of rows) {
+    updatedMap[r.id] = r.status || '';
+  }
+  writeJson(STATE_FILE, {
+    ...state,
+    notified_map: updatedMap,
+    leads_last_notified: new Date(nowMs).toISOString(),
+  });
+
   return {
     enabled: true,
     signal: cfg.signal,
     frequency: cfg.frequency,
-    count: rows.length,
-    new_leads: rows.map((r) => ({ name: r.name, phone: r.phone, price: r.price, course: r.course, status: r.status, created_at: r.created_at })),
+    count: changedRows.length,
+    new_leads: changedRows.map((r) => ({
+      name: r.name,
+      phone: r.phone,
+      price: r.price,
+      course: r.course,
+      status: r.status,
+      created_at: r.created_at,
+      type: r._change === 'updated' ? `Cập nhật (cũ: ${r._prev_status})` : 'Mới',
+    })),
   };
 }
 
@@ -306,4 +373,9 @@ app.listen(PORT, HOST, () => {
   log(`MCP server listening on http://${HOST}:${PORT}/mcp`);
   log(`brain.db: ${DB_PATH}`);
   log(`index.html: ${INDEX_HTML}`);
+
+  // Automatic 30s ticker: 0-cost, direct Telegram notification for instant delivery
+  setInterval(() => {
+    doNewLeads().catch((err) => log('AutoLeadCheck ERROR:', err.message));
+  }, 30000);
 });
