@@ -304,7 +304,7 @@ def get_waitlist_welcome_content(name="anh/chị", phone="", email="", goal="", 
 
     <div style="border-top: 1px solid #E2E8F0; padding-top: 16px; margin-top: 24px; font-size: 13px; color: #718096;">
       <p style="margin: 0 0 4px 0; font-weight: 700; color: #2D3748;">SIMON EDU CENTER — CHIRO.VN</p>
-      <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>093 115 8868</strong></p>
+      <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>0389 609 938</strong></p>
       <p style="margin: 0 0 4px 0;">🌐 Website: <a href="https://chiro.vn" style="color: #8F1D35; text-decoration: none; font-weight: 600;">https://chiro.vn</a></p>
       <p style="margin: 0;">✉️ Email: <a href="mailto:hi@chiro.vn" style="color: #8F1D35; text-decoration: none;">hi@chiro.vn</a></p>
     </div>

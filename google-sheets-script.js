@@ -1222,7 +1222,7 @@ function sendWaitlistWelcomeEmail(recipientEmail, customerName, customerPhone, g
         <!-- Footer Contact -->
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
           <p style="margin: 0 0 4px 0; font-weight: bold; color: #0f172a;">SIMON EDU CENTER — CHIRO.VN</p>
-          <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>093 115 8868</strong></p>
+          <p style="margin: 0 0 4px 0;">📍 Hotline / Zalo: <strong>0389 609 938</strong></p>
           <p style="margin: 0 0 4px 0;">🌐 Website: <a href="https://chiro.vn" style="color: #8F1D35; text-decoration: none; font-weight: bold;">https://chiro.vn</a></p>
           <p style="margin: 0;">✉️ Email hỗ trợ: <a href="mailto:hi@chiro.vn" style="color: #8F1D35; text-decoration: none;">hi@chiro.vn</a></p>
         </div>

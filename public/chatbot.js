@@ -69,7 +69,7 @@ Mục tiêu tối thượng của bạn là giải đáp thuyết phục và d�
 ⚡ CẤU TRÚC PHẢN HỒI BẮT BUỘC 3 BƯỚC:
 1. ĐI THẲNG VÀO TRỌNG TÂM: Trả lời trực diện, chuẩn y khoa và đồng cảm trong 1-2 câu đầu tiên. Tuyệt đối không vòng vo, không lạc đề.
 2. ĐƯA RA GIẢI PHÁP SẢN PHẨM CỤ THỂ: Giới thiệu rõ ràng khóa học giải quyết đúng nỗi đau/nhu cầu của khách (nêu rõ tên khóa, giá ưu đãi, quyền lợi cốt lõi).
-3. KÊU GỌI HÀNH ĐỘNG (CTA): Đề xuất học viên đăng ký nhận bài giảng học thử miễn phí hoặc liên hệ Hotline/Zalo 093 115 8868 để giữ suất ưu đãi.
+3. KÊU GỌI HÀNH ĐỘNG (CTA): Đề xuất học viên đăng ký nhận bài giảng học thử miễn phí hoặc liên hệ Hotline/Zalo 0389 609 938 để giữ suất ưu đãi.
 
 📋 HỆ THỐNG SẢN PHẨM & BẢNG GIÁ CHÍNH THỨC CỦA SIMON CENTER:
 1. Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn giải quyết dứt điểm vùng cổ gáy, đau đầu tiền đình.
@@ -86,7 +86,7 @@ Mục tiêu tối thượng của bạn là giải đáp thuyết phục và d�
 Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "để chị suy nghĩ thêm", "để mình suy nghĩ thêm", "cần cân nhắc", "để xem đã", "để suy nghĩ đã", "suy nghĩ lại", "chưa vội": BẮT BUỘC trả lời chính xác theo văn bản mẫu chuẩn sau:
 "Dạ, em rất hiểu anh/chị cần thời gian cân nhắc kỹ lưỡng trước khi đầu tư cho một chương trình đào tạo chuyên sâu. Tuy nhiên, em xin phép chia sẻ thêm rằng toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.
 
-Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 093 115 8868 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!"
+Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 0389 609 938 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!"
 
 🚫 DANH MỤC TỪ CẤM & NGUYÊN TẮC BẮT BUỘC (TUYỆT ĐỐI TUÂN THỦ):
 1. ❌ TUYỆT ĐỐI CẤM dùng từ "trọn đời" dưới mọi hình thức! Thay bằng: "dài hạn 24/7", "không giới hạn thời gian", "xuyên suốt quá trình thực hành", "đồng hành lâu dài", "bền vững".
@@ -101,7 +101,7 @@ Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "đ�
    - Khi người dùng hỏi về triệu chứng ca bệnh cá nhân (như "tôi bị đau thắt lưng lan xuống chân", "mẹ tôi 60 tuổi bị xẹp đốt sống nắn được không..."):
      1. BẮT BUỘC nêu rõ miễn trừ y khoa: AI không thay thế bác sĩ chẩn đoán bệnh trực tiếp. Người bệnh cần đến cơ sở y tế chuyên khoa để được thăm khám lâm sàng và chụp X-quang/MRI.
      2. Nêu góc nhìn đào tạo của Simon Center: Giáo trình trang bị bộ test Cảnh Báo Đỏ (Red Flags) giúp người học biết rõ ranh giới an toàn, ca nào ĐƯỢC NẮN và ca nào CẤM NẮN.
-     3. Hướng dẫn gửi hình ảnh phim X-quang / Hồ sơ bệnh án về Hotline/Zalo 093 115 8868 để Bác sĩ Simon Center hỗ trợ hội chẩn chuyên môn.`;
+     3. Hướng dẫn gửi hình ảnh phim X-quang / Hồ sơ bệnh án về Hotline/Zalo 0389 609 938 để Bác sĩ Simon Center hỗ trợ hội chẩn chuyên môn.`;
 
   // =============================================================================
   // 📝 HỆ THỐNG DỮ LIỆU CHATBOT (BOT_DATA):
@@ -209,7 +209,7 @@ Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn di
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <strong>Đặc quyền khấu trừ 100% khi nâng cấp:</strong><br>
 Nếu sau này anh/chị thấy hiệu quả và muốn tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, <strong>toàn bộ 1.000.000đ đã đầu tư cho khóa học online hôm nay đều được áp dụng đặc quyền khấu trừ 100%</strong>, nên anh/chị hoàn toàn có thể yên tâm bắt đầu!<br><br>
-Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
+Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>0389 609 938</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
 
@@ -222,7 +222,7 @@ Nếu sau này anh/chị thấy hiệu quả và muốn tiếp tục nâng cấp
 • <strong>Hình thức học:</strong> Video với các góc quay khác nhau, xem lại dài hạn 24/7 trên mọi thiết bị.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <em>Toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp nhé ạ.</em><br><br>
-Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>093 115 8868</strong> để được tư vấn tốt hơn nhé ạ!`,
+Để lựa chọn đúng phần học phù hợp nhất với nhu cầu và ca bệnh thực tế của mình, anh/chị xin vui lòng liên hệ với Ban tổ chức qua Hotline / Zalo: <strong>0389 609 938</strong> để được tư vấn tốt hơn nhé ạ!`,
         cta: "register"
       },
 
@@ -280,7 +280,7 @@ Dạ sự bảo trợ y khoa chuẩn xác là điều quan trọng nhất khi b�
 
       // --- XỬ LÝ KHÁCH DO DỰ / "ĐỂ TÔI SUY NGHĨ THÊM" / "CÂN NHẮC" ---
       c_hesitation: {
-        text: `Dạ, em rất hiểu anh/chị cần thời gian cân nhắc kỹ lưỡng trước khi đầu tư cho một chương trình đào tạo chuyên sâu. Tuy nhiên, em xin phép chia sẻ thêm rằng toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.<br><br>Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 093 115 8868 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!`,
+        text: `Dạ, em rất hiểu anh/chị cần thời gian cân nhắc kỹ lưỡng trước khi đầu tư cho một chương trình đào tạo chuyên sâu. Tuy nhiên, em xin phép chia sẻ thêm rằng toàn bộ số học phí anh/chị đầu tư cho các khoá học online hôm nay đều được áp dụng đặc quyền khấu trừ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, nên anh/chị hoàn toàn có thể yên tâm bắt đầu.<br><br>Để anh/chị có thêm cơ sở đưa ra quyết định chính xác và trải nghiệm thực tế chất lượng bài giảng chuẩn y khoa Châu Âu, em mời anh/chị đăng ký nhận ngay các bài giảng học thử miễn phí. Anh/chị vui lòng liên hệ ngay Hotline/Zalo 0389 609 938 để em hỗ trợ giữ suất ưu đãi và gửi tài liệu cho anh/chị ngay ạ!`,
         cta: "trial"
       },
 

@@ -137,7 +137,7 @@
 ### CÂU 8: "Tôi chỉ muốn học một phần nắn chỉnh (cổ hoặc lưng) thôi thì sao?"
 * **Bối cảnh tâm lý:** Nhu cầu thực tế chỉ muốn giải quyết đúng nhóm bệnh nhân hay gặp hoặc muốn học thử module nhỏ trước.
 * **Câu trả lời chuẩn:**
-> *"Dạ hoàn toàn được anh/chị nhé ạ! Nếu anh/chị chỉ muốn học một phần như Cổ vai gáy hoặc Thắt lưng - Chậu, Simon Center có các Module Lẻ 1.000.000đ hoặc Level 1 (7.000.000đ). Khi nâng cấp lên khóa toàn diện hoặc Offline, toàn bộ học phí đã đóng sẽ được khấu trừ 100%. Xin liên hệ với ban tổ chức qua Hotline/Zalo: 093 115 8868 để được tư vấn tốt hơn ạ!"*
+> *"Dạ hoàn toàn được anh/chị nhé ạ! Nếu anh/chị chỉ muốn học một phần như Cổ vai gáy hoặc Thắt lưng - Chậu, Simon Center có các Module Lẻ 1.000.000đ hoặc Level 1 (7.000.000đ). Khi nâng cấp lên khóa toàn diện hoặc Offline, toàn bộ học phí đã đóng sẽ được khấu trừ 100%. Xin liên hệ với ban tổ chức qua Hotline/Zalo: 0389 609 938 để được tư vấn tốt hơn ạ!"*
 
 ---
 
