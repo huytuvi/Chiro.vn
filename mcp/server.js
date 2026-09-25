@@ -117,8 +117,12 @@ function crossedScheduledTime(sinceMs, nowMs, morning, evening) {
   return false;
 }
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8837255291:AAHs647bVFftOG-bCvDWv2LB5bIx193cvXc';
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '7383945015';
+const BOTS = [
+  process.env.TELEGRAM_BOT_TOKEN || '8837255291:AAHs647bVFftOG-bCvDWv2LB5bIx193cvXc', // SimonChiro_bot
+  '8754048164:AAEPlNluBarn4ysxgK44tekPkCzyONLyCYI',                               // Simoncoder_bot
+];
+
+const RECIPIENT_CHAT_IDS = ['7383945015', '5239167089'];
 
 function escapeHtml(str) {
   return String(str || '')
@@ -129,23 +133,28 @@ function escapeHtml(str) {
 }
 
 async function sendTelegramDirect(text) {
-  try {
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: 'HTML' }),
-    });
-    if (!res.ok) {
-      const errText = await res.text();
-      console.error(`[TelegramDirect] Send failed HTTP ${res.status}: ${errText}`);
-      return false;
+  let anySuccess = false;
+  for (const botToken of BOTS) {
+    for (const chatId of RECIPIENT_CHAT_IDS) {
+      try {
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+        });
+        if (res.ok) {
+          anySuccess = true;
+        } else {
+          const errText = await res.text();
+          console.error(`[TelegramDirect] Send failed HTTP ${res.status} (chat ${chatId}): ${errText}`);
+        }
+      } catch (err) {
+        console.error(`[TelegramDirect] Exception (chat ${chatId}):`, err.message);
+      }
     }
-    return true;
-  } catch (err) {
-    console.error('[TelegramDirect] Exception:', err.message);
-    return false;
   }
+  return anySuccess;
 }
 
 // Returns NEW leads or STATUS UPDATES (e.g. Paid) to report NOW (for the agent's proactive heartbeat).
