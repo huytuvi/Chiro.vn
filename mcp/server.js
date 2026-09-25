@@ -344,15 +344,16 @@ async function doGetTokenReport() {
   try {
     const { execSync } = await import('child_process');
     
-    // Daily usage query
-    const dailySql = `SELECT DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh')::text as date_vn, COUNT(*)::int as sessions_count, COALESCE(SUM(input_tokens), 0)::bigint as input_tokens, COALESCE(SUM(output_tokens), 0)::bigint as output_tokens FROM sessions GROUP BY DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh') ORDER BY date_vn DESC LIMIT 7;`;
+    // Daily usage query — filter ONLY DeepSeek models for paid cost
+    const dailySql = `SELECT DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh')::text as date_vn, COUNT(*)::int as sessions_count, COALESCE(SUM(CASE WHEN LOWER(model) LIKE '%deepseek%' THEN input_tokens ELSE 0 END), 0)::bigint as ds_input, COALESCE(SUM(CASE WHEN LOWER(model) LIKE '%deepseek%' THEN output_tokens ELSE 0 END), 0)::bigint as ds_output, COALESCE(SUM(CASE WHEN LOWER(model) NOT LIKE '%deepseek%' THEN input_tokens + output_tokens ELSE 0 END), 0)::bigint as free_tokens FROM sessions GROUP BY DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh') ORDER BY date_vn DESC LIMIT 7;`;
     const dailyRaw = execSync(`docker exec -i goclaw-postgres-1 psql -U goclaw -d goclaw -t -A -c "${dailySql}" 2>/dev/null`).toString().trim();
 
     if (dailyRaw) {
       dailyUsage = dailyRaw.split('\n').filter(Boolean).map(line => {
-        const [date_vn, sessions_count, input_tokens, output_tokens] = line.split('|');
-        const inp = Number(input_tokens) || 0;
-        const out = Number(output_tokens) || 0;
+        const [date_vn, sessions_count, ds_input, ds_output, free_tokens] = line.split('|');
+        const inp = Number(ds_input) || 0;
+        const out = Number(ds_output) || 0;
+        const freeT = Number(free_tokens) || 0;
         // DeepSeek Pricing: Input $0.14/1M, Output $0.28/1M
         const costUsd = (inp * 0.00000014) + (out * 0.00000028);
         const costVnd = Math.round(costUsd * 25000);
@@ -361,14 +362,15 @@ async function doGetTokenReport() {
           sessions_count: Number(sessions_count) || 0,
           input_tokens: inp,
           output_tokens: out,
+          free_tokens: freeT,
           cost_usd: costUsd,
           cost_vnd: costVnd
         };
       });
     }
 
-    // Total usage query
-    const totalSql = `SELECT COALESCE(SUM(input_tokens), 0)::bigint as total_input, COALESCE(SUM(output_tokens), 0)::bigint as total_output FROM sessions;`;
+    // Total usage query for DeepSeek paid models
+    const totalSql = `SELECT COALESCE(SUM(CASE WHEN LOWER(model) LIKE '%deepseek%' THEN input_tokens ELSE 0 END), 0)::bigint as total_ds_input, COALESCE(SUM(CASE WHEN LOWER(model) LIKE '%deepseek%' THEN output_tokens ELSE 0 END), 0)::bigint as total_ds_output FROM sessions;`;
     const totalRaw = execSync(`docker exec -i goclaw-postgres-1 psql -U goclaw -d goclaw -t -A -c "${totalSql}" 2>/dev/null`).toString().trim();
 
     if (totalRaw) {
@@ -388,9 +390,20 @@ async function doGetTokenReport() {
   if (percentRemaining < 20) statusEmoji = '⚠️';
   if (percentRemaining < 5) statusEmoji = '🚨';
 
-  let dailyLines = dailyUsage.map(d => 
-    `• <b>${d.date_vn}:</b> ${d.input_tokens.toLocaleString('vi-VN')} input | ${d.output_tokens.toLocaleString('vi-VN')} output ➔ <b>~${d.cost_vnd.toLocaleString('vi-VN')}đ</b>`
-  ).join('\n');
+  let dailyLines = dailyUsage.map(d => {
+    let line = `• <b>${d.date_vn}:</b> `;
+    if (d.input_tokens > 0 || d.output_tokens > 0) {
+      line += `DeepSeek: ${d.input_tokens.toLocaleString('vi-VN')} in | ${d.output_tokens.toLocaleString('vi-VN')} out ➔ <b>~${d.cost_vnd.toLocaleString('vi-VN')}đ ($${d.cost_usd.toFixed(2)})</b>`;
+    }
+    if (d.free_tokens > 0) {
+      if (d.input_tokens > 0) line += ` | `;
+      line += `Gemini/Gemma: ${d.free_tokens.toLocaleString('vi-VN')} tokens (<b>0đ Miễn phí</b>)`;
+    }
+    if (d.input_tokens === 0 && d.output_tokens === 0 && d.free_tokens === 0) {
+      line += `Chưa sử dụng token nào`;
+    }
+    return line;
+  }).join('\n');
   if (!dailyLines) dailyLines = '• Chưa có lịch sử tiêu thụ.';
 
   let depositLines = deposits.map(dep => 
@@ -398,20 +411,20 @@ async function doGetTokenReport() {
   ).join('\n');
 
   const report_text = 
-    `📊 <b>BÁO CÁO THU CHI & NGÂN SÁCH TOKEN AI</b>\n\n` +
-    `💰 <b>1. CÁN CÂN NGÂN SÁCH (SỐ DƯ)</b>\n` +
+    `📊 <b>BÁO CÁO THU CHI & NGÂN SÁCH TOKEN AI (CHÍNH XÁC)</b>\n\n` +
+    `💰 <b>1. CÁN CÂN NGÂN SÁCH DEEPSEEK (SỐ DƯ)</b>\n` +
     `• <b>Tổng tiền đã nạp:</b> ${totalDepositedVnd.toLocaleString('vi-VN')} VNĐ ($${totalDepositedUsd.toFixed(2)})\n` +
-    `• <b>Đã tiêu thụ:</b> ~${totalSpentVnd.toLocaleString('vi-VN')} VNĐ ($${totalSpentUsd.toFixed(3)})\n` +
-    `• <b>Số dư còn lại:</b> <b>${remainingVnd.toLocaleString('vi-VN')} VNĐ</b> ($${remainingUsd.toFixed(2)})\n` +
+    `• <b>Đã tiêu thụ DeepSeek:</b> ~${totalSpentVnd.toLocaleString('vi-VN')} VNĐ ($${totalSpentUsd.toFixed(2)})\n` +
+    `• <b>Số dư tài khoản DeepSeek còn lại:</b> <b>${remainingVnd.toLocaleString('vi-VN')} VNĐ</b> ($${remainingUsd.toFixed(2)})\n` +
     `• <b>Tỷ lệ còn lại:</b> <b>${percentRemaining}%</b> ${statusEmoji}\n\n` +
-    `📈 <b>2. NHẬT KÝ TIÊU THỤ THEO NGÀY (GẦN NHẤT)</b>\n` +
+    `📈 <b>2. NHẬT KÝ TIÊU THỤ THEO NGÀY</b>\n` +
     `${dailyLines}\n\n` +
     `📥 <b>3. LỊCH SỬ NẠP TIỀN</b>\n` +
     `${depositLines}\n\n` +
     `💡 <b>4. DỰ BÁO & LỜI KHUYÊN</b>\n` +
-    `• <b>Google Gemini (aistudio):</b> 0đ (100% Free Tier).\n` +
-    `• <b>DeepSeek (deepseek-chat):</b> ~3.5đ / 1k input tokens, ~7đ / 1k output tokens.\n` +
-    `• Với mức dùng hiện tại, ngân sách của anh Huy còn đủ dùng an toàn lâu dài!`;
+    `• <b>Google Gemini & Gemma:</b> 0đ (100% Free Tier - Không tốn ngân sách).\n` +
+    `• <b>DeepSeek (deepseek-chat / v4-pro):</b> Tính phí thực tế ~$0.14/1M input (~3.5đ/1k), ~$0.28/1M output (~7đ/1k).\n` +
+    `• Số dư DeepSeek của anh Huy hiện còn tới **$${remainingUsd.toFixed(2)} (~${remainingVnd.toLocaleString('vi-VN')}đ)**, đủ dùng an toàn lâu dài!`;
 
   return {
     total_deposited_vnd: totalDepositedVnd,
