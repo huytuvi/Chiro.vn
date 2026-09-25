@@ -1,0 +1,13 @@
+{
+  "deposits": [
+    {
+      "id": 1,
+      "date": "2026-09-24T12:00:00.000Z",
+      "source": "Nạp tiền DeepSeek API",
+      "amount_vnd": 125000,
+      "amount_usd": 5.0,
+      "notes": "Khoản nạp ngân sách ban đầu ($5.00)"
+    }
+  ],
+  "alert_threshold_percent": 20
+}

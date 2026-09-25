@@ -10,6 +10,7 @@ import 'dotenv/config';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import https from 'https';
 import { fileURLToPath } from 'url';
 import Database from 'better-sqlite3';
 import { z } from 'zod';
@@ -129,22 +130,45 @@ async function sendTelegramDirect(text) {
   let anySuccess = false;
   for (const botToken of BOTS) {
     for (const chatId of RECIPIENT_CHAT_IDS) {
-      try {
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-        const res = await fetch(url, {
+      const ok = await new Promise((resolve) => {
+        const data = JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' });
+        const req = https.request(`https://api.telegram.org/bot${botToken}/sendMessage`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data),
+          },
+          family: 4, // Force IPv4 to prevent VPS IPv6 unreachable socket timeout
+          timeout: 10000,
+        }, (res) => {
+          let body = '';
+          res.on('data', (chunk) => { body += chunk; });
+          res.on('end', () => {
+            if (res.statusCode === 200) {
+              resolve(true);
+            } else {
+              console.error(`[TelegramDirect] Send failed HTTP ${res.statusCode} (chat ${chatId}): ${body}`);
+              resolve(false);
+            }
+          });
         });
-        if (res.ok) {
-          anySuccess = true;
-        } else {
-          const errText = await res.text();
-          console.error(`[TelegramDirect] Send failed HTTP ${res.status} (chat ${chatId}): ${errText}`);
-        }
-      } catch (err) {
-        console.error(`[TelegramDirect] Exception (chat ${chatId}):`, err.message);
-      }
+
+        req.on('error', (err) => {
+          console.error(`[TelegramDirect] Exception (chat ${chatId}):`, err.message);
+          resolve(false);
+        });
+
+        req.on('timeout', () => {
+          req.destroy();
+          console.error(`[TelegramDirect] Timeout (chat ${chatId})`);
+          resolve(false);
+        });
+
+        req.write(data);
+        req.end();
+      });
+
+      if (ok) anySuccess = true;
     }
   }
   return anySuccess;
