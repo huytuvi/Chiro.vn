@@ -3,10 +3,10 @@
     {
       "id": 1,
       "date": "2026-09-24T12:00:00.000Z",
-      "source": "Nạp tiền DeepSeek API",
-      "amount_vnd": 125000,
-      "amount_usd": 5.0,
-      "notes": "Khoản nạp ngân sách ban đầu ($5.00)"
+      "source": "Nạp tiền DeepSeek API Platform",
+      "amount_vnd": 136000,
+      "amount_usd": 5.44,
+      "notes": "Khoản nạp ngân sách ban đầu (Khớp số dư khả dụng $4.80 trên DeepSeek Platform)"
     }
   ],
   "alert_threshold_percent": 20
