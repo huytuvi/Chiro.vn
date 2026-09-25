@@ -213,6 +213,8 @@ async function doNewLeads() {
     return { enabled: true, count: 0, holding: changedRows.length, new_leads: [], frequency: cfg.frequency };
   }
 
+  const updatedMap = { ...notifiedMap };
+
   // Send direct Telegram notification for each changed lead (0 LLM tokens, 100% reliable HTML format)
   for (const r of changedRows) {
     let title = r._change === 'updated' ? '💳 <b>CẬP NHẬT THANH TOÁN / TRẠNG THÁI</b>' : '📝 <b>ĐƠN ĐĂNG KÝ / LEAD MỚI</b>';
@@ -227,13 +229,15 @@ async function doNewLeads() {
       (r._change === 'updated' ? `🔄 <b>Trạng thái cũ:</b> ${escapeHtml(r._prev_status)}\n` : '') +
       `🕒 <b>Thời gian:</b> ${escapeHtml(r.time_str || new Date().toLocaleString('vi-VN'))}`;
 
-    await sendTelegramDirect(text);
+    const ok = await sendTelegramDirect(text);
+    if (ok) {
+      // ONLY mark as notified if Telegram API returned SUCCESS (200 OK)
+      updatedMap[r.id] = r.status || '';
+    } else {
+      console.error(`[TelegramDirect] Delivery failed for lead ID ${r.id} (${r.name}) - will retry next cycle.`);
+    }
   }
 
-  const updatedMap = { ...notifiedMap };
-  for (const r of rows) {
-    updatedMap[r.id] = r.status || '';
-  }
   writeJson(STATE_FILE, {
     ...state,
     notified_map: updatedMap,
