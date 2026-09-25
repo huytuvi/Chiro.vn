@@ -76,6 +76,9 @@
       <button onclick="switchMainTab('roles')" id="navTabRoles" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
         <span>👥 Phân Quyền (Agent)</span>
       </button>
+      <button onclick="switchMainTab('token')" id="navTabToken" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
+        <span>📊 Sổ Thu Chi Token</span>
+      </button>
       <button onclick="switchMainTab('settings')" id="navTabSettings" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition flex items-center space-x-2 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shrink-0">
         <span>⚙️ Cài Đặt Hệ Thống &amp; API</span>
       </button>
@@ -488,6 +491,133 @@
           <span id="rolesCfgStatus" class="text-[11px] text-slate-500 ml-2"></span>
         </div>
       </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- SECTION: SỔ THEO DÕI THU CHI TOKEN AI (TOKEN LEDGER)              -->
+    <!-- =================================================================== -->
+    <div id="sectionToken" class="space-y-6 hidden">
+
+      <!-- 4 KPI Cards Thu Chi Token -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="card p-4 border-l-4 border-emerald-600 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">TỔNG NẠP BAN ĐẦU</span>
+            <span class="text-base">💳</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-emerald-700 font-mono" id="tokenTotalDepositedVnd">0 đ</div>
+          <div class="text-[11px] text-emerald-600 font-semibold mt-1" id="tokenTotalDepositedUsd">$0.00</div>
+        </div>
+
+        <div class="card p-4 border-l-4 border-rose-600 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">ĐÃ TIÊU THỤ (AI)</span>
+            <span class="text-base">🔥</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-rose-700 font-mono" id="tokenTotalSpentVnd">0 đ</div>
+          <div class="text-[11px] text-rose-600 font-semibold mt-1" id="tokenTotalSpentUsd">$0.00</div>
+        </div>
+
+        <div class="card p-4 border-l-4 border-sky-600 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">SỐ DƯ DỰ TRỮ CÒN LẠI</span>
+            <span class="text-base">💰</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-sky-700 font-mono" id="tokenRemainingVnd">0 đ</div>
+          <div class="text-[11px] text-sky-600 font-semibold mt-1" id="tokenRemainingUsd">$0.00</div>
+        </div>
+
+        <div class="card p-4 border-l-4 border-purple-600 bg-white shadow-sm">
+          <div class="flex items-center justify-between text-slate-500 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider">TỶ LỆ AN TOÀN BAN ĐẦU</span>
+            <span class="text-base">📊</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-black text-purple-700 font-mono" id="tokenPercentRemaining">100%</div>
+          <div class="text-[11px] text-purple-600 font-semibold mt-1" id="tokenBudgetStatus">🟢 An toàn</div>
+        </div>
+      </div>
+
+      <!-- Khung Thêm Khoản Nạp Mới (Deposit) -->
+      <div class="card p-6 border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <h2 class="text-base font-black text-slate-900">➕ Ghi Nhận Khoản Nạp Ngân Sách Token Mới</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Khi bạn mua thêm Token (DeepSeek / OpenAI...), hãy nhập vào đây để hệ thống tự cộng số dư và gửi cảnh báo Telegram khi sắp hết.</p>
+          </div>
+          <button onclick="loadTokenLedger()" class="text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-3 py-2 rounded-xl border border-indigo-200 transition shadow-sm flex items-center space-x-1">
+            <span>🔄 Cập Nhật Báo Cáo</span>
+          </button>
+        </div>
+
+        <div class="grid sm:grid-cols-4 gap-3 items-end">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nguồn Nạp / Nhà Cung Cấp *</label>
+            <input type="text" id="tokenDepSource" placeholder="VD: DeepSeek API / Đại lý" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35]">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Số Tiền Nạp (VNĐ) *</label>
+            <input type="number" id="tokenDepVnd" placeholder="200000" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35]">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Quy Đổi USD ($) (Mặc định: 1$ = 25k)</label>
+            <input type="number" step="0.1" id="tokenDepUsd" placeholder="8.0" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35]">
+          </div>
+          <div>
+            <button onclick="saveTokenDeposit()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow">
+              📥 Nạp Ngân Sách Mới
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Ghi Chú Nạp Tiền</label>
+          <input type="text" id="tokenDepNotes" placeholder="VD: Nạp ngân sách ban đầu qua thẻ Visa / MoMo" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-[#8F1D35]">
+        </div>
+      </div>
+
+      <!-- Bảng 1: Lịch Sử Tiêu Thụ Token Hàng Ngày từ Database goClaw -->
+      <div class="card p-6 border border-slate-200 space-y-4">
+        <h2 class="text-base font-black text-slate-900 border-b border-slate-200 pb-3">📈 Lịch Sử Tiêu Thụ Token Theo Ngày (Thống Kê Từ Database goClaw)</h2>
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-3">Ngày (VN Wall-Clock)</th>
+                <th class="py-3 px-3 text-center">Số Phiên Chat (Sessions)</th>
+                <th class="py-3 px-3 text-right">Input Tokens (Đầu Vào)</th>
+                <th class="py-3 px-3 text-right">Output Tokens (Đầu Ra)</th>
+                <th class="py-3 px-3 text-right">Chi Phí Quy Đổi (USD)</th>
+                <th class="py-3 px-3 text-right">Chi Phí Quy Đổi (VNĐ)</th>
+              </tr>
+            </thead>
+            <tbody id="tokenDailyTableBody" class="divide-y divide-slate-100 text-slate-800">
+              <tr><td colspan="6" class="py-4 text-center text-slate-400 italic">Đang tải lịch sử tiêu thụ...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bảng 2: Lịch Sử Nạp Tiền -->
+      <div class="card p-6 border border-slate-200 space-y-4">
+        <h2 class="text-base font-black text-slate-900 border-b border-slate-200 pb-3">📥 Lịch Sử Các Khoản Nạp Tiền</h2>
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-3 w-12 text-center">#</th>
+                <th class="py-3 px-3">Ngày Nạp</th>
+                <th class="py-3 px-3">Nguồn Nạp / Nhà Cung Cấp</th>
+                <th class="py-3 px-3 text-right">Số Tiền (VNĐ)</th>
+                <th class="py-3 px-3 text-right">Quy Đổi ($)</th>
+                <th class="py-3 px-3">Ghi Chú</th>
+              </tr>
+            </thead>
+            <tbody id="tokenDepositsTableBody" class="divide-y divide-slate-100 text-slate-800">
+              <tr><td colspan="6" class="py-4 text-center text-slate-400 italic">Đang tải lịch sử nạp tiền...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
 
     <!-- =================================================================== -->
@@ -1245,6 +1375,7 @@
         crm:      { sec: 'sectionCRM',      btn: 'navTabCRM' },
         survey:   { sec: 'sectionSurvey',   btn: 'navTabSurvey' },
         roles:    { sec: 'sectionRoles',    btn: 'navTabRoles' },
+        token:    { sec: 'sectionToken',    btn: 'navTabToken' },
         settings: { sec: 'sectionSettings', btn: 'navTabSettings' },
       };
       Object.keys(map).forEach(t => {
@@ -1262,6 +1393,105 @@
       });
       if (tab === 'survey') renderWaitlistTable();
       if (tab === 'roles') loadRolesConfig();
+      if (tab === 'token') loadTokenLedger();
+    }
+
+    async function loadTokenLedger() {
+      try {
+        const r = await fetch('/api/admin/token-ledger');
+        if (!r.ok) return;
+        const d = await r.json();
+
+        const totDepVnd = document.getElementById('tokenTotalDepositedVnd'); if (totDepVnd) totDepVnd.innerText = (d.total_deposited_vnd || 0).toLocaleString('vi-VN') + ' đ';
+        const totDepUsd = document.getElementById('tokenTotalDepositedUsd'); if (totDepUsd) totDepUsd.innerText = '$' + (d.total_deposited_usd || 0).toFixed(2);
+
+        const totSpentVnd = document.getElementById('tokenTotalSpentVnd'); if (totSpentVnd) totSpentVnd.innerText = (d.total_spent_vnd || 0).toLocaleString('vi-VN') + ' đ';
+        const totSpentUsd = document.getElementById('tokenTotalSpentUsd'); if (totSpentUsd) totSpentUsd.innerText = '$' + (d.total_spent_usd || 0).toFixed(3);
+
+        const remVnd = document.getElementById('tokenRemainingVnd'); if (remVnd) remVnd.innerText = (d.remaining_vnd || 0).toLocaleString('vi-VN') + ' đ';
+        const remUsd = document.getElementById('tokenRemainingUsd'); if (remUsd) remUsd.innerText = '$' + (d.remaining_usd || 0).toFixed(2);
+
+        const pct = d.percent_remaining || 0;
+        const pctElem = document.getElementById('tokenPercentRemaining'); if (pctElem) pctElem.innerText = pct + '%';
+        let statusText = '🟢 An toàn (>20%)';
+        if (pct < 20) statusText = '⚠️ Cảnh báo (<20%)';
+        if (pct < 5) statusText = '🚨 Nguy hiểm (<5%)';
+        const stElem = document.getElementById('tokenBudgetStatus'); if (stElem) stElem.innerText = statusText;
+
+        // Render Daily Usage Table
+        const dailyTb = document.getElementById('tokenDailyTableBody');
+        if (dailyTb) {
+          if (!d.daily_usage || d.daily_usage.length === 0) {
+            dailyTb.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-slate-400 italic">Chưa có lịch sử tiêu thụ.</td></tr>';
+          } else {
+            dailyTb.innerHTML = d.daily_usage.map(u => `
+              <tr class="hover:bg-slate-50 transition">
+                <td class="py-3 px-3 font-bold font-mono text-slate-800">${u.date_vn}</td>
+                <td class="py-3 px-3 text-center font-bold text-indigo-700">${u.sessions_count}</td>
+                <td class="py-3 px-3 text-right font-mono text-slate-700">${u.input_tokens.toLocaleString('vi-VN')}</td>
+                <td class="py-3 px-3 text-right font-mono text-slate-700">${u.output_tokens.toLocaleString('vi-VN')}</td>
+                <td class="py-3 px-3 text-right font-mono text-rose-700 font-bold">$${u.cost_usd.toFixed(4)}</td>
+                <td class="py-3 px-3 text-right font-mono text-rose-700 font-black">~${u.cost_vnd.toLocaleString('vi-VN')} đ</td>
+              </tr>
+            `).join('');
+          }
+        }
+
+        // Render Deposits Table
+        const depTb = document.getElementById('tokenDepositsTableBody');
+        if (depTb) {
+          if (!d.deposits || d.deposits.length === 0) {
+            depTb.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-slate-400 italic">Chưa có khoản nạp nào.</td></tr>';
+          } else {
+            depTb.innerHTML = d.deposits.map(dep => `
+              <tr class="hover:bg-slate-50 transition">
+                <td class="py-3 px-3 text-center font-mono text-slate-400 font-bold">${dep.id}</td>
+                <td class="py-3 px-3 text-slate-600 text-[11px]">${new Date(dep.date || Date.now()).toLocaleDateString('vi-VN')}</td>
+                <td class="py-3 px-3 font-bold text-slate-900">${escapeHtml(dep.source || '--')}</td>
+                <td class="py-3 px-3 text-right font-mono font-bold text-emerald-700">${(Number(dep.amount_vnd)||0).toLocaleString('vi-VN')} đ</td>
+                <td class="py-3 px-3 text-right font-mono font-bold text-emerald-700">$${(Number(dep.amount_usd)||0).toFixed(2)}</td>
+                <td class="py-3 px-3 text-slate-600 text-[11px]">${escapeHtml(dep.notes || '--')}</td>
+              </tr>
+            `).join('');
+          }
+        }
+      } catch (e) {
+        console.error('Error loading token ledger:', e);
+      }
+    }
+
+    async function saveTokenDeposit() {
+      const source = document.getElementById('tokenDepSource').value.trim();
+      const amount_vnd = Number(document.getElementById('tokenDepVnd').value) || 0;
+      let amount_usd = Number(document.getElementById('tokenDepUsd').value) || 0;
+      const notes = document.getElementById('tokenDepNotes').value.trim();
+
+      if (!source || amount_vnd <= 0) {
+        alert('Vui lòng nhập nguồn nạp và số tiền VNĐ hợp lệ!');
+        return;
+      }
+
+      if (amount_usd <= 0) amount_usd = amount_vnd / 25000;
+
+      try {
+        const r = await fetch('/api/admin/token-ledger/deposit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': getAdminKey() },
+          body: JSON.stringify({ source, amount_vnd, amount_usd, notes })
+        });
+        if (r.ok) {
+          showAdminToast('📥 Đã nạp thành công khoản ngân sách mới!');
+          document.getElementById('tokenDepSource').value = '';
+          document.getElementById('tokenDepVnd').value = '';
+          document.getElementById('tokenDepUsd').value = '';
+          document.getElementById('tokenDepNotes').value = '';
+          loadTokenLedger();
+        } else {
+          alert('❌ Không thể lưu khoản nạp!');
+        }
+      } catch (e) {
+        alert('❌ Lỗi: ' + e.message);
+      }
     }
 
     function switchCRMSubTab(sub) {

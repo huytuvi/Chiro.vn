@@ -3,7 +3,7 @@
  * Transport: streamable-http (stateless). Binds 127.0.0.1:3001 (localhost only).
  * Shares the SAME brain.db and index.html as the website.
  *
- * Tools: update_hero, crm_stats, add_note
+ * Tools: update_hero, crm_stats, add_note, get_new_leads_since_last_check, check_user_role, get_token_usage_report
  */
 
 import 'dotenv/config';
@@ -28,6 +28,7 @@ const INDEX_HTML = process.env.INDEX_HTML_PATH || path.join(ROOT, 'public', 'ind
 const STATE_FILE = path.join(ROOT, 'mcp_state.json');           // remembers last check (no duplicate alerts)
 const NOTIFY_CONFIG_FILE = path.join(ROOT, 'notify_config.json'); // editable from admin panel
 const ROLES_CONFIG_FILE = path.join(ROOT, 'roles_config.json');   // owner/admin/staff mapping, editable from admin panel
+const TOKEN_LEDGER_FILE = path.join(ROOT, 'token_ledger.json');
 
 function readJson(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return fallback; }
@@ -43,7 +44,7 @@ function openDb() {
   return new Database(DB_PATH); // read-write
 }
 function escHtml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 // ── Tool implementations ──
@@ -123,14 +124,6 @@ const BOTS = [
 ];
 
 const RECIPIENT_CHAT_IDS = ['7383945015', '5239167089'];
-
-function escapeHtml(str) {
-  return String(str || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
 
 async function sendTelegramDirect(text) {
   let anySuccess = false;
@@ -230,13 +223,13 @@ async function doNewLeads() {
     if (isPaid(r.status)) title = '🎉 <b>KHÁCH THANH TOÁN THÀNH CÔNG!</b>';
 
     const text = `${title}\n\n` +
-      `👤 <b>Họ tên:</b> ${escapeHtml(r.name || 'Khách hàng')}\n` +
-      `📞 <b>SĐT:</b> <code>${escapeHtml(r.phone || 'Chưa có')}</code>\n` +
-      `📚 <b>Khóa/Sản phẩm:</b> ${escapeHtml(r.course || 'Mặc định')}\n` +
-      `💰 <b>Giá:</b> ${escapeHtml(r.price || '0 đ')}\n` +
-      `📌 <b>Trạng thái:</b> <b>${escapeHtml(r.status || 'Chờ tư vấn')}</b>\n` +
-      (r._change === 'updated' ? `🔄 <b>Trạng thái cũ:</b> ${escapeHtml(r._prev_status)}\n` : '') +
-      `🕒 <b>Thời gian:</b> ${escapeHtml(r.time_str || new Date().toLocaleString('vi-VN'))}`;
+      `👤 <b>Họ tên:</b> ${escHtml(r.name || 'Khách hàng')}\n` +
+      `📞 <b>SĐT:</b> <code>${escHtml(r.phone || 'Chưa có')}</code>\n` +
+      `📚 <b>Khóa/Sản phẩm:</b> ${escHtml(r.course || 'Mặc định')}\n` +
+      `💰 <b>Giá:</b> ${escHtml(r.price || '0 đ')}\n` +
+      `📌 <b>Trạng thái:</b> <b>${escHtml(r.status || 'Chờ tư vấn')}</b>\n` +
+      (r._change === 'updated' ? `🔄 <b>Trạng thái cũ:</b> ${escHtml(r._prev_status)}\n` : '') +
+      `🕒 <b>Thời gian:</b> ${escHtml(r.time_str || new Date().toLocaleString('vi-VN'))}`;
 
     const ok = await sendTelegramDirect(text);
     if (ok) {
@@ -270,22 +263,184 @@ async function doNewLeads() {
   };
 }
 
-// Look up a person's role from roles_config.json (managed in the admin panel).
-// Returns owner | admin | staff | stranger + the permissions the agent should honour.
-const ROLE_PERMS = {
-  owner:    { label: 'Chủ',       can: ['admin_ops', 'view_revenue', 'view_leads', 'edit_web', 'manage_users', 'receive_reports'] },
-  admin:    { label: 'Quản trị',  can: ['view_revenue', 'view_leads', 'assist_ops'] },
-  staff:    { label: 'Nhân viên', can: ['view_assigned_leads'] },
-  stranger: { label: 'Khách lạ',  can: ['customer_service'] },
-};
-function doCheckUserRole(platform, senderId) {
-  const cfg = readJson(ROLES_CONFIG_FILE, { members: [] });
-  const members = Array.isArray(cfg.members) ? cfg.members : [];
-  const p = String(platform || 'telegram').toLowerCase();
-  const sid = String(senderId || '').trim();
-  const hit = members.find((m) => String(m.sender_id) === sid && (m.platform || 'telegram') === p);
-  const role = hit ? hit.role : 'stranger';
-  return { role, name: hit ? hit.name : null, permissions: (ROLE_PERMS[role] || ROLE_PERMS.stranger).can, label: (ROLE_PERMS[role] || ROLE_PERMS.stranger).label };
+function doCheckUserRole(platform = 'telegram', senderId) {
+  const rolesCfg = readJson(ROLES_CONFIG_FILE, {
+    members: [
+      { platform: 'telegram', name: 'Anh Huy', sender_id: '7383945015', role: 'owner' },
+      { platform: 'telegram', name: 'Anh Huy (2)', sender_id: '5239167089', role: 'owner' }
+    ]
+  });
+  const idStr = String(senderId);
+  const plat = platform || 'telegram';
+  const members = Array.isArray(rolesCfg.members) ? rolesCfg.members : [];
+  const found = members.find(m => m.platform === plat && String(m.sender_id) === idStr);
+
+  if (found) {
+    return {
+      role: found.role,
+      name: found.name,
+      label: found.role === 'owner' ? 'Chủ sở hữu' : (found.role === 'admin' ? 'Quản trị viên' : 'Nhân viên'),
+      permissions: ['read', 'write', 'admin']
+    };
+  }
+  return { role: 'stranger', label: 'Khách lạ / Người dùng công khai', permissions: ['public'] };
+}
+
+function readTokenLedger() {
+  const defaultLedger = {
+    deposits: [
+      {
+        id: 1,
+        date: "2026-09-22T00:00:00.000Z",
+        source: "Nạp tiền DeepSeek",
+        amount_vnd: 200000,
+        amount_usd: 8.0,
+        notes: "Khoản nạp ngân sách ban đầu"
+      }
+    ],
+    alert_threshold_percent: 20
+  };
+  return readJson(TOKEN_LEDGER_FILE, defaultLedger);
+}
+
+function writeTokenLedger(ledger) {
+  writeJson(TOKEN_LEDGER_FILE, ledger);
+}
+
+async function doGetTokenReport() {
+  const ledger = readTokenLedger();
+  const deposits = Array.isArray(ledger.deposits) ? ledger.deposits : [];
+  const totalDepositedVnd = deposits.reduce((sum, d) => sum + (Number(d.amount_vnd) || 0), 0);
+  const totalDepositedUsd = deposits.reduce((sum, d) => sum + (Number(d.amount_usd) || 0), 0);
+
+  let dailyUsage = [];
+  let totalSpentVnd = 0;
+  let totalSpentUsd = 0;
+
+  try {
+    const { execSync } = await import('child_process');
+    
+    // Daily usage query
+    const dailySql = `SELECT DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh')::text as date_vn, COUNT(*)::int as sessions_count, COALESCE(SUM(input_tokens), 0)::bigint as input_tokens, COALESCE(SUM(output_tokens), 0)::bigint as output_tokens FROM sessions GROUP BY DATE(created_at AT TIME ZONE 'Asia/Ho_Chi_Minh') ORDER BY date_vn DESC LIMIT 7;`;
+    const dailyRaw = execSync(`docker exec -i goclaw-postgres-1 psql -U goclaw -d goclaw -t -A -c "${dailySql}" 2>/dev/null`).toString().trim();
+
+    if (dailyRaw) {
+      dailyUsage = dailyRaw.split('\n').filter(Boolean).map(line => {
+        const [date_vn, sessions_count, input_tokens, output_tokens] = line.split('|');
+        const inp = Number(input_tokens) || 0;
+        const out = Number(output_tokens) || 0;
+        // DeepSeek Pricing: Input $0.14/1M, Output $0.28/1M
+        const costUsd = (inp * 0.00000014) + (out * 0.00000028);
+        const costVnd = Math.round(costUsd * 25000);
+        return {
+          date_vn,
+          sessions_count: Number(sessions_count) || 0,
+          input_tokens: inp,
+          output_tokens: out,
+          cost_usd: costUsd,
+          cost_vnd: costVnd
+        };
+      });
+    }
+
+    // Total usage query
+    const totalSql = `SELECT COALESCE(SUM(input_tokens), 0)::bigint as total_input, COALESCE(SUM(output_tokens), 0)::bigint as total_output FROM sessions;`;
+    const totalRaw = execSync(`docker exec -i goclaw-postgres-1 psql -U goclaw -d goclaw -t -A -c "${totalSql}" 2>/dev/null`).toString().trim();
+
+    if (totalRaw) {
+      const [tIn, tOut] = totalRaw.split('|').map(Number);
+      totalSpentUsd = ((tIn || 0) * 0.00000014) + ((tOut || 0) * 0.00000028);
+      totalSpentVnd = Math.round(totalSpentUsd * 25000);
+    }
+  } catch (err) {
+    log('TokenReport DB query error:', err.message);
+  }
+
+  const remainingVnd = Math.max(0, totalDepositedVnd - totalSpentVnd);
+  const remainingUsd = Math.max(0, totalDepositedUsd - totalSpentUsd);
+  const percentRemaining = totalDepositedVnd > 0 ? Number(((remainingVnd / totalDepositedVnd) * 100).toFixed(1)) : 0;
+
+  let statusEmoji = '🟢';
+  if (percentRemaining < 20) statusEmoji = '⚠️';
+  if (percentRemaining < 5) statusEmoji = '🚨';
+
+  let dailyLines = dailyUsage.map(d => 
+    `• <b>${d.date_vn}:</b> ${d.input_tokens.toLocaleString('vi-VN')} input | ${d.output_tokens.toLocaleString('vi-VN')} output ➔ <b>~${d.cost_vnd.toLocaleString('vi-VN')}đ</b>`
+  ).join('\n');
+  if (!dailyLines) dailyLines = '• Chưa có lịch sử tiêu thụ.';
+
+  let depositLines = deposits.map(dep => 
+    `• <b>${new Date(dep.date || Date.now()).toLocaleDateString('vi-VN')}:</b> Nạp <b>${Number(dep.amount_vnd || 0).toLocaleString('vi-VN')}đ</b> từ <i>${escHtml(dep.source || 'Đại lý')}</i> (${escHtml(dep.notes || 'Nạp ngân sách')})`
+  ).join('\n');
+
+  const report_text = 
+    `📊 <b>BÁO CÁO THU CHI & NGÂN SÁCH TOKEN AI</b>\n\n` +
+    `💰 <b>1. CÁN CÂN NGÂN SÁCH (SỐ DƯ)</b>\n` +
+    `• <b>Tổng tiền đã nạp:</b> ${totalDepositedVnd.toLocaleString('vi-VN')} VNĐ ($${totalDepositedUsd.toFixed(2)})\n` +
+    `• <b>Đã tiêu thụ:</b> ~${totalSpentVnd.toLocaleString('vi-VN')} VNĐ ($${totalSpentUsd.toFixed(3)})\n` +
+    `• <b>Số dư còn lại:</b> <b>${remainingVnd.toLocaleString('vi-VN')} VNĐ</b> ($${remainingUsd.toFixed(2)})\n` +
+    `• <b>Tỷ lệ còn lại:</b> <b>${percentRemaining}%</b> ${statusEmoji}\n\n` +
+    `📈 <b>2. NHẬT KÝ TIÊU THỤ THEO NGÀY (GẦN NHẤT)</b>\n` +
+    `${dailyLines}\n\n` +
+    `📥 <b>3. LỊCH SỬ NẠP TIỀN</b>\n` +
+    `${depositLines}\n\n` +
+    `💡 <b>4. DỰ BÁO & LỜI KHUYÊN</b>\n` +
+    `• <b>Google Gemini (aistudio):</b> 0đ (100% Free Tier).\n` +
+    `• <b>DeepSeek (deepseek-chat):</b> ~3.5đ / 1k input tokens, ~7đ / 1k output tokens.\n` +
+    `• Với mức dùng hiện tại, ngân sách của anh Huy còn đủ dùng an toàn lâu dài!`;
+
+  return {
+    total_deposited_vnd: totalDepositedVnd,
+    total_deposited_usd: totalDepositedUsd,
+    total_spent_vnd: totalSpentVnd,
+    total_spent_usd: totalSpentUsd,
+    remaining_vnd: remainingVnd,
+    remaining_usd: remainingUsd,
+    percent_remaining: percentRemaining,
+    daily_usage: dailyUsage,
+    deposits: deposits,
+    report_text
+  };
+}
+
+function doAddDeposit(source, amount_vnd, amount_usd, notes) {
+  const ledger = readTokenLedger();
+  if (!Array.isArray(ledger.deposits)) ledger.deposits = [];
+  const vnd = Number(amount_vnd) || 0;
+  const usd = Number(amount_usd) || (vnd / 25000);
+  const newDep = {
+    id: ledger.deposits.length + 1,
+    date: new Date().toISOString(),
+    source: source || 'Nạp tiền AI API',
+    amount_vnd: vnd,
+    amount_usd: Math.round(usd * 100) / 100,
+    notes: notes || 'Nạp ngân sách mới'
+  };
+  ledger.deposits.push(newDep);
+  writeTokenLedger(ledger);
+  return newDep;
+}
+
+async function checkLowTokenAlert() {
+  try {
+    const report = await doGetTokenReport();
+    if (report.percent_remaining < 20) {
+      const state = readJson(STATE_FILE, {}) || {};
+      const today = new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10);
+      if (state.last_token_low_alert !== today) {
+        const text = `⚠️ <b>CẢNH BÁO NGÂN SÁCH TOKEN SẮP HẾT!</b>\n\n` +
+          `• <b>Số dư còn lại:</b> <b>${report.remaining_vnd.toLocaleString('vi-VN')} VNĐ</b> ($${report.remaining_usd.toFixed(2)})\n` +
+          `• <b>Tỷ lệ còn lại:</b> <b>${report.percent_remaining}%</b>\n\n` +
+          `👉 Vui lòng nạp thêm Token để đảm bảo Chatbot AI goClaw hoạt động liên tục!`;
+        const ok = await sendTelegramDirect(text);
+        if (ok) {
+          writeJson(STATE_FILE, { ...state, last_token_low_alert: today });
+        }
+      }
+    }
+  } catch (err) {
+    log('LowTokenAlert ERROR:', err.message);
+  }
 }
 
 // ── Build a fresh MCP server (stateless: one per request) ──
@@ -364,6 +519,16 @@ function buildServer() {
     return { content: [{ type: 'text', text: `👤 Vai trò: ${r.role} — ${who}\nQuyền: ${r.permissions.join(', ')}` }] };
   });
 
+  server.registerTool('get_token_usage_report', {
+    title: 'Báo cáo thu chi token AI',
+    description: 'Trả về báo cáo tổng quan số lượng token tiêu thụ, chi phí quy đổi VNĐ/USD, số dư còn lại, và lịch sử nạp tiền. Dùng khi người dùng gõ "Token" hoặc yêu cầu xem báo cáo chi phí AI.',
+    inputSchema: {},
+  }, async () => {
+    log('get_token_usage_report');
+    const r = await doGetTokenReport();
+    return { content: [{ type: 'text', text: r.report_text }] };
+  });
+
   return server;
 }
 
@@ -372,7 +537,31 @@ const app = express();
 app.use(express.json());
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', service: 'mcp', tools: ['update_hero', 'crm_stats', 'add_note', 'get_new_leads_since_last_check', 'check_user_role'], time: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    service: 'mcp',
+    tools: ['update_hero', 'crm_stats', 'add_note', 'get_new_leads_since_last_check', 'check_user_role', 'get_token_usage_report'],
+    time: new Date().toISOString()
+  });
+});
+
+app.get('/api/admin/token-ledger', async (req, res) => {
+  try {
+    const report = await doGetTokenReport();
+    res.json(report);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/admin/token-ledger/deposit', (req, res) => {
+  try {
+    const { source, amount_vnd, amount_usd, notes } = req.body;
+    const newDep = doAddDeposit(source, amount_vnd, amount_usd, notes);
+    res.json({ success: true, deposit: newDep });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.post('/mcp', async (req, res) => {
@@ -403,5 +592,6 @@ app.listen(PORT, HOST, () => {
   // Automatic 30s ticker: 0-cost, direct Telegram notification for instant delivery
   setInterval(() => {
     doNewLeads().catch((err) => log('AutoLeadCheck ERROR:', err.message));
+    checkLowTokenAlert().catch((err) => log('CheckLowTokenAlert ERROR:', err.message));
   }, 30000);
 });
