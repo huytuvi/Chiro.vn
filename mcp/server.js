@@ -120,17 +120,30 @@ function crossedScheduledTime(sinceMs, nowMs, morning, evening) {
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8837255291:AAHs647bVFftOG-bCvDWv2LB5bIx193cvXc';
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '7383945015';
 
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 async function sendTelegramDirect(text) {
   try {
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: 'Markdown' }),
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: 'HTML' }),
     });
-    return res.ok;
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`[TelegramDirect] Send failed HTTP ${res.status}: ${errText}`);
+      return false;
+    }
+    return true;
   } catch (err) {
-    console.error('Telegram direct send error:', err);
+    console.error('[TelegramDirect] Exception:', err.message);
     return false;
   }
 }
@@ -200,19 +213,19 @@ async function doNewLeads() {
     return { enabled: true, count: 0, holding: changedRows.length, new_leads: [], frequency: cfg.frequency };
   }
 
-  // Send direct Telegram notification for each changed lead (0 LLM tokens, 100% reliable)
+  // Send direct Telegram notification for each changed lead (0 LLM tokens, 100% reliable HTML format)
   for (const r of changedRows) {
-    let title = r._change === 'updated' ? '💳 CẬP NHẬT THANH TOÁN / TRẠNG THÁI' : '📝 ĐƠN ĐĂNG KÝ / LEAD MỚI';
-    if (isPaid(r.status)) title = '🎉 KHÁCH THANH TOÁN THÀNH CÔNG!';
+    let title = r._change === 'updated' ? '💳 <b>CẬP NHẬT THANH TOÁN / TRẠNG THÁI</b>' : '📝 <b>ĐƠN ĐĂNG KÝ / LEAD MỚI</b>';
+    if (isPaid(r.status)) title = '🎉 <b>KHÁCH THANH TOÁN THÀNH CÔNG!</b>';
 
     const text = `${title}\n\n` +
-      `👤 *Họ tên:* ${r.name || 'Khách hàng'}\n` +
-      `📞 *SĐT:* \`${r.phone || 'Chưa có'}\`\n` +
-      `📚 *Khóa/Sản phẩm:* ${r.course || 'Mặc định'}\n` +
-      `💰 *Giá:* ${r.price || '0 đ'}\n` +
-      `📌 *Trạng thái:* *${r.status || 'Chờ tư vấn'}*\n` +
-      (r._change === 'updated' ? `🔄 *Trạng thái cũ:* ${r._prev_status}\n` : '') +
-      `🕒 *Thời gian:* ${r.time_str || new Date().toLocaleString('vi-VN')}`;
+      `👤 <b>Họ tên:</b> ${escapeHtml(r.name || 'Khách hàng')}\n` +
+      `📞 <b>SĐT:</b> <code>${escapeHtml(r.phone || 'Chưa có')}</code>\n` +
+      `📚 <b>Khóa/Sản phẩm:</b> ${escapeHtml(r.course || 'Mặc định')}\n` +
+      `💰 <b>Giá:</b> ${escapeHtml(r.price || '0 đ')}\n` +
+      `📌 <b>Trạng thái:</b> <b>${escapeHtml(r.status || 'Chờ tư vấn')}</b>\n` +
+      (r._change === 'updated' ? `🔄 <b>Trạng thái cũ:</b> ${escapeHtml(r._prev_status)}\n` : '') +
+      `🕒 <b>Thời gian:</b> ${escapeHtml(r.time_str || new Date().toLocaleString('vi-VN'))}`;
 
     await sendTelegramDirect(text);
   }
