@@ -1129,7 +1129,7 @@
           <div class="text-center shrink-0 bg-black/40 p-5 rounded-2xl border border-amber-400/50 w-full lg:w-auto">
             <div class="text-xs text-gray-300 line-through">Giá niêm yết: <span
                 class="offline-original-display">42.000.000đ</span></div>
-            <div class="text-3xl sm:text-4xl font-black text-amber-300 current-offline-display my-1">36.000.000 VNĐ
+            <div class="text-3xl sm:text-4xl font-black text-amber-300 current-offline-display my-1">30.000.000 VNĐ
             </div>
             <div class="text-[11px] text-amber-200/90 mb-3">(Khấu trừ 100% học phí khóa Online)</div>
             <a href="#register-form" onclick="selectCourse('offline_vip')"
@@ -1328,8 +1328,9 @@
               <option value="full_online" selected>⭐ THE FULL ONLINE COLLECTION (Trọn Bộ Toàn Diện Full-Spine + Bài Tập Rèn Lực + Chứng Chỉ) — [Khuyên Dùng]</option>
               <option value="level_1">🟩 Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A) — 7.000.000 VNĐ</option>
               <option value="level_2">🟦 Level 2 Online — Tứ Chi &amp; Phân Tích X-Quang Chuyên Sâu (Modul B) — 7.000.000 VNĐ</option>
-              <option value="module_le">🟨 Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — 1.000.000 VNĐ</option>
-              <option value="offline_vip">👑 Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (4–5 ngày cùng Thầy Henrik Simon — Khấu trừ 100% Online)</option>
+              <option value="module_le">🟨 Module Lẻ Online — Module nhỏ chuyên Sâu tuỳ chọn — 1.000.000 VNĐ</option>
+              <option value="offline_level1">👑 Workshop Offline Level 1 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon) — 30.000.000 VNĐ</option>
+              <option value="offline_level2">👑 Workshop Offline Level 2 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon) — 30.000.000 VNĐ</option>
               <option value="tageshospitation">🏥 Tageshospitation — Đi Thực Tế Lâm Sàng Tại Simon Center — 2.500.000 VNĐ</option>
               <option value="giao_trinh">📖 Giáo Trình Chiropractic Y Khoa &amp; Thước Đo Cột Sống — 1.500.000 VNĐ</option>
             </select>
@@ -2036,7 +2037,7 @@
       level_original: 8500000,
       full_current: 12900000,
       full_original: 14900000,
-      offline_current: 36000000,
+      offline_current: 30000000,
       offline_original: 42000000,
       // Tương thích ngược:
       k1_current: 1000000,
@@ -2208,7 +2209,7 @@
       } else if (courseKey === 'module_le' || courseKey === 'k1') {
       /* [TEST_COURSE_END] */
         currentPriceObj = pricing.module;
-        courseName = 'Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu)';
+        courseName = 'Module Lẻ Online — Module nhỏ chuyên Sâu tuỳ chọn';
       } else if (courseKey === 'level_1') {
         currentPriceObj = pricing.level1;
         courseName = 'Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A)';
@@ -2218,9 +2219,12 @@
       } else if (courseKey === 'level_le' || courseKey === 'k2') {
         currentPriceObj = pricing.level;
         courseName = 'Level Lẻ Online (Level 1 Nền tảng hoặc Level 2 Nâng cao)';
-      } else if (courseKey === 'offline_vip') {
+      } else if (courseKey === 'offline_level1' || courseKey === 'offline_vip') {
         currentPriceObj = pricing.offline;
-        courseName = 'Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (4–5 ngày cùng Thầy Henrik Simon)';
+        courseName = 'Workshop Offline Level 1 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon)';
+      } else if (courseKey === 'offline_level2') {
+        currentPriceObj = pricing.offline;
+        courseName = 'Workshop Offline Level 2 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon)';
       } else if (courseKey === 'tageshospitation') {
         currentPriceObj = pricing.tageshospitation;
         courseName = 'Tageshospitation — Đi Thực Tế Lâm Sàng Tại Simon Center';

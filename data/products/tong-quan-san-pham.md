@@ -8,16 +8,16 @@
 
 ## 1. BẢNG BIỂU CHÍNH SÁCH GIÁ 8 TẦNG SẢN PHẨM
 
-| STT | Tên Sản Phẩm | Định Dạng Đào Tạo | Học Phí Chuẩn | Quyền Lợi & Mô Tả Trọng Tâm |
+| STT | Tên Sản Phẩm | Định Dạng Đào Tạo | Học Phí Ưu Đãi | Quyền Lợi & Mô Tả Trọng Tâm |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | **Module Lẻ Online** | Video E-Learning chất lượng cao | **1.000.000đ – 2.000.000đ** | Cho người muốn học thử 1 vùng, giải quyết ca đau cấp (Cổ vai gáy hoặc Thắt lưng - Chậu). |
-| **2** | **Level Lẻ Online (1 & 2)** | E-Learning chuyên sâu | **8.500.000đ** | Cho người muốn học trọn vẹn 1 Level (Level 1 Cột sống hoặc Level 2 Tứ chi). |
-| **3** | **The Full Online Collection (Trọn bộ Online)** | Trọn bộ Full-Spine E-Learning | **14.900.000đ** | **Đẳng cấp E-Learning chuẩn quốc tế:** Toàn bộ Video với các góc quay khác nhau, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. |
-| **4** | **Khóa Offline Cầm tay chỉ việc (Hands-on Mentorship)** | 4 ngày thực hành trực tiếp | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày cầm tay nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ đồng hành lâu dài. |
-| **5** | **Superrefresher / Refresher (Học lại ôn bài)** | 1–2 ngày thực hành lâm sàng | **6.000.000đ** *(Giảm 50% còn 3.000.000đ cho Thành viên Cộng đồng)* | Dành cho học viên cũ muốn chỉnh lại cảm giác tay, sửa lỗi tư thế phát lực sau thời gian hành nghề. |
-| **6** | **Tageshospitation (Đi thực tế lâm sàng)** | 1 ngày tại Simon Center | **2.500.000đ / ngày** *(Giảm 50% còn 1.250.000đ cho Thành viên Cộng đồng)* | Trực tiếp đứng cạnh Henrik Simon xem khám bệnh nhân thật, học quy trình chẩn đoán và phác đồ thực chiến. |
-| **7** | **Gói Toàn diện (Mastery Track) (Level 1 + Level 2)** | Đào tạo chuyên sâu từ A-Z | **68.000.000đ – 75.000.000đ** | Dành cho người muốn mở phòng khám chuyên sâu Chiropractic từ A-Z. Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ đồng hành lâu dài. |
-| **8** | **Gói Trọn gói - "DISC Full Certification"** | Chứng chỉ Quốc tế Toàn diện | **85.000.000đ** | Toàn diện Cột Sống + Khớp Ngoại Vi (Bao gồm Modul A Cột sống + Modul Khớp Ngoại vi + Kèm cặp ca bệnh thực tế tại phòng khám + Hỗ trợ chuyên môn 5 năm). |
+| **1** | **Module Lẻ Online — Module nhỏ chuyên Sâu tuỳ chọn** | Video E-Learning dài hạn 24/7 | **1.000.000đ** *(Gốc 2tr)* | Cho người muốn học 1 module nhỏ chuyên biệt theo nhu cầu (Cổ vai gáy, Thắt lưng - Chậu, Body-Drop...). |
+| **2** | **Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A)** | E-Learning chuyên sâu | **7.000.000đ** *(Gốc 8.5tr)* | Kỹ thuật nắn chỉnh toàn bộ trục Cột sống (Cổ, Ngực, Thắt lưng, Khung chậu). |
+| **3** | **Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B)** | E-Learning chuyên sâu | **7.000.000đ** *(Gốc 8.5tr)* | Kỹ thuật nắn chỉnh khớp ngoại vi (chi trên, chi dưới) + Đo đọc phim X-quang cơ sinh học. |
+| **4** | **The Full Online Collection (Trọn Bộ Toàn Diện Level 1 + Level 2)** | Trọn bộ Full-Spine E-Learning | **12.900.000đ** *(Gốc 14.9tr)* | **Đẳng cấp E-Learning chuẩn quốc tế:** Toàn bộ Video với các góc quay khác nhau, hệ thống bài tập rèn phản xạ & lực rơi tại nhà, cấp Certificate chính thức. |
+| **5** | **Workshop Offline Level 1 - Cầm Tay Chỉ Việc** | 4 ngày thực hành trực tiếp | **30.000.000đ** *(Gốc 42tr)* | **Đích đến chủ lực:** 4 ngày cầm tay nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, lớp 10-12 học viên. Khấu trừ 100% học phí Online. |
+| **6** | **Workshop Offline Level 2 - Cầm Tay Chỉ Việc** | 4 ngày thực hành trực tiếp | **30.000.000đ** *(Gốc 42tr)* | **Đích đến chủ lực:** 4 ngày cầm tay nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, lớp 10-12 học viên. Khấu trừ 100% học phí Online. |
+| **7** | **Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống** | Bộ sách in màu & thước đo | **1.500.000đ** | Giáo trình chuẩn y khoa kèm thước đo Cobb và phim mẫu giải phẫu cơ sinh học. |
+| **8** | **Tageshospitation (Đi thực tế lâm sàng)** | 1 ngày tại Simon Center | **2.500.000đ / ngày** | Trực tiếp đứng cạnh Henrik Simon xem khám bệnh nhân thật, học quy trình chẩn đoán và phác đồ thực chiến. |
 
 ---
 

@@ -7,10 +7,12 @@
 
 | Sản Phẩm | Giá Niêm Yết Thật | Giá Ưu Đãi / Điều Kiện Thật | Quyền Lợi & Tính Năng Thật Đã Được Kiểm Chứng |
 | :--- | :--- | :--- | :--- |
-| **Module Lẻ Online** | 2.000.000đ – 3.000.000đ | **1.000.000đ – 2.000.000đ** | Học thử 1 vùng chuyên biệt (Cổ vai gáy hoặc Thắt lưng chậu hoặc Khớp hàm TMJ). Video với các góc quay khác nhau. |
-| **Level Lẻ Online (1 & 2)** | 10.000.000đ | **8.500.000đ** | Học trọn 1 Level: Level 1 (Toàn bộ Cột sống Full-Spine) hoặc Level 2 (Toàn bộ Khớp ngoại vi Tứ chi). |
-| **The Full Online Collection** | 18.000.000đ | **14.900.000đ** *(Giai đoạn Founding)* | Trọn bộ Full-Spine + Tứ chi + X-ray. Video với các góc quay khác nhau, hệ thống bài tập rèn lực tại nhà rèn lực tại nhà, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. **Tặng kèm: Cẩm nang đọc phim X-quang**. |
-| **Khóa Offline Cầm tay chỉ việc** | 45.000.000đ | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; **Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ đồng hành lâu dài**. |
+| **Module Lẻ Online** | 2.000.000đ | **1.000.000đ** | Module nhỏ chuyên sâu tùy chọn (Cổ vai gáy, Thắt lưng - Chậu, Body-Drop...). |
+| **Level 1 Online — Full-Spine (Modul A)** | 8.500.000đ | **7.000.000đ** | Học trọn Level 1: Toàn bộ Cột sống Cổ, Ngực, Thắt lưng, Khung chậu. |
+| **Level 2 Online — Tứ Chi & X-Ray (Modul B)** | 8.500.000đ | **7.000.000đ** | Học trọn Level 2: Toàn bộ Khớp ngoại vi Tứ chi + Đọc đo phim X-quang cơ sinh học. |
+| **The Full Online Collection** | 14.900.000đ | **12.900.000đ** | Trọn bộ Level 1 + Level 2 (351 bài giảng + Bài tập rèn phản xạ & lực rơi tại nhà + Cấp Certificate). |
+| **Workshop Offline Level 1 - Cầm tay chỉ việc** | 42.000.000đ | **30.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, lớp 10-12 học viên, **Khấu trừ 100% học phí Online**. |
+| **Workshop Offline Level 2 - Cầm tay chỉ việc** | 42.000.000đ | **30.000.000đ** | **Đích đến chủ lực:** 4 ngày nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, lớp 10-12 học viên, **Khấu trừ 100% học phí Online**. |
 | **Superrefresher / Refresher** | 6.000.000đ | **3.000.000đ** *(Giảm 50% cho Alumni)* | 1–2 ngày thực hành uốn nắn lại cảm giác tay cho học viên cũ sau thời gian hành nghề bị trôi lực. |
 | **Tageshospitation (Đi lâm sàng)** | 2.500.000đ/ngày | **1.250.000đ/ngày** *(Giảm 50% cho Alumni)* | Trực tiếp đứng cạnh Henrik Simon xem khám, đọc phim và điều trị bệnh nhân thật tại Simon Center TP.HCM. |
 | **Gói Toàn diện (Mastery Track)** | 80.000.000đ | **68.000.000đ – 75.000.000đ** | Trọn vẹn Level 1 + Level 2 offline thực chiến, chuẩn bị mở phòng khám từ A-Z. Tặng Full Online 14.9tr + Vé Cộng đồng đồng hành lâu dài. |

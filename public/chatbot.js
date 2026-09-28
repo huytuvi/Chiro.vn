@@ -72,15 +72,15 @@ Mục tiêu tối thượng của bạn là giải đáp thuyết phục và d�
 3. KÊU GỌI HÀNH ĐỘNG (CTA): Đề xuất học viên đăng ký nhận bài giảng học thử miễn phí hoặc liên hệ Hotline/Zalo 0389 609 938 để giữ suất ưu đãi.
 
 📋 HỆ THỐNG SẢN PHẨM & BẢNG GIÁ CHÍNH THỨC CỦA SIMON CENTER:
-1. Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn giải quyết dứt điểm vùng cổ gáy, đau đầu tiền đình.
-2. Module Lẻ Online — Chuyên Sâu Thắt Lưng - Chậu (LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn học xử lý thắt lưng, thoát vị, kẹt khớp cùng chậu ISG.
-3. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Toàn bộ trục Cột sống từ Cổ C1-C7, Ngực T1-T12 đến Thắt lưng - Chậu.
-4. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Kỹ thuật nắn chỉnh ngoại vi (vai, khuỷu, cổ tay, gối, cổ chân) + Đọc phim X-quang cơ sinh học.
-5. ⭐ The Full Online Collection (GÓI BÁN CHẠY NHẤT — KHUYÊN DÙNG): 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ — Tiết kiệm 1.100.000đ so với mua lẻ). Trọn bộ 351 bài giảng Cột sống + Tứ chi + X-ray + Bài tập rèn lực tại nhà + Cấp Chứng nhận Certificate chính thức do Bác sĩ Henrik Simon ký.
-6. 👑 Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon): 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người).
+1. Module Lẻ Online — Module nhỏ chuyên Sâu tuỳ chọn: 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Truy cập học tập dài hạn 24/7. Dành cho ai muốn học 1 module nhỏ chuyên biệt theo nhu cầu (Cổ vai gáy, Thắt lưng - Chậu, Body-Drop...).
+2. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Toàn bộ trục Cột sống từ Cổ C1-C7, Ngực T1-T12 đến Thắt lưng - Chậu.
+3. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Kỹ thuật nắn chỉnh ngoại vi (vai, khuỷu, cổ tay, gối, cổ chân) + Đọc phim X-quang cơ sinh học.
+4. ⭐ The Full Online Collection (GÓI BÁN CHẠY NHẤT — KHUYÊN DÙNG): 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ — Tiết kiệm 1.100.000đ so với mua lẻ). Trọn bộ 351 bài giảng Cột sống + Tứ chi + X-ray + Bài tập rèn phản xạ & lực rơi tại nhà + Cấp Chứng nhận Certificate chính thức do Bác sĩ Henrik Simon ký.
+5. 👑 Workshop Offline Level 1 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon): 30.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người). Trực tiếp Bác sĩ Henrik Simon chỉnh sửa từng góc đặt tay, thế đứng và cảm giác lực trên người thật.
+6. 👑 Workshop Offline Level 2 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon): 30.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người). Trực tiếp Bác sĩ Henrik Simon chỉnh sửa từng góc đặt tay, thế đứng và cảm giác lực trên người thật.
 7. 📖 Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống: 1.500.000 VNĐ.
 8. 🏥 Tageshospitation (Đi Thực Tế Lâm Sàng Tại Simon Center): 2.500.000 VNĐ.
-💡 ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền học phí anh/chị đầu tư cho các khóa học online hôm nay đều được áp dụng đặc quyền KHẤU TRỪ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa học thực hành trực tiếp (Workshop Offline), nên hoàn toàn có thể yên tâm bắt đầu!
+💡 ĐẶC QUYỀN KHẤU TRỪ 100%: Toàn bộ số tiền học phí anh/chị đầu tư cho các khóa học online hôm nay đều được áp dụng đặc quyền KHẤU TRỪ 100% nếu anh/chị tiếp tục nâng cấp lên các khóa thực hành trực tiếp (Workshop Offline Level 1 hoặc Level 2 Cầm tay chỉ việc), nên hoàn toàn có thể yên tâm bắt đầu!
 
 🎯 KỊCH BẢN BẮT BUỘC KHI KHÁCH DO DỰ / "ĐỂ TÔI SUY NGHĨ THÊM" / "CÂN NHẮC":
 Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "để chị suy nghĩ thêm", "để mình suy nghĩ thêm", "cần cân nhắc", "để xem đã", "để suy nghĩ đã", "suy nghĩ lại", "chưa vội": BẮT BUỘC trả lời chính xác theo văn bản mẫu chuẩn sau:
@@ -142,25 +142,26 @@ Dạ anh/chị đang muốn tìm hiểu khóa học nắn chỉnh cho vùng cộ
       // --- DANH SÁCH KHÓA HỌC & BẢNG GIÁ CHI TIẾT (2 PHẦN TỰ ĐỘNG) ---
       c_courses_and_pricing_part1: {
         text: `Dạ em xin gửi anh/chị danh mục <strong>Hệ Thống Sản Phẩm Khóa Học & Bảng Giá Ưu Đãi</strong> chính thức tại <strong>Simon Chiropractic Center</strong> ạ:<br><br>
-1. 💆 <strong>Module Lẻ Online — Chuyên Sâu Cổ Vai Gáy (HWS):</strong><br>
-• Kỹ thuật sờ nắn, giải phóng đốt sống cổ C1–C7, đoạn chuyển tiếp C7-T1, xử lý đau mỏi, đau đầu, tê bì tay và test De-Kleyn an toàn.<br>
-• Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7.<br><br>
-2. 🦴 <strong>Module Lẻ Online — Chuyên Sâu Thắt Lưng - Chậu (LWS):</strong><br>
-• Nắm vững giải phẫu chức năng L1–L5, xương cùng S1, kẹt khớp cùng chậu ISG, chỉnh lệch chân ngắn - chân dài và phục hồi đĩa đệm.<br>
-• Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7.<br><br>
-3. 🟩 <strong>Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A):</strong><br>
+1. 🟨 <strong>Module Lẻ Online — Module Nhỏ Chuyên Sâu Tùy Chọn:</strong><br>
+• Học phí ưu đãi: <strong>1.000.000 VNĐ</strong> (Gốc: 2.000.000 VNĐ). Truy cập học tập dài hạn 24/7. Dành cho ai muốn tiếp cận nhanh, học 1 module nhỏ chuyên biệt theo nhu cầu.<br><br>
+2. 🟩 <strong>Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A):</strong><br>
 • Cơ sinh học và kỹ thuật nắn chỉnh toàn bộ trục cột sống: Cổ C1-C7, Ngực T1-T12, Thắt lưng L1-L5 và Khung chậu S1-ISG.<br>
 • Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Gốc: 8.500.000 VNĐ).<br><br>
-4. 🟦 <strong>Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B):</strong><br>
+3. 🟦 <strong>Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B):</strong><br>
 • Kỹ thuật nắn chỉnh khớp ngoại vi (chi trên, chi dưới) và phương pháp đọc, đo đạc phim X-quang cơ sinh học.<br>
 • Học phí ưu đãi: <strong>7.000.000 VNĐ</strong> (Gốc: 8.500.000 VNĐ).<br><br>
-5. ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Level 1 + Level 2):</strong><br>
+4. ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Level 1 + Level 2):</strong><br>
 • Gói hoàn chỉnh nhất gồm toàn bộ 351 bài giảng: Cột sống Full-Spine + Tứ chi + Đo đọc phim X-quang. Cấp Certificate chính thức.<br>
 • Học phí ưu đãi: <strong>12.900.000 VNĐ</strong> (Gốc: 14.900.000 VNĐ — Tiết kiệm ngay 1.100.000đ so với mua lẻ Level 1 và Level 2).<br><br>
-6. 👑 <strong>Workshop Offline Cầm Tay Chỉ Việc (3-4 Ngày Cùng Thầy Henrik Simon):</strong><br>
+5. 👑 <strong>Workshop Offline Level 1 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon):</strong><br>
 • Lớp giới hạn 10-12 học viên, trực tiếp Bác sĩ Henrik Simon chỉnh sửa từng góc đặt tay, thế đứng và cảm giác lực trên người thật.<br>
-• Học phí: <strong>36.000.000 VNĐ</strong> (Niêm yết: 42.000.000 VNĐ).<br><br>
-💡 <em>Đặc quyền khấu trừ 100%:</em> Toàn bộ số tiền anh/chị đã đóng ở các khóa Online sẽ được <strong>khấu trừ 100%</strong> khi đăng ký nâng cấp lên lớp Workshop Offline Cầm tay chỉ việc này ạ!<br><br>
+• Học phí: <strong>30.000.000 VNĐ</strong> (Niêm yết: 42.000.000 VNĐ).<br><br>
+6. 👑 <strong>Workshop Offline Level 2 - Cầm Tay Chỉ Việc (4 Ngày Cùng Thầy Henrik Simon):</strong><br>
+• Lớp giới hạn 10-12 học viên, trực tiếp Bác sĩ Henrik Simon chỉnh sửa từng góc đặt tay, thế đứng và cảm giác lực trên người thật.<br>
+• Học phí: <strong>30.000.000 VNĐ</strong> (Niêm yết: 42.000.000 VNĐ).<br><br>
+7. 📖 <strong>Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống:</strong> 1.500.000 VNĐ.<br><br>
+8. 🏥 <strong>Tageshospitation (Đi Thực Tế Lâm Sàng Tại Simon Center):</strong> 2.500.000 VNĐ.<br><br>
+💡 <em>Đặc quyền khấu trừ 100%:</em> Toàn bộ số tiền anh/chị đã đóng ở các khóa Online sẽ được <strong>khấu trừ 100%</strong> khi đăng ký nâng cấp lên các lớp Workshop Offline Level 1 hoặc Level 2 Cầm tay chỉ việc này ạ!<br><br>
 Dạ anh/chị đang muốn bắt đầu với một Module chuyên biệt hay tìm hiểu khóa toàn diện ạ?`,
         cta: null
       },
@@ -1988,9 +1989,10 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         appendBotMessage(
           `Dạ em chào anh/chị ạ! Rất vui được đón tiếp anh/chị tại Simon Center.<br><br>
 Em đang sẵn sàng tư vấn chi tiết về <strong>Hệ Thống Khóa Học Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon:<br><br>
-• 🟨 <strong>Module Lẻ Online (Cổ gáy hoặc Thắt lưng):</strong> 1.000.000 VNĐ (Khấu trừ 100% khi lên lớp thực hành trực tiếp).<br>
+• 🟨 <strong>Module Lẻ Online — Module Nhỏ Chuyên Sâu Tùy Chọn:</strong> 1.000.000 VNĐ (Khấu trừ 100% khi lên lớp thực hành trực tiếp).<br>
 • ⭐ <strong>The Full Online Collection (Trọn Bộ Toàn Diện Full-Spine + Tứ chi + X-ray):</strong> 12.900.000 VNĐ (Tiết kiệm 1.100.000đ, cấp Chứng chỉ).<br>
-• 👑 <strong>Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon):</strong> 36.000.000 VNĐ.<br><br>
+• 👑 <strong>Workshop Offline Level 1 - Cầm Tay Chỉ Việc:</strong> 30.000.000 VNĐ (4 ngày cùng Thầy Henrik Simon).<br>
+• 👑 <strong>Workshop Offline Level 2 - Cầm Tay Chỉ Việc:</strong> 30.000.000 VNĐ (4 ngày cùng Thầy Henrik Simon).<br><br>
 Dạ anh/chị đang muốn bắt đầu từ nội dung nào hay đang quan tâm nắn chỉnh cho vùng cột sống nào vậy ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
           "trial"
         );
@@ -2044,9 +2046,9 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
       appendBotMessage(
         `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
 Tại <strong>Simon Chiropractic Center</strong>, toàn bộ các khóa học đều lấy phương pháp thực chiến Y khoa của Bác sĩ Henrik Simon làm trọng tâm với 3 nấc thang đào tạo rõ ràng:<br><br>
-• 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi lên thực hành trực tiếp</em>).<br>
+• 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online — Module nhỏ chuyên sâu tùy chọn — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi lên thực hành trực tiếp</em>).<br>
 • ⭐ <strong>Khóa Đào Tạo Toàn Diện (Khuyên Dùng):</strong> The Full Online Collection — <strong>12.900.000 VNĐ</strong> (Trọn bộ 351 bài giảng Cột sống Full-Spine + Tứ chi + Đọc X-quang + Bài tập rèn lực tại nhà + Cấp Chứng chỉ).<br>
-• 👑 <strong>Khóa Huấn Luyện Đỉnh Cao:</strong> Workshop Offline Cầm Tay Chỉ Việc — <strong>36.000.000 VNĐ</strong> (3-4 ngày trực tiếp cùng Thầy Henrik Simon — <em>Được khấu trừ 100% học phí Online</em>).<br><br>
+• 👑 <strong>Khóa Huấn Luyện Đỉnh Cao:</strong> Workshop Offline Level 1 & Level 2 Cầm Tay Chỉ Việc — <strong>30.000.000 VNĐ</strong> (4 ngày trực tiếp cùng Thầy Henrik Simon — <em>Được khấu trừ 100% học phí Online</em>).<br><br>
 Dạ để em tư vấn đúng gói học và mức học phí tiết kiệm nhất cho mình: Hiện tại anh/chị đang muốn học để tự chăm sóc sức khỏe gia đình, bổ trợ công việc PT/Spa hay nâng cao tay nghề mở cơ sở trị liệu vậy ạ?`,
         "register"
       );

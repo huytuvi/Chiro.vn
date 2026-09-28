@@ -85,16 +85,18 @@
 ### CÂU 4: "Simon Center có những khóa học nào và học phí bao nhiêu?"
 * **Bối cảnh tâm lý:** Cần nắm rõ toàn bộ khung chương trình và các mức học phí để lựa chọn gói phù hợp với ngân sách.
 * **Câu trả lời chuẩn:**
-> *"Dạ, hệ sinh thái đào tạo của Simon EDU Center gồm 6 chương trình chuẩn y khoa được thiết kế linh hoạt theo nhu cầu của anh/chị:*  
+> *"Dạ, hệ sinh thái đào tạo của Simon EDU Center gồm các chương trình chuẩn y khoa được thiết kế linh hoạt theo nhu cầu của anh/chị:*  
 >  
-> 1. **MODULE LẺ ONLINE — CỔ VAI GÁY (HWS):** 1.000.000đ  
-> 2. **MODULE LẺ ONLINE — THẮT LƯNG & KHUNG CHẬU (LWS & PELVIS):** 1.000.000đ  
-> 3. **LEVEL 1 ONLINE — NỀN TẢNG CỘT SỐNG CỔ & THẮT LƯNG:** 7.000.000đ  
-> 4. **LEVEL 2 ONLINE — CHUYÊN SÂU KHỚP NGOẠI VI TỨ CHI:** 7.000.000đ  
-> 5. **THE FULL ONLINE COLLECTION (TRỌN BỘ TOÀN DIỆN LEVEL 1 + LEVEL 2):** 12.900.000đ *(Bao gồm toàn bộ video với các góc quay khác nhau, hệ thống bài tập rèn lực tại nhà, bài test qua môn và chứng chỉ hoàn thành).*  
-> 6. **WORKSHOP OFFLINE THỰC HÀNH CẦM TAY CHỈ VIỆC CÙNG THẦY HENRIK SIMON:** 36.000.000đ *(Thực hành trực tiếp 1-1, uốn nắn từng góc tay).*  
+> 1. **MODULE LẺ ONLINE — MODULE NHỎ CHUYÊN SÂU TÙY CHỌN:** 1.000.000đ  
+> 2. **LEVEL 1 ONLINE — NỀN TẢNG CỘT SỐNG FULL-SPINE (MODUL A):** 7.000.000đ  
+> 3. **LEVEL 2 ONLINE — TỨ CHI & PHÂN TÍCH X-QUANG CHUYÊN SÂU (MODUL B):** 7.000.000đ  
+> 4. **THE FULL ONLINE COLLECTION (TRỌN BỘ TOÀN DIỆN LEVEL 1 + LEVEL 2):** 12.900.000đ *(Bao gồm toàn bộ video với các góc quay khác nhau, hệ thống bài tập rèn phản xạ & lực rơi tại nhà, bài test qua môn và chứng chỉ hoàn thành).*  
+> 5. **WORKSHOP OFFLINE LEVEL 1 - CẦM TAY CHỈ VIỆC CÙNG THẦY HENRIK SIMON:** 30.000.000đ *(Thực hành trực tiếp 4 ngày, uốn nắn từng góc tay 1-1, giá niêm yết 42.000.000đ).*  
+> 6. **WORKSHOP OFFLINE LEVEL 2 - CẦM TAY CHỈ VIỆC CÙNG THẦY HENRIK SIMON:** 30.000.000đ *(Thực hành trực tiếp 4 ngày, uốn nắn từng góc tay 1-1, giá niêm yết 42.000.000đ).*  
+> 7. **GIÁO TRÌNH CHIROPRACTIC Y KHOA & THƯỚC ĐO CỘT SỐNG:** 1.500.000đ  
+> 8. **TAGESHOSPITATION (ĐI THỰC TẾ LÂM SÀNG TẠI SIMON CENTER):** 2.500.000đ  
 >  
-> 🔥 **ĐẶC QUYỀN KHẤU TRỪ 100%:** Toàn bộ số tiền anh/chị đầu tư cho các khóa Online sẽ được **khấu trừ 100%** khi nâng cấp lên Workshop thực hành Offline!  
+> 🔥 **ĐẶC QUYỀN KHẤU TRỪ 100%:** Toàn bộ số tiền anh/chị đầu tư cho các khóa Online sẽ được **khấu trừ 100%** khi nâng cấp lên Workshop thực hành Offline Level 1 hoặc Level 2!  
 >  
 > 👉 *Dạ anh/chị đang muốn bắt đầu từ Module Lẻ thực chiến chuyên biệt (1 triệu) hay đăng ký trọn bộ Full Online (12.9 triệu) để làm chủ toàn diện Full-Spine ạ?"*
 
@@ -180,7 +182,7 @@ Khi khách bắt đầu hỏi các câu như: *"Khóa này học trên điện t
 ### Kịch bản Chốt 3.2: Chốt theo phương án lựa chọn (Alternative Choice Close)
 > *"Dạ lộ trình đào tạo hiện tại đang có 2 phương án tối ưu nhất:*  
 > * **Phương án 1:** Đăng ký khóa **The Full Online Collection (12.900.000đ)** để nắm chắc 100% nền tảng Full-Spine và X-quang trước, sau này học lên lớp Offline được khấu trừ lại toàn bộ 12.9 triệu.  
-> * **Phương án 2:** Đăng ký giữ chỗ thẳng vào khóa **Huấn luyện Offline Cầm tay chỉ việc cùng Thầy Henrik Simon (36.000.000đ)** để được uốn nắn lực 1-1 và được tặng kèm luôn khóa Full Online 12.9 triệu này.  
+> * **Phương án 2:** Đăng ký giữ chỗ thẳng vào khóa **Workshop Offline Level 1 hoặc Level 2 Cầm tay chỉ việc cùng Thầy Henrik Simon (30.000.000đ)** để được uốn nắn lực 1-1 và được tặng kèm luôn khóa Full Online 12.9 triệu này.  
 >  
 > *Dạ không biết anh/chị muốn bắt đầu với nền tảng Online trước để chủ động thời gian, hay mình muốn đăng ký thẳng khóa thực hành trực tiếp cùng Thầy Henrik luôn ạ?"*
 
