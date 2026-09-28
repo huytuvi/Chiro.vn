@@ -335,10 +335,17 @@
     let countdownInterval = null;
 
     function generateOrderCode(phone) {
-      const cleanPhone = (phone || '').replace(/\D/g, '').slice(-4);
       const now = new Date();
-      const timeStr = String(now.getDate()).padStart(2, '0') + String(now.getHours()).padStart(2, '0') + String(now.getMinutes()).padStart(2, '0');
-      return 'SCC' + timeStr + (cleanPhone || Math.floor(1000 + Math.random() * 9000));
+      const dd = String(now.getDate()).padStart(2, '0');
+      const MM = String(now.getMonth() + 1).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const timePart = `${dd}${MM}${hh}${mm}`;
+      
+      const cleanPhone = String(phone || '').replace(/\D/g, '');
+      const phonePart = cleanPhone.length >= 4 ? cleanPhone.slice(-4) : (cleanPhone ? cleanPhone.padStart(4, '0') : String(Math.floor(1000 + Math.random() * 9000)));
+      
+      return `SCC${timePart}${phonePart}`;
     }
 
     function copyText(elementId) {
@@ -431,7 +438,8 @@
       pollInterval = setInterval(async () => {
         if (!sbClient || !currentOrderCode) return;
         try {
-          const { data, error } = await sbClient
+          // 1. Kiểm tra theo email_status (mã đơn SCC...)
+          const { data } = await sbClient
             .from('leads')
             .select('status')
             .eq('email_status', currentOrderCode)
@@ -439,11 +447,27 @@
 
           if (data && data.status === 'ĐÃ THANH TOÁN') {
             onPaymentSuccess();
+            return;
+          }
+
+          // 2. Fallback: Kiểm tra theo số điện thoại học viên
+          if (currentLeadData.phone) {
+            const { data: phoneMatch } = await sbClient
+              .from('leads')
+              .select('status')
+              .eq('phone', currentLeadData.phone)
+              .eq('status', 'ĐÃ THANH TOÁN')
+              .maybeSingle();
+
+            if (phoneMatch) {
+              onPaymentSuccess();
+              return;
+            }
           }
         } catch (e) {
           console.warn('Lỗi kiểm tra SePay status:', e);
         }
-      }, 2500);
+      }, 2000);
     }
 
     async function checkPaymentStatusManual() {
