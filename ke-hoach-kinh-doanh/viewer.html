@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đọc Tài Liệu Markdown Online | Chiro.vn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              wine: '#4A121E',
+              wineDark: '#360B14',
+              crimson: '#8F1D35',
+              sand: '#FDFBF7',
+              slate: '#0f172a'
+            }
+          },
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0f172a; color: #e2e8f0; }
+    .markdown-body h1 { font-size: 1.875rem; font-weight: 800; color: #ffffff; margin-top: 1.5rem; margin-bottom: 1rem; border-bottom: 2px solid #8F1D35; padding-bottom: 0.5rem; }
+    .markdown-body h2 { font-size: 1.5rem; font-weight: 700; color: #f59e0b; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .markdown-body h3 { font-size: 1.25rem; font-weight: 700; color: #38bdf8; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+    .markdown-body p { margin-bottom: 1rem; line-height: 1.7; color: #cbd5e1; }
+    .markdown-body ul, .markdown-body ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .markdown-body ul { list-style-type: disc; }
+    .markdown-body ol { list-style-type: decimal; }
+    .markdown-body li { margin-bottom: 0.35rem; color: #cbd5e1; }
+    .markdown-body blockquote { border-left: 4px solid #8F1D35; background-color: rgba(143, 29, 53, 0.15); padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    .markdown-body code { background-color: #1e293b; color: #f43f5e; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; }
+    .markdown-body pre { background-color: #1e293b; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 1rem; border: 1px solid #334155; }
+    .markdown-body pre code { background: none; padding: 0; color: #e2e8f0; }
+    .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; overflow-x: auto; display: block; }
+    .markdown-body th { background-color: #1e293b; color: #f59e0b; padding: 0.75rem; border: 1px solid #334155; text-align: left; }
+    .markdown-body td { padding: 0.75rem; border: 1px solid #334155; color: #cbd5e1; }
+    .markdown-body a { color: #38bdf8; text-decoration: underline; }
+    .markdown-body a:hover { color: #7dd3fc; }
+    .markdown-body hr { border: 0; height: 1px; background: #334155; margin: 2rem 0; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-crimson selection:text-white">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="bg-brand-wineDark border-b border-brand-crimson sticky top-0 z-50 px-4 py-3 shadow-lg">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <a href="/ke-hoach/" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold px-3 py-2 rounded-xl transition shadow flex items-center gap-1.5">
+          <span>←</span> <span>Dashboard</span>
+        </a>
+        <span id="fileTitle" class="text-white font-extrabold text-xs sm:text-sm tracking-wide truncate max-w-[180px] sm:max-w-xs">Đang tải tài liệu...</span>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <a id="htmlViewBtn" href="#" target="_blank" class="hidden sm:inline-flex bg-brand-crimson hover:bg-brand-crimsonHover text-white text-xs font-bold px-3 py-2 rounded-xl transition shadow items-center gap-1">
+          <span>👁️</span> <span>Xem Bản HTML</span>
+        </a>
+        <a id="downloadRawBtn" href="#" download class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl transition shadow items-center gap-1">
+          <span>📥</span> <span>Tải File .MD Gốc</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+      <div id="contentLoading" class="text-center py-16 space-y-3">
+        <div class="inline-block animate-spin text-brand-crimson text-4xl">⏳</div>
+        <div class="text-sm text-gray-400 font-medium">Đang tải và hiển thị nội dung tài liệu Markdown...</div>
+      </div>
+      <article id="markdownContent" class="markdown-body hidden">
+        <!-- Rendered markdown content will be inserted here -->
+      </article>
+    </div>
+  </main>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    async function loadMarkdown() {
+      let fileName = getQueryParam('file') || '00-business-context.md';
+      fileName = fileName.replace(/[^a-zA-Z0-9\-_.]/g, '');
+      if (!fileName.endsWith('.md')) fileName += '.md';
+
+      document.getElementById('fileTitle').innerText = fileName;
+      
+      const rawMdUrl = '/ke-hoach/' + fileName;
+      document.getElementById('downloadRawBtn').href = rawMdUrl;
+
+      const htmlFileName = fileName.replace(/\.md$/, '.html');
+      const htmlViewBtn = document.getElementById('htmlViewBtn');
+      htmlViewBtn.href = '/ke-hoach/' + htmlFileName;
+      htmlViewBtn.classList.remove('hidden');
+
+      try {
+        const response = await fetch(rawMdUrl);
+        if (!response.ok) throw new Error('Không thể tải file ' + fileName);
+        
+        const markdownText = await response.text();
+        
+        // Render Markdown using marked
+        const htmlContent = marked.parse(markdownText);
+        
+        const contentEl = document.getElementById('markdownContent');
+        contentEl.innerHTML = htmlContent;
+        
+        document.getElementById('contentLoading').classList.add('hidden');
+        contentEl.classList.remove('hidden');
+      } catch (err) {
+        document.getElementById('contentLoading').innerHTML = `
+          <div class="text-red-400 font-bold text-base mb-2">⚠️ Lỗi tải tài liệu</div>
+          <div class="text-xs text-gray-400">${err.message}</div>
+          <a href="/ke-hoach/" class="inline-block mt-4 bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-bold">Quay về Dashboard</a>
+        `;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadMarkdown);
+  </script>
+</body>
+</html>
