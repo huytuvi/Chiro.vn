@@ -666,23 +666,26 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
   // UI INJECTION: CHÈN NÚT CHAT & CỬA SỔ CHAT VÀO DOM
   // =============================================================================
   function injectChatbot() {
+    if (document.getElementById("chiroChatToggle")) return;
+
     const existingStickyCol = document.querySelector('.fixed.bottom-5.right-4') || 
+                              document.querySelector('.fixed.bottom-5.right-4.sm\\:right-5') ||
                               document.querySelector('.fixed.bottom-14.md\\:bottom-5.right-4') ||
                               document.querySelector('.fixed.bottom-5');
 
     const toggleBtnWrapper = document.createElement("div");
-    toggleBtnWrapper.className = "relative group shrink-0";
+    toggleBtnWrapper.className = "relative group shrink-0 z-50";
     toggleBtnWrapper.innerHTML = `
       <button id="chiroChatToggle" onclick="window.toggleChiroChat()" 
-        class="w-13 h-13 sm:w-14 sm:h-14 rounded-full text-white flex items-center justify-center transition transform hover:scale-110 relative border-2 border-amber-300 shadow-2xl"
-        style="background: linear-gradient(135deg, #4A121E 0%, #8F1D35 60%, #D97706 100%);"
-        title="Trợ Lý Tư Vấn Y Khoa Simon Center 24/7">
-        <span class="text-2xl" id="chatBtnIcon">💬</span>
+        class="w-12 h-12 sm:w-14 sm:h-14 rounded-full text-white flex items-center justify-center transition transform hover:scale-110 relative border-2 border-amber-300 shadow-2xl cursor-pointer"
+        style="width: 52px; height: 52px; min-width: 52px; min-height: 52px; background: linear-gradient(135deg, #4A121E 0%, #8F1D35 60%, #D97706 100%);"
+        title="Trợ Lý Tư Vấn Khóa Học Simon Center 24/7">
+        <span class="text-xl sm:text-2xl" id="chatBtnIcon">💬</span>
         <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full animate-ping"></span>
         <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
       </button>
       <span class="absolute right-16 top-2.5 bg-[#360B14] text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition shadow-xl pointer-events-none border border-amber-300/40 z-50">
-        Chat Tư Vấn Y Khoa 24/7
+        Chat Tư Vấn Khóa Học 24/7
       </span>
     `;
 
@@ -690,6 +693,7 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
       existingStickyCol.insertBefore(toggleBtnWrapper, existingStickyCol.firstChild);
     } else {
       const fallbackBtnContainer = document.createElement("div");
+      fallbackBtnContainer.id = "chiroFallbackStickyCol";
       fallbackBtnContainer.className = "fixed bottom-5 right-4 z-50 flex flex-col gap-3 items-center";
       fallbackBtnContainer.appendChild(toggleBtnWrapper);
       document.body.appendChild(fallbackBtnContainer);
