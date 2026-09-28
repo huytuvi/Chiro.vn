@@ -781,10 +781,10 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
           </div>
         </div>
         <div class="flex items-center space-x-1 sm:space-x-1.5">
-          <button type="button" id="chiroAiToggleBtn" onclick="window.openGeminiSettingsModal()" title="Cài đặt Google Gemini AI" 
-            class="px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 transition shadow-2xs">
-            <span id="chiroAiDot" class="w-1.5 h-1.5 rounded-full bg-amber-300"></span>
-            <span id="chiroAiStatusLabel">AI Gemini</span>
+          <button type="button" id="chiroAiToggleBtn" onclick="window.openGeminiSettingsModal()" title="Trạng thái kết nối AI" 
+            class="p-1.5 rounded-full flex items-center justify-center border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 transition shadow-2xs">
+            <span id="chiroAiDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="chiroAiStatusLabel" class="hidden"></span>
           </button>
           <button onclick="window.clearChiroChat()" title="Làm mới cuộc trò chuyện" class="text-white/70 hover:text-white p-1.5 text-xs rounded-lg hover:bg-white/10 transition">
             🔄
@@ -844,30 +844,15 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
         </div>
       </div>
 
-      <!-- THANH CHUYỂN TAB CHỦ ĐỀ GỢI Ý (KHÓA HỌC / CHUYÊN KHOA) -->
-      <div class="px-2.5 pt-2 pb-1 bg-white border-t border-gray-200 flex items-center justify-between gap-1 shrink-0">
-        <span class="text-gray-400 text-[10px] uppercase font-bold tracking-wider">Chủ đề:</span>
-        <div class="flex items-center gap-1">
-          <button type="button" id="tabBtnCourse" onclick="window.switchChiroCategory('course')" 
-            class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-brand-crimson text-white shadow-xs">
-            🎓 Khóa Học (12)
-          </button>
-          <button type="button" id="tabBtnClinical" onclick="window.switchChiroCategory('clinical')" 
-            class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition bg-gray-100 hover:bg-amber-100 text-gray-700 hover:text-amber-900 border border-gray-200">
-            🩺 Hỏi Chuyên Khoa (12)
-          </button>
-        </div>
-      </div>
-
-      <!-- GỢI Ý CÂU HỎI NHANH (QUICK CHIPS) -->
-      <div id="chiroQuickChipsContainer" class="px-2.5 pb-2 pt-1 bg-white overflow-x-auto whitespace-nowrap text-xs flex gap-1.5 chat-scroll shrink-0 border-b border-gray-100">
+      <!-- GỢI Ý CÂU HỎI NHANH (QUICK CHIPS KHÓA HỌC) -->
+      <div id="chiroQuickChipsContainer" class="px-2.5 pb-2 pt-2 bg-white overflow-x-auto whitespace-nowrap text-xs flex gap-1.5 chat-scroll shrink-0 border-b border-t border-gray-100">
         <!-- Chips render động -->
       </div>
 
       <!-- KHUNG NHẬP TIN NHẮN (INPUT BAR) -->
       <div class="p-2.5 sm:p-3 bg-white shrink-0">
         <form id="chiroChatForm" onsubmit="window.handleChiroSend(event)" class="flex items-center space-x-2">
-          <input type="text" id="chiroChatInput" placeholder="Hỏi về bệnh học, X-quang, kỹ thuật nắn, học phí..." 
+          <input type="text" id="chiroChatInput" placeholder="Hỏi về lộ trình, học phí, đăng ký khóa học..." 
             class="flex-1 bg-gray-100 hover:bg-gray-50 focus:bg-white text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-crimson transition text-gray-800"
             autocomplete="off" />
           <button type="submit" class="bg-brand-crimson hover:bg-brand-crimsonHover text-white w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow transition transform hover:scale-105" title="Gửi tin nhắn">
@@ -876,12 +861,8 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
             </svg>
           </button>
         </form>
-        <div class="text-[10px] text-gray-400 text-center mt-1.5 flex items-center justify-center space-x-2">
-          <span>🔒 Y đức chuẩn mực</span>
-          <span>•</span>
-          <span>Kế thừa 20+ năm Bác Sĩ Henrik Simon</span>
-          <span>•</span>
-          <a href="tel:0389609938" class="text-brand-crimson font-bold hover:underline">Hotline: 0389.609.938</a>
+        <div class="text-[10px] text-gray-400 text-center mt-1.5 flex items-center justify-center">
+          <a href="tel:0389609938" class="text-brand-crimson font-bold hover:underline">Hotline Hỗ Trợ: 0389.609.938</a>
         </div>
       </div>
     `;
@@ -1452,16 +1433,18 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const badge = document.getElementById("chiroAiToggleBtn");
     const dot = document.getElementById("chiroAiDot");
     const label = document.getElementById("chiroAiStatusLabel");
-    if (!badge || !dot || !label) return;
+    if (!badge || !dot) return;
+
+    if (label) label.innerText = "";
 
     if (GEMINI_CONFIG.apiKey && GEMINI_CONFIG.enabled) {
-      dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse";
-      label.innerText = "✨ Gemini AI (Bật)";
-      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-emerald-300/40 bg-emerald-400/20 hover:bg-emerald-400/30 text-emerald-200 transition shadow-2xs cursor-pointer";
+      dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+      badge.className = "p-1.5 rounded-full flex items-center justify-center border border-emerald-300/40 bg-emerald-400/20 hover:bg-emerald-400/30 transition shadow-2xs cursor-pointer";
+      badge.title = "Trạng thái AI: Đang hoạt động (🟢 Green)";
     } else {
-      dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
-      label.innerText = "⚙️ Cài Gemini AI";
-      badge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 transition shadow-2xs cursor-pointer";
+      dot.className = "w-2 h-2 rounded-full bg-rose-500";
+      badge.className = "p-1.5 rounded-full flex items-center justify-center border border-rose-300/40 bg-rose-500/20 hover:bg-rose-500/30 transition shadow-2xs cursor-pointer";
+      badge.title = "Trạng thái AI: Tắt / Thất bại (🔴 Red)";
     }
   }
 
