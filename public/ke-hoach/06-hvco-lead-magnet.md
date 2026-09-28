@@ -1,7 +1,7 @@
 # 🧲 06 — HVCO LEAD MAGNET: TÀI LIỆU THU HÚT GIÁ TRỊ CAO (HIGH-VALUE CREATIVE OFFER)
 
 > **Agent:** 06 — ASSP HVCO Creator  
-> **Tiêu đề Sách Lead Magnet:** *CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay (Biên soạn từ Lehrbuch Chiropraktik — Henrik Simon)*  
+> **Tiêu đề Sách Lead Magnet:** *Simon Center - Cẩm nang Chiropractic (Biên soạn từ Lehrbuch Chiropraktik — Henrik Simon)*  
 
 ---
 
@@ -23,5 +23,5 @@ HVCO là cuốn sách chuyên khảo dài 21 chương/mục được thiết k�
 
 ## 🚀 3. KỊCH BẢN CHUYỂN ĐỔI TỪ SÁCH TẶNG SANG KHÓA HỌC TRẢ TIỀN
 
-> *"Sau khi đọc xong cuốn sách **CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay**, bạn sẽ nắm rõ nền tảng lý thuyết và triết lý y khoa chuẩn Đức.  
+> *"Sau khi đọc xong cuốn sách **Simon Center - Cẩm nang Chiropractic**, bạn sẽ nắm rõ nền tảng lý thuyết và triết lý y khoa chuẩn Đức.  
 > Hãy đăng ký giữ chỗ ngay các khóa học thực hành **Level 1 Online** hoặc **Masterclass Offline** tại Chiro.vn để được Bác sĩ Henrik Simon cầm tay chỉ việc!"*

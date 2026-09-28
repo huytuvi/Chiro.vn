@@ -1,58 +1,55 @@
-# 🗺️ 13 — ROADMAP 90 NGÀY & TỰ VẤN BẢN THÂN (SELF-REFLECTION)
+# BẢN ĐỒ LỘ TRÌNH 90 NGÀY & PHẦN TỰ VẤN NĂNG LỰC CÁ NHÂN
 
-> **Dự án:** Chiro.vn — Hệ thống Kinh doanh Sản phẩm số & Phễu Chiropractic  
-> **Thời gian thực hiện:** 90 Ngày (Tháng 10 - Tháng 12/2026)  
-
----
-
-## 🚀 PHẦN 1: ROADMAP 90 NGÀY (3 THÁNG × 3 MILESTONES)
+## I. ROADMAP 90 NGÀY (3 THÁNG × 3 MILESTONE ĐỘT PHÁ)
 
 ```
-[THÁNG 1: LAUNCH & VALIDATION]  ──►  [THÁNG 2: OPTIMIZATION & SCALE]  ──►  [THÁNG 3: AUTOMATION & ECOSYSTEM]
- • M1: Mở bán Ebook 2k (500 đơn)      • M4: Tối ưu CVR Landing lên 15%        • M7: Đạt 100 học viên Full Online
- • M2: Chạy Ads FB/TikTok 200k/ngày   • M5: Vận hành Email Sequence Resend     • M8: Tổ chức Offline Workshop 30 người
- • M3: Đo lường CAC & AOV              • M6: Ra mắt Module Lẻ Cổ Vai Gáy       • M9: Tự động hóa 90% bộ máy với AI
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ THÁNG 1: LAUNCH PHỄU & TỐI ƯU CỖ MÁY BÁN HÀNG TỰ ĐỘNG                                  │
+│ ├─ Milestone 1: Deploy công khai phễu chiro.vn/ke-hoach, chạy test 3 góc Ads Facebook.│
+│ ├─ Milestone 2: Thu hút 600 - 800 Leads nhận Cẩm nang Red Flags (CPL < 40k).           │
+│ └─ Milestone 3: Chốt 10 - 12 học viên đầu tiên gói Full Online Collection (14.9tr).   │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ THÁNG 2: TỐI ƯU NURTURE & KÍCH HOẠT UPSELL OFFLINE                                      │
+│ ├─ Milestone 1: Tối ưu tỷ lệ mở Email/Zalo Nurture Sequence 5 ngày lên > 40%.         │
+│ ├─ Milestone 2: Tổ chức 01 Workshop Live với Chuyên gia Henrik Simon (Webinar).      │
+│ └─ Milestone 3: Upsell 3 - 5 học viên nâng cấp lên gói Offline Cầm tay chỉ việc (36tr).│
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ THÁNG 3: SCALE UP DOANH THU & CHUẨN HÓA VẬN HÀNH ALUMNI                                 │
+│ ├─ Milestone 1: Xây dựng chương trình Affiliate giới thiệu từ Alumni (Hoa hồng 15%). │
+│ ├─ Milestone 2: Nhân rộng ngân sách Ads lên 60tr/tháng, đạt mốc 25 - 30 đơn/tháng.    │
+│ └─ Milestone 3: Đạt mốc doanh thu 400.000.000đ/tháng, vận hành cỗ máy bán hàng 90% AI.│
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 🗓️ THÁNG 1: MỞ BÁN & XÁC NHẬN THỊ TRƯỜNG (LAUNCH & VALIDATION)
-* **Milestone 1:** Mở bán thành công Ebook 2.000đ đạt mốc 500 khách hàng mua đầu tiên (Validate Product-Market Fit).
-* **Milestone 2:** Chạy thử nghiệm Facebook Ads & TikTok Ads với ngân sách 200.000đ/ngày.
-* **Milestone 3:** Đo lường chính xác CAC (Chi phí thu hút 1 buyer) và tỷ lệ chuyển đổi Order Bump sang sản phẩm 1.000.000đ.
+---
 
-### 🗓️ THÁNG 2: TỐI ƯU & MỞ RỘNG (OPTIMIZATION & SCALE)
-* **Milestone 4:** Tối ưu hóa Landing Page CVR (Conversion Rate) từ 8% lên 15% nhờ A/B Testing tiêu đề và Video VSL.
-* **Milestone 5:** Vận hành trơn tru chuỗi 5 Email tự động trên Resend đạt tỷ lệ mở (Open Rate) > 35%.
-* **Milestone 6:** Ra mắt chính thức 2 Module lẻ Online (Cổ Vai Gáy & Thắt Lưng - Chậu) giá 1.000.000đ.
+## II. PHẦN TỰ VẤN NĂNG LỰC CÁ NHÂN (3 ĐỂM YẾU CỤ THỂ)
 
-### 🗓️ THÁNG 3: TỰ ĐỘNG HÓA & HỆ SINH THÁI (AUTOMATION & ECOSYSTEM)
-* **Milestone 7:** Đạt cột mốc 100 học viên đăng ký chương trình Full Online Collection (Doanh thu > 1 tỷ VNĐ).
-* **Milestone 8:** Tổ chức thành công 1 buổi Offline Masterclass 30 người trực tiếp cùng Bác sĩ Henrik Simon.
-* **Milestone 9:** Đóng gói cỗ máy vận hành AI (12 Agents + GoClaw Team) giúp giảm 90% thời gian quản lý nhân sự.
+### 🔴 ĐIỂM YẾU 1: CHƯA THÀNH THẠO KỸ NĂNG TỐI ƯU QUẢNG CÁO FACEBOOK / GOOGLE ADS NÂNG CAO
+- **Mô tả cụ thể**: Dễ bị hoang mang khi chỉ số CPL (chi phí lead) tăng cao hoặc Ads bị không duyệt.
+- **AI gánh được gì**: AI đã viết sẵn toàn bộ 3 góc Ad Copy đỉnh cao (nỗi đau run tay, an toàn Red Flags, cảm giác tay bài bản), thiết kế bảng target avatar chuẩn và tạo bài viết quảng cáo.
+- **Bản thân phải tự học gì**: Tư duy đọc chỉ số quảng cáo (CTR, CPL, CPM, ROAS), cách setup chiến dịch trên Meta Ads Manager và kỹ thuật A/B testing target.
+- **Học ở đâu**: Khóa học Quảng cáo Chuyên sâu tại KP3 / Focus Camp và tài liệu thực hành Meta Blueprint.
+
+### 🔴 ĐIỂM YẾU 2: NGẠI NÓI TRƯỚC ỐNG KÍNH VÀ QUAY VIDEO VSL
+- **Mô tả cụ thể**: Khi đứng trước máy quay dễ bị nói vấp, biểu cảm cứng hoặc giọng nói thiếu năng lượng thu hút.
+- **AI gánh được gì**: AI đã viết trọn bộ kịch bản VSL 15 phút chi tiết mốc thời gian, lời thoại từng câu chữ và gợi ý hình ảnh minh họa lâm sàng (Visual cues).
+- **Bản thân phải tự học gì**: Kỹ thuật nói truyền cảm qua máy quay, cách sử dụng máy đọc chữ (Teleprompter) và ngôn ngữ cơ thể tự tin.
+- **Học ở đâu**: Luyện tập quay video 15 phút mỗi ngày theo đúng file [09-vsl-script.md](file:///Users/huybui/Desktop/Chiro_course/ke-hoach-kinh-doanh/09-vsl-script.md) và nhận góp ý từ cộng đồng KP3.
+
+### 🔴 ĐIỂM YẾU 3: KỸ NĂNG XỬ LÝ TỪ CHỐI QUA ĐIỆN THOẠI (TELESALES)
+- **Mô tả cụ thể**: Dễ bị lúng túng khi khách hàng chê học phí 14.9tr đắt hoặc đòi học thử trực tiếp.
+- **AI gánh được gì**: AI đã soạn sẵn kịch bản Telesales 6 bước "Sell like a doctor" xử lý triệt để 4 loại phản bác phổ biến nhất.
+- **Bản thân phải tự học gì**: Kỹ năng lắng nghe đồng cảm (Feel-Felt-Found), điều chỉnh tông giọng điềm tĩnh chuẩn y đức và kỹ thuật dẫn dắt câu hỏi mở.
+- **Học ở đâu**: Nhập vai thực hành (Role-play) 30 phút mỗi ngày cùng đồng nghiệp theo file [12-sales-script.md](file:///Users/huybui/Desktop/Chiro_course/ke-hoach-kinh-doanh/12-sales-script.md).
 
 ---
 
-## 🔍 PHẦN 2: TỰ VẤN CỤ THỂ BẢN THÂN (SELF-REFLECTION)
+## III. 3 VẤN ĐỀ SỢ KẸT NHẤT & GIẢI PHÁP KHẮC PHỤC
 
-### ⚠️ 3 ĐIỂM YẾU LỚN NHẤT & GIẢI PHÁP KHẮC PHỤC:
-
-#### 1. Điểm yếu 1: Kỹ năng Chạy Ads & Tối Ưu Chi Phí Quảng Cáo (Media Buying)
-* **AI gánh được gì:** AI viết toàn bộ Ad Copy (Agent 08), tạo hình ảnh quảng cáo bằng Midjourney/DALL-E, đề xuất 5 góc Hook quảng cáo khác nhau.
-* **Mình phải tự học gì:** Cách thiết lập chiến dịch Facebook Ads Manager, TikTok Ads Manager, kỹ năng đọc chỉ số CTR, CPM, CPA và kỹ năng A/B testing ngân sách.
-* **Học ở đâu:** Khóa học Facebook Ads Blueprint chính thức của Meta + Thực hành trực tiếp chi tiêu ngân sách nhỏ 200.000đ/ngày.
-
-#### 2. Điểm yếu 2: Kỹ năng Tư Vấn Call Sales 1-1 Nâng Cao (High-Ticket Closing)
-* **AI gánh được gì:** AI soạn sẵn Kịch bản Call Sales 5 bước (Agent 12), xử lý các câu từ chối phổ biến, tóm tắt thông tin khách hàng từ CRM.
-* **Mình phải tự học gì:** Kỹ năng lắng nghe tông giọng khách hàng, kỹ năng đặt câu hỏi xoáy sâu nỗi đau, xử lý từ chối bằng sự thấu hiểu chân thành.
-* **Học ở đâu:** Sách "Way of the Wolf" (Jordan Belfort) + Luyện tập roleplay telesales 30 phút mỗi ngày với đối tác.
-
-#### 3. Điểm yếu 3: Quản Lý & Bảo Trì Hệ Thống Đào Tạo / Server Kỹ Thuật (DevOps & Backend)
-* **AI gánh được gì:** AI tự động viết code server Node.js, truy vấn database SQLite/Supabase, cấu hình webhook Sepay & Resend API.
-* **Mình phải tự học gì:** Quy trình backup dữ liệu tự động, quản lý SSL/Domain VPS, xử lý lỗi khi traffic tăng đột biến.
-* **Học ở đâu:** Tài liệu hướng dẫn VPS DigitalOcean/Vultr + Khóa học căn bản Linux Command Line trên Coursera.
-
----
-
-### 💣 3 VẤN ĐỀ SỢ KẸT NHẤT (TOP 3 BOTTLENECK FEARS):
-1. **Sợ kẹt 1:** Tài khoản quảng cáo Facebook/TikTok bị vô hiệu hóa (Banned Ads Account) khi bắt đầu vít ngân sách.
-2. **Sợ kẹt 2:** Khách hàng mua Ebook 2k nhưng tỷ lệ mở Email Resend thấp (<15%), khiến luồng nuôi dưỡng bị đứt gãy.
-3. **Sợ kẹt 3:** Quá tải thời gian vừa quản lý kỹ thuật vừa trực tiếp tư vấn chốt đơn cho khách hàng High-Ticket.
+1. **Sợ kẹt 1: Ngân sách quảng cáo ban đầu bị lãng phí do chưa tối ưu.**
+   - ➔ *Giải pháp*: Chỉ test ngân sách nhỏ (100k - 200k/ngày) cho 3 góc Ads trong file [08-ad-copy.md](file:///Users/huybui/Desktop/Chiro_course/ke-hoach-kinh-doanh/08-ad-copy.md). Góc nào CPL rẻ dưới 40k mới nâng ngân sách.
+2. **Sợ kẹt 2: Khách hàng lo ngại nắn chỉnh online không hiệu quả.**
+   - ➔ *Giải pháp*: Nhấn mạnh chính sách **Cam kết 30 ngày hoàn tiền 100%** và cho khách trải nghiệm Bộ bài tập rèn lực tại nhà + 50 bài test Red Flags qua môn.
+3. **Sợ kẹt 3: Quản lý nhóm Zalo Alumni & hỗ trợ chẩn đoán ca bệnh bị quá tải.**
+   - ➔ *Giải pháp*: Thành lập Hội đồng Chuyên môn Đức/Việt phân ca hỗ trợ giải đáp 24/7, dùng mẫu phiếu chẩn đoán X-quang file PDF chuẩn hóa câu trả lời.

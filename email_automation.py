@@ -112,7 +112,7 @@ def get_email_1_content(name="anh/chị"):
       <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 800; color: #065F46;">🎁 MÓN QUÀ TRI ÂN ĐẶC QUYỀN DÀNH TẶNG BẠN</p>
       <p style="margin: 0 0 16px 0; font-size: 14px; color: #047857; line-height: 1.6;">
         Để bày tỏ lòng biết ơn, Thầy Henrik Simon xin gửi tặng bạn cuốn sách chuyên khảo độc quyền:<br/>
-        <strong style="font-size: 15px; color: #064E3B;">CHIROPRATIK — CHỮA LÀNH BẰNG ĐÔI BÀN TAY</strong><br/>
+        <strong style="font-size: 15px; color: #064E3B;">SIMON CENTER - CẨM NĂNG CHIROPRATIK</strong><br/>
         <span style="font-size: 12.5px; color: #059669;">(Biên soạn dựa trên giáo trình gốc <em>Lehrbuch Chiropraktik</em> — Thieme Verlag)</span>
       </p>
 

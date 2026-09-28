@@ -1,7 +1,7 @@
 # SIMON CENTER
 **Chiropractic chuyên biệt · Phục hồi chức năng cột sống & khớp**
 
-# CHIROPRATIK — CHỮA LÀNH BẰNG ĐÔI BÀN TAY
+# SIMON CENTER - CẨM NĂNG CHIROPRATIK
 *Nguồn gốc · Sự phát triển toàn cầu · Bằng chứng khoa học · Triết lý điều trị từ gốc rễ & nguyên tắc an toàn cho người bệnh*
 
 > **Cẩm nang dành cho người bệnh và người học nghề**  

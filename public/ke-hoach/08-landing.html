@@ -1,144 +1,220 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ebook Cẩm Nang Tự Chăm Sóc Cột Sống — Chiro.vn</title>
+  <title>Đăng Ký Nhận Cẩm Nang Cảnh Báo Đỏ &amp; Kỹ Năng Sờ Nắn Bài Bản | Chiro.vn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              wine: '#4A121E',      /* Burgundy chuẩn Simon Center */
+              wineDark: '#360B14',
+              crimson: '#8F1D35',   /* Crimson chủ đạo */
+              crimsonHover: '#76162A',
+              sand: '#FDFBF7',
+              slate: '#F4F5F7',
+              charcoal: '#1A1D20',
+              muted: '#64748B'
+            }
+          },
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    * { -webkit-font-smoothing: antialiased; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
 
-  <!-- TOP BANNER -->
-  <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white text-center py-2.5 px-4 text-xs font-extrabold uppercase tracking-wider shadow-lg flex items-center justify-center gap-2">
-    <span>🔥 DEMO DAY LAUNCH OFFER:</span>
-    <span class="bg-white text-emerald-950 px-2 py-0.5 rounded-full text-[11px]">GIẢM 99% — CHỈ 2.000 VNĐ</span>
+<body class="font-sans text-brand-charcoal bg-white antialiased selection:bg-brand-crimson selection:text-white">
+
+  <!-- HEADER THANH ĐIỀU HƯỚNG CHÍNH ĐẾN CÁC TRANG CỦA WEBSITE CHIRO.VN -->
+  <header class="bg-brand-wine border-b border-brand-crimson py-4 px-4 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <!-- Logo Chiro.vn -->
+      <a href="https://chiro.vn" class="flex items-center space-x-3">
+        <img src="https://simoncenter.vn/wp-content/uploads/2026/02/cropped-logo-simon-center-150x50-1-192x192.png" alt="Simon Center" class="h-9 w-auto">
+        <span class="text-white font-extrabold text-xl tracking-wider">Chiro<span class="text-amber-400">.vn</span></span>
+      </a>
+
+      <!-- Menu Điều Hướng Trang Gốc -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs sm:text-sm font-semibold text-gray-200">
+        <a href="https://chiro.vn" class="hover:text-amber-300 transition">Trang Chủ</a>
+        <a href="https://chiro.vn/chuyen-gia-henrik-simon.html" class="hover:text-amber-300 transition">Chuyên Gia Henrik Simon</a>
+        <a href="https://chiro.vn/lo-trinh-khoa-hoc.html" class="hover:text-amber-300 transition">Lộ Trình Khóa Học</a>
+        <a href="https://chiro.vn/doc-sach.html" class="hover:text-amber-300 transition">Đọc Sách PDF</a>
+        <a href="#survey-form" class="bg-brand-crimson hover:bg-brand-crimsonHover text-white px-4 py-2 rounded-xl transition shadow">
+          Khảo Sát &amp; Nhận Quà (0Đ)
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN FORM ĐĂNG KÝ KHẢO SÁT CHUẨN CHIRO.VN -->
+  <section id="survey-form" class="py-12 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="bg-brand-sand p-6 sm:p-8 rounded-3xl shadow-2xl border-2 border-brand-crimson">
+        <div class="text-center mb-6">
+          <span class="bg-brand-crimson text-white text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider">BẢNG KHẢO SÁT &amp; ĐĂNG KÝ NHẬN TÀI LIỆU MIỄN PHÍ</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-brand-wine mt-3">ĐĂNG KÝ NHẬN CẨM NĂNG CẢNH BÁO ĐỎ &amp; KỸ NĂNG SỜ NẮN BÀI BẢN (MIỄN PHÍ 0Đ)</h2>
+          <p class="text-xs text-gray-500 mt-1.5">Điền thông tin bên dưới để nhận thông báo Ebook &amp; Video bài giảng kỹ năng sờ nắn bài bản qua Email</p>
+        </div>
+
+        <form id="chiroSurveyForm" onsubmit="handleSurveyFormSubmit(event)" class="space-y-5">
+
+          <!-- 1. Họ và tên -->
+          <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">1. Họ và tên của anh/chị là gì? <span class="text-brand-crimson">*</span></label>
+            <input type="text" id="surveyName" required placeholder="Ví dụ: Nguyễn Văn Tuấn" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson text-sm bg-white">
+          </div>
+
+          <!-- 2 & 3. SĐT & Email -->
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+              <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">2. Số điện thoại (Zalo) *</label>
+              <input type="tel" id="surveyPhone" required placeholder="0901234567" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson text-sm bg-white">
+            </div>
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+              <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">3. Địa chỉ Email nhận Sách &amp; Bài giảng *</label>
+              <input type="email" id="surveyEmail" required placeholder="bacsianh@gmail.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson text-sm bg-white">
+            </div>
+          </div>
+
+          <!-- 4. Nghề nghiệp -->
+          <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-1">4. Chuyên môn / Nghề nghiệp hiện tại của anh/chị *</label>
+            <select id="surveyOccupation" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-crimson text-sm bg-white">
+              <option value="KTV YHCT / Vật lý trị liệu / Phục hồi chức năng">Kỹ thuật viên Vật lý trị liệu / YHCT / PHCN</option>
+              <option value="Bác sĩ / Y sĩ Y học cổ truyền">Bác sĩ / Y sĩ / Y học cổ truyền</option>
+              <option value="Chủ phòng khám Đông y / Trị liệu cột sống">Chủ phòng khám Đông y / Trị liệu cột sống</option>
+              <option value="Huấn luyện viên PT Gym / Yoga / Pilates Coach">Huấn luyện viên thể hình (PT Gym, Yoga, Pilates)</option>
+              <option value="Khác">Nghề nghiệp khác...</option>
+            </select>
+          </div>
+
+          <!-- 5. Mục tiêu khảo sát -->
+          <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-2">5. Mục tiêu chính của anh/chị khi tìm hiểu Chiropractic là gì? *</label>
+            <div class="space-y-2">
+              <label class="flex items-center space-x-2.5 p-2.5 rounded-xl bg-gray-50 border border-gray-200 cursor-pointer hover:border-brand-crimson transition">
+                <input type="radio" name="surveyGoal" value="Học để tự chăm sóc cơ thể và người thân" required class="text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học để tự chăm sóc cơ thể và người thân</span>
+              </label>
+              <label class="flex items-center space-x-2.5 p-2.5 rounded-xl bg-gray-50 border border-gray-200 cursor-pointer hover:border-brand-crimson transition">
+                <input type="radio" name="surveyGoal" value="Nâng cao tay nghề/bổ trợ công việc hiện tại (KTV, PT, Spa...)" class="text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Nâng cao tay nghề/bổ trợ công việc hiện tại (HLV, PT, Spa, Vật lý trị liệu...)</span>
+              </label>
+              <label class="flex items-center space-x-2.5 p-2.5 rounded-xl bg-gray-50 border border-gray-200 cursor-pointer hover:border-brand-crimson transition">
+                <input type="radio" name="surveyGoal" value="Học nghề bài bản để mở dịch vụ/phòng trị liệu riêng" class="text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs text-gray-800 font-medium">Học nghề bài bản để mở dịch vụ/phòng trị liệu riêng</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 6. CÂU HỎI 6 -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200 shadow-sm">
+            <label class="block text-xs sm:text-sm font-extrabold text-gray-900 mb-3 leading-snug">
+              6. Anh/chị mong muốn tham gia khoá học theo hình thức nào? <span class="text-brand-crimson">*</span>
+            </label>
+            <div class="space-y-2.5">
+              <label class="flex items-center space-x-3 p-3 rounded-2xl border border-gray-200 bg-white hover:border-brand-crimson cursor-pointer transition shadow-sm">
+                <input type="radio" name="surveyFormat" value="Học trực tiếp thực hành (Offline)" required class="w-4 h-4 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs sm:text-sm text-gray-800 font-medium">Học trực tiếp thực hành (Offline)</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 rounded-2xl border border-gray-200 bg-white hover:border-brand-crimson cursor-pointer transition shadow-sm">
+                <input type="radio" name="surveyFormat" value="Học lý thuyết Online kết hợp thực hành sau" class="w-4 h-4 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs sm:text-sm text-gray-800 font-medium">Học lý thuyết Online kết hợp thực hành sau</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 rounded-2xl border border-gray-200 bg-white hover:border-brand-crimson cursor-pointer transition shadow-sm">
+                <input type="radio" name="surveyFormat" value="Cần tư vấn thêm về lịch khai giảng phù hợp" class="w-4 h-4 text-brand-crimson focus:ring-brand-crimson">
+                <span class="text-xs sm:text-sm text-gray-800 font-medium">Cần tư vấn thêm về lịch khai giảng phù hợp</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold text-base py-4 rounded-xl shadow-xl transition uppercase tracking-wide">
+            👉 XÁC NHẬN ĐĂNG KÝ THÔNG TIN KHẢO SÁT
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL POPUP THÔNG BÁO ĐÃ NHẬN THÔNG TIN KHÁCH HÀNG & THÔNG BÁO GỬI QUA EMAIL -->
+  <div id="surveySuccessModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border-2 border-brand-crimson overflow-hidden text-center p-6 sm:p-8">
+      <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">✓</div>
+      
+      <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2">Đã Nhận Được Thông Tin Của Bạn!</h3>
+      <p class="text-xs sm:text-sm text-gray-600 mb-5 leading-relaxed">
+        Cảm ơn <strong id="modalConfirmName" class="text-brand-crimson">...</strong> đã điền bảng khảo sát! Hệ thống đã ghi nhận thành công thông tin của bạn.
+      </p>
+
+      <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 text-left space-y-2 mb-6">
+        <div class="text-xs font-bold text-amber-900">📩 Thông báo qua Email:</div>
+        <p class="text-xs text-amber-800 leading-relaxed">
+          Thông tin chi tiết về <strong>Sách "Simon Center - Cẩm nang Chiropractic"</strong> và <strong>Chương Trình Học Thử Miễn Phí</strong> sẽ được tự động gửi qua địa chỉ Email: <strong id="modalConfirmEmail" class="underline">...</strong> trong ít phút tới. Xin vui lòng kiểm tra hộp thư của bạn!
+        </p>
+      </div>
+
+      <!-- KẾT NỐI KHÁM PHÁ WEBSITE CHIRO.VN -->
+      <div class="space-y-2.5">
+        <a href="https://chiro.vn/lo-trinh-khoa-hoc.html" class="block w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold py-3.5 rounded-xl text-xs sm:text-sm uppercase transition shadow">
+          🗺️ Xem Lộ Trình Khóa Học Tại Chiro.vn →
+        </a>
+        <a href="https://chiro.vn" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded-xl text-xs transition">
+          🏠 Quay Về Trang Chủ Chiro.vn
+        </a>
+      </div>
+    </div>
   </div>
 
-  <!-- NAVIGATION -->
-  <nav class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center border-b border-slate-800/80">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-emerald-500/20 text-emerald-400 font-extrabold rounded-xl flex items-center justify-center text-xl border border-emerald-500/30">
-        C
-      </div>
-      <span class="font-extrabold text-xl tracking-tight text-white">Chiro<span class="text-emerald-400">.vn</span></span>
-    </div>
-    <a href="#checkout" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-xl text-xs uppercase tracking-wider transition transform active:scale-95 shadow-md">
-      Mua Ebook 2.000đ
-    </a>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section class="max-w-5xl mx-auto px-6 py-16 text-center">
-    <span class="inline-block px-4 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-      Giải Pháp Cơ Sinh Học Chuẩn Y Khoa Đức (Dr. Henrik Simon)
-    </span>
-    
-    <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-      Chấm Dứt Đau Cổ Vai Gáy & Thắt Lưng Tại Nhà Chỉ Với <span class="text-emerald-400 underline underline-offset-8 decoration-emerald-500/40">10 Phút/Ngày</span>
-    </h1>
-
-    <p class="text-slate-300 text-base md:text-lg max-w-3xl mx-auto mb-10 leading-relaxed">
-      Sở hữu ngay <strong>Ebook Cẩm Nang Tự Chăm Sóc Cột Sống & Nắn Chỉnh Tại Nhà</strong> — Phương pháp giải áp đĩa đệm độc quyền từ Bác sĩ Chiropractic Henrik Simon. Không cần dùng thuốc, không tác hại phụ.
-    </p>
-
-    <!-- VSL VIDEO EMBED PLACEHOLDER -->
-    <div class="max-w-3xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-4 shadow-2xl mb-12 relative group overflow-hidden">
-      <div class="aspect-video bg-slate-950 rounded-2xl flex flex-col items-center justify-center relative border border-slate-800/80">
-        <div class="w-16 h-16 bg-emerald-500 text-slate-950 rounded-full flex items-center justify-center text-2xl font-bold pl-1 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition cursor-pointer">
-          ▶
-        </div>
-        <p class="text-xs text-slate-400 font-semibold mt-4">Xem Video 3 Phút Hướng Dẫn Từ Dr. Henrik Simon</p>
+  <!-- FOOTER ĐIỀU HƯỚNG WEBSITE -->
+  <footer class="bg-brand-wineDark text-gray-400 py-8 px-4 border-t border-brand-wine">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <p>© 2026 Chiro.vn — Simon Center Chiropractic Education.</p>
+      <div class="flex space-x-4">
+        <a href="https://chiro.vn" class="hover:text-white transition">Trang chủ</a>
+        <a href="https://chiro.vn/chuyen-gia-henrik-simon.html" class="hover:text-white transition">Chuyên gia</a>
+        <a href="https://chiro.vn/lo-trinh-khoa-hoc.html" class="hover:text-white transition">Lộ trình</a>
+        <a href="https://chiro.vn/doc-sach.html" class="hover:text-white transition">Đọc sách</a>
       </div>
     </div>
-
-    <!-- CTA BUTTON -->
-    <a href="#checkout" class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-2xl text-lg shadow-xl shadow-emerald-500/25 transition transform active:scale-95">
-      <span>📥 TẢI EBOOK CẨM NANG NGAY (CHỈ 2.000 VNĐ)</span>
-    </a>
-  </section>
-
-  <!-- OFFER STACK -->
-  <section class="bg-slate-900/60 border-y border-slate-800 py-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-3xl font-extrabold text-center text-white mb-10">BẠN SẼ NHẬN ĐƯỢC GÌ TRONG BỘ SẢN PHẨM SỐ NÀY?</h2>
-
-      <div class="space-y-4">
-        <!-- Item 1 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex items-start gap-4 shadow-md">
-          <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">
-            1
-          </div>
-          <div>
-            <h3 class="font-bold text-white text-base">Ebook PDF Cẩm Nang Tự Chăm Sóc Cột Sống (500.000đ)</h3>
-            <p class="text-xs text-slate-400 mt-1">Toàn bộ kiến thức giải phẫu cơ sinh học + 5 bài tập bài tập rèn lực tại nhà dứt điểm đau nhức cổ vai gáy & thắt lưng.</p>
-          </div>
-        </div>
-
-        <!-- Bonus 1 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex items-start gap-4 shadow-md">
-          <div class="w-8 h-8 bg-amber-500/20 text-amber-400 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
-            BONUS
-          </div>
-          <div>
-            <h3 class="font-bold text-white text-base">🎁 Video Hướng Dẫn Kỹ Thuật bài tập rèn lực tại nhà (1.000.000đ)</h3>
-            <p class="text-xs text-slate-400 mt-1">Bác sĩ Henrik Simon trực tiếp làm mẫu chuẩn từng động tác kéo giãn giải áp đĩa đệm.</p>
-          </div>
-        </div>
-
-        <!-- Bonus 2 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex items-start gap-4 shadow-md">
-          <div class="w-8 h-8 bg-amber-500/20 text-amber-400 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
-            BONUS
-          </div>
-          <div>
-            <h3 class="font-bold text-white text-base">🎁 Bảng Checklist 14 Ngày Tư Thế Ergo Văn Phòng (300.000đ)</h3>
-            <p class="text-xs text-slate-400 mt-1">Giúp bạn duy trì thói quen ngồi đúng tư thế 8 tiếng không lo mỏi cứng.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CHECKOUT FORM SECTION -->
-  <section id="checkout" class="max-w-xl mx-auto px-6 py-16">
-    <div class="bg-slate-900 border border-emerald-500/30 rounded-3xl p-8 shadow-2xl">
-      <h3 class="text-2xl font-extrabold text-white text-center mb-2">ĐẶT MUA SẢN PHẨM SỐ (TEST 2.000 VNĐ)</h3>
-      <p class="text-xs text-slate-400 text-center mb-6">Thanh toán tự động qua SePay VietQR + Nhận link tải lập tức</p>
-
-      <form action="/download-ebook.html" method="GET" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Họ và tên của bạn</label>
-          <input type="text" required placeholder="Nguyễn Văn A" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Email nhận file</label>
-          <input type="email" required placeholder="ban@gmail.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Số điện thoại / Zalo</label>
-          <input type="tel" required placeholder="0901234567" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-        </div>
-
-        <div class="pt-4 border-t border-slate-800 flex justify-between items-center">
-          <span class="text-xs text-slate-400 font-semibold">Tổng thanh toán:</span>
-          <span class="text-2xl font-extrabold text-emerald-400">2.000 VNĐ</span>
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-xl text-base shadow-lg shadow-emerald-500/20 transition transform active:scale-95">
-          💳 QUÉT MÃ VIETQR MUA HÀNG (2.000đ)
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Chiro.vn — Dr. Henrik Simon. Tất cả quyền được bảo lưu.</p>
   </footer>
+
+  <script>
+    function handleSurveyFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('surveyName').value;
+      const email = document.getElementById('surveyEmail').value;
+
+      document.getElementById('modalConfirmName').innerText = name;
+      document.getElementById('modalConfirmEmail').innerText = email;
+
+      const modal = document.getElementById('surveySuccessModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSurveySuccessModal() {
+      const modal = document.getElementById('surveySuccessModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  </script>
 
 </body>
 </html>

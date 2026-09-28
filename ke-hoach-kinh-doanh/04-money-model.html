@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-money-model.md</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #0f172a; color: #f8fafc; line-height: 1.7; padding: 40px 20px; }
+        .content { max-width: 900px; margin: 0 auto; background-color: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1, h2, h3 { color: #f59e0b; font-weight: 800; margin-top: 1.5em; margin-bottom: 0.5em; }
+        h1 { font-size: 2rem; border-bottom: 2px solid #8f1d35; padding-bottom: 10px; color: #38bdf8; }
+        h2 { font-size: 1.4rem; color: #f59e0b; border-left: 4px solid #f59e0b; padding-left: 10px; margin-top: 25px; }
+        h3 { font-size: 1.1rem; color: #10b981; margin-top: 20px; }
+        p { margin-bottom: 1em; color: #cbd5e1; }
+        ul { margin-left: 20px; margin-bottom: 1em; list-style-type: disc; color: #cbd5e1; }
+        ol { margin-left: 20px; margin-bottom: 1em; list-style-type: decimal; color: #cbd5e1; }
+        li { margin-bottom: 5px; }
+        blockquote { border-left: 4px solid #8f1d35; padding-left: 15px; color: #e2e8f0; font-style: italic; background: rgba(143, 29, 53, 0.2); padding: 12px 18px; border-radius: 0 10px 10px 0; margin: 15px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #334155; padding: 12px; text-align: left; font-size: 0.9rem; }
+        th { background: #1e293b; color: #38bdf8; font-weight: bold; }
+        a { color: #38bdf8; text-decoration: underline; }
+        strong { color: #ffffff; font-weight: bold; }
+        code { background: #0f172a; padding: 2px 6px; border-radius: 4px; color: #f43f5e; font-size: 0.9em; }
+        pre { background: #0f172a; padding: 15px; border-radius: 8px; overflow-x: auto; color: #38bdf8; margin: 15px 0; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div style="margin-bottom: 25px;">
+            <a href="index.html" style="color: #f59e0b; text-decoration: none; font-weight: bold; font-size: 0.9rem;">← Quay lại Trang Pitching Demo Day</a>
+        </div>
+        <h1>MONEY MODEL ARCHITECT: BẢN ĐỒ DOANH THU &amp; PHỄU SẢN PHẨM CHIRO.VN</h1>
+<h2>I. TỔNG QUAN HỆ THỐNG &quot;MÁY IN TIỀN&quot; (REVENUE MODEL OVERVIEW)</h2>
+<p>Mô hình kinh doanh của <strong>chiro.vn</strong> được cấu trúc theo bộ khung 4 nhóm Offer chuẩn y khoa (chuẩn hóa theo Alex Hormozi) nhằm tối đa hóa Giá trị Vòng đời Khách hàng (LTV) từ Kỹ thuật viên/Bác sĩ YHCT/VLTL.</p>
+<pre><code>┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 1. ATTRACTION (Thu hút)   → Lead Magnet Free (0đ) + Tripwire Online Module (1.9tr)      │
+│ 2. CORE OFFER (Chủ lực)  → The Full Online Collection (12.9tr - 14.9tr)               │
+│ 3. UPSELL (Giá cao)      → Offline Cầm Tay Chỉ Việc 4-5 ngày với Henrik Simon (36tr-42tr)│
+│ 4. DOWNSELL (Hạ giá)     → Course Online Rút gọn / Trả góp (4.9tr - 7.9tr)            │
+│ 5. CONTINUITY (Định kỳ)  → Simon Alumni Membership 24/7 (500k/năm) + Lâm sàng (1.25tr)│
+└────────────────────────────────────────────────────────────────────────────────────────┘</code></pre>
+<p>---</p>
+<h2>II. CHI TIẾT 4 NHÓM OFFER &amp; BẢNG GIÁ</h2>
+<h3>1. NHÓM ATTRACTION OFFERS (Sản phẩm thu hút &amp; Dùng thử)</h3>
+<ul><li><strong>HVCO Lead Magnet (Miễn phí 0đ)</strong>: Ebook / Video phân tích ca lâm sàng: <em>&quot;Bộ Cẩm Nang Tầm Soát 5 Dấu Hiệu Cảnh Báo Đỏ (Red Flags) &amp; Kỹ Thuật Luyện Bàn Tay Sờ Nắn Định Vị Đốt Sai Lệch Châu Âu&quot;</em>.</li></ul>
+<ul><li><strong>Tripwire Offer (1.000.000đ – 1.900.000đ)</strong>: Khóa học ngắn 3 module <em>&quot;Kỹ thuật Đọc Phim X-quang Cột Sống Căn Bản trong Chẩn đoán Chiropractic&quot;</em>. Mục tiêu biến người lạ thành người mua hàng đầu tiên với rào cản tài chính cực thấp.</li></ul>
+<h3>2. NHÓM CORE OFFER (Sản phẩm chủ lực - Nguồn doanh thu chính)</h3>
+<ul><li><strong>The Full Online Collection (12.900.000đ – 14.900.000đ)</strong>:</li></ul>
+<p>  - <strong>Nội dung</strong>: Trọn bộ 8 Module Video E-Learning đa góc quay + Hệ thống Bài test tình huống lâm sàng lũy tiến + Kỹ thuật Sờ Nắn Cảm Giác Tay + Phân tích góc trượt X-quang Full-Spine.</p>
+<p>  - <strong>Giá trị trao đổi</strong>: Tặng kèm Bộ Template tư vấn bệnh nhân + Chứng nhận hoàn thành từ Simon Center.</p>
+<h3>3. NHÓM UPSELL OFFERS (Sản phẩm giá cao - Tối đa hóa lợi nhuận)</h3>
+<ul><li><strong>Upsell 1 — Offline Cầm Tay Chỉ Việc (36.000.000đ – 42.000.000đ)</strong>:</li></ul>
+<p>  - <strong>Hình thức</strong>: 4–5 ngày học trực tiếp lâm sàng 1:1 cùng Chuyên gia Henrik Simon tại Hà Nội / TP.HCM. Tặng kèm Full Online (14.9tr) + Miễn phí 1 năm Alumni Membership.</p>
+<ul><li><strong>Upsell 2 — Mastery Track &amp; DISC Certification (68.000.000đ – 85.000.000đ)</strong>:</li></ul>
+<p>  - <strong>Hình thức</strong>: Đào tạo Chuyên sâu Toàn diện Cột sống &amp; Khớp ngoại vi + Cầm cặp lâm sàng thực tế tại phòng khám.</p>
+<h3>4. NHÓM DOWNSELL OFFERS (Giải pháp giải cứu lead không đủ điều kiện tài chính)</h3>
+<ul><li><strong>Downsell — Core Online Mini / Trả góp (4.900.000đ – 7.900.000đ)</strong>:</li></ul>
+<p>  - Dành cho học viên rất muốn học gói Full Online 14.9tr nhưng chưa có đủ điều kiện trả thẳng 100%. Cho phép chia nhỏ thanh toán hoặc đăng ký học trước 4 module căn bản.</p>
+<h3>5. NHÓM CONTINUITY OFFERS (Doanh thu duy trì &amp; Đột phá LTV)</h3>
+<ul><li><strong>Continuity 1 — Simon Alumni Membership (500.000đ/năm)</strong>:</li></ul>
+<p>  - <strong>Quyền lợi</strong>: Tham gia Hội đồng chuyên môn Đức/Việt hỗ trợ đọc phim X-quang &amp; tư vấn ca bệnh khó 24/7; Giảm 50% học phí học lại (Refresher) &amp; phí đi lâm sàng.</p>
+<ul><li><strong>Continuity 2 — Thực tập Lâm sàng (Tageshospitation - 1.250.000đ/ngày)</strong>:</li></ul>
+<p>  - Cho phép Alumni đến quan sát &amp; thực hành trên bệnh nhân thật tại phòng khám đối tác của Henrik Simon.</p>
+<p>---</p>
+<h2>III. DÒNG CHUYỂN HƯỚNG KHÁCH HÀNG (CUSTOMER MONEY FLOW)</h2>
+<ol><li>Khách xem Ad / Facebook Post ➔ Nhận <strong>HVCO Lead Magnet (0đ)</strong>.</li></ol>
+<ol><li>Trang Cảm Ơn chào bán ngay <strong>Tripwire X-quang (1.9tr)</strong>.</li></ol>
+<ol><li>Chăm sóc Zalo / Email Sequence chốt gói chủ lực <strong>Full Online (14.9tr)</strong>.</li></ol>
+<ol><li>Tại điểm mua Full Online ➔ Chào bán Upsell <strong>Offline Cầm Tay Chỉ Việc với Henrik Simon (36tr - 42tr)</strong>.</li></ol>
+<ol><li>Nếu từ chối ➔ Chào bán Downsell <strong>Trả góp 4.9tr</strong>.</li></ol>
+<ol><li>Sau khi tốt nghiệp ➔ Kích hoạt <strong>Alumni Membership (500k/năm)</strong> giữ chân trọn đời và tạo nguồn thu nhập thụ động bền vững.</li></ol>
+    </div>
+</body>
+</html>

@@ -1,14 +1,14 @@
 # 🎁 05 — GRAND SLAM OFFER ARCHITECTURE: ĐĂNG KÝ HỌC & NHẬN SÁCH TẶNG
 
 > **Agent:** 05 — ASSP Offer Architect  
-> **Tên Lời Chào Hàng:** *ĐĂNG KÝ GIỮ CHỖ KHÓA HỌC CHIRO.VN & TẶNG NGAY SÁCH "CHIROPRATIK: CHỮA LÀNH BẰNG ĐÔI BÀN TAY"*  
+> **Tên Lời Chào Hàng:** *ĐĂNG KÝ GIỮ CHỖ KHÓA HỌC CHIRO.VN & TẶNG NGAY SÁCH "SIMON CENTER - CẨM NĂNG CHIROPRATIK"*  
 
 ---
 
 ## 💎 1. CẤU TRÚC LỜI CHÀO HÀNG ĐẶC QUYỀN (GRAND SLAM OFFER)
 
 ### 📦 QUÀ TẶNG KHI ĐĂNG KÝ FORM / GIỮ CHỖ KHÓA HỌC:
-* **Sách Quà Tặng Độc Quyền:** *CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay* (Trị giá: **1.500.000 VNĐ** — Bản mềm PDF full 21 chương)
+* **Sách Quà Tặng Độc Quyền:** *Simon Center - Cẩm nang Chiropractic* (Trị giá: **1.500.000 VNĐ** — Bản mềm PDF full 21 chương)
   * Biên soạn từ giáo trình gốc *Lehrbuch Chiropraktik* của Bác sĩ Henrik Simon (Georg Thieme Verlag, Đức).
 
 ---
