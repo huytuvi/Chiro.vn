@@ -112,16 +112,13 @@ Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "đ�
     greetings: {
       course: `Dạ em kính chào anh/chị ạ! Rất vui được hỗ trợ anh/chị tìm hiểu về <strong>Chương Trình Đào Tạo Chiropractic Chuẩn Y Khoa</strong> của Bác sĩ Henrik Simon.<br><br>
 Anh/chị có thể hỏi em bất kỳ nội dung nào: <em>lộ trình học từ con số 0, học trọn bộ hoặc học từng phần lẻ (cổ vai gáy, thắt lưng - chậu...), học phí ưu đãi, lớp thực hành Offline Cầm tay chỉ việc hay bài giảng mẫu học thử miễn phí</em>.<br><br>
-Dạ anh/chị đang muốn tìm hiểu khóa học nắn chỉnh cho vùng cột sống nào hay muốn bắt đầu từ lộ trình toàn diện ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`,
-      clinical: `Dạ em kính chào anh/chị ạ! Em là Trợ lý Chuyên môn hỗ trợ <strong>Hội Chẩn & Bệnh Học Cột Sống</strong> cùng Bác sĩ Henrik Simon.<br><br>
-Anh/chị có thể trao đổi cùng em về các ca lâm sàng thực tế: <em>phân tích phim X-quang, thoát vị đĩa đệm L4-L5/L5-S1, lệch khung chậu chân ngắn chân dài, kẹt khớp cùng chậu ISG, khớp thái dương hàm hay ranh giới Cảnh báo đỏ (Red Flags)</em>.<br><br>
-Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả chẩn đoán hình ảnh như thế nào ạ? Anh/chị chia sẻ chi tiết để em cùng hội chẩn nhé ạ!`
+Dạ anh/chị đang muốn tìm hiểu khóa học nắn chỉnh cho vùng cột sống nào hay muốn bắt đầu từ lộ trình toàn diện ạ? Anh/chị cứ nhắn tự nhiên cho em nhé ạ!`
     },
 
-    // DANH MỤC CÂU HỎI NHANH THEO 2 TAB
+    // DANH MỤC CÂU HỎI NHANH TƯ VẤN KHÓA HỌC
     categories: {
       course: {
-        label: "🎓 Khóa Học (12)",
+        label: "🎓 Khóa Học",
         questions: [
           { id: "c_courses_and_pricing", text: "💰 Các khóa học & Bảng giá chi tiết" },
           { id: "c_zero_base_passion", text: "🌱 Chưa biết gì & Rất đam mê có học được không?" },
@@ -136,23 +133,6 @@ Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả ch�
           { id: "c_career_outcome", text: "💼 Đầu ra sau khóa học & Cơ hội mở phòng khám" },
           { id: "q4", text: "📊 Khóa học có dạy đọc phim X-quang không?" },
           { id: "q6", text: "🤝 Mua khóa Online sau lên Offline có được trừ tiền?" }
-        ]
-      },
-      clinical: {
-        label: "🩺 Hỏi Chuyên Khoa (12)",
-        questions: [
-          { id: "c_redflags", text: "🚨 Cảnh báo đỏ (Red Flags): Khi nào TUYỆT ĐỐI CẤM NẮN?" },
-          { id: "c_cavitation", text: "💥 Tiếng 'rắc' (Cavitation) bản chất là gì? Có hại không?" },
-          { id: "c_pelvis", text: "🦴 Lệch chậu & Chân ngắn - chân dài (Ilium PI / AS) là sao?" },
-          { id: "c_isg", text: "⚡ Kẹt khớp cùng chậu (ISG Blockade) đau ở đâu, khám thế nào?" },
-          { id: "c_disc", text: "📉 Thoát vị đĩa đệm L4-L5 & Phân biệt đau thần kinh tọa do Cơ hình lê?" },
-          { id: "c_c1_atlas", text: "🧠 Đốt đội C1 (Atlas) liên quan gì Đau đầu Migraine & Chóng mặt?" },
-          { id: "c_tmj", text: "🦷 Khớp cắn hàm (TMG) kêu lục cục & Há miệng lệch xử lý ra sao?" },
-          { id: "c_osteoporosis", text: "👵 Người già loãng xương có nắn được không? Lưu ý an toàn?" },
-          { id: "c_extremity", text: "🦵 Kẹt sụn chêm gối, Lật sơ mi cổ chân & Khớp ngoại vi?" },
-          { id: "c_xray", text: "🔬 Đọc phim X-quang Chiropractic cần đo các chỉ số nào?" },
-          { id: "c_hvla_simon", text: "🎯 Kỹ thuật HVLA & Phương pháp ngón cái (Simon-Technik) có gì hay?" },
-          { id: "c_pediatric", text: "👶 Trẻ sơ sinh vẹo cổ, khóc dạ đề: Hội chứng KISS nắn thế nào?" }
         ]
       }
     },
@@ -784,12 +764,11 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
             </div>
           </div>
         </div>
-        <div class="flex items-center space-x-1 sm:space-x-1.5">
-          <button type="button" id="chiroAiToggleBtn" onclick="window.openGeminiSettingsModal()" title="Trạng thái kết nối AI" 
-            class="p-1.5 rounded-full flex items-center justify-center border border-amber-300/40 bg-amber-400/20 hover:bg-amber-400/30 transition shadow-2xs">
-            <span id="chiroAiDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div class="flex items-center space-x-2">
+          <div id="chiroAiToggleBtn" onclick="window.openGeminiSettingsModal()" title="Trạng thái kết nối AI" class="cursor-pointer flex items-center p-1">
+            <span id="chiroAiDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
             <span id="chiroAiStatusLabel" class="hidden"></span>
-          </button>
+          </div>
           <button onclick="window.clearChiroChat()" title="Làm mới cuộc trò chuyện" class="text-white/70 hover:text-white p-1.5 text-xs rounded-lg hover:bg-white/10 transition">
             🔄
           </button>
@@ -865,9 +844,6 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
             </svg>
           </button>
         </form>
-        <div class="text-[10px] text-gray-400 text-center mt-1.5 flex items-center justify-center">
-          <a href="tel:0389609938" class="text-brand-crimson font-bold hover:underline">Hotline Hỗ Trợ: 0389.609.938</a>
-        </div>
       </div>
     `;
 
@@ -1437,18 +1413,16 @@ Chương 5.8 trong giáo trình Henrik Simon dành riêng cho nắn chỉnh nhi 
     const badge = document.getElementById("chiroAiToggleBtn");
     const dot = document.getElementById("chiroAiDot");
     const label = document.getElementById("chiroAiStatusLabel");
-    if (!badge || !dot) return;
+    if (!dot) return;
 
     if (label) label.innerText = "";
 
     if (GEMINI_CONFIG.apiKey && GEMINI_CONFIG.enabled) {
-      dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
-      badge.className = "p-1.5 rounded-full flex items-center justify-center border border-emerald-300/40 bg-emerald-400/20 hover:bg-emerald-400/30 transition shadow-2xs cursor-pointer";
-      badge.title = "Trạng thái AI: Đang hoạt động (🟢 Green)";
+      dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse inline-block";
+      if (badge) badge.title = "Trạng thái AI: Đang hoạt động (🟢 Green)";
     } else {
-      dot.className = "w-2 h-2 rounded-full bg-rose-500";
-      badge.className = "p-1.5 rounded-full flex items-center justify-center border border-rose-300/40 bg-rose-500/20 hover:bg-rose-500/30 transition shadow-2xs cursor-pointer";
-      badge.title = "Trạng thái AI: Tắt / Thất bại (🔴 Red)";
+      dot.className = "w-2.5 h-2.5 rounded-full bg-rose-500 inline-block";
+      if (badge) badge.title = "Trạng thái AI: Tắt / Thất bại (🔴 Red)";
     }
   }
 
