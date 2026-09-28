@@ -306,9 +306,17 @@ app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 // Root → landing page
 app.get('/', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
 
-// 404 fallback
+// 404 fallback (Check ke-hoach directory before serving homepage index.html)
 app.use((req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'not found' });
+  
+  const relPath = req.path.replace(/^\//, '');
+  if (relPath) {
+    const keHoachFile = path.join(PUBLIC_DIR, 'ke-hoach', relPath);
+    if (fs.existsSync(keHoachFile) && fs.statSync(keHoachFile).isFile()) {
+      return res.sendFile(keHoachFile);
+    }
+  }
   res.status(404).sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
