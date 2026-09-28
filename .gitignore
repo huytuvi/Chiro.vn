@@ -45,3 +45,4 @@ mcp_state.json
 # ── Generated vault markdown (từ brain.db) ──
 vault-ready/
 context-files/
+register_vps.py

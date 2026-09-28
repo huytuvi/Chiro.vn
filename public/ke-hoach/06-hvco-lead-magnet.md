@@ -1,35 +1,27 @@
 # 🧲 06 — HVCO LEAD MAGNET: TÀI LIỆU THU HÚT GIÁ TRỊ CAO (HIGH-VALUE CREATIVE OFFER)
 
 > **Agent:** 06 — ASSP HVCO Creator  
-> **Tiêu đề Lead Magnet:** *Tài Liệu Độc Quyền: 5 Sai Lầm Chết Người Khi Tự Chữa Đau Cổ Vai Gáy & Bài Tập bài tập rèn lực tại nhà 3 Phút Giải Áp Ngay Lập Tức*  
+> **Tiêu đề Sách Lead Magnet:** *CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay (Biên soạn từ Lehrbuch Chiropraktik — Henrik Simon)*  
 
 ---
 
 ## 🎯 1. ĐỊNH NGHĨA HVCO (HIGH VALUE CREATIVE OFFER)
 
-HVCO không phải là một tài liệu quảng cáo bán hàng che đậy, mà là một nội dung mang tính giáo dục sâu sắc, giúp khách hàng tiềm năng nhận ra vấn đề gốc rễ của họ và khao khát có giải pháp toàn diện từ Chiro.vn.
+HVCO là cuốn sách chuyên khảo dài 21 chương/mục được thiết kế tỉ mỉ, giúp học viên và bệnh nhân hiểu rõ nguyên tắc Y Khoa, triết lý chữa lành từ gốc rễ và bằng chứng khoa học WHO trước khi đăng ký tham gia các khóa học Online / Offline tại Chiro.vn.
 
 ---
 
-## 📑 2. DÀN Ý CHI TIẾT CỦA HVCO LEAD MAGNET
+## 📑 2. NỘI DUNG TÓM TẮT CỦA CUỐN SÁCH TẶNG
 
-### PART 1: 5 SAI LẦM PHỔ BIẾN KHIẾN ĐAU CỘT SỐNG NẶNG HƠN
-1. **Sai lầm 1:** Lạm dụng thuốc giảm đau và dán cao liên tục (Làm tê thần kinh, che giấu sự thoái hóa đĩa đệm).
-2. **Sai lầm 2:** Tự vặn cổ, bẻ lưng phát ra tiếng "rắc" ngẫu nhiên (Làm giãn dây chằng bao khớp, gây mất ổn định cột sống).
-3. **Sai lầm 3:** Đi massage bấm huyệt tại các cơ sở không có chuyên môn y khoa.
-4. **Sai lầm 4:** Tập luyện các bài tập dằn cơ mạnh khi cột sống đang bị viêm cấp tính.
-5. **Sai lầm 5:** Bỏ qua các dấu hiệu cảnh báo sớm từ cơ sinh học khung chậu.
-
-### PART 2: NGUYÊN LÝ CƠ SINH HỌC GONSTEAD TỪ DR. HENRIK SIMON
-* Tại sao phải kiểm tra toàn bộ cột sống Full-Spine thay vì chỉ chăm chăm vào đốt sống bị đau.
-* Giải thích cơ chế giải áp tự nhiên của đĩa đệm.
-
-### PART 3: BÀI TẬP MICRO-DRILLS 3 PHÚT NGỒI TẠI BÀN LÀM VIỆC
-* Hướng dẫn 3 bước thực hiện động tác kéo giãn giải áp HWS (Cổ) & LWS (Thắt lưng).
+1. **Nguồn gốc & Lịch sử:** Từ dấu vết cổ xưa Hy Lạp/Hippocrates đến năm 1895 D.D. Palmer và sự phát triển tại Đức & Việt Nam.
+2. **Bằng chứng khoa học:** Báo cáo Lancet, Bronfort 2010, Warwick 2014 và khuyến nghị chính thức của WHO (2023).
+3. **Bản đồ đốt sống – cơ quan:** Giải thích sự liên hệ giữa các tầng đốt sống Cổ, Ngực, Thắt Lưng với triệu chứng nội tạng & thần kinh.
+4. **Triết lý điều trị:** Cơ thể là một tổng thể, điểm đau là điểm báo (gánh hậu quả), truy tìm gốc rễ qua kỹ thuật chuyên biệt Gonstead/DISC.
+5. **An toàn tuyệt đối (Red Flags):** Quy tắc *Primum non nocere* (Trước hết, đừng gây hại), chỉ định và chống chỉ định tuyệt đối.
 
 ---
 
-## 🚀 3. KỊCH BẢN CHUYỂN ĐỔI TỪ HVCO SANG SẢN PHẨM TRẢ TIỀN (TRANSITION TO EBOOK 2K)
+## 🚀 3. KỊCH BẢN CHUYỂN ĐỔI TỪ SÁCH TẶNG SANG KHÓA HỌC TRẢ TIỀN
 
-> *"Bài tập bài tập rèn lực tại nhà 3 phút trên là giải pháp cấp bách cho bạn ngay hôm nay. Nhưng để dứt điểm nỗi đau và xây dựng lại hệ cơ sinh học vững chắc, bạn cần một lộ trình 14 ngày đầy đủ chuẩn y khoa.*  
-> *Hãy sở hữu ngay **Ebook Cẩm Nang Tự Chăm Sóc Cột Sống & Nắn Chỉnh Tại Nhà** chỉ với **2.000 VNĐ** (Ưu đãi mở bán hôm nay)!"*
+> *"Sau khi đọc xong cuốn sách **CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay**, bạn sẽ nắm rõ nền tảng lý thuyết và triết lý y khoa chuẩn Đức.  
+> Hãy đăng ký giữ chỗ ngay các khóa học thực hành **Level 1 Online** hoặc **Masterclass Offline** tại Chiro.vn để được Bác sĩ Henrik Simon cầm tay chỉ việc!"*

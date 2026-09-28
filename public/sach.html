@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đọc Sách Online: CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay | Simon Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen pb-20 selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- TOP STICKY BAR FOR ACTION & DOWNLOAD -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 shadow-xl">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-emerald-500/20 text-emerald-400 font-extrabold rounded-xl flex items-center justify-center text-lg border border-emerald-500/30">
+          📖
+        </div>
+        <div>
+          <h1 class="font-bold text-sm text-white leading-tight">CHIROPRATIK — Chữa Lành Bằng Đôi Bàn Tay</h1>
+          <p class="text-[11px] text-slate-400">Tác giả: Dr. Henrik Simon · Simon Center</p>
+        </div>
+      </div>
+      
+      <!-- ACTION BUTTONS -->
+      <div class="flex items-center gap-2">
+        <a href="/books/Chiropractic-Chua-Lanh-Bang-Doi-Ban-Tay.pdf" download class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-xl text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 transition transform active:scale-95">
+          <span>📥 TẢI SÁCH PDF</span>
+        </a>
+        <a href="/books/Chiropractic-Chua-Lanh-Bang-Doi-Ban-Tay.md" download class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl text-xs transition">
+          📄 File Markdown
+        </a>
+        <button onclick="window.print()" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl text-xs transition hidden sm:inline-block">
+          🖨️ In / Luu PDF
+        </button>
+        <a href="/" class="px-3.5 py-2 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 rounded-xl text-xs font-semibold transition">
+          🏠 Trang Chủ
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN BOOK READER CONTAINER -->
+  <main class="max-w-4xl mx-auto px-4 pt-10">
+
+    <!-- BOOK COVER / HEADER BANNER -->
+    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-10 text-center relative overflow-hidden shadow-2xl">
+      <span class="inline-block px-4 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+        SIMON CENTER · TÀI LIỆU CHUYÊN KHOẢO CHÍNH THỨC
+      </span>
+      
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+        CHIROPRATIK — CHỮA LÀNH BẰNG ĐÔI BÀN TAY
+      </h1>
+      
+      <p class="text-slate-300 text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-6">
+        Nguồn gốc · Sự phát triển toàn cầu · Bằng chứng khoa học · Triết lý điều trị từ gốc rễ &amp; Nguyên tắc an toàn cho người bệnh
+      </p>
+
+      <div class="flex flex-wrap justify-center items-center gap-4 text-xs text-slate-400 border-t border-slate-800 pt-6">
+        <span>👨‍⚕️ <strong>Biên soạn:</strong> Bác sĩ Henrik Simon</span>
+        <span>📖 <strong>Giáo trình gốc:</strong> <em>Lehrbuch Chiropraktik (Thieme Verlag)</em></span>
+        <span>📍 <strong>Phát hành:</strong> Simon Center · TP.HCM (2026)</span>
+      </div>
+    </div>
+
+    <!-- QUICK NAVIGATION / TABLE OF CONTENTS -->
+    <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 mb-12 shadow-lg">
+      <h3 class="text-sm font-extrabold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+        <span>📑 MỤC LỤC SÁCH (CLICK ĐỂ XEM NHANH TỪNG CHƯƠNG)</span>
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-300">
+        <a href="#loi-noi-dau" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">00.</span> Lời nói đầu &amp; Lời nhắc quan trọng
+        </a>
+        <a href="#chuong-1" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">01.</span> Chiropractic ra đời từ đâu? (Lịch sử 1895)
+        </a>
+        <a href="#chuong-2" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">02.</span> Hơn một thế kỷ lan tỏa khắp thế giới
+        </a>
+        <a href="#chuong-3" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">03.</span> Chiropractic tại Châu Á và Việt Nam
+        </a>
+        <a href="#chuong-4" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">04.</span> Vì sao Chiropractic được ưa chuộng &amp; Bằng chứng WHO
+        </a>
+        <a href="#chuong-5" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">05.</span> Những bộ phận &amp; bệnh lý điều trị hiệu quả
+        </a>
+        <a href="#chuong-6" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">06.</span> Triết lý điều trị: Cơ thể là một tổng thể
+        </a>
+        <a href="#chuong-7" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">07.</span> Không chỉ cột sống: Nơi nào có khớp nơi đó chỉnh được
+        </a>
+        <a href="#chuong-8" class="p-2.5 bg-slate-950/60 rounded-xl hover:bg-emerald-500/10 hover:text-emerald-400 transition flex items-center gap-2">
+          <span class="text-emerald-500 font-bold">08.</span> An toàn trên hết: Phác đồ &amp; Nguyên tắc "Primum non nocere"
+        </a>
+      </div>
+    </div>
+
+    <!-- CHAPTER CONTENT -->
+    <article class="space-y-12 text-slate-300 text-sm md:text-base leading-relaxed">
+      
+      <!-- LỜI NÓI ĐẦU -->
+      <section id="loi-noi-dau" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">📜</span> Lời Nói Đầu
+        </h2>
+        <p class="mb-4">
+          Vận động là sự sống, và sự sống là vận động. Chiropractic — trong tiếng Việt thường gọi là nắn chỉnh cột sống và khớp, hay chỉnh hình học thần kinh cột sống — là một phương pháp trị liệu bằng đôi bàn tay, không dùng thuốc và không phẫu thuật. Điều làm nên sức sống của nó suốt hơn một thế kỷ qua không phải là những lời quảng bá, mà là kết quả thật trên hàng triệu người bệnh và một khối lượng bằng chứng khoa học ngày càng dày.
+        </p>
+        <p class="mb-4">
+          Cẩm nang nhỏ này được biên soạn cho hai nhóm bạn đọc: những người bệnh muốn hiểu rõ mình đang được điều trị bằng phương pháp gì và vì sao nó hiệu quả, và những người đang học nghề muốn nắm bắt nền tảng, triết lý cùng những nguyên tắc an toàn cốt lõi trước khi đặt tay lên người bệnh.
+        </p>
+        <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-2xl text-xs text-amber-200 mt-6">
+          <h4 class="font-bold uppercase tracking-wider mb-1">⚠️ MỘT LỜI NHẮC QUAN TRỌNG</h4>
+          <p>Cuốn cẩm nang này giúp bạn hiểu và tin tưởng hơn vào Chiropractic dựa trên dữ kiện — nhưng nó không thay thế việc thăm khám trực tiếp. Chiropractic chuyên biệt là một tay nghề chỉ có thể học qua thực hành có hướng dẫn; và mỗi người bệnh cần được đánh giá riêng bởi người điều trị có chuyên môn.</p>
+        </div>
+      </section>
+
+      <!-- CHƯƠNG 1 -->
+      <section id="chuong-1" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🏛️</span> Chương 1 · Chiropractic Ra Đời Từ Đâu?
+        </h2>
+        <p class="mb-4">
+          Từ <em>Chiropractic</em> được ghép từ hai từ Hy Lạp cổ: <em>cheir</em> (bàn tay) và <em>praktos</em> (thực hành) — nghĩa đen là “làm bằng bàn tay”. Đây là một nền y học về nguyên tắc rất cổ xưa, thuần túy thủ công, có thể thực hiện ở bất cứ đâu trong những điều kiện đơn giản nhất.
+        </p>
+        <h3 class="font-bold text-white text-base mt-6 mb-2">Những dấu vết cổ xưa</h3>
+        <p class="mb-4">
+          Việc nắn một khớp lệch về đúng vị trí đã đồng hành cùng loài người từ rất sớm. Ngay từ thời đồ đá, người ta đã “nắn lại vào chỗ” những khớp bị trật sau chấn thương. Ở Hy Lạp, danh y <strong>Hippocrates (460–377 TCN)</strong> đã mô tả các kỹ thuật thao tác bằng tay trong chuyên khảo “Về các khớp”.
+        </p>
+        <h3 class="font-bold text-white text-base mt-6 mb-2">Năm 1895: Một bước ngoặt lịch sử</h3>
+        <p class="mb-4">
+          Năm 1895, <strong>Daniel David Palmer (1845–1913)</strong> phát triển Chiropractic ở Davenport, bang Iowa, Hoa Kỳ. Palmer đặt nền móng cho phương pháp của mình từ ca điều trị cho Harvey Lillard ngày 18/09/1895 — người gác cổng bị điếc nặng nhiều năm. Palmer nắn lại đốt sống lệch ở lưng Lillard và thính giác của ông gần như phục hồi hoàn toàn.
+        </p>
+      </section>
+
+      <!-- CHƯƠNG 2 -->
+      <section id="chuong-2" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🌍</span> Chương 2 · Hơn Một Thế Kỷ Lan Tỏa Khắp Thế Giới
+        </h2>
+        <p class="mb-4">
+          Từ một căn phòng nhỏ ở Iowa, trong hơn 100 năm, Chiropractic đã trở thành một nghề chăm sóc sức khỏe được đào tạo bài bản và được luật pháp công nhận tại hơn 90 quốc gia.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+            <h4 class="font-bold text-emerald-400 text-xs uppercase mb-1">Hoa Kỳ &amp; Canada</h4>
+            <p class="text-xs text-slate-400">Được cấp phép hành nghề ở toàn bộ 50 bang của Mỹ với học vị Tiến sĩ Doctor of Chiropractic (D.C.).</p>
+          </div>
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+            <h4 class="font-bold text-emerald-400 text-xs uppercase mb-1">Châu Âu &amp; Nước Đức (DISC)</h4>
+            <p class="text-xs text-slate-400">Trường phái Chiropractic Chuyên Biệt do Dr. Henrik Simon đào tạo nhấn mạnh phân tích trật khớp chính xác &amp; xung lực đặc hiệu.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHƯƠNG 3 -->
+      <section id="chuong-3" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🇻🇳</span> Chương 3 · Chiropractic Tại Châu Á Và Việt Nam
+        </h2>
+        <p class="mb-4">
+          Việt Nam là một trong những quốc gia đầu tiên ở châu Á đưa Chiropractic vào hành nghề một cách hợp pháp từ năm 2006. Simon Center tại TP. Hồ Chí Minh mang trường phái Chiropractic chuyên biệt kiểu Đức – Mỹ (theo giáo trình của Henrik Simon / DISC) đến Việt Nam — không chỉ điều trị mà còn đào tạo chuẩn hóa an toàn y khoa.
+        </p>
+      </section>
+
+      <!-- CHƯƠNG 4 & 5 -->
+      <section id="chuong-4" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🔬</span> Chương 4 &amp; 5 · Bằng Chứng Khoa Học &amp; Bệnh Lý Điều Trị
+        </h2>
+        <p class="mb-4">
+          Năm 2023, Tổ chức Y tế Thế giới (WHO) công nhận liệu pháp nắn chỉnh cột sống (spinal manipulative therapy) cho các chứng đau thắt lưng mạn tính. Các báo cáo thử nghiệm lâm sàng ngẫu nhiên có đối chứng (RCT) của Bronfort và Warwick khẳng định Chiropractic vượt trội hơn dùng thuốc trong việc giảm đau cổ vai gáy và cột sống thắt lưng.
+        </p>
+      </section>
+
+      <!-- CHƯƠNG 6 & 7 -->
+      <section id="chuong-6" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🧘</span> Chương 6 &amp; 7 · Triết Lý Điều Trị &amp; Phạm Vi Toàn Thân
+        </h2>
+        <p class="mb-4">
+          <strong>Cơ thể là một tổng thể:</strong> Nơi đau thường là nơi "gánh hậu quả" chứ không phải nơi gây ra vấn đề. Chiropractic chuyên biệt truy tìm gốc rễ sai lệch qua chuỗi bù trừ cơ sinh học.
+        </p>
+        <p class="mb-4">
+          <strong>Nơi nào có khớp, nơi đó chỉnh được:</strong> Bất cứ khớp nào trên cơ thể (cổ, lưng, vai, khuỷu, cổ tay, hàm TMG, gối, cổ chân) đều có thể được đánh giá và nắn chỉnh an toàn.
+        </p>
+      </section>
+
+      <!-- CHƯƠNG 8 -->
+      <section id="chuong-8" class="bg-slate-900 border border-slate-800 rounded-3xl p-8 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+          <span class="text-emerald-400">🛡️</span> Chương 8 · An Toàn Trên Hết: Nguyên Tắc "Primum Non Nocere"
+        </h2>
+        <p class="mb-4">
+          Diễn đạt cho người thực hành Chiropractic: <em>"Trước khi học cách chữa cho người bệnh, phải học cách không làm hại họ."</em> Quy trình chẩn đoán nghiêm ngặt (Hỏi bệnh sử ➔ Quan sát ➔ Sờ nắn Palpation ➔ X-quang/MRI) giúp loại trừ hoàn toàn các nguy cơ Red Flags trước khi nắn chỉnh.
+        </p>
+      </section>
+
+    </article>
+
+    <!-- BOTTOM DOWNLOAD & COURSE REGISTRATION BANNER -->
+    <div class="mt-16 bg-gradient-to-r from-emerald-900 via-slate-900 to-emerald-900 border border-emerald-500/40 rounded-3xl p-8 text-center shadow-2xl">
+      <h3 class="text-2xl font-extrabold text-white mb-2">TẢI SÁCH PDF HOẶC ĐĂNG KÝ KHÓA HỌC THỰC HÀNH</h3>
+      <p class="text-xs text-slate-300 max-w-xl mx-auto mb-6">
+        Bạn có thể tải ngay cuốn sách về máy hoặc đăng ký tham gia khóa huấn luyện Chiropractic chuẩn Đức trực tiếp cùng Dr. Henrik Simon tại Chiro.vn.
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-4">
+        <a href="/books/Chiropractic-Chua-Lanh-Bang-Doi-Ban-Tay.pdf" download class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold rounded-2xl text-sm shadow-xl shadow-emerald-500/20 transition transform active:scale-95">
+          📥 TẢI SÁCH PDF FILE FULL
+        </a>
+        <a href="/#checkout" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-extrabold rounded-2xl text-sm border border-slate-700 transition">
+          🎓 ĐĂNG KÝ HỌC TẠI CHIRO.VN
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-20 border-t border-slate-900 py-8 text-center text-xs text-slate-500">
+    <p>© 2026 Simon Center · Chiro.vn · Biên soạn dựa trên giáo trình <em>Lehrbuch Chiropraktik</em> — Dr. Henrik Simon</p>
+  </footer>
+
+</body>
+</html>

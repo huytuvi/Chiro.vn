@@ -272,6 +272,34 @@ app.get('/api/admin/stats', requireAdmin, (req, res) => {
 // Friendly /admin route
 app.get('/admin', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'admin.html')));
 
+// Friendly /books & /doc-sach route (Đọc sách online & tải PDF)
+app.get('/books', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'doc-sach.html')));
+app.get('/sach', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'doc-sach.html')));
+app.get('/doc-sach', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'doc-sach.html')));
+app.get('/books/*', (req, res, next) => {
+  const file = req.params[0];
+  const filePath = path.join(PUBLIC_DIR, 'books', file);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    return res.sendFile(filePath);
+  }
+  res.sendFile(path.join(PUBLIC_DIR, 'doc-sach.html'));
+});
+
+// Friendly /ke-hoach route (Dashboard thuyết trình Demo Day)
+app.get('/ke-hoach', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'ke-hoach', 'index.html')));
+app.get('/ke-hoach/*', (req, res, next) => {
+  const file = req.params[0];
+  const filePath = path.join(PUBLIC_DIR, 'ke-hoach', file);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    return res.sendFile(filePath);
+  }
+  res.sendFile(path.join(PUBLIC_DIR, 'ke-hoach', 'index.html'));
+});
+
+// Short page aliases
+app.get('/download-ebook', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'download-ebook.html')));
+app.get('/landing', (req, res) => res.sendFile(path.join(PUBLIC_DIR, 'landing.html')));
+
 // Static site (only ./public is exposed). ".html" lets /foo serve foo.html
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 

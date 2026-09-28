@@ -1,0 +1,19 @@
+Hôm nay là Ngày 16 trong chuỗi thử thách, và mình vừa hoàn thành việc "nâng cấp bộ kỹ năng" cho Trợ lý AI với 3 AI Skills thực chiến tự tạo.
+
+Trước đây, muốn AI làm đúng ý thì lần nào cũng phải gõ lại prompt dài ngoằng. Hôm nay, mọi quy trình đã được đóng gói chuẩn hóa thành các Skill chuyên nghiệp có thể tái sử dụng 100%:
+
+1️⃣ Skill 1: Tính chi phí vận hành VPS & AI API (`tinh-chi-phi-vps-ai`)
+- Tích hợp sẵn Python script tự động tính chính xác chi phí VPS (123host) + API DeepSeek theo số lượng request/ngày, không còn tính nhẩm mơ hồ.
+
+2️⃣ Skill 2: Trả lời FAQ hệ thống goClaw (`tra-loi-faq-goclaw`)
+- Đóng vai CSKH tự động tư vấn thắc mắc về AI Agent Gateway, VPS Ubuntu, Telegram Bot với văn phong chuẩn mực và thân thiện.
+
+3️⃣ Skill 3: Viết bài đăng Facebook chuẩn Brand Voice (`viet-bai-facebook-chiro`)
+- Soạn post truyền thông theo chuẩn cấu trúc Hook - Body - CTA kèm template sẵn có, đảm bảo đúng tone & style thực chiến.
+
+💡 Đúc kết lớn nhất hôm nay: Dạy AI làm việc không phải là viết prompt ngẫu hứng, mà là thiết lập quy trình (SKILL.md + Python Script + Asset Templates) rõ ràng. Khi có quy trình chuẩn, AI sẽ trở thành một nhân sự cực kỳ đáng tin cậy.
+
+Cảm ơn anh Dương Trọng Nghĩa vì bài tập thực tế và giá trị!
+👉 https://www.facebook.com/duongtrongnghia.theKP3/
+
+#21DayChallenge #theKP3 #AIFirst #AISkills #VibeCoding #goClaw
