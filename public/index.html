@@ -1307,13 +1307,10 @@
             <input type="text" name="website_hp" id="regHoneypot" tabindex="-1" autocomplete="off">
           </div>
 
-          <!-- Cấu hình ẩn cho FormSubmit -->
+          <!-- Cấu hình ẩn cho FormSubmit (Chỉ dùng thông báo Admin, KHÔNG gửi _autoresponse để tránh trùng lặp email với Supabase Resend) -->
           <input type="hidden" name="_subject" value="[CHIRO.VN] Học viên mới đăng ký khóa học – Simon Center">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
-          <!-- Auto-reply: gửi email xác nhận về địa chỉ email khách đã điền -->
-          <input type="hidden" name="_autoresponse"
-            value="Chúc mừng và chân thành cảm ơn Anh/Chị đã quan tâm và đăng ký khóa học Chiropractic tại Simon EDU Center (chiro.vn)! Khách hàng sẽ được cung cấp những thông tin mới nhất các khóa học của Simon EDU Center sớm nhất. Chuyển khoản vào mã QR SePay (Ngân hàng ACB – STK: 2412825668 – Chủ TK: BUI NGOC MINH HUY) để hoàn tất đăng ký. Sau khi chuyển khoản, hệ thống sẽ tự động kích hoạt. Cam kết bảo mật: Toàn bộ thông tin cá nhân của Anh/Chị luôn được bảo mật 100%. Hotline / Zalo: 0389 609 938.">
           <input type="hidden" name="_replyto" id="regReplyTo" value="">
           <input type="hidden" name="_next" value="https://chiro.vn">
           <input type="hidden" name="Hoc_Phi_Tai_Thoi_Diem_Dang_Ky" id="hiddenFormPrice" value="12.900.000 VNĐ">
@@ -2992,39 +2989,12 @@
         website_hp: hp
       });
 
-      // 4. GỬI EMAIL XÁC NHẬN KÈM HƯỚNG DẪN CHUYỂN KHOẢN & MÃ VIETQR QUA FORMSUBMIT
-      const cleanPriceNum = String(currentPriceObj.current).replace(/\D/g, '') || '7000000';
-      const qrImageUrl = `https://img.vietqr.io/image/ACB-2412825668-compact2.png?amount=${cleanPriceNum}&addInfo=${encodeURIComponent(orderCode)}&accountName=BUI%20NGOC%20MINH%20HUY`;
-
-      const regAutoResponse =
-        `🎉 CHÚC MỪNG ANH/CHỊ ${name.toUpperCase()} ĐÃ ĐĂNG KÝ THÀNH CÔNG!\n\n` +
-        `Hệ thống Simon EDU Center đã ghi nhận yêu cầu đăng ký của Anh/Chị.\n\n` +
-        `📋 THÔNG TIN ĐƠN ĐĂNG KÝ:\n` +
-        `• Họ và tên: ${name}\n` +
-        `• Số điện thoại / Zalo: ${phone}\n` +
-        `• Email: ${email}\n` +
-        `• Khóa học quan tâm: ${courseName}\n` +
-        `• Học phí ưu đãi: ${currentPriceObj.currentFormatted}\n` +
-        `• Mã đơn hàng (Nội dung CK SePay): ${orderCode}\n\n` +
-        `💳 HƯỚNG DẪN CHUYỂN KHOẢN TỰ ĐỘNG (ACB SEPAY):\n` +
-        `• Ngân hàng: ACB (Ngân hàng TMCP Á Châu)\n` +
-        `• Số tài khoản: 2412825668\n` +
-        `• Chủ tài khoản: BUI NGOC MINH HUY\n` +
-        `• Số tiền: ${currentPriceObj.currentFormatted}\n` +
-        `• Nội dung chuyển khoản (BẮT BUỘC CHÍNH XÁC): ${orderCode}\n\n` +
-        `📷 MÃ VIETQR QUÉT TỰ ĐỘNG CHUYỂN KHOẢN SEPAY:\n` +
-        `Mở app ngân hàng quét mã QR tại liên kết bên dưới để thông tin tự động điền 100%:\n` +
-        `${qrImageUrl}\n\n` +
-        `⚠️ LƯU Ý QUAN TRỌNG: Vui lòng nhập CHÍNH XÁC nội dung chuyển khoản là "${orderCode}" để cổng SePay tự động xác thực và kích hoạt khóa học cho Anh/Chị trong 3-10 giây!\n\n` +
-        `📞 Cần hỗ trợ khẩn cấp: Hotline/Zalo 0389.609.938\n` +
-        `🔒 Simon EDU Center cam kết bảo mật 100% thông tin cá nhân.\n\n` +
-        `Trân trọng,\nBan Đào Tạo Simon EDU Center — chiro.vn`;
-
+      // 4. GỬI THÔNG BÁO VỀ HÒM THƯ ADMIN VIA FORMSUBMIT
+      // (KHÔNG gửi _autoresponse ở đây để tránh trùng lặp email với Supabase Resend HTML email)
       const formData = new FormData(form);
       formData.set('name', name);
       formData.set('email', email);
       formData.set('_replyto', email);
-      formData.set('_autoresponse', regAutoResponse);
       formData.set('_subject', `[Simon Center] ✅ Xác nhận đăng ký & Hướng dẫn CK SePay — ${name} (Đơn #${orderCode})`);
 
       fetch('https://formsubmit.co/ajax/chiroeduvn@gmail.com', {
