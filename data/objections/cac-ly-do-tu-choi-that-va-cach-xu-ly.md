@@ -14,7 +14,7 @@
 >  
 > *Tuy nhiên, điểm khác biệt lớn nhất mà các anh chị học viên sau khi tham khảo cả hai bên quyết định chọn Simon Center nằm ở **Giải pháp sư phạm chống quên bài** ạ:*  
 > * Thứ nhất, Thầy Henrik Simon là tác giả sách giáo khoa Chiropractic tại Đức và giảng dạy theo trường phái **Specific chuẩn y khoa** — tập trung vào việc đọc phim X-quang đo đạc milimet và kiểm tra Cảnh báo đỏ (Red Flags) nghiêm ngặt trước khi nắn.  
-> * Thứ hai, bên em có **Hệ thống E-Learning 4K xem lại dài hạn 24/7 không giới hạn thời gian kèm bài tập Micro-drills rèn lực tại nhà**. Điểm mấu chốt của nắn chỉnh là trí nhớ cơ bắp; nếu học 3 ngày trực tiếp xong về không có video chi tiết để ôn lại thì rất dễ bị run tay và quên bài.  
+> * Thứ hai, bên em có **Hệ thống E-Learning chất lượng cao xem lại dài hạn 24/7 không giới hạn thời gian kèm bài tập bài tập rèn lực tại nhà rèn lực tại nhà**. Điểm mấu chốt của nắn chỉnh là trí nhớ cơ bắp; nếu học 3 ngày trực tiếp xong về không có video chi tiết để ôn lại thì rất dễ bị run tay và quên bài.  
 > * Thứ ba, bên em có chính sách **khấu trừ 100% học phí khóa Online vào khóa Offline Cầm tay chỉ việc cùng Thầy Henrik Simon**, và nhóm cựu học viên được Thầy hỗ trợ đọc phim X-quang 24/7 dài hạn. Anh/chị học online vững lý thuyết trước rồi bước vào lớp thực hành thì hiệu quả sẽ cao gấp 3 lần ạ."*
 
 ---

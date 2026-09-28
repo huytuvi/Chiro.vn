@@ -27,7 +27,7 @@ Không biết đối với anh/chị, điều gì đang khiến anh/chị băn k
 ### Bước 3: Đánh giá chi phí của sự trì hoãn (Cost of Inaction)
 * *Nếu khách nói "để đợt sau":*  
 * *"Dạ em hiểu ạ. Nhưng em xin phép chia sẻ thật lòng: Nếu anh/chị đợi thêm 3 tháng hay 6 tháng nữa, mỗi ngày tại phòng khám anh/chị vẫn phải dùng sức bắp tay xoa bóp mệt mỏi, vẫn phải từ chối hoặc run tay trước những ca bệnh nhân cột sống khó, và mất đi hàng chục triệu tiền thu nhập từ các ca nắn chỉnh chuyên biệt mỗi tháng.*  
-*Trong khi nếu anh/chị bắt đầu ngay hôm nay, hệ thống E-Learning cho phép anh/chị học linh hoạt mỗi ngày chỉ 30 phút vào buổi tối. Sau 2 tuần rèn Micro-drills là anh/chị đã bắt đầu có thể ứng dụng sờ nắn và gia tăng hiệu quả điều trị cho bệnh nhân ngay rồi.*  
+*Trong khi nếu anh/chị bắt đầu ngay hôm nay, hệ thống E-Learning cho phép anh/chị học linh hoạt mỗi ngày chỉ 30 phút vào buổi tối. Sau 2 tuần rèn bài tập rèn lực tại nhà là anh/chị đã bắt đầu có thể ứng dụng sờ nắn và gia tăng hiệu quả điều trị cho bệnh nhân ngay rồi.*  
 *Đặc biệt, đợt mở màn này học phí đang được giữ ở mức 14.9 triệu kèm trọn bộ quà tặng cẩm nang X-quang. Sang chu kỳ sau, học phí sẽ tự động cập nhật về giá gốc ạ."*
 
 ### Bước 4: Đóng khung bước đi tiếp theo (Micro-commitment)

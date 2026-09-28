@@ -16,7 +16,7 @@
 | ❌ **"1 phần mười giây"** / **"1/10 giây"** | Thông số chưa được kiểm chứng vật lý | **"ở thời điểm thả lỏng cơ"**, **"trong tích tắc giải phóng lực"**, **"kỹ thuật thả rơi trọng lượng cơ thể (Body Drop)"** |
 | ❌ **"bẻ khớp trôi nổi"**, **"đối thủ"**, **"ngoài thị trường"** (để chê bai) | Vi phạm y đức, hạ thấp hình ảnh chuyên gia | **Tập trung nêu bật 4 thế mạnh bản quyền của Simon Center** (Chuẩn DISC Đức, Specific, Red Flags, Video đa góc) |
 | ❌ **"trả góp"**, **"trả góp 0%"**, **"thẻ tín dụng"** | Không chủ động chào mời tài chính | Chỉ giải thích khi khách hàng chủ động hỏi phương thức thanh toán |
-| ❌ **"Video 4K First-Person POV"** | Thuật ngữ phức tạp gây khó hiểu | **"Video với các góc quay khác nhau"** |
+| ❌ **"video chất lượng cao First-Person POV"** | Thuật ngữ phức tạp gây khó hiểu | **"Video với các góc quay khác nhau"** |
 | ❌ **Hứa hẹn mở phòng khám ngay** | Sai lệch pháp lý y tế tại Việt Nam | **Chứng nhận Certificate of Completion xác nhận năng lực chuyên môn**, mở phòng khám cần tuân thủ quy định Bộ Y tế |
 
 ---
@@ -91,7 +91,7 @@
 > 2. **MODULE LẺ ONLINE — THẮT LƯNG & KHUNG CHẬU (LWS & PELVIS):** 1.000.000đ  
 > 3. **LEVEL 1 ONLINE — NỀN TẢNG CỘT SỐNG CỔ & THẮT LƯNG:** 7.000.000đ  
 > 4. **LEVEL 2 ONLINE — CHUYÊN SÂU KHỚP NGOẠI VI TỨ CHI:** 7.000.000đ  
-> 5. **THE FULL ONLINE COLLECTION (TRỌN BỘ TOÀN DIỆN LEVEL 1 + LEVEL 2):** 12.900.000đ *(Bao gồm toàn bộ video với các góc quay khác nhau, hệ thống bài tập rèn lực Micro-drills, bài test qua môn và chứng chỉ hoàn thành).*  
+> 5. **THE FULL ONLINE COLLECTION (TRỌN BỘ TOÀN DIỆN LEVEL 1 + LEVEL 2):** 12.900.000đ *(Bao gồm toàn bộ video với các góc quay khác nhau, hệ thống bài tập rèn lực tại nhà, bài test qua môn và chứng chỉ hoàn thành).*  
 > 6. **WORKSHOP OFFLINE THỰC HÀNH CẦM TAY CHỈ VIỆC CÙNG THẦY HENRIK SIMON:** 36.000.000đ *(Thực hành trực tiếp 1-1, uốn nắn từng góc tay).*  
 >  
 > 🔥 **ĐẶC QUYỀN KHẤU TRỪ 100%:** Toàn bộ số tiền anh/chị đầu tư cho các khóa Online sẽ được **khấu trừ 100%** khi nâng cấp lên Workshop thực hành Offline!  
@@ -108,7 +108,7 @@
 > • **Chuẩn Y Khoa Cơ Sinh Học Châu Âu:** Hệ thống kiến thức kế thừa hơn 20 năm nghiên cứu và điều trị thực tế của Bác sĩ Henrik Simon tại Đức, tập trung vào bản chất cơ sinh học khớp và giải phẫu chức năng.  
 > • **Tính Chính Xác Cao (Specific Chiropractic):** Phương pháp tập trung xác định đúng điểm đốt sống sai lệch (Subluxation), đưa khớp vào góc khóa an toàn rồi mới tác động lực nhẹ giải tỏa áp lực, tuyệt đối không dùng lực vặn xoắn bừa bãi.  
 > • **Hệ Thống Sàng Lọc An Toàn Tuyệt Đối (Red Flags):** Học viên được đào tạo bài bản các bài kiểm tra lâm sàng (như test động mạch sống nền De-Kleyn, kiểm tra bao xơ đĩa đệm, loãng xương) để nắm rõ ranh giới an toàn, đảm bảo sự an tâm 100% cho người bệnh.  
-> • **Hệ Thống Video Đa Góc Quay & Mô Phỏng Lực:** Từng kỹ thuật được quay chi tiết cận cảnh điểm tiếp xúc mỏm gai, kết hợp phương pháp Micro-drills giúp học viên rèn phản xạ và cảm nhận lực nhuần nhuyễn ngay tại nhà."*
+> • **Hệ Thống Video Đa Góc Quay & Mô Phỏng Lực:** Từng kỹ thuật được quay chi tiết cận cảnh điểm tiếp xúc mỏm gai, kết hợp phương pháp bài tập rèn phản xạ giúp học viên rèn phản xạ và cảm nhận lực nhuần nhuyễn ngay tại nhà."*
 
 ---
 
@@ -173,7 +173,7 @@ Khi khách bắt đầu hỏi các câu như: *"Khóa này học trên điện t
 ### Kịch bản Chốt 3.1: Chốt trực tiếp vào quyền lợi và kích hoạt ngay
 > *"Dạ tài khoản học được kích hoạt tự động ngay sau khi đăng ký anh nhé ạ! Anh có thể học linh hoạt mọi lúc mọi nơi trên cả điện thoại, máy tính bảng và laptop, xem lại dài hạn 24/7 không giới hạn thời gian.*  
 >  
-> *Hiện tại khóa **The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ** (đã bao gồm toàn bộ video với các góc quay khác nhau, hệ thống Micro-drills rèn lực, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).*  
+> *Hiện tại khóa **The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ** (đã bao gồm toàn bộ video với các góc quay khác nhau, hệ thống bài tập rèn lực tại nhà, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).*  
 >  
 > *Dạ anh/chị bấm nút đăng ký hoặc quét mã QR SePay tự động trên website để hệ thống kích hoạt tài khoản và vào học luôn bài giảng đầu tiên hôm nay nhé ạ!"*
 

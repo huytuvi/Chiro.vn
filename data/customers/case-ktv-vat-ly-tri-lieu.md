@@ -20,7 +20,7 @@
 ---
 
 ## 3. BƯỚC NGOẶT CHUYỂN HÓA CÙNG SIMON CENTER
-1. **Làm chủ cảm giác lực qua Micro-drills:**  
+1. **Làm chủ cảm giác lực qua bài tập rèn lực tại nhà:**  
    Nhờ các bài tập rơi trọng lực cơ thể (Body Drop) tại nhà của Thầy Henrik, anh Dũng học được cách phát lực xung chớp nhoáng mà cơ bắp cánh tay hoàn toàn thả lỏng. Không còn tình trạng mỏi tay sau ca điều trị.
 2. **Triệt tiêu 100% nỗi sợ nhờ bài Test Cảnh báo đỏ (Red Flags):**  
    Anh nắm vững các tiêu chuẩn an toàn: Ca nào được nắn, ca nào phải gửi đi chụp MRI hoặc chuyển tuyến ngoại khoa. Sự tự tin lâm sàng tăng vọt.

@@ -10,7 +10,7 @@
 
 | STT | Tên Sản Phẩm | Định Dạng Đào Tạo | Học Phí Chuẩn | Quyền Lợi & Mô Tả Trọng Tâm |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | **Module Lẻ Online** | Video E-Learning 4K | **1.000.000đ – 2.000.000đ** | Cho người muốn học thử 1 vùng, giải quyết ca đau cấp (Cổ vai gáy hoặc Thắt lưng - Chậu). |
+| **1** | **Module Lẻ Online** | Video E-Learning chất lượng cao | **1.000.000đ – 2.000.000đ** | Cho người muốn học thử 1 vùng, giải quyết ca đau cấp (Cổ vai gáy hoặc Thắt lưng - Chậu). |
 | **2** | **Level Lẻ Online (1 & 2)** | E-Learning chuyên sâu | **8.500.000đ** | Cho người muốn học trọn vẹn 1 Level (Level 1 Cột sống hoặc Level 2 Tứ chi). |
 | **3** | **The Full Online Collection (Trọn bộ Online)** | Trọn bộ Full-Spine E-Learning | **14.900.000đ** | **Đẳng cấp E-Learning chuẩn quốc tế:** Toàn bộ Video với các góc quay khác nhau, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online. |
 | **4** | **Khóa Offline Cầm tay chỉ việc (Hands-on Mentorship)** | 4 ngày thực hành trực tiếp | **40.000.000đ** | **Đích đến chủ lực:** 4 ngày cầm tay nắn trực tiếp trên người thật cùng Bác sĩ Henrik Simon, chỉnh từng milimet lực; Tặng Full Online 14.9tr + Vé vào Cộng đồng học viên cũ đồng hành lâu dài. |

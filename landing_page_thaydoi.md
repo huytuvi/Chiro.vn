@@ -14,7 +14,7 @@
 
 ```markdown
 <!-- ==================== BANNER ĐẦU TRANG ==================== -->
-[KHÓA HỌC E-LEARNING ĐẦU TIÊN TẠI VIỆT NAM] Hệ Thống Đào Tạo Kỹ Thuật Nắn Chỉnh Cột Sống Chuẩn Y Khoa — Video 4K Đa Góc Xem Trọn Đời & Bài Test Độc Quyền Chống Quên Bài.
+[KHÓA HỌC E-LEARNING ĐẦU TIÊN TẠI VIỆT NAM] Hệ Thống Đào Tạo Kỹ Thuật Nắn Chỉnh Cột Sống Chuẩn Y Khoa — video chất lượng cao Đa Góc Xem Trọn Đời & Bài Test Độc Quyền Chống Quên Bài.
 
 <!-- ==================== HERO SECTION (TRỌNG TÂM ONLINE) ==================== -->
 ### [TAGLINE CHUYÊN MÔN]
@@ -23,13 +23,13 @@ PHƯƠNG PHÁP ĐÀO TẠO E-LEARNING TIÊU CHUẨN QUỐC TẾ (SPECIFIC & AN T
 # Làm Chủ Kỹ Thuật Nắn Chỉnh Cột Sống Đẳng Cấp Y Khoa Đức Ngay Tại Nhà — Học Là Nhớ, Làm Là Chuẩn
 
 ### [SUB-HEADLINE / MÔ TẢ GIÁ TRỊ CỐT LÕI]
-Chương trình E-Learning chuyên sâu bóc tách toàn bộ kỹ thuật nắn chỉnh Full-Spine thành các bài tập phản xạ tại nhà (Micro-drills). Hệ thống kiểm tra lũy tiến sau mỗi bài giảng giúp bạn vững vàng lý thuyết, tự tin cảm nhận lực và sẵn sàng ứng dụng lâm sàng mà không sợ quên bài.
+Chương trình E-Learning chuyên sâu bóc tách toàn bộ kỹ thuật nắn chỉnh Full-Spine thành các bài tập phản xạ tại nhà (bài tập rèn lực tại nhà). Hệ thống kiểm tra lũy tiến sau mỗi bài giảng giúp bạn vững vàng lý thuyết, tự tin cảm nhận lực và sẵn sàng ứng dụng lâm sàng mà không sợ quên bài.
 
 ---
 
 ### [4 BẢO CHỨNG GIÁ TRỊ DUY NHẤT CỦA KHÓA HỌC ONLINE]
-✓ VIDEO 4K ĐA GÓC QUAY (POV & CẬN CẢNH): Xem lại trọn đời. Quay rõ từng chi tiết vi mô: điểm tiếp xúc xương (Contact Point), góc khóa khớp (Pre-tension) và hướng phát lực (Line of Drive) mà học trực tiếp tại hội trường đông người thường khó nhìn thấy.
-✓ PHƯƠNG PHÁP MICRO-DRILLS: Các bài tập rèn luyện tốc độ, bộ pháp và lực rơi cơ thể (Body Drop) trên đệm mút/bóng phản xạ tại nhà — rèn thành thục cảm giác lực trước khi chạm vào bệnh nhân thật.
+✓ video chất lượng cao ĐA GÓC QUAY (POV & CẬN CẢNH): Xem lại trọn đời. Quay rõ từng chi tiết vi mô: điểm tiếp xúc xương (Contact Point), góc khóa khớp (Pre-tension) và hướng phát lực (Line of Drive) mà học trực tiếp tại hội trường đông người thường khó nhìn thấy.
+✓ PHƯƠNG PHÁP bài tập rèn lực tại nhà: Các bài tập rèn luyện tốc độ, bộ pháp và lực rơi cơ thể (Body Drop) trên đệm mút/bóng phản xạ tại nhà — rèn thành thục cảm giác lực trước khi chạm vào bệnh nhân thật.
 ✓ HỆ THỐNG TEST CHỐNG QUÊN BÀI: Sau mỗi bài học, học viên hoàn thành bài kiểm tra tình huống lâm sàng (nhận biết Red Flags, chống chỉ định). Đạt chuẩn mới mở khóa bài tiếp theo.
 ✓ BẢO TRỢ CHUYÊN MÔN 24/7 (ALUMNI CLUB): Tham gia nhóm kín cựu học viên, được giảng viên hỗ trợ đọc phim X-quang và định hướng phác đồ cho các ca bệnh khó gặp tại phòng khám.
 
@@ -49,9 +49,9 @@ Rất nhiều bác sĩ và kỹ thuật viên e ngại: *"Nắn chỉnh là môn
 
 Khóa học E-Learning tại Simon Center được thiết kế để giải quyết triệt để rào cản này qua **Quy trình sư phạm 3 bước chuẩn y khoa**:
 
-1. **Bước 1 — Thẩm thấu cơ chế vi mô qua Video 4K đa góc:** 
+1. **Bước 1 — Thẩm thấu cơ chế vi mô qua video chất lượng cao đa góc:** 
    Không quay toàn cảnh xa xôi. Máy quay đặt ở góc nhìn người nắn (First-person POV) để bạn thấy chính xác mắt mình sẽ nhìn thấy gì khi đứng cạnh bàn nắn.
-2. **Bước 2 — Rèn phản xạ không cần người mẫu (Micro-drills):**
+2. **Bước 2 — Rèn phản xạ không cần người mẫu (bài tập rèn lực tại nhà):**
    Bạn được hướng dẫn các bài tập phản xạ thả lỏng cơ tay, dùng trọng lực cơ thể (Body Drop) trên các dụng cụ tập luyện đơn giản tại nhà. Luyện đến khi tốc độ đạt chuẩn tự nhiên.
 3. **Bước 3 — Khóa chặt kiến thức qua bài Test lâm sàng:**
    Không có chuyện "bật video lên để đó". Mỗi bài giảng kết thúc bằng các câu hỏi trắc nghiệm ca bệnh thực tế. Bạn phải hiểu rõ: *Khi nào ĐƯỢC nắn, khi nào TUYỆT ĐỐI KHÔNG* mới được qua bài.
@@ -65,7 +65,7 @@ Khóa học E-Learning tại Simon Center được thiết kế để giải quy
 | :--- | :--- | :--- |
 | **Module Lẻ Online** *(Cổ vai gáy hoặc Thắt lưng - Chậu)* | **1.000.000đ – 2.000.000đ** | Dành cho người muốn học thử nghiệm 1 vùng cụ thể để giải quyết ngay các ca đau cấp tính. |
 | **Level Lẻ Online** *(Level 1 hoặc Level 2)* | **7.000.000đ – 8.500.000đ** | Học trọn vẹn nền tảng hoặc nâng cao theo từng cấp độ chuyên sâu. |
-| **The Full Online Collection** *(Được khuyên dùng nhiều nhất)* | **12.900.000đ – 14.900.000đ** | **Trọn bộ toàn diện Full-Spine:** Toàn bộ kho video 4K, hệ thống Drills rèn lực, bài Test qua môn và cấp Chứng chỉ hoàn thành Online. |
+| **The Full Online Collection** *(Được khuyên dùng nhiều nhất)* | **12.900.000đ – 14.900.000đ** | **Trọn bộ toàn diện Full-Spine:** Toàn bộ kho video chất lượng cao, hệ thống Drills rèn lực, bài Test qua môn và cấp Chứng chỉ hoàn thành Online. |
 
 ---
 
@@ -90,6 +90,6 @@ Học viên sở hữu khóa **The Full Online Collection** sẽ nhận được
 ---
 
 ## III. ĐIỂM TINH TẾ CỦA BẢN COPY NÀY
-1. **Tập trung 100% vào chuyển đổi Online:** Khách vào trang lập tức bị cuốn hút bởi giải pháp học online chất lượng cao (video 4K, micro-drills, bài test chống quên) mà không bị phân tâm bởi việc phải đi học offline xa xôi hay tốn kém.
+1. **Tập trung 100% vào chuyển đổi Online:** Khách vào trang lập tức bị cuốn hút bởi giải pháp học online chất lượng cao (video chất lượng cao, bài tập rèn lực tại nhà, bài test chống quên) mà không bị phân tâm bởi việc phải đi học offline xa xôi hay tốn kém.
 2. **Khóa Offline đóng vai trò "Kích cầu mua khóa Online":** Bằng chính sách **"khấu trừ 100% tiền khóa Online vào khóa Offline cùng Thầy Henrik Simon"**, học viên sẽ không ngần ngại xuống tiền mua khóa Online ngay, vì họ biết số tiền đó không hề mất đi mà là bước đệm để sau này học tiếp với Thầy Henrik Simon.
 3. **Tuân thủ tuyệt đối chuẩn y đức Simon Center:** Tôn trọng người học, ngôn ngữ khoa học, minh bạch và không hề có bất kỳ câu từ so sánh tiêu cực hay nhắc tên người khác.

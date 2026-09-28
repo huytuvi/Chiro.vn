@@ -6,7 +6,7 @@
 ## 1. THÔNG TIN SẢN PHẨM & MỨC HỌC PHÍ
 * **Tên sản phẩm:** The Full Online Collection (Trọn Bộ Khóa Học Trực Tuyến).
 * **Mức học phí niêm yết:** **14.900.000 VNĐ**.
-* **Định vị sản phẩm:** Đẳng cấp E-Learning chuẩn quốc tế: Toàn bộ Video 4K, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online.
+* **Định vị sản phẩm:** Đẳng cấp E-Learning chuẩn quốc tế: Toàn bộ video chất lượng cao, hệ thống Drills rèn lực, Test sau mỗi bài học (đạt mới mở bài tiếp), cấp chứng chỉ hoàn thành Online.
 * **Thời hạn truy cập:** Sở hữu dài hạn tài khoản trên mọi thiết bị (Laptop, iPad, Smartphone).
 
 ---
@@ -25,7 +25,7 @@
 
 ## 3. CƠ CHẾ SƯ PHẠM VƯỢT TRỘI CHUẨN Y KHOA
 * **Video với các góc quay khác nhau kết hợp cận cảnh:** Quay chi tiết từ nhiều góc độ, thấy rõ từng mm tiếp xúc xương và hướng vector lực.
-* **Hệ thống Micro-drills rèn lực tại nhà:** Bóc tách thao tác thành các bài tập bộ pháp, thả lỏng cổ tay và rơi trọng lực cơ thể (Body Drop) trên đệm/bóng. Rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
+* **Hệ thống bài tập rèn lực tại nhà rèn lực tại nhà:** Bóc tách thao tác thành các bài tập bộ pháp, thả lỏng cổ tay và rơi trọng lực cơ thể (Body Drop) trên đệm/bóng. Rèn thành thục trí nhớ cơ bắp trước khi chạm vào người thật.
 * **Hệ thống Test sau mỗi bài học:** Bắt buộc vượt qua câu hỏi tình huống lâm sàng và chống chỉ định (đạt chuẩn mới mở khóa bài tiếp theo). Đảm bảo học viên nắm chắc 100% kiến thức, không sợ quên bài.
 * **Cấp Chứng chỉ Hoàn thành Online (Certificate of Completion)** có chữ ký xác nhận của Chuyên gia Henrik Simon.
 

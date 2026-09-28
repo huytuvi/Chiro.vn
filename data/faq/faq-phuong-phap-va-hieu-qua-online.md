@@ -15,9 +15,9 @@ Với video E-Learning của Simon Center:
 
 ---
 
-### Q2: "Micro-drills là gì và làm sao rèn được phản xạ tại nhà mà không cần người mẫu?"
+### Q2: "bài tập rèn lực tại nhà là gì và làm sao rèn được phản xạ tại nhà mà không cần người mẫu?"
 **Giải đáp chuyên môn:**  
-*Micro-drills* là phương pháp huấn luyện phản xạ vi mô tiêu chuẩn quốc tế. Thay vì lấy người thật ra làm "chuột bạch" khi tay nghề còn lóng ngóng, bạn sẽ được hướng dẫn:
+*bài tập rèn lực tại nhà* là phương pháp huấn luyện phản xạ vi mô tiêu chuẩn quốc tế. Thay vì lấy người thật ra làm "chuột bạch" khi tay nghề còn lóng ngóng, bạn sẽ được hướng dẫn:
 * Bài tập thả lỏng cổ tay và phát lực xung lực $F \cdot \Delta t = m \cdot \Delta v$ trên đệm mút hoặc bóng đàn hồi.
 * Bài tập bộ pháp chùng gối để tận dụng trọng lượng cơ thể rơi tự do (Body Drop) tạo ra lực nắn êm ái mà không tốn sức.
 * Bài tập định vị cảm giác tiếp xúc xương (Pisiform, Thumb contact) trên mô hình.  

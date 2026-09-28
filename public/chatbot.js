@@ -76,7 +76,7 @@ Mục tiêu tối thượng của bạn là giải đáp thuyết phục và d�
 2. Module Lẻ Online — Chuyên Sâu Thắt Lưng - Chậu (LWS): 1.000.000 VNĐ (giá gốc 2.000.000 VNĐ) — Dành cho ai muốn học xử lý thắt lưng, thoát vị, kẹt khớp cùng chậu ISG.
 3. Level 1 Online — Nền Tảng Cột Sống Full-Spine (Modul A): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Toàn bộ trục Cột sống từ Cổ C1-C7, Ngực T1-T12 đến Thắt lưng - Chậu.
 4. Level 2 Online — Tứ Chi & Phân Tích X-Quang Chuyên Sâu (Modul B): 7.000.000 VNĐ (giá gốc 8.500.000 VNĐ) — Kỹ thuật nắn chỉnh ngoại vi (vai, khuỷu, cổ tay, gối, cổ chân) + Đọc phim X-quang cơ sinh học.
-5. ⭐ The Full Online Collection (GÓI BÁN CHẠY NHẤT — KHUYÊN DÙNG): 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ — Tiết kiệm 1.100.000đ so với mua lẻ). Trọn bộ 351 bài giảng Cột sống + Tứ chi + X-ray + Micro-drills rèn lực tại nhà + Cấp Chứng nhận Certificate chính thức do Bác sĩ Henrik Simon ký.
+5. ⭐ The Full Online Collection (GÓI BÁN CHẠY NHẤT — KHUYÊN DÙNG): 12.900.000 VNĐ (giá gốc 14.900.000 VNĐ — Tiết kiệm 1.100.000đ so với mua lẻ). Trọn bộ 351 bài giảng Cột sống + Tứ chi + X-ray + Bài tập rèn lực tại nhà + Cấp Chứng nhận Certificate chính thức do Bác sĩ Henrik Simon ký.
 6. 👑 Khóa Huấn Luyện Offline Cầm Tay Chỉ Việc (3-4 ngày cùng Thầy Henrik Simon): 36.000.000 VNĐ (giá niêm yết 42.000.000 VNĐ, lớp giới hạn 10-12 người).
 7. 📖 Giáo Trình Chiropractic Y Khoa & Thước Đo Cột Sống: 1.500.000 VNĐ.
 8. 🏥 Tageshospitation (Đi Thực Tế Lâm Sàng Tại Simon Center): 2.500.000 VNĐ.
@@ -93,7 +93,7 @@ Khi khách nói "để tôi suy nghĩ thêm", "để anh suy nghĩ thêm", "đ�
 2. ❌ TUYỆT ĐỐI CẤM dùng từ "bẻ khớp trôi nổi", "đối thủ", "ngoài thị trường" để chê bai đối thủ. CHỈ NÊU BẬT THẾ MẠNH ĐỘC BẢN: Chuẩn Y học Châu Âu, Specific chính xác từng phân đoạn, an toàn với Red Flags, video đa góc quay.
 3. ❌ TUYỆT ĐỐI CẤM dùng cụm từ "1 phần mười giây" hoặc "1/10 giây". Thay bằng: "ở thời điểm thả lỏng cơ", "trong tích tắc giải phóng lực", "kỹ thuật thả rơi trọng lượng cơ thể (Body Drop)".
 4. ❌ TUYỆT ĐỐI KHÔNG tự tiện đề cập "trả góp", "trả góp 0%", "thẻ tín dụng" trừ khi khách hàng CHỦ ĐỘNG HỎI về trả góp!
-5. ❌ TUYỆT ĐỐI CẤM dùng từ "Video 4K First-Person POV" (thay bằng "Video với các góc quay khác nhau").
+5. ❌ TUYỆT ĐỐI CẤM dùng từ "video chất lượng cao", "bài tập rèn lực", "bài tập rèn lực tại nhà", "bài tập rèn lực tại nhà", "Phản xạ bài tập rèn lực tại nhà" (thay bằng "Video với các góc quay sắc nét", "bài tập rèn phản xạ & lực rơi tại nhà", "bài tập bổ trợ").
 6. ❌ TUYỆT ĐỐI CẤM hứa hẹn sai pháp lý: "học xong ra mở phòng khám ngay". Minh bạch: Chứng nhận hoàn thành của Simon Center do Bác sĩ Henrik Simon ký; việc hành nghề trị liệu có can thiệp tại Việt Nam phải tuân thủ điều kiện văn bằng của Bộ Y tế/Sở Y tế.
 7. ❌ Nếu khách đang ở tab Khóa học: Tuyệt đối KHÔNG hỏi lại khách "anh/chị muốn chat chế độ nào".
 8. 🛑 RÀO CHẮN AN TOÀN Y KHOA (MEDICAL GUARDRAIL & CHỐNG HALLUCINATION TUYỆT ĐỐI):
@@ -191,7 +191,7 @@ Dạ anh/chị đang muốn bắt đầu với một Module chuyên biệt hay t
 Toàn bộ kiến thức kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon và Viện DISC (Đức), chú trọng hiểu rõ bản chất giải phẫu cơ sinh học thay vì học vẹt thao tác.<br><br>
 🎥 <strong>2. Video Với Các Góc Quay Khác Nhau:</strong><br>
 Hệ thống video chất lượng cao với nhiều góc máy (cận cảnh điểm tiếp xúc ngón tay, góc khóa khớp và hướng truyền lực), giúp anh/chị quan sát trực quan từng động tác kỹ thuật.<br><br>
-🏋️ <strong>3. Phương Pháp Micro-Drills Rèn Phản Xạ Lực Tại Nhà:</strong><br>
+🏋️ <strong>3. Phương Pháp Bài Tập Rèn Phản Xạ Lực Tại Nhà:</strong><br>
 Hệ thống bài tập mô phỏng lực rơi cơ thể (Body Drop) trên đệm mút và bóng phản xạ, giúp bàn tay hình thành cảm giác lực nhuần nhuyễn trước khi thao tác trên người thật — hoàn toàn không lo run tay.<br><br>
 🚨 <strong>4. Ranh Giới Cảnh Báo Đỏ (Red Flags) & An Toàn Tuyệt Đối:</strong><br>
 Trang bị bài bản các test loại trừ bệnh lý nguy hiểm và các vùng chống chỉ định y khoa, giúp người thầy thuốc luôn tự tin và bảo vệ an toàn cao nhất cho người bệnh.<br><br>
@@ -205,7 +205,7 @@ Dạ không biết anh/chị đang muốn tìm hiểu một lộ trình toàn di
 🦴 <strong>MODULE LẺ ONLINE — CHUYÊN SÂU THẮT LƯNG - CHẬU (LWS):</strong><br>
 • <strong>Nội dung trọng tâm:</strong> Làm chủ giải phẫu chức năng và kỹ thuật nắn chỉnh vùng thắt lưng L1–L5, xương cùng S1, kẹt khớp cùng chậu ISG và chỉnh lệch khung chậu (chân ngắn - chân dài).<br>
 • <strong>Kỹ thuật thực chiến:</strong> Xử lý thoát vị đĩa đệm L4-L5, L5-S1, giải áp đau thần kinh tọa, hội chứng cơ hình lê (Piriformis) và phục hồi đường cong sinh lý thắt lưng an toàn.<br>
-• <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập Micro-drills rèn lực rơi (Body Drop) tại nhà, tài khoản học dài hạn 24/7.<br>
+• <strong>Hình thức học:</strong> Hệ thống video với các góc quay khác nhau kết hợp bài tập rèn lực rơi (Body Drop) tại nhà, tài khoản học dài hạn 24/7.<br>
 • <strong>Học phí ưu đãi:</strong> <strong>1.000.000 VNĐ</strong> (Học phí gốc: 2.000.000 VNĐ).<br><br>
 💡 <strong>Đặc quyền khấu trừ 100% khi nâng cấp:</strong><br>
 Nếu sau này anh/chị thấy hiệu quả và muốn tiếp tục nâng cấp lên các khóa học thực hành trực tiếp, <strong>toàn bộ 1.000.000đ đã đầu tư cho khóa học online hôm nay đều được áp dụng đặc quyền khấu trừ 100%</strong>, nên anh/chị hoàn toàn có thể yên tâm bắt đầu!<br><br>
@@ -317,7 +317,7 @@ Dạ hiện tại cơ sở hoặc phòng tập của anh/chị có thường xuy
         text: `Dạ em rất hiểu học phí là điều anh/chị luôn cân nhắc kỹ lưỡng khi tìm hiểu một chương trình đào tạo chuyên môn sâu ạ.<br><br>
 Tại Simon Center, giá trị cốt lõi của khóa học không nằm ở số lượng chiêu thức bề nổi, mà tập trung vào <strong>sự an toàn tuyệt đối và chuẩn mực y khoa quốc tế</strong>:<br><br>
 • <strong>Nền tảng cơ sinh học chuẩn Đức:</strong> Toàn bộ giáo trình kế thừa hơn 20 năm kinh nghiệm lâm sàng của Bác sĩ Henrik Simon (Viện DISC - Đức), giúp anh/chị hiểu rõ nguyên lý khóa khớp và đòn bẩy tự nhiên, không dùng sức gồng bắp tay.<br>
-• <strong>Hệ thống Video với các góc quay khác nhau & Micro-Drills:</strong> Từng góc quay trực quan đa chiều, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
+• <strong>Hệ thống Video với các góc quay khác nhau & Bài Tập Rèn Lực:</strong> Từng góc quay trực quan đa chiều, kết hợp các bài rèn lực phản xạ tại nhà giúp học viên tự tin làm chủ đôi bàn tay trước khi chạm vào người thật.<br>
 • <strong>Đào tạo chuyên sâu phân tích X-quang & Cảnh báo đỏ (Red Flags):</strong> Giúp người thực hành nhận diện chính xác các chống chỉ định y khoa, bảo vệ an toàn cao nhất cho bệnh nhân và uy tín người thầy thuốc.<br>
 • <strong>Đặc quyền khấu trừ 100%:</strong> Toàn bộ học phí khóa Online được khấu trừ 100% khi anh/chị tham gia lớp Thực hành Offline Cầm tay chỉ việc cùng Thầy Henrik Simon.<br><br>
 Dạ anh/chị có muốn em gửi xem thử 1 video bài giảng mẫu với các góc quay khác nhau để trải nghiệm trực quan cách Thầy Henrik truyền đạt không ạ?`,
@@ -355,7 +355,7 @@ Dạ đây là chính sách trợ lực tốt nhất cho học viên. Anh/chị 
 • <strong>Chuẩn Y Khoa Cơ Sinh Học Châu Âu:</strong> Hệ thống kiến thức kế thừa hơn 20 năm nghiên cứu và điều trị thực tế của Bác sĩ Henrik Simon tại Đức, tập trung vào bản chất cơ sinh học khớp và giải phẫu chức năng.<br>
 • <strong>Tính Chính Xác Cao (Specific Chiropractic):</strong> Phương pháp tập trung xác định đúng điểm đốt sống sai lệch (Subluxation), đưa khớp vào góc khóa an toàn rồi mới tác động lực nhẹ giải tỏa áp lực, tuyệt đối không dùng lực vặn xoắn bừa bãi.<br>
 • <strong>Hệ Thống Sàng Lọc An Toàn Tuyệt Đối (Red Flags):</strong> Học viên được đào tạo bài bản các bài kiểm tra lâm sàng (như test động mạch sống nền De-Kleyn, kiểm tra bao xơ đĩa đệm, loãng xương) để nắm rõ ranh giới an toàn, đảm bảo sự an tâm 100% cho người bệnh.<br>
-• <strong>Hệ Thống Video Đa Góc Quay & Mô Phỏng Lực:</strong> Từng kỹ thuật được quay chi tiết cận cảnh điểm tiếp xúc mỏm gai, kết hợp phương pháp Micro-drills giúp học viên rèn phản xạ và cảm nhận lực nhuần nhuyễn ngay tại nhà.`,
+• <strong>Hệ Thống Video Đa Góc Quay & Mô Phỏng Lực:</strong> Từng kỹ thuật được quay chi tiết cận cảnh điểm tiếp xúc mỏm gai, kết hợp bài tập rèn phản xạ giúp học viên rèn phản xạ và cảm nhận lực nhuần nhuyễn ngay tại nhà.`,
         cta: "trial"
       },
 
@@ -377,7 +377,7 @@ Dạ chị có đang lo lắng về thể lực hay chiều cao của mình khi 
 
       buy: {
         text: `Dạ tuyệt vời quá ạ! Tài khoản học được kích hoạt tự động ngay sau khi đăng ký anh/chị nhé ạ.<br><br>
-Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video với các góc quay khác nhau xem dài hạn 24/7, hệ thống Micro-drills, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
+Hiện tại khóa <strong>The Full Online Collection đang được áp dụng mức học phí ưu đãi 12.900.000đ</strong> (bao gồm toàn bộ video với các góc quay khác nhau xem dài hạn 24/7, hệ thống bài tập rèn lực tại nhà, bài Test qua môn và tặng kèm Cẩm nang đọc phim X-quang).<br><br>
 Anh/chị bấm nút bên dưới để chuyển ngay đến Form đăng ký giữ suất ưu đãi đợt này nhé ạ:`,
         cta: "register_now"
       },
@@ -394,7 +394,7 @@ Anh/chị bấm nút bên dưới để chuyển đến form nhận bài giảng
 Tại Simon Center, hơn 60% học viên thành công cũng xuất phát điểm từ con số 0 tròn trĩnh giống hệt anh/chị — từ những người làm văn phòng, HLV thể hình PT, chủ spa đến những người có niềm đam mê muốn tự chữa lành cho người thân trong gia đình.<br><br>
 💡 <strong>Vì sao người chưa từng học Y vẫn học tốt và tự tin hành nghề?</strong><br>
 1. <strong>Giáo trình trực quan từ Đức:</strong> Thầy Henrik Simon không bắt học viên phải thuộc lòng các thuật ngữ giải phẫu Latin phức tạp, mà giải thích tường minh cơ chế đòn bẩy tự nhiên và chuyển động khớp qua mô hình 3D trực quan, dễ hiểu - dễ nhớ.<br>
-2. <strong>Phương pháp Micro-drills rèn lực tại nhà:</strong> Kỹ thuật nắn chỉnh Chiropractic chuẩn Y khoa hoàn toàn không dùng sức bắp tay, mà sử dụng tốc độ và trọng lực rơi cơ thể (Body Drop). Anh/chị được rèn luyện trên đệm mút và bóng phản xạ tại nhà, giúp bàn tay hình thành phản xạ tự nhiên chuẩn xác trước khi chạm người thật — <strong>hoàn toàn không lo run tay</strong>.<br>
+2. <strong>Phương pháp bài tập rèn lực tại nhà:</strong> Kỹ thuật nắn chỉnh Chiropractic chuẩn Y khoa hoàn toàn không dùng sức bắp tay, mà sử dụng tốc độ và trọng lực rơi cơ thể (Body Drop). Anh/chị được rèn luyện trên đệm mút và bóng phản xạ tại nhà, giúp bàn tay hình thành phản xạ tự nhiên chuẩn xác trước khi chạm người thật — <strong>hoàn toàn không lo run tay</strong>.<br>
 3. <strong>Ranh giới Cảnh báo đỏ (Red Flags) bảo vệ 100%:</strong> Giáo trình trang bị bài bản các test loại trừ bệnh lý nguy hiểm và các vùng chống chỉ định y khoa, giúp anh/chị luôn tự tin và bảo vệ an toàn cao nhất cho người bệnh.<br>
 4. <strong>Lộ trình học linh hoạt theo nhu cầu:</strong> Anh/chị có thể bắt đầu bằng Module lẻ chuyên sâu (Thắt lưng hoặc Cổ gáy) với học phí chỉ <strong>1.000.000 VNĐ</strong> để tự trải nghiệm trước, hoặc học trọn bộ The Full Online Collection.<br><br>
 Dạ hiện tại anh/chị đang muốn học để tự chăm sóc cho người thân trong gia đình hay định hướng phát triển nghề nghiệp trị liệu lâu dài vậy ạ? Anh/chị chia sẻ thêm với em nhé ạ!`,
@@ -418,7 +418,7 @@ Dạ anh/chị có muốn đăng ký nhận bài giảng mẫu học thử miễ
 • <strong>Khóa Online The Full Collection:</strong> Tài khoản học có giá trị <strong>xem dài hạn 24/7 không giới hạn thời gian</strong>. Anh/chị chủ động hoàn toàn về thời gian, học trên điện thoại hoặc máy tính bất kỳ lúc nào rảnh rỗi mà không sợ bị trôi bài.<br>
 • <strong>Lộ trình tiếp thu trung bình của học viên:</strong><br>
   - <em>Tuần 1–3:</em> Nắm vững giải phẫu cơ sinh học, sờ nắn mốc xương và bảng Cảnh báo đỏ Red Flags.<br>
-  - <em>Tuần 4–6:</em> Thuần thục phương pháp Micro-drills rèn lực, bộ pháp và các test lâm sàng.<br>
+  - <em>Tuần 4–6:</em> Thuần thục các bài tập rèn lực tại nhà, bộ pháp và các test lâm sàng.<br>
   - <em>Tuần 7–10:</em> Thực hành nhuần nhuyễn các kỹ thuật nắn chỉnh cột sống cổ, lưng, khung chậu và khớp ngoại vi.<br><br>
 • <strong>Lớp Offline Cầm tay chỉ việc:</strong> Diễn ra tập trung trong <strong>4 ngày thực hành liên tục (thứ 5 đến Chủ nhật)</strong> định kỳ mỗi quý cùng Bác sĩ Henrik Simon tại trung tâm.`,
         cta: "register"
@@ -2054,7 +2054,7 @@ Dạ ca bệnh của anh/chị đang có triệu chứng hoặc kết quả ch�
       appendBotMessage(
         `Dạ em chào anh/chị ạ! Về chương trình đào tạo của Bác sĩ Henrik Simon tại Simon Center:<br><br>
 • Khóa học được thiết kế chuẩn Y khoa Quốc tế kế thừa từ Viện DISC (Đức), hướng dẫn bài bản từ giải phẫu cơ sinh học đến kỹ thuật nắn chỉnh thực chiến qua <strong>hệ thống video với các góc quay khác nhau</strong> kết hợp quay cận cảnh góc khóa khớp.<br>
-• Dù anh/chị xuất phát điểm từ con số 0 hay đã là kỹ thuật viên vật lý trị liệu/HLV Gym, phương pháp Micro-drills của Thầy sẽ giúp anh/chị định hình phản xạ chuẩn xác và tự tin thực hành an toàn.<br><br>
+• Dù anh/chị xuất phát điểm từ con số 0 hay đã là kỹ thuật viên vật lý trị liệu/HLV Gym, phương pháp bài tập rèn lực của Thầy sẽ giúp anh/chị định hình phản xạ chuẩn xác và tự tin thực hành an toàn.<br><br>
 🎁 Để anh/chị trải nghiệm thực tế phương pháp giảng dạy, em xin gửi tặng anh/chị <strong>1 Bài giảng mẫu với các góc quay khác nhau hoàn toàn miễn phí</strong>. Anh/chị bấm nút bên dưới để nhận ngay nhé ạ!`,
         "trial"
       );
@@ -2084,7 +2084,7 @@ Trong Trị liệu Thần kinh Cột sống Chiropractic, hầu hết các cơn 
         `Dạ em rất hiểu và trân trọng câu hỏi này của anh/chị ạ!<br><br>
 Tại <strong>Simon Chiropractic Center</strong>, toàn bộ các khóa học đều lấy phương pháp thực chiến Y khoa của Bác sĩ Henrik Simon làm trọng tâm với 3 nấc thang đào tạo rõ ràng:<br><br>
 • 🟨 <strong>Khóa Trải Nghiệm Ban Đầu:</strong> Module Lẻ Online (Cổ vai gáy hoặc Thắt lưng - Chậu) — <strong>1.000.000 VNĐ</strong> (Tiếp cận nhanh, chi phí thấp, <em>khấu trừ 100% khi lên thực hành trực tiếp</em>).<br>
-• ⭐ <strong>Khóa Đào Tạo Toàn Diện (Khuyên Dùng):</strong> The Full Online Collection — <strong>12.900.000 VNĐ</strong> (Trọn bộ 351 bài giảng Cột sống Full-Spine + Tứ chi + Đọc X-quang + Micro-drills rèn lực tại nhà + Cấp Chứng chỉ).<br>
+• ⭐ <strong>Khóa Đào Tạo Toàn Diện (Khuyên Dùng):</strong> The Full Online Collection — <strong>12.900.000 VNĐ</strong> (Trọn bộ 351 bài giảng Cột sống Full-Spine + Tứ chi + Đọc X-quang + Bài tập rèn lực tại nhà + Cấp Chứng chỉ).<br>
 • 👑 <strong>Khóa Huấn Luyện Đỉnh Cao:</strong> Workshop Offline Cầm Tay Chỉ Việc — <strong>36.000.000 VNĐ</strong> (3-4 ngày trực tiếp cùng Thầy Henrik Simon — <em>Được khấu trừ 100% học phí Online</em>).<br><br>
 Dạ để em tư vấn đúng gói học và mức học phí tiết kiệm nhất cho mình: Hiện tại anh/chị đang muốn học để tự chăm sóc sức khỏe gia đình, bổ trợ công việc PT/Spa hay nâng cao tay nghề mở cơ sở trị liệu vậy ạ?`,
         "register"

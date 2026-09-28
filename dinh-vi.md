@@ -12,7 +12,7 @@
    * Giảng viên được đào tạo và từng đứng lớp tại DISC Academy (Đức). Chúng tôi dạy bạn phương pháp đo đạc góc trượt trên phim X-quang và phân tích chuỗi cơ sinh học Full-Spine để tìm ra đúng "đốt lệch tiên phát" (Primary Subluxation) gây ra bệnh, thay vì nắn mò hay nắn chữa cháy theo vị trí đau cục bộ như các lớp học truyền thống.
 2. **Quy trình tầm soát 'Cảnh báo đỏ' (Red Flags) & Test qua môn bắt buộc:**
    * Trước khi học kỹ thuật nắn, học viên bắt buộc phải vượt qua các bài kiểm tra chẩn đoán phân biệt (thoát vị rách bao xơ, trượt đốt sống nặng, loãng xương, dị dạng mạch máu não, u tủy). Đảm bảo 100% học viên hiểu rõ chống chỉ định để không bao giờ xảy ra tai biến y khoa trong suốt sự nghiệp.
-3. **Hệ thống sờ nắn động & phản xạ vi mô (Micro-drills):**
+3. **Hệ thống sờ nắn động & phản xạ vi mô (bài tập rèn lực tại nhà):**
    * Không dạy các thao tác vặn xoắn thô bạo; học viên được rèn luyện cảm giác tay để phân biệt chính xác đốt kẹt (Hypomobile - cần nắn) và đốt lỏng (Hypermobile - cấm nắn), kết hợp các bài tập phản xạ tại nhà trên đệm/bóng để làm chủ tốc độ và lực rơi cơ thể trước khi chạm vào bệnh nhân thật.
 
 ---
@@ -45,7 +45,7 @@
 > **Lời đáp:**  
 > *"Dạ em hiểu nỗi băn khoăn của anh/chị, vì nắn chỉnh là môn thực hành trực tiếp ạ. Chính vì vậy, bên em không bán các video lý thuyết xem thụ động một chiều.*  
 >  
-> *Toàn bộ kỹ thuật được bóc tách thành các bài tập phản xạ tại nhà (Micro-drills) để anh/chị tự rèn tốc độ, góc đặt tay và lực rơi cơ thể trước. Sau mỗi bài học đều có bài test tình huống lâm sàng bắt buộc, anh/chị nắm chắc cơ chế an toàn và chỉ định thì mới được mở bài tiếp theo.*  
+> *Toàn bộ kỹ thuật được bóc tách thành các bài tập phản xạ tại nhà (bài tập rèn lực tại nhà) để anh/chị tự rèn tốc độ, góc đặt tay và lực rơi cơ thể trước. Sau mỗi bài học đều có bài test tình huống lâm sàng bắt buộc, anh/chị nắm chắc cơ chế an toàn và chỉ định thì mới được mở bài tiếp theo.*  
 >  
 > *Đây là bước đệm chuẩn mực nhất để khi anh/chị bước vào nắn trên người thật, tay nghề đã vững vàng và không còn cảm giác sợ hãi hay lúng túng nhé ạ."*
 
@@ -62,7 +62,7 @@
 | STT | Tên góc định vị | Câu khẳng định ngắn gọn |
 | :---: | :--- | :--- |
 | **1** | **An toàn y khoa (Safety First)** | *"Biết chính xác khi nào TUYỆT ĐỐI KHÔNG ĐƯỢC NẮN trước khi học cách nắn."* |
-| **2** | **Sư phạm chống quên (Motor Drills)** | *"Học phản xạ tại nhà qua Micro-drills & Test qua môn — Học là nhớ, không run tay."* |
+| **2** | **Sư phạm chống quên (Motor Drills)** | *"Học phản xạ tại nhà qua bài tập rèn lực tại nhà & Test qua môn — Học là nhớ, không run tay."* |
 | **3** | **Đồng hành dài hạn (Mentorship)** | *"Không mua video xem rồi bỏ — Sở hữu hội đồng chuyên môn chuẩn quốc tế hỗ trợ dài hạn."* |
 | **4** | **Chẩn đoán gốc rễ (Root Cause)** | **"Đọc được phim X-quang, học sờ nắn biết được chính xác vị trí bị sai lệch, học cách lập luận để biết gốc bệnh."** |
 | **5** | **Nắn êm ái (Gentle Precision)** | *"Không cần gồng cơ, không xoay vặn thô bạo — Bệnh nhân chưa kịp sợ khớp đã êm."* |
@@ -83,6 +83,6 @@
 8. **Chiến lược giữ chân đắt giá (Alumni Membership - 500.000đ/năm):** Giảm 50% phí học lại & đi lâm sàng, hỗ trợ hỏi đáp và hội chẩn ca bệnh 24/7 trong nhóm kín.
 
 ### 2. Cơ chế sư phạm khác biệt:
-* **Micro-Drills:** Bóc tách thao tác thành các bài tập rèn luyện phản xạ, lực rơi và góc đặt tay tại nhà trước khi chạm người thật.
+* **bài tập rèn lực tại nhà:** Bóc tách thao tác thành các bài tập rèn luyện phản xạ, lực rơi và góc đặt tay tại nhà trước khi chạm người thật.
 * **Test trắc nghiệm lũy tiến sau mỗi bài học:** Bắt buộc vượt qua câu hỏi tình huống và dấu hiệu cảnh báo đỏ (Red Flags) mới được mở bài tiếp theo (chống quên bài, đảm bảo an toàn tuyệt đối).
 

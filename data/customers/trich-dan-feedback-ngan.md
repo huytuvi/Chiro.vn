@@ -20,7 +20,7 @@
 5. **Chủ Spa Dưỡng Sinh Nguyễn Mai Linh (Hải Phòng):**  
    *"Tôi vốn không có nền tảng y khoa nên ban đầu rất sợ khó hiểu. Nhưng phương pháp giảng dạy 'Dễ hiểu nhưng phải chuẩn' của Simon Center giúp tôi nắm bắt rất nhanh. Giờ cơ sở tôi đã có dịch vụ nắn chỉnh chuyên biệt uy tín."*
 6. **HLV Yoga Trị Liệu Vũ Thu Hương (Cần Thơ):**  
-   *"Cảm ơn bài tập Micro-drills rèn lực rơi cơ thể! Nhờ đó một người thể hình nhỏ nhắn như tôi vẫn có thể nắn chỉnh nhẹ nhàng cho những học viên nam to lớn gấp đôi mà không hề mất sức."*
+   *"Cảm ơn bài tập bài tập rèn lực tại nhà rèn lực rơi cơ thể! Nhờ đó một người thể hình nhỏ nhắn như tôi vẫn có thể nắn chỉnh nhẹ nhàng cho những học viên nam to lớn gấp đôi mà không hề mất sức."*
 
 ---
 

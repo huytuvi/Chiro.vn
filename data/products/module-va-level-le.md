@@ -18,4 +18,4 @@
 * **Phân định 2 Level:**
   * **Level 1 — Spine Foundation (Cột Sống Toàn Diện - 8.500.000đ):** Toàn bộ kỹ thuật nắn chỉnh cột sống Cổ (HWS), Ngực (BWS), Thắt lưng (LWS) và Khung chậu (ISG).
   * **Level 2 — Extremities (Tứ Chi Toàn Diện - 8.500.000đ):** Toàn bộ kỹ thuật nắn chỉnh Đai vai, Khuỷu tay, Cổ bàn tay, Khớp thái dương hàm, Khớp háng, Gối, Cổ chân và bàn chân.
-* **Bao gồm:** Toàn bộ Video bài giảng chuyên sâu + Hệ thống Micro-drills rèn lực + Bài test tình huống y khoa sau mỗi bài giảng.
+* **Bao gồm:** Toàn bộ Video bài giảng chuyên sâu + Hệ thống bài tập rèn lực tại nhà rèn lực + Bài test tình huống y khoa sau mỗi bài giảng.

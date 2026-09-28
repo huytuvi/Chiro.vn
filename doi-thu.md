@@ -13,12 +13,12 @@
   * Nền tảng E-Learning: [chiropraktiktraining.learningsuite.io](https://chiropraktiktraining.learningsuite.io)
   * Fanpage/Instagram: `@thechirodudes` / Chiropraktiktraining
 * **Sản phẩm Online đang bán:**
-  * Khóa *"The Full Collection"*: Hơn 100 bài học video 4K đa góc quay, giải phẫu chức năng, tư thế đứng (Stance), điểm tiếp xúc xương (Contact Point) và kỹ thuật thả lỏng cơ thể (Body Drop).
+  * Khóa *"The Full Collection"*: Hơn 100 bài học video chất lượng cao đa góc quay, giải phẫu chức năng, tư thế đứng (Stance), điểm tiếp xúc xương (Contact Point) và kỹ thuật thả lỏng cơ thể (Body Drop).
 * **Vấn đề họ giải quyết:** Giúp người nắn nâng cao tốc độ (*Speed*) và độ chính xác (*Precision*) khi thực hiện cú nắn HVLA mà không phụ thuộc vào sức mạnh bắp tay.
 * **Mức giá:**
   * Khóa Online độc lập: **€890 (~24.000.000 VNĐ)**.
   * Vé Seminar trực tiếp (Level 1, 2, 3): **€3.200/level (~86.000.000 VNĐ)** *(tặng kèm tài khoản LearningSuite online)*.
-* **Điểm mạnh:** UI/UX trên LearningSuite tuyệt đẹp; chia nhỏ động tác thành chuỗi phản xạ vi mô (*Micro-drills*) rất trực quan.
+* **Điểm mạnh:** UI/UX trên LearningSuite tuyệt đẹp; chia nhỏ động tác thành chuỗi phản xạ vi mô (*bài tập rèn lực tại nhà*) rất trực quan.
 * **Điểm yếu chí tử:** Video xem một chiều, không có cơ chế bài test kiểm tra kiến thức bắt buộc; không sửa bài hay chỉnh lực cho học viên online; không dạy đọc phim X-quang/MRI chuyên sâu.
 
 ---
@@ -111,7 +111,7 @@
 | **Syntropy** (Mỹ/Âu) | Kajabi | Impulse Biomechanics | $497–$1.800 | Khóa chặt online; rào cản tiếng Anh và địa lý | Mở quyền truy cập trọn đời, đưa nguyên lý **bảo vệ cổ tay/lưng người nắn** vào bài giảng |
 | **MPI** (Mỹ) | Web portal | Fixation Theory + DNS | $195/khóa | Video cũ kỹ, khô khan, khó tự học qua mạng | Mang tư duy **y học chứng cứ (chỉ nắn khớp kẹt)** vào bài giảng trực quan, hiện đại |
 | **Apex Chiro** (Mỹ) | Thinkific | Diversified + Cục bộ | $120–$997 | Nắn manh mún từng vùng; không có phản xạ lực | Dạy **tư duy chẩn đoán Full-Spine toàn thân**, tích hợp bài học bảo vệ y đức & marketing |
-| **Saigon Holistic** (VN) | Offline 3 ngày | Gonstead + HVLA | 25–45 triệu VNĐ | Dồn dập 3 ngày, về run tay; không có E-learning | **E-learning 4K ôn trọn đời + Hệ thống Drills tập tại nhà**, hết run tay trước khi đụng bệnh nhân |
+| **Saigon Holistic** (VN) | Offline 3 ngày | Gonstead + HVLA | 25–45 triệu VNĐ | Dồn dập 3 ngày, về run tay; không có E-learning | **E-Learning chất lượng cao ôn trọn đời + Hệ thống Drills tập tại nhà**, hết run tay trước khi đụng bệnh nhân |
 | **Y Cốt Liên Khoa** (VN) | Offline truyền nghề | Đông y + Bẻ thực nghiệm | 8–15 triệu VNĐ | Không X-ray, nguy cơ tai biến y khoa cao | **Chuẩn Y Khoa (Specific)** — Đọc phim X-ray, kiểm tra Red Flags loại trừ tai biến 100% |
 
 ---
@@ -119,6 +119,6 @@
 # ĐỊNH HÌNH SẢN PHẨM KHÓA HỌC CHIROPRACTIC ONLINE CỦA SIMON CENTER
 
 Tuân thủ nghiêm ngặt **Brand Voice trong brain.db**:
-1. **"Dễ hiểu nhưng phải chuẩn"**: Bóc tách kỹ thuật giải phẫu phức tạp thành các bài tập phản xạ tại nhà (*Micro-drills*), dùng hình ảnh ẩn dụ đời thường nhưng nền tảng giải phẫu phải tuyệt đối chuẩn y khoa.
+1. **"Dễ hiểu nhưng phải chuẩn"**: Bóc tách kỹ thuật giải phẫu phức tạp thành các bài tập phản xạ tại nhà (*bài tập rèn lực tại nhà*), dùng hình ảnh ẩn dụ đời thường nhưng nền tảng giải phẫu phải tuyệt đối chuẩn y khoa.
 2. **Cơ chế kiểm soát chất lượng (Chống quên bài):** Học viên bắt buộc phải vượt qua bài kiểm tra trắc nghiệm tình huống y khoa sau mỗi bài giảng mới được mở bài tiếp theo.
 3. **Phễu chuyển đổi lên Offline Cầm tay chỉ việc:** Khóa online trang bị 100% lý thuyết và cảm giác phản xạ, làm bước đệm vững chắc để học viên tham gia khóa Offline thực hành trực tiếp tại Simon Center.

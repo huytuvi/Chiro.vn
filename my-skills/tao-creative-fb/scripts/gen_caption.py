@@ -55,7 +55,7 @@ Bạn là Y Bác sĩ, KTV Vật lý trị liệu hay Y sĩ YHCT muốn làm ch�
 
 📌 Quyền lợi khóa học tại Simon Chiropractic Center:
 1. Học kỹ thuật thả rơi Body Drop: Nữ 45kg vẫn nắn chỉnh nhẹ nhàng cho khách nam 90kg.
-2. Bộ video đa góc quay cận cảnh & bài tập rèn lực Micro-drills tại nhà.
+2. Bộ video đa góc quay cận cảnh & bài tập rèn lực bài tập rèn lực tại nhà tại nhà.
 3. Đặc quyền KHẤU TRỪ 100% học phí online khi nâng cấp học thực hành 1-1.
 4. Cấp Chứng nhận Hoàn thành chính thức do Bác sĩ Henrik Simon trực tiếp ký.
 

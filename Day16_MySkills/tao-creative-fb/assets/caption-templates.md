@@ -15,7 +15,7 @@
 
 ### Angle 2 — Solution (Giải pháp chuẩn y khoa Châu Âu)
 - **Hook**: 💡 BÍ QUYẾT NẮN CHỈNH CHUẨN Y KHOA CHÂU ÂU TỪ BÁC SĨ HENRIK SIMON!
-- **Body**: Nắn chỉnh không dùng lực tay thô bạo — đó là khoa học của tốc độ và trọng lực rơi cơ thể (Body Drop). Hệ thống bài giảng đa góc quay và Micro-drills giúp bạn rèn phản xạ chuẩn xác ngay tại nhà. Khấu trừ 100% học phí online khi nâng cấp thực hành trực tiếp!
+- **Body**: Nắn chỉnh không dùng lực tay thô bạo — đó là khoa học của tốc độ và trọng lực rơi cơ thể (Body Drop). Hệ thống bài giảng đa góc quay và bài tập rèn lực tại nhà giúp bạn rèn phản xạ chuẩn xác ngay tại nhà. Khấu trừ 100% học phí online khi nâng cấp thực hành trực tiếp!
 - **CTA**: 📥 Nhận ưu đãi khấu trừ 100% học phí & tư vấn lộ trình: Hotline 0389 609 938.
 
 ### Angle 3 — Social Proof (Nữ 45kg nắn khách 90kg)
