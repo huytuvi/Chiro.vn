@@ -238,15 +238,12 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
           </span>
-          <span id="paymentStatusText">Đang chờ hệ thống SePay xác nhận (Tự động tải file Sách sau 0.5s)...</span>
+          <span id="paymentStatusText">Đang chờ hệ thống SePay xác nhận (Tự động mở Sách sau khi quét mã)...</span>
         </div>
 
-        <!-- Manual Confirm Button -->
-        <div class="space-y-2">
-          <button type="button" onclick="checkPaymentStatusManual()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 rounded-xl text-xs uppercase transition shadow">
-            ✓ Tôi Đã Thanh Toán 2.000Đ (Xác Nhận Ngay)
-          </button>
-          <button type="button" onclick="closeSepayModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-2.5 rounded-xl text-xs transition">
+        <!-- Action Button -->
+        <div>
+          <button type="button" onclick="closeSepayModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 rounded-xl text-xs transition">
             Đóng cửa sổ
           </button>
         </div>
@@ -288,10 +285,13 @@
         </div>
       </div>
 
-      <!-- KẾT NỐI KHÁM PHÁ WEBSITE CHIRO.VN & BUTTON TẢI SÁCH -->
+      <!-- KẾT NỐI ĐỌC SÁCH ONLINE VÀ TẢI PDF EBOOK -->
       <div class="space-y-2.5">
-        <a id="autoDownloadLink" href="/books/Simon-Center-Cam-nang-Chiropractic.pdf" download="Simon-Center-Cam-nang-Chiropractic.pdf" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold py-3.5 rounded-xl text-xs sm:text-sm uppercase transition shadow-lg">
-          <span>📥 TẢI LẠI EBOOK CẨM NĂNG CHIROPRACTIC (PDF)</span>
+        <a href="https://chiro.vn/doc-sach.html" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-brand-crimson hover:bg-brand-crimsonHover text-white font-extrabold py-3.5 rounded-xl text-xs sm:text-sm uppercase transition shadow-lg">
+          <span>📖 ĐỌC SÁCH TRỰC TIẾP ONLINE (FLIPBOOK) →</span>
+        </a>
+        <a id="autoDownloadLink" href="/books/Simon-Center-Cam-nang-Chiropractic.pdf" download="Simon-Center-Cam-nang-Chiropractic.pdf" target="_blank" class="flex items-center justify-center space-x-2 w-full bg-amber-600 hover:bg-amber-700 text-white font-extrabold py-3.5 rounded-xl text-xs sm:text-sm uppercase transition shadow-md">
+          <span>📥 TẢI FILE EBOOK PDF VỀ MÁY</span>
         </a>
         <a href="https://chiro.vn/lo-trinh-khoa-hoc.html" class="block w-full bg-brand-wine hover:bg-brand-wineDark text-white font-bold py-3 rounded-xl text-xs uppercase transition shadow">
           🗺️ Xem Lộ Trình Khóa Học Tại Chiro.vn →
